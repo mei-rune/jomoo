@@ -1,0 +1,119 @@
+#include "StdAfx.h"
+#include "Transport_Protocol.H"
+#include "Instance_IM.H"
+
+
+
+#ifdef _MEMORY_DEBUG
+#undef THIS_FILE
+#define new	   DEBUG_NEW  
+#define malloc DEBUG_MALLOC  
+static char THIS_FILE[] = __FILE__;  
+#endif // _MEMORY_DEBUG
+
+_im_begin
+
+void Transport_Protocol::finalize()
+{
+}
+
+int Transport_Protocol::service()
+{
+	if( state_ == 0 )
+		BT_LOG_ERROR_RETURN( getLogger(), toString() << BT_TEXT("> 状态为null") , -1 );
+
+	int r = state_->service( this );
+	if( r != 0 )
+		state_ = 0;
+	return r;
+}
+
+void Transport_Protocol::onRead( im_transport_handler_type::read_result_type& result)
+{
+	if( state_ == 0 )
+		ThrowException1( InvalidPointerException , "，state_为null" );
+
+	state_ = state_->transition( this, result , 0 );
+	if( state_ == 0 )
+	{
+		BT_LOG_TRACE( getLogger(), toString() << BT_TEXT("> 写数据状态结束!")  );
+		return ;
+	}
+	instance_->getConcurrencyBridge().putq( this );
+}
+
+void Transport_Protocol::onReadArray(im_transport_handler_type::read_array_result_type& result )
+{
+	if( state_ == 0 )
+		ThrowException1( InvalidPointerException , "，state_为null" );
+	state_ = state_->transition( this, result , 0 );
+	if( state_ == 0 )
+	{
+		BT_LOG_TRACE( getLogger(), toString() << BT_TEXT("> 写数据状态结束!")  );
+		return ;
+	}
+	instance_->getConcurrencyBridge().putq( this );
+
+}
+
+void Transport_Protocol::onWrite(  im_transport_handler_type::write_result_type& result)
+{
+	if( state_ == 0 )
+		ThrowException1( InvalidPointerException , "，state_为null" );
+	state_ = state_->transition( this, result , 0 );
+		if( state_ == 0 )
+	{
+		BT_LOG_TRACE( getLogger(), toString() << BT_TEXT("> 写数据状态结束!")  );
+		return ;
+	}
+	instance_->getConcurrencyBridge().putq( this );
+}
+
+void Transport_Protocol::onWriteArray(  im_transport_handler_type::write_array_result_type& result)
+{
+	if( state_ == 0 )
+		ThrowException1( InvalidPointerException , "，state_为null" );
+	state_ = state_->transition( this, result , 0 );
+		if( state_ == 0 )
+	{
+		BT_LOG_TRACE( getLogger(), toString() << BT_TEXT("> 写数据状态结束!")  );
+		return ;
+	}
+	instance_->getConcurrencyBridge().putq( this );
+}
+
+void Transport_Protocol::onTransmit(  im_transport_handler_type::transmit_result_type& result )
+{
+	if( state_ == 0 )
+		ThrowException1( InvalidPointerException , "，state_为null" );
+	state_ = state_->transition( this, result , 0 );
+		if( state_ == 0 )
+	{
+		BT_LOG_TRACE( getLogger(), toString() << BT_TEXT("> 写数据状态结束!")  );
+		return ;
+	}
+	instance_->getConcurrencyBridge().putq( this );
+}
+
+void Transport_Protocol::setState( Transport_Protocol_State* state )
+{
+	state_ = state;
+}
+
+const tstring& Transport_Protocol::toString() const
+{
+	if( connection_ == 0 )
+		ThrowException1( InvalidPointerException , "，connection为空" );
+
+	return connection_->toString();
+}
+
+Msg_Connection::LoggerPtr Transport_Protocol::getLogger()
+{
+	if( connection_ == 0 )
+		ThrowException1( InvalidPointerException , "，connection为空" );
+
+	return connection_->getLogger();
+}
+
+_im_end

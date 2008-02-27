@@ -1,0 +1,85 @@
+#include "StdAfx.h"
+#include "DownLoad_Protocol.h"
+#include "DownLoadServer.H"
+
+_greengown_begin
+
+DownLoad_Handler::DownLoad_Handler( DownLoadServer& server )
+: server_( server )
+{
+	toString_ = BT_TEXT("空路由处理器");
+}
+
+int DownLoad_Handler::open( const tstring& name ,Msg_Connection_Ptr connection )
+{
+	return 0;
+}
+
+void DownLoad_Handler::close( )
+{
+}
+
+void DownLoad_Handler::onWriteMessage( Msg_Write_Result& result )
+{
+}
+
+void DownLoad_Handler::onReadMessage( Msg_Read_Result& result )
+{
+}
+
+void DownLoad_Handler::onReadPresent( Msg_Read_Result& result )
+{
+}
+
+void DownLoad_Handler::onReadIQ( Msg_Read_Result& result )
+{
+}
+
+void DownLoad_Handler::onReadX( Msg_Read_Result& result )
+{
+}
+
+void DownLoad_Handler::onException( Msg_Read_Result& result )
+{
+}
+
+DownLoad_Handler::LoggerPtr DownLoad_Handler::getLogger()
+{
+	return server_.getLogger();
+}
+
+const tstring& DownLoad_Handler::toString() const
+{
+	return toString_;
+}
+
+DownLoad_Connect_Handler::DownLoad_Connect_Handler( DownLoadServer& server )
+: server_( server )
+{
+	toString_ = server.toString();
+	toString_ += "连接器";
+}
+
+void DownLoad_Connect_Handler::onConnect( Msg_Connect_Result& result )
+{
+	if( ! result.success() )
+		return ;
+
+	DownLoad_Handler_Ptr handler = server_.createHandler( );
+	if( isNone( handler ) )
+		BT_LOG_ERROR( server_.getLogger(), toString() << BT_TEXT( "> 创建通信器失败") );
+	BOE_INET_Addr addr;
+	size_t len = addr.get_size();
+
+	result.connection()->getOption( "remoteaddr" , addr.get_addr() ,len );
+	if( handler->open( addr.toString(),result.connection() ) != 0 )
+		BT_LOG_ERROR( server_.getLogger(), toString() << BT_TEXT( "> 初始化通信器失败") );
+
+}
+
+const tstring& DownLoad_Connect_Handler::toString() const
+{
+	return toString_;
+}
+
+_greengown_end

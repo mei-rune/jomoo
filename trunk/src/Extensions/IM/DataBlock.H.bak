@@ -1,0 +1,82 @@
+
+#ifndef DATABLOCK_H
+#define DATABLOCK_H
+
+#include "config.h"
+
+#if !defined (BOE_LACKS_PRAGMA_ONCE)
+# pragma once
+#endif /* BOE_LACKS_PRAGMA_ONCE */
+
+// Include files
+#include "config_IM.h"
+#include "IM_Connection.h"
+#include "Instance_IM.H"
+#include <list>
+
+/**
+ */
+_im_begin
+
+class BufferBlock
+{
+public:
+	BufferBlock( Instance_IM& instance, size_t len );
+
+	BufferBlock( Instance_IM& instance, IM_Buf_Ptr p, size_t len );
+
+	void append( IM_Buf_Ptr p );
+
+	const std::vector< iovec >& rd_vec();
+	void rd_vec( size_t t );
+
+	std::vector< iovec >& wd_vec();
+	void wd_vec( size_t len );
+
+	void reset( size_t len , size_t first = 0 );
+
+	size_t length() const;
+	size_t space( ) const;
+
+	size_t copy( BufferBlock& data, size_t len ,size_t first );
+
+	size_t read( BufferBlock& data, size_t len ,size_t first );
+
+	void swap( BufferBlock& data );
+
+	void copy( BufferBlock& data );
+
+private:
+
+	DECLARE_NO_COPY_CLASS( BufferBlock );
+
+	size_t rd_ptr( size_t len );
+
+	size_t wd_ptr( size_t len );
+
+	size_t read( BufferBlock& data, size_t len );
+
+	size_t readHeader( BufferBlock& data, size_t len , size_t first );
+
+	size_t readHeader( BufferBlock& data, size_t len );
+
+private:
+	Instance_IM& instance_;
+
+
+	std::list< IM_Buf_Ptr > r_data_;
+	std::list< IM_Buf_Ptr > w_data_;
+
+	std::vector< iovec > rv_;
+	std::vector< iovec > wv_;
+
+	size_t rd_length_;
+	size_t wd_length_;
+};
+
+
+typedef counter_ptr< BufferBlock > BufferBlockPtr;
+
+_im_end
+
+#endif // DATABLOCK_H

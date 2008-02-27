@@ -1,0 +1,328 @@
+#include "StdAfx.h"
+#include "DataBlock.h"
+#include "BOE/exception.HPP"
+
+#ifdef _MEMORY_DEBUG
+#undef THIS_FILE
+#define new	   DEBUG_NEW  
+#define malloc DEBUG_MALLOC  
+static char THIS_FILE[] = __FILE__;  
+#endif // _MEMORY_DEBUG
+
+
+_im_begin
+
+BufferBlock::BufferBlock( Instance_IM& instance, size_t len )
+: instance_( instance )
+, rd_length_( 0 )
+, wd_length_( 0 )
+{
+	reset( len );
+}
+
+BufferBlock::BufferBlock( Instance_IM& instance, IM_Buf_Ptr p, size_t len )
+: instance_( instance )
+, rd_length_( 0 )
+, wd_length_( 0 )
+{
+	append( p );
+	reset( len );
+}
+
+void BufferBlock::append( IM_Buf_Ptr p )
+{
+	if( p.get() == 0 )
+		return ;
+
+	iovec v;
+	v.buf = p->buf ;//+ p->begin;
+//	v.len = p->end ;//- p->begin;
+	if( v.len <= 0 )
+		return ;
+
+	r_data_.push_back( p );
+	rv_.push_back( v );
+	rd_length_ += v.len;
+}
+
+void BufferBlock::reset( size_t len ,size_t first )
+{
+	while( true )
+	{
+		if( wv_.empty() )
+			break;
+		if( wv_[ 0 ].len >= first )
+			break;
+		wd_length_ -= wv_[ 0 ].len;
+		wv_.erase( wv_.begin() );
+		w_data_.erase( w_data_.begin() );
+	}
+
+	if( wd_length_ > len )
+		return ;
+	len += instance_.getDefaultsAndOverrides().maxMessageSize;
+	size_t n = len / instance_.getDefaultsAndOverrides().maxMessageSize;
+
+	for( size_t i = 0; i < n ; i ++ )
+	{
+		IM_Buf_Ptr buf = instance_.getIMBufFactory().create();
+		iovec v ;
+		v.buf = buf->buf;
+//		v.len = buf->size;
+		wd_length_ += v.len;
+		wv_.push_back( v );
+		w_data_.push_back( buf );
+	}
+}
+
+const std::vector< iovec >& BufferBlock::rd_vec()
+{
+	return rv_;
+}
+
+size_t BufferBlock::rd_ptr( size_t len )
+{
+	iovec & v = rv_[ 0 ];
+	if( len < v.len )
+	{
+		v.buf += len;
+		v.len -= len;
+		rd_length_ -= len;
+		return len;
+	}
+	len = v.len;
+	rv_.erase( rv_.begin() );
+	r_data_.erase( r_data_.begin() );
+
+	rd_length_ -= len;
+	return len;
+}
+
+void BufferBlock::rd_vec( size_t len )
+{
+	if( len == 0 )
+		return ;
+
+	if( len > rd_length_ )
+		ThrowException1( LengthException, "可读数据没有这么长" );
+	while( len > 0 && ! rv_.empty() )
+		len -= rd_ptr( len );
+}
+
+std::vector< iovec >& BufferBlock::wd_vec()
+{
+	return wv_;
+}
+
+size_t BufferBlock::wd_ptr( size_t len )
+{
+	iovec & v = wv_[ 0 ];
+	if( len < v.len )
+	{
+		iovec iv = v;
+		iv.len = len;
+
+		rv_.push_back( iv );
+		r_data_.push_back( *(w_data_.begin()) );
+		rd_length_ += len;
+
+		wd_length_ -= len;
+
+		v.buf += len;
+		v.len -= len;
+		return len;
+	}
+	len = v.len;
+	
+	rv_.push_back( v );
+	r_data_.push_back( *(w_data_.begin()) );
+	rd_length_ += len;
+
+		
+	wv_.erase( wv_.begin() );
+	w_data_.erase( w_data_.begin() );
+	wd_length_ -= len;
+	return len;
+}
+
+void BufferBlock::wd_vec( size_t len )
+{
+	if( len == 0 )
+		return ;
+
+	if( len > wd_length_ )
+		ThrowException1( LengthException, "可写数据没有这么长" );
+	while( len > 0 && ! wv_.empty() )
+		len -= wd_ptr( len );
+
+	// 保证下一次有数据块可写
+	reset( 6 );
+}
+
+size_t BufferBlock::length() const
+{
+	return rd_length_;
+}
+
+size_t BufferBlock::space( ) const
+{
+	return wd_length_;
+}
+
+void BufferBlock::copy( BufferBlock& data )
+{
+	if( &(this->instance_) != &(data.instance_)  )
+		ThrowException1( RuntimeException, ",两个没不同的实例生成的数据块不能进行交换" );
+
+	data.r_data_ = this->r_data_;
+	data.rd_length_ = this->rd_length_;
+	data.rv_ = this->rv_;
+}
+
+size_t BufferBlock::copy( BufferBlock& data, size_t len , size_t first )
+{
+	if( rd_length_ < len )
+		return 0;
+	BufferBlock d( data.instance_, 5 );
+	d.r_data_ = this->r_data_;
+	d.rd_length_ = this->rd_length_;
+	d.rv_ = this->rv_;
+
+	return d.read( data, len, first );
+}
+
+size_t BufferBlock::read( BufferBlock& data, size_t len ,size_t first )
+{
+	if( rd_length_ < len )
+		return 0;
+
+	if( len < first )
+		first = len;
+
+	data.reset( first, first );
+
+	size_t l = readHeader( data, len, first );
+	while( l < first && !rv_.empty() )
+		l += readHeader( data, first - l );
+
+	while( l< len && !rv_.empty() )
+		l += read( data, len - l );
+
+	return l;
+}
+
+size_t BufferBlock::read( BufferBlock& data, size_t len )
+{
+	iovec & v = rv_[ 0 ];
+	if( v.len > len )
+	{
+		iovec iv = v;
+		iv.len = len;
+
+		data.rv_.push_back( iv );
+		data.r_data_.push_back( *r_data_.begin() );
+
+		rd_length_ -= len;
+		v.buf += len;
+		v.len -= len;
+		return len;
+	}
+
+	data.rv_.push_back( v );
+	data.r_data_.push_back( *r_data_.begin() );
+
+	len = v.len;
+
+	rd_length_ -= v.len;
+	rv_.erase( rv_.begin() );
+	r_data_.erase( r_data_.begin() );
+
+	return len;
+}
+
+size_t BufferBlock::readHeader( BufferBlock& data, size_t len , size_t first )
+{
+	iovec & v = rv_[ 0 ];
+	if( len < v.len )
+	{
+		iovec iv = v;
+		iv.len = len;
+
+		data.rv_.push_back( iv );
+		data.r_data_.push_back( *(r_data_.begin()) );
+		data.rd_length_ += len;
+
+		rd_length_ -= len;
+		v.buf += len;
+		v.len -= len;
+		return len;
+	}
+	else if( v.len > first )
+	{
+		data.rv_.push_back( v );
+		data.r_data_.push_back( *(r_data_.begin()) );
+		data.rd_length_ += v.len;
+
+		rd_length_ -= v.len;
+
+		len = v.len ;
+
+		rv_.erase( rv_.begin() );
+		r_data_.erase( r_data_.begin() );
+		return len;
+	}
+
+	memcpy(  data.wd_vec()[ 0 ].buf, v.buf, v.len );
+	data.wd_vec( v.len );
+
+	len = v.len;
+
+	rd_length_ -= v.len;
+	rv_.erase( rv_.begin() );
+	r_data_.erase( r_data_.begin() );
+
+	return len;
+}
+
+size_t BufferBlock::readHeader( BufferBlock& data, size_t len )
+{
+	iovec & v = rv_[ 0 ];
+	if( v.len > len )
+	{
+		memcpy(  data.wd_vec()[ 0 ].buf, v.buf, len );
+		data.wd_vec( len );
+
+		rd_length_ -= len;
+		v.buf += len;
+		v.len -= len;
+		return len;
+	}
+
+	memcpy(  data.wd_vec()[ 0 ].buf, v.buf, v.len );
+	data.wd_vec( v.len );
+
+	len = v.len;
+
+	rd_length_ -= v.len;
+	rv_.erase( rv_.begin() );
+	r_data_.erase( r_data_.begin() );
+
+	return len;
+}
+
+void BufferBlock::swap( BufferBlock& data )
+{
+	if( &(this->instance_) != &(data.instance_)  )
+		ThrowException1( RuntimeException, ",两个没不同的实例生成的数据块不能进行交换" );
+
+	r_data_.swap( data.r_data_ );
+	w_data_.swap( data.w_data_ );
+
+	rv_.swap( data.rv_ );
+	wv_.swap( data.wv_ );
+
+	std::swap( rd_length_, data.rd_length_ );
+	std::swap( wd_length_, data.wd_length_ );	
+}
+
+_im_end

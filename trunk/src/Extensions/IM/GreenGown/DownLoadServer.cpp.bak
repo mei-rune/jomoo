@@ -1,0 +1,75 @@
+#include "StdAfx.h"
+#include "DownLoadServer.h"
+#include "BOE/exception.hpp"
+
+_greengown_begin
+
+DownLoadServer::DownLoadServer( _io Instance_IO& instance )
+: instance_( instance )
+{
+	toString_ = BT_TEXT("DownLoad服务器");
+	handler_.reset( new DownLoad_Connect_Handler( *this ) );
+	pfilepool_.reset( new FileManager( instance_ ) );
+}
+
+int DownLoadServer::open( _util PropertiesPtr config )
+{
+	if( !isNone( connector_ ) )
+		BT_LOG_ERROR_RETURN( instance_.getLogger(),toString() << BT_TEXT("> 启动服务失败，已经启动过了!") , -1 );
+	if( config.get() == 0 )
+		BT_LOG_ERROR_RETURN( instance_.getLogger(),toString() << BT_TEXT("> 启动服务失败，配置为空!") , -1 );
+	tstring addr = config->getPropertyWithDefault( "ServerAddress", "" );
+	if( addr.empty() )
+		BT_LOG_ERROR_RETURN( instance_.getLogger(), toString() << BT_TEXT("> 启动服务失败，没有服务器地址!") , -1 );
+	toString_ = BT_TEXT("路由服务器[");
+	toString_ += config->getPropertyWithDefault( "ServerName", addr );
+	toString_ += BT_TEXT("]");
+	instance_type::endpoint_ptr endpoint = instance_.createEndpoint( addr );
+	if( isNone( endpoint ) )
+		BT_LOG_ERROR_RETURN( instance_.getLogger(), toString() << 
+		BT_TEXT("启动服务失败，创建通信端节点失败!") , -1 );
+	connector_ = endpoint->connector();
+	if( isNone( connector_ ) )
+		BT_LOG_ERROR_RETURN( instance_.getLogger(), toString() << 
+		BT_TEXT("启动服务失败，创建连接器失败!") , -1 );
+	return connector_->connect( *handler_ , 0 );
+}
+
+void DownLoadServer::close( )
+{
+	if( isNone( connector_ ) )
+		BT_LOG_ERROR( instance_.getLogger(), toString() << 
+		BT_TEXT("停止服务失败，监听器为空!") );
+	connector_->cancel( );
+}
+
+DownLoadServer::instance_type::connector_ptr DownLoadServer::connector()
+{
+	return connector_;
+}
+
+Data_Block_Ptr DownLoadServer::readFile( const tstring& url, size_t begin, size_t end )
+{
+	return pfilepool_->readFile( url, begin, end );
+}
+
+DownLoadServer::instance_type::LoggerPtr DownLoadServer::getLogger()
+{
+	return instance_.getLogger();
+}
+const tstring& DownLoadServer::toString() const
+{
+	return toString_;
+}
+
+DownLoad_Handler_Ptr DownLoadServer::createHandler( )
+{
+	return DownLoad_Handler_Ptr( new DownLoad_Handler( *this ) );
+}
+
+_greengown_end
+
+BOE_Export_C _io BOE_Server* MODUE_POINT( _io Instance_IO& instance )
+{
+	return new DownLoadServer( instance );
+}
