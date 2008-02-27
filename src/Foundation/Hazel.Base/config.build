@@ -1,0 +1,95 @@
+use generator "msvs7";
+
+set project.name = "Hazel.Base";
+set msvs7-filedir="";
+set project.version = "1.0";
+set project.email = "run_mei@163.com";
+
+add cxxflags "/D_WINSOCKAPI_";
+
+build library "Hazel.Base" {
+
+header "directory.inl";
+
+header "counter_ptr.hpp";
+header "Exception.hpp";
+header "AbstractFactorp15.h";
+header "AbstractFactory.h";
+header "AbstractFactory0.h";
+header "AbstractFactory1.h";
+header "AbstractFactory10.h";
+header "AbstractFactory11.h";
+header "AbstractFactory12.h";
+header "AbstractFactory13.h";
+header "AbstractFactory14.h";
+header "AbstractFactory16.h";
+header "AbstractFactory2.h";
+header "AbstractFactory3.h";
+header "AbstractFactory4.h";
+header "AbstractFactory5.h";
+header "AbstractFactory6.h";
+header "AbstractFactory7.h";
+header "AbstractFactory8.h";
+header "AbstractFactory9.h";
+header "AbstractFactoryTemplates.h";
+header "args_define.h";
+header "Hazel_Buffer.H";
+header "Cleanup.H";
+header "directory.H";
+header "ErrorDef.H";
+header "Factory.h";
+header "get_last_error.h";
+header "Logger.H";
+header "toString.h";
+header "tstring.h";
+header "Singleton.Template";
+header "Singleton.H";
+
+group "Collections" {
+ set header-installation-suffix = "Hazel.BASE/Collections";
+header "Collections/ThreadSafeQueue.hpp";
+}
+
+group "Threading" {
+ set header-installation-suffix = "Hazel.BASE/Threading";
+header "Threading/Hazel_Thread_Manager.cpp";
+header "Threading/Hazel_Thread.cpp";
+
+header "Threading/Hazel_Base_Thread.h";
+header "Threading/Hazel_Base_Thread.inl";
+header "Threading/Hazel_Base_Thread_Manager.h";
+header "Threading/Hazel_Base_Thread_Manager.inl";
+header "Threading/Hazel_Event.h";
+header "Threading/Hazel_Guard.Template";
+header "Threading/Hazel_Guard.h";
+header "Threading/Hazel_Null_Mutex.H";
+header "Threading/Hazel_Semaphore.h";
+header "Threading/Hazel_Thread.h";
+
+header "Threading/Hazel_Thread_Manager.h";
+header "Threading/Hazel_Thread_Mutex.H";
+header "Threading/config_threading.h";
+header "Threading/Threading.h";
+}
+
+group "util" {
+ set header-installation-suffix = "Hazel.BASE/util";
+header "util/NTService.cpp";
+header "util/CtrlCHandler.cpp";
+header "util/PropertiesI.cpp";
+header "util/ServiceManager.cpp";
+header "util/Options.cpp";
+
+header "util/config_Util.h";
+header "util/CtrlCHandler.h";
+header "util/NTService.h";
+header "util/Options.h";
+header "util/Properties.h";
+header "util/PropertiesI.h";
+header "util/ServiceManager.h";
+header "util/Share_Library.inl";
+header "util/Share_Library.h";
+header "util/Util.h";
+}
+
+}

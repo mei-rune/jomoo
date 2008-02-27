@@ -1,0 +1,25 @@
+ 驱动器 E 中的卷是 本地磁盘
+ 卷的序列号是 71EA-C09E
+
+ E:\工作目录\BOE\src\Foundation\BOE.Base\util 的目录
+
+2005-11-07  10:30       <DIR>          .
+2005-11-07  10:30       <DIR>          ..
+2005-09-13  13:15                  645 config_Util.h
+2005-11-18  13:51                4,000 CtrlCHandler.cpp
+2005-11-14  13:55                1,819 CtrlCHandler.h
+2005-08-31  11:31                5,680 NTService.cpp
+2005-08-23  14:48                2,960 NTService.h
+2005-10-13  15:21               11,641 Options.cpp
+2005-09-13  11:04                4,503 Options.h
+2005-11-07  11:23                3,949 Properties.h
+2005-11-18  23:45                6,816 PropertiesI.cpp
+2005-11-07  11:23                1,523 PropertiesI.h
+2005-09-13  13:06                8,634 ServiceManager.cpp
+2005-09-13  13:13                1,640 ServiceManager.h
+2005-09-13  17:12                3,086 Share_Library.cpp
+2005-09-12  15:08                2,954 Share_Library.h
+2005-09-12  14:38                    0 Util.h
+2006-01-06  12:44                    0 config.build
+              16 个文件         59,850 字节
+               2 个目录  1,796,014,080 可用字节
