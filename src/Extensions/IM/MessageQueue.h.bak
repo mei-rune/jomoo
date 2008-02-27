@@ -1,0 +1,33 @@
+
+#ifndef MessageQueue_H
+#define MessageQueue_H
+
+#include "config.h"
+
+#if !defined (BOE_LACKS_PRAGMA_ONCE)
+# pragma once
+#endif /* BOE_LACKS_PRAGMA_ONCE */
+
+// Include files
+#include "config_IM.h"
+#include "Message.H"
+
+
+_im_begin
+
+class MessageQueue
+{
+public:
+
+	int push( BOE_Message message );
+	BOE_Message& top( );
+	void pop( );
+	bool empty();
+private:
+	
+};
+
+_im_end
+
+#endif // MessageQueue_H
+

@@ -1,0 +1,203 @@
+#include "StdAfx.h"
+#include "MsgConnection.h"
+#include "Transport_Protocol_Handler.H"
+#include "Instance_IM.H"
+
+_im_begin
+
+Msg_Asynch_Result::Msg_Asynch_Result( void* act )
+: success_( false )
+, error_( 0 )
+, act_( act )
+{
+}
+
+Msg_Asynch_Result::~Msg_Asynch_Result()
+{
+}
+
+bool Msg_Asynch_Result::success( ) const
+{
+	return success_;
+}
+
+int Msg_Asynch_Result::error() const
+{
+	return error_;
+}
+void* Msg_Asynch_Result::act( )
+{
+	return act_;
+}
+
+const void* Msg_Asynch_Result::act() const
+{
+	return act_;
+}
+
+void Msg_Asynch_Result::set( bool success,int error,void* act )
+{
+	success_ = success;
+	error_ = error;
+	act_ = act;
+}
+
+Msg_Write_Result ::Msg_Write_Result( const Bit_Write_Buffer& buf
+		, Msg_Connection_Handler& handler
+		, Msg_Connection& conn 
+		, void* act )
+		: Msg_Asynch_Result( act )
+		, buffer_( buf )
+		, handle_( handler )
+		, conn_( conn )
+{
+}
+	
+const Bit_Write_Buffer& Msg_Write_Result ::buffer()
+{
+	return buffer_;
+}
+
+Msg_Connection_Handler& Msg_Write_Result ::handler()
+{
+	return handle_;
+}
+
+Msg_Connection& Msg_Write_Result ::connection()
+{
+	return conn_;
+}
+
+Msg_Read_Result ::Msg_Read_Result( Bit_Read_Buffer& buf
+		, Msg_Connection_Handler& handler
+		, Msg_Connection& conn 
+		, void* act )
+		: Msg_Asynch_Result( act )
+		, buffer_( buf )
+		, handle_( handler )
+		, conn_( conn )
+{
+}
+	
+Bit_Read_Buffer& Msg_Read_Result ::buffer()
+{
+	return buffer_;
+}
+
+Msg_Connection_Handler& Msg_Read_Result ::handler()
+{
+	return handle_;
+}
+
+Msg_Connection& Msg_Read_Result ::connection()
+{
+	return conn_;
+}
+
+Msg_Connection::Msg_Connection( Instance_IM& instance, BOE_Transport_Ptr transport, const tchar* name )
+: instance_( instance )
+, transport_( transport )
+, rd_( &instance )
+, wd_( &instance )
+, toString_( name == 0 ? transport->toString() : name )
+{
+	rd_.setConnection( this );
+	wd_.setConnection( this );
+}
+
+Msg_Connection::~Msg_Connection(void)
+{
+}
+
+int Msg_Connection::open(  )
+{
+	return 0;
+}
+
+void Msg_Connection::close( )
+{
+}
+
+BOE_Transport& Msg_Connection::transport()
+{
+	return *transport_;
+}
+
+Msg_Connection::LoggerPtr Msg_Connection::getLogger()
+{
+	return instance_.getLogger();
+}
+
+const tstring& Msg_Connection::toString( ) const
+{
+	return toString_;
+}
+
+bool Msg_Connection::read( Msg_Connection_Handler& handler, Bit_Read_Buffer& buf , void* act )
+{
+	rd_.setHandler( &handler );
+	return rd_.service( buf , act ) ==0 ;
+}
+
+bool Msg_Connection::write( Msg_Connection_Handler& handler, Bit_Write_Buffer& buf , void* act )
+{
+	wd_.setHandler( &handler );
+	return wd_.service( buf , act ) ==0 ;
+}
+
+
+bool Msg_Connection::cancelread( )
+{
+	return ( rd_.cancel() == 0 );
+}
+
+bool Msg_Connection::cancelwrite( )
+{
+	return ( wd_.cancel() == 0 );
+}
+
+bool Msg_Connection::isReading() const
+{
+	return ( rd_.isRunning() );
+}
+
+bool Msg_Connection::isWriting() const
+{
+	return ( wd_.isRunning() );
+}
+
+int Msg_Connection::setFeature(const char* feature,
+					bool value)
+{
+	if( isNone( transport_ ) )
+		return -1;
+	return transport_->setFeature( feature, value );
+}
+
+int Msg_Connection::getFeature(const char* feature,
+					bool& value) const
+{
+	if( isNone( transport_ ) )
+		return -1;
+	return transport_->getFeature( feature, value );
+}
+
+int Msg_Connection::setOption(const char* option,
+				   void* value,
+				   size_t size)
+{
+	if( isNone( transport_ ) )
+		return -1;
+	return transport_->setOption( option, value, size );
+}
+
+int Msg_Connection::getOption(const char* option,
+				   void* value,
+				   size_t& size) const
+{
+	if( isNone( transport_ ) )
+		return -1;
+	return transport_->getOption( option, value ,size );
+}
+
+_im_end

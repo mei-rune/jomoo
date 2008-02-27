@@ -1,0 +1,8 @@
+#include "StdAfx.h"
+#include "message_buffer.h"
+#include "BOE/exception.hpp"
+
+_im_begin
+
+
+_im_end

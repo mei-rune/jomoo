@@ -1,0 +1,64 @@
+
+#ifndef BOE_Buffer_T_H
+#define BOE_Buffer_T_H
+
+#include "config.h"
+
+#if !defined (BOE_LACKS_PRAGMA_ONCE)
+# pragma once
+#endif /* BOE_LACKS_PRAGMA_ONCE */
+
+// Include files
+#include "config_IM.h"
+#include "Instance_IM.H"
+#include "BOE\BOE_Buffer.h"
+
+_im_begin
+
+#define BOE_Buffer_T_ST_1 typename T , typename TRAIT
+#define BOE_Buffer_T_ST_2 T , TRAIT
+
+template< BOE_Buffer_T_ST_1 >
+class BOE_Buffer_T :
+	public BOE_Buffer
+{
+public:
+	BOE_Buffer_T( T* t = 0 );
+	virtual ~BOE_Buffer_T(void);
+	void reset( T* t );
+
+	bool read( Byte& );
+	bool read( Int16& );
+	bool read( Int32& );
+	bool read( Int64& );
+	bool read( Float& );
+	bool read( Double& );
+	bool read( void* blob, size_t t ) ;
+
+	bool write( Byte );
+	bool write( Int16 );
+	bool write( Int32 );
+	bool write( Int64 );
+	bool write( Float );
+	bool write( Double );
+	bool write( const void* blob, size_t t );
+
+	bool eof();
+
+	const tstring& last_error() const;
+
+	const tstring& toString() const;
+
+private:
+
+	T* t_;
+	typename T::iterator it_;
+	size_t pos_;
+
+	tstring toString_;
+	tstring last_error_;
+};
+
+_im_end
+
+#endif // BOE_Buffer_T_H

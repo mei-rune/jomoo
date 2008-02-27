@@ -1,0 +1,32 @@
+
+#ifndef FileManager_H
+#define FileManager_H
+
+#include "config.h"
+
+#if !defined (BOE_LACKS_PRAGMA_ONCE)
+# pragma once
+#endif /* BOE_LACKS_PRAGMA_ONCE */
+
+// Include files
+#include "config_GreenGown.H"
+#include "../Instance_IM.H"
+#include "BOE/IO/mmap.h"
+
+_greengown_begin
+
+class FileManager
+{
+public:
+	FileManager( _io Instance_IM& instance );
+	Data_Block_Ptr readFile( const tstring& url, size_t begin, size_t end );
+	const tstring& toString() const;
+private:
+	Instance_IM& instance_;
+	tstring toString_;
+};
+
+_greengown_end
+
+#endif // FileManager_H
+

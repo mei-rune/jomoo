@@ -1,0 +1,34 @@
+
+#ifndef DownLoadServer_H
+#define DownLoadServer_H
+
+#include "config.h"
+
+#if !defined (BOE_LACKS_PRAGMA_ONCE)
+# pragma once
+#endif /* BOE_LACKS_PRAGMA_ONCE */
+
+// Include files
+#include "config_GreenGown.H"
+#include "../Instance_IM.H"
+#include "../ConnectionManager.H"
+#include "DownLoad_Protocol.H"
+#include "FileManager.H"
+
+_greengown_begin
+
+class DownLoadServer : public Message_Handler
+{
+public:
+	DownLoadServer( Instance_IM& instance );
+	int open( _util PropertiesPtr config );
+	void close( );
+	void onMessage( BOE_Message& result );
+private:
+	Instance_IM& instance_;
+};
+
+_greengown_end
+
+#endif // DownLoadServer_H
+

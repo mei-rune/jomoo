@@ -1,0 +1,218 @@
+
+#ifndef BOE_CONNECTION_H
+#define BOE_CONNECTION_H
+
+#include "config.h"
+
+#if !defined (BOE_LACKS_PRAGMA_ONCE)
+# pragma once
+#endif /* BOE_LACKS_PRAGMA_ONCE */
+
+// Include files
+#include "config_IM.h"
+#include "DataHeader.H"
+#include "BOE/counter_ptr.hpp"
+#include "BOE/BOE_Buffer.H"
+#include "Instance_IM.H"
+#include "IM_Protocol_Handler.H"
+
+/**
+ */
+_im_begin
+
+typedef iovec IM_Buf;
+
+//struct IMBuffer
+//{
+//	char* buf;
+//	size_t len;		// 当前有效数据内容起始位置
+//};
+
+
+typedef counter_ptr< IM_Buf > IM_Buf_Ptr;
+
+inline void reset( IM_Buf& b )
+{
+	//b. begin = 0;	// 当前有效数据内容起始位置
+	//b. end = 0;		// 当前有效数据内容长度
+}
+
+inline void reset( IM_Buf_Ptr b )
+{
+	reset( *b );
+}
+
+class IM_Buf_Factory
+{
+public:
+	virtual ~IM_Buf_Factory(){}
+
+	virtual IM_Buf_Ptr create() = 0;
+};
+
+class IM_Buffer
+{
+public:
+	IM_Buffer( void* buf, size_t size );
+
+	IM_Buffer( void* buf, size_t size , size_t length );
+
+	IM_Buffer( void* buf, size_t size , size_t begin, size_t end );
+
+	const void* rd_ptr( ) const;
+	void rd_ptr( size_t );
+	size_t length( ) const;
+
+	void* wd_ptr( );
+	void wd_ptr( size_t );
+	size_t space() const;
+
+	void crunch( );
+private:
+
+	DECLARE_NO_COPY_CLASS( IM_Buffer );
+
+	char * buf_;
+	size_t size_;
+	size_t begin_;
+	size_t end_;
+};
+
+
+class IM_Connection;
+class IM_Connection_Handler;
+
+typedef counter_ptr< IM_Connection > IM_Connection_Ptr;
+typedef counter_ptr< IM_Connection_Handler > IM_Connection_Handler_Ptr;
+
+class IM_Connection_Result
+{
+public:
+
+	IM_Connection_Result( bool success = true
+		,int err = 0
+		,void* act = 0
+		,const char* name = 0 );
+
+	virtual ~IM_Connection_Result();
+
+	bool success( ) const;
+
+	void* act();
+
+	const void* act() const;
+
+	const tstring& toString() const;
+
+	int error() const;
+
+	void set( bool success,int error,void* act );
+
+protected:
+
+	bool success_;
+	int error_;
+	void* act_;
+	tstring toString_;
+
+private:
+
+	DECLARE_NO_COPY_CLASS( IM_Connection_Result );
+};
+
+class IM_Connection_Read_Result : public IM_Connection_Result
+{
+public:
+
+	IM_Connection_Read_Result( IM_Buffer& buffer
+		,IM_Connection_Handler& handle
+		,IM_Connection& connection );
+
+	IM_Buffer& get() ;
+
+	IM_Connection_Handler& handle();
+
+	IM_Connection& connection();
+
+private:
+	IM_Buffer& buffer_;
+
+	IM_Connection_Handler& handle_;
+
+	IM_Connection& connection_;
+};
+
+class IM_Connection_Write_Result : public IM_Connection_Result
+{
+public:
+
+	IM_Connection_Write_Result( const IM_Buffer& buffer
+		,IM_Connection_Handler& handle
+		,IM_Connection& connection );
+
+	const IM_Buffer& get() const;
+
+	IM_Connection_Handler& handle();
+
+	IM_Connection& connection();
+
+private:
+	const IM_Buffer& buffer_;
+
+	IM_Connection_Handler& handle_;
+
+	IM_Connection& connection_;
+};
+
+class IM_Connection_Handler
+{
+public:
+
+	virtual ~IM_Connection_Handler(){}
+
+	virtual void onRead( IM_Connection_Read_Result& result ) = 0;
+
+	virtual void onWrite( IM_Connection_Write_Result& result ) = 0;
+
+	virtual const tstring& toString() const = 0;
+};
+
+class IM_Connection
+{
+public:
+
+	typedef IMLoggerPtr LoggerPtr;
+
+	IM_Connection( Instance_IM& instance,TcpTransportPtr transport, const tchar* name = 0 );
+
+	~IM_Connection(void);
+
+	int open( );
+
+	void close( );
+
+	bool read( IM_Connection_Handler& handler,IM_Buffer& buf, void* act ) ;
+
+	bool write( IM_Connection_Handler& handler,const IM_Buffer& buf, void* act ) ;
+
+	TcpTransportPtr transport();
+
+	LoggerPtr getLogger() ;
+
+	const tstring& toString() const ;
+
+private:
+
+	Instance_IM& instance_;
+
+	TcpTransportPtr transport_;
+
+	IM_Read_Protocol_Handler rd_;
+	IM_Write_Protocol_Handler wd_;
+
+	tstring toString_;
+};
+
+_im_end
+
+#endif // BOE_CONNECTION_H

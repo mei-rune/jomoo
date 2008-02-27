@@ -1,0 +1,62 @@
+#include "StdAfx.h"
+#include "message_buffer.h"
+#include "BOE/exception.hpp"
+
+_im_begin
+
+Data_Block::Data_Block( Instance_IM& instance )
+: instance_( instance )
+, data_( instance.create() )
+, begin_( 0 )
+, end_( 0 )
+{	
+}
+
+Data_Block::~Data_Block()
+{
+	instance.relase( data_ );
+}
+const char* Data_Block::rd_ptr( ) const
+{
+	return data_->buf + begin_;
+}
+
+void Data_Block::rd_ptr( size_t t )
+{
+	if( t > ( end_ - begin_ ) )
+		ThrowException1( OutOfRangeException, "，可读数据没有那么长" );
+
+	begin_ += t;
+}
+
+size_t Data_Block::length( ) const
+{
+	return ( end_ - begin_ );
+}
+
+char* Data_Block::wd_ptr()
+{
+	return ( data_->buf + end_ );
+}
+
+void Data_Block::wd_ptr( size_t t )
+{
+	if( t > ( data_->len - end_ ) )
+		ThrowException1( OutOfRangeException, "，可读数据没有那么长" );
+	begin_ += t;
+}
+
+size_t Data_Block::space( ) const
+{
+	return ( data_->len - end_ );
+}
+
+Message_Buffer::Message_Buffer(void)
+{
+}
+
+Message_Buffer::~Message_Buffer(void)
+{
+}
+
+_im_end

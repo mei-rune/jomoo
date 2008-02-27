@@ -1,0 +1,195 @@
+#include "StdAfx.h"
+#include "BOE_Buffer_T.h"
+
+_im_begin
+
+template< BOE_Buffer_T_ST_1 >
+BOE_Buffer_T< BOE_Buffer_T_ST_2 >::BOE_Buffer_T( T* t )
+{
+	reset( t );
+	toString_ = "BOE_Buffer_T";
+}
+
+template< BOE_Buffer_T_ST_1 >
+BOE_Buffer_T< BOE_Buffer_T_ST_2 >::~BOE_Buffer_T(void)
+{
+}
+
+template< BOE_Buffer_T_ST_1 >
+void BOE_Buffer_T< BOE_Buffer_T_ST_2 >::reset( T* t )
+{
+	t_ = t;
+	if( t_ == 0 )
+		return ;
+
+	it_= t_->begin();
+	pos_ = 0;
+}
+
+template< BOE_Buffer_T_ST_1 >
+bool BOE_Buffer_T< BOE_Buffer_T_ST_2 >::read( Byte& )
+{
+	if( eof() )
+		return false;
+		
+	return false;
+}
+
+template< BOE_Buffer_T_ST_1 >
+bool BOE_Buffer_T< BOE_Buffer_T_ST_2 >::read( Int16& )
+{
+	if( eof() )
+		return false;
+		
+	return false;
+}
+
+template< BOE_Buffer_T_ST_1 >
+bool BOE_Buffer_T< BOE_Buffer_T_ST_2 >::read( Int32& )
+{
+	if( eof() )
+		return false;
+		
+	return false;
+}
+
+
+template< BOE_Buffer_T_ST_1 >
+bool BOE_Buffer_T< BOE_Buffer_T_ST_2 >::read( Int64& )
+{
+	if( eof() )
+		return false;
+		
+	return false;
+}
+
+template< BOE_Buffer_T_ST_1 >
+bool BOE_Buffer_T< BOE_Buffer_T_ST_2 >::read( Float& )
+{
+	if( eof() )
+		return false;
+		
+	return false;
+}
+
+template< BOE_Buffer_T_ST_1 >
+bool BOE_Buffer_T< BOE_Buffer_T_ST_2 >::read( Double& )
+{
+	if( eof() )
+		return false;
+		
+	return false;
+}
+
+template< BOE_Buffer_T_ST_1 >
+bool BOE_Buffer_T< BOE_Buffer_T_ST_2 >::read( void* blob, size_t t )
+{
+	if( eof() )
+		return false;
+		
+	return false;
+}
+
+
+template< BOE_Buffer_T_ST_1 >
+bool BOE_Buffer_T< BOE_Buffer_T_ST_2 >::write( Byte )
+{
+	if( eof() )
+		return false;
+		
+	return false;
+}
+
+template< BOE_Buffer_T_ST_1 >
+bool BOE_Buffer_T< BOE_Buffer_T_ST_2 >::write( Int16 )
+{
+	if( eof() )
+		return false;
+		
+	return false;
+}
+
+template< BOE_Buffer_T_ST_1 >
+bool BOE_Buffer_T< BOE_Buffer_T_ST_2 >::write( Int32 )
+{
+	if( eof() )
+		return false;
+		
+	return false;
+}
+
+template< BOE_Buffer_T_ST_1 >
+bool BOE_Buffer_T< BOE_Buffer_T_ST_2 >::write( Int64 )
+{
+	if( eof() )
+		return false;
+		
+	return false;
+}
+
+template< BOE_Buffer_T_ST_1 >
+bool BOE_Buffer_T< BOE_Buffer_T_ST_2 >::write( Float )
+{
+	if( eof() )
+		return false;
+		
+	return false;
+}
+
+template< BOE_Buffer_T_ST_1 >
+bool BOE_Buffer_T< BOE_Buffer_T_ST_2 >::write( Double )
+{
+	if( eof() )
+		return false;
+		
+	return false;
+}
+
+template< BOE_Buffer_T_ST_1 >
+bool BOE_Buffer_T< BOE_Buffer_T_ST_2 >::write( const void* blob, size_t t )
+{
+	if( eof() )
+		return false;
+		
+	return false;
+}
+
+template< BOE_Buffer_T_ST_1 >
+bool BOE_Buffer_T< BOE_Buffer_T_ST_2 >::eof()
+{
+	if( t_ == 0 )
+	{
+		last_error_ = "没有数据块，请先设置数据块";
+		return true;
+	}
+
+	while( true )
+	{
+		if( it_ = t_->end() )
+		{
+			last_error_ = "已经到了数据块的结尾了";
+			return true;
+		}
+
+		if( TRAIT::getlen( *it ) > pos_ )
+			break;
+
+		it ++;
+		pos_ = 0;
+	}
+	return false;
+}
+
+template< BOE_Buffer_T_ST_1 >
+const tstring& BOE_Buffer_T< BOE_Buffer_T_ST_2 >::last_error() const
+{
+	return last_error_;
+}
+
+template< BOE_Buffer_T_ST_1 >
+const tstring& BOE_Buffer_T< BOE_Buffer_T_ST_2 >::toString() const
+{
+	return toString_;
+}
+
+_im_end
