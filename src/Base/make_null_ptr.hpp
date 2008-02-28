@@ -1,0 +1,18 @@
+
+#ifndef _make_null_ptr_hpp_
+#define _make_null_ptr_hpp_
+
+#include "config.h"
+
+#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+# pragma once
+#endif /* Hazel_LACKS_PRAGMA_ONCE */
+
+template <typename T>
+inline T* make_null_ptr()
+{
+	return (T*)0;
+}
+
+
+#endif /* _make_null_ptr_hpp_ */
