@@ -1,7 +1,0 @@
-#include "StdAfx.h"
-#include "MessageQueue.h"
-#include "BOE/exception.hpp"
-
-_im_begin
-
-_im_end
