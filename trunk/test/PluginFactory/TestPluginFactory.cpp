@@ -1,4 +1,0 @@
-//<<<<<< INCLUDES                                                       >>>>>>
-
-#include "TestPluginFactory.h"
-
