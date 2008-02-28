@@ -1,0 +1,91 @@
+#include "StdAfx.h"
+
+#ifdef BOE_MT
+
+#include "BOE_Thread.h"
+#include "boost/thread/tss.hpp"
+
+
+
+_thread_begin
+
+DWORD g_Thread_Ptr;
+
+void BOE_Thread::static_thread_svc( void * arg )
+{
+	try{
+	BOE_Thread* thread_ = ( BOE_Thread* ) arg;
+	TlsSetValue( g_Thread_Ptr, thread_ );
+	g_Thread_Ptr.reset( thread_ );
+	thread_->m_runfn_->run();
+	}
+	catch( ... )
+	{
+	}
+
+	TlsSetValue( g_Thread_Ptr, 0 );
+}
+
+
+BOE_Thread::BOE_Thread( _thread Runnable& runfn , const tchar* descr)
+: m_thread_( 0 )
+, m_runfn_( &runfn )
+, to_string_( descr == 0 ? "< empty >" : descr )
+{
+}
+
+BOE_Thread::~BOE_Thread()
+{
+	join();
+   CloseHandle(reinterpret_cast<HANDLE>(m_thread));
+}
+
+BOE_MUTEX( g_mutex_ );
+
+int BOE_Thread::activate ( )
+{
+	if ( m_thread_ )
+		return -1;
+
+	BOE_GUARD( BOE_Mutex, guard, g_mutex_ );
+
+	if ( m_thread_ )
+		return -1;
+
+    m_thread_ = _beginthreadex(0, 0, &static_thread_svc,
+                                           this, 0, &m_id);
+    if (!m_thread_ )
+		return -1;
+
+	to_string_ += "[";
+	to_string_ += convertIntegerToString( m_thread_ ); 
+	to_string_ += "]";
+
+	return 0;
+}
+
+void BOE_Thread::join (void)
+{
+   WaitForSingleObject(reinterpret_cast<HANDLE>(m_thread_), INFINITE);
+   CloseHandle(reinterpret_cast<HANDLE>(m_thread_));
+   m_thread_ = 0;
+}
+
+const tstring& BOE_Thread::to_string() const
+{
+	return to_string_;
+}
+
+_thread_end
+
+BT_Export_C _thread BOE_Base_Thread* ___get_BOE_Thread( )
+{
+	return ( BOE_Base_Thread* )TlsGetValue( _thread g_Thread_Ptr );
+}
+
+BT_Export_C _thread BOE_Base_Thread* ___make_BOE_Thread( _thread Runnable& runfn ,const tchar* descr )
+{
+	return new _thread BOE_Thread( runfn , descr );
+}
+
+#endif // BOE_MT
