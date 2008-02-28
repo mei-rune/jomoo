@@ -1,0 +1,53 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Server", "Server\Server.vcproj", "{911CC03C-DCC2-4393-B3F7-FB5D474F9F51}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "client", "client\client.vcproj", "{4AA8EF61-DA22-4636-A880-CADED7CA01DD}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "addr_test", "addr_test\addr_test.vcproj", "{6239A84F-C77B-45A0-8DF9-35C3155F8248}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TCPScan", "..\vc\TCPScan\TCPScan.vcproj", "{C9833569-8D42-4CA4-AE41-8DA902CE0E9D}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TCP_Scan", "TCP_Scan\TCP_Scan.vcproj", "{A00367F9-13E9-4534-BC4C-72B80FD11D87}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{911CC03C-DCC2-4393-B3F7-FB5D474F9F51}.Debug.ActiveCfg = Debug|Win32
+		{911CC03C-DCC2-4393-B3F7-FB5D474F9F51}.Debug.Build.0 = Debug|Win32
+		{911CC03C-DCC2-4393-B3F7-FB5D474F9F51}.Release.ActiveCfg = Release|Win32
+		{911CC03C-DCC2-4393-B3F7-FB5D474F9F51}.Release.Build.0 = Release|Win32
+		{4AA8EF61-DA22-4636-A880-CADED7CA01DD}.Debug.ActiveCfg = Debug|Win32
+		{4AA8EF61-DA22-4636-A880-CADED7CA01DD}.Debug.Build.0 = Debug|Win32
+		{4AA8EF61-DA22-4636-A880-CADED7CA01DD}.Release.ActiveCfg = Release|Win32
+		{4AA8EF61-DA22-4636-A880-CADED7CA01DD}.Release.Build.0 = Release|Win32
+		{6239A84F-C77B-45A0-8DF9-35C3155F8248}.Debug.ActiveCfg = Debug|Win32
+		{6239A84F-C77B-45A0-8DF9-35C3155F8248}.Debug.Build.0 = Debug|Win32
+		{6239A84F-C77B-45A0-8DF9-35C3155F8248}.Release.ActiveCfg = Release|Win32
+		{6239A84F-C77B-45A0-8DF9-35C3155F8248}.Release.Build.0 = Release|Win32
+		{C9833569-8D42-4CA4-AE41-8DA902CE0E9D}.Debug.ActiveCfg = Debug|Win32
+		{C9833569-8D42-4CA4-AE41-8DA902CE0E9D}.Debug.Build.0 = Debug|Win32
+		{C9833569-8D42-4CA4-AE41-8DA902CE0E9D}.Release.ActiveCfg = Release|Win32
+		{C9833569-8D42-4CA4-AE41-8DA902CE0E9D}.Release.Build.0 = Release|Win32
+		{A00367F9-13E9-4534-BC4C-72B80FD11D87}.Debug.ActiveCfg = Debug|Win32
+		{A00367F9-13E9-4534-BC4C-72B80FD11D87}.Debug.Build.0 = Debug|Win32
+		{A00367F9-13E9-4534-BC4C-72B80FD11D87}.Release.ActiveCfg = Release|Win32
+		{A00367F9-13E9-4534-BC4C-72B80FD11D87}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal
