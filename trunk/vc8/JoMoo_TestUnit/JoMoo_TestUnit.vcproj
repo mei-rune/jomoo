@@ -39,7 +39,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalOptions="/DTEST"
+				AdditionalOptions="/DTEST=1"
 				Optimization="0"
 				AdditionalIncludeDirectories="$(BOOST_ROOT)"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;JOMOO_TESTUNIT_EXPORTS"

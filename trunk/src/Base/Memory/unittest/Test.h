@@ -1,5 +1,6 @@
 
 #ifdef TEST
+
 #ifndef TEST_MEMORY_H
 #define TEST_MEMORY_H
 
@@ -20,4 +21,5 @@ void Test()
 }
 
 #endif //SYSTEM_POOL_H
+
 #endif //TEST
