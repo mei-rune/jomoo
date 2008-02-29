@@ -140,12 +140,12 @@ void TCP_Accept_Result::complete (size_t bytes_transferred,
 
 	m_new_channel_->onAccept( );
 
-	BT_LOG_TRACE( m_new_channel_->getLogger(), m_new_channel_->toString() << BT_TEXT("TCP连接到来!") );
+	LOG_TRACE( m_new_channel_->getLogger(), m_new_channel_->toString() << BT_TEXT("TCP连接到来!") );
 
 	//if( instance_.getWIN32Proactor().register_handle( ( Hazel_HANDLE )( m_new_channel_->get_handle().get_handle() ), 0 ) != 0 )
 	//{
 	//	m_success_ = -1;
-	//	BT_LOG_ERROR( m_new_channel_->getLogger(), m_new_channel_->toString() << BT_TEXT("打开异步连接失败，[")
+	//	LOG_ERROR( m_new_channel_->getLogger(), m_new_channel_->toString() << BT_TEXT("打开异步连接失败，[")
 	//	<< lastError() << BT_TEXT("]") );
 	//}
 
@@ -183,32 +183,32 @@ bool TcpAcceptor::isOpen( )
 bool TcpAcceptor::open( const Hazel_INET_Addr& addr )
 {
 	if( m_handle_.get_handle() != NULL && m_handle_.get_handle() != INVALID_SOCKET )
-		BT_LOG_ERROR_RETURN( getLogger(), toString() << BT_TEXT("已经打开过了!") , false );
+		LOG_ERROR_RETURN( getLogger(), toString() << BT_TEXT("已经打开过了!") , false );
 
 	m_serveraddr_ = addr;
 
 	if( m_handle_.open( ) != 0 )
-		BT_LOG_ERROR_RETURN( getLogger(), BT_TEXT("打开socket失败，[")
+		LOG_ERROR_RETURN( getLogger(), BT_TEXT("打开socket失败，[")
 		<< lastError() << BT_TEXT("]") , false );
 
 	if( ::bind( m_handle_.get_handle()
 		, ( sockaddr* )m_serveraddr_.get_addr()
 		, m_serveraddr_.get_size() ) == SOCKET_ERROR )
-		BT_LOG_ERROR_RETURN( getLogger(), BT_TEXT("绑定服务到地址[")<< 
+		LOG_ERROR_RETURN( getLogger(), BT_TEXT("绑定服务到地址[")<< 
 		m_serveraddr_.toString() << BT_TEXT("]失败，[")
 		<< lastError() << BT_TEXT("]") , false );
 
 	if( ::listen( m_handle_.get_handle(), SOMAXCONN ) == SOCKET_ERROR )
-		BT_LOG_ERROR_RETURN( getLogger(), BT_TEXT("监听服务启动失败，[")
+		LOG_ERROR_RETURN( getLogger(), BT_TEXT("监听服务启动失败，[")
 		<< lastError() << BT_TEXT("]") , false );
 
 	if( instance_.getInstanceNetwork().getNativeProactor().register_handle( 
 		reinterpret_cast< Hazel_HANDLE > ( m_handle_.get_handle() )
 		, this ) != 0 )
-		BT_LOG_ERROR_RETURN( getLogger(), BT_TEXT("打开异步监听失败，[")
+		LOG_ERROR_RETURN( getLogger(), BT_TEXT("打开异步监听失败，[")
 		<< lastError() << BT_TEXT("]") , false );
 
-	BT_LOG_INFO( getLogger(), BT_TEXT("监听服务启动成功，监听地址[")<< 
+	LOG_INFO( getLogger(), BT_TEXT("监听服务启动成功，监听地址[")<< 
 		m_serveraddr_.toString() << BT_TEXT("]") );
 
 	toString_ = BT_TEXT( "接收器[" );
@@ -251,7 +251,7 @@ bool TcpAcceptor::accept( handler_type& handle
 	TcpTransportPtr newchannel = createTransport();
 
    if( !newchannel->open() )
-		BT_LOG_ERROR_RETURN( getLogger(), toString() << BT_TEXT("打开TCP连接失败，[") 
+		LOG_ERROR_RETURN( getLogger(), toString() << BT_TEXT("打开TCP连接失败，[") 
 		<< lastError( WSAGetLastError() ) << BT_TEXT("]") , false );
 	
 	Instance_TCP::AcceptResultFactory::auto_ptr result (
@@ -271,7 +271,7 @@ bool TcpAcceptor::accept( handler_type& handle
 		, result.get() ) != TRUE )
 	{
 		if ( GetLastError() != ERROR_IO_PENDING )
-			BT_LOG_ERROR_RETURN( getLogger(), toString() << BT_TEXT("监听TCP连接失败，[")
+			LOG_ERROR_RETURN( getLogger(), toString() << BT_TEXT("监听TCP连接失败，[")
 			<< lastError( WSAGetLastError() ) << BT_TEXT("]") , false );
 	}
 	result.release();
@@ -286,13 +286,13 @@ bool TcpAcceptor::accept( handler_type& handle
 //		, &remote_size );
 //
 //   if( new_socket == INVALID_SOCKET ) 
-//		BT_LOG_ERROR_RETURN( getLogger(), toString() << BT_TEXT("建立TCP连接失败，[") << lastError() << BT_TEXT("]") , false );
+//		LOG_ERROR_RETURN( getLogger(), toString() << BT_TEXT("建立TCP连接失败，[") << lastError() << BT_TEXT("]") , false );
 //
 //    result->new_tcp_channel()->get_handle().set_handle( new_socket );
 //   result->new_tcp_channel()->getRemoteAddr().set_addr ( &remote_addr,remote_size);
 //
 //	//if( instance_.getInstance_IO().getProactor()->register_handle( ( Hazel_HANDLE )result->new_tcp_channel()->get_handle().get_handle(), 0 ) != 0 )
-//	//		BT_LOG_ERROR_RETURN( getLogger(), toString() << BT_TEXT("打开异步连接失败，[")
+//	//		LOG_ERROR_RETURN( getLogger(), toString() << BT_TEXT("打开异步连接失败，[")
 //	//	<< lastError() << BT_TEXT("]") , false );
 //
 //	result->complete( 0, 0, 0, 0 );
