@@ -28,7 +28,7 @@ int ServiceManager::installService(const std::string& name, const std::string& d
         char buf[_MAX_PATH];
         if(GetModuleFileName(NULL, buf, _MAX_PATH) == 0)
         {
-            BT_LOG_ERROR( logger_, BT_TEXT("没有执行文件名") );
+            LOG_ERROR( logger_, BT_TEXT("没有执行文件名") );
             return -1;
         }
         exec = buf;
@@ -71,7 +71,7 @@ int ServiceManager::installService(const std::string& name, const std::string& d
     SC_HANDLE hSCM = OpenSCManager(NULL, NULL, SC_MANAGER_ALL_ACCESS);
     if(hSCM == NULL)
     {
-        BT_LOG_INFO( logger_, BT_TEXT("不能打开 SCM") );
+        LOG_INFO( logger_, BT_TEXT("不能打开 SCM") );
         return -1;
     }
     SC_HANDLE hService = CreateService(
@@ -91,7 +91,7 @@ int ServiceManager::installService(const std::string& name, const std::string& d
 
     if(hService == NULL)
     {
-        BT_LOG_INFO( logger_, BT_TEXT("不能安装服务[") << name << BT_TEXT( "]") );
+        LOG_INFO( logger_, BT_TEXT("不能安装服务[") << name << BT_TEXT( "]") );
         CloseServiceHandle(hSCM);
         return -1;
     }
@@ -107,14 +107,14 @@ int ServiceManager::uninstallService(const std::string& name)
     SC_HANDLE hSCM = OpenSCManager(NULL, NULL, SC_MANAGER_ALL_ACCESS);
     if(hSCM == NULL)
     {
-        BT_LOG_INFO( logger_, BT_TEXT("不能打开 SCM") );
+        LOG_INFO( logger_, BT_TEXT("不能打开 SCM") );
         return -1;
     }
 
     SC_HANDLE hService = OpenService(hSCM, name.c_str(), SC_MANAGER_ALL_ACCESS);
     if(hService == NULL)
     {
-        BT_LOG_INFO( logger_, BT_TEXT("不能打开服务[") << name << BT_TEXT( "]"));
+        LOG_INFO( logger_, BT_TEXT("不能打开服务[") << name << BT_TEXT( "]"));
         CloseServiceHandle(hSCM);
         return -1;
     }
@@ -123,7 +123,7 @@ int ServiceManager::uninstallService(const std::string& name)
 
     if(!b)
     {
-	    BT_LOG_INFO( logger_, BT_TEXT("不能卸载服务[") << name << BT_TEXT( "]"));
+	    LOG_INFO( logger_, BT_TEXT("不能卸载服务[") << name << BT_TEXT( "]"));
     }
 
     CloseServiceHandle(hSCM);
@@ -137,14 +137,14 @@ int ServiceManager::startService(const std::string& name, const std::vector<std:
     SC_HANDLE hSCM = OpenSCManager(NULL, NULL, SC_MANAGER_ALL_ACCESS);
     if(hSCM == NULL)
     {
-        BT_LOG_INFO( logger_, BT_TEXT("不能打开 SCM") );
+        LOG_INFO( logger_, BT_TEXT("不能打开 SCM") );
         return -1;
     }
 
     SC_HANDLE hService = OpenService(hSCM, name.c_str(), SC_MANAGER_ALL_ACCESS);
     if(hService == NULL)
     {
-        BT_LOG_INFO( logger_, BT_TEXT("不能打开服务[") << name << BT_TEXT( "]"));
+        LOG_INFO( logger_, BT_TEXT("不能打开服务[") << name << BT_TEXT( "]"));
         CloseServiceHandle(hSCM);
         return -1;
     }
@@ -176,13 +176,13 @@ int ServiceManager::startService(const std::string& name, const std::vector<std:
 
     if(!b)
     {
-		BT_LOG_INFO( logger_, BT_TEXT("不能启动服务[") << name << BT_TEXT( "]"));
+		LOG_INFO( logger_, BT_TEXT("不能启动服务[") << name << BT_TEXT( "]"));
         CloseServiceHandle(hService);
         CloseServiceHandle(hSCM);
         return -1;
     }
 
-    BT_LOG_TRACE( logger_, BT_TEXT("服务正在启动中...") );
+    LOG_TRACE( logger_, BT_TEXT("服务正在启动中...") );
 
     //
     // 
@@ -190,7 +190,7 @@ int ServiceManager::startService(const std::string& name, const std::vector<std:
     SERVICE_STATUS status;
     if(!waitForServiceState(hService, SERVICE_START_PENDING, status))
     {
-		BT_LOG_INFO( logger_, BT_TEXT("检测服务[") << name << BT_TEXT( "]状态，发生错误。"));
+		LOG_INFO( logger_, BT_TEXT("检测服务[") << name << BT_TEXT( "]状态，发生错误。"));
         CloseServiceHandle(hService);
         CloseServiceHandle(hSCM);
         return -1;
@@ -201,7 +201,7 @@ int ServiceManager::startService(const std::string& name, const std::vector<std:
 
     if(status.dwCurrentState == SERVICE_RUNNING)
     {
-        BT_LOG_TRACE( logger_, BT_TEXT("服务运行中..."));
+        LOG_TRACE( logger_, BT_TEXT("服务运行中..."));
     }
     else
     {
@@ -217,14 +217,14 @@ int ServiceManager::stopService(const std::string& name)
     SC_HANDLE hSCM = OpenSCManager(NULL, NULL, SC_MANAGER_ALL_ACCESS);
     if(hSCM == NULL)
     {
-        BT_LOG_INFO( logger_, BT_TEXT("不能打开 SCM") );
+        LOG_INFO( logger_, BT_TEXT("不能打开 SCM") );
         return -1;
     }
 
     SC_HANDLE hService = OpenService(hSCM, name.c_str(), SC_MANAGER_ALL_ACCESS);
     if(hService == NULL)
     {
-        BT_LOG_INFO( logger_, BT_TEXT("不能打开服务[") << name << BT_TEXT( "]"));
+        LOG_INFO( logger_, BT_TEXT("不能打开服务[") << name << BT_TEXT( "]"));
         CloseServiceHandle(hSCM);
         return -1;
     }
@@ -234,20 +234,20 @@ int ServiceManager::stopService(const std::string& name)
 
     if(!b)
     {
-		BT_LOG_INFO( logger_, BT_TEXT("不能停止服务[") << name << BT_TEXT( "]"));
+		LOG_INFO( logger_, BT_TEXT("不能停止服务[") << name << BT_TEXT( "]"));
         CloseServiceHandle(hSCM);
         CloseServiceHandle(hService);
         return -1;
     }
 
-    BT_LOG_TRACE( logger_, BT_TEXT("服务停止中..."));
+    LOG_TRACE( logger_, BT_TEXT("服务停止中..."));
 
     //
     // 等待服务停止或发生一个错误
     //
     if(!waitForServiceState(hService, SERVICE_STOP_PENDING, status))
     {
-        BT_LOG_INFO( logger_, BT_TEXT("检测服务[") << name << BT_TEXT( "]状态，发生错误。"));
+        LOG_INFO( logger_, BT_TEXT("检测服务[") << name << BT_TEXT( "]状态，发生错误。"));
         CloseServiceHandle(hService);
         CloseServiceHandle(hSCM);
         return -1;
@@ -258,7 +258,7 @@ int ServiceManager::stopService(const std::string& name)
 
     if(status.dwCurrentState == SERVICE_STOPPED)
     {
-         BT_LOG_TRACE( logger_, BT_TEXT("服务已停止."));
+         LOG_TRACE( logger_, BT_TEXT("服务已停止."));
     }
     else
     {
@@ -367,7 +367,7 @@ void ServiceManager::showServiceStatus(const std::string& msg, SERVICE_STATUS& s
     }
 
    
-   BT_LOG_TRACE( logger_, msg << BT_TEXT( ",")
+   LOG_TRACE( logger_, msg << BT_TEXT( ",")
 	 << BT_TEXT("  当前状态: " ) << state << BT_TEXT( ",")
 	 << BT_TEXT("  退出代码: " ) << status.dwWin32ExitCode << BT_TEXT( ",")
 	 << BT_TEXT("  服务退出代码: " ) << status.dwServiceSpecificExitCode << BT_TEXT( ",")

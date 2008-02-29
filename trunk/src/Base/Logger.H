@@ -23,11 +23,12 @@
 #include "Hazel_Export.h"
 #include <assert.h>
 
+
 namespace Logging
 {
 
 /**
- * @Brief Hazel_Log_Impl 日志接口
+ * @Brief ILogger 日志接口
  * 这是BT的日志接口，每一个具体的日志都必须从它继承，每一个需要记日志的都可以得到一个这样的接，
  * 但不推荐直接使用它。有一组预定义好的宏，请使用宏
  */
@@ -195,11 +196,11 @@ public:
 
 _hazel_end
 
-#ifndef _NO_BT_LOG_
+#ifndef _NO_LOG_
 
 #ifndef BT_NDC
 #define BT_NDC( ndc , msg )		// _hazel BT_Log_NDC ndc( msg )
-#endif //BT_LOG_NDC
+#endif //LOG_NDC
 
 #ifndef BT_LOG
 #define BT_LOG(logger, level, message) { \
@@ -209,311 +210,311 @@ _hazel_end
 	logger->fatal(level, oss, __FILE__, __LINE__); }}
 #endif // BT_LOG
 
-#ifndef BT_LOG_RETURN
-#define BT_LOG_RETURN(logger, level, message,ret) { \
+#ifndef LOG_RETURN
+#define LOG_RETURN(logger, level, message,ret) { \
 	StringStream oss; \
 	oss << message; \
 	if ( logger != 0 && logger->isEnabledFor(level)) {\
 	logger->fatal(level, oss, __FILE__, __LINE__); } return ( ret );}
-#endif // BT_LOG_RETURN
+#endif // LOG_RETURN
 
-#ifndef BT_LOG_THROW
-#define BT_LOG_THROW(logger, level, message ,e ) { \
+#ifndef LOG_THROW
+#define LOG_THROW(logger, level, message ,e ) { \
 	StringStream oss; \
 	oss << message; \
 	if ( logger != 0 && logger->isEnabledFor(level)) {\
 	logger->fatal(level, oss, __FILE__, __LINE__); } throw e( __FILE__,__LINE__,  oss.str() );}
-#endif // BT_LOG_THROW
+#endif // LOG_THROW
 
-#ifndef BT_LOG_DEBUG
-#define BT_LOG_DEBUG(logger, message) { \
+#ifndef LOG_DEBUG
+#define LOG_DEBUG(logger, message) { \
 	if ( logger != 0 && logger->isDebugEnabled()) {\
 	StringStream oss; \
 	oss << message; \
 	logger->debug( oss, __FILE__, __LINE__); }}
-#endif // BT_LOG_DEBUG
+#endif // LOG_DEBUG
 
-#ifndef BT_LOG_DEBUG_RETURN
-#define BT_LOG_DEBUG_RETURN(logger, message, ret ) { \
+#ifndef LOG_DEBUG_RETURN
+#define LOG_DEBUG_RETURN(logger, message, ret ) { \
 	if ( logger != 0 && logger->isDebugEnabled()) {\
 	StringStream oss; \
 	oss << message; \
 	logger->debug( oss, __FILE__, __LINE__); } return ( ret );}
-#endif // BT_LOG_DEBUG_RETURN
+#endif // LOG_DEBUG_RETURN
 
-#ifndef BT_LOG_DEBUG_THROW
-#define BT_LOG_DEBUG_THROW(logger, message ,e) { \
+#ifndef LOG_DEBUG_THROW
+#define LOG_DEBUG_THROW(logger, message ,e) { \
 	StringStream oss; \
 	oss << message; \
 	if ( logger != 0 && logger->isDebugEnabled()) {\
 	logger->debug( oss, __FILE__, __LINE__); } throw e( __FILE__,__LINE__, oss.str() ); }
-#endif // BT_LOG_DEBUG_THROW
+#endif // LOG_DEBUG_THROW
 
-#ifndef BT_LOG_DEBUG_THROW2
-#define BT_LOG_DEBUG_THROW2(logger, m1,m2,e ) { \
+#ifndef LOG_DEBUG_THROW2
+#define LOG_DEBUG_THROW2(logger, m1,m2,e ) { \
 	StringStream oss; \
 	oss << m2; \
 	if ( logger != 0 && logger->isDebugEnabled()) {\
 	logger->debug( oss, __FILE__, __LINE__); } throw e( __FILE__,__LINE__, m1,oss.str() ); }
-#endif // BT_LOG_DEBUG_THROW2
+#endif // LOG_DEBUG_THROW2
 
-#ifndef BT_LOG_DEBUG_THROW3
-#define BT_LOG_DEBUG_THROW3(logger, m1,m2,m3,e ) { \
+#ifndef LOG_DEBUG_THROW3
+#define LOG_DEBUG_THROW3(logger, m1,m2,m3,e ) { \
 	StringStream oss; \
 	oss << m3; \
 	if ( logger != 0 && logger->isDebugEnabled()) {\
 	logger->debug( oss, __FILE__, __LINE__); } throw e( __FILE__,__LINE__, m1,m2,oss.str() ); }
-#endif // BT_LOG_DEBUG_THROW3
+#endif // LOG_DEBUG_THROW3
 
-#ifndef BT_LOG_DEBUG_THROW4
-#define BT_LOG_DEBUG_THROW4(logger, m1,m2,m3,m4,e ) { \
+#ifndef LOG_DEBUG_THROW4
+#define LOG_DEBUG_THROW4(logger, m1,m2,m3,m4,e ) { \
 	StringStream oss; \
 	oss << m4; \
 	if ( logger != 0 && logger->isDebugEnabled()) {\
 	logger->debug( oss, __FILE__, __LINE__); } throw e( __FILE__,__LINE__, m1,m2,m3,oss.str() ); }
-#endif // BT_LOG_DEBUG_THROW3
+#endif // LOG_DEBUG_THROW3
 
-#ifndef BT_LOG_INFO
-#define BT_LOG_INFO(logger, message) { \
+#ifndef LOG_INFO
+#define LOG_INFO(logger, message) { \
 	if ( logger != 0 && logger->isInfoEnabled()) {\
 	StringStream oss; \
 	oss << message; \
 	logger->info( oss, __FILE__, __LINE__); }}
-#endif // BT_LOG_INFO
+#endif // LOG_INFO
 
-#ifndef BT_LOG_INFO_RETURN
-#define BT_LOG_INFO_RETURN(logger, message, ret ) { \
+#ifndef LOG_INFO_RETURN
+#define LOG_INFO_RETURN(logger, message, ret ) { \
 	if ( logger != 0 && logger->isInfoEnabled()) {\
 	StringStream oss; \
 	oss << message; \
 	logger->info( oss, __FILE__, __LINE__); } return ( ret ); }
-#endif // BT_LOG_INFO_RETURN
+#endif // LOG_INFO_RETURN
 
-#ifndef BT_LOG_INFO_THROW
-#define BT_LOG_INFO_THROW(logger, message ,e ) { \
+#ifndef LOG_INFO_THROW
+#define LOG_INFO_THROW(logger, message ,e ) { \
 	StringStream oss; \
 	oss << message; \
 	if ( logger != 0 && logger->isInfoEnabled()) {\
 	logger->info( oss, __FILE__, __LINE__); } throw e( __FILE__,__LINE__,  oss.str() ); }
-#endif // BT_LOG_INFO_THROW
+#endif // LOG_INFO_THROW
 
-#ifndef BT_LOG_INFO_THROW2
-#define BT_LOG_INFO_THROW2(logger, m1,m2,e ) { \
+#ifndef LOG_INFO_THROW2
+#define LOG_INFO_THROW2(logger, m1,m2,e ) { \
 	StringStream oss; \
 	oss << m2; \
 	if ( logger != 0 && logger->isInfoEnabled()) {\
 	logger->info( oss, __FILE__, __LINE__); } throw e( __FILE__,__LINE__, m1,oss.str() ); }
-#endif // BT_LOG_INFO_THROW2
+#endif // LOG_INFO_THROW2
 
-#ifndef BT_LOG_INFO_THROW3
-#define BT_LOG_INFO_THROW3(logger, m1,m2,m3,e ) { \
+#ifndef LOG_INFO_THROW3
+#define LOG_INFO_THROW3(logger, m1,m2,m3,e ) { \
 	StringStream oss; \
 	oss << m3; \
 	if ( logger != 0 && logger->isInfoEnabled()) {\
 	logger->info( oss, __FILE__, __LINE__); } throw e( __FILE__,__LINE__, m1,m2,oss.str() ); }
-#endif // BT_LOG_INFO_THROW3
+#endif // LOG_INFO_THROW3
 
-#ifndef BT_LOG_INFO_THROW4
-#define BT_LOG_INFO_THROW4(logger, m1,m2,m3,m4,e ) { \
+#ifndef LOG_INFO_THROW4
+#define LOG_INFO_THROW4(logger, m1,m2,m3,m4,e ) { \
 	StringStream oss; \
 	oss << m4; \
 	if ( logger != 0 && logger->isInfoEnabled()) {\
 	logger->info( oss, __FILE__, __LINE__); } throw e( __FILE__,__LINE__, m1,m2,m3,oss.str() ); }
-#endif // BT_LOG_INFO_THROW3
+#endif // LOG_INFO_THROW3
 
-#ifndef BT_LOG_WARN
-#define BT_LOG_WARN(logger, message ) { \
+#ifndef LOG_WARN
+#define LOG_WARN(logger, message ) { \
 	if ( logger != 0 && logger->isWarnEnabled()) {\
 	StringStream oss; \
 	oss << message; \
 	logger->warn( oss, __FILE__, __LINE__); }}
-#endif // BT_LOG_WARN
+#endif // LOG_WARN
 
-#ifndef BT_LOG_WARN_RETURN
-#define BT_LOG_WARN_RETURN(logger, message, ret ) { \
+#ifndef LOG_WARN_RETURN
+#define LOG_WARN_RETURN(logger, message, ret ) { \
 	if ( logger != 0 && logger->isWarnEnabled()) {\
 	StringStream oss; \
 	oss << message; \
 	logger->warn( oss, __FILE__, __LINE__); } return ( ret ); }
-#endif // BT_LOG_WARN_RETURN
+#endif // LOG_WARN_RETURN
 
-#ifndef BT_LOG_WARN_THROW
-#define BT_LOG_WARN_THROW(logger, message ,r ) { \
+#ifndef LOG_WARN_THROW
+#define LOG_WARN_THROW(logger, message ,r ) { \
 	StringStream oss; \
 	oss << message; \
 	if ( logger != 0 && logger->isWarnEnabled()) {\
 	logger->warn( oss, __FILE__, __LINE__); } throw e( __FILE__,__LINE__, oss.str() ); }
-#endif // BT_LOG_WARN_THROW
+#endif // LOG_WARN_THROW
 
-#ifndef BT_LOG_WARN_THROW2
-#define BT_LOG_WARN_THROW2(logger, m1,m2,e ) { \
+#ifndef LOG_WARN_THROW2
+#define LOG_WARN_THROW2(logger, m1,m2,e ) { \
 	StringStream oss; \
 	oss << m2; \
 	if ( logger != 0 && logger->isWarnEnabled()) {\
 	logger->warn( oss, __FILE__, __LINE__); } throw e( __FILE__,__LINE__, m1,oss.str() ); }
-#endif // BT_LOG_WARN_THROW2
+#endif // LOG_WARN_THROW2
 
-#ifndef BT_LOG_WARN_THROW3
-#define BT_LOG_WARN_THROW3(logger, m1,m2,m3,e ) { \
+#ifndef LOG_WARN_THROW3
+#define LOG_WARN_THROW3(logger, m1,m2,m3,e ) { \
 	StringStream oss; \
 	oss << m3; \
 	if ( logger != 0 && logger->isWarnEnabled()) {\
 	logger->warn( oss, __FILE__, __LINE__); } throw e( __FILE__,__LINE__, m1,m2,oss.str() ); }
-#endif // BT_LOG_WARN_THROW3
+#endif // LOG_WARN_THROW3
 
-#ifndef BT_LOG_WARN_THROW4
-#define BT_LOG_WARN_THROW4(logger, m1,m2,m3,m4,e ) { \
+#ifndef LOG_WARN_THROW4
+#define LOG_WARN_THROW4(logger, m1,m2,m3,m4,e ) { \
 	StringStream oss; \
 	oss << m4; \
 	if ( logger != 0 && logger->isWarnEnabled()) {\
 	logger->warn( oss, __FILE__, __LINE__); } throw e( __FILE__,__LINE__, m1,m2,m3,oss.str(); }
-#endif // BT_LOG_WARN_THROW3
+#endif // LOG_WARN_THROW3
 
-#ifndef BT_LOG_ERROR
-#define BT_LOG_ERROR(logger, message) { \
+#ifndef LOG_ERROR
+#define LOG_ERROR(logger, message) { \
 	if ( logger != 0 && logger->isErrorEnabled()) {\
 	StringStream oss; \
 	oss << message; \
 	logger->error( oss, __FILE__, __LINE__); }}
-#endif // BT_LOG_ERROR
+#endif // LOG_ERROR
 
-#ifndef BT_LOG_ERROR_RETURN
-#define BT_LOG_ERROR_RETURN(logger, message, ret ) { \
+#ifndef LOG_ERROR_RETURN
+#define LOG_ERROR_RETURN(logger, message, ret ) { \
 	if ( logger != 0 && logger->isErrorEnabled()) {\
 	StringStream oss; \
 	oss << message; \
 	logger->error( oss, __FILE__, __LINE__); } return ( ret );}
-#endif // BT_LOG_ERROR_RETURN
+#endif // LOG_ERROR_RETURN
 
-#ifndef BT_LOG_ERROR_THROW
-#define BT_LOG_ERROR_THROW(logger, message ,e ) { \
+#ifndef LOG_ERROR_THROW
+#define LOG_ERROR_THROW(logger, message ,e ) { \
 	StringStream oss; \
 	oss << message; \
 	if ( logger != 0 && logger->isErrorEnabled()) {\
 	logger->error( oss, __FILE__, __LINE__); } throw e( __FILE__,__LINE__, oss.str() ); }
-#endif // BT_LOG_ERROR_THROW
+#endif // LOG_ERROR_THROW
 
-#ifndef BT_LOG_ERROR_THROW2
-#define BT_LOG_ERROR_THROW2(logger, m1,m2,e ) { \
+#ifndef LOG_ERROR_THROW2
+#define LOG_ERROR_THROW2(logger, m1,m2,e ) { \
 	StringStream oss; \
 	oss << m2; \
 	if ( logger != 0 && logger->isErrorEnabled()) {\
 	logger->error( oss, __FILE__, __LINE__); } throw e( __FILE__,__LINE__, m1,oss.str() ); }
-#endif // BT_LOG_ERROR_THROW2
+#endif // LOG_ERROR_THROW2
 
-#ifndef BT_LOG_ERROR_THROW3
-#define BT_LOG_ERROR_THROW3(logger, m1,m2,m3,e ) { \
+#ifndef LOG_ERROR_THROW3
+#define LOG_ERROR_THROW3(logger, m1,m2,m3,e ) { \
 	StringStream oss; \
 	oss << m3; \
 	if ( logger != 0 && logger->isErrorEnabled()) {\
 	logger->error( oss, __FILE__, __LINE__); } throw e( __FILE__,__LINE__, m1,m2,oss.str() ); }
-#endif // BT_LOG_ERROR_THROW3
+#endif // LOG_ERROR_THROW3
 
-#ifndef BT_LOG_ERROR_THROW4
-#define BT_LOG_ERROR_THROW4(logger, m1,m2,m3,m4,e ) { \
+#ifndef LOG_ERROR_THROW4
+#define LOG_ERROR_THROW4(logger, m1,m2,m3,m4,e ) { \
 	StringStream oss; \
 	oss << m4; \
 	if ( logger != 0 && logger->isErrorEnabled()) {\
 	logger->error( oss, __FILE__, __LINE__); } throw e( __FILE__,__LINE__, m1,m2,m3,oss.str(); }
-#endif // BT_LOG_ERROR_THROW3
+#endif // LOG_ERROR_THROW3
 
 
-#ifndef BT_LOG_FATAL
-#define BT_LOG_FATAL(logger, message) { \
+#ifndef LOG_FATAL
+#define LOG_FATAL(logger, message) { \
 	if ( logger != 0 && logger->isFatalEnabled()) {\
 	StringStream oss; \
 	oss << message; \
 	logger->fatal( oss, __FILE__, __LINE__); }}
-#endif // BT_LOG_FATAL
+#endif // LOG_FATAL
 
-#ifndef BT_LOG_FATAL_RETURN
-#define BT_LOG_FATAL_RETURN(logger, message, ret ) { \
+#ifndef LOG_FATAL_RETURN
+#define LOG_FATAL_RETURN(logger, message, ret ) { \
 	if ( logger != 0 && logger->isFatalEnabled()) {\
 	StringStream oss; \
 	oss << message; \
 	logger->fatal( oss, __FILE__, __LINE__); } return ( ret );}
-#endif // BT_LOG_FATAL_RETURN
+#endif // LOG_FATAL_RETURN
 
-#ifndef BT_LOG_FATAL_THROW
-#define BT_LOG_FATAL_THROW(logger, message ,e ) { \
+#ifndef LOG_FATAL_THROW
+#define LOG_FATAL_THROW(logger, message ,e ) { \
 	StringStream oss; \
 	oss << message; \
 	if ( logger != 0 && logger->isFatalEnabled()) {\
 	logger->fatal( oss, __FILE__, __LINE__); } throw e( __FILE__,__LINE__, message ); }
-#endif // BT_LOG_FATAL_THROW
+#endif // LOG_FATAL_THROW
 
-#ifndef BT_LOG_FATAL_THROW2
-#define BT_LOG_FATAL_THROW2(logger, m1,m2,e ) { \
+#ifndef LOG_FATAL_THROW2
+#define LOG_FATAL_THROW2(logger, m1,m2,e ) { \
 	StringStream oss; \
 	oss << m2; \
 	if ( logger != 0 && logger->isFatalEnabled()) {\
 	logger->fatal( oss, __FILE__, __LINE__); } throw e( __FILE__,__LINE__, m1,oss.str() ); }
-#endif // BT_LOG_FATAL_THROW2
+#endif // LOG_FATAL_THROW2
 
-#ifndef BT_LOG_FATAL_THROW3
-#define BT_LOG_FATAL_THROW3(logger, m1,m2,m3,e ) { \
+#ifndef LOG_FATAL_THROW3
+#define LOG_FATAL_THROW3(logger, m1,m2,m3,e ) { \
 	StringStream oss; \
 	oss << m3; \
 	if ( logger != 0 && logger->isFatalEnabled()) {\
 	logger->fatal( oss, __FILE__, __LINE__); } throw e( __FILE__,__LINE__, m1,m2,oss.str() ); }
-#endif // BT_LOG_FATAL_THROW3
+#endif // LOG_FATAL_THROW3
 
 
-#ifndef BT_LOG_FATAL_THROW4
-#define BT_LOG_FATAL_THROW4(logger, m1,m2,m3,m4,e ) { \
+#ifndef LOG_FATAL_THROW4
+#define LOG_FATAL_THROW4(logger, m1,m2,m3,m4,e ) { \
 	StringStream oss; \
 	oss << m4; \
 	if ( logger != 0 && logger->isFatalEnabled()) {\
 	logger->fatal( oss, __FILE__, __LINE__); } throw e( __FILE__,__LINE__, m1,m2,m3,oss.str() ); }
-#endif // BT_LOG_FATAL_THROW3
+#endif // LOG_FATAL_THROW3
 
-#ifndef BT_LOG_TRACE
-#define BT_LOG_TRACE(logger, message) { \
+#ifndef LOG_TRACE
+#define LOG_TRACE(logger, message) { \
 	if ( logger != 0 && logger->isDebugEnabled()) {\
 	StringStream oss; \
 	oss << message; \
 	logger->debug( oss, __FILE__, __LINE__); }}
-#endif // BT_LOG_TRACE
+#endif // LOG_TRACE
 
-#ifndef BT_LOG_TRACE_RETURN
-#define BT_LOG_TRACE_RETURN(logger, message, ret ) { \
+#ifndef LOG_TRACE_RETURN
+#define LOG_TRACE_RETURN(logger, message, ret ) { \
 	if ( logger != 0 && logger->isDebugEnabled()) {\
 	StringStream oss; \
 	oss << message; \
 	logger->debug( oss, __FILE__, __LINE__); } return ( ret );}
-#endif // BT_LOG_TRACE_RETURN
+#endif // LOG_TRACE_RETURN
 
-#ifndef BT_LOG_TRACE_THROW
-#define BT_LOG_TRACE_THROW(logger, message , e ) { \
+#ifndef LOG_TRACE_THROW
+#define LOG_TRACE_THROW(logger, message , e ) { \
 	StringStream oss; \
 	oss << message; \
 	if ( logger != 0 && logger->isDebugEnabled()) {\
 	logger->debug( oss, __FILE__, __LINE__); } throw e( __FILE__,__LINE__,  oss.str() ); }
-#endif // BT_LOG_TRACE_THROW
+#endif // LOG_TRACE_THROW
 
-#ifndef BT_LOG_TRACE_THROW2
-#define BT_LOG_TRACE_THROW2(logger, m1,m2,e ) { \
+#ifndef LOG_TRACE_THROW2
+#define LOG_TRACE_THROW2(logger, m1,m2,e ) { \
 	StringStream oss; \
 	oss << m2; \
 	if ( logger != 0 && logger->isDebugEnabled()) {\
 	logger->debug( oss, __FILE__, __LINE__); } throw e( __FILE__,__LINE__, m1,oss.str() ); }
-#endif // BT_LOG_TRACE_THROW2
+#endif // LOG_TRACE_THROW2
 
-#ifndef BT_LOG_TRACE_THROW3
-#define BT_LOG_TRACE_THROW3(logger, m1,m2,m3,e ) { \
+#ifndef LOG_TRACE_THROW3
+#define LOG_TRACE_THROW3(logger, m1,m2,m3,e ) { \
 	StringStream oss; \
 	oss << m3; \
 	if ( logger != 0 && logger->isDebugEnabled()) {\
 	logger->debug( oss, __FILE__, __LINE__); } throw e( __FILE__,__LINE__, m1,m2,oss.str() ); }
-#endif // BT_LOG_TRACE_THROW3
+#endif // LOG_TRACE_THROW3
 
-#ifndef BT_LOG_TRACE_THROW4
-#define BT_LOG_TRACE_THROW4(logger, m1,m2,m3,m4,e ) { \
+#ifndef LOG_TRACE_THROW4
+#define LOG_TRACE_THROW4(logger, m1,m2,m3,m4,e ) { \
 	StringStream oss; \
 	oss << m4; \
 	if ( logger != 0 && logger->isDebugEnabled()) {\
 	logger->debug( oss, __FILE__, __LINE__); } throw e( __FILE__,__LINE__, m1,m2,m3,oss.str(); }
-#endif // BT_LOG_TRACE_THROW3
+#endif // LOG_TRACE_THROW3
 
 #ifndef BT_ASSERT
 #define BT_ASSERT( logger,assertion ) { \
@@ -528,7 +529,7 @@ _hazel_end
 
 #endif // BT_ASSERT
 
-#else	// _NO_BT_LOG_
+#else	// _NO_LOG_
 
 #ifndef BT_NDC
 #define BT_NDC( logger, ndc , msg )				{}
@@ -538,195 +539,195 @@ _hazel_end
 #define BT_LOG(logger, level, message)			{}
 #endif // BT_LOG
 
-#ifndef BT_LOG_DEBUG
-#define BT_LOG_DEBUG(logger, message)			{}
-#endif // BT_LOG_DEBUG
+#ifndef LOG_DEBUG
+#define LOG_DEBUG(logger, message)			{}
+#endif // LOG_DEBUG
 
-#ifndef BT_LOG_INFO
-#define BT_LOG_INFO(logger, message)			{}
-#endif // BT_LOG_INFO
+#ifndef LOG_INFO
+#define LOG_INFO(logger, message)			{}
+#endif // LOG_INFO
 
-#ifndef BT_LOG_WARN
-#define BT_LOG_WARN(logger, message)			{}
-#endif // BT_LOG_WARN
+#ifndef LOG_WARN
+#define LOG_WARN(logger, message)			{}
+#endif // LOG_WARN
 
-#ifndef BT_LOG_ERROR
-#define BT_LOG_ERROR(logger, message)			{}
-#endif // BT_LOG_ERROR
+#ifndef LOG_ERROR
+#define LOG_ERROR(logger, message)			{}
+#endif // LOG_ERROR
 
-#ifndef BT_LOG_FATAL
-#define BT_LOG_FATAL(logger, message)			{}
-#endif // BT_LOG_FATAL
+#ifndef LOG_FATAL
+#define LOG_FATAL(logger, message)			{}
+#endif // LOG_FATAL
 
-#ifndef BT_LOG_TRACE
-#define BT_LOG_TRACE(logger, message)			{}
-#endif // BT_LOG_TRACE
+#ifndef LOG_TRACE
+#define LOG_TRACE(logger, message)			{}
+#endif // LOG_TRACE
 
 #ifndef BT_ASSERT
 #define BT_ASSERT(logger,assertion )			{}
 #endif // BT_ASSERT
 
-#ifndef BT_LOG_RETURN
-#define BT_LOG_RETURN(logger, level, message, ret )			return ( ret );
-#endif // BT_LOG_RETURN
+#ifndef LOG_RETURN
+#define LOG_RETURN(logger, level, message, ret )			return ( ret );
+#endif // LOG_RETURN
 
-#ifndef BT_LOG_DEBUG_RETURN
-#define BT_LOG_DEBUG_RETURN(logger, message, ret )			return ( ret );
-#endif // BT_LOG_DEBUG_RETURN
+#ifndef LOG_DEBUG_RETURN
+#define LOG_DEBUG_RETURN(logger, message, ret )			return ( ret );
+#endif // LOG_DEBUG_RETURN
 
-#ifndef BT_LOG_INFO_RETURN
-#define BT_LOG_INFO_RETURN(logger, message, ret )			return ( ret );
-#endif // BT_LOG_INFO_RETURN
+#ifndef LOG_INFO_RETURN
+#define LOG_INFO_RETURN(logger, message, ret )			return ( ret );
+#endif // LOG_INFO_RETURN
 
-#ifndef BT_LOG_WARN_RETURN
-#define BT_LOG_WARN_RETURN(logger, message, ret )			return ( ret );
-#endif // BT_LOG_WARN_RETURN
+#ifndef LOG_WARN_RETURN
+#define LOG_WARN_RETURN(logger, message, ret )			return ( ret );
+#endif // LOG_WARN_RETURN
 
-#ifndef BT_LOG_ERROR_RETURN
-#define BT_LOG_ERROR_RETURN(logger, message, ret )			return ( ret );
-#endif // BT_LOG_ERROR_RETURN
+#ifndef LOG_ERROR_RETURN
+#define LOG_ERROR_RETURN(logger, message, ret )			return ( ret );
+#endif // LOG_ERROR_RETURN
 
-#ifndef BT_LOG_FATAL_RETURN
-#define BT_LOG_FATAL_RETURN(logger, message, ret )			return ( ret );
-#endif // BT_LOG_FATAL_RETURN
+#ifndef LOG_FATAL_RETURN
+#define LOG_FATAL_RETURN(logger, message, ret )			return ( ret );
+#endif // LOG_FATAL_RETURN
 
-#ifndef BT_LOG_TRACE_RETURN
-#define BT_LOG_TRACE_RETURN(logger, message, ret )			return ( ret );
-#endif // BT_LOG_TRACE_RETURN
+#ifndef LOG_TRACE_RETURN
+#define LOG_TRACE_RETURN(logger, message, ret )			return ( ret );
+#endif // LOG_TRACE_RETURN
 
 
-#ifndef BT_LOG_THROW
-#define BT_LOG_THROW(logger, level, message ,e )			{ \
+#ifndef LOG_THROW
+#define LOG_THROW(logger, level, message ,e )			{ \
 	throw e( __FILE__,__LINE__,  message );\
 }
-#endif // BT_LOG_THROW
+#endif // LOG_THROW
 
-#ifndef BT_LOG_DEBUG_THROW
-#define BT_LOG_DEBUG_THROW(logger, message, e )		{ \
+#ifndef LOG_DEBUG_THROW
+#define LOG_DEBUG_THROW(logger, message, e )		{ \
 	StringStream oss; oss << message;throw e( __FILE__,__LINE__, message );\
 }
-#endif // BT_LOG_DEBUG_THROW
+#endif // LOG_DEBUG_THROW
 
-#ifndef BT_LOG_DEBUG_THROW2
-#define BT_LOG_DEBUG_THROW2(logger, m1,m2, e )		{ \
+#ifndef LOG_DEBUG_THROW2
+#define LOG_DEBUG_THROW2(logger, m1,m2, e )		{ \
 	StringStream oss; oss << m2;throw e( __FILE__,__LINE__, m1,oss.str();\
 }
-#endif // BT_LOG_DEBUG_THROW2
+#endif // LOG_DEBUG_THROW2
 
-#ifndef BT_LOG_DEBUG_THROW3
-#define BT_LOG_DEBUG_THROW3(logger, m1,m2,m3, e )		{ \
+#ifndef LOG_DEBUG_THROW3
+#define LOG_DEBUG_THROW3(logger, m1,m2,m3, e )		{ \
 	StringStream oss; oss << m3;throw e( __FILE__,__LINE__, m1,m2,oss.str();\
 }
-#endif // BT_LOG_DEBUG_THROW3
+#endif // LOG_DEBUG_THROW3
 
-#ifndef BT_LOG_DEBUG_THROW4
-#define BT_LOG_DEBUG_THROW4(logger, m1,m2,m3,m4, e )		{ \
+#ifndef LOG_DEBUG_THROW4
+#define LOG_DEBUG_THROW4(logger, m1,m2,m3,m4, e )		{ \
 	StringStream oss; oss << m4;throw e( __FILE__,__LINE__, m1,m2,m3,oss.str();\
 }
-#endif // BT_LOG_DEBUG_THROW4
+#endif // LOG_DEBUG_THROW4
 
-#ifndef BT_LOG_INFO_THROW
-#define BT_LOG_INFO_THROW(logger, message, e )		{ \
+#ifndef LOG_INFO_THROW
+#define LOG_INFO_THROW(logger, message, e )		{ \
 	StringStream oss; oss << message;throw e( __FILE__,__LINE__, message );\
 }
-#endif // BT_LOG_INFO_THROW
+#endif // LOG_INFO_THROW
 
-#ifndef BT_LOG_INFO_THROW2
-#define BT_LOG_INFO_THROW2(logger, m1,m2, e )		{ \
+#ifndef LOG_INFO_THROW2
+#define LOG_INFO_THROW2(logger, m1,m2, e )		{ \
 	StringStream oss; oss << m2;throw e( __FILE__,__LINE__, m1,oss.str();\
 }
-#endif // BT_LOG_INFO_THROW2
+#endif // LOG_INFO_THROW2
 
-#ifndef BT_LOG_INFO_THROW3
-#define BT_LOG_INFO_THROW3(logger, m1,m2,m3, e )		{ \
+#ifndef LOG_INFO_THROW3
+#define LOG_INFO_THROW3(logger, m1,m2,m3, e )		{ \
 	StringStream oss; oss << m3;throw e( __FILE__,__LINE__, m1,m2,oss.str();\
 }
-#endif // BT_LOG_INFO_THROW3
+#endif // LOG_INFO_THROW3
 
-#ifndef BT_LOG_INFO_THROW4
-#define BT_LOG_INFO_THROW4(logger, m1,m2,m3,m4, e )		{ \
+#ifndef LOG_INFO_THROW4
+#define LOG_INFO_THROW4(logger, m1,m2,m3,m4, e )		{ \
 	StringStream oss; oss << m4;throw e( __FILE__,__LINE__, m1,m2,m3,oss.str();\
 }
-#endif // BT_LOG_INFO_THROW4
+#endif // LOG_INFO_THROW4
 
-#ifndef BT_LOG_WARN_THROW
-#define BT_LOG_WARN_THROW(logger, message, e )		{ \
+#ifndef LOG_WARN_THROW
+#define LOG_WARN_THROW(logger, message, e )		{ \
 	StringStream oss; oss << message;throw e( __FILE__,__LINE__, message );\
 }
-#endif // BT_LOG_WARN_THROW
+#endif // LOG_WARN_THROW
 
-#ifndef BT_LOG_WARN_THROW2
-#define BT_LOG_WARN_THROW2(logger, m1,m2, e )		{ \
+#ifndef LOG_WARN_THROW2
+#define LOG_WARN_THROW2(logger, m1,m2, e )		{ \
 	StringStream oss; oss << m2;throw e( __FILE__,__LINE__, m1,oss.str();\
 }
-#endif // BT_LOG_WARN_THROW2
+#endif // LOG_WARN_THROW2
 
-#ifndef BT_LOG_WARN_THROW3
-#define BT_LOG_WARN_THROW3(logger, m1,m2,m3, e )		{ \
+#ifndef LOG_WARN_THROW3
+#define LOG_WARN_THROW3(logger, m1,m2,m3, e )		{ \
 	StringStream oss; oss << m3;throw e( __FILE__,__LINE__, m1,m2,oss.str();\
 }
-#endif // BT_LOG_WARN_THROW3
+#endif // LOG_WARN_THROW3
 
-#ifndef BT_LOG_WARN_THROW4
-#define BT_LOG_WARN_THROW4(logger, m1,m2,m3,m4, e )		{ \
+#ifndef LOG_WARN_THROW4
+#define LOG_WARN_THROW4(logger, m1,m2,m3,m4, e )		{ \
 	StringStream oss; oss << m4;throw e( __FILE__,__LINE__, m1,m2,m3,oss.str();\
 }
-#endif // BT_LOG_WARN_THROW4
+#endif // LOG_WARN_THROW4
 
-#ifndef BT_LOG_ERROR_THROW
-#define BT_LOG_ERROR_THROW(logger, message, e )		{ \
+#ifndef LOG_ERROR_THROW
+#define LOG_ERROR_THROW(logger, message, e )		{ \
 	throw e( __FILE__,__LINE__,  message );\
 }
-#endif // BT_LOG_ERROR_THROW
+#endif // LOG_ERROR_THROW
 
-#ifndef BT_LOG_FATAL_THROW
-#define BT_LOG_FATAL_THROW(logger, message, e )		{ \
+#ifndef LOG_FATAL_THROW
+#define LOG_FATAL_THROW(logger, message, e )		{ \
 	StringStream oss; oss << message;throw e( __FILE__,__LINE__, message );\
 }
-#endif // BT_LOG_FATAL_THROW
+#endif // LOG_FATAL_THROW
 
-#ifndef BT_LOG_FATAL_THROW2
-#define BT_LOG_FATAL_THROW2(logger, m1,m2, e )		{ \
+#ifndef LOG_FATAL_THROW2
+#define LOG_FATAL_THROW2(logger, m1,m2, e )		{ \
 	StringStream oss; oss << m2;throw e( __FILE__,__LINE__, m1,oss.str();\
 }
-#endif // BT_LOG_FATAL_THROW2
+#endif // LOG_FATAL_THROW2
 
-#ifndef BT_LOG_FATAL_THROW3
-#define BT_LOG_FATAL_THROW3(logger, m1,m2,m3, e )		{ \
+#ifndef LOG_FATAL_THROW3
+#define LOG_FATAL_THROW3(logger, m1,m2,m3, e )		{ \
 	StringStream oss; oss << m3;throw e( __FILE__,__LINE__, m1,m2,oss.str();\
 }
-#endif // BT_LOG_FATAL_THROW3
+#endif // LOG_FATAL_THROW3
 
-#ifndef BT_LOG_FATAL_THROW4
-#define BT_LOG_FATAL_THROW4(logger, m1,m2,m3,m4, e )		{ \
+#ifndef LOG_FATAL_THROW4
+#define LOG_FATAL_THROW4(logger, m1,m2,m3,m4, e )		{ \
 	StringStream oss; oss << m4;throw e( __FILE__,__LINE__, m1,m2,m3,oss.str();\
 }
-#endif // BT_LOG_FATAL_THROW4
+#endif // LOG_FATAL_THROW4
 
-#ifndef BT_LOG_TRACE_THROW
-#define BT_LOG_TRACE_THROW(logger, message, e )		{ \
+#ifndef LOG_TRACE_THROW
+#define LOG_TRACE_THROW(logger, message, e )		{ \
 	StringStream oss; oss << message;throw e( __FILE__,__LINE__, message );\
 }
-#endif // BT_LOG_TRACE_THROW
+#endif // LOG_TRACE_THROW
 
-#ifndef BT_LOG_TRACE_THROW2
-#define BT_LOG_TRACE_THROW2(logger, m1,m2, e )		{ \
+#ifndef LOG_TRACE_THROW2
+#define LOG_TRACE_THROW2(logger, m1,m2, e )		{ \
 	StringStream oss; oss << m2;throw e( __FILE__,__LINE__, m1,oss.str();\
 }
-#endif // BT_LOG_TRACE_THROW2
+#endif // LOG_TRACE_THROW2
 
-#ifndef BT_LOG_TRACE_THROW3
-#define BT_LOG_TRACE_THROW3(logger, m1,m2,m3, e )		{ \
+#ifndef LOG_TRACE_THROW3
+#define LOG_TRACE_THROW3(logger, m1,m2,m3, e )		{ \
 	StringStream oss; oss << m3;throw e( __FILE__,__LINE__, m1,m2,oss.str();\
 }
-#endif // BT_LOG_TRACE_THROW3
+#endif // LOG_TRACE_THROW3
 
-#ifndef BT_LOG_TRACE_THROW4
-#define BT_LOG_TRACE_THROW4(logger, m1,m2,m3,m4, e )		{ \
+#ifndef LOG_TRACE_THROW4
+#define LOG_TRACE_THROW4(logger, m1,m2,m3,m4, e )		{ \
 	StringStream oss; oss << m4;throw e( __FILE__,__LINE__, m1,m2,m3,oss.str();\
 }
-#endif // BT_LOG_TRACE_THROW4
+#endif // LOG_TRACE_THROW4
 
-#endif // _NO_BT_LOG_
+#endif // _NO_LOG_
 
 #endif // _Hazel_Log_H_
