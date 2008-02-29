@@ -2,7 +2,6 @@
 //
 
 #include "stdafx.h"
-#define TEST 1
 #include "Hazel.Base/Memory/Test/Test.h"
 #include <time.h>
 
