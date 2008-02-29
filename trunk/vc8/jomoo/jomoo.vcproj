@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="Hazel.Base"
+	Name="jomoo"
 	ProjectGUID="{58B66B4B-2E16-4C0F-AA02-BE63D0B79635}"
-	RootNamespace="Hazel.Base"
+	RootNamespace="jomoo"
 	Keyword="Win32Proj"
 	>
 	<Platforms>
@@ -18,7 +18,7 @@
 		<Configuration
 			Name="Debug|Win32"
 			OutputDirectory="../../../Debug"
-			IntermediateDirectory="../../../Debug/OBJ/Hazel.Base"
+			IntermediateDirectory="../../../Debug/OBJ/jomoo"
 			ConfigurationType="2"
 			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
 			CharacterSet="2"
@@ -65,12 +65,12 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)/Hazel.Base.dll"
+				OutputFile="$(OutDir)/jomoo.dll"
 				LinkIncremental="2"
 				GenerateDebugInformation="true"
-				ProgramDatabaseFile="$(OutDir)/Hazel.Base.pdb"
+				ProgramDatabaseFile="$(OutDir)/jomoo.pdb"
 				SubSystem="2"
-				ImportLibrary="$(OutDir)/Hazel.Base.lib"
+				ImportLibrary="$(OutDir)/jomoo.lib"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -141,13 +141,13 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile="$(OutDir)/Hazel.Base.dll"
+				OutputFile="$(OutDir)/jomoo.dll"
 				LinkIncremental="1"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
-				ImportLibrary="$(OutDir)/Hazel.Base.lib"
+				ImportLibrary="$(OutDir)/jomoo.lib"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -191,139 +191,139 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\AbstractFactory.h"
+				RelativePath="..\..\src\Base\AbstractFactory.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\AbstractFactory0.h"
+				RelativePath="..\..\src\Base\AbstractFactory0.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\AbstractFactory1.h"
+				RelativePath="..\..\src\Base\AbstractFactory1.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\AbstractFactory10.h"
+				RelativePath="..\..\src\Base\AbstractFactory10.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\AbstractFactory11.h"
+				RelativePath="..\..\src\Base\AbstractFactory11.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\AbstractFactory12.h"
+				RelativePath="..\..\src\Base\AbstractFactory12.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\AbstractFactory13.h"
+				RelativePath="..\..\src\Base\AbstractFactory13.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\AbstractFactory14.h"
+				RelativePath="..\..\src\Base\AbstractFactory14.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\AbstractFactory15.h"
+				RelativePath="..\..\src\Base\AbstractFactory15.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\AbstractFactory16.h"
+				RelativePath="..\..\src\Base\AbstractFactory16.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\AbstractFactory2.h"
+				RelativePath="..\..\src\Base\AbstractFactory2.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\AbstractFactory3.h"
+				RelativePath="..\..\src\Base\AbstractFactory3.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\AbstractFactory4.h"
+				RelativePath="..\..\src\Base\AbstractFactory4.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\AbstractFactory5.h"
+				RelativePath="..\..\src\Base\AbstractFactory5.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\AbstractFactory6.h"
+				RelativePath="..\..\src\Base\AbstractFactory6.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\AbstractFactory7.h"
+				RelativePath="..\..\src\Base\AbstractFactory7.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\AbstractFactory8.h"
+				RelativePath="..\..\src\Base\AbstractFactory8.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\AbstractFactory9.h"
+				RelativePath="..\..\src\Base\AbstractFactory9.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\AbstractFactoryTemplates.h"
+				RelativePath="..\..\src\Base\AbstractFactoryTemplates.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\Buffer.H"
+				RelativePath="..\..\src\Base\Buffer.H"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\Builder.H"
+				RelativePath="..\..\src\Base\Builder.H"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\Cleanup.H"
+				RelativePath="..\..\src\Base\Cleanup.H"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\counter_ptr.hpp"
+				RelativePath="..\..\src\Base\counter_ptr.hpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\directory.H"
+				RelativePath="..\..\src\Base\directory.H"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\directory.inl"
+				RelativePath="..\..\src\Base\directory.inl"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\EmptyType.H"
+				RelativePath="..\..\src\Base\EmptyType.H"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\ErrorDef.H"
+				RelativePath="..\..\src\Base\ErrorDef.H"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\Exception.hpp"
+				RelativePath="..\..\src\Base\Exception.hpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\Factory.h"
+				RelativePath="..\..\src\Base\Factory.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\is_empty.h"
+				RelativePath="..\..\src\Base\is_empty.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\lastError.h"
+				RelativePath="..\..\src\Base\lastError.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\make_null_ptr.hpp"
+				RelativePath="..\..\src\Base\make_null_ptr.hpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\random_iterator.hpp"
+				RelativePath="..\..\src\Base\random_iterator.hpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\Singleton.H"
+				RelativePath="..\..\src\Base\Singleton.H"
 				>
 			</File>
 			<File
@@ -331,7 +331,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\string.hpp"
+				RelativePath="..\..\src\Base\string.hpp"
 				>
 			</File>
 		</Filter>
@@ -345,67 +345,67 @@
 			Name="Util"
 			>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\util\config_Util.h"
+				RelativePath="..\..\src\Base\util\config_Util.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\util\Configuration.h"
+				RelativePath="..\..\src\Base\util\Configuration.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\util\CtrlCHandler.cpp"
+				RelativePath="..\..\src\Base\util\CtrlCHandler.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\util\CtrlCHandler.h"
+				RelativePath="..\..\src\Base\util\CtrlCHandler.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\util\NTService.cpp"
+				RelativePath="..\..\src\Base\util\NTService.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\util\NTService.h"
+				RelativePath="..\..\src\Base\util\NTService.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\util\Options.cpp"
+				RelativePath="..\..\src\Base\util\Options.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\util\Options.h"
+				RelativePath="..\..\src\Base\util\Options.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\util\Properties.h"
+				RelativePath="..\..\src\Base\util\Properties.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\util\PropertiesI.cpp"
+				RelativePath="..\..\src\Base\util\PropertiesI.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\util\PropertiesI.h"
+				RelativePath="..\..\src\Base\util\PropertiesI.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\util\ServiceManager.cpp"
+				RelativePath="..\..\src\Base\util\ServiceManager.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\util\ServiceManager.h"
+				RelativePath="..\..\src\Base\util\ServiceManager.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\util\Shared_Library.h"
+				RelativePath="..\..\src\Base\util\Shared_Library.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\util\Shared_Library.inl"
+				RelativePath="..\..\src\Base\util\Shared_Library.inl"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\util\Util.h"
+				RelativePath="..\..\src\Base\util\Util.h"
 				>
 			</File>
 		</Filter>
@@ -413,23 +413,23 @@
 			Name="Collections"
 			>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\Collections\CollectionsBase.h"
+				RelativePath="..\..\src\Base\Collections\CollectionsBase.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\Collections\enumerator.H"
+				RelativePath="..\..\src\Base\Collections\enumerator.H"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\Collections\Link.h"
+				RelativePath="..\..\src\Base\Collections\Link.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\Collections\Test.CPP"
+				RelativePath="..\..\src\Base\Collections\Test.CPP"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\Collections\ThreadSafePtrQueue.hpp"
+				RelativePath="..\..\src\Base\Collections\ThreadSafePtrQueue.hpp"
 				>
 			</File>
 		</Filter>
@@ -441,67 +441,67 @@
 			Name="Threading"
 			>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\Threading\config_threading.h"
+				RelativePath="..\..\src\Base\Threading\config_threading.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\Threading\Event.h"
+				RelativePath="..\..\src\Base\Threading\Event.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\Threading\Guard.h"
+				RelativePath="..\..\src\Base\Threading\Guard.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\Threading\Guard.T"
+				RelativePath="..\..\src\Base\Threading\Guard.T"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\Threading\Null_Mutex.H"
+				RelativePath="..\..\src\Base\Threading\Null_Mutex.H"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\Threading\Null_Semaphore.H"
+				RelativePath="..\..\src\Base\Threading\Null_Semaphore.H"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\Threading\Thread.CPP"
+				RelativePath="..\..\src\Base\Threading\Thread.CPP"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\Threading\Thread.h"
+				RelativePath="..\..\src\Base\Threading\Thread.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\Threading\Thread_Manager.CPP"
+				RelativePath="..\..\src\Base\Threading\Thread_Manager.CPP"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\Threading\Thread_Manager.h"
+				RelativePath="..\..\src\Base\Threading\Thread_Manager.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\Threading\Thread_Manager.inl"
+				RelativePath="..\..\src\Base\Threading\Thread_Manager.inl"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\Threading\Thread_Mutex.H"
+				RelativePath="..\..\src\Base\Threading\Thread_Mutex.H"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\Threading\Thread_Semaphore.h"
+				RelativePath="..\..\src\Base\Threading\Thread_Semaphore.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\Threading\Threading.h"
+				RelativePath="..\..\src\Base\Threading\Threading.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\Threading\Worker_Queue..h"
+				RelativePath="..\..\src\Base\Threading\Worker_Queue..h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\Threading\Worker_Queue.T"
+				RelativePath="..\..\src\Base\Threading\Worker_Queue.T"
 				>
 			</File>
 		</Filter>
@@ -509,70 +509,70 @@
 			Name="Memory"
 			>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\Memory\auto_ptr.h"
+				RelativePath="..\..\src\Base\Memory\auto_ptr.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\Memory\config_Memory.H"
+				RelativePath="..\..\src\Base\Memory\config_Memory.H"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\Memory\FixedPool.cpp"
+				RelativePath="..\..\src\Base\Memory\FixedPool.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\Memory\FixedPool.h"
+				RelativePath="..\..\src\Base\Memory\FixedPool.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\Memory\Memory.H"
+				RelativePath="..\..\src\Base\Memory\Memory.H"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\Memory\Memory_Pool.H"
+				RelativePath="..\..\src\Base\Memory\Memory_Pool.H"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\Memory\MemoryManager.CPP"
+				RelativePath="..\..\src\Base\Memory\MemoryManager.CPP"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\Memory\MemoryManager.H"
+				RelativePath="..\..\src\Base\Memory\MemoryManager.H"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\Memory\ObjectPool.h"
+				RelativePath="..\..\src\Base\Memory\ObjectPool.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\Memory\Pool.h"
+				RelativePath="..\..\src\Base\Memory\Pool.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\Memory\SystemPool.cpp"
+				RelativePath="..\..\src\Base\Memory\SystemPool.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\Memory\SystemPool.h"
+				RelativePath="..\..\src\Base\Memory\SystemPool.h"
 				>
 			</File>
 			<Filter
 				Name="test"
 				>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Base\Memory\Test\FixedPoolTest.h"
+					RelativePath="..\..\src\Base\Memory\Test\FixedPoolTest.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Base\Memory\Test\ObjectPoolTest.h"
+					RelativePath="..\..\src\Base\Memory\Test\ObjectPoolTest.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Base\Memory\Test\SystemPoolTest.h"
+					RelativePath="..\..\src\Base\Memory\Test\SystemPoolTest.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Base\Memory\Test\Test.h"
+					RelativePath="..\..\src\Base\Memory\Test\Test.h"
 					>
 				</File>
 			</Filter>
@@ -581,23 +581,23 @@
 			Name="macro"
 			>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\macro\macro_counter.hpp"
+				RelativePath="..\..\src\Base\macro\macro_counter.hpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\macro\macro_define.hpp"
+				RelativePath="..\..\src\Base\macro\macro_define.hpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\macro\macro_misc.hpp"
+				RelativePath="..\..\src\Base\macro\macro_misc.hpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\macro\macro_params.hpp"
+				RelativePath="..\..\src\Base\macro\macro_params.hpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\macro\macro_repeat.hpp"
+				RelativePath="..\..\src\Base\macro\macro_repeat.hpp"
 				>
 			</File>
 		</Filter>
@@ -605,7 +605,7 @@
 			Name="mpl"
 			>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\mpl\mpl.hpp"
+				RelativePath="..\..\src\Base\mpl\mpl.hpp"
 				>
 			</File>
 		</Filter>
@@ -613,47 +613,47 @@
 			Name="string"
 			>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\string\case_functions.hpp"
+				RelativePath="..\..\src\Base\string\case_functions.hpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\string\ctype_traits.hpp"
+				RelativePath="..\..\src\Base\string\ctype_traits.hpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\string\functionals.hpp"
+				RelativePath="..\..\src\Base\string\functionals.hpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\string\string_append_iterator.h"
+				RelativePath="..\..\src\Base\string\string_append_iterator.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\string\string_token_iterator.h"
+				RelativePath="..\..\src\Base\string\string_token_iterator.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\string\string_traits.hpp"
+				RelativePath="..\..\src\Base\string\string_traits.hpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\string\string_view.h"
+				RelativePath="..\..\src\Base\string\string_view.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\string\StringOps.h"
+				RelativePath="..\..\src\Base\string\StringOps.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\string\StringPtr.h"
+				RelativePath="..\..\src\Base\string\StringPtr.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\string\toString.h"
+				RelativePath="..\..\src\Base\string\toString.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\string\trim_functions.hpp"
+				RelativePath="..\..\src\Base\string\trim_functions.hpp"
 				>
 			</File>
 		</Filter>
@@ -661,170 +661,170 @@
 			Name="Network"
 			>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Networks\Communicator.cpp"
+				RelativePath="..\..\src\Networks\Communicator.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Networks\Communicator.H"
+				RelativePath="..\..\src\Networks\Communicator.H"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Networks\config_Networks.H"
+				RelativePath="..\..\src\Networks\config_Networks.H"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Networks\INET_Addr.cpp"
+				RelativePath="..\..\src\Networks\INET_Addr.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Networks\INET_Addr.h"
+				RelativePath="..\..\src\Networks\INET_Addr.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Networks\INET_Addr.inl"
+				RelativePath="..\..\src\Networks\INET_Addr.inl"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Networks\Instance_Networks.cpp"
+				RelativePath="..\..\src\Networks\Instance_Networks.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Networks\Instance_Networks.h"
+				RelativePath="..\..\src\Networks\Instance_Networks.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Networks\mmap.cpp"
+				RelativePath="..\..\src\Networks\mmap.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Networks\mmap.h"
+				RelativePath="..\..\src\Networks\mmap.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Networks\Module.cpp"
+				RelativePath="..\..\src\Networks\Module.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Networks\Networks.H"
+				RelativePath="..\..\src\Networks\Networks.H"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Networks\SOCK.cpp"
+				RelativePath="..\..\src\Networks\SOCK.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Networks\SOCK.h"
+				RelativePath="..\..\src\Networks\SOCK.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Networks\SOCK.inl"
+				RelativePath="..\..\src\Networks\SOCK.inl"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Networks\SOCK_IO.cpp"
+				RelativePath="..\..\src\Networks\SOCK_IO.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Networks\SOCK_IO.h"
+				RelativePath="..\..\src\Networks\SOCK_IO.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Networks\SOCK_IO.inl"
+				RelativePath="..\..\src\Networks\SOCK_IO.inl"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Networks\Url.cpp"
+				RelativePath="..\..\src\Networks\Url.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Networks\Url.h"
+				RelativePath="..\..\src\Networks\Url.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Networks\WIN32_Operation_Proactor.cpp"
+				RelativePath="..\..\src\Networks\WIN32_Operation_Proactor.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Networks\WIN32_Operation_Proactor.h"
+				RelativePath="..\..\src\Networks\WIN32_Operation_Proactor.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Networks\WIN32_Operation_Result.H"
+				RelativePath="..\..\src\Networks\WIN32_Operation_Result.H"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Networks\WIN32OperationOverlapped.H"
+				RelativePath="..\..\src\Networks\WIN32OperationOverlapped.H"
 				>
 			</File>
 			<Filter
 				Name="Include"
 				>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\include\Acceptor.h"
+					RelativePath="..\..\src\Networks\include\Acceptor.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\include\Communicator.H"
+					RelativePath="..\..\src\Networks\include\Communicator.H"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\include\Connector.h"
+					RelativePath="..\..\src\Networks\include\Connector.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\include\Endpoint.h"
+					RelativePath="..\..\src\Networks\include\Endpoint.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\include\Endpoint_Factory.h"
+					RelativePath="..\..\src\Networks\include\Endpoint_Factory.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\include\IOBuf.H"
+					RelativePath="..\..\src\Networks\include\IOBuf.H"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\include\IProtocol.h"
+					RelativePath="..\..\src\Networks\include\IProtocol.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\include\IProtocolFactory.h"
+					RelativePath="..\..\src\Networks\include\IProtocolFactory.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\include\IReactorArbitrary.h"
+					RelativePath="..\..\src\Networks\include\IReactorArbitrary.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\include\IReactorCore.h"
+					RelativePath="..\..\src\Networks\include\IReactorCore.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\include\IResolver.h"
+					RelativePath="..\..\src\Networks\include\IResolver.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\..\..\Betanetworks.Networks\Betanetworks.Networks\Logging\ITrace.h"
+					RelativePath="..\..\src\Networks\Logging\ITrace.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\include\ITransport.h"
+					RelativePath="..\..\src\Networks\include\ITransport.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\include\Operation_Result.h"
+					RelativePath="..\..\src\Networks\include\Operation_Result.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\include\OperationProactor.H"
+					RelativePath="..\..\src\Networks\include\OperationProactor.H"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\include\Transport.h"
+					RelativePath="..\..\src\Networks\include\Transport.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\include\Transport_Result.h"
+					RelativePath="..\..\src\Networks\include\Transport_Result.h"
 					>
 				</File>
 			</Filter>
@@ -832,19 +832,19 @@
 				Name="IO"
 				>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\IO\config_IO.H"
+					RelativePath="..\..\src\Networks\IO\config_IO.H"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\IO\Hazel_IO.cpp"
+					RelativePath="..\..\src\Networks\IO\Hazel_IO.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\IO\Hazel_IO.h"
+					RelativePath="..\..\src\Networks\IO\Hazel_IO.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\IO\IO.H"
+					RelativePath="..\..\src\Networks\IO\IO.H"
 					>
 				</File>
 			</Filter>
@@ -852,99 +852,99 @@
 				Name="TCP"
 				>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\TCP\Instance_TCP.cpp"
+					RelativePath="..\..\src\Networks\TCP\Instance_TCP.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\TCP\Instance_TCP.h"
+					RelativePath="..\..\src\Networks\TCP\Instance_TCP.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\TCP\TCP_Asynch_Read_Array_Result.cpp"
+					RelativePath="..\..\src\Networks\TCP\TCP_Asynch_Read_Array_Result.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\TCP\TCP_Asynch_Read_Array_Result.h"
+					RelativePath="..\..\src\Networks\TCP\TCP_Asynch_Read_Array_Result.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\TCP\TCP_Asynch_Read_Result.CPP"
+					RelativePath="..\..\src\Networks\TCP\TCP_Asynch_Read_Result.CPP"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\TCP\TCP_Asynch_Read_Result.h"
+					RelativePath="..\..\src\Networks\TCP\TCP_Asynch_Read_Result.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\TCP\TCP_Asynch_Result.cpp"
+					RelativePath="..\..\src\Networks\TCP\TCP_Asynch_Result.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\TCP\TCP_Asynch_Result.h"
+					RelativePath="..\..\src\Networks\TCP\TCP_Asynch_Result.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\TCP\TCP_Asynch_Transmit_Result.cpp"
+					RelativePath="..\..\src\Networks\TCP\TCP_Asynch_Transmit_Result.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\TCP\TCP_Asynch_Transmit_Result.h"
+					RelativePath="..\..\src\Networks\TCP\TCP_Asynch_Transmit_Result.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\TCP\TCP_Asynch_Write_Array_Result.cpp"
+					RelativePath="..\..\src\Networks\TCP\TCP_Asynch_Write_Array_Result.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\TCP\TCP_Asynch_Write_Array_Result.h"
+					RelativePath="..\..\src\Networks\TCP\TCP_Asynch_Write_Array_Result.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\TCP\TCP_Asynch_Write_Result.CPP"
+					RelativePath="..\..\src\Networks\TCP\TCP_Asynch_Write_Result.CPP"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\TCP\TCP_Asynch_Write_Result.h"
+					RelativePath="..\..\src\Networks\TCP\TCP_Asynch_Write_Result.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\TCP\TCP_Endpoint_Factory.CPP"
+					RelativePath="..\..\src\Networks\TCP\TCP_Endpoint_Factory.CPP"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\TCP\TCP_Endpoint_Factory.H"
+					RelativePath="..\..\src\Networks\TCP\TCP_Endpoint_Factory.H"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\TCP\TcpAcceptor.cpp"
+					RelativePath="..\..\src\Networks\TCP\TcpAcceptor.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\TCP\TcpAcceptor.h"
+					RelativePath="..\..\src\Networks\TCP\TcpAcceptor.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\TCP\TcpConnector.cpp"
+					RelativePath="..\..\src\Networks\TCP\TcpConnector.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\TCP\TcpConnector.h"
+					RelativePath="..\..\src\Networks\TCP\TcpConnector.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\TCP\TcpEndpoint.cpp"
+					RelativePath="..\..\src\Networks\TCP\TcpEndpoint.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\TCP\TcpEndpoint.H"
+					RelativePath="..\..\src\Networks\TCP\TcpEndpoint.H"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\TCP\TcpTransport.cpp"
+					RelativePath="..\..\src\Networks\TCP\TcpTransport.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\TCP\TcpTransport.h"
+					RelativePath="..\..\src\Networks\TCP\TcpTransport.h"
 					>
 				</File>
 			</Filter>
@@ -952,27 +952,27 @@
 				Name="Template"
 				>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\Template\Acceptor.h"
+					RelativePath="..\..\src\Networks\Template\Acceptor.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\Template\Acceptor.T"
+					RelativePath="..\..\src\Networks\Template\Acceptor.T"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\Template\Connector.h"
+					RelativePath="..\..\src\Networks\Template\Connector.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\Template\Connector.T"
+					RelativePath="..\..\src\Networks\Template\Connector.T"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\Template\Transport.h"
+					RelativePath="..\..\src\Networks\Template\Transport.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Foundation\Hazel.Networks\Template\Transport.T"
+					RelativePath="..\..\src\Networks\Template\Transport.T"
 					>
 				</File>
 			</Filter>
@@ -981,16 +981,12 @@
 			Name="Logging"
 			>
 			<File
-				RelativePath="..\..\src\Foundation\Hazel.Base\Logger.H"
+				RelativePath="..\..\src\Base\Logger.H"
 				>
 			</File>
 		</Filter>
 		<File
-			RelativePath="..\..\src\Foundation\Hazel.Base\config.build"
-			>
-		</File>
-		<File
-			RelativePath="..\..\src\Foundation\Hazel.Base\Singleton.Template"
+			RelativePath="..\..\src\Base\Singleton.T"
 			>
 		</File>
 	</Files>
