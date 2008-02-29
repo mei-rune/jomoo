@@ -29,7 +29,7 @@ namespace OS
 
 # if defined (OS_HAS_INLINED)
 #   include "os_networks.inl"
-# endif /* Hazel_HAS_INLINED_OSCALLS */
+# endif /* HAZEL_HAS_INLINED_OSCALLS */
 
 };
 

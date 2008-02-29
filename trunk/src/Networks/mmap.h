@@ -11,7 +11,7 @@
 
 // Include files
 #include "config_Networks.h"
-#include "Hazel.Platform/os_mmap.h"
+#include "Platform/os_mmap.h"
 
 _networks_begin
 

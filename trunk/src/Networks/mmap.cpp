@@ -15,8 +15,8 @@ _networks_begin
 Hazel_Mem_MAP::Hazel_Mem_MAP (void)
 : base_addr_ ( 0 ),
 length_ (0),
-handle_ (Hazel_INVALID_HANDLE),
-file_mapping_ (Hazel_INVALID_HANDLE)
+handle_ (HAZEL_INVALID_HANDLE),
+file_mapping_ (HAZEL_INVALID_HANDLE)
 {
 }
 
@@ -29,8 +29,8 @@ Hazel_Mem_MAP::Hazel_Mem_MAP (const tchar *file_name,
 						  LPSECURITY_ATTRIBUTES sa)
 						  : base_addr_ ( 0 ),
 						  length_ (0),
-						  handle_ (Hazel_INVALID_HANDLE),
-						  file_mapping_ (Hazel_INVALID_HANDLE)
+						  handle_ (HAZEL_INVALID_HANDLE),
+						  file_mapping_ (HAZEL_INVALID_HANDLE)
 {
 	if (this->map (file_name,
 		len,
@@ -52,8 +52,8 @@ Hazel_Mem_MAP::Hazel_Mem_MAP (Hazel_HANDLE handle,
 						  LPSECURITY_ATTRIBUTES sa)
 						  : base_addr_ ( 0 ),
 						  length_ (0),
-						  handle_ (Hazel_INVALID_HANDLE),
-						  file_mapping_ (Hazel_INVALID_HANDLE)
+						  handle_ (HAZEL_INVALID_HANDLE),
+						  file_mapping_ (HAZEL_INVALID_HANDLE)
 {
 	if (this->map (handle,
 		len,
@@ -115,7 +115,7 @@ int Hazel_Mem_MAP::map (const tchar *file_name,
 		this->length_,
 		prot,
 		share,
-		Hazel_INVALID_HANDLE_VALUE,
+		HAZEL_INVALID_HANDLE_VALUE,
 		offset,
 		this->file_mapping_,
 		sa
@@ -180,10 +180,10 @@ int Hazel_Mem_MAP::close_filemapping_handle (void)
 	int result = 0;
 
 	if (this->file_mapping_ != this->handle_
-		&& this->file_mapping_ != Hazel_INVALID_HANDLE)
+		&& this->file_mapping_ != HAZEL_INVALID_HANDLE)
 	{
 		result = OS::close_handle (this->file_mapping_) ? 0 : -1;
-		this->file_mapping_ = Hazel_INVALID_HANDLE;
+		this->file_mapping_ = HAZEL_INVALID_HANDLE;
 	}
 
 	return result;
@@ -226,10 +226,10 @@ int Hazel_Mem_MAP::advise (int behavior )
 int Hazel_Mem_MAP::close_handle (void)
 {
 	int result = 0;
-	if( this->handle_ != Hazel_INVALID_HANDLE )
+	if( this->handle_ != HAZEL_INVALID_HANDLE )
 	{
 		result = OS::close_handle (this->handle_) ? 0 : -1;
-		this->handle_ = Hazel_INVALID_HANDLE;
+		this->handle_ = HAZEL_INVALID_HANDLE;
 	}
 	return result;
 }

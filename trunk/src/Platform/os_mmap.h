@@ -16,7 +16,7 @@
 #include "os_string.h"
 
 
-#if defined (Hazel_LACKS_SYS_MMAN_H) && !defined (Hazel_WIN32)
+#if defined (Hazel_LACKS_SYS_MMAN_H) && !defined (HAZEL_WIN32)
 #  define PROT_READ 0
 #  define PROT_WRITE 0
 #  define PROT_EXEC 0
@@ -25,7 +25,7 @@
 #  define MAP_PRIVATE 0
 #  define MAP_SHARED 0
 #  define MAP_FIXED 0
-#elif defined (Hazel_WIN32)
+#elif defined (HAZEL_WIN32)
    // These two may be used for internal flags soon:
 #  define MAP_PRIVATE 1
 #  define MAP_SHARED  2
@@ -61,7 +61,7 @@ PAGE_NOCACHE  */
 #  define PROT_RDWR (PROT_READ|PROT_WRITE)
 #endif /* PROT_RDWR */
 
-# if defined (Hazel_WIN32)
+# if defined (HAZEL_WIN32)
     // Needed to map calls to NT transparently.
 #   define MS_ASYNC 0
 #   define MS_INVALIDATE 0
@@ -74,12 +74,12 @@ PAGE_NOCACHE  */
 
 namespace OS
 {
-  Hazel_NAMESPACE_INLINE_FUNCTION
+  HAZEL_NAMESPACE_INLINE_FUNCTION
   int madvise (void* addr,
                size_t len,
                int map_advice);
 
-  Hazel_NAMESPACE_INLINE_FUNCTION
+  HAZEL_NAMESPACE_INLINE_FUNCTION
   void *mmap (void *addr,
               size_t len,
               int prot,
@@ -90,32 +90,32 @@ namespace OS
               LPSECURITY_ATTRIBUTES sa = 0,
               const tchar *file_mapping_name = 0);
 
-  Hazel_NAMESPACE_INLINE_FUNCTION
+  HAZEL_NAMESPACE_INLINE_FUNCTION
   int mprotect (void *addr,
                 size_t len,
                 int prot);
 
-  Hazel_NAMESPACE_INLINE_FUNCTION
+  HAZEL_NAMESPACE_INLINE_FUNCTION
   int msync (void *addr,
              size_t len,
              int sync);
 
-  Hazel_NAMESPACE_INLINE_FUNCTION
+  HAZEL_NAMESPACE_INLINE_FUNCTION
   int munmap (void *addr,
               size_t len);
 
-  Hazel_NAMESPACE_INLINE_FUNCTION
+  HAZEL_NAMESPACE_INLINE_FUNCTION
   Hazel_HANDLE shm_open (const tchar *filename,
 	  int prot,
 	  int flags,
 	  LPSECURITY_ATTRIBUTES sa = 0);
 
-  Hazel_NAMESPACE_INLINE_FUNCTION
+  HAZEL_NAMESPACE_INLINE_FUNCTION
   int shm_unlink (const tchar *path);
 
 # if defined (OS_HAS_INLINED)
 #   include "OS_mmap.inl"
-# endif /* Hazel_HAS_INLINED_OSCALLS */
+# endif /* HAZEL_HAS_INLINED_OSCALLS */
 
 };
 

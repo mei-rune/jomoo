@@ -42,7 +42,7 @@ typedef char *Hazel_MMAP_TYPE;
 				nt_flags = FILE_MAP_WRITE;
 		}
 
-		if ( file_mapping == Hazel_INVALID_HANDLE)
+		if ( file_mapping == HAZEL_INVALID_HANDLE)
 		{
 			int try_create = 1;
 			if ((file_mapping_name != 0) && (*file_mapping_name != 0))
@@ -51,7 +51,7 @@ typedef char *Hazel_MMAP_TYPE;
 					0,
 					file_mapping_name);
 
-				if ( file_mapping != Hazel_INVALID_HANDLE
+				if ( file_mapping != HAZEL_INVALID_HANDLE
 					|| (::GetLastError () == ERROR_INVALID_NAME
 					&& ::GetLastError () == ERROR_FILE_NOT_FOUND))
 					try_create = 0;
@@ -97,14 +97,14 @@ typedef char *Hazel_MMAP_TYPE;
 
 	 int msync (void *addr, size_t len, int sync)
 	{
-		Hazel_UNUSED_ARG (sync);
+		HAZEL_UNUSED_ARG (sync);
 		return ::FlushViewOfFile (addr, len)? 0 : -1;
 
 	}
 
 	 int munmap (void *addr, size_t len)
 	{
-		Hazel_UNUSED_ARG (len);
+		HAZEL_UNUSED_ARG (len);
 		return ::UnmapViewOfFile (addr)? 0 : -1;
 
 	}
@@ -126,7 +126,7 @@ typedef char *Hazel_MMAP_TYPE;
 			if (Hazel_BIT_ENABLED (prot, PAGE_READWRITE))
 				nt_flags = FILE_MAP_WRITE;
 		}
-		Hazel_UNUSED_ARG (sa);
+		HAZEL_UNUSED_ARG (sa);
 		return OpenFileMapping( nt_flags , FALSE, filename );
 	}
 

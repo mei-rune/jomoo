@@ -1,18 +1,18 @@
 
 
-Hazel_INLINE
+HAZEL_INLINE
 hazel_socket::hazel_socket (void)
 {
 
 }
 
-Hazel_INLINE
+HAZEL_INLINE
 hazel_socket::~hazel_socket (void)
 {
 
 }
 
-Hazel_INLINE ssize_t
+HAZEL_INLINE ssize_t
 hazel_socket::recv (void *buf,
                    size_t len,
                    int flags ) const
@@ -24,7 +24,7 @@ hazel_socket::recv (void *buf,
                     flags );
 }
 
-Hazel_INLINE ssize_t
+HAZEL_INLINE ssize_t
 hazel_socket::recv (void *buf,
                    size_t len ) const
 {
@@ -33,7 +33,7 @@ hazel_socket::recv (void *buf,
                     len,
                     0);
 }
-Hazel_INLINE ssize_t
+HAZEL_INLINE ssize_t
 hazel_socket::recvv (iovec iov[],
                    size_t n) const
 {
@@ -52,7 +52,7 @@ hazel_socket::recvv (iovec iov[],
 	return r;
 }
 
-Hazel_INLINE bool
+HAZEL_INLINE bool
 hazel_socket::recvv (iovec iov[],
 					size_t n,
 					Hazel_OVERLAPPED& overlapped) const
@@ -68,7 +68,7 @@ hazel_socket::recvv (iovec iov[],
 		, 0 ) == 0 ) ? true : false;
 }
 
-Hazel_INLINE bool
+HAZEL_INLINE bool
 hazel_socket::recv (void *buf,
 				   size_t n,
 				   Hazel_OVERLAPPED& overlapped) const
@@ -85,7 +85,7 @@ hazel_socket::recv (void *buf,
 	//return r;
 }
 
-Hazel_INLINE ssize_t
+HAZEL_INLINE ssize_t
 hazel_socket::send (const void *buf,
                    size_t len,
                    int flags ) const
@@ -94,7 +94,7 @@ hazel_socket::send (const void *buf,
     return ::send (get_handle(), (const char *) buf, ( int )len, flags);
 }
 
-Hazel_INLINE ssize_t
+HAZEL_INLINE ssize_t
 hazel_socket::send (const void *buf,
                    size_t len ) const
 {
@@ -103,7 +103,7 @@ hazel_socket::send (const void *buf,
 }
 
 
-Hazel_INLINE bool 
+HAZEL_INLINE bool 
 hazel_socket::send (const void *buf,
 				   size_t n,
 				   Hazel_OVERLAPPED& overlapped) const
@@ -114,7 +114,7 @@ hazel_socket::send (const void *buf,
 }
 
 
-Hazel_INLINE ssize_t
+HAZEL_INLINE ssize_t
 hazel_socket::sendv ( const iovec iov[],
                     size_t n ) const
 {
@@ -131,7 +131,7 @@ hazel_socket::sendv ( const iovec iov[],
 	return r;
 }
 
-Hazel_INLINE   bool 
+HAZEL_INLINE   bool 
 hazel_socket::sendv (const iovec iov[],
 					size_t n,
 					Hazel_OVERLAPPED& overlapped) const
@@ -146,7 +146,7 @@ hazel_socket::sendv (const iovec iov[],
 		0) == 0 ) ? true : false;
 }
 
-Hazel_INLINE   bool 
+HAZEL_INLINE   bool 
 hazel_socket::transmit (const iopack iov[],
                  size_t n,
                  Hazel_OVERLAPPED& overlapped) const
