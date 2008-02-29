@@ -2,9 +2,11 @@
 //
 
 #include "stdafx.h"
-#define TEST 1
-#include "Hazel.Base/Memory/Test/Test.h"
+#include "test.h"
 #include <time.h>
+
+
+#ifdef TEST
 
 void TestG()
 {
@@ -51,8 +53,34 @@ time_t foomalloc()
 	return time( 0 ) - t;
 }
 
-int _tmain(int argc, _TCHAR* argv[])
+
+class PoolTestCase : public CPPUNIT_NS::TestFixture
 {
+  CPPUNIT_TEST_SUITE( PoolTestCase );
+  CPPUNIT_TEST( testRate );
+  CPPUNIT_TEST_SUITE_END();
+
+public:
+  void setUp();
+  void tearDown();
+protected:
+	void testRate();
+};
+
+
+CPPUNIT_TEST_SUITE_REGISTRATION( PoolTestCase );
+
+void PoolTestCase::setUp()
+{
+}
+
+void PoolTestCase::tearDown()
+{
+}
+
+void PoolTestCase::testRate()
+{
+	
 	Test();
 
 	time_t t = foomalloc();
@@ -61,8 +89,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	std::cout << "pool:" << p << std::endl;
 	std::cout << "malloc:" << t << std::endl;
 	std::cout << "diff:" << t - p << std::endl;
-	assert( ( t - p ) > 0 );
-
-	return 0;
+	CPPUNIT_ASSERT( ( t - p ) > 0 );
 }
 
+#endif

@@ -3,8 +3,9 @@
 #ifndef TEST_LINK_H
 #define TEST_LINK_H
 
-#include "../ThreadSafePtrQueue.hpp"
 #include <iostream>
+#include <cppunit/extensions/HelperMacros.h>
+#include "../ThreadSafePtrQueue.hpp"
 
 struct LINK LIST_INTERFACE( LINK )
 {
@@ -12,7 +13,33 @@ struct LINK LIST_INTERFACE( LINK )
 	int value;
 };
 
-void Test()
+
+class LinkTestCase : public CPPUNIT_NS::TestFixture
+{
+  CPPUNIT_TEST_SUITE( LinkTestCase );
+  CPPUNIT_TEST( testSimply );
+  CPPUNIT_TEST_SUITE_END();
+
+public:
+  void setUp();
+  void tearDown();
+
+protected:
+	void testSimply();
+};
+
+
+CPPUNIT_TEST_SUITE_REGISTRATION( LinkTestCase );
+
+void LinkTestCase::setUp()
+{
+}
+
+void LinkTestCase::tearDown()
+{
+}
+
+void LinkTestCase::testSimply()
 {
 	ThreadSafePtrQueue< LINK > queue;
 	for( int i = 0; i < 100 ; i ++ )
@@ -31,6 +58,7 @@ void Test()
 	}
 	std::cout << std::endl;
 }
+
 
 #endif // TEST_LINK_H
 #endif // TEST
