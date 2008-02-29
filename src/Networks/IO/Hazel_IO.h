@@ -10,7 +10,7 @@
 
 // Include files
 # include "config_IO.h"
-# include "Hazel.Platform/os.H"
+# include "Platform/os.H"
 _networks_begin
 
 class Hazel_STDIO

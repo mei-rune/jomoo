@@ -1,6 +1,6 @@
 
-#ifndef Hazel_WIN32_OPERATION_OVERLAPPED_H
-#define Hazel_WIN32_OPERATION_OVERLAPPED_H
+#ifndef HAZEL_WIN32_OPERATION_OVERLAPPED_H
+#define HAZEL_WIN32_OPERATION_OVERLAPPED_H
 
 #include "config.h"
 
@@ -24,7 +24,7 @@ public:
 
 	WIN32_Operation_Result( )
 		: instance_( 0 )
-		, m_handle_( Hazel_INVALID_HANDLE_VALUE )
+		, m_handle_( HAZEL_INVALID_HANDLE_VALUE )
 		, handler_( 0 )
 	{
 		Internal =  0;
@@ -42,7 +42,7 @@ public:
 	{
 		if( instance == 0 )
 			ThrowException1( NullException, BT_TEXT("instance") );
-		if( handle == Hazel_INVALID_HANDLE_VALUE )
+		if( handle == HAZEL_INVALID_HANDLE_VALUE )
 			ThrowException1( NullException, BT_TEXT("handle") );
 
 		instance_ = instance;
@@ -52,7 +52,7 @@ public:
 	void fini()
 	{
 		instance_ = 0;
-		m_handle_ = Hazel_INVALID_HANDLE_VALUE;
+		m_handle_ = HAZEL_INVALID_HANDLE_VALUE;
 	}
 
 	virtual int open( void* connection )
@@ -91,4 +91,4 @@ protected:
 
 _networks_begin
 
-#endif //Hazel_WIN32_OPERATION_OVERLAPPED_H
+#endif //HAZEL_WIN32_OPERATION_OVERLAPPED_H

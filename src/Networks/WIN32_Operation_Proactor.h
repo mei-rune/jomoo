@@ -1,7 +1,7 @@
 
 
-#ifndef Hazel_WIN32_OPERATION_PROACTOR_H
-#define Hazel_WIN32_OPERATION_PROACTOR_H
+#ifndef HAZEL_WIN32_OPERATION_PROACTOR_H
+#define HAZEL_WIN32_OPERATION_PROACTOR_H
 
 #include "config.h"
 
@@ -11,7 +11,7 @@
 
 // Include files
 #include "config_Networks.h"
-#include "Hazel.Platform/OS.H"
+#include "Platform/OS.H"
 #include "include/HazelOperationProactor.H"
 #include "Hazel.Base/Collections/ThreadSafePtrQueue.HPP"
 
@@ -56,4 +56,4 @@ private:
 
 _networks_end
 
-#endif // Hazel_WIN32_OPERATION_PROACTOR_H
+#endif // HAZEL_WIN32_OPERATION_PROACTOR_H

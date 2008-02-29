@@ -18,7 +18,7 @@ WIN32_Operation_Proactor::WIN32_Operation_Proactor(  )
 {
 	//for( int i = 0; i < 100; i ++ )
 	//{
-	//	queue_.push( WIN32_Defer( 0, !result_delete_, this, Hazel_INVALID_HANDLE_VALUE , 0 );
+	//	queue_.push( WIN32_Defer( 0, !result_delete_, this, HAZEL_INVALID_HANDLE_VALUE , 0 );
 	//}
 }
 
@@ -192,7 +192,7 @@ int WIN32_Operation_Proactor::post_completion ( Hazel_Operation_Result_Ptr resul
 //	//WIN32_Defer* p = queue_.pop();
 //	//if( p != 0 )
 //	//	return p;
-//	//return ( new WIN32_Defer( result ,!result_delete_, *this , Hazel_INVALID_HANDLE_VALUE , 0  ) );
+//	//return ( new WIN32_Defer( result ,!result_delete_, *this , HAZEL_INVALID_HANDLE_VALUE , 0  ) );
 //	return 0;
 //}
 

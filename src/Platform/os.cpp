@@ -10,4 +10,4 @@ static char THIS_FILE[] = __FILE__;
 
 #if !defined (OS_HAS_INLINED)
 # include "OS.inl"
-#endif /* Hazel_HAS_INLINED_OS_CALLS */
+#endif /* HAZEL_HAS_INLINED_OS_CALLS */

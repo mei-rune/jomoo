@@ -10,7 +10,7 @@
 
 // Include files
 # include "config_Networks.h"
-# include "Hazel.Platform/os_networks.H"
+# include "Platform/os_networks.H"
 # include "Hazel.Base/string.hpp"
 
 _networks_begin

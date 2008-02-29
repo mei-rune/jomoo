@@ -1,11 +1,11 @@
 
 
-Hazel_INLINE
+HAZEL_INLINE
 Hazel_INET_Addr::~Hazel_INET_Addr (void)
 {
 }
 
-Hazel_INLINE void
+HAZEL_INLINE void
 Hazel_INET_Addr::reset (void)
 {
   memset (&this->m_addr_ , 0, sizeof (this->m_addr_ ));

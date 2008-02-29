@@ -13,7 +13,7 @@ static char THIS_FILE[] = __FILE__;
 _networks_begin
 
 Hazel_STDIO::Hazel_STDIO (void)
-: handle_( Hazel_INVALID_HANDLE_VALUE ) 
+: handle_( HAZEL_INVALID_HANDLE_VALUE ) 
 {
 }
 

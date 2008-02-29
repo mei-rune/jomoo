@@ -11,7 +11,7 @@
 
 // Include files
 #include "../config_Networks.h"
-#include "Hazel.Platform/OS.H"
+#include "Platform/OS.H"
 #include "Hazel_Operation_Result.H"
 
 _networks_begin

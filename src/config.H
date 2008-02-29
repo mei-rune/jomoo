@@ -178,20 +178,20 @@ typedef _off_t off_t;
 
 #ifdef OS_HAS_INLINED
 #define OS_INLINE inline
-#define Hazel_NAMESPACE_INLINE_FUNCTION inline
+#define HAZEL_NAMESPACE_INLINE_FUNCTION inline
 #endif //OS_HAS_INLINED
 
 
-#define Hazel_HAS_INLINED 1
+#define HAZEL_HAS_INLINED 1
 
-#ifdef Hazel_HAS_INLINED
-#define Hazel_INLINE inline
-#endif //Hazel_HAS_INLINED
+#ifdef HAZEL_HAS_INLINED
+#define HAZEL_INLINE inline
+#endif //HAZEL_HAS_INLINED
 
 #define KB_SIZE	1024
 
-#define Hazel_TM sizeof( void* )
-#define Hazel_LCD_DEF( SIZE , TM ) ( ( (SIZE/ TM ) + (( SIZE%TM ) ? 1 : 0) ) * TM )
+#define HAZEL_TM sizeof( void* )
+#define HAZEL_LCD_DEF( SIZE , TM ) ( ( (SIZE/ TM ) + (( SIZE%TM ) ? 1 : 0) ) * TM )
 
 inline size_t Hazel_LCD( size_t SIZE , size_t TM )
 {
@@ -223,7 +223,7 @@ inline size_t Hazel_LCD( size_t SIZE , size_t TM )
 	I_don_t_know_how_to_define_reverse_iterator
 # endif
 
-#define Hazel_INTERFACE( X ) 
+#define HAZEL_INTERFACE( X ) 
 
 
 template< typename T >
@@ -240,9 +240,9 @@ inline T get_ptr( T t )
 
 #define Hazel_BIT_ENABLED( V , F ) ( V&F )
 
-#define Hazel_WIN32 1
+#define HAZEL_WIN32 1
 
-#define Hazel_UNUSED_ARG( X )
+#define HAZEL_UNUSED_ARG( X )
 
 #define MAKE_STRING( X ) #X
 #define ASSERT assert
