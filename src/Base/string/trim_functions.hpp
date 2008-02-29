@@ -8,7 +8,7 @@
 # pragma once
 #endif /* Hazel_LACKS_PRAGMA_ONCE */
 
-# include "Hazel.Platform/os_string.h"
+# include "Platform/os_string.h"
 //
 //template <typename C>
 //inline C const *default_trim_chars(C const *, ss_size_t &n)

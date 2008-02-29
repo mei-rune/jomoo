@@ -24,7 +24,7 @@ public:
 	{
 		//enum
 		//{
-		//	CHUNK_LENGTH = Hazel_LCD_DEF( sizeof( CHUNK ) , sizeof( void* ) );
+		//	CHUNK_LENGTH = HAZEL_LCD_DEF( sizeof( CHUNK ) , sizeof( void* ) );
 		//}
 
 		CHUNK()
@@ -39,7 +39,7 @@ public:
 
 	enum
 	{
-		CHUNK_HEAD_SIZE = Hazel_LCD_DEF( sizeof( CHUNK ) , Hazel_TM )
+		CHUNK_HEAD_SIZE = HAZEL_LCD_DEF( sizeof( CHUNK ) , HAZEL_TM )
 	};
 
 	FixedPool( const tstring& name ,size_t number, size_t size );

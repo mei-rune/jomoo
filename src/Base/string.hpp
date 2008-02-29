@@ -9,7 +9,7 @@
 #endif /* Hazel_LACKS_PRAGMA_ONCE */
 
 
-# include "Hazel.Platform/os_string.h"
+# include "Platform/os_string.h"
 # include "string/toString.h"
 # include "string/string_view.h"
 # include "string/stringOps.h"

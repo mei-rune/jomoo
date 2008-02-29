@@ -71,7 +71,7 @@ Hazel_Guard<Hazel_LOCK>::Hazel_Guard (Hazel_LOCK &l, bool block, bool become_own
   : lock_ (&l),
     owner_ (become_owner == 0 ? false : true )
 {
-  //Hazel_UNUSED_ARG (block);
+  //HAZEL_UNUSED_ARG (block);
 }
 
 

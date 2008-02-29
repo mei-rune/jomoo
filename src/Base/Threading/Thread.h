@@ -86,12 +86,12 @@ private:
 
 _thread_end
 
-#ifndef Hazel_HAS_INLINED
+#ifndef HAZEL_HAS_INLINED
 
 //BT_Export_C _thread Hazel_Thread* ___make_Hazel_Thread( _thread Runnable& runfn ,const tchar* descr );
 BT_Export_C _thread Hazel_Thread* ___get_Hazel_Thread( );
 
-#endif // Hazel_HAS_INLINED
+#endif // HAZEL_HAS_INLINED
 
 _thread_begin
 
@@ -103,11 +103,11 @@ namespace ThreadOP
 	 */
 	inline Hazel_Thread* get_self()
 	{
-#ifndef Hazel_HAS_INLINED
+#ifndef HAZEL_HAS_INLINED
 		return ___get_Hazel_Thread( );
 #else 
 		return 0;
-#endif // Hazel_HAS_INLINED
+#endif // HAZEL_HAS_INLINED
 	}
 
 	inline void yield()
