@@ -1,6 +1,6 @@
 //<<<<<< INCLUDES                                                       >>>>>>
 
-#include "Hazel.PluginManager/PluginManager.h"
+#include "PluginManager/PluginManager.h"
 #include "../PluginFactory/TestPluginFactory.cpp"
 #include "../PluginFactory/TestPluginType.h"
 
