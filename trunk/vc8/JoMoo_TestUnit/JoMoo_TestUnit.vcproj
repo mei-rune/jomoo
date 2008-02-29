@@ -41,7 +41,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/DTEST=1"
 				Optimization="0"
-				AdditionalIncludeDirectories="$(BOOST_ROOT)"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)../src/&quot;;&quot;$(CPPUNIT_ROOT)/include&quot;;&quot;$(BOOST_ROOT)&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;JOMOO_TESTUNIT_EXPORTS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
