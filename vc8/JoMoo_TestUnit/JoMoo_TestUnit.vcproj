@@ -228,6 +228,30 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="Memory"
+				>
+				<File
+					RelativePath="..\..\src\Base\Memory\unittest\FixedPoolTest.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\Base\Memory\unittest\ObjectPoolTest.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\Base\Memory\unittest\PoolTest.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\Base\Memory\unittest\SystemPoolTest.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\Base\Memory\unittest\Test.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<File
 			RelativePath=".\ReadMe.txt"
