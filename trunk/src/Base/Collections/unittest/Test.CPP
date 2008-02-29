@@ -3,6 +3,7 @@
 #ifndef TEST_LINK_H
 #define TEST_LINK_H
 
+#include <stdafx.h>
 #include <iostream>
 #include <cppunit/extensions/HelperMacros.h>
 #include "../ThreadSafePtrQueue.hpp"

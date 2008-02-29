@@ -12,7 +12,7 @@
 
 #ifdef Hazel_MT
 
-#include "Hazel.Platform/OS.H"
+#include "Platform/OS.H"
 
 #define LIST_INTERFACE( X ) : public SLIST_ENTRY
 #define LIST_DEFINE( X )

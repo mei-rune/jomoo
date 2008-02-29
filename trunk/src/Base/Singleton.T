@@ -19,7 +19,7 @@
 
 _hazel_begin
 
-template <Hazel_Singleton_ST_1> Hazel_INLINE
+template <Hazel_Singleton_ST_1> HAZEL_INLINE
 Hazel_Singleton<Hazel_Singleton_ST_2>::Hazel_Singleton ( )
 : instance_( 0 )
 {

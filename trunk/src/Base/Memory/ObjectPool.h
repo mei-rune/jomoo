@@ -9,7 +9,7 @@
 
 // Include files
 # include "config_Memory.H"
-# include "../toString.H"
+# include "../string.hpp"
 # include "MemoryManager.H"
 # include "../Collections/ThreadSafePtrQueue.HPP"
 
@@ -146,11 +146,11 @@ public:
 
 	enum
 	{
-		CHUNK_HEAD_SIZE = Hazel_LCD_DEF( sizeof( storage_type ) , Hazel_TM )
+		CHUNK_HEAD_SIZE = HAZEL_LCD_DEF( sizeof( storage_type ) , HAZEL_TM )
 	};
 	enum
 	{
-		CHUNK_SIZE = Hazel_LCD_DEF( CHUNK_HEAD_SIZE + sizeof( Object ) , Hazel_TM )
+		CHUNK_SIZE = HAZEL_LCD_DEF( CHUNK_HEAD_SIZE + sizeof( Object ) , HAZEL_TM )
 	};
 
 	typedef CREATIONPOLICY< storage_type ,CHUNK_HEAD_SIZE , CHUNK_SIZE > CreationPolicy;

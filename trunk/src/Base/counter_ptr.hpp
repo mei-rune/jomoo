@@ -11,7 +11,7 @@
 
 #include "boost/smart_ptr.hpp"
 #include "exception.hpp"
-#include "Hazel.Platform/OS.H"
+#include "Platform/OS.H"
 
 #define counter_ptr boost::shared_ptr
 
