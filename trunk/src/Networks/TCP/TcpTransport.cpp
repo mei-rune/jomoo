@@ -38,10 +38,10 @@ void TcpTransport::fini()
 bool TcpTransport::open( )
 {
 	if( m_handle_.get_handle() != NULL && m_handle_.get_handle() != INVALID_SOCKET )
-		BT_LOG_ERROR_RETURN( getLogger(), BT_TEXT("已经打开过了!") , false );
+		LOG_ERROR_RETURN( getLogger(), BT_TEXT("已经打开过了!") , false );
 
 	if( m_handle_.open( ) != 0 )
-		BT_LOG_ERROR_RETURN( getLogger(), BT_TEXT("打开socket失败，[")
+		LOG_ERROR_RETURN( getLogger(), BT_TEXT("打开socket失败，[")
 		<< lastError() << BT_TEXT("]") , false );
 
 	return true;
@@ -50,7 +50,7 @@ bool TcpTransport::open( )
 void TcpTransport::close( )
 {
 	if( m_handle_.get_handle() != NULL && m_handle_.get_handle() != INVALID_SOCKET )
-		BT_LOG_ERROR( getLogger(),toString() << BT_TEXT("TCP连接断开!") );
+		LOG_ERROR( getLogger(),toString() << BT_TEXT("TCP连接断开!") );
 	
 	m_handle_.close();
 }
@@ -67,7 +67,7 @@ bool TcpTransport::write(handler_type& handle,
 	if( !m_handle_.send( buffer, length, result->getOverlapped() ) )
 	{
 		if ( GetLastError() != ERROR_IO_PENDING )
-			BT_LOG_ERROR_RETURN( getLogger(), toString() << BT_TEXT("发送数据失败，[") 
+			LOG_ERROR_RETURN( getLogger(), toString() << BT_TEXT("发送数据失败，[") 
 			<< lastError() << BT_TEXT("]") , false );
 	}
 	result.release();
@@ -86,7 +86,7 @@ bool TcpTransport::write(handler_type& handle,
 	if( ! m_handle_.sendv( data, size, result->getOverlapped() ) )
 	{
 		if ( GetLastError() != ERROR_IO_PENDING )
-			BT_LOG_ERROR_RETURN( getLogger(), toString() << BT_TEXT("传输数据失败，[") << 
+			LOG_ERROR_RETURN( getLogger(), toString() << BT_TEXT("传输数据失败，[") << 
 			lastError() << BT_TEXT("]") , false );
 	}
 	result.release();
@@ -105,7 +105,7 @@ bool TcpTransport::transmit(handler_type& handle,
 	if( ! m_handle_.transmit( data, size, result->getOverlapped() ) )
 	{
 		if ( GetLastError() != ERROR_IO_PENDING )
-			BT_LOG_ERROR_RETURN( getLogger(), toString() << BT_TEXT("传输数据失败，[") << 
+			LOG_ERROR_RETURN( getLogger(), toString() << BT_TEXT("传输数据失败，[") << 
 			lastError() << BT_TEXT("]") , false );
 	}
 	result.release();
@@ -125,7 +125,7 @@ bool TcpTransport::read(handler_type& handle,
 	if( ! m_handle_.recv( buffer,length , result->getOverlapped() ) )
 	{
 		if ( GetLastError() != ERROR_IO_PENDING )
-			BT_LOG_ERROR_RETURN( getLogger(), toString() << BT_TEXT("读取数据失败，[") 
+			LOG_ERROR_RETURN( getLogger(), toString() << BT_TEXT("读取数据失败，[") 
 			<< lastError() << BT_TEXT("]") , false );
 	}
 	result.release();
@@ -145,7 +145,7 @@ bool TcpTransport::read(handler_type& handle,
 	if( ! m_handle_.recvv( data,size , result->getOverlapped() )  )
 	{
 		if ( GetLastError() != ERROR_IO_PENDING )
-			BT_LOG_ERROR_RETURN( getLogger(), toString() << BT_TEXT("读取数据失败，[") 
+			LOG_ERROR_RETURN( getLogger(), toString() << BT_TEXT("读取数据失败，[") 
 			<< lastError() << BT_TEXT("]") , false );
 	}
 	result.release();
@@ -252,7 +252,7 @@ void TcpTransport::onAccept()
 
 	if( instance_->getInstanceNetwork().getNativeProactor().register_handle(
 		reinterpret_cast  < Hazel_HANDLE >( get_handle().get_handle() ) , this ) != 0 )
-			BT_LOG_ERROR_THROW( getLogger(), toString() << BT_TEXT("打开异步连接失败，[") 
+			LOG_ERROR_THROW( getLogger(), toString() << BT_TEXT("打开异步连接失败，[") 
 			<< lastError() << BT_TEXT("]") , SystemException );
 }
 

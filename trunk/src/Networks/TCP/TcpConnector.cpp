@@ -90,7 +90,7 @@ void TCP_Connect_Result::complete (size_t bytes_transferred,
 
 	m_Transport_->onConnect();
 
-	BT_LOG_TRACE( m_Transport_->getLogger(), m_Transport_->toString() << BT_TEXT("TCP连接建立成功!") );
+	LOG_TRACE( m_Transport_->getLogger(), m_Transport_->toString() << BT_TEXT("TCP连接建立成功!") );
 
 	//m_handle_.onConnect( *this );
 	//Connector_T< TcpConnector,  handler_type::result_type::connector_type > a( connector() );
@@ -135,7 +135,7 @@ bool TcpConnector::connect(TCP_Connect_Handler& handle, void* act )
 	TcpTransportPtr newchannel = createTransport();
 
    if( !newchannel->open() )
-		BT_LOG_ERROR_RETURN( getLogger(), toString() << BT_TEXT("打开TCP连接失败，[") 
+		LOG_ERROR_RETURN( getLogger(), toString() << BT_TEXT("打开TCP连接失败，[") 
 		<< lastError( WSAGetLastError() ) << BT_TEXT("]") , false );
 	
    Instance_TCP::ConnectResultFactory::auto_ptr result (
@@ -145,7 +145,7 @@ bool TcpConnector::connect(TCP_Connect_Handler& handle, void* act )
 #ifdef _WINXP_
 
    	if( result->getOverlapped().open( this ) )
-			BT_LOG_ERROR_RETURN( getLogger(), toString() << BT_TEXT("打开异步连接失败，[")
+			LOG_ERROR_RETURN( getLogger(), toString() << BT_TEXT("打开异步连接失败，[")
 		<< lastError() << BT_TEXT("]") , false );
 
 	if( ::ConnectEx( result->new_native_channel()->get_handle().get_handle()
@@ -157,17 +157,17 @@ bool TcpConnector::connect(TCP_Connect_Handler& handle, void* act )
 		, result->getOverlapped() ) != TRUE )
 	{
 		if ( GetLastError() != ERROR_IO_PENDING )
-			BT_LOG_ERROR_RETURN( getLogger(), toString() << BT_TEXT("建立TCP连接失败，[") << lastError() << BT_TEXT("]") , false );
+			LOG_ERROR_RETURN( getLogger(), toString() << BT_TEXT("建立TCP连接失败，[") << lastError() << BT_TEXT("]") , false );
 	}
 	return true;
 #else
 	if( ::connect( result->new_native_channel()->get_handle().get_handle(),
 		( const sockaddr *)m_remoteaddr_.get_addr(),m_remoteaddr_.get_size() ) == SOCKET_ERROR ) 
-		BT_LOG_ERROR_RETURN( getLogger(), toString() << BT_TEXT("建立TCP连接失败，[")
+		LOG_ERROR_RETURN( getLogger(), toString() << BT_TEXT("建立TCP连接失败，[")
 				<< lastError() << BT_TEXT("]") , false );
 
 	if( result->getOverlapped().open( this ) )
-			BT_LOG_ERROR_RETURN( getLogger(), toString() << BT_TEXT("打开异步连接失败，[")
+			LOG_ERROR_RETURN( getLogger(), toString() << BT_TEXT("打开异步连接失败，[")
 		<< lastError() << BT_TEXT("]") , false );
 
 	result->complete( 0, 0, 0, 0 );

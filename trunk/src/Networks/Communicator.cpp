@@ -21,51 +21,51 @@ _networks_begin
 //int PlugIn_Server::load( _util PropertiesPtr config )
 //{
 //	if( pServer_.get() != 0 )
-//		BT_LOG_ERROR_RETURN( instance_.getLogger(), BT_TEXT("PlugIn> 启动插件[")
+//		LOG_ERROR_RETURN( instance_.getLogger(), BT_TEXT("PlugIn> 启动插件[")
 //			<< module_ << BT_TEXT( "]时，发现已经启动了" ) ,-1 );
 //
 //	try
 //	{
 //		tstring file = config->getProperty( "ModuleName" );
 //		if( file.empty() )
-//			BT_LOG_ERROR_RETURN( instance_.getLogger(), BT_TEXT("PlugIn> 启动插件[")
+//			LOG_ERROR_RETURN( instance_.getLogger(), BT_TEXT("PlugIn> 启动插件[")
 //			<< module_ << BT_TEXT( "]时，配置没有文件名." ) ,-1 );
 //
 //		tstring enterpoint = config->getProperty( "ModulePoint" );
 //		if( enterpoint.empty() )
-//			BT_LOG_ERROR_RETURN( instance_.getLogger(), BT_TEXT("PlugIn> 启动插件[")
+//			LOG_ERROR_RETURN( instance_.getLogger(), BT_TEXT("PlugIn> 启动插件[")
 //			<< module_ << BT_TEXT( "]时，配置没有进入点." ) ,-1 );
 //
 //		if( library_.open( file ) != 0 )
-//			BT_LOG_ERROR_RETURN( instance_.getLogger(), 
+//			LOG_ERROR_RETURN( instance_.getLogger(), 
 //			BT_TEXT("PlugIn> 启动插件[") << module_ << BT_TEXT( "]时，载入[") 
 //			<< file <<BT_TEXT("]失败," << library_.error() ) ,-1 );
 //
 //		MODULE_POINT module_point = ( MODULE_POINT ) library_.symbol( enterpoint.c_str() );
 //		if( module_point == 0 )
-//			BT_LOG_ERROR_RETURN( instance_.getLogger(), BT_TEXT("PlugIn> 启动插件[")
+//			LOG_ERROR_RETURN( instance_.getLogger(), BT_TEXT("PlugIn> 启动插件[")
 //			<< module_ << BT_TEXT( "]时，取函数地址失败," << library_.error() ) ,-1 );
 //
 //		pServer_.reset( (*module_point)( instance_ ) );
 //		if( pServer_.get() == 0 )
-//			BT_LOG_ERROR_RETURN( instance_.getLogger(), BT_TEXT("PlugIn> 启动插件[")
+//			LOG_ERROR_RETURN( instance_.getLogger(), BT_TEXT("PlugIn> 启动插件[")
 //			<< module_ << BT_TEXT( "]时，生成服务实例失败" ) ,-1 );
 //
 //		int r = pServer_->open( config );
 //		if( r == -1 )
-//			BT_LOG_ERROR( instance_.getLogger(), BT_TEXT("PlugIn> 启动插件[")
+//			LOG_ERROR( instance_.getLogger(), BT_TEXT("PlugIn> 启动插件[")
 //			<< module_ << BT_TEXT( "]时，启动服务失败" ) );
 //		return r;
 //
 //	}
 //	catch( std::runtime_error & e )
 //	{
-//		BT_LOG_ERROR( instance_.getLogger(), BT_TEXT("PlugIn> 启动插件[")
+//		LOG_ERROR( instance_.getLogger(), BT_TEXT("PlugIn> 启动插件[")
 //			<< module_ << BT_TEXT( "]时，发生错误," ) << e.what() );
 //	}
 //	catch( ... )
 //	{
-//		BT_LOG_ERROR( instance_.getLogger(), BT_TEXT("PlugIn> 启动插件[")
+//		LOG_ERROR( instance_.getLogger(), BT_TEXT("PlugIn> 启动插件[")
 //			<< module_ << BT_TEXT( "]时，发生未知异常") );
 //	}
 //	return -1;
@@ -74,7 +74,7 @@ _networks_begin
 //void PlugIn_Server::close()
 //{
 //	if( pServer_.get() == 0 )
-//		BT_LOG_ERROR( instance_.getLogger(), BT_TEXT("PlugIn> 停止插件[")
+//		LOG_ERROR( instance_.getLogger(), BT_TEXT("PlugIn> 停止插件[")
 //			<< module_ << BT_TEXT( "]时，发现没有启动" ) );
 //	pServer_->close();
 //
@@ -83,7 +83,7 @@ _networks_begin
 //void PlugIn_Server::unload( )
 //{
 //	if( pServer_.get() == 0 )
-//		BT_LOG_ERROR( instance_.getLogger(), BT_TEXT("PlugIn> 停止插件[")
+//		LOG_ERROR( instance_.getLogger(), BT_TEXT("PlugIn> 停止插件[")
 //			<< module_ << BT_TEXT( "]时，发现没有启动" ) );
 //	try
 //	{
@@ -91,12 +91,12 @@ _networks_begin
 //	}
 //	catch( std::runtime_error & e )
 //	{
-//		BT_LOG_ERROR( instance_.getLogger(), BT_TEXT("PlugIn> 停止插件[")
+//		LOG_ERROR( instance_.getLogger(), BT_TEXT("PlugIn> 停止插件[")
 //			<< module_ << BT_TEXT( "]时，发生错误," ) << e.what() );
 //	}
 //	catch( ... )
 //	{
-//		BT_LOG_ERROR( instance_.getLogger(), BT_TEXT("PlugIn> 停止插件[")
+//		LOG_ERROR( instance_.getLogger(), BT_TEXT("PlugIn> 停止插件[")
 //			<< module_ << BT_TEXT( "]时，发生未知异常") );
 //	}
 //}
