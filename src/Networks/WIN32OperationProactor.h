@@ -11,9 +11,9 @@
 
 // Include files
 #include "config_Networks.h"
-#include "Hazel.Platform/OS.H"
-#include "include/HazelOperationProactor.H"
-#include "Hazel.Base/Collections/ThreadSafePtrQueue.HPP"
+#include "Platform/OS.H"
+#include "include/OperationProactor.H"
+#include "Base/Collections/ThreadSafePtrQueue.HPP"
 
 _networks_begin
 

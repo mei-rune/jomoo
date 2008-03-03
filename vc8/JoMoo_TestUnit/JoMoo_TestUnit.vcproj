@@ -20,7 +20,7 @@
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="2"
-			CharacterSet="1"
+			CharacterSet="2"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -224,7 +224,7 @@
 				Name="Collections"
 				>
 				<File
-					RelativePath="..\..\src\Base\Collections\unittest\Test.CPP"
+					RelativePath="..\..\src\Base\Collections\unittest\collections_test.CPP"
 					>
 				</File>
 			</Filter>

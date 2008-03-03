@@ -14,7 +14,7 @@
 
 #ifdef Hazel_MT
 
-BT_Export_C _thread Hazel_Thread* ___get_Hazel_Thread( )
+JOMOO_Export_C _thread Hazel_Thread* ___get_Hazel_Thread( )
 {
 	return 0;
 }

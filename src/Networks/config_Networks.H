@@ -11,8 +11,8 @@
 #endif /* Hazel_LACKS_PRAGMA_ONCE */
 
 // Include files
-# include "Hazel.Base/Logger.H"
-# include "Hazel.Base/Counter_Ptr.hpp"
+# include "Base/Logger.H"
+# include "Base/Counter_Ptr.hpp"
 
 #define _networks_begin
 #define _networks_end

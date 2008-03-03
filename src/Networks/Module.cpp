@@ -1,5 +1,5 @@
 
-#include "include/Hazel_Endpoint_Factory.H"
+#include "include/Endpoint_Factory.H"
 #include "Tcp/Instance_Tcp.H"
 
 #ifdef _MEMORY_DEBUG

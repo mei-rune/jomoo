@@ -14,8 +14,8 @@
 #ifdef Hazel_MT
 
 #include "os_threading.h"
-#include "Hazel.Base/string.hpp"
-#include "Hazel.Base/exception.hpp"
+#include "Base/string.hpp"
+#include "Base/exception.hpp"
 _hazel_begin
 
 class Hazel_Event

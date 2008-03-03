@@ -11,8 +11,8 @@
 
 // Include files
 #include "config_Networks.h"
-#include "Hazel_INET_Addr.H"
-#include "Hazel.Base/Exception.hpp"
+#include "INET_Addr.H"
+#include "Base/Exception.hpp"
 
 
 _networks_begin

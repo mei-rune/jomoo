@@ -11,7 +11,7 @@
 // Include files
 # include "config_Networks.h"
 # include "Platform/os_networks.H"
-# include "Hazel.Base/string.hpp"
+# include "Base/string.hpp"
 
 _networks_begin
 
@@ -101,7 +101,7 @@ private:
 };
 
 #if !defined (Hazel_LACKS_INLINE_FUNCTIONS)
-#include "Hazel_INET_Addr.inl"
+#include "INET_Addr.inl"
 #endif
 
 _networks_end

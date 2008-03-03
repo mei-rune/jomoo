@@ -5,7 +5,7 @@
 # include "Hazel.PluginManager/IPluginManager.H"
 # include "Hazel.PluginManager/PluginInfoDOM.H"
 # include "Hazel.PluginManager/ModuleDescriptorTarget.H"
-# include "Hazel.Base/directory.H"
+# include "Base/directory.H"
 # include <iostream>
 # include <string>
 

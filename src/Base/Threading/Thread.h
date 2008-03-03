@@ -88,8 +88,8 @@ _thread_end
 
 #ifndef HAZEL_HAS_INLINED
 
-//BT_Export_C _thread Hazel_Thread* ___make_Hazel_Thread( _thread Runnable& runfn ,const tchar* descr );
-BT_Export_C _thread Hazel_Thread* ___get_Hazel_Thread( );
+//JOMOO_Export_C _thread Hazel_Thread* ___make_Hazel_Thread( _thread Runnable& runfn ,const tchar* descr );
+JOMOO_Export_C _thread Hazel_Thread* ___get_Hazel_Thread( );
 
 #endif // HAZEL_HAS_INLINED
 

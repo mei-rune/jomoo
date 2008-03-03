@@ -22,7 +22,7 @@
 // Include files
 # include "config_Memory.H"
 # include "Memory_Pool.h"
-# include "Hazel_Export.H"
+# include "jomoo_export.H"
 
 _memory_begin
 
@@ -91,19 +91,19 @@ _memory_end
  * 取得默认的内存池
  * @return 返回默认的内存池的指针
  */
-Hazel_Export_C _memory pool_mgr* ___getPoolManager();
+JOMOO_Export_C _memory pool_mgr* ___getPoolManager();
 
 /**
  * 打印出内存池管理器的状态
  * @param[ in ] Target 输出流
  */
-Hazel_Export_C void  ___dumpPoolManager( std::ostream& Target );
+JOMOO_Export_C void  ___dumpPoolManager( std::ostream& Target );
 
 /**
  * 取得默认的内存池
  * @return 返回默认的内存池的指针
  */
-Hazel_Export_C _memory pool_ptr ___getPool( );
+JOMOO_Export_C _memory pool_ptr ___getPool( );
 
 /**
  * 创建一个内存池
@@ -111,7 +111,7 @@ Hazel_Export_C _memory pool_ptr ___getPool( );
  * @param[ in ] pages 指定内存池预分配内存块的大小
  * @return 返回内存池的指针
  */
-Hazel_Export_C _memory pool_ptr ___createPool( const tstring& name , size_t pages );
+JOMOO_Export_C _memory pool_ptr ___createPool( const tstring& name , size_t pages );
 	
 /**
  * 创建一个固定大小内存池
@@ -120,21 +120,21 @@ Hazel_Export_C _memory pool_ptr ___createPool( const tstring& name , size_t page
  * @param[ in ] size 指定内存池每个预分配内存块的大小
  * @return 返回内存池的指针
  */
-Hazel_Export_C _memory fixed_pool_ptr ___createLoopPool( const tstring& name, size_t number,size_t size );
+JOMOO_Export_C _memory fixed_pool_ptr ___createLoopPool( const tstring& name, size_t number,size_t size );
 
 /**
  * 查找一个内存池
  * @param[ in ] name 内存池名称
  * @return 返回内存池的指针
  */
-Hazel_Export_C _memory pool_ptr ___findPool( const tstring& name  );
+JOMOO_Export_C _memory pool_ptr ___findPool( const tstring& name  );
 
 /**
  * 查找一个固定大小内存池
  * @param[ in ] name 内存池名称
  * @return 返回内存池的指针
  */
-Hazel_Export_C _memory fixed_pool_ptr ___findLoopPool( const tstring& name, size_t chunk_size);
+JOMOO_Export_C _memory fixed_pool_ptr ___findLoopPool( const tstring& name, size_t chunk_size);
 
 /**
  * 分配指定大小的内存块
@@ -144,14 +144,14 @@ Hazel_Export_C _memory fixed_pool_ptr ___findLoopPool( const tstring& name, size
  * @return 返回内存块的地址
  * @remark 它可能会失败并扔出内存错误异常
  */
-Hazel_Export_C void* ___hazel_malloc (size_t nbytes , const char* file, size_t line );
+JOMOO_Export_C void* ___hazel_malloc (size_t nbytes , const char* file, size_t line );
 
 /**
  * 释放内存块
  * @param[ in ] block 内存块的地址
  * @remark 它可能会失败并扔出内存错误异常
  */
-Hazel_Export_C void ___hazel_free (void* block );
+JOMOO_Export_C void ___hazel_free (void* block );
 
 _memory_begin
 

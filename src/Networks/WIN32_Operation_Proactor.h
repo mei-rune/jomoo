@@ -13,7 +13,7 @@
 #include "config_Networks.h"
 #include "Platform/OS.H"
 #include "include/HazelOperationProactor.H"
-#include "Hazel.Base/Collections/ThreadSafePtrQueue.HPP"
+#include "Base/Collections/ThreadSafePtrQueue.HPP"
 
 _networks_begin
 

@@ -4,7 +4,7 @@
 #include "stdafx.h"
 
 #define TEST 1
-#include "Hazel.Base/Collections/Test.CPP"
+#include "Base/Collections/Test.CPP"
 
 
 

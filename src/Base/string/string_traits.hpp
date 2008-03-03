@@ -75,51 +75,56 @@ struct string_traits<char_t>
 
 	inline static   char_type *itoa( int value,
 				 char_type *str,
+				 size_t len,
 				 int radix )
 	{
-		return ::_itoa( value, str, radix );
+		return ( 0 == ::_itoa_s( value, str,len, radix ) )? str : 0;
 	}
 
 	inline static   char_type *ltoa( long value,
 				 char_type *str,
+				 size_t len,
 				 int radix )
 	{
-		return ::_ltoa( value, str, radix );
+		return ( 0 == ::_ltoa_s( value, str, len, radix ))? str : 0;
 	}
 
 	inline static   char_type *ultoa( unsigned long value,
 				 char_type *str,
+				 size_t len,
 				 int radix )
 	{
-		return ::_ultoa( value, str, radix );
+		return ( 0 == ::_ultoa_s( value, str, len, radix ))? str : 0;
 	}
 
 	inline static   char_type *i64toa( __int64 value,
 				 char_type *str,
+				 size_t len,
 				 int radix )
 	{
-		return ::_i64toa( value, str, radix );
+		return ( 0 == ::_i64toa_s( value, str, len, radix ))? str : 0;
 	}
 
 	inline static   char_type *ui64toa( unsigned __int64 value,
 				 char_type *str,
+				 size_t len,
 				 int radix )
 	{
-		return ::_ui64toa( value, str, radix );
+		return ( 0 == ::_ui64toa_s( value, str, len, radix ))? str : 0;
 	}
 
-/* String functions */
+	/* String functions */
  
-	inline static   char_type *strcat(char_type *strDestination,
+	inline static   errno_t strcat(char_type *strDestination, size_t length,
 				const char_type *strSource )
 	{
-		return ::strcat( strDestination, strSource );
+		return ::strcat_s( strDestination, length, strSource );
 	}
-	
-	inline static   char_type *strcpy(char_type *strDestination,
+
+	inline static   errno_t strcpy(char_type *strDestination, size_t length,
 				const char_type *strSource )
 	{
-		return ::strcpy( strDestination, strSource );
+		return ::strcpy_s( strDestination, length, strSource );
 	}
 
 	//寻找strCharSet字符集中任意一个字符在str字符串中第一次出现的位置
@@ -302,51 +307,56 @@ struct string_traits<wchar_t>
 
 	inline static  char_type *itoa( int value,
 				 char_type *str,
+				 size_t len,
 				 int radix )
 	{
-		return ::_itow( value, str, radix );
+		return ( 0 == ::_itow_s( value, str, len, radix ))? str : 0;
 	}
 
 	inline static  char_type *ltoa( long value,
 				 char_type *str,
+				 size_t len,
 				 int radix )
 	{
-		return ::_ltow( value, str, radix );
+		return ( 0 == ::_ltow_s( value, str, len, radix ))? str : 0;
 	}
 
 	inline static  char_type *ultoa( unsigned long value,
 				 char_type *str,
+				 size_t len,
 				 int radix )
 	{
-		return ::_ultow( value, str, radix );
+		return ( 0 == ::_ultow_s( value, str, len, radix ))? str : 0;
 	}
 
 	inline static  char_type *i64toa( __int64 value,
 				 char_type *str,
+				 size_t len,
 				 int radix )
 	{
-		return ::_i64tow( value, str, radix );
+		return ( 0 == ::_i64tow_s( value, str, len, radix ))? str : 0;
 	}
 
 	inline static  char_type *ui64toa( unsigned __int64 value,
 				 char_type *str,
+				 size_t len,
 				 int radix )
 	{
-		return ::_ui64tow( value, str, radix );
+		return ( 0 == ::_ui64tow_s( value, str, len, radix ))? str : 0;
 	}
 
-/* String functions */
+	/* String functions */
  
-	inline static  char_type *strcat(char_type *strDestination,
+	inline static  errno_t strcat(char_type *strDestination, size_t length,
 				const char_type *strSource )
 	{
-		return ::wcscat( strDestination, strSource );
+		return ::wcscat_s( strDestination,length, strSource );
 	}
 	
-	inline static  char_type *strcpy(char_type *strDestination,
+	inline static  errno_t strcpy(char_type *strDestination, size_t length,
 				const char_type *strSource )
 	{
-		return ::wcscpy( strDestination, strSource );
+		return ::wcscpy_s( strDestination,length, strSource );
 	}
 
 	//寻找strCharSet字符集中任意一个字符在str字符串中第一次出现的位置

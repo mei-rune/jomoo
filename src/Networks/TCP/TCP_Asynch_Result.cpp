@@ -1,7 +1,7 @@
 
 #include "TCPAsynchResult.h"
 #include "TcpTransport.h"
-#include "Hazel.Base/lastError.h"
+#include "Base/lastError.h"
 #include "Instance_TCP.H"
 
 #ifdef _MEMORY_DEBUG

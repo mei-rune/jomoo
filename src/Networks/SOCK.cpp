@@ -1,6 +1,6 @@
 // IPC_SAP.cpp,v 4.33 2003/11/01 11:15:13 dhinton Exp
 
-#include "hazel_sap.h"
+#include "sock.h"
 
 #ifdef _MEMORY_DEBUG
 #undef THIS_FILE

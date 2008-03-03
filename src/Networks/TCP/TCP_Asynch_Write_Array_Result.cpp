@@ -2,7 +2,7 @@
 
 #include "TCP_Asynch_Write_Array_Result.h"
 #include "TcpTransport.h"
-#include "Hazel.Base/lastError.h"
+#include "Base/lastError.h"
 #include "Instance_TCP.H"
 #include "../Template/Transport.H"
 

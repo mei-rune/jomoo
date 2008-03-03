@@ -180,7 +180,7 @@ const std::string& Communicator::toString() const
 
 _networks_end
 
-Hazel_Export_C _networks Hazel_Communicator* initializeCommunicator_NoArg( )
+JOMOO_Export_C _networks Hazel_Communicator* initializeCommunicator_NoArg( )
 {
 	std::auto_ptr< Hazel_Communicator > ptr( new Communicator() );
 	return ptr.release();

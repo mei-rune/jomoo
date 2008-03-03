@@ -1,5 +1,5 @@
 
-#include "Hazel_Url.H"
+#include "Url.H"
 
 Hazel_Url::Hazel_Url( const tstring& url )
 : url_( url )

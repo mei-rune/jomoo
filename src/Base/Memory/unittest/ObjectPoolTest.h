@@ -4,6 +4,7 @@
 #define TEST_ConnectionObjectPool_H
 
 #include "../ObjectPool.H"
+#include <iostream>
 
 _memory_begin
 

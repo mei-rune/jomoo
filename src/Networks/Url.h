@@ -11,8 +11,8 @@
 
 // Include files
 #include "config_Networks.h"
-# include "Hazel.Base/Exception.HPP"
-#include "Hazel.Base/stringOps.H"
+# include "Base/Exception.HPP"
+#include "Base/stringOps.H"
 
 class Hazel_Url_Base
 {

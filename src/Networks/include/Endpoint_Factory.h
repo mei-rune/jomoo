@@ -11,13 +11,13 @@
 
 // Include files
 # include "../config_Networks.h"
-# include "Hazel.Base/Exception.HPP"
-# include "Hazel.Base/Threading/Threading.H"
-# include "Hazel.Base/Singleton.H"
-# include "Hazel.PluginManager/PluginManager.H"
-# include "Hazel_Endpoint.H"
-# include "Hazel_Communicator.H"
-# include "../Hazel_Url.H"
+# include "Base/Exception.HPP"
+# include "Base/Threading/Threading.H"
+# include "Base/Singleton.H"
+# include "PluginManager/PluginManager.H"
+# include "Endpoint.H"
+# include "Communicator.H"
+# include "../Url.H"
 
 _networks_begin
 

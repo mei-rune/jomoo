@@ -20,7 +20,7 @@
 
 #include "string.hpp"
 #include "counter_ptr.hpp"
-#include "Hazel_Export.h"
+#include "jomoo_export.h"
 #include <assert.h>
 
 
@@ -194,7 +194,10 @@ public:
 	virtual void popNDC( ) = 0;
 };
 
-_hazel_end
+
+
+
+}
 
 #ifndef _NO_LOG_
 

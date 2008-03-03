@@ -1,6 +1,6 @@
 
 #include "TcpConnector.h"
-#include "Hazel.Base/lastError.h"
+#include "Base/lastError.h"
 #include "TcpTransport.h"
 #include "Instance_TCP.H"
 #include "../Template/Connector.H"

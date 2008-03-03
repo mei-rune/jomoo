@@ -12,8 +12,8 @@
 // Include files
 # include "../config_Networks.h"
 # include "../Instance_Networks.H"
-# include "Hazel.Base/Builder.H"
-# include "Hazel.Base/EmptyType.H"
+# include "Base/Builder.H"
+# include "Base/EmptyType.H"
 # include "Hazel.MicroKernel/MicroKernel.H"
 # include "../include/Hazel_Transport.H"
 # include "TCPTransport.H"

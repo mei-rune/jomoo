@@ -11,8 +11,8 @@
 #ifdef Hazel_MT
 
 #include "Hazel_Thread.h"
-#include "Hazel.Base/Exception.hpp"
-#include "Hazel.Base/get_last_error.h"
+#include "Base/Exception.hpp"
+#include "Base/get_last_error.h"
 
 #ifdef _MEMORY_DEBUG
 #undef THIS_FILE

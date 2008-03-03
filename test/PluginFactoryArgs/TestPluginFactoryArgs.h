@@ -3,8 +3,8 @@
 
 # include "../PluginFactoryArgs/TestPluginTypeArgs.h"
 # include "Hazel.PluginManager/PluginFactory.h"
-# include "Hazel.Base/Singleton.h"
-# include "Hazel.Base/Threading/Threading.h"
+# include "Base/Singleton.h"
+# include "Base/Threading/Threading.h"
 
 
 #define TEST_FACTORY(fname,proto, name ,version )			\

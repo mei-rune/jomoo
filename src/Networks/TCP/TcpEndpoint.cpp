@@ -2,8 +2,8 @@
 #include "Instance_TCP.H"
 #include "TcpEndpoint.h"
 #include "Instance_TCP.H"
-#include "Hazel.Base/lastError.H"
-#include "Hazel.Base/Exception.HPP"
+#include "Base/lastError.H"
+#include "Base/Exception.HPP"
 #ifdef _MEMORY_DEBUG
 #undef THIS_FILE
 #define new	   DEBUG_NEW  
