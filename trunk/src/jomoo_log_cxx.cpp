@@ -1,4 +1,4 @@
-#include "BT_Log_Cxx.h"
+#include "jomoo_log_cxx.h"
 
 #ifndef NOLOG4CXX
 

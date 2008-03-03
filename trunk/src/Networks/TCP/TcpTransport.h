@@ -14,7 +14,7 @@
 #include "../config_Networks.h"
 #include "../hazel_socket.h"
 #include "../Hazel_INET_Addr.H"
-#include "Hazel.Base/Counter_Ptr.hpp"
+#include "Base/Counter_Ptr.hpp"
 #include "Tcp_Asynch_Read_Result.H"
 #include "Tcp_Asynch_Read_Array_Result.H"
 #include "Tcp_Asynch_Write_Result.H"

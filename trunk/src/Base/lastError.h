@@ -26,7 +26,7 @@ inline tstring get_last_error( DWORD code )
 		NULL );
 	if ( ret <= 0 )
 	{
-		return "<不知道>";
+		return tstring( ( const tchar* )"<不知道>" );
 	}
 
 	LPTSTR s = (LPTSTR)lpMsgBuf;
@@ -36,12 +36,12 @@ inline tstring get_last_error( DWORD code )
 	if( s[ret - 2 ] == '\r' || s[ ret - 2 ] == '\n')
 		s[ret - 2 ] = 0;
 
-	tstring str = "[";
+	tstring str =( const tchar* ) "[";
 
 	char tmp[110] = "";
 	ultoa( code, tmp, 10 );
-	str += tmp;
-	str += "],";
+	str += ( const tchar* )tmp;
+	str += ( const tchar* )"],";
 	str += (LPTSTR)lpMsgBuf;
 	// Free the buffer.
 	LocalFree( lpMsgBuf );

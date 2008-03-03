@@ -5,8 +5,8 @@
 
 # include "../PluginFactory/TestPluginType.h"
 # include "Hazel.PluginManager/PluginFactory.h"
-# include "Hazel.Base/Singleton.h"
-# include "Hazel.Base/Threading/Threading.h"
+# include "Base/Singleton.h"
+# include "Base/Threading/Threading.h"
 
 //<<<<<< PUBLIC DEFINES                                                 >>>>>>
 //<<<<<< PUBLIC CONSTANTS                                               >>>>>>

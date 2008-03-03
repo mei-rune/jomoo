@@ -1,12 +1,16 @@
-#ifdef TEST
 
-#ifndef TEST_LINK_H
-#define TEST_LINK_H
+
+
 
 #include <stdafx.h>
+
+#ifdef TEST
+
 #include <iostream>
 #include <cppunit/extensions/HelperMacros.h>
 #include "../ThreadSafePtrQueue.hpp"
+
+
 
 struct LINK LIST_INTERFACE( LINK )
 {
@@ -61,5 +65,4 @@ void LinkTestCase::testSimply()
 }
 
 
-#endif // TEST_LINK_H
 #endif // TEST

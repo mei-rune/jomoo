@@ -9,7 +9,7 @@
 
 // Include files
 #include "config_Util.h"
-#include "Hazel_Export.H"
+#include "jomoo_export.h"
 
 _util_begin
 
@@ -115,10 +115,10 @@ typedef  Properties::PropertiesPtr PropertiesPtr;
 
 _util_end
 
-Hazel_Export_C _util Properties* ___createProperties();
-Hazel_Export_C _util Properties* ___createProperties_args(const StringSeq&);
-Hazel_Export_C _util Properties* ___createProperties_vec(int, char*[]);
-Hazel_Export_C void ___freeProperties( _util Properties* );
+JOMOO_Export_C _util Properties* ___createProperties();
+JOMOO_Export_C _util Properties* ___createProperties_args(const StringSeq&);
+JOMOO_Export_C _util Properties* ___createProperties_vec(int, char*[]);
+JOMOO_Export_C void ___freeProperties( _util Properties* );
 
 
 typedef std::vector<tstring> StringSeq;

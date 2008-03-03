@@ -11,7 +11,7 @@
 
 // Include files
 # include "../config_Networks.h"
-# include "Hazel.Base/Util/Configuration.H"
+# include "Base/Util/Configuration.H"
 # include "Hazel_Endpoint_Factory.H"
 # include "HazelOperationProactor.H"
 # include "Hazel.MicroKernel/MicroKernel.H"
@@ -57,7 +57,7 @@ public:
 //	virtual const tstring& toString() const = 0;
 //};
 //
-//#define DEFINE_SERVER( X ) Hazel_Export_C _io Hazel_Server* make_##X( _io Instance_Networks& instance ){ return new X( instance ); }
+//#define DEFINE_SERVER( X ) JOMOO_Export_C _io Hazel_Server* make_##X( _io Instance_Networks& instance ){ return new X( instance ); }
 
 /**
  * 
@@ -111,7 +111,7 @@ private:
 
 _networks_end
 
-//Hazel_Export_C _networks Hazel_Communicator* initializeCommunicator_NoArg( );
+//JOMOO_Export_C _networks Hazel_Communicator* initializeCommunicator_NoArg( );
 //
 //inline _networks Hazel_Communicator_Ptr initializeCommunicator( )
 //{

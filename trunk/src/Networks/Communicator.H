@@ -13,7 +13,7 @@
 #include "config_Networks.h"
 #include "Instance_Networks.H"
 #include "include/Hazel_Communicator.H"
-#include "Hazel.Base/util/Share_Library.H"
+#include "Base/util/Share_Library.H"
 #include <list>
 
 //typedef _networks Hazel_Server* (*MODULE_POINT)( _networks Instance_Networks& );

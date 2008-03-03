@@ -10,7 +10,7 @@
 // Include files
 # include "config_Util.h"
 # include "../Exception.HPP"
-# include "Hazel_Export.H"
+# include "jomoo_export.h"
 
 _util_begin
 
@@ -173,10 +173,10 @@ typedef  IConfiguration::ptr_type ConfigurationPtr;
 
 _util_end
 
-Hazel_Export_C _util IConfiguration* ___createConfiguration();
-Hazel_Export_C _util IConfiguration* ___createConfiguration_args( int, char*[] );
-Hazel_Export_C _util IConfiguration* ___createConfiguration_vec( const _util StringSeq&);
-Hazel_Export_C void ___freeConfiguration( _util IConfiguration* );
+JOMOO_Export_C _util IConfiguration* ___createConfiguration();
+JOMOO_Export_C _util IConfiguration* ___createConfiguration_args( int, char*[] );
+JOMOO_Export_C _util IConfiguration* ___createConfiguration_vec( const _util StringSeq&);
+JOMOO_Export_C void ___freeConfiguration( _util IConfiguration* );
 
 _util_begin
 

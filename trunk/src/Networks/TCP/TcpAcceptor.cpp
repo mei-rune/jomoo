@@ -1,9 +1,9 @@
 
 
 #include "TcpAcceptor.h"
-#include "Hazel.Base/lastError.h"
+#include "Base/lastError.h"
 #include "Instance_TCP.H"
-#include "Hazel.Base/Memory/Memory.H"
+#include "Base/Memory/Memory.H"
 #include "../Template/Acceptor.H"
 
 #ifdef _MEMORY_DEBUG

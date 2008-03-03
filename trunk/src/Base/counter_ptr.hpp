@@ -59,14 +59,14 @@ public:
 	}
 
 private:
-	DECLARE_NO_COPY_CLASS( Counter );
+	DECLARE_NO_COPY_CLASS( counter );
 	long counter_;
 };
 
-class HazelShared
+class jomoo_shared
 {
 public:
-	virtual ~HazelShared(){}
+	virtual ~jomoo_shared(){}
     virtual void incRef() = 0;
     virtual void decRef() = 0;
 };
@@ -85,14 +85,14 @@ public:
 									if( r <= 0 ) delete this;									\
 								}
 
-inline      void intrusive_ptr_add_ref( HazelShared * p)
+inline      void intrusive_ptr_add_ref( jomoo_shared * p)
 {
 	if( p == 0 )
 		ThrowException( InvalidPointerException );
 	p->incRef();
 }
 
-inline      void intrusive_ptr_release( HazelShared * p)
+inline      void intrusive_ptr_release( jomoo_shared * p)
 {
 	if( p == 0 )
 		ThrowException( InvalidPointerException );

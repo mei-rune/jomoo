@@ -1,7 +1,7 @@
 #include "TcpAsynchResult.h"
 #include "TcpTransport.H"
-#include "Hazel.Base/lastError.H"
-#include "Hazel.Base/toString.H"
+#include "Base/lastError.H"
+#include "Base/toString.H"
 #include "Instance_TCP.H"
 
 #ifdef _MEMORY_DEBUG

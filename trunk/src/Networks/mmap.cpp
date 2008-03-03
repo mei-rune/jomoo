@@ -1,7 +1,7 @@
 
-#include "Hazel_mmap.h"
-#include "Hazel.Base/exception.hpp"
-#include "Hazel.Base/lastError.h"
+#include "mmap.h"
+#include "Base/exception.hpp"
+#include "Base/lastError.h"
 
 #ifdef _MEMORY_DEBUG
 #undef THIS_FILE

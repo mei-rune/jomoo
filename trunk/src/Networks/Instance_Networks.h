@@ -12,9 +12,9 @@
 // Include files
 #include "config_Networks.h"
 #include "WIN32OperationProactor.H"
-#include "Hazel.Base/Util/Properties.H"
-#include "include/Hazel_Endpoint_Factory.H"
-#include "include/Hazel_Communicator.H"
+#include "Base/Util/Properties.H"
+#include "include/Endpoint_Factory.H"
+#include "include/Communicator.H"
 
 _networks_begin
 

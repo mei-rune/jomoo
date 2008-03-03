@@ -1,5 +1,5 @@
 
-#include "Hazel_INET_Addr.h"
+#include "INET_Addr.h"
 #include <vector>
 
 #ifdef _MEMORY_DEBUG
@@ -12,7 +12,7 @@ static char THIS_FILE[] = __FILE__;
 _networks_begin
 
 #if defined (Hazel_LACKS_INLINE_FUNCTIONS)
-#include "Hazel_INET_Addr.inl"
+#include "INET_Addr.inl"
 #endif /* Hazel_LACKS_INLINE_FUNCTIONS */
 
 

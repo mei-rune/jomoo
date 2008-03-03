@@ -20,8 +20,8 @@
 
 #include "tstring.h"
 #include "counter_ptr.hpp"
-#include "Hazel_Export.h"
-#include "Hazel.Base/exception.hpp"
+#include "jomoo_export.h"
+#include "Base/exception.hpp"
 
 _hazel_begin
 

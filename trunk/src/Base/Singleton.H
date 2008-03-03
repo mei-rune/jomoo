@@ -73,7 +73,7 @@ _hazel_end
 
 
 #if defined (Hazel_TEMPLATES_REQUIRE_SOURCE)
-#include "Singleton.Template"
+#include "Singleton.T"
 #endif /* Hazel_TEMPLATES_REQUIRE_SOURCE */
 
 #if defined (Hazel_TEMPLATES_REQUIRE_PRAGMA)

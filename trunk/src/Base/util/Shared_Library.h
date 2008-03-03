@@ -17,7 +17,7 @@
 
 // Include files
 #include "config_Util.h"
-#include "Hazel.Base/string.hpp"
+#include "Base/string.hpp"
 
 _util_begin
 

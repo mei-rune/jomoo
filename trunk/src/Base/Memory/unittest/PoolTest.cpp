@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "test.h"
 #include <time.h>
+#include <cppunit/extensions/HelperMacros.h>
 
 
 #ifdef TEST

@@ -99,7 +99,7 @@ _memory_end
  * 取得默认的内存池
  * @return 返回默认的内存池的指针
  */
-Hazel_Export_C _memory pool_mgr* ___getPoolManager()
+JOMOO_Export_C _memory pool_mgr* ___getPoolManager()
 {
 	return & _memory POOL_Manager::get();
 }
@@ -108,7 +108,7 @@ Hazel_Export_C _memory pool_mgr* ___getPoolManager()
  * 打印出内存池管理器的状态
  * @param[ in ] Target 输出流
  */
-Hazel_Export_C void  ___dumpPoolManager( std::ostream& Target )
+JOMOO_Export_C void  ___dumpPoolManager( std::ostream& Target )
 {
 	_memory POOL_Manager::get().dump( Target );
 }
@@ -117,7 +117,7 @@ Hazel_Export_C void  ___dumpPoolManager( std::ostream& Target )
  * 取得默认的内存池
  * @return 返回默认的内存池的指针
  */
-Hazel_Export_C _memory pool_ptr ___getPool( )
+JOMOO_Export_C _memory pool_ptr ___getPool( )
 {
 	return _memory POOL_Manager::get().getPool();
 }
@@ -128,7 +128,7 @@ Hazel_Export_C _memory pool_ptr ___getPool( )
  * @param[ in ] pages 指定内存池预分配内存块的大小
  * @return 返回内存池的指针
  */
-Hazel_Export_C _memory pool_ptr ___createPool( const tstring& name , size_t pages )
+JOMOO_Export_C _memory pool_ptr ___createPool( const tstring& name , size_t pages )
 {
 	return _memory POOL_Manager::get().createPool( name , pages );
 }
@@ -140,7 +140,7 @@ Hazel_Export_C _memory pool_ptr ___createPool( const tstring& name , size_t page
  * @param[ in ] size 指定内存池每个预分配内存块的大小
  * @return 返回内存池的指针
  */
-Hazel_Export_C _memory fixed_pool_ptr ___createLoopPool( const tstring& name, size_t number,size_t size )
+JOMOO_Export_C _memory fixed_pool_ptr ___createLoopPool( const tstring& name, size_t number,size_t size )
 {
 	return _memory POOL_Manager::get().createPool( name , number, size );
 }
@@ -150,7 +150,7 @@ Hazel_Export_C _memory fixed_pool_ptr ___createLoopPool( const tstring& name, si
  * @param[ in ] name 内存池名称
  * @return 返回内存池的指针
  */
-Hazel_Export_C _memory pool_ptr ___findPool( const tstring& name  )
+JOMOO_Export_C _memory pool_ptr ___findPool( const tstring& name  )
 {
 	return _memory POOL_Manager::get().findPool( name );
 }
@@ -160,17 +160,17 @@ Hazel_Export_C _memory pool_ptr ___findPool( const tstring& name  )
  * @param[ in ] name 内存池名称
  * @return 返回内存池的指针
  */
-Hazel_Export_C _memory fixed_pool_ptr ___findLoopPool( const tstring& name, size_t chunk_size)
+JOMOO_Export_C _memory fixed_pool_ptr ___findLoopPool( const tstring& name, size_t chunk_size)
 {
 	return _memory POOL_Manager::get().findPool ( name ,chunk_size );
 }
 
-Hazel_Export_C void* ___hazel_malloc (size_t nbytes , const char* file, size_t line )
+JOMOO_Export_C void* ___hazel_malloc (size_t nbytes , const char* file, size_t line )
 {
 	return _memory POOL_Manager::get().getPool()->malloc( nbytes, file, line );
 }
 
-Hazel_Export_C void ___hazel_free (void* block )
+JOMOO_Export_C void ___hazel_free (void* block )
 {
 	return _memory POOL_Manager::get().getPool()->free( block );
 }

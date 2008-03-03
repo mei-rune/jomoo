@@ -11,7 +11,7 @@
 
 // Include files
 #include "../config_Networks.h"
-#include "Hazel.Base/counter_ptr.hpp"
+#include "Base/counter_ptr.hpp"
 
 _networks_begin
 

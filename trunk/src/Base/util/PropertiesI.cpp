@@ -356,23 +356,23 @@ PropertiesI::loadConfig()
 
 _util_end
 
-Hazel_Export_C _util Properties* ___createProperties()
+JOMOO_Export_C _util Properties* ___createProperties()
 {
 	return new _util PropertiesI();
 }
 
-Hazel_Export_C _util Properties* ___createProperties_args(const StringSeq& args )
+JOMOO_Export_C _util Properties* ___createProperties_args(const StringSeq& args )
 {
 	return new _util PropertiesI( args );
 }
 
-Hazel_Export_C _util Properties* ___createProperties_vec(int argc, char* argv[])
+JOMOO_Export_C _util Properties* ___createProperties_vec(int argc, char* argv[])
 {
     StringSeq args = argsToStringSeq(argc, argv);
     return ___createProperties_args(args);
 }
 
-Hazel_Export_C void ___freeProperties( _util Properties* ptr )
+JOMOO_Export_C void ___freeProperties( _util Properties* ptr )
 {
 	delete ptr;
 }

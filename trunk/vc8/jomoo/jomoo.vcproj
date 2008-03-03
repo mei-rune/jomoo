@@ -40,6 +40,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalOptions="/DNOLOG4CXX"
 				Optimization="0"
 				AdditionalIncludeDirectories="&quot;$(BOOST_ROOT)&quot;;&quot;$(SolutionDir)\..\src\&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;HazelBASE_EXPORTS"
@@ -600,10 +601,6 @@
 		<Filter
 			Name="Base"
 			>
-			<File
-				RelativePath="..\Hazel.Base.Test\stdafx.h"
-				>
-			</File>
 			<Filter
 				Name="Collections"
 				>

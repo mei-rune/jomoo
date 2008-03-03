@@ -12,7 +12,7 @@
 // Include files
 #include "../config_Networks.h"
 #include "Platform/OS.H"
-#include "Hazel_Operation_Result.H"
+#include "Operation_Result.H"
 
 _networks_begin
 
