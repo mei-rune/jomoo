@@ -9,9 +9,9 @@
 
 // Include files
 # include "config_PluginManager.h"
-# include "Hazel.Base/counter_ptr.hpp"
-# include "Hazel.Base/string.hpp"
-# include "Hazel.Base/exception.hpp"
+# include "base/counter_ptr.hpp"
+# include "base/string.hpp"
+# include "base/exception.hpp"
 
 _seal_begin
 	class PluginInfoExistDefaultInfo : public _hazel Exception
