@@ -230,18 +230,6 @@
 			Name="Network"
 			>
 			<File
-				RelativePath="..\..\src\Networks\base_socket.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\Networks\base_socket.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\Networks\base_socket.inl"
-				>
-			</File>
-			<File
 				RelativePath="..\..\src\Networks\Communicator.cpp"
 				>
 			</File>
@@ -287,18 +275,6 @@
 			</File>
 			<File
 				RelativePath="..\..\src\Networks\Networks.H"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\Networks\tcp_socket.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\Networks\tcp_socket.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\Networks\tcp_socket.inl"
 				>
 			</File>
 			<File
@@ -545,6 +521,46 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="socket"
+				>
+				<File
+					RelativePath="..\..\src\Networks\socket\base_socket.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\Networks\socket\base_socket.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\Networks\socket\base_socket.inl"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\Networks\socket\os_networks.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\Networks\socket\os_networks.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\Networks\socket\os_networks.inl"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\Networks\socket\tcp_socket.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\Networks\socket\tcp_socket.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\Networks\socket\tcp_socket.inl"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Platform"
@@ -571,18 +587,6 @@
 			</File>
 			<File
 				RelativePath="..\..\src\Platform\os_mmap.inl"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\Platform\os_networks.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\Platform\os_networks.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\Platform\os_networks.inl"
 				>
 			</File>
 			<File

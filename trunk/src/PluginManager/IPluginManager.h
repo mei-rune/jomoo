@@ -12,7 +12,7 @@
 # include "PluginFeedback.H"
 # include "PluginFactoryImplBase.H"
 # include "FactoryKey.H"
-# include "Hazel.Base/exception.hpp"
+# include "base/exception.hpp"
 
 _seal_begin
 

@@ -9,8 +9,8 @@
 
 // Include files
 # include "config_PluginManager.h"
-# include "Hazel.Base/Exception.hpp"
-# include "Hazel.Base/Threading/Threading.H"
+# include "base/exception.hpp"
+# include "base/threading/threading.H"
 # include <set>
 
 _seal_begin
@@ -121,7 +121,7 @@ public:
 		    		  const tstring &scope,
 					  const Exception& error )
 	{
-		Hazel_GUARD( guard,mutex_ );
+		JOMOO_GUARD( guard,mutex_ );
 		for( std::set< FeedbackCB >::iterator it = group_.begin()
 			; it != group_.end()
 			; it ++  )
@@ -131,7 +131,7 @@ public:
 	void feedback( int code,
 		    		  const tstring &scope )
 	{
-		Hazel_GUARD( guard,mutex_ );
+		JOMOO_GUARD( guard,mutex_ );
 		for( std::set< FeedbackCB >::iterator it = group_.begin()
 			; it != group_.end()
 			; it ++  )
@@ -142,7 +142,7 @@ public:
 		    		  const tstring &scope,
 					  const tstring &error )
 	{
-		Hazel_GUARD( guard,mutex_ );
+		JOMOO_GUARD( guard,mutex_ );
 		for( std::set< FeedbackCB >::iterator it = group_.begin()
 			; it != group_.end()
 			; it ++  )
@@ -152,19 +152,19 @@ public:
 
 	void add( FeedbackCB cb )
 	{
-		Hazel_GUARD( guard,mutex_ );
+		JOMOO_GUARD( guard,mutex_ );
 		group_.insert( cb );
 	}
 
 	void remove( FeedbackCB cb )
 	{
-		Hazel_GUARD( guard,mutex_ );
+		JOMOO_GUARD( guard,mutex_ );
 		group_.erase( cb );
 	}
 
 private:
 
-	Hazel_MUTEX_MUTABLE( mutex_ );
+	JOMOO_MUTEX_MUTABLE( mutex_ );
 	std::set< FeedbackCB > group_;
 
 };

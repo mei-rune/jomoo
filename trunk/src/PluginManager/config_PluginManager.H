@@ -7,14 +7,14 @@
 # pragma once
 #endif /* Hazel_LACKS_PRAGMA_ONCE */
 
-#include "Hazel.Base/Logger.H"
+#include "base/logger.h"
 
 #define _seal_begin namespace SEAL{
 #define _seal_end } // SEAL
 
 #define _seal SEAL::
 
-#define PluginManagerLoggerPtr Hazel_Log_Impl*
+#define PluginManagerLoggerPtr Logging::ILogger*
 
 #define Hazel_PLUGIN_MANAGER_VERSION "0.7.1"
 
