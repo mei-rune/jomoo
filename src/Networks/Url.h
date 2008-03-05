@@ -10,9 +10,9 @@
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
-#include "config_Networks.h"
-# include "Base/Exception.HPP"
-#include "Base/stringOps.H"
+# include "config_Networks.h"
+# include "base/exception.HPP"
+# include "base/stringOps.H"
 
 class JOMOO_Url_Base
 {
