@@ -67,6 +67,8 @@ public:
   bool transmit (const iopack iov[],
                  size_t n,
                  JOMOO_OVERLAPPED& overlapped) const;
+
+  bool connect( I )
 };
 
 
