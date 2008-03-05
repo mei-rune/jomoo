@@ -1,6 +1,6 @@
 
-#ifndef JOMOO_INET_ADDR_H
-#define JOMOO_INET_ADDR_H
+#ifndef inet_address_H
+#define inet_address_H
 
 #include "config.h"
 
@@ -15,37 +15,36 @@
 
 _networks_begin
 
-class JOMOO_INET_Addr
+class inet_address
 {
 public:
 
-	JOMOO_INET_Addr (void);
+	inet_address (void);
 
-	JOMOO_INET_Addr (const JOMOO_INET_Addr & );
+	inet_address (const inet_address & );
 
-	JOMOO_INET_Addr (const sockaddr_in *, int len);
+	inet_address (const sockaddr_in *, int len);
 
-	JOMOO_INET_Addr (u_short port_number,
+	inet_address (u_short port_number,
 		u_long ip_addr = INADDR_ANY );
 
-	JOMOO_INET_Addr (u_short port_number,
+	inet_address (u_short port_number,
 		const char* host_name );
 
-	JOMOO_INET_Addr (const char* port_number,
+	inet_address (const char* port_number,
 		const char* ip_addr );
 
-	explicit JOMOO_INET_Addr (const char* address);
+	explicit inet_address (const char* address);
 
-	~JOMOO_INET_Addr (void);
+	~inet_address (void);
 
+	bool operator < (const inet_address &rhs) const;
 
-	bool operator < (const JOMOO_INET_Addr &rhs) const;
+	bool operator > (const inet_address &rhs) const;
 
-	bool operator > (const JOMOO_INET_Addr &rhs) const;
+	bool operator == (const inet_address &SAP) const;
 
-	bool operator == (const JOMOO_INET_Addr &SAP) const;
-
-	bool operator != (const JOMOO_INET_Addr &SAP) const;
+	bool operator != (const inet_address &SAP) const;
 
 	void set_port_number (u_short port_number , bool encode = true );
 
@@ -55,7 +54,7 @@ public:
 
 	u_short get_port_number( void ) const ;
 
-	int set (const JOMOO_INET_Addr &);
+	int set (const inet_address &);
 
 	int set (const char* addr );
 
@@ -101,9 +100,9 @@ private:
 };
 
 #if !defined (JOMOO_LACKS_INLINE_FUNCTIONS)
-#include "INET_Addr.inl"
+#include "inet_address.inl"
 #endif
 
 _networks_end
 
-#endif /* JOMOO_INET_ADDR_H */
+#endif /* inet_address_H */
