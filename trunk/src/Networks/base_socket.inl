@@ -12,11 +12,10 @@ base_socket::base_socket (int type,
                     int reuse_addr)
 					  : handle_ (INVALID_SOCKET )
 {
-  if (this->open (type,
+  this->open (type,
                   protocol_family, 
                   protocol,
-                  reuse_addr) == -1)
-				  ThrowException1( NetworkException, ",创建socket出错!" );
+                  reuse_addr);
 }
 
 JOMOO_INLINE
@@ -24,19 +23,18 @@ base_socket::base_socket (int type,
                     int protocol_family, 
                     int protocol,
                     WSAPROTOCOL_INFO *protocolinfo,
-                    base_socket_GROUP g,
+                    JOMOO_SOCK_GROUP g,
                     u_long flags,
                     int reuse_addr)
 					  : handle_ (INVALID_SOCKET )
 {
-  if (this->open (type,
+  this->open (type,
                   protocol_family,
                   protocol,
                   protocolinfo,
                   g,
                   flags,
-                  reuse_addr) == -1)
-				  ThrowException1( NetworkException, ",创建socket出错!" );
+                  reuse_addr);				  
 }
 
 JOMOO_INLINE
@@ -45,7 +43,10 @@ base_socket::~base_socket (void)
 	close();
 }
 
-
+JOMOO_INLINE bool base_socket::is_good() const
+{
+	return INVALID_SOCKET != this->get_handle ();
+}
 
 JOMOO_INLINE int base_socket::open (int type, 
                 int protocol_family, 
@@ -77,7 +78,7 @@ JOMOO_INLINE int base_socket::open (int type,
                 int protocol_family, 
                 int protocol,
                 WSAPROTOCOL_INFO *protocolinfo,
-                base_socket_GROUP g,
+                JOMOO_SOCK_GROUP g,
                 u_long flags,
                 int reuse_addr)
 {
@@ -104,7 +105,7 @@ JOMOO_INLINE int base_socket::open (int type,
     return 0;
 }
 
-JOMOO_INLINE HANDLE
+JOMOO_INLINE SOCKET
 base_socket::get_handle (void) const
 {
   return this->handle_;
@@ -112,7 +113,7 @@ base_socket::get_handle (void) const
 
 
 JOMOO_INLINE void
-base_socket::set_handle (HANDLE handle)
+base_socket::set_handle (SOCKET handle)
 {
   this->handle_ = handle;
 }
