@@ -23,15 +23,17 @@ public:
 
   ~base_socket (void);
 
+  bool is_good() const;
+
   int enable (int value) const;
 
   int disable (int value) const;
 
-  void swap( JOMOO_sap& r );
+  void swap( base_socket& r );
 
-  HANDLE get_handle (void) const;
+  SOCKET get_handle (void) const;
 
-  void set_handle (HANDLE handle);
+  void set_handle (SOCKET handle);
 
   int set_option (int level,
                   int option,
@@ -58,7 +60,7 @@ public:
             int protocol_family,
             int protocol,
             WSAPROTOCOL_INFO *protocolinfo,
-            JOMOO_sap_GROUP g,
+            JOMOO_SOCK_GROUP g,
             u_long flags,
             int reuse_addr);
 
@@ -80,7 +82,7 @@ protected:
             int protocol_family,
             int protocol,
             WSAPROTOCOL_INFO *protocolinfo,
-            JOMOO_sap_GROUP g,
+            JOMOO_SOCK_GROUP g,
              u_long flags,
             int reuse_addr);
 
@@ -88,7 +90,7 @@ private:
 
   DECLARE_NO_COPY_CLASS( base_socket );
 
-  HANDLE handle_;
+  SOCKET handle_;
 };
 
 #if !defined (JOMOO_LACKS_INLINE_FUNCTIONS)

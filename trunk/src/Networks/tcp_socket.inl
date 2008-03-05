@@ -2,14 +2,13 @@
 
 JOMOO_INLINE
 tcp_socket::tcp_socket (void)
+: base_socket(AF_INET , SOCK_STREAM, IPPROTO_TCP )   
 {
-
 }
 
 JOMOO_INLINE
 tcp_socket::~tcp_socket (void)
 {
-
 }
 
 JOMOO_INLINE ssize_t
@@ -161,4 +160,47 @@ tcp_socket::transmit (const iopack iov[],
 #else
 	return sendv( iov, n ,overlapped );
 #endif // _WINXP_
+}
+
+
+JOMOO_INLINE ssize_t
+tcp_socket::send (size_t n, ...) const
+{
+  va_list argp;
+  int total_tuples = static_cast< int >( n) / 2;
+  std::vector< iovec > iovp( total_tuples );
+
+  va_start (argp, n);
+
+  for (int i = 0; i < total_tuples; i++)
+    {
+      iovp[i].buf = va_arg (argp, char *);
+      iovp[i].len = va_arg (argp, int);
+    }
+
+  ssize_t result = sendv ( &iovp[0],
+                                  total_tuples);
+  va_end (argp);
+  return result;
+}
+
+
+JOMOO_INLINE ssize_t
+tcp_socket::recv (size_t n, ...) const
+{
+	va_list argp;
+	int total_tuples = static_cast< int >(n / 2);
+	std::vector< iovec > iovp( total_tuples );
+	va_start (argp, n);
+
+	for (int i = 0; i < total_tuples; i++)
+	{
+		iovp[i].buf = va_arg (argp, char *);
+		iovp[i].len = va_arg (argp, int);
+	}
+
+	ssize_t result = recvv ( &iovp[ 0 ],
+		total_tuples);
+	va_end (argp);
+	return result;
 }
