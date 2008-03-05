@@ -31,7 +31,7 @@ void TCP_Read_Result::init( Instance_TCP* instance
 {
 	ASSERT( channel != 0 );
 		TCP_Asynch_Result::init( instance,
-		reinterpret_cast< Hazel_HANDLE > ( channel->get_handle().get_handle()) , act );
+		reinterpret_cast< JOMOO_HANDLE > ( channel->get_handle().get_handle()) , act );
 
 
 	ASSERT( handle != 0 );
@@ -74,7 +74,7 @@ TcpTransport& TCP_Read_Result::native_transport()
 	return *m_channel_;
 }
 
-Hazel_Transport& TCP_Read_Result::transport()
+JOMOO_Transport& TCP_Read_Result::transport()
 {
 	return *m_channel_;
 }
@@ -88,7 +88,7 @@ void TCP_Read_Result::complete (size_t bytes_transferred,
 	m_error_ = error;
 	m_success_= success;
 //	m_handle_.onRead( *this );
-	Read_Result_T< TCP_Read_Result , Hazel_Read_Result > r( *this, handle(), transport() );
+	Read_Result_T< TCP_Read_Result , JOMOO_Read_Result > r( *this, handle(), transport() );
 	m_handle_->onRead ( r );
 }
 

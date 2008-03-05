@@ -230,6 +230,18 @@
 			Name="Network"
 			>
 			<File
+				RelativePath="..\..\src\Networks\base_socket.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\Networks\base_socket.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\Networks\base_socket.inl"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\Networks\Communicator.cpp"
 				>
 			</File>
@@ -275,18 +287,6 @@
 			</File>
 			<File
 				RelativePath="..\..\src\Networks\Networks.H"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\Networks\SOCK.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\Networks\SOCK.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\Networks\SOCK.inl"
 				>
 			</File>
 			<File

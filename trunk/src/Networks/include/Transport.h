@@ -1,14 +1,14 @@
 // Communication
 
 
-#ifndef __Hazel_Transport__
-#define __Hazel_Transport__
+#ifndef __JOMOO_Transport__
+#define __JOMOO_Transport__
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
 #include "../config_Networks.h"
@@ -16,23 +16,23 @@
 
 _networks_begin
 
-class Hazel_Transport;
-class Hazel_Transport_Handler;
+class JOMOO_Transport;
+class JOMOO_Transport_Handler;
 
-typedef counter_ptr< Hazel_Transport > Hazel_Transport_Ptr;
+typedef counter_ptr< JOMOO_Transport > JOMOO_Transport_Ptr;
 
-class Hazel_Read_Result : virtual public Hazel_Transport_Result
+class JOMOO_Read_Result : virtual public JOMOO_Transport_Result
 {
 
 public:
 
-	typedef Hazel_Transport_Handler handler_type;
-	typedef Hazel_Transport transport_type;
+	typedef JOMOO_Transport_Handler handler_type;
+	typedef JOMOO_Transport transport_type;
 
 	/**
 	 * virtual destructor
 	 */
-	virtual ~Hazel_Read_Result(){}
+	virtual ~JOMOO_Read_Result(){}
 
 	/**
 	 * 取得实际读到的数据块大小
@@ -61,28 +61,28 @@ public:
 	/**
 	 * 本次异步操作的回调句柄
 	 */
-	virtual Hazel_Transport_Handler& handle() = 0;
+	virtual JOMOO_Transport_Handler& handle() = 0;
 
 	/**
 	 * 本次异步操作的transport句柄
 	 */
-	virtual Hazel_Transport& transport() = 0;
+	virtual JOMOO_Transport& transport() = 0;
 
-};// END CLASS DEFINITION Hazel_Read_Result
+};// END CLASS DEFINITION JOMOO_Read_Result
 
 
-class Hazel_Read_Array_Result : virtual public Hazel_Transport_Result
+class JOMOO_Read_Array_Result : virtual public JOMOO_Transport_Result
 {
 
 public:
 
-	typedef Hazel_Transport_Handler handler_type;
-	typedef Hazel_Transport transport_type;
+	typedef JOMOO_Transport_Handler handler_type;
+	typedef JOMOO_Transport transport_type;
 
 	/**
 	 * virtual destructor
 	 */
-	virtual ~Hazel_Read_Array_Result(){}
+	virtual ~JOMOO_Read_Array_Result(){}
 
 	/**
 	 * 取得实际读到的数据块大小
@@ -105,29 +105,29 @@ public:
 	/**
 	 * 本次异步操作的回调句柄
 	 */
-	virtual Hazel_Transport_Handler& handle() = 0;
+	virtual JOMOO_Transport_Handler& handle() = 0;
 
 	/**
 	 * 本次异步操作的transport句柄
 	 */
-	virtual Hazel_Transport& transport() = 0;
+	virtual JOMOO_Transport& transport() = 0;
 
-};// END CLASS DEFINITION Hazel_Read_Array_Result
+};// END CLASS DEFINITION JOMOO_Read_Array_Result
 
 
 
-class Hazel_Write_Result : virtual public Hazel_Transport_Result
+class JOMOO_Write_Result : virtual public JOMOO_Transport_Result
 {
 
 public:
 		
-	typedef Hazel_Transport_Handler handler_type;
-	typedef Hazel_Transport transport_type;
+	typedef JOMOO_Transport_Handler handler_type;
+	typedef JOMOO_Transport transport_type;
 
 	/**
 	 * virtual destructor
 	 */
-	virtual ~Hazel_Write_Result(){}
+	virtual ~JOMOO_Write_Result(){}
 
 	/**
 	 * 取得实际发送的数据大小
@@ -150,28 +150,28 @@ public:
 	/**
 	 * 本次异步操作的回调句柄
 	 */
-	virtual Hazel_Transport_Handler& handle() = 0;
+	virtual JOMOO_Transport_Handler& handle() = 0;
 
 	/**
 	 * 本次异步操作的transport句柄
 	 */
-	virtual Hazel_Transport& transport() = 0;
+	virtual JOMOO_Transport& transport() = 0;
 
-};// END CLASS DEFINITION Hazel_Write_Result
+};// END CLASS DEFINITION JOMOO_Write_Result
 
 
-class Hazel_Write_Array_Result : virtual public Hazel_Transport_Result
+class JOMOO_Write_Array_Result : virtual public JOMOO_Transport_Result
 {
 
 public:
 		
-	typedef Hazel_Transport_Handler handler_type;
-	typedef Hazel_Transport transport_type;
+	typedef JOMOO_Transport_Handler handler_type;
+	typedef JOMOO_Transport transport_type;
 
 	/**
 	 * virtual destructor
 	 */
-	virtual ~Hazel_Write_Array_Result(){}
+	virtual ~JOMOO_Write_Array_Result(){}
 
 	/**
 	 * 取得实际读到的数据块大小
@@ -194,29 +194,29 @@ public:
 	/**
 	 * 本次异步操作的回调句柄
 	 */
-	virtual Hazel_Transport_Handler& handle() = 0;
+	virtual JOMOO_Transport_Handler& handle() = 0;
 
 	/**
 	 * 本次异步操作的transport句柄
 	 */
-	virtual Hazel_Transport& transport() = 0;
+	virtual JOMOO_Transport& transport() = 0;
 
-};// END CLASS DEFINITION Hazel_Transmit_Result
+};// END CLASS DEFINITION JOMOO_Transmit_Result
 
 
 
-class Hazel_Transmit_Result : virtual public Hazel_Transport_Result
+class JOMOO_Transmit_Result : virtual public JOMOO_Transport_Result
 {
 
 public:
 		
-	typedef Hazel_Transport_Handler handler_type;
-	typedef Hazel_Transport transport_type;
+	typedef JOMOO_Transport_Handler handler_type;
+	typedef JOMOO_Transport transport_type;
 
 	/**
 	 * virtual destructor
 	 */
-	virtual ~Hazel_Transmit_Result(){}
+	virtual ~JOMOO_Transmit_Result(){}
 
 	/**
 	 * 取得实际读到的数据块大小
@@ -239,69 +239,69 @@ public:
 	/**
 	 * 本次异步操作的回调句柄
 	 */
-	virtual Hazel_Transport_Handler& handle() = 0;
+	virtual JOMOO_Transport_Handler& handle() = 0;
 
 	/**
 	 * 本次异步操作的transport句柄
 	 */
-	virtual Hazel_Transport& transport() = 0;
+	virtual JOMOO_Transport& transport() = 0;
 
-};// END CLASS DEFINITION Hazel_Transmit_Result
+};// END CLASS DEFINITION JOMOO_Transmit_Result
 
 
 /**
- * @Brief Hazel_Transport_Handler channel 异步回调接口，@see Hazel_Transport
+ * @Brief JOMOO_Transport_Handler channel 异步回调接口，@see JOMOO_Transport
  */
-class Hazel_Transport_Handler
+class JOMOO_Transport_Handler
 {
 
 public:
-	typedef counter_ptr< Hazel_Transport_Handler > ptr_type;
-	typedef Hazel_Read_Result read_result_type;
-	typedef Hazel_Read_Array_Result read_array_result_type;
-	typedef Hazel_Write_Result write_result_type;
-	typedef Hazel_Write_Array_Result write_array_result_type;
-	typedef Hazel_Transmit_Result transmit_result_type;
-	typedef Hazel_Transport transport_type;
+	typedef counter_ptr< JOMOO_Transport_Handler > ptr_type;
+	typedef JOMOO_Read_Result read_result_type;
+	typedef JOMOO_Read_Array_Result read_array_result_type;
+	typedef JOMOO_Write_Result write_result_type;
+	typedef JOMOO_Write_Array_Result write_array_result_type;
+	typedef JOMOO_Transmit_Result transmit_result_type;
+	typedef JOMOO_Transport transport_type;
 
 
 	/**
 	 * virtual destructor
 	 */
-	virtual ~Hazel_Transport_Handler(){}
+	virtual ~JOMOO_Transport_Handler(){}
 
 	/**
 	 * channel读操作回调接口
-	 * @see Hazel_Read_Result
-	 * @see Hazel_Transport::read
+	 * @see JOMOO_Read_Result
+	 * @see JOMOO_Transport::read
 	 */
 	virtual void onRead(read_result_type& result) = 0;
 
 	/**
 	 * channel读操作回调接口
-	 * @see Hazel_Read_Array_Result
-	 * @see Hazel_Transport::read
+	 * @see JOMOO_Read_Array_Result
+	 * @see JOMOO_Transport::read
 	 */
 	virtual void onReadArray(read_array_result_type& result ) = 0;
 
 	/**
 	 * channel写操作回调接口
-	 * @see Hazel_Write_Result
-	 * @see Hazel_Transport::write
+	 * @see JOMOO_Write_Result
+	 * @see JOMOO_Transport::write
 	 */
 	virtual void onWrite(write_result_type& result) = 0;
 
 	/**
 	 * channel写操作回调接口
-	 * @see Hazel_Write_Result
-	 * @see Hazel_Transport::write
+	 * @see JOMOO_Write_Result
+	 * @see JOMOO_Transport::write
 	 */
 	virtual void onWriteArray(write_array_result_type& result) = 0;
 
 	/**
 	 * channel写操作回调接口
-	 * @see Hazel_Transmit_Result
-	 * @see Hazel_Transport::transmit
+	 * @see JOMOO_Transmit_Result
+	 * @see JOMOO_Transport::transmit
 	 */
 	virtual void onTransmit(transmit_result_type& result ) = 0;
 
@@ -312,20 +312,20 @@ public:
 
 };// END CLASS DEFINITION handler_type
 
-class Hazel_Transport
+class JOMOO_Transport
 {
 public:
 
-	typedef counter_ptr< Hazel_Transport > ptr_type;
+	typedef counter_ptr< JOMOO_Transport > ptr_type;
 
 	typedef NetWorksLoggerPtr LoggerPtr;
-	typedef Hazel_Transport_Handler handler_type;
+	typedef JOMOO_Transport_Handler handler_type;
 
 
 	/**
 	 * virtual destructor
 	 */
-	virtual ~Hazel_Transport(){}
+	virtual ~JOMOO_Transport(){}
 
 	/**
 	 * 发送一块数据（注意它是异步的  )
@@ -338,7 +338,7 @@ public:
 	 * @remark 注意如果返回成功，并不代表数据被发送，也不代表数据一定会发送成
 	 *		   功，但一定会回调handle的onWrite接口，如果返回失败则一定不
 	 *		   会调用handle的onWrite接口
-	 * @see Hazel_Transport_Handler
+	 * @see JOMOO_Transport_Handler
 	 */
 	virtual bool write(handler_type& handle,
 				   const void* buffer,
@@ -356,7 +356,7 @@ public:
 	 * @remark 注意如果返回成功，并不代表数据被发送，也不代表数据一定会发送成
 	 *		   功，但一定会回调handle的onTransmit接口，如果返回失败则一定
 	 *		   不会调用handle的onTransmit接口
-	 * @see Hazel_Transport_Handler
+	 * @see JOMOO_Transport_Handler
 	 */
 	virtual bool write(handler_type& handle,
 					  const iovec* data,
@@ -374,7 +374,7 @@ public:
 	 * @remark 注意如果返回成功，并不代表数据被发送，也不代表数据一定会发送成
 	 *		   功，但一定会回调handle的onTransmit接口，如果返回失败则一定
 	 *		   不会调用handle的onTransmit接口
-	 * @see Hazel_Transport_Handler
+	 * @see JOMOO_Transport_Handler
 	 */
 	virtual bool transmit(handler_type& handle,
 					  const iopack* data,
@@ -393,7 +393,7 @@ public:
 	 * @remark 注意如果返回成功，并不代表读到数据，也不代表一定会读到数据，
 	 *		   但一定会回调handle的onRead接口，如果返回失败则一定不会
 	 *		   调用handle的onRead接口
-	 * @see Hazel_Transport_Handler
+	 * @see JOMOO_Transport_Handler
 	 */
 	virtual bool read(handler_type& handle,
 				  void* buffer,
@@ -411,7 +411,7 @@ public:
 	 * @remark 注意如果返回成功，并不代表读到数据，也不代表一定会读到数据，
 	 *		   但一定会回调handle的onReadArray接口，如果返回失败则一
 	 *		   定不会调用handle的onReadArray接口
-	 * @see Hazel_Transport_Handler
+	 * @see JOMOO_Transport_Handler
 	 */
 	virtual bool read(handler_type& handle,
 				  iovec* data,
@@ -462,13 +462,13 @@ public:
 	// * 取得本地地址
 	// * @return 本地地址
 	// */
-	//virtual const Hazel_INET_Addr& getLocalAddr() const = 0;
+	//virtual const JOMOO_INET_Addr& getLocalAddr() const = 0;
 
 	///**
 	// * 取得远程地址
 	// * @return 远程地址
 	// */
-	//virtual const Hazel_INET_Addr& getRemoteAddr() const = 0;
+	//virtual const JOMOO_INET_Addr& getRemoteAddr() const = 0;
 
 	/**
 	 * 撤消当前操作
@@ -486,10 +486,10 @@ public:
 	 */
 	virtual const tstring& toString() const = 0;
 
-};// END CLASS DEFINITION Hazel_Transport
+};// END CLASS DEFINITION JOMOO_Transport
 
 
 
 _networks_end
 
-#endif // __Hazel_Transport__
+#endif // __JOMOO_Transport__

@@ -1,27 +1,27 @@
 
 
-#if !defined _Hazel_THREAD_SEMAPHORE_H_
-#define _Hazel_THREAD_SEMAPHORE_H_
+#if !defined _JOMOO_THREAD_SEMAPHORE_H_
+#define _JOMOO_THREAD_SEMAPHORE_H_
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 #include "config_threading.h"
 
-#ifdef Hazel_MT
+#ifdef JOMOO_MT
 
 #include "os_threading.h"
-#include "Hazel_Guard.h"
+#include "JOMOO_Guard.h"
 
-_hazel_begin
+_JOMOO_begin
 
-class Hazel_Thread_Semaphore
+class JOMOO_Thread_Semaphore
 {
 public:
-	typedef Hazel_Guard< Hazel_Thread_Semaphore > scoped_lock;
+	typedef JOMOO_Guard< JOMOO_Thread_Semaphore > scoped_lock;
 
 	bool acquire( )
 	{
@@ -40,7 +40,7 @@ public:
 	}
 #endif
 
-	Hazel_Thread_Semaphore(long lInitialCount,long lMaxCount,const char* pSemaphoreName=NULL)
+	JOMOO_Thread_Semaphore(long lInitialCount,long lMaxCount,const char* pSemaphoreName=NULL)
 		: m_hSemaphore( NULL ),
 		m_delete_( true )
 	{
@@ -57,20 +57,20 @@ public:
 		
 
 	}
-	~Hazel_Thread_Semaphore()
+	~JOMOO_Thread_Semaphore()
 	{
 		if ( m_delete_ )
 			OS::close_semaphore( m_hSemaphore );
 	}
 private:
-	DECLARE_NO_COPY_CLASS( Hazel_Thread_Semaphore );
+	DECLARE_NO_COPY_CLASS( JOMOO_Thread_Semaphore );
 
-	Hazel_HANDLE m_hSemaphore;
+	JOMOO_HANDLE m_hSemaphore;
 	bool m_delete_;
 };
 
-_hazel_end
+_JOMOO_end
 
-#endif // Hazel_MT
+#endif // JOMOO_MT
 
-#endif // !defined(_Hazel_THREAD_SEMAPHORE_H_)
+#endif // !defined(_JOMOO_THREAD_SEMAPHORE_H_)

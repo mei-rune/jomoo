@@ -5,9 +5,9 @@
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
 # include "../config_Networks.h"
@@ -15,7 +15,7 @@
 # include "Base/Builder.H"
 # include "Base/EmptyType.H"
 # include "Hazel.MicroKernel/MicroKernel.H"
-# include "../include/Hazel_Transport.H"
+# include "../include/JOMOO_Transport.H"
 # include "TCPTransport.H"
 # include "TCPConnector.H"
 # include "TCPAcceptor.H"

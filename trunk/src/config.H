@@ -12,9 +12,9 @@
 #define _config_H_
 
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 #ifndef _WINSOCKAPI_
 #define _WINSOCKAPI_   /* Prevent inclusion of winsock.h in windows.h */
@@ -158,8 +158,8 @@ typedef long _off_t;
 typedef _off_t off_t;
 #endif //
 
-#define _hazel_begin 
-#define _hazel_end 
+#define _JOMOO_begin 
+#define _JOMOO_end 
 #define _hazel 
 #define use_hazel 
 
@@ -170,30 +170,30 @@ typedef _off_t off_t;
 
 
 
-#define Hazel_TEMPLATES_REQUIRE_SOURCE 1
-#define Hazel_TEMPLATE_SPECIALIZATION template< >
-//#define Hazel_MT
+#define JOMOO_TEMPLATES_REQUIRE_SOURCE 1
+#define JOMOO_TEMPLATE_SPECIALIZATION template< >
+//#define JOMOO_MT
 
 #define OS_HAS_INLINED 1
 
 #ifdef OS_HAS_INLINED
 #define OS_INLINE inline
-#define HAZEL_NAMESPACE_INLINE_FUNCTION inline
+#define JOMOO_NAMESPACE_INLINE_FUNCTION inline
 #endif //OS_HAS_INLINED
 
 
-#define HAZEL_HAS_INLINED 1
+#define JOMOO_HAS_INLINED 1
 
-#ifdef HAZEL_HAS_INLINED
-#define HAZEL_INLINE inline
-#endif //HAZEL_HAS_INLINED
+#ifdef JOMOO_HAS_INLINED
+#define JOMOO_INLINE inline
+#endif //JOMOO_HAS_INLINED
 
 #define KB_SIZE	1024
 
-#define HAZEL_TM sizeof( void* )
-#define HAZEL_LCD_DEF( SIZE , TM ) ( ( (SIZE/ TM ) + (( SIZE%TM ) ? 1 : 0) ) * TM )
+#define JOMOO_TM sizeof( void* )
+#define JOMOO_LCD_DEF( SIZE , TM ) ( ( (SIZE/ TM ) + (( SIZE%TM ) ? 1 : 0) ) * TM )
 
-inline size_t Hazel_LCD( size_t SIZE , size_t TM )
+inline size_t JOMOO_LCD( size_t SIZE , size_t TM )
 {
 	return ( ( (SIZE/ TM ) + (( SIZE%TM ) ? 1 : 0) ) * TM );
 }
@@ -223,7 +223,7 @@ inline size_t Hazel_LCD( size_t SIZE , size_t TM )
 	I_don_t_know_how_to_define_reverse_iterator
 # endif
 
-#define HAZEL_INTERFACE( X ) 
+#define JOMOO_INTERFACE( X ) 
 
 
 template< typename T >
@@ -238,11 +238,11 @@ inline T get_ptr( T t )
 	return t;
 }
 
-#define Hazel_BIT_ENABLED( V , F ) ( V&F )
+#define JOMOO_BIT_ENABLED( V , F ) ( V&F )
 
-#define HAZEL_WIN32 1
+#define JOMOO_WIN32 1
 
-#define HAZEL_UNUSED_ARG( X )
+#define JOMOO_UNUSED_ARG( X )
 
 #define MAKE_STRING( X ) #X
 #define ASSERT assert

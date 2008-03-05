@@ -1,5 +1,5 @@
 
-bool close_handle( Hazel_HANDLE &handle )
+bool close_handle( JOMOO_HANDLE &handle )
 {
 	if( handle != NULL )
 		return ( ::CloseHandle( handle ) == TRUE );
@@ -7,9 +7,9 @@ bool close_handle( Hazel_HANDLE &handle )
 		return true;
 }
 
-bool dup_handle( Hazel_HANDLE hSourceProcessHandle,
-					Hazel_HANDLE hSourceHandle,
-					Hazel_HANDLE hTargetProcessHandle,
+bool dup_handle( JOMOO_HANDLE hSourceProcessHandle,
+					JOMOO_HANDLE hSourceHandle,
+					JOMOO_HANDLE hTargetProcessHandle,
 					HANDLE& lpTargetHandle,
 					DWORD dwDesiredAccess,
 					bool bInheritHandle,
@@ -26,13 +26,13 @@ bool dup_handle( Hazel_HANDLE hSourceProcessHandle,
 		) == TRUE;
 }
 
-bool get_handle_info( Hazel_HANDLE hObject,DWORD& dwFlags )
+bool get_handle_info( JOMOO_HANDLE hObject,DWORD& dwFlags )
 {
 	return ( GetHandleInformation( hObject,&dwFlags) == TRUE );
 }
 
 
-bool get_handle_info( Hazel_HANDLE hObject, DWORD dwMask, DWORD dwFlags )
+bool get_handle_info( JOMOO_HANDLE hObject, DWORD dwMask, DWORD dwFlags )
 {
 	return ( SetHandleInformation( hObject,dwMask,dwFlags) == TRUE );
 }
@@ -40,7 +40,7 @@ bool get_handle_info( Hazel_HANDLE hObject, DWORD dwMask, DWORD dwFlags )
 long InterlockedIncrement( long& v )
 {
 
-#ifdef Hazel_MT
+#ifdef JOMOO_MT
 	return ::InterlockedIncrement( &v );
 #else
 	return ++v;
@@ -49,7 +49,7 @@ long InterlockedIncrement( long& v )
 
 long InterlockedDecrement( long& v )
 {
-#ifdef Hazel_MT
+#ifdef JOMOO_MT
 	return ::InterlockedDecrement( &v );
 #else
 	return --v;

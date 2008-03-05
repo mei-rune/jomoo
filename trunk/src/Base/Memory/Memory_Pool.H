@@ -14,9 +14,9 @@
 
 # include "config.h"
 
-# if !defined (Hazel_LACKS_PRAGMA_ONCE)
+# if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-# endif /* Hazel_LACKS_PRAGMA_ONCE */
+# endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
 # include "config_Memory.H"
@@ -173,25 +173,25 @@ inline void   operator delete(void * chunk , _memory fixed_pool_ptr pools)
 
 //template<class _T1,
 //	class _T2> inline
-//	void Hazel_Construct(_T1 _FARQ *_Ptr, const _T2& _Val )
+//	void JOMOO_Construct(_T1 _FARQ *_Ptr, const _T2& _Val )
 //	{	// construct object at _Ptr with value _Val
 //	new ((void _FARQ *)_Ptr) _T1(_Val);
 //	}
 
 		// TEMPLATE FUNCTION _Destroy
 template<class _Ty> inline
-	void Hazel_Destroy(_Ty _FARQ *_Ptr)
+	void JOMOO_Destroy(_Ty _FARQ *_Ptr)
 	{	// destroy object at _Ptr
 	_DESTRUCTOR(_Ty, _Ptr);
 	}
 
 template<> inline
-	void Hazel_Destroy(char _FARQ *)
+	void JOMOO_Destroy(char _FARQ *)
 	{	// destroy a char (do nothing)
 	}
 
 template<> inline
-	void Hazel_Destroy(wchar_t _FARQ *)
+	void JOMOO_Destroy(wchar_t _FARQ *)
 	{	// destroy a wchar_t (do nothing)
 	}
 
@@ -209,15 +209,15 @@ inline void* pool_malloc( fixed_pool_ptr pools ,size_t size ,const char* file , 
 	return pools->malloc( file,line );
 }
 
-#define Hazel_MALLOC( pool, size ) pool->malloc( size, __FILE__,__LINE__ )
-#define Hazel_FIXED_MALLOC( pool )pool->malloc( __FILE__,__LINE__ )
-#define Hazel_FREE( pool , p )pool->free( p )
+#define JOMOO_MALLOC( pool, size ) pool->malloc( size, __FILE__,__LINE__ )
+#define JOMOO_FIXED_MALLOC( pool )pool->malloc( __FILE__,__LINE__ )
+#define JOMOO_FREE( pool , p )pool->free( p )
 
-#define Hazel_DELETE( pool, ptr )  Hazel_Destroy( ptr ), pool->free( ptr )
-#define Hazel_NEW( pool, T,a ) new ((void _FARQ *)pool_malloc( pool, sizeof( T ), __FILE__,__LINE__ ) ) T a
-#define Hazel_FIXED_NEW( pool, T,a ) new ((void _FARQ *)pool_malloc( pool, __FILE__,__LINE__ ) ) T a
+#define JOMOO_DELETE( pool, ptr )  JOMOO_Destroy( ptr ), pool->free( ptr )
+#define JOMOO_NEW( pool, T,a ) new ((void _FARQ *)pool_malloc( pool, sizeof( T ), __FILE__,__LINE__ ) ) T a
+#define JOMOO_FIXED_NEW( pool, T,a ) new ((void _FARQ *)pool_malloc( pool, __FILE__,__LINE__ ) ) T a
 
-#define Hazel_DELETE( pool, ptr )  Hazel_Destroy( ptr ), pool->free( ptr )
+#define JOMOO_DELETE( pool, ptr )  JOMOO_Destroy( ptr ), pool->free( ptr )
 
 _memory_end
 

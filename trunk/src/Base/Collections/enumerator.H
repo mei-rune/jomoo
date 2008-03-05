@@ -3,14 +3,14 @@
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
 # include <list>
 
-_hazel_begin
+_JOMOO_begin
 
 namespace detail
 {
@@ -145,6 +145,6 @@ private:
 	collection_type collection_;
 };
 
-_hazel_end
+_JOMOO_end
 
 #endif // ENUMERATOR_H

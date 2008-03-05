@@ -6,9 +6,9 @@
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
 #include "../config_Networks.h"
@@ -31,7 +31,7 @@ _networks_begin
 
 template< Read_Result_T_1 >
 class Read_Result_T : public B
-	//, public Hazel_Read_Result
+	//, public JOMOO_Read_Result
 {
 public:
 	typedef T result_type;
@@ -70,7 +70,7 @@ private:
 
 template< Read_Array_Result_T_1 >
 class Read_Array_Result_T : public B
-	//, public Hazel_Read_Result
+	//, public JOMOO_Read_Result
 {
 public:
 
@@ -94,7 +94,7 @@ private:
 
 template< Write_Result_T_1 >
 class Write_Result_T : public B
-	//, public Hazel_Read_Result
+	//, public JOMOO_Read_Result
 {
 public:
 
@@ -118,7 +118,7 @@ private:
 
 template< Write_Array_Result_T_1 >
 class Write_Array_Result_T : public B
-	//, public Hazel_Read_Result
+	//, public JOMOO_Read_Result
 {
 public:
 
@@ -142,7 +142,7 @@ private:
 
 template< Transmit_Result_T_1 >
 class Transmit_Result_T : public B
-	//, public Hazel_Read_Result
+	//, public JOMOO_Read_Result
 {
 public:
 
@@ -268,11 +268,11 @@ private:
 
 _networks_end
 
-#if defined (Hazel_TEMPLATES_REQUIRE_SOURCE)
+#if defined (JOMOO_TEMPLATES_REQUIRE_SOURCE)
 #include "Transport.T"
 #endif /* ACE_TEMPLATES_REQUIRE_SOURCE */
 
-#if defined (Hazel_TEMPLATES_REQUIRE_PRAGMA)
+#if defined (JOMOO_TEMPLATES_REQUIRE_PRAGMA)
 #pragma implementation ("Transport.T")
 #endif /* ACE_TEMPLATES_REQUIRE_PRAGMA */
 

@@ -1,16 +1,16 @@
-#ifndef Hazel_WORKER_QUEUE_TEMPL
-#define Hazel_WORKER_QUEUE_TEMPL
+#ifndef JOMOO_WORKER_QUEUE_TEMPL
+#define JOMOO_WORKER_QUEUE_TEMPL
 
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
-#ifdef Hazel_MT
+#ifdef JOMOO_MT
 
-#include "Hazel_Thread.h"
+#include "JOMOO_Thread.h"
 #include "Base/Exception.hpp"
 #include "Base/get_last_error.h"
 
@@ -26,6 +26,6 @@ _thread_begin
 _thread_end
 
 
-#endif // Hazel_MT
+#endif // JOMOO_MT
 
-#endif // Hazel_WORKER_QUEUE_TEMPL
+#endif // JOMOO_WORKER_QUEUE_TEMPL

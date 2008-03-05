@@ -1,6 +1,6 @@
 
 
-#include "Hazel_IO.h"
+#include "JOMOO_IO.h"
 #include <vector>
 
 #ifdef _MEMORY_DEBUG
@@ -12,31 +12,31 @@ static char THIS_FILE[] = __FILE__;
 
 _networks_begin
 
-Hazel_STDIO::Hazel_STDIO (void)
-: handle_( HAZEL_INVALID_HANDLE_VALUE ) 
+JOMOO_STDIO::JOMOO_STDIO (void)
+: handle_( JOMOO_INVALID_HANDLE_VALUE ) 
 {
 }
 
-Hazel_STDIO::~Hazel_STDIO (void)
+JOMOO_STDIO::~JOMOO_STDIO (void)
 {
 }
 
-Hazel_HANDLE Hazel_STDIO::get_handle (void) const
+JOMOO_HANDLE JOMOO_STDIO::get_handle (void) const
 {
   return this->handle_;
 }
 
-void Hazel_STDIO::set_handle ( Hazel_HANDLE handle )
+void JOMOO_STDIO::set_handle ( JOMOO_HANDLE handle )
 {
   this->handle_ = handle;
 }
 
-void Hazel_STDIO::swap( Hazel_STDIO& r )
+void JOMOO_STDIO::swap( JOMOO_STDIO& r )
 {
 	std::swap( this->handle_, r.handle_ );
 }
 
-ssize_t Hazel_STDIO::recv (void *buf,
+ssize_t JOMOO_STDIO::recv (void *buf,
               size_t n ) const
 {
 	DWORD bytes_read = 0;
@@ -49,7 +49,7 @@ ssize_t Hazel_STDIO::recv (void *buf,
 		//, 0 
 		) ? bytes_read : 0 ;
 }
-ssize_t Hazel_STDIO::recvv (FILE_SEGMENT_ELEMENT iov[],
+ssize_t JOMOO_STDIO::recvv (FILE_SEGMENT_ELEMENT iov[],
               size_t n) const
 {
 	DWORD bytes_read = 0;
@@ -63,9 +63,9 @@ ssize_t Hazel_STDIO::recvv (FILE_SEGMENT_ELEMENT iov[],
 		) ? bytes_read : 0 ;
 }
 
-bool Hazel_STDIO::recv (void *buf,
+bool JOMOO_STDIO::recv (void *buf,
               size_t n,
-              Hazel_OVERLAPPED *overlapped) const
+              JOMOO_OVERLAPPED *overlapped) const
 {
 	DWORD bytes_read = 0;
 	DWORD short_nbyte = static_cast < DWORD>( n);
@@ -77,9 +77,9 @@ bool Hazel_STDIO::recv (void *buf,
 		//, 0 
 		) ? true : false ;
 }
-bool Hazel_STDIO::recvv (FILE_SEGMENT_ELEMENT iov[],
+bool JOMOO_STDIO::recvv (FILE_SEGMENT_ELEMENT iov[],
               size_t n,
-              Hazel_OVERLAPPED *overlapped) const
+              JOMOO_OVERLAPPED *overlapped) const
 {
 	DWORD bytes_read = 0;
 	DWORD short_nbyte = static_cast < DWORD>( n);
@@ -91,7 +91,7 @@ bool Hazel_STDIO::recvv (FILE_SEGMENT_ELEMENT iov[],
 		//, 0 
 		) ? true : false ;
 }
-ssize_t Hazel_STDIO::send (const void *buf,
+ssize_t JOMOO_STDIO::send (const void *buf,
               size_t n ) const
 {
 	DWORD bytes_send = 0;
@@ -105,7 +105,7 @@ ssize_t Hazel_STDIO::send (const void *buf,
 		) ? bytes_send : 0 ;
 }
 
-ssize_t Hazel_STDIO::sendv (const FILE_SEGMENT_ELEMENT iov[],
+ssize_t JOMOO_STDIO::sendv (const FILE_SEGMENT_ELEMENT iov[],
                size_t n ) const
 {
 	DWORD bytes_send = 0;
@@ -119,9 +119,9 @@ ssize_t Hazel_STDIO::sendv (const FILE_SEGMENT_ELEMENT iov[],
 		) ? bytes_send : 0 ;
 }
 
-bool Hazel_STDIO::send (const void *buf,
+bool JOMOO_STDIO::send (const void *buf,
                 size_t n,
-                Hazel_OVERLAPPED *overlapped) const
+                JOMOO_OVERLAPPED *overlapped) const
 {
 	DWORD bytes_send = 0;
 	DWORD short_nbyte = static_cast < DWORD>( n);
@@ -133,9 +133,9 @@ bool Hazel_STDIO::send (const void *buf,
 		//, 0 
 		) ? true : false ;
 }
-bool Hazel_STDIO::sendv (const FILE_SEGMENT_ELEMENT iov[],
+bool JOMOO_STDIO::sendv (const FILE_SEGMENT_ELEMENT iov[],
                 size_t n,
-                Hazel_OVERLAPPED *overlapped) const
+                JOMOO_OVERLAPPED *overlapped) const
 {
 	DWORD bytes_send = 0;
 	DWORD short_nbyte = static_cast < DWORD>( n);

@@ -4,9 +4,9 @@
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
 #include "config_Util.h"
@@ -18,7 +18,7 @@ _util_begin
 
 #define SERVICE_CONTROL_USER 128
 
-class Hazel_Service
+class JOMOO_Service
 {
 public:
 	
@@ -108,7 +108,7 @@ public:
 class CNTService
 {
 public:
-    CNTService(const tchar* szServiceName ,Hazel_Service* svr, UtilLoggerPtr ptr );
+    CNTService(const tchar* szServiceName ,JOMOO_Service* svr, UtilLoggerPtr ptr );
     virtual ~CNTService();
     bool StartService( DWORD dwArgc, LPTSTR* lpszArgv );
     void SetStatus(DWORD dwState);
@@ -127,7 +127,7 @@ private:
 
 	UtilLoggerPtr logger_;
     static CNTService* m_pThis;
-	Hazel_Service* m_svr_;
+	JOMOO_Service* m_svr_;
 };
 
 _util_end

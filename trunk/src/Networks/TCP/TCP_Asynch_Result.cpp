@@ -27,7 +27,7 @@ TCP_Asynch_Result::~TCP_Asynch_Result()
 {
 }
 
-void TCP_Asynch_Result::init( Instance_TCP* instance , Hazel_HANDLE handle , void* act )
+void TCP_Asynch_Result::init( Instance_TCP* instance , JOMOO_HANDLE handle , void* act )
 {
 	if( instance == 0 )
 		ThrowException1( NullException, BT_TEXT("instance") );

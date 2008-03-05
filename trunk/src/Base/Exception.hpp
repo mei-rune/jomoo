@@ -4,16 +4,16 @@
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 #include "ErrorDef.H"
 #include "string.hpp"
 #include "lastError.h"
 #include <stdexcept>
 
-_hazel_begin
+_JOMOO_begin
 
 
 class Exception : public std::runtime_error 
@@ -195,6 +195,6 @@ MakeException( SystemException, SystemError );
 #define ThrowException3( type ,m1 ,m2 ,m3 ) throw type(__FILE__, __LINE__ , m1, m2, m3 )
 #define ThrowException4( type ,m1 ,m2 ,m3 ,m4) throw type(__FILE__, __LINE__ , m1, m2, m3, m4)
 
-_hazel_end
+_JOMOO_end
 
 #endif

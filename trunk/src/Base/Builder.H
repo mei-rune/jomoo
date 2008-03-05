@@ -3,15 +3,15 @@
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
 # include "Memory/memory.h"
 # include "macro/macro_params.hpp"
 
-_hazel_begin
+_JOMOO_begin
 
 template< typename B
 		>
@@ -24,81 +24,81 @@ public :
 		b->init( );
 	}
 
-	template< Hazel_MAKE_PARAMS1( 1, typename T) >
-	static void Init( B* b, Hazel_MAKE_PARAMS2( 1, T, a) )
+	template< JOMOO_MAKE_PARAMS1( 1, typename T) >
+	static void Init( B* b, JOMOO_MAKE_PARAMS2( 1, T, a) )
 	{
-		b->init( Hazel_MAKE_PARAMS1( 1, a) );
+		b->init( JOMOO_MAKE_PARAMS1( 1, a) );
 	}
 
-	template< Hazel_MAKE_PARAMS1( 2, typename T) >
-	static void Init( B* b, Hazel_MAKE_PARAMS2( 2, T, a) )
+	template< JOMOO_MAKE_PARAMS1( 2, typename T) >
+	static void Init( B* b, JOMOO_MAKE_PARAMS2( 2, T, a) )
 	{
 
-		b->init( Hazel_MAKE_PARAMS1( 2, a) );
-
-	}
-
-	template< Hazel_MAKE_PARAMS1( 3, typename T) >
-	static void Init( B* b, Hazel_MAKE_PARAMS2( 3, T, a) )
-	{
-
-		b->init( Hazel_MAKE_PARAMS1( 3, a) );
+		b->init( JOMOO_MAKE_PARAMS1( 2, a) );
 
 	}
 
-	template< Hazel_MAKE_PARAMS1( 4, typename T) >
-	static void Init( B* b, Hazel_MAKE_PARAMS2( 4, T, a) )
+	template< JOMOO_MAKE_PARAMS1( 3, typename T) >
+	static void Init( B* b, JOMOO_MAKE_PARAMS2( 3, T, a) )
 	{
 
-		b->init( Hazel_MAKE_PARAMS1( 4, a) );
+		b->init( JOMOO_MAKE_PARAMS1( 3, a) );
 
 	}
 
-		template< Hazel_MAKE_PARAMS1( 5, typename T) >
-	static void Init( B* b, Hazel_MAKE_PARAMS2( 5, T, a) )
+	template< JOMOO_MAKE_PARAMS1( 4, typename T) >
+	static void Init( B* b, JOMOO_MAKE_PARAMS2( 4, T, a) )
 	{
 
-		b->init( Hazel_MAKE_PARAMS1( 5, a) );
+		b->init( JOMOO_MAKE_PARAMS1( 4, a) );
 
 	}
 
-	template< Hazel_MAKE_PARAMS1( 6, typename T) >
-	static void Init( B* b, Hazel_MAKE_PARAMS2( 6, T, a) )
+		template< JOMOO_MAKE_PARAMS1( 5, typename T) >
+	static void Init( B* b, JOMOO_MAKE_PARAMS2( 5, T, a) )
 	{
 
-		b->init( Hazel_MAKE_PARAMS1( 6, a) );
+		b->init( JOMOO_MAKE_PARAMS1( 5, a) );
+
+	}
+
+	template< JOMOO_MAKE_PARAMS1( 6, typename T) >
+	static void Init( B* b, JOMOO_MAKE_PARAMS2( 6, T, a) )
+	{
+
+		b->init( JOMOO_MAKE_PARAMS1( 6, a) );
 
 	}
 	
-	template< Hazel_MAKE_PARAMS1( 7, typename T) >
-	static void Init( B* b, Hazel_MAKE_PARAMS2( 7, T, a) )
+	template< JOMOO_MAKE_PARAMS1( 7, typename T) >
+	static void Init( B* b, JOMOO_MAKE_PARAMS2( 7, T, a) )
 	{
 
-		b->init( Hazel_MAKE_PARAMS1( 7, a) );
+		b->init( JOMOO_MAKE_PARAMS1( 7, a) );
 
 	}
 
-	template< Hazel_MAKE_PARAMS1( 8, typename T) >
-	static void Init( B* b, Hazel_MAKE_PARAMS2( 8, T, a) )
+	template< JOMOO_MAKE_PARAMS1( 8, typename T) >
+	static void Init( B* b, JOMOO_MAKE_PARAMS2( 8, T, a) )
 	{
 
-		b->init( Hazel_MAKE_PARAMS1( 8, a) );
+		b->init( JOMOO_MAKE_PARAMS1( 8, a) );
 
 	}
 
-	template< Hazel_MAKE_PARAMS1( 9, typename T) >
-	static void Init( B* b, Hazel_MAKE_PARAMS2( 9, T, a) )
+	template< JOMOO_MAKE_PARAMS1( 9, typename T) >
+	static void Init( B* b, JOMOO_MAKE_PARAMS2( 9, T, a) )
 	{
 
-		b->init( Hazel_MAKE_PARAMS1( 9, a) );
+		b->init( JOMOO_MAKE_PARAMS1( 9, a) );
 
 	}
 
-	template< Hazel_MAKE_PARAMS1( 10, typename T) >
-	static void Init( B* b, Hazel_MAKE_PARAMS2( 10, T, a) )
+	template< JOMOO_MAKE_PARAMS1( 10, typename T) >
+	static void Init( B* b, JOMOO_MAKE_PARAMS2( 10, T, a) )
 	{
 
-		b->init( Hazel_MAKE_PARAMS1( 10, a) );
+		b->init( JOMOO_MAKE_PARAMS1( 10, a) );
 	}
 
 	static void Fini( B* h )
@@ -151,83 +151,83 @@ public :
 		return handler.release();
 	}
 
-	template< Hazel_MAKE_PARAMS1( 1, typename T) >
-	B* create( Hazel_MAKE_PARAMS2( 1, T, a) )
+	template< JOMOO_MAKE_PARAMS1( 1, typename T) >
+	B* create( JOMOO_MAKE_PARAMS2( 1, T, a) )
 	{
 		_memory auto_ptr< R, pool_type > handler( pool_.malloc() , pool_ );
-		OP< R >::Init( handler.get() , Hazel_MAKE_PARAMS1( 1, a) );
+		OP< R >::Init( handler.get() , JOMOO_MAKE_PARAMS1( 1, a) );
 		return handler.release();
 	}
 
-	template< Hazel_MAKE_PARAMS1( 2, typename T) >
-	B* create( Hazel_MAKE_PARAMS2( 2, T, a) )
+	template< JOMOO_MAKE_PARAMS1( 2, typename T) >
+	B* create( JOMOO_MAKE_PARAMS2( 2, T, a) )
 	{
 		_memory auto_ptr< R, pool_type > handler( pool_.malloc() , pool_ );
-		OP< R >::Init( handler.get() , Hazel_MAKE_PARAMS1( 2, a) );
+		OP< R >::Init( handler.get() , JOMOO_MAKE_PARAMS1( 2, a) );
 		return handler.release();
 	}
 
-	template< Hazel_MAKE_PARAMS1( 3, typename T) >
-	B* create( Hazel_MAKE_PARAMS2( 3, T, a) )
+	template< JOMOO_MAKE_PARAMS1( 3, typename T) >
+	B* create( JOMOO_MAKE_PARAMS2( 3, T, a) )
 	{
 		_memory auto_ptr< R, pool_type > handler( pool_.malloc() , pool_ );
-		OP< R >::Init( handler.get() , Hazel_MAKE_PARAMS1( 3, a) );
+		OP< R >::Init( handler.get() , JOMOO_MAKE_PARAMS1( 3, a) );
 		return handler.release();
 	}
 
-	template< Hazel_MAKE_PARAMS1( 4, typename T) >
-	B* create( Hazel_MAKE_PARAMS2( 4, T, a) )
+	template< JOMOO_MAKE_PARAMS1( 4, typename T) >
+	B* create( JOMOO_MAKE_PARAMS2( 4, T, a) )
 	{
 		_memory auto_ptr< R, pool_type > handler( pool_.malloc() , pool_ );
-		OP< R >::Init( handler.get() , Hazel_MAKE_PARAMS1( 4, a) );
+		OP< R >::Init( handler.get() , JOMOO_MAKE_PARAMS1( 4, a) );
 		return handler.release();
 	}
 
-		template< Hazel_MAKE_PARAMS1( 5, typename T) >
-	B* create( Hazel_MAKE_PARAMS2( 5, T, a) )
+		template< JOMOO_MAKE_PARAMS1( 5, typename T) >
+	B* create( JOMOO_MAKE_PARAMS2( 5, T, a) )
 	{
 		_memory auto_ptr< R, pool_type > handler( pool_.malloc() , pool_ );
-		OP< R >::Init( handler.get() , Hazel_MAKE_PARAMS1( 5, a) );
+		OP< R >::Init( handler.get() , JOMOO_MAKE_PARAMS1( 5, a) );
 		return handler.release();
 	}
 
-	template< Hazel_MAKE_PARAMS1( 6, typename T) >
-	B* create( Hazel_MAKE_PARAMS2( 6, T, a) )
+	template< JOMOO_MAKE_PARAMS1( 6, typename T) >
+	B* create( JOMOO_MAKE_PARAMS2( 6, T, a) )
 	{
 		_memory auto_ptr< R, pool_type > handler( pool_.malloc() , pool_ );
-		OP< R >::Init( handler.get() , Hazel_MAKE_PARAMS1( 6, a) );
+		OP< R >::Init( handler.get() , JOMOO_MAKE_PARAMS1( 6, a) );
 		return handler.release();
 	}
 	
-	template< Hazel_MAKE_PARAMS1( 7, typename T) >
-	B* create( Hazel_MAKE_PARAMS2( 7, T, a) )
+	template< JOMOO_MAKE_PARAMS1( 7, typename T) >
+	B* create( JOMOO_MAKE_PARAMS2( 7, T, a) )
 	{
 		_memory auto_ptr< R, pool_type > handler( pool_.malloc() , pool_ );
-		OP< R >::Init( handler.get() , Hazel_MAKE_PARAMS1( 7, a) );
+		OP< R >::Init( handler.get() , JOMOO_MAKE_PARAMS1( 7, a) );
 		return handler.release();
 	}
 
-	template< Hazel_MAKE_PARAMS1( 8, typename T) >
-	B* create( Hazel_MAKE_PARAMS2( 8, T, a) )
+	template< JOMOO_MAKE_PARAMS1( 8, typename T) >
+	B* create( JOMOO_MAKE_PARAMS2( 8, T, a) )
 	{
 		_memory auto_ptr< R, pool_type > handler( pool_.malloc() , pool_ );
-		OP< R >::Init( handler.get() , Hazel_MAKE_PARAMS1( 8, a) );
+		OP< R >::Init( handler.get() , JOMOO_MAKE_PARAMS1( 8, a) );
 		return handler.release();
 	}
 
-	template< Hazel_MAKE_PARAMS1( 9, typename T) >
-	B* create( Hazel_MAKE_PARAMS2( 9, T, a) )
+	template< JOMOO_MAKE_PARAMS1( 9, typename T) >
+	B* create( JOMOO_MAKE_PARAMS2( 9, T, a) )
 	{
 		_memory auto_ptr< R, pool_type > handler( pool_.malloc() , pool_ );
-		OP< R >::Init( handler.get() , Hazel_MAKE_PARAMS1( 9, a) );
+		OP< R >::Init( handler.get() , JOMOO_MAKE_PARAMS1( 9, a) );
 		return handler.release();
 	}
 
-	template< Hazel_MAKE_PARAMS1( 10, typename T) >
-	B* create( Hazel_MAKE_PARAMS2( 10, T, a) )
+	template< JOMOO_MAKE_PARAMS1( 10, typename T) >
+	B* create( JOMOO_MAKE_PARAMS2( 10, T, a) )
 	{
 		_memory auto_ptr< R, pool_type > handler( pool_.malloc() , pool_ );
-		OP< R >::Init( handler.get() , Hazel_MAKE_PARAMS1( 10, a) );
+		OP< R >::Init( handler.get() , JOMOO_MAKE_PARAMS1( 10, a) );
 		return handler.release();
 	}
 
@@ -244,6 +244,6 @@ private:
 };
 
 
-_hazel_end
+_JOMOO_end
 
 #endif // NETWORKS_BUILDER_H

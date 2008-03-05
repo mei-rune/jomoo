@@ -1,17 +1,17 @@
 
-#ifndef Hazel_ENDPOINT_H
-#define Hazel_ENDPOINT_H
+#ifndef JOMOO_ENDPOINT_H
+#define JOMOO_ENDPOINT_H
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
 #include "../config_Networks.h"
-#include "Hazel_Connector.H"
-#include "Hazel_Acceptor.H"
+#include "JOMOO_Connector.H"
+#include "JOMOO_Acceptor.H"
 
 _networks_begin
 
@@ -22,13 +22,13 @@ enum TransportType
 	,nUdpTransport
 };
 
-class Hazel_Endpoint
+class JOMOO_Endpoint
 {
 public:
 
-	typedef counter_ptr< Hazel_Endpoint > ptr_type;
+	typedef counter_ptr< JOMOO_Endpoint > ptr_type;
 
-	virtual ~Hazel_Endpoint() {}
+	virtual ~JOMOO_Endpoint() {}
 
     virtual const std::string& toString() const = 0;
 
@@ -36,20 +36,20 @@ public:
 
 	virtual const tstring& protocol() const = 0;
 
-    virtual Hazel_Connector& connector() const = 0;
+    virtual JOMOO_Connector& connector() const = 0;
 
-    virtual Hazel_Acceptor& acceptor( ) const = 0;
+    virtual JOMOO_Acceptor& acceptor( ) const = 0;
 };
 
-typedef Hazel_Endpoint::ptr_type Hazel_Endpoint_Ptr;
+typedef JOMOO_Endpoint::ptr_type JOMOO_Endpoint_Ptr;
 
-//class Hazel_Endpoint_Factory
+//class JOMOO_Endpoint_Factory
 //{
 //public:
 //
-//	virtual ~Hazel_Endpoint_Factory(){}
+//	virtual ~JOMOO_Endpoint_Factory(){}
 //
-//	virtual Hazel_Endpoint_Ptr create( const std::string& ) = 0;
+//	virtual JOMOO_Endpoint_Ptr create( const std::string& ) = 0;
 //
 //	virtual int type() = 0;
 //
@@ -58,7 +58,7 @@ typedef Hazel_Endpoint::ptr_type Hazel_Endpoint_Ptr;
 //	virtual const tstring& toString() const = 0;
 //};
 //
-//typedef counter_ptr< Hazel_Endpoint_Factory > Hazel_Endpoint_Factory_Ptr;
+//typedef counter_ptr< JOMOO_Endpoint_Factory > JOMOO_Endpoint_Factory_Ptr;
 
 _networks_end
 

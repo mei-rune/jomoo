@@ -12,7 +12,7 @@ _util_begin
 
 CNTService* CNTService::m_pThis = NULL;
 
-CNTService::CNTService(const tchar* szServiceName,Hazel_Service* svr, UtilLoggerPtr ptr )
+CNTService::CNTService(const tchar* szServiceName,JOMOO_Service* svr, UtilLoggerPtr ptr )
 : m_svr_( svr )
 , logger_( ptr )
 {

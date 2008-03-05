@@ -195,29 +195,29 @@ int TcpTransport::getOption(const char* option,
 
 bool TcpTransport::cancel()
 {
-	return ( CancelIo( ( Hazel_HANDLE )m_handle_.get_handle() ) ) ? true : false ;
+	return ( CancelIo( ( JOMOO_HANDLE )m_handle_.get_handle() ) ) ? true : false ;
 }
 
-const Hazel_INET_Addr& TcpTransport::getRemoteAddr() const
+const JOMOO_INET_Addr& TcpTransport::getRemoteAddr() const
 {
 	return m_remoteaddr_;
 }
-//const Hazel_INET_Addr& TcpTransport::getRemoteAddr() const
+//const JOMOO_INET_Addr& TcpTransport::getRemoteAddr() const
 //{
 //	return m_remoteaddr_;
 //}
 
-Hazel_INET_Addr& TcpTransport::getRemoteAddr()
+JOMOO_INET_Addr& TcpTransport::getRemoteAddr()
 {
 	return m_remoteaddr_;
 }
 
-const Hazel_INET_Addr& TcpTransport::getLocalAddr() const
+const JOMOO_INET_Addr& TcpTransport::getLocalAddr() const
 {
 	return m_localaddr_;
 }
 
-Hazel_INET_Addr& TcpTransport::getLocalAddr()
+JOMOO_INET_Addr& TcpTransport::getLocalAddr()
 {
 	return m_localaddr_;
 }
@@ -232,7 +232,7 @@ const tstring& TcpTransport::toString() const
 	return m_to_string_;
 }
 
-hazel_socket& TcpTransport::get_handle()
+JOMOO_socket& TcpTransport::get_handle()
 {
 	return m_handle_;
 }
@@ -251,7 +251,7 @@ void TcpTransport::onAccept()
 	m_to_string_ += BT_TEXT( "]" );
 
 	if( instance_->getInstanceNetwork().getNativeProactor().register_handle(
-		reinterpret_cast  < Hazel_HANDLE >( get_handle().get_handle() ) , this ) != 0 )
+		reinterpret_cast  < JOMOO_HANDLE >( get_handle().get_handle() ) , this ) != 0 )
 			LOG_ERROR_THROW( getLogger(), toString() << BT_TEXT("打开异步连接失败，[") 
 			<< lastError() << BT_TEXT("]") , SystemException );
 }

@@ -6,14 +6,14 @@
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
 #include "../config_Networks.h"
-#include "../hazel_socket.h"
-#include "../Hazel_INET_Addr.H"
+#include "../JOMOO_socket.h"
+#include "../JOMOO_INET_Addr.H"
 #include "Base/Counter_Ptr.hpp"
 #include "Tcp_Asynch_Read_Result.H"
 #include "Tcp_Asynch_Read_Array_Result.H"
@@ -24,11 +24,11 @@
 _networks_begin
 
 class TcpTransport 
-	: 	public Hazel_Transport
+	: 	public JOMOO_Transport
 {
 public:
 
-	typedef Hazel_Transport::LoggerPtr LoggerPtr;
+	typedef JOMOO_Transport::LoggerPtr LoggerPtr;
 	typedef TCP_Transport_Handler handler_type;
 	typedef counter_ptr< TcpTransport > TransportPtr;
 	typedef TransportPtr ptr_type;
@@ -65,7 +65,7 @@ public:
 	 * @remark 注意如果返回成功，并不代表数据被发送，也不代表数据一定会发送成
 	 *		   功，但一定会回调handle的handle_writed接口，如果返回失败则一定不
 	 *		   会调用handle的handle_writed接口
-	 * @see Hazel_Transport_Handler
+	 * @see JOMOO_Transport_Handler
 	 */
 	bool write(handler_type& handle,
 				   const void* buffer,
@@ -82,7 +82,7 @@ public:
 	 * @remark 注意如果返回成功，并不代表数据被发送，也不代表数据一定会发送成
 	 *		   功，但一定会回调handle的onTransmit接口，如果返回失败则一定
 	 *		   不会调用handle的onTransmit接口
-	 * @see Hazel_Transport_Handler
+	 * @see JOMOO_Transport_Handler
 	 */
 	bool write(handler_type& handle,
 					  const iovec* data,
@@ -125,19 +125,19 @@ public:
 
 	bool cancel();
 
-	const Hazel_INET_Addr& getRemoteAddr() const;
+	const JOMOO_INET_Addr& getRemoteAddr() const;
 
-	const Hazel_INET_Addr& getLocalAddr() const;
+	const JOMOO_INET_Addr& getLocalAddr() const;
 
-	Hazel_INET_Addr& getRemoteAddr();
+	JOMOO_INET_Addr& getRemoteAddr();
 
-	Hazel_INET_Addr& getLocalAddr();
+	JOMOO_INET_Addr& getLocalAddr();
 
 	LoggerPtr getLogger();
 
 	const tstring& toString() const;
 
-	hazel_socket& get_handle();
+	JOMOO_socket& get_handle();
 
 	void onAccept();
 
@@ -149,12 +149,12 @@ private:
 
 	Instance_TCP* instance_;
 
-	hazel_socket m_handle_;
+	JOMOO_socket m_handle_;
 
 	tstring m_to_string_;
 
-	Hazel_INET_Addr m_remoteaddr_;
-	Hazel_INET_Addr m_localaddr_;
+	JOMOO_INET_Addr m_remoteaddr_;
+	JOMOO_INET_Addr m_localaddr_;
 
 };// END CLASS DEFINITION TcpTransport
 

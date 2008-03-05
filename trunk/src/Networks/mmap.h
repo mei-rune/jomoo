@@ -5,9 +5,9 @@
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
 #include "config_Networks.h"
@@ -15,38 +15,38 @@
 
 _networks_begin
 
-class Hazel_Mem_MAP
+class JOMOO_Mem_MAP
 {
 public:
-	Hazel_Mem_MAP (void);
+	JOMOO_Mem_MAP (void);
 
-	Hazel_Mem_MAP (Hazel_HANDLE handle,
+	JOMOO_Mem_MAP (JOMOO_HANDLE handle,
 		int length = -1,
 		int prot = PROT_RDWR,
-		int share = Hazel_MAP_PRIVATE,
+		int share = JOMOO_MAP_PRIVATE,
 		void *addr = 0,
 		off_t offset = 0,
 		LPSECURITY_ATTRIBUTES sa = 0);
 
-	Hazel_Mem_MAP (const tchar *filename,
+	JOMOO_Mem_MAP (const tchar *filename,
 		int len = -1,
 		int prot = PROT_RDWR,
-		int share = Hazel_MAP_PRIVATE,
+		int share = JOMOO_MAP_PRIVATE,
 		void *addr = 0,
 		off_t offset = 0,
 		LPSECURITY_ATTRIBUTES sa = 0);
 
-	int map (Hazel_HANDLE handle,
+	int map (JOMOO_HANDLE handle,
 		int length = -1,
 		int prot = PROT_RDWR,
-		int share = Hazel_MAP_PRIVATE,
+		int share = JOMOO_MAP_PRIVATE,
 		void *addr = 0,
 		off_t offset = 0,
 		LPSECURITY_ATTRIBUTES sa = 0);
 
 	int map (int length ,
 		int prot = PROT_RDWR,
-		int share = Hazel_MAP_PRIVATE,
+		int share = JOMOO_MAP_PRIVATE,
 		void *addr = 0,
 		off_t offset = 0,
 		LPSECURITY_ATTRIBUTES sa = 0);
@@ -55,12 +55,12 @@ public:
 	int map (const tchar *filename,
 		int len = -1,
 		int prot = PROT_RDWR,
-		int share = Hazel_MAP_PRIVATE,
+		int share = JOMOO_MAP_PRIVATE,
 		void *addr = 0,
 		off_t offset = 0,
 		LPSECURITY_ATTRIBUTES sa = 0);
 
-	~Hazel_Mem_MAP (void);
+	~JOMOO_Mem_MAP (void);
 
 	int close (void);
 	int close_handle (void);
@@ -83,11 +83,11 @@ private:
 
 	size_t length_;
 
-	Hazel_HANDLE handle_;
+	JOMOO_HANDLE handle_;
 
-	Hazel_HANDLE file_mapping_;
+	JOMOO_HANDLE file_mapping_;
 
-	int map_it (Hazel_HANDLE handle,
+	int map_it (JOMOO_HANDLE handle,
 		int len ,
 		int prot = PROT_RDWR,
 		int share = MAP_SHARED,

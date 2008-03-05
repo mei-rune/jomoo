@@ -1,7 +1,7 @@
 
-#ifndef __hazel_macro_assert__hpp
-#define __hazel_macro_assert__hpp
+#ifndef __JOMOO_macro_assert__hpp
+#define __JOMOO_macro_assert__hpp
 
 #include "boost/mpl.hpp"
 
-#endif //__hazel_macro_assert__hpp
+#endif //__JOMOO_macro_assert__hpp

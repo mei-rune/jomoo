@@ -14,5 +14,5 @@ _networks_begin
 _networks_end
 
 DEFINE_SEAL_MODULE ();
-//DEFINE_SEAL_PLUGIN_FACTORY_DEFAULT_NAME ( _networks Hazel_Endpoint_Factory, _networks TCP_Endpoint_Factory );
+//DEFINE_SEAL_PLUGIN_FACTORY_DEFAULT_NAME ( _networks JOMOO_Endpoint_Factory, _networks TCP_Endpoint_Factory );
 //DEFINE_SEAL_PLUGIN_FACTORY_DEFAULT_NAME ( ComponentFactory , _networks Instance_TCP );

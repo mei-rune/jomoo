@@ -6,26 +6,26 @@
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
 #include "../config_Networks.h"
-#include "../include/Hazel_Endpoint_Factory.h"
+#include "../include/JOMOO_Endpoint_Factory.h"
 #include "../Instance_Networks.H"
 #include "Instance_TCP.H"
 
 _networks_begin
 
-class TCP_Endpoint_Factory : public Hazel_Endpoint_Factory::base_type::AbstractFactory
+class TCP_Endpoint_Factory : public JOMOO_Endpoint_Factory::base_type::AbstractFactory
 {
 public:
 	TCP_Endpoint_Factory( );
 
-	Hazel_Endpoint* create( Instance_Networks& , const Hazel_Url_Base& );
+	JOMOO_Endpoint* create( Instance_Networks& , const JOMOO_Url_Base& );
 	
-	void release( Hazel_Endpoint* );
+	void release( JOMOO_Endpoint* );
 
 	const tstring& toString() const;
 

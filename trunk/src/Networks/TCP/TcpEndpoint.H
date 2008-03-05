@@ -1,25 +1,25 @@
 // Communication
 
 
-#ifndef __Hazel_TCP_ENDPOINT__
-#define __Hazel_TCP_ENDPOINT__
+#ifndef __JOMOO_TCP_ENDPOINT__
+#define __JOMOO_TCP_ENDPOINT__
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
 #include "../config_Networks.h"
-#include "../include/Hazel_Endpoint.h"
+#include "../include/JOMOO_Endpoint.h"
 #include "TcpAcceptor.h"
 #include "TcpConnector.h"
 
 _networks_begin
 
 class TcpEndpoint :
-	public Hazel_Endpoint
+	public JOMOO_Endpoint
 {
 public:
 	//TcpEndpoint( Instance_TCP& instance, const tstring& ipstr, const tstring& port );
@@ -36,13 +36,13 @@ public:
 
 	const tstring& protocol() const;
 
-    Hazel_Connector& connector() const;
+    JOMOO_Connector& connector() const;
 
-    Hazel_Acceptor& acceptor( ) const;
+    JOMOO_Acceptor& acceptor( ) const;
 
 	void release();
 
-	void init( Instance_TCP* instance, const Hazel_Url_Base* url );
+	void init( Instance_TCP* instance, const JOMOO_Url_Base* url );
 
 	void fini( );
 
@@ -51,13 +51,13 @@ private:
 	DECLARE_NO_COPY_CLASS( TcpEndpoint );
 
 	Instance_TCP* instance_;
-	Hazel_INET_Addr addr_;
+	JOMOO_INET_Addr addr_;
 
 	mutable std::auto_ptr< TcpConnector > connector_;
 	mutable std::auto_ptr< TcpAcceptor > acceptor_;
 
-	//mutable Connector_T< TcpConnector, Hazel_Connector > connector_;
-	//mutable Acceptor_T< TcpAcceptor, Hazel_Acceptor > acceptor_;
+	//mutable Connector_T< TcpConnector, JOMOO_Connector > connector_;
+	//mutable Acceptor_T< TcpAcceptor, JOMOO_Acceptor > acceptor_;
 	
 	tstring toString_;
 	static tstring protocol_;
@@ -66,4 +66,4 @@ private:
 
 _networks_end
 
-#endif // __Hazel_TCP_ENDPOINT__
+#endif // __JOMOO_TCP_ENDPOINT__

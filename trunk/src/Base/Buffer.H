@@ -3,48 +3,48 @@
 /**
 * -*- C++ -*-
 * -------------------------------------------------------------------------------
-* - ¤╭⌒╮ ╭⌒╮						   Hazel_Buffer.H,v 1.0 2005/10/10 16:45:54
+* - ¤╭⌒╮ ╭⌒╮						   JOMOO_Buffer.H,v 1.0 2005/10/10 16:45:54
 *  ╱◥██◣ ╭╭ ⌒╮
 * ︱田︱田田| ╰------
 * -------------------------------------------------------------------------------
 */
 
-#ifndef _Hazel_Buffer_H_
-#define _Hazel_Buffer_H_
+#ifndef _JOMOO_Buffer_H_
+#define _JOMOO_Buffer_H_
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 #include "tstring.h"
 #include "counter_ptr.hpp"
 #include "jomoo_export.h"
 #include "Base/exception.hpp"
 
-_hazel_begin
+_JOMOO_begin
 
-class Hazel_Read_Buffer
+class JOMOO_Read_Buffer
 {
 public:
-	virtual ~Hazel_Read_Buffer() {}
+	virtual ~JOMOO_Read_Buffer() {}
 	virtual bool read( void* blob, size_t t ) = 0;
 	virtual const tstring& toString() const = 0;
 };
 
-class Hazel_Read_Stream
+class JOMOO_Read_Stream
 {
 public:
 
-	Hazel_Read_Stream( Hazel_Read_Buffer* buf )
+	JOMOO_Read_Stream( JOMOO_Read_Buffer* buf )
 		: buf_( buf )
 	{
 		if( buf_ == 0 )
 			ThrowException1( InvalidPointerException, ",读流buf不能为空" );
 	}
 
-	virtual ~Hazel_Read_Stream() {}
+	virtual ~JOMOO_Read_Stream() {}
 
 	bool read( Byte& b )
 	{
@@ -86,37 +86,37 @@ public:
 		return buf_->toString();
 	}
 
-	Hazel_Read_Buffer* rd_buf()
+	JOMOO_Read_Buffer* rd_buf()
 	{
 		return buf_;
 	}
 private:
 
-	DECLARE_NO_COPY_CLASS( Hazel_Read_Stream );
+	DECLARE_NO_COPY_CLASS( JOMOO_Read_Stream );
 
-	Hazel_Read_Buffer* buf_;
+	JOMOO_Read_Buffer* buf_;
 };
 
-class Hazel_Write_Buffer
+class JOMOO_Write_Buffer
 {
 public:
-	virtual ~Hazel_Write_Buffer() {}
+	virtual ~JOMOO_Write_Buffer() {}
 	virtual bool write( const void* blob, size_t t ) = 0;
 	virtual const tstring& toString() const = 0;
 };
 
-class Hazel_Write_Stream
+class JOMOO_Write_Stream
 {
 public:
 
-	Hazel_Write_Stream( Hazel_Write_Buffer* buf )
+	JOMOO_Write_Stream( JOMOO_Write_Buffer* buf )
 		: buf_( buf )
 	{
 		if( buf_ == 0 )
 			ThrowException1( InvalidPointerException, ",写流buf不能为空" );
 	}
 
-	virtual ~Hazel_Write_Stream() {}
+	virtual ~JOMOO_Write_Stream() {}
 
 	bool write( Byte b)
 	{
@@ -158,24 +158,24 @@ public:
 		return buf_->toString();
 	}
 		
-	Hazel_Write_Buffer* wd_buf()
+	JOMOO_Write_Buffer* wd_buf()
 	{
 		return buf_;
 	}
 private:
 
-	DECLARE_NO_COPY_CLASS( Hazel_Write_Stream );
-	Hazel_Write_Buffer* buf_;
+	DECLARE_NO_COPY_CLASS( JOMOO_Write_Stream );
+	JOMOO_Write_Buffer* buf_;
 };
 
-class Hazel_Buffer : public Hazel_Read_Buffer
-	, public Hazel_Write_Buffer
+class JOMOO_Buffer : public JOMOO_Read_Buffer
+	, public JOMOO_Write_Buffer
 {
 public :
-	virtual ~Hazel_Buffer(){}
+	virtual ~JOMOO_Buffer(){}
 	virtual const tstring& toString() const = 0;
 };
 
-_hazel_end
+_JOMOO_end
 
-#endif // _Hazel_Buffer_H_
+#endif // _JOMOO_Buffer_H_

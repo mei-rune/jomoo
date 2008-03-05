@@ -11,31 +11,31 @@ static char THIS_FILE[] = __FILE__;
 
 _networks_begin
 
-#if defined (Hazel_LACKS_INLINE_FUNCTIONS)
+#if defined (JOMOO_LACKS_INLINE_FUNCTIONS)
 #include "INET_Addr.inl"
-#endif /* Hazel_LACKS_INLINE_FUNCTIONS */
+#endif /* JOMOO_LACKS_INLINE_FUNCTIONS */
 
 
-Hazel_INET_Addr::Hazel_INET_Addr (void)
+JOMOO_INET_Addr::JOMOO_INET_Addr (void)
 {
 	this->reset ();
 }
 
-Hazel_INET_Addr::Hazel_INET_Addr (const char* address)
+JOMOO_INET_Addr::JOMOO_INET_Addr (const char* address)
 {
 	this->reset ();
 	this->set (address);
 }
 
 
-Hazel_INET_Addr::Hazel_INET_Addr (const Hazel_INET_Addr &sa)
+JOMOO_INET_Addr::JOMOO_INET_Addr (const JOMOO_INET_Addr &sa)
 {
 	this->reset ();
 	this->set (sa);
 }
 
 
-Hazel_INET_Addr::Hazel_INET_Addr (u_short port_number,
+JOMOO_INET_Addr::JOMOO_INET_Addr (u_short port_number,
 							  const char* host_name )
 {
 	this->reset ();
@@ -43,21 +43,21 @@ Hazel_INET_Addr::Hazel_INET_Addr (u_short port_number,
 }
 
 
-Hazel_INET_Addr::Hazel_INET_Addr (const char* port_number,
+JOMOO_INET_Addr::JOMOO_INET_Addr (const char* port_number,
 		const char* ip_addr )
 {
 	this->reset ();
 	this->set (port_number,ip_addr );
 }
 
-Hazel_INET_Addr::Hazel_INET_Addr (const sockaddr_in *addr, int len)
+JOMOO_INET_Addr::JOMOO_INET_Addr (const sockaddr_in *addr, int len)
 {
 	this->reset ();
 	this->set (addr, len);
 }
 
 
-Hazel_INET_Addr::Hazel_INET_Addr (u_short port_number,
+JOMOO_INET_Addr::JOMOO_INET_Addr (u_short port_number,
 							  u_long inet_address)
 {
 	this->reset ();
@@ -65,26 +65,26 @@ Hazel_INET_Addr::Hazel_INET_Addr (u_short port_number,
 }
 
 
-bool Hazel_INET_Addr::operator != (const Hazel_INET_Addr &sap) const
+bool JOMOO_INET_Addr::operator != (const JOMOO_INET_Addr &sap) const
 {
 	return !((*this) == sap);
 }
 
 
-bool Hazel_INET_Addr::operator == (const Hazel_INET_Addr &sap) const
+bool JOMOO_INET_Addr::operator == (const JOMOO_INET_Addr &sap) const
 {	return (::memcmp (&this->m_addr_,
 		&sap.m_addr_,
 		this->get_size ()) == 0);
 }
 
-bool Hazel_INET_Addr::operator < (const Hazel_INET_Addr &rhs) const
+bool JOMOO_INET_Addr::operator < (const JOMOO_INET_Addr &rhs) const
 {
   return (::memcmp (&this->m_addr_,
 		&rhs.m_addr_,
 		this->get_size ()) < 0 );
 }
 
-bool Hazel_INET_Addr::operator > (const Hazel_INET_Addr &rhs) const
+bool JOMOO_INET_Addr::operator > (const JOMOO_INET_Addr &rhs) const
 {
   return (::memcmp (&this->m_addr_,
 		&rhs.m_addr_,
@@ -92,7 +92,7 @@ bool Hazel_INET_Addr::operator > (const Hazel_INET_Addr &rhs) const
 }
 
 
-void Hazel_INET_Addr::set_port_number (u_short port_number,
+void JOMOO_INET_Addr::set_port_number (u_short port_number,
 									 bool encode )
 {
 
@@ -102,7 +102,7 @@ void Hazel_INET_Addr::set_port_number (u_short port_number,
 	((sockaddr_in*) &m_addr_)->sin_port = port_number;
 }
 
-void Hazel_INET_Addr::set_ip_address( u_long ip , bool encode )
+void JOMOO_INET_Addr::set_ip_address( u_long ip , bool encode )
 {
 	if (encode)
 		ip = htonl ( ip );
@@ -110,17 +110,17 @@ void Hazel_INET_Addr::set_ip_address( u_long ip , bool encode )
 	((sockaddr_in*) &m_addr_)->sin_addr.s_addr = ip;
 }
 
-u_long Hazel_INET_Addr::get_ip_address ( void ) const
+u_long JOMOO_INET_Addr::get_ip_address ( void ) const
 {
 	return (((sockaddr_in*) &m_addr_)->sin_addr .s_addr);
 }
 
-u_short Hazel_INET_Addr::get_port_number( void ) const 
+u_short JOMOO_INET_Addr::get_port_number( void ) const 
 {
 	return htons( ((sockaddr_in*) &m_addr_)->sin_port );
 }
 
-int Hazel_INET_Addr::addr_to_string (char* s,
+int JOMOO_INET_Addr::addr_to_string (char* s,
 							   size_t size ) const
 {
 	char* ipstr = inet_ntoa( ((sockaddr_in*) &m_addr_)->sin_addr );
@@ -151,17 +151,17 @@ int Hazel_INET_Addr::addr_to_string (char* s,
 }
 
 
-int Hazel_INET_Addr::string_to_addr ( const char* address )
+int JOMOO_INET_Addr::string_to_addr ( const char* address )
 {
 	return this->set( address );
 }
 
-int Hazel_INET_Addr::set (const Hazel_INET_Addr &sa)
+int JOMOO_INET_Addr::set (const JOMOO_INET_Addr &sa)
 {
 	::memcpy( &this->m_addr_, &sa.m_addr_, sa.get_size () );
 	return 0;
 }
-int Hazel_INET_Addr::set (const char* address)
+int JOMOO_INET_Addr::set (const char* address)
 {
 		if( strnicmp( address, "TCP://", sizeof( "TCP://") ) == 0 )
 		address += 6;
@@ -188,7 +188,7 @@ int Hazel_INET_Addr::set (const char* address)
 }
 
 
-int Hazel_INET_Addr::set (u_short port_number,
+int JOMOO_INET_Addr::set (u_short port_number,
 						u_long inet_address )
 {
 	this->set_ip_address ( inet_address );
@@ -197,7 +197,7 @@ int Hazel_INET_Addr::set (u_short port_number,
 }
 
 
-int Hazel_INET_Addr::set (u_short port_number,
+int JOMOO_INET_Addr::set (u_short port_number,
 						const char* host_name )
 {
 	if (host_name == 0)
@@ -241,7 +241,7 @@ static int get_port_number_from_name (const char* port_name)
 }
 
 
-int Hazel_INET_Addr::set (const char* port_name,
+int JOMOO_INET_Addr::set (const char* port_name,
 						const char* host_name)
 {
 	int port_number = get_port_number_from_name (port_name);
@@ -253,7 +253,7 @@ int Hazel_INET_Addr::set (const char* port_name,
 		host_name );
 }
 
-int Hazel_INET_Addr::set (const char* port_name,
+int JOMOO_INET_Addr::set (const char* port_name,
 						u_long inet_address )
 {
 	int port_number = get_port_number_from_name (port_name);
@@ -266,13 +266,13 @@ int Hazel_INET_Addr::set (const char* port_name,
 		inet_address );
 }
 
-int Hazel_INET_Addr::set (const sockaddr_in *addr, int len)
+int JOMOO_INET_Addr::set (const sockaddr_in *addr, int len)
 {
 	::memcpy (&this->m_addr_, addr, len);
 	return 0;
 }
 
-const tstring& Hazel_INET_Addr::toString( ) const
+const tstring& JOMOO_INET_Addr::toString( ) const
 {
 	char ipstr[ 100 ] = "";
 	addr_to_string( ipstr, 100 );
@@ -281,27 +281,27 @@ const tstring& Hazel_INET_Addr::toString( ) const
 }
 
 
-size_t Hazel_INET_Addr::get_size (void) const
+size_t JOMOO_INET_Addr::get_size (void) const
 {
 	return sizeof( this->m_addr_ );
 }
 
-void Hazel_INET_Addr::set_size (size_t size)
+void JOMOO_INET_Addr::set_size (size_t size)
 {
 	
 }
 
-const void *Hazel_INET_Addr::get_addr (void) const
+const void *JOMOO_INET_Addr::get_addr (void) const
 {
 	return &(this->m_addr_);
 }
 
-void *Hazel_INET_Addr::get_addr (void)
+void *JOMOO_INET_Addr::get_addr (void)
 {
 	return &(this->m_addr_);
 }
 
-void Hazel_INET_Addr::set_addr ( const void * addr, size_t len)
+void JOMOO_INET_Addr::set_addr ( const void * addr, size_t len)
 {
 	if( len > get_size() )
 		memcpy( get_addr(), addr, get_size() );

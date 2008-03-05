@@ -10,7 +10,7 @@ static char THIS_FILE[] = __FILE__;
 
 #if !defined (OS_HAS_INLINED)
 # include "os_networks.inl"
-#endif /* HAZEL_HAS_INLINED_OS_CALLS */
+#endif /* JOMOO_HAS_INLINED_OS_CALLS */
 
 
 namespace OS

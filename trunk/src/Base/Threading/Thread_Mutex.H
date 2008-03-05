@@ -1,35 +1,35 @@
 
 
-#ifndef Hazel_THREAD_MUTEX_H
-#define Hazel_THREAD_MUTEX_H
+#ifndef JOMOO_THREAD_MUTEX_H
+#define JOMOO_THREAD_MUTEX_H
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 #include "config_threading.h"
 
-#ifdef Hazel_MT
+#ifdef JOMOO_MT
 
 #include "os_threading.h"
-#include "Hazel_Guard.h"
+#include "JOMOO_Guard.h"
 
-_hazel_begin
+_JOMOO_begin
 
-class Hazel_Thread_Mutex
+class JOMOO_Thread_Mutex
 {
 private:
 	critical_section section_;
 public:
-	typedef Hazel_Guard< Hazel_Thread_Mutex > spcode_lock;
-	Hazel_Thread_Mutex()
+	typedef JOMOO_Guard< JOMOO_Thread_Mutex > spcode_lock;
+	JOMOO_Thread_Mutex()
 	{
 		OS::create_critical_section( &section_ );
 	}
 
-	~Hazel_Thread_Mutex()
+	~JOMOO_Thread_Mutex()
 	{
 		OS::close_critical_section( &section_ );
 	}
@@ -52,11 +52,11 @@ public:
 #endif
 
 private:
-	DECLARE_NO_COPY_CLASS( Hazel_Thread_Mutex );
+	DECLARE_NO_COPY_CLASS( JOMOO_Thread_Mutex );
 };
 
-_hazel_end
+_JOMOO_end
 
-#endif // Hazel_MT
+#endif // JOMOO_MT
 
-#endif // Hazel_THREAD_MUTEX_H
+#endif // JOMOO_THREAD_MUTEX_H

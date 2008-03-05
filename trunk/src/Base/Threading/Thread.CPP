@@ -1,20 +1,20 @@
 
 
-#ifndef Hazel_THREAD_CPP
-#define Hazel_THREAD_CPP
+#ifndef JOMOO_THREAD_CPP
+#define JOMOO_THREAD_CPP
 
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 #include "config_threading.h"
 
-#ifdef Hazel_MT
+#ifdef JOMOO_MT
 
-JOMOO_Export_C _thread Hazel_Thread* ___get_Hazel_Thread( )
+JOMOO_Export_C _thread JOMOO_Thread* ___get_JOMOO_Thread( )
 {
 	return 0;
 }
@@ -25,10 +25,10 @@ _thread_begin
 
 #ifndef OS_HAS_INLINED
 
-void Hazel_Thread::static_thread_svc( void * arg )
+void JOMOO_Thread::static_thread_svc( void * arg )
 {
 	try{
-	Hazel_Thread* thread_ = ( Hazel_Thread* ) arg;
+	JOMOO_Thread* thread_ = ( JOMOO_Thread* ) arg;
 	thread_->m_runfn_.run();
 	_endthreadex( 0 );
 	return ;
@@ -39,13 +39,13 @@ void Hazel_Thread::static_thread_svc( void * arg )
 	_endthreadex( -1 );
 }
 
-#include "Hazel_Thread.inl"
+#include "JOMOO_Thread.inl"
 
 #endif // OS_HAS_INLINED
 
 
 _thread_end
 
-#endif // Hazel_MT
+#endif // JOMOO_MT
 
-#endif /* Hazel_THREAD_CPP */
+#endif /* JOMOO_THREAD_CPP */

@@ -1,13 +1,13 @@
 
 
-#ifndef hazel_sap_H
-#define hazel_sap_H
+#ifndef JOMOO_sap_H
+#define JOMOO_sap_H
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
 #include "config_Networks.h"
@@ -17,23 +17,21 @@
 
 _networks_begin
 
-class hazel_sap
+class base_socket
 {
 public:
 
-   MakeException( NetworkException, NetworkError );
-
-  ~hazel_sap (void);
+  ~base_socket (void);
 
   int enable (int value) const;
 
   int disable (int value) const;
 
-  void swap( hazel_sap& r );
+  void swap( JOMOO_sap& r );
 
-  hazel_sap_HANDLE get_handle (void) const;
+  HANDLE get_handle (void) const;
 
-  void set_handle (hazel_sap_HANDLE handle);
+  void set_handle (HANDLE handle);
 
   int set_option (int level,
                   int option,
@@ -47,9 +45,9 @@ public:
 
   int close (void);
 
-  int get_local_addr (Hazel_INET_Addr &) const;
+  int get_local_addr (JOMOO_INET_Addr &) const;
 
-  int get_remote_addr (Hazel_INET_Addr &) const;
+  int get_remote_addr (JOMOO_INET_Addr &) const;
 
   int open (int type = SOCK_STREAM,
             int protocol_family = AF_INET,
@@ -60,7 +58,7 @@ public:
             int protocol_family,
             int protocol,
             WSAPROTOCOL_INFO *protocolinfo,
-            hazel_sap_GROUP g,
+            JOMOO_sap_GROUP g,
             u_long flags,
             int reuse_addr);
 
@@ -71,32 +69,32 @@ public:
 
 protected:
 
-  hazel_sap (void);
+  base_socket (void);
 
-  hazel_sap (int type,
+  base_socket (int type,
             int protocol_family,
             int protocol = 0,
             int reuse_addr = 0);
 
-  hazel_sap (int type,
+  base_socket (int type,
             int protocol_family,
             int protocol,
             WSAPROTOCOL_INFO *protocolinfo,
-            hazel_sap_GROUP g,
+            JOMOO_sap_GROUP g,
              u_long flags,
             int reuse_addr);
 
 private:
 
-  DECLARE_NO_COPY_CLASS( hazel_sap );
+  DECLARE_NO_COPY_CLASS( base_socket );
 
-  hazel_sap_HANDLE handle_;
+  HANDLE handle_;
 };
 
-#if !defined (Hazel_LACKS_INLINE_FUNCTIONS)
-#include "hazel_sap.inl"
-#endif /* Hazel_LACKS_INLINE_FUNCTIONS */
+#if !defined (JOMOO_LACKS_INLINE_FUNCTIONS)
+#include "base_socket.inl"
+#endif /* JOMOO_LACKS_INLINE_FUNCTIONS */
 
 _networks_end
 
-#endif /* hazel_sap_H */
+#endif /* JOMOO_sap_H */

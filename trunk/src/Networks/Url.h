@@ -1,24 +1,24 @@
 
 
-#ifndef Hazel_URL_H
-#define Hazel_URL_H
+#ifndef JOMOO_URL_H
+#define JOMOO_URL_H
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
 #include "config_Networks.h"
 # include "Base/Exception.HPP"
 #include "Base/stringOps.H"
 
-class Hazel_Url_Base
+class JOMOO_Url_Base
 {
 public:
-	virtual ~Hazel_Url_Base(){}
-	//Hazel_Url( const tstring& url );
+	virtual ~JOMOO_Url_Base(){}
+	//JOMOO_Url( const tstring& url );
 	virtual const tstring& protocol() const = 0;
 	virtual const tstring& address() const = 0;
 	virtual const tstring& entity() const = 0;
@@ -26,10 +26,10 @@ public:
 	virtual const tstring& toString() const = 0;
 };
 
-class Hazel_Url : public Hazel_Url_Base
+class JOMOO_Url : public JOMOO_Url_Base
 {
 public:
-	Hazel_Url( const tstring& url );
+	JOMOO_Url( const tstring& url );
 	const tstring& protocol() const;
 	const tstring& address() const;
 	const tstring& entity() const;
@@ -43,4 +43,4 @@ private:
 	tstring toString_;
 };
 
-#endif //Hazel_URL_H
+#endif //JOMOO_URL_H

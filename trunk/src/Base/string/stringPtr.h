@@ -3,15 +3,15 @@
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 # include <memory>
 # include <string>
 # include <vector>
 
-_hazel_begin
+_JOMOO_begin
 
 namespace StringOps
 {
@@ -93,6 +93,6 @@ namespace StringOps
 		tchar *_Myptr;
 	};
 }
-_hazel_end
+_JOMOO_end
 
 #endif // SEAL_BASE_OPS_STRING_OPS_H

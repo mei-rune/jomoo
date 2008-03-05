@@ -5,9 +5,9 @@
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
 #include "config_Networks.h"
@@ -36,7 +36,7 @@ public:
 
 	WIN32_Operation_Proactor& getNativeProactor();
 
-	Hazel_Operation_Proactor& getProactor();
+	JOMOO_Operation_Proactor& getProactor();
 
 	int run( u_long milli_seconds );
 
@@ -46,9 +46,9 @@ public:
 
 	const _util ConfigurationSettings& conf() const;
 
-	Hazel_Endpoint_Ptr create(const tstring&);
+	JOMOO_Endpoint_Ptr create(const tstring&);
 
-	_micro_kernel Component& findComponent( const Hazel_Url_Base& url );
+	_micro_kernel Component& findComponent( const JOMOO_Url_Base& url );
 
 	_micro_kernel IKernel& kernel( );
 

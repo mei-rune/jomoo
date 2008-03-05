@@ -42,7 +42,7 @@ void TCP_Accept_Result::init( Instance_TCP* instance
 	ASSERT( channel != 0 );
 	ASSERT( newchannel.get() != 0 );
 	TCP_Asynch_Result::init( instance,
-		reinterpret_cast< Hazel_HANDLE > ( channel->get_handle().get_handle()) , act );
+		reinterpret_cast< JOMOO_HANDLE > ( channel->get_handle().get_handle()) , act );
 
 	ASSERT( handle != 0 );
 	m_acceptor_ = channel;
@@ -87,12 +87,12 @@ TCP_Accept_Result::handler_type& TCP_Accept_Result::handle()
 	return *m_handle_;
 }
 
-Hazel_Transport_Ptr TCP_Accept_Result::new_channel()
+JOMOO_Transport_Ptr TCP_Accept_Result::new_channel()
 {
 	return m_new_channel_;
 }
 
-Hazel_Acceptor& TCP_Accept_Result::acceptor()
+JOMOO_Acceptor& TCP_Accept_Result::acceptor()
 {
 	return *m_acceptor_;
 }
@@ -142,14 +142,14 @@ void TCP_Accept_Result::complete (size_t bytes_transferred,
 
 	LOG_TRACE( m_new_channel_->getLogger(), m_new_channel_->toString() << BT_TEXT("TCP连接到来!") );
 
-	//if( instance_.getWIN32Proactor().register_handle( ( Hazel_HANDLE )( m_new_channel_->get_handle().get_handle() ), 0 ) != 0 )
+	//if( instance_.getWIN32Proactor().register_handle( ( JOMOO_HANDLE )( m_new_channel_->get_handle().get_handle() ), 0 ) != 0 )
 	//{
 	//	m_success_ = -1;
 	//	LOG_ERROR( m_new_channel_->getLogger(), m_new_channel_->toString() << BT_TEXT("打开异步连接失败，[")
 	//	<< lastError() << BT_TEXT("]") );
 	//}
 
-	Hazel_HANDLE listener = ( Hazel_HANDLE )m_acceptor_->get_handle().get_handle();
+	JOMOO_HANDLE listener = ( JOMOO_HANDLE )m_acceptor_->get_handle().get_handle();
 	setsockopt( m_acceptor_->get_handle().get_handle(), SOL_SOCKET, SO_UPDATE_ACCEPT_CONTEXT,
 			(char *) &listener, sizeof listener );
 
@@ -180,7 +180,7 @@ bool TcpAcceptor::isOpen( )
 }
 
 
-bool TcpAcceptor::open( const Hazel_INET_Addr& addr )
+bool TcpAcceptor::open( const JOMOO_INET_Addr& addr )
 {
 	if( m_handle_.get_handle() != NULL && m_handle_.get_handle() != INVALID_SOCKET )
 		LOG_ERROR_RETURN( getLogger(), toString() << BT_TEXT("已经打开过了!") , false );
@@ -203,7 +203,7 @@ bool TcpAcceptor::open( const Hazel_INET_Addr& addr )
 		<< lastError() << BT_TEXT("]") , false );
 
 	if( instance_.getInstanceNetwork().getNativeProactor().register_handle( 
-		reinterpret_cast< Hazel_HANDLE > ( m_handle_.get_handle() )
+		reinterpret_cast< JOMOO_HANDLE > ( m_handle_.get_handle() )
 		, this ) != 0 )
 		LOG_ERROR_RETURN( getLogger(), BT_TEXT("打开异步监听失败，[")
 		<< lastError() << BT_TEXT("]") , false );
@@ -245,7 +245,7 @@ TcpTransportPtr TcpAcceptor::createTransport()
 }
 
 bool TcpAcceptor::accept( handler_type& handle
-							/*,Hazel_Transport& new_tcp_channel*/
+							/*,JOMOO_Transport& new_tcp_channel*/
 							, void* act )
 {
 	TcpTransportPtr newchannel = createTransport();
@@ -281,7 +281,7 @@ bool TcpAcceptor::accept( handler_type& handle
 //	int remote_size = 1024;
 //
 //
-//	hazel_sap_HANDLE new_socket = ::accept( get_handle().get_handle( )
+//	HANDLE new_socket = ::accept( get_handle().get_handle( )
 //		, ( sockaddr* )remote_addr
 //		, &remote_size );
 //
@@ -291,7 +291,7 @@ bool TcpAcceptor::accept( handler_type& handle
 //    result->new_tcp_channel()->get_handle().set_handle( new_socket );
 //   result->new_tcp_channel()->getRemoteAddr().set_addr ( &remote_addr,remote_size);
 //
-//	//if( instance_.getInstance_IO().getProactor()->register_handle( ( Hazel_HANDLE )result->new_tcp_channel()->get_handle().get_handle(), 0 ) != 0 )
+//	//if( instance_.getInstance_IO().getProactor()->register_handle( ( JOMOO_HANDLE )result->new_tcp_channel()->get_handle().get_handle(), 0 ) != 0 )
 //	//		LOG_ERROR_RETURN( getLogger(), toString() << BT_TEXT("打开异步连接失败，[")
 //	//	<< lastError() << BT_TEXT("]") , false );
 //
@@ -302,10 +302,10 @@ bool TcpAcceptor::accept( handler_type& handle
 
 bool TcpAcceptor::cancel()
 {
-	return ( CancelIo( ( Hazel_HANDLE )m_handle_.get_handle() ) ) ? true : false ;
+	return ( CancelIo( ( JOMOO_HANDLE )m_handle_.get_handle() ) ) ? true : false ;
 }
 
-hazel_socket& TcpAcceptor::get_handle()
+JOMOO_socket& TcpAcceptor::get_handle()
 {
 	return m_handle_;
 }
