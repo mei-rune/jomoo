@@ -290,15 +290,15 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Networks\SOCK_IO.cpp"
+				RelativePath="..\..\src\Networks\tcp_socket.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Networks\SOCK_IO.h"
+				RelativePath="..\..\src\Networks\tcp_socket.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Networks\SOCK_IO.inl"
+				RelativePath="..\..\src\Networks\tcp_socket.inl"
 				>
 			</File>
 			<File
