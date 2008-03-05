@@ -9,7 +9,7 @@
 # pragma once
 # endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
-# include "OS.H"
+# include "platform/os.H"
 # include "Winsock2.h"
 # include "Mswsock.h"
 
