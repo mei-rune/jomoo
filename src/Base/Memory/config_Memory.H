@@ -15,9 +15,9 @@
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 #define _memory_begin namespace MEMORY {
 #define _memory_end }// MEMORY

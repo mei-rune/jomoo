@@ -5,17 +5,17 @@
 
 # include "config.h"
 
-# if !defined (Hazel_LACKS_PRAGMA_ONCE)
+# if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-# endif /* Hazel_LACKS_PRAGMA_ONCE */
+# endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 # include "OS.H"
 # include "Winsock2.h"
 # include "Mswsock.h"
 
- typedef SOCKET Hazel_SOCK_HANDLE;
-# define Hazel_NONBLOCK 1
- typedef unsigned long Hazel_SOCK_GROUP;
+ typedef SOCKET JOMOO_SOCK_HANDLE;
+# define JOMOO_NONBLOCK 1
+ typedef unsigned long JOMOO_SOCK_GROUP;
 
 typedef WSABUF iovec;
 
@@ -29,7 +29,7 @@ namespace OS
 
 # if defined (OS_HAS_INLINED)
 #   include "os_networks.inl"
-# endif /* HAZEL_HAS_INLINED_OSCALLS */
+# endif /* JOMOO_HAS_INLINED_OSCALLS */
 
 };
 

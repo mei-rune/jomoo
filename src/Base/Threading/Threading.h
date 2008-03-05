@@ -1,18 +1,18 @@
 
 
-#ifndef Hazel_SYNCH_TRAITS_H
-#define Hazel_SYNCH_TRAITS_H
+#ifndef JOMOO_SYNCH_TRAITS_H
+#define JOMOO_SYNCH_TRAITS_H
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 #include "Null_Mutex.h"
 #include "Null_Semaphore.h"
 
-#ifdef Hazel_MT
+#ifdef JOMOO_MT
 
 #include "Thread_Mutex.h"
 #include "Thread_Semaphore.h"
@@ -20,55 +20,55 @@
 #include "Base_Thread_Manager.H"
 
 
-_hazel_begin
+_JOMOO_begin
 
-typedef Hazel_Thread_Mutex Hazel_Mutex;
-typedef Hazel_Thread_Semaphore Hazel_Semaphore;
-_hazel_end
+typedef JOMOO_Thread_Mutex JOMOO_Mutex;
+typedef JOMOO_Thread_Semaphore JOMOO_Semaphore;
+_JOMOO_end
 
-#define Hazel_MUTEX_MUTABLE( x ) mutable Hazel_Mutex x
+#define JOMOO_MUTEX_MUTABLE( x ) mutable JOMOO_Mutex x
 
-#define Hazel_MUTEX( x ) Hazel_Mutex x
+#define JOMOO_MUTEX( x ) JOMOO_Mutex x
 
-#define Hazel_MUTEX_STATIC( x ) static Hazel_Mutex x
+#define JOMOO_MUTEX_STATIC( x ) static JOMOO_Mutex x
 
-#define Hazel_GUARD(  g, l )	Hazel_Mutex::spcode_lock g( l )
+#define JOMOO_GUARD(  g, l )	JOMOO_Mutex::spcode_lock g( l )
 
-#define Hazel_GUARD_THROW(  g, l , t )	Hazel_Mutex::spcode_lock g( l , false , true ) ; if( !g.locked() ) ThrowException1( RuntimeException, t )
+#define JOMOO_GUARD_THROW(  g, l , t )	JOMOO_Mutex::spcode_lock g( l , false , true ) ; if( !g.locked() ) ThrowException1( RuntimeException, t )
 
-#define Hazel_GUARD_RETURN(  g, l , r) Hazel_Mutex::spcode_lock g( l, false ); if( !g.locked() ) return r
+#define JOMOO_GUARD_RETURN(  g, l , r) JOMOO_Mutex::spcode_lock g( l, false ); if( !g.locked() ) return r
 
-#define Hazel_GUARD_RETURN_VOID( g, l ) Hazel_Mutex::spcode_lock g( l, false ); if( !g.locked() ) return
+#define JOMOO_GUARD_RETURN_VOID( g, l ) JOMOO_Mutex::spcode_lock g( l, false ); if( !g.locked() ) return
 
 #else
 
-_hazel_begin
+_JOMOO_begin
 
-typedef Hazel_Null_Mutex Hazel_Mutex;
-typedef Hazel_Null_Semaphore Hazel_Semaphore;
+typedef JOMOO_Null_Mutex JOMOO_Mutex;
+typedef JOMOO_Null_Semaphore JOMOO_Semaphore;
 
-_hazel_end
+_JOMOO_end
 
-#define Hazel_MUTEX_MUTABLE( x )
+#define JOMOO_MUTEX_MUTABLE( x )
 
-#define Hazel_MUTEX( x ) 
+#define JOMOO_MUTEX( x ) 
 
-#define Hazel_MUTEX_STATIC( x )
+#define JOMOO_MUTEX_STATIC( x )
 
-#define Hazel_GUARD(  g, l )	
+#define JOMOO_GUARD(  g, l )	
 
-#define Hazel_GUARD_THROW(  g, l , t )	
+#define JOMOO_GUARD_THROW(  g, l , t )	
 
-#define Hazel_GUARD_RETURN( g, l , r) 
+#define JOMOO_GUARD_RETURN( g, l , r) 
 
-#define Hazel_GUARD_RETURN_VOID( g, l ) 
+#define JOMOO_GUARD_RETURN_VOID( g, l ) 
 
-#endif //Hazel_MT
+#endif //JOMOO_MT
 
 namespace Threading
 {
-	typedef _hazel Hazel_Mutex MUTEX;
-	typedef _hazel Hazel_Semaphore SEMAPHORE;
+	typedef _hazel JOMOO_Mutex MUTEX;
+	typedef _hazel JOMOO_Semaphore SEMAPHORE;
 }
 
 #endif //SYNCH_TRAITS_H

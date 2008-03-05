@@ -1,29 +1,29 @@
 
 
-#ifndef Hazel_NULL_MUTEX_H
-#define Hazel_NULL_MUTEX_H
+#ifndef JOMOO_NULL_MUTEX_H
+#define JOMOO_NULL_MUTEX_H
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 #include "config_threading.h"
 #include "Guard.h"
 
-_hazel_begin
+_JOMOO_begin
 
-class Hazel_Null_Mutex
+class JOMOO_Null_Mutex
 {
 public:
-	typedef Hazel_Guard< Hazel_Null_Mutex > spcode_lock;
-	Hazel_Null_Mutex()
+	typedef JOMOO_Guard< JOMOO_Null_Mutex > spcode_lock;
+	JOMOO_Null_Mutex()
 	{
 		
 	}
 
-	~Hazel_Null_Mutex()
+	~JOMOO_Null_Mutex()
 	{
 		
 	}
@@ -44,10 +44,10 @@ public:
 #endif
 
 private:
-	DECLARE_NO_COPY_CLASS( Hazel_Null_Mutex );
+	DECLARE_NO_COPY_CLASS( JOMOO_Null_Mutex );
 };
 
-_hazel_end
+_JOMOO_end
 
 
-#endif // Hazel_NULL_MUTEX_H
+#endif // JOMOO_NULL_MUTEX_H

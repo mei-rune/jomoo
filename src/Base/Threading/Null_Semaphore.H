@@ -1,31 +1,31 @@
 
 
-#ifndef Hazel_NULL_SEMAPHORE_H
-#define Hazel_NULL_SEMAPHORE_H
+#ifndef JOMOO_NULL_SEMAPHORE_H
+#define JOMOO_NULL_SEMAPHORE_H
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 #include "config_threading.h"
 #include "Guard.h"
 
-_hazel_begin
+_JOMOO_begin
 
-class Hazel_Null_Semaphore
+class JOMOO_Null_Semaphore
 {
 public:
 
-	typedef Hazel_Guard< Hazel_Null_Semaphore > spcode_lock;
+	typedef JOMOO_Guard< JOMOO_Null_Semaphore > spcode_lock;
 
-	Hazel_Null_Semaphore( long lInitialCount,long lMaxCount,const char* pSemaphoreName=NULL )
+	JOMOO_Null_Semaphore( long lInitialCount,long lMaxCount,const char* pSemaphoreName=NULL )
 	{
 		
 	}
 
-	~Hazel_Null_Semaphore()
+	~JOMOO_Null_Semaphore()
 	{
 		
 	}
@@ -47,10 +47,10 @@ public:
 
 
 private:
-	DECLARE_NO_COPY_CLASS( Hazel_Null_Semaphore );
+	DECLARE_NO_COPY_CLASS( JOMOO_Null_Semaphore );
 };
 
-_hazel_end
+_JOMOO_end
 
 
-#endif // Hazel_NULL_SEMAPHORE_H
+#endif // JOMOO_NULL_SEMAPHORE_H

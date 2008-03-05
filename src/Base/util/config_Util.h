@@ -6,9 +6,9 @@
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 #define _util_begin  namespace UTIL{
 #define _util_end  } 
@@ -27,7 +27,7 @@ typedef counter_ptr< StringSeq > StringSeqPtr;
 typedef counter_ptr< PropertyDict > PropertyDictPtr;
 
 #ifndef UtilLoggerPtr
-#define UtilLoggerPtr Hazel_Log_Impl*
+#define UtilLoggerPtr JOMOO_Log_Impl*
 #endif 
 
 _util_end

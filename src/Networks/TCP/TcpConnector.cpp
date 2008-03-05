@@ -34,7 +34,7 @@ void TCP_Connect_Result::init( Instance_TCP* instance
 	ASSERT( channel != 0 );
 	ASSERT( newchannel.get() != 0 );
 	TCP_Asynch_Result::init( instance,
-		reinterpret_cast< Hazel_HANDLE > ( newchannel->get_handle().get_handle()) , act );
+		reinterpret_cast< JOMOO_HANDLE > ( newchannel->get_handle().get_handle()) , act );
 
 	ASSERT( handle != 0 );
 	m_channel_ = channel;
@@ -67,12 +67,12 @@ TcpTransportPtr TCP_Connect_Result::new_native_channel()
 	return m_Transport_;
 }
 
-Hazel_Transport_Ptr TCP_Connect_Result::new_channel()
+JOMOO_Transport_Ptr TCP_Connect_Result::new_channel()
 {
-	return dynamicCast< Hazel_Transport , TcpTransport >( m_Transport_ );
+	return dynamicCast< JOMOO_Transport , TcpTransport >( m_Transport_ );
 }
 
-Hazel_Connector& TCP_Connect_Result::connector()
+JOMOO_Connector& TCP_Connect_Result::connector()
 {
 	return *m_channel_;
 }
@@ -191,7 +191,7 @@ bool TcpConnector::isOpen( )
 	return true;
 }
 
-bool TcpConnector::open( const Hazel_INET_Addr& addr )
+bool TcpConnector::open( const JOMOO_INET_Addr& addr )
 {
 	m_remoteaddr_.set_addr( addr.get_addr(), addr.get_size() );
 	toString_ = BT_TEXT( "Á¬½ÓÆ÷[" );
@@ -209,7 +209,7 @@ TcpConnector::LoggerPtr TcpConnector::getLogger()
 }
 
 
-const Hazel_INET_Addr& TcpConnector::getRemoteAddr() const
+const JOMOO_INET_Addr& TcpConnector::getRemoteAddr() const
 {
 	return m_remoteaddr_;
 }

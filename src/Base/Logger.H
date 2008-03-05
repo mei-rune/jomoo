@@ -3,20 +3,20 @@
 /**
 * -*- C++ -*-
 * -------------------------------------------------------------------------------
-* - °Ë®q°–®r ®q°–®r							  Hazel_Log.h,v 1.0 2005/03/25 09:50:54
+* - °Ë®q°–®r ®q°–®r							  JOMOO_Log.h,v 1.0 2005/03/25 09:50:54
 *  ®u®ê®Ä®Ä®é ®q®q °–®r
 * ¶ÚÃÔ¶ÚÃÔÃÔ| ®t------
 * -------------------------------------------------------------------------------
 */
 
-#ifndef _Hazel_Log_Impl_H_
-#define _Hazel_Log_Impl_H_
+#ifndef _JOMOO_Log_Impl_H_
+#define _JOMOO_Log_Impl_H_
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 #include "string.hpp"
 #include "counter_ptr.hpp"
@@ -48,7 +48,7 @@ public:
 	};
 
 	/**
-	 * virtual Hazel_Log_Impl destructor
+	 * virtual JOMOO_Log_Impl destructor
 	 */
 	virtual ~ILogger(){};
 
@@ -733,4 +733,4 @@ public:
 
 #endif // _NO_LOG_
 
-#endif // _Hazel_Log_H_
+#endif // _JOMOO_Log_H_

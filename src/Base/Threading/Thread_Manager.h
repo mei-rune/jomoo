@@ -1,33 +1,33 @@
 
 
-#ifndef Hazel_THREAD_MANAGER_H
-#define Hazel_THREAD_MANAGER_H
+#ifndef JOMOO_THREAD_MANAGER_H
+#define JOMOO_THREAD_MANAGER_H
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 #include "config_threading.h"
 
-#ifdef Hazel_MT
+#ifdef JOMOO_MT
 
 #include <set>
 #include "synch/synch_traits.h"
-#include "Hazel_Thread.h"
+#include "JOMOO_Thread.h"
 
 _thread_begin
 
-class Hazel_Thread_Manager //: public Hazel_Base_Thread_Manager
+class JOMOO_Thread_Manager //: public JOMOO_Base_Thread_Manager
 {
 public:
 
-	typedef std::set< Hazel_Thread* > container_type;
+	typedef std::set< JOMOO_Thread* > container_type;
 
-	Hazel_Thread_Manager( const tchar* descr );
+	JOMOO_Thread_Manager( const tchar* descr );
 
-	~Hazel_Thread_Manager();
+	~JOMOO_Thread_Manager();
 
 	/**
 	 * 创建一个线程
@@ -36,7 +36,7 @@ public:
 	 * @return 成功返回线程对象，否则返回0
 	 * @remarks 注意不要试图删除它，因为它是属于本线程组所有
 	 */
-	Hazel_Thread* create_thread( Hazel_Thread::Runnable& runfn , const tchar* descr = 0 );
+	JOMOO_Thread* create_thread( JOMOO_Thread::Runnable& runfn , const tchar* descr = 0 );
 
 	/**
 	 * 增加一个线程
@@ -44,14 +44,14 @@ public:
 	 * @remarks 注意，将线程对象添加到本线程组后，不要试图删
 	 * 除它，因为在本线程组柝构时会自动删除它。此外本函数可能会扔出异常。
 	 */
-	void add_thread( Hazel_Thread* thrd );
+	void add_thread( JOMOO_Thread* thrd );
 
 	/**
 	 * 删除一个线程
 	 * @param[ in ] thrd 线程对象
 	 * @remarks 注意，本函数可能会扔出异常。
 	 */
-	void remove_thread( Hazel_Thread* thrd);
+	void remove_thread( JOMOO_Thread* thrd);
 
 	/**
 	 * 等待所有线程结束
@@ -65,8 +65,8 @@ public:
 	const tstring& toString() const;
 
 private:
-	DECLARE_NO_COPY_CLASS( Hazel_Thread_Manager );
-	Hazel_MUTEX_MUTABLE( m_mutex_ );
+	DECLARE_NO_COPY_CLASS( JOMOO_Thread_Manager );
+	JOMOO_MUTEX_MUTABLE( m_mutex_ );
 	container_type m_thread_group_;
 	tstring m_descr_;
 	mutable tstring m_to_string_;
@@ -75,13 +75,13 @@ private:
 
 #ifdef OS_HAS_INLINED
 
-#include "Hazel_Thread_Manager.inl"
+#include "JOMOO_Thread_Manager.inl"
 
 #endif //
 
 _thread_end
 
 
-#endif // Hazel_MT
+#endif // JOMOO_MT
 
-#endif // Hazel_THREAD_MANAGER_H
+#endif // JOMOO_THREAD_MANAGER_H

@@ -20,11 +20,11 @@ class TestPluginFactory : public _seal PluginFactory<TestPluginType *(int, doubl
 public:
 	static TestPluginFactory& get (void)
 	{
-		return Hazel_Singleton< TestPluginFactory , Threading::MUTEX >::get();
+		return JOMOO_Singleton< TestPluginFactory , Threading::MUTEX >::get();
 	}
 private:
 
-	friend class Hazel_Singleton< TestPluginFactory , Threading::MUTEX >;
+	friend class JOMOO_Singleton< TestPluginFactory , Threading::MUTEX >;
 
 	TestPluginFactory ( /*IPluginManager& manager*/ )    : _seal PluginFactory<TestPluginType *(int, double)> ( _seal getPluginManager(), "Test","2")
 	{}

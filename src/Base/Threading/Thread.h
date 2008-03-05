@@ -1,26 +1,26 @@
 
 
-#ifndef Hazel_THREAD_H
-#define Hazel_THREAD_H
+#ifndef JOMOO_THREAD_H
+#define JOMOO_THREAD_H
 
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 #include "config_threading.h"
 
-#ifdef Hazel_MT
+#ifdef JOMOO_MT
 
 
 _thread_begin
 
 /**
- * @Brief Hazel_Base_Thread 线程接口，本线程封装了平台的各种线程接口
+ * @Brief JOMOO_Base_Thread 线程接口，本线程封装了平台的各种线程接口
  */
-class  Hazel_Thread
+class  JOMOO_Thread
 {
 public:
 	/**
@@ -41,9 +41,9 @@ public:
 		virtual void run() = 0;
 	};
 
-	Hazel_Thread ( Runnable& runfn , const tchar* descr );
+	JOMOO_Thread ( Runnable& runfn , const tchar* descr );
 
-	~Hazel_Thread();
+	~JOMOO_Thread();
 
 	/**
 	 * 等待线程结束
@@ -61,7 +61,7 @@ public:
 	static void static_thread_svc( void * arg );
 
 private:
-	DECLARE_NO_COPY_CLASS( Hazel_Thread );
+	DECLARE_NO_COPY_CLASS( JOMOO_Thread );
 
 	/**
 	 * 起动线程
@@ -80,18 +80,18 @@ private:
 
 #ifdef OS_HAS_INLINED
 
-#include "Hazel_Thread.inl"
+#include "JOMOO_Thread.inl"
 
 #endif //
 
 _thread_end
 
-#ifndef HAZEL_HAS_INLINED
+#ifndef JOMOO_HAS_INLINED
 
-//JOMOO_Export_C _thread Hazel_Thread* ___make_Hazel_Thread( _thread Runnable& runfn ,const tchar* descr );
-JOMOO_Export_C _thread Hazel_Thread* ___get_Hazel_Thread( );
+//JOMOO_Export_C _thread JOMOO_Thread* ___make_JOMOO_Thread( _thread Runnable& runfn ,const tchar* descr );
+JOMOO_Export_C _thread JOMOO_Thread* ___get_JOMOO_Thread( );
 
-#endif // HAZEL_HAS_INLINED
+#endif // JOMOO_HAS_INLINED
 
 _thread_begin
 
@@ -101,13 +101,13 @@ namespace ThreadOP
 	 * 取得本线的线程对象
 	 * 成功返回线程对象，失败返回0;
 	 */
-	inline Hazel_Thread* get_self()
+	inline JOMOO_Thread* get_self()
 	{
-#ifndef HAZEL_HAS_INLINED
-		return ___get_Hazel_Thread( );
+#ifndef JOMOO_HAS_INLINED
+		return ___get_JOMOO_Thread( );
 #else 
 		return 0;
-#endif // HAZEL_HAS_INLINED
+#endif // JOMOO_HAS_INLINED
 	}
 
 	inline void yield()
@@ -123,6 +123,6 @@ namespace ThreadOP
 
 _thread_end
 
-#endif // Hazel_MT
+#endif // JOMOO_MT
 
-#endif /* Hazel_THREAD_H */
+#endif /* JOMOO_THREAD_H */

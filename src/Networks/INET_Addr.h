@@ -1,12 +1,12 @@
 
-#ifndef Hazel_INET_ADDR_H
-#define Hazel_INET_ADDR_H
+#ifndef JOMOO_INET_ADDR_H
+#define JOMOO_INET_ADDR_H
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
 # include "config_Networks.h"
@@ -15,37 +15,37 @@
 
 _networks_begin
 
-class Hazel_INET_Addr
+class JOMOO_INET_Addr
 {
 public:
 
-	Hazel_INET_Addr (void);
+	JOMOO_INET_Addr (void);
 
-	Hazel_INET_Addr (const Hazel_INET_Addr & );
+	JOMOO_INET_Addr (const JOMOO_INET_Addr & );
 
-	Hazel_INET_Addr (const sockaddr_in *, int len);
+	JOMOO_INET_Addr (const sockaddr_in *, int len);
 
-	Hazel_INET_Addr (u_short port_number,
+	JOMOO_INET_Addr (u_short port_number,
 		u_long ip_addr = INADDR_ANY );
 
-	Hazel_INET_Addr (u_short port_number,
+	JOMOO_INET_Addr (u_short port_number,
 		const char* host_name );
 
-	Hazel_INET_Addr (const char* port_number,
+	JOMOO_INET_Addr (const char* port_number,
 		const char* ip_addr );
 
-	explicit Hazel_INET_Addr (const char* address);
+	explicit JOMOO_INET_Addr (const char* address);
 
-	~Hazel_INET_Addr (void);
+	~JOMOO_INET_Addr (void);
 
 
-	bool operator < (const Hazel_INET_Addr &rhs) const;
+	bool operator < (const JOMOO_INET_Addr &rhs) const;
 
-	bool operator > (const Hazel_INET_Addr &rhs) const;
+	bool operator > (const JOMOO_INET_Addr &rhs) const;
 
-	bool operator == (const Hazel_INET_Addr &SAP) const;
+	bool operator == (const JOMOO_INET_Addr &SAP) const;
 
-	bool operator != (const Hazel_INET_Addr &SAP) const;
+	bool operator != (const JOMOO_INET_Addr &SAP) const;
 
 	void set_port_number (u_short port_number , bool encode = true );
 
@@ -55,7 +55,7 @@ public:
 
 	u_short get_port_number( void ) const ;
 
-	int set (const Hazel_INET_Addr &);
+	int set (const JOMOO_INET_Addr &);
 
 	int set (const char* addr );
 
@@ -100,10 +100,10 @@ private:
 	mutable tstring to_string_;
 };
 
-#if !defined (Hazel_LACKS_INLINE_FUNCTIONS)
+#if !defined (JOMOO_LACKS_INLINE_FUNCTIONS)
 #include "INET_Addr.inl"
 #endif
 
 _networks_end
 
-#endif /* Hazel_INET_ADDR_H */
+#endif /* JOMOO_INET_ADDR_H */

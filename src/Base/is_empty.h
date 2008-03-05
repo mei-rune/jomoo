@@ -3,13 +3,13 @@
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
 
-_hazel_begin
+_JOMOO_begin
 
 #ifdef _STRING_
 template<class _Elem,
@@ -111,6 +111,6 @@ template<class _Kty,
 	}
 #endif
 
-_hazel_end
+_JOMOO_end
 
 #endif // is_empty_H

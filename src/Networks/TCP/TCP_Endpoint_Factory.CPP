@@ -17,7 +17,7 @@ TCP_Endpoint_Factory::TCP_Endpoint_Factory( )
 {
 }
 
-Hazel_Endpoint* TCP_Endpoint_Factory::create( Instance_Networks& instance, const Hazel_Url_Base& url )
+JOMOO_Endpoint* TCP_Endpoint_Factory::create( Instance_Networks& instance, const JOMOO_Url_Base& url )
 {
 	Instance_TCP* tcpinstance =  dynamicCast< Instance_TCP , _micro_kernel Component>( &(instance.findComponent( url ) ) ) ;
 	if( tcpinstance == 0 )
@@ -26,9 +26,9 @@ Hazel_Endpoint* TCP_Endpoint_Factory::create( Instance_Networks& instance, const
 	return tcpinstance->getEndpiontFactory().create( tcpinstance, &url );
 }
 
-void TCP_Endpoint_Factory::release( Hazel_Endpoint* endpoint )
+void TCP_Endpoint_Factory::release( JOMOO_Endpoint* endpoint )
 {
-	TcpEndpoint* tcpendpoint = dynamicCast< TcpEndpoint, Hazel_Endpoint >( endpoint );
+	TcpEndpoint* tcpendpoint = dynamicCast< TcpEndpoint, JOMOO_Endpoint >( endpoint );
 	if( tcpendpoint != 0 )
 		tcpendpoint ->release();
 }

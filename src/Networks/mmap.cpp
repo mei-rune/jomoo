@@ -12,15 +12,15 @@ static char THIS_FILE[] = __FILE__;
 
 _networks_begin
 
-Hazel_Mem_MAP::Hazel_Mem_MAP (void)
+JOMOO_Mem_MAP::JOMOO_Mem_MAP (void)
 : base_addr_ ( 0 ),
 length_ (0),
-handle_ (HAZEL_INVALID_HANDLE),
-file_mapping_ (HAZEL_INVALID_HANDLE)
+handle_ (JOMOO_INVALID_HANDLE),
+file_mapping_ (JOMOO_INVALID_HANDLE)
 {
 }
 
-Hazel_Mem_MAP::Hazel_Mem_MAP (const tchar *file_name,
+JOMOO_Mem_MAP::JOMOO_Mem_MAP (const tchar *file_name,
 						  int len,
 						  int prot,
 						  int share,
@@ -29,8 +29,8 @@ Hazel_Mem_MAP::Hazel_Mem_MAP (const tchar *file_name,
 						  LPSECURITY_ATTRIBUTES sa)
 						  : base_addr_ ( 0 ),
 						  length_ (0),
-						  handle_ (HAZEL_INVALID_HANDLE),
-						  file_mapping_ (HAZEL_INVALID_HANDLE)
+						  handle_ (JOMOO_INVALID_HANDLE),
+						  file_mapping_ (JOMOO_INVALID_HANDLE)
 {
 	if (this->map (file_name,
 		len,
@@ -43,7 +43,7 @@ Hazel_Mem_MAP::Hazel_Mem_MAP (const tchar *file_name,
 
 }
 
-Hazel_Mem_MAP::Hazel_Mem_MAP (Hazel_HANDLE handle,
+JOMOO_Mem_MAP::JOMOO_Mem_MAP (JOMOO_HANDLE handle,
 						  int len,
 						  int prot,
 						  int share,
@@ -52,8 +52,8 @@ Hazel_Mem_MAP::Hazel_Mem_MAP (Hazel_HANDLE handle,
 						  LPSECURITY_ATTRIBUTES sa)
 						  : base_addr_ ( 0 ),
 						  length_ (0),
-						  handle_ (HAZEL_INVALID_HANDLE),
-						  file_mapping_ (HAZEL_INVALID_HANDLE)
+						  handle_ (JOMOO_INVALID_HANDLE),
+						  file_mapping_ (JOMOO_INVALID_HANDLE)
 {
 	if (this->map (handle,
 		len,
@@ -65,19 +65,19 @@ Hazel_Mem_MAP::Hazel_Mem_MAP (Hazel_HANDLE handle,
 		ThrowException1( RuntimeException , lastError() );
 }
 
-Hazel_Mem_MAP::~Hazel_Mem_MAP (void)
+JOMOO_Mem_MAP::~JOMOO_Mem_MAP (void)
 {
 	this->close ();
 }
 
-int Hazel_Mem_MAP::close (void)
+int JOMOO_Mem_MAP::close (void)
 {
 	this->unmap ();
 	return this->close_handle ();
 }
 
 
-int Hazel_Mem_MAP::map_it (Hazel_HANDLE handle,
+int JOMOO_Mem_MAP::map_it (JOMOO_HANDLE handle,
 						 int length_request,
 						 int prot,
 						 int share,
@@ -99,7 +99,7 @@ int Hazel_Mem_MAP::map_it (Hazel_HANDLE handle,
 }
 
 
-int Hazel_Mem_MAP::map (const tchar *file_name,
+int JOMOO_Mem_MAP::map (const tchar *file_name,
 					  int len,
 					  int prot,
 					  int share,
@@ -115,7 +115,7 @@ int Hazel_Mem_MAP::map (const tchar *file_name,
 		this->length_,
 		prot,
 		share,
-		HAZEL_INVALID_HANDLE_VALUE,
+		JOMOO_INVALID_HANDLE_VALUE,
 		offset,
 		this->file_mapping_,
 		sa
@@ -125,7 +125,7 @@ int Hazel_Mem_MAP::map (const tchar *file_name,
 }
 
 
-int Hazel_Mem_MAP::map (Hazel_HANDLE handle,
+int JOMOO_Mem_MAP::map (JOMOO_HANDLE handle,
 					  int len,
 					  int prot,
 					  int share,
@@ -137,7 +137,7 @@ int Hazel_Mem_MAP::map (Hazel_HANDLE handle,
 	return this->map_it (handle, len, prot, share, addr, offset, sa);
 }
 
-int Hazel_Mem_MAP::map (int len,
+int JOMOO_Mem_MAP::map (int len,
 					  int prot,
 					  int share,
 					  void *addr,
@@ -154,42 +154,42 @@ int Hazel_Mem_MAP::map (int len,
 }
 
 int
-Hazel_Mem_MAP::remove (void)
+JOMOO_Mem_MAP::remove (void)
 {
 	this->close ();
 	return 0;
 }
 
-const tstring& Hazel_Mem_MAP::filename (void) const
+const tstring& JOMOO_Mem_MAP::filename (void) const
 {
 	return this->filename_;
 }
 
-void* Hazel_Mem_MAP::addr (void) const
+void* JOMOO_Mem_MAP::addr (void) const
 {
 	return this->base_addr_;
 }
 
-size_t Hazel_Mem_MAP::size (void) const
+size_t JOMOO_Mem_MAP::size (void) const
 {
 	return this->length_;
 }
 
-int Hazel_Mem_MAP::close_filemapping_handle (void)
+int JOMOO_Mem_MAP::close_filemapping_handle (void)
 {
 	int result = 0;
 
 	if (this->file_mapping_ != this->handle_
-		&& this->file_mapping_ != HAZEL_INVALID_HANDLE)
+		&& this->file_mapping_ != JOMOO_INVALID_HANDLE)
 	{
 		result = OS::close_handle (this->file_mapping_) ? 0 : -1;
-		this->file_mapping_ = HAZEL_INVALID_HANDLE;
+		this->file_mapping_ = JOMOO_INVALID_HANDLE;
 	}
 
 	return result;
 }
 
-int Hazel_Mem_MAP::unmap ( )
+int JOMOO_Mem_MAP::unmap ( )
 {
 
 	this->close_filemapping_handle ();
@@ -204,32 +204,32 @@ int Hazel_Mem_MAP::unmap ( )
 	return 0;
 }
 
-int Hazel_Mem_MAP::sync (int flags)
+int JOMOO_Mem_MAP::sync (int flags)
 {
 	return OS::msync (this->base_addr_,
 		this->length_,
 		flags);
 }
 
-int Hazel_Mem_MAP::protect ( int prot )
+int JOMOO_Mem_MAP::protect ( int prot )
 {
 	return OS::mprotect (this->base_addr_, this->length_, prot);
 }
 
-int Hazel_Mem_MAP::advise (int behavior )
+int JOMOO_Mem_MAP::advise (int behavior )
 {
 	return OS::madvise ( this->base_addr_,
 		this->length_ ,
 		behavior);
 }
 
-int Hazel_Mem_MAP::close_handle (void)
+int JOMOO_Mem_MAP::close_handle (void)
 {
 	int result = 0;
-	if( this->handle_ != HAZEL_INVALID_HANDLE )
+	if( this->handle_ != JOMOO_INVALID_HANDLE )
 	{
 		result = OS::close_handle (this->handle_) ? 0 : -1;
-		this->handle_ = HAZEL_INVALID_HANDLE;
+		this->handle_ = JOMOO_INVALID_HANDLE;
 	}
 	return result;
 }

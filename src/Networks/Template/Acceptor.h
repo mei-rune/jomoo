@@ -6,9 +6,9 @@
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
 #include "../config_Networks.h"
@@ -113,14 +113,14 @@ private:
 
 template< Acceptor_T_1 >
 class Acceptor_T  : public B
-	// : public Hazel_Acceptor
+	// : public JOMOO_Acceptor
 {
 public:	
 
 	typedef typename B::handler_type handler_type;
 
 	/**
-	 * Hazel_TCP_Acceptor constructor
+	 * JOMOO_TCP_Acceptor constructor
 	 */
 	Acceptor_T( T* ptr );
 
@@ -148,11 +148,11 @@ private:
 
 _networks_end
 
-#if defined (Hazel_TEMPLATES_REQUIRE_SOURCE)
+#if defined (JOMOO_TEMPLATES_REQUIRE_SOURCE)
 #include "Acceptor.T"
 #endif /* ACE_TEMPLATES_REQUIRE_SOURCE */
 
-#if defined (Hazel_TEMPLATES_REQUIRE_PRAGMA)
+#if defined (JOMOO_TEMPLATES_REQUIRE_PRAGMA)
 #pragma implementation ("Acceptor.T")
 #endif /* ACE_TEMPLATES_REQUIRE_PRAGMA */
 

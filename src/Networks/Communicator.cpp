@@ -1,6 +1,6 @@
 
 #include "Communicator.H"
-#include "hazel_sap.H"
+#include "JOMOO_sap.H"
 
 
 #ifdef _MEMORY_DEBUG
@@ -112,7 +112,7 @@ Communicator::Communicator()
 : toString_( "Communicator" )
 {
 	if( init_ == 0 )
-		hazel_sap::initsocket();
+		JOMOO_sap::initsocket();
 
 	init_ ++;
 }
@@ -121,7 +121,7 @@ Communicator::~Communicator()
 {
 	init_ --;
 	if( init_ == 0 )
-		hazel_sap::shutdownsock();
+		JOMOO_sap::shutdownsock();
 }
 
 int Communicator::open( _util ConfigurationSettings& config )
@@ -153,7 +153,7 @@ int Communicator::run( u_long milli_seconds )
 	return instance_.run( milli_seconds );
 }
 
-Hazel_Operation_Proactor& Communicator::getProactor()
+JOMOO_Operation_Proactor& Communicator::getProactor()
 {
 	return instance_.getProactor();
 }
@@ -168,7 +168,7 @@ void Communicator::setLogger( LoggerPtr logger )
 	return instance_.setLogger( logger );
 }
 
-Hazel_Endpoint_Ptr Communicator::create(const tstring& addr )
+JOMOO_Endpoint_Ptr Communicator::create(const tstring& addr )
 {
 	return instance_.create( addr );
 }
@@ -180,8 +180,8 @@ const std::string& Communicator::toString() const
 
 _networks_end
 
-JOMOO_Export_C _networks Hazel_Communicator* initializeCommunicator_NoArg( )
+JOMOO_Export_C _networks JOMOO_Communicator* initializeCommunicator_NoArg( )
 {
-	std::auto_ptr< Hazel_Communicator > ptr( new Communicator() );
+	std::auto_ptr< JOMOO_Communicator > ptr( new Communicator() );
 	return ptr.release();
 }

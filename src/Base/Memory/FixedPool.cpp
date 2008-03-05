@@ -18,8 +18,8 @@ FixedPool::FixedPool( const tstring& name , size_t number, size_t size )
 	ASSERT( number_ > 0 );
 	
 
-	size_t CHUNK_SIZE = Hazel_LCD( CHUNK_HEAD_SIZE + chunk_size_ , sizeof( void* ) );
-	lpvAddr_ = ::LocalAlloc(GPTR, Hazel_LCD(  CHUNK_SIZE * number_ , KB_SIZE ) );
+	size_t CHUNK_SIZE = JOMOO_LCD( CHUNK_HEAD_SIZE + chunk_size_ , sizeof( void* ) );
+	lpvAddr_ = ::LocalAlloc(GPTR, JOMOO_LCD(  CHUNK_SIZE * number_ , KB_SIZE ) );
 
 	if( lpvAddr_ == 0 )
 		ThrowException1( BadMemoryException, lastError() );

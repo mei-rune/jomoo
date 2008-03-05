@@ -6,16 +6,16 @@
 #pragma warning (disable : 4005) // macro redefinition
 
 // E.g. <typename T0, typename T1, typename T2, ...>
-#define FACTORY_TEMPLATE_PARAMS    Hazel_MAKE_PARAMS1( FACTORY_NUM_ARGS, typename T)
+#define FACTORY_TEMPLATE_PARAMS    JOMOO_MAKE_PARAMS1( FACTORY_NUM_ARGS, typename T)
 
 // E.g. <T0, T1, T2, ...>
-#define FACTORY_TEMPLATE_ARGS      Hazel_MAKE_PARAMS1( FACTORY_NUM_ARGS, T)
+#define FACTORY_TEMPLATE_ARGS      JOMOO_MAKE_PARAMS1( FACTORY_NUM_ARGS, T)
 
 // E.g. (T0 a0, T1 a1, T2 a2, ...)
-#define FACTORY_FUNCTION_PARAMS    Hazel_MAKE_PARAMS2( FACTORY_NUM_ARGS, T, a)
+#define FACTORY_FUNCTION_PARAMS    JOMOO_MAKE_PARAMS2( FACTORY_NUM_ARGS, T, a)
 
 // E.g. <a0, a1, a2, ...>
-#define FACTORY_FUNCTION_ARGS      Hazel_MAKE_PARAMS1( FACTORY_NUM_ARGS, a)
+#define FACTORY_FUNCTION_ARGS      JOMOO_MAKE_PARAMS1( FACTORY_NUM_ARGS, a)
 
 
 #if FACTORY_NUM_ARGS == 0
@@ -27,7 +27,7 @@
 #pragma warning (pop)
 
 
-_hazel_begin
+_JOMOO_begin
 
 /**
  * Brief 本类是一个虚工厂接口模板，用于定义一个虚工厂接口
@@ -74,4 +74,4 @@ public:
 };
 
 
-_hazel_end
+_JOMOO_end

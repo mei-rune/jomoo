@@ -18,7 +18,7 @@ WIN32_Operation_Proactor::WIN32_Operation_Proactor(  )
 {
 	//for( int i = 0; i < 100; i ++ )
 	//{
-	//	queue_.push( WIN32_Defer( 0, !result_delete_, this, HAZEL_INVALID_HANDLE_VALUE , 0 );
+	//	queue_.push( WIN32_Defer( 0, !result_delete_, this, JOMOO_INVALID_HANDLE_VALUE , 0 );
 	//}
 }
 
@@ -57,13 +57,13 @@ void WIN32_Operation_Proactor::close (void)
 
 	for (;;)
 	{
-		Hazel_OVERLAPPED *overlapped = 0;
+		JOMOO_OVERLAPPED *overlapped = 0;
 		u_long bytes_transferred = 0;
-#if defined (Hazel_WIN64)
+#if defined (JOMOO_WIN64)
 		ULONG_PTR completion_key = 0;
 #else
 		ULONG completion_key = 0;
-#endif /* Hazel_WIN64 */
+#endif /* JOMOO_WIN64 */
 
 		BOOL res = ::GetQueuedCompletionStatus
 			(m_completion_port_,
@@ -88,7 +88,7 @@ void WIN32_Operation_Proactor::close (void)
 
 int WIN32_Operation_Proactor::handle_events (unsigned long milli_seconds)
 {
-	Hazel_OVERLAPPED *overlapped = 0;
+	JOMOO_OVERLAPPED *overlapped = 0;
 	u_long bytes_transferred = 0;
 
 	ULONG_PTR completion_key = 0;
@@ -176,7 +176,7 @@ int WIN32_Operation_Proactor::post_completion (WIN32_Operation_Result *result )
 	return 0;
 }
 
-int WIN32_Operation_Proactor::post_completion ( Hazel_Operation_Result_Ptr result)
+int WIN32_Operation_Proactor::post_completion ( JOMOO_Operation_Result_Ptr result)
 {
 	//std::auto_ptr< WIN32_Defer > defer( createDefer( result ) );
 	//if( defer.get() == 0 )
@@ -187,26 +187,26 @@ int WIN32_Operation_Proactor::post_completion ( Hazel_Operation_Result_Ptr resul
 	//return 0;
 }
 
-//WIN32_Defer* WIN32_Operation_Proactor::createDefer( Hazel_Operation_Result_Ptr result )
+//WIN32_Defer* WIN32_Operation_Proactor::createDefer( JOMOO_Operation_Result_Ptr result )
 //{
 //	//WIN32_Defer* p = queue_.pop();
 //	//if( p != 0 )
 //	//	return p;
-//	//return ( new WIN32_Defer( result ,!result_delete_, *this , HAZEL_INVALID_HANDLE_VALUE , 0  ) );
+//	//return ( new WIN32_Defer( result ,!result_delete_, *this , JOMOO_INVALID_HANDLE_VALUE , 0  ) );
 //	return 0;
 //}
 
-Hazel_HANDLE WIN32_Operation_Proactor::get_handle()
+JOMOO_HANDLE WIN32_Operation_Proactor::get_handle()
 {
 	return m_completion_port_;
 }
 
-int WIN32_Operation_Proactor::register_handle (Hazel_HANDLE handle,
+int WIN32_Operation_Proactor::register_handle (JOMOO_HANDLE handle,
 											   const void *completion_key)
 {
 	ULONG_PTR comp_key = reinterpret_cast < ULONG_PTR >( (void*)completion_key);
 
-	Hazel_HANDLE cp = ::CreateIoCompletionPort (handle,
+	JOMOO_HANDLE cp = ::CreateIoCompletionPort (handle,
 		this->m_completion_port_,
 		comp_key,
 		this->m_number_of_threads_);

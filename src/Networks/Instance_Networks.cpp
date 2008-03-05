@@ -47,7 +47,7 @@ WIN32_Operation_Proactor& InstanceNetworks::getNativeProactor()
 	return m_proactor_;
 }
 
-Hazel_Operation_Proactor& InstanceNetworks::getProactor()
+JOMOO_Operation_Proactor& InstanceNetworks::getProactor()
 {
 	return m_proactor_;
 }
@@ -72,13 +72,13 @@ const _util ConfigurationSettings& InstanceNetworks::conf() const
 	return config_;
 }
 
-Hazel_Endpoint_Ptr InstanceNetworks::create(const std::string& endpoint )
+JOMOO_Endpoint_Ptr InstanceNetworks::create(const std::string& endpoint )
 {
-	Hazel_Url url( endpoint );
-	return Hazel_Endpoint_Ptr( Hazel_Endpoint_Factory::get().create( url.protocol() ,*this, url ) );
+	JOMOO_Url url( endpoint );
+	return JOMOO_Endpoint_Ptr( JOMOO_Endpoint_Factory::get().create( url.protocol() ,*this, url ) );
 }
 
-_micro_kernel Component& InstanceNetworks::findComponent( const Hazel_Url_Base& url )
+_micro_kernel Component& InstanceNetworks::findComponent( const JOMOO_Url_Base& url )
 {
 	return kernel().component( url.protocol() );
 }

@@ -1,14 +1,14 @@
 // Communication
 
 
-#ifndef __Hazel_CHANNEL_RESULT__
-#define __Hazel_CHANNEL_RESULT__
+#ifndef __JOMOO_CHANNEL_RESULT__
+#define __JOMOO_CHANNEL_RESULT__
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
 # include "../config_Networks.h"
@@ -16,10 +16,10 @@
 
 _networks_begin
 
-class Hazel_Transport;
-class Hazel_Transport_Handler;
+class JOMOO_Transport;
+class JOMOO_Transport_Handler;
 
-class Hazel_Transport_Result
+class JOMOO_Transport_Result
 {
 
 public:
@@ -27,7 +27,7 @@ public:
 	/**
 	 * virtual destructor
 	 */
-	virtual ~Hazel_Transport_Result(){}
+	virtual ~JOMOO_Transport_Result(){}
 
 	/**
 	 * 本次操作的key
@@ -46,8 +46,8 @@ public:
 	 */
 	virtual int error() const = 0;
 
-};// END CLASS DEFINITION Hazel_Transport_Result
+};// END CLASS DEFINITION JOMOO_Transport_Result
 
 _networks_end
 
-#endif // __Hazel_CHANNEL_RESULT__
+#endif // __JOMOO_CHANNEL_RESULT__

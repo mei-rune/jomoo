@@ -1,94 +1,94 @@
 
-#ifndef Hazel_ACCEPTOR_H
-#define Hazel_ACCEPTOR_H
+#ifndef JOMOO_ACCEPTOR_H
+#define JOMOO_ACCEPTOR_H
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
 #include "../config_Networks.h"
-#include "Hazel_Transport.h"
+#include "JOMOO_Transport.h"
 
 _networks_begin
 
 
-class Hazel_Accept_Handler;
-class Hazel_Acceptor;
-typedef counter_ptr< Hazel_Acceptor > Hazel_Acceptor_Ptr;
+class JOMOO_Accept_Handler;
+class JOMOO_Acceptor;
+typedef counter_ptr< JOMOO_Acceptor > JOMOO_Acceptor_Ptr;
 
-class Hazel_Accept_Result : virtual public Hazel_Transport_Result
+class JOMOO_Accept_Result : virtual public JOMOO_Transport_Result
 {
 public:
 
-	typedef Hazel_Transport_Ptr transportptr;
-	typedef Hazel_Accept_Handler handler_type;
-	typedef Hazel_Acceptor acceptor_type;
-	typedef Hazel_Transport transport_type;
+	typedef JOMOO_Transport_Ptr transportptr;
+	typedef JOMOO_Accept_Handler handler_type;
+	typedef JOMOO_Acceptor acceptor_type;
+	typedef JOMOO_Transport transport_type;
 
 	/**
 	 * virtual destructor
 	 */
-	virtual ~Hazel_Accept_Result(){}
+	virtual ~JOMOO_Accept_Result(){}
 
 	/**
 	 * 取得新建立的channel句柄
 	 * @return 新建立的channel句柄
 	 */
-	virtual Hazel_Transport_Ptr new_channel() = 0;
+	virtual JOMOO_Transport_Ptr new_channel() = 0;
 
 	/**
 	 * 本次异步操作的回调句柄
 	 */
-	virtual Hazel_Accept_Handler& handle() = 0;
+	virtual JOMOO_Accept_Handler& handle() = 0;
 
 	/**
 	 * 本次异步操作的acceptor句柄
 	 */
-	virtual Hazel_Acceptor& acceptor() = 0;
+	virtual JOMOO_Acceptor& acceptor() = 0;
 
-};// END CLASS DEFINITION Hazel_Accept_Result
+};// END CLASS DEFINITION JOMOO_Accept_Result
 
 /**
- * @Brief Hazel_Accept_Handler Acceptor 异步回调接口，@see Hazel_Transport
+ * @Brief JOMOO_Accept_Handler Acceptor 异步回调接口，@see JOMOO_Transport
  */
-class Hazel_Accept_Handler
+class JOMOO_Accept_Handler
 {
 public:
 	
-	typedef Hazel_Accept_Result result_type;
+	typedef JOMOO_Accept_Result result_type;
 
 	/**
 	 * virtual destructor
 	 */
-	virtual ~Hazel_Accept_Handler(){}
+	virtual ~JOMOO_Accept_Handler(){}
 
 	/**
 	 * channel连接轮询操作回调接口
-	 * @see Hazel_Accept_Result
-	 * @see Hazel_Transport::accept
+	 * @see JOMOO_Accept_Result
+	 * @see JOMOO_Transport::accept
 	 */
-	virtual void onAccept(Hazel_Accept_Result& result) = 0;
+	virtual void onAccept(JOMOO_Accept_Result& result) = 0;
 
 	/**
 	 * 取得实例的描述
 	 */
 	virtual const tstring& toString() const = 0;
 
-};// END CLASS DEFINITION Hazel_Accept_Handler
+};// END CLASS DEFINITION JOMOO_Accept_Handler
 
-class Hazel_Acceptor
+class JOMOO_Acceptor
 {
 public:
 
-	typedef Hazel_Accept_Handler handler_type;
+	typedef JOMOO_Accept_Handler handler_type;
 
 	/**
 	 * virtual destructor
 	 */
-	virtual ~Hazel_Acceptor(){}
+	virtual ~JOMOO_Acceptor(){}
 
 	/**
 	 * 接收一个channel（就是轮询是否有新的channel连接到来）
@@ -99,16 +99,16 @@ public:
 	 * @remark 注意如果返回成功，并不代表有新的channel连接到来，也不代表一定
 	 *		   会新的channel连接到来，但一定会回调handle的onAccept接口，
 	 *		   如果返回失败则一定不会调用handle的onAccept接口。
-	 * @see Hazel_Accept_Handler
+	 * @see JOMOO_Accept_Handler
 	 */
-	virtual bool accept( Hazel_Accept_Handler& handle
-							/*,Hazel_Transport_Ptr new_channel*/ 
+	virtual bool accept( JOMOO_Accept_Handler& handle
+							/*,JOMOO_Transport_Ptr new_channel*/ 
 							, void* act ) = 0;
 
 	/**
 	 * 取消接收一个channel（就是取消轮询是否有新的channel连接到来）
 	 * @return 成功取消异步channel连接轮询操作则返回true,否则返回false
-	 * @see Hazel_Accept_Handler
+	 * @see JOMOO_Accept_Handler
 	 */
 	virtual bool cancel() = 0;
 

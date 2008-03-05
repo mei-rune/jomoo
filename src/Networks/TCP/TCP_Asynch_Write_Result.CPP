@@ -31,7 +31,7 @@ void TCP_Write_Result::init( Instance_TCP* instance
 {
 	ASSERT( channel != 0 );
 	TCP_Asynch_Result::init( instance,
-		reinterpret_cast< Hazel_HANDLE > ( channel->get_handle().get_handle()) , act );
+		reinterpret_cast< JOMOO_HANDLE > ( channel->get_handle().get_handle()) , act );
 
 	ASSERT( handle != 0 );
 	ASSERT( buffer != 0 );
@@ -68,7 +68,7 @@ TcpTransport& TCP_Write_Result::native_transport()
 	return *m_channel_;
 }
 
-Hazel_Transport& TCP_Write_Result::transport()
+JOMOO_Transport& TCP_Write_Result::transport()
 {
 	return *m_channel_;
 }
@@ -82,7 +82,7 @@ void TCP_Write_Result::complete (size_t bytes_transferred,
 	m_error_ = error;
 	m_success_= success;
 
-	Write_Result_T< TCP_Write_Result , Hazel_Write_Result > r( *this, handle(), transport() );
+	Write_Result_T< TCP_Write_Result , JOMOO_Write_Result > r( *this, handle(), transport() );
 	m_handle_->onWrite( r );
 }	
 

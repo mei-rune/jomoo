@@ -15,9 +15,9 @@
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
 # include "config_Memory.H"
@@ -144,14 +144,14 @@ JOMOO_Export_C _memory fixed_pool_ptr ___findLoopPool( const tstring& name, size
  * @return 返回内存块的地址
  * @remark 它可能会失败并扔出内存错误异常
  */
-JOMOO_Export_C void* ___hazel_malloc (size_t nbytes , const char* file, size_t line );
+JOMOO_Export_C void* ___JOMOO_malloc (size_t nbytes , const char* file, size_t line );
 
 /**
  * 释放内存块
  * @param[ in ] block 内存块的地址
  * @remark 它可能会失败并扔出内存错误异常
  */
-JOMOO_Export_C void ___hazel_free (void* block );
+JOMOO_Export_C void ___JOMOO_free (void* block );
 
 _memory_begin
 
@@ -226,7 +226,7 @@ inline _memory fixed_pool_ptr findPool( const tstring& name , size_t chunk_size 
  */
 inline void* boe_malloc (size_t nbytes , const char* file, size_t line )
 {
-	return ___hazel_malloc( nbytes, file, line );
+	return ___JOMOO_malloc( nbytes, file, line );
 }
 
 /**
@@ -236,7 +236,7 @@ inline void* boe_malloc (size_t nbytes , const char* file, size_t line )
  */
 inline void boe_free (void* block )
 {
-	___hazel_free( block ); 
+	___JOMOO_free( block ); 
 }
 
 

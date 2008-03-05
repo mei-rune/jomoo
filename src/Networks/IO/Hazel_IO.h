@@ -1,31 +1,31 @@
 
-#ifndef Hazel_STDIO_H
-#define Hazel_STDIO_H
+#ifndef JOMOO_STDIO_H
+#define JOMOO_STDIO_H
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
 # include "config_IO.h"
 # include "Platform/os.H"
 _networks_begin
 
-class Hazel_STDIO
+class JOMOO_STDIO
 {
 public:
 
-  Hazel_STDIO (void);
+  JOMOO_STDIO (void);
 
-  ~Hazel_STDIO (void);
+  ~JOMOO_STDIO (void);
 
-  Hazel_HANDLE get_handle (void) const;
+  JOMOO_HANDLE get_handle (void) const;
 
-  void set_handle ( Hazel_HANDLE handle );
+  void set_handle ( JOMOO_HANDLE handle );
 
-  void swap( Hazel_STDIO& r );
+  void swap( JOMOO_STDIO& r );
 
   ssize_t recv (void *buf,
                 size_t n ) const;
@@ -35,11 +35,11 @@ public:
 
   bool recv (void *buf,
                 size_t n,
-                Hazel_OVERLAPPED *overlapped) const;
+                JOMOO_OVERLAPPED *overlapped) const;
 
   bool recvv (FILE_SEGMENT_ELEMENT iov[],
                 size_t n,
-                Hazel_OVERLAPPED *overlapped) const;
+                JOMOO_OVERLAPPED *overlapped) const;
 
   ssize_t send (const void *buf,
                 size_t n ) const;
@@ -49,19 +49,19 @@ public:
 
   bool send (const void *buf,
                 size_t n,
-                Hazel_OVERLAPPED *overlapped) const;
+                JOMOO_OVERLAPPED *overlapped) const;
 
   bool sendv (const FILE_SEGMENT_ELEMENT iov[],
                  size_t n,
-                 Hazel_OVERLAPPED *overlapped) const;
+                 JOMOO_OVERLAPPED *overlapped) const;
 
 private:
 
-	DECLARE_NO_COPY_CLASS( Hazel_STDIO );
+	DECLARE_NO_COPY_CLASS( JOMOO_STDIO );
 
-	Hazel_HANDLE handle_;
+	JOMOO_HANDLE handle_;
 };
 
 _networks_end
 
-#endif /* Hazel_STDIO_H */
+#endif /* JOMOO_STDIO_H */

@@ -9,9 +9,9 @@
 
 #define TEST_FACTORY(fname,proto, name ,version )			\
   class fname : public _seal PluginFactory<proto> {	\
-  public: static fname &get (void){ return Hazel_Singleton< fname, Hazel_Mutex >::get(); }			\
+  public: static fname &get (void){ return JOMOO_Singleton< fname, JOMOO_Mutex >::get(); }			\
   private: fname (void): _seal PluginFactory<proto> ( _seal getPluginManager(),name, version ) {}	\
-  friend class Hazel_Singleton< fname, Hazel_Mutex >; }
+  friend class JOMOO_Singleton< fname, JOMOO_Mutex >; }
 
 //TEST_FACTORY (TestPluginFactoryArgsV, void);
 TEST_FACTORY (TestPluginFactoryArgs0, TestPluginType0 *(void), "Test0" , "1");

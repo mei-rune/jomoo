@@ -6,9 +6,9 @@
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
 #include "../config_Networks.h"
@@ -20,7 +20,7 @@ _networks_begin
 
 template< Connect_Result_T_1 >
 class Connect_Result_T : public B  //: public WIN32OperationOverlapped
-	//, public Hazel_Connect_Result
+	//, public JOMOO_Connect_Result
 {
 public:
 	typedef typename T result_type;
@@ -105,14 +105,14 @@ private:
 
 template< Connector_T_1 >
 class Connector_T  : public B
-	// : public Hazel_Acceptor
+	// : public JOMOO_Acceptor
 {
 public:	
 
 	typedef typename B::handler_type handler_type;
 
 	/**
-	 * Hazel_TCP_Acceptor constructor
+	 * JOMOO_TCP_Acceptor constructor
 	 */
 	Connector_T( T* ptr );
 
@@ -141,11 +141,11 @@ private:
 
 _networks_end
 
-#if defined (Hazel_TEMPLATES_REQUIRE_SOURCE)
+#if defined (JOMOO_TEMPLATES_REQUIRE_SOURCE)
 #include "Connector.T"
 #endif /* ACE_TEMPLATES_REQUIRE_SOURCE */
 
-#if defined (Hazel_TEMPLATES_REQUIRE_PRAGMA)
+#if defined (JOMOO_TEMPLATES_REQUIRE_PRAGMA)
 #pragma implementation ("Connector.T")
 #endif /* ACE_TEMPLATES_REQUIRE_PRAGMA */
 

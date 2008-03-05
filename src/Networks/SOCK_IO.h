@@ -1,26 +1,26 @@
 
-#ifndef HAZEL_SOCKET_H
-#define HAZEL_SOCKET_H
+#ifndef JOMOO_SOCKET_H
+#define JOMOO_SOCKET_H
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
 #include "config_Networks.h"
-#include "sock.h"
+#include "base_socket.h"
 
 _networks_begin
 
-class hazel_socket : public hazel_sap
+class tcp_socket : public base_socket
 {
 public:
 
-  hazel_socket (void);
+  tcp_socket (void);
 
-  ~hazel_socket (void);
+  ~tcp_socket (void);
 
   ssize_t recv (void *buf,
                 size_t n,
@@ -37,11 +37,11 @@ public:
 
   bool recv (void *buf,
                 size_t n,
-                Hazel_OVERLAPPED& overlapped) const;
+                JOMOO_OVERLAPPED& overlapped) const;
    
   bool recvv (iovec iov[],
                 size_t n,
-                Hazel_OVERLAPPED& overlapped) const;
+                JOMOO_OVERLAPPED& overlapped) const;
 
   ssize_t send (const void *buf,
                 size_t n,
@@ -58,22 +58,22 @@ public:
 
   bool send (const void *buf,
                 size_t n,
-                Hazel_OVERLAPPED& overlapped) const;
+                JOMOO_OVERLAPPED& overlapped) const;
 
   bool sendv (const iovec iov[],
                  size_t n,
-                 Hazel_OVERLAPPED& overlapped) const;
+                 JOMOO_OVERLAPPED& overlapped) const;
 
   bool transmit (const iopack iov[],
                  size_t n,
-                 Hazel_OVERLAPPED& overlapped) const;
+                 JOMOO_OVERLAPPED& overlapped) const;
 };
 
 
-#if !defined (Hazel_LACKS_INLINE_FUNCTIONS)
-#include "hazel_socket.inl"
+#if !defined (JOMOO_LACKS_INLINE_FUNCTIONS)
+#include "tcp_socket.inl"
 #endif
 
 _networks_end
 
-#endif /* HAZEL_SOCKET_H */
+#endif /* JOMOO_SOCKET_H */

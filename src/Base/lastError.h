@@ -1,13 +1,13 @@
 
 
-#ifndef Hazel_GET_LAST_ERROR_H
-#define Hazel_GET_LAST_ERROR_H
+#ifndef JOMOO_GET_LAST_ERROR_H
+#define JOMOO_GET_LAST_ERROR_H
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 #include "string.hpp"
 
@@ -75,4 +75,4 @@ inline tstring get_c_error()
 }
 
 
-#endif //Hazel_GET_LAST_ERROR_H
+#endif //JOMOO_GET_LAST_ERROR_H

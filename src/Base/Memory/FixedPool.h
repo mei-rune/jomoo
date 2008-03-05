@@ -5,9 +5,9 @@
 
 # include "config.h"
 
-# if !defined (Hazel_LACKS_PRAGMA_ONCE)
+# if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-# endif /* Hazel_LACKS_PRAGMA_ONCE */
+# endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
 # include "config_Memory.H"
@@ -24,7 +24,7 @@ public:
 	{
 		//enum
 		//{
-		//	CHUNK_LENGTH = HAZEL_LCD_DEF( sizeof( CHUNK ) , sizeof( void* ) );
+		//	CHUNK_LENGTH = JOMOO_LCD_DEF( sizeof( CHUNK ) , sizeof( void* ) );
 		//}
 
 		CHUNK()
@@ -39,7 +39,7 @@ public:
 
 	enum
 	{
-		CHUNK_HEAD_SIZE = HAZEL_LCD_DEF( sizeof( CHUNK ) , HAZEL_TM )
+		CHUNK_HEAD_SIZE = JOMOO_LCD_DEF( sizeof( CHUNK ) , JOMOO_TM )
 	};
 
 	FixedPool( const tstring& name ,size_t number, size_t size );

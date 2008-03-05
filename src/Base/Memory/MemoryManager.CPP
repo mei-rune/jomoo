@@ -36,7 +36,7 @@ public:
 	
 	fixed_pool_ptr createPool( const tstring& name, size_t number,size_t size )
 	{
-		Hazel_GUARD( lock, mutex_ );
+		JOMOO_GUARD( lock, mutex_ );
 		container_type::iterator it = loop_pools_.find( name );
 		if( it != loop_pools_.end() )
 			return it->second;
@@ -53,7 +53,7 @@ public:
 
 	fixed_pool_ptr findPool( const tstring& name, size_t chunk_size )
 	{
-		Hazel_GUARD( lock, mutex_ );
+		JOMOO_GUARD( lock, mutex_ );
 		container_type::iterator it = loop_pools_.find( name );
 		if( it != loop_pools_.end() && it->second ->chunk_size() >= chunk_size )
 			return it->second;
@@ -66,7 +66,7 @@ public:
 		Target << "<MemoryPool>";
 		SystemPool::get().dump( Target );
 
-		Hazel_GUARD( lock, mutex_ );
+		JOMOO_GUARD( lock, mutex_ );
 		for( container_type::const_iterator it = loop_pools_.begin()
 			; it != loop_pools_.end()
 			; it ++ )
@@ -87,7 +87,7 @@ private:
 	{
 	}
 
-	Hazel_MUTEX_MUTABLE( mutex_ );
+	JOMOO_MUTEX_MUTABLE( mutex_ );
 
 	container_type loop_pools_;
 	tstring toString_;
@@ -165,12 +165,12 @@ JOMOO_Export_C _memory fixed_pool_ptr ___findLoopPool( const tstring& name, size
 	return _memory POOL_Manager::get().findPool ( name ,chunk_size );
 }
 
-JOMOO_Export_C void* ___hazel_malloc (size_t nbytes , const char* file, size_t line )
+JOMOO_Export_C void* ___JOMOO_malloc (size_t nbytes , const char* file, size_t line )
 {
 	return _memory POOL_Manager::get().getPool()->malloc( nbytes, file, line );
 }
 
-JOMOO_Export_C void ___hazel_free (void* block )
+JOMOO_Export_C void ___JOMOO_free (void* block )
 {
 	return _memory POOL_Manager::get().getPool()->free( block );
 }

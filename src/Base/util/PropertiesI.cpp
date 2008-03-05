@@ -322,7 +322,7 @@ PropertiesI::loadConfig()
 
 	if(value.empty() || value == "1")
 	{
-		const char* s = getenv("Hazel_CONFIG");
+		const char* s = getenv("JOMOO_CONFIG");
 		if(s && *s != '\0')
 		{
 			value = s;

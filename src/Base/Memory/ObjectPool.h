@@ -3,9 +3,9 @@
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
 # include "config_Memory.H"
@@ -47,33 +47,33 @@ public:
 	}
 	static void Destroy(Object* pObj )
 	{
-		Hazel_Destroy( pObj->pointee_ );
+		JOMOO_Destroy( pObj->pointee_ );
 	}
 
 	static Object* Construct( fixed_pool_ptr pools )
 	{
 		//ASSERT( pools->chunk_size() > CHUNK_SIZE )
-		return Construct( Hazel_FIXED_MALLOC( pools ) );
-		//return Hazel_FIXED_NEW(  pools , T, () );
+		return Construct( JOMOO_FIXED_MALLOC( pools ) );
+		//return JOMOO_FIXED_NEW(  pools , T, () );
 	}
 
 	static void Destroy(Object* pObj, fixed_pool_ptr pools )
 	{
 		Destroy( pObj );
-		Hazel_FREE( pools,pObj );
+		JOMOO_FREE( pools,pObj );
 	}
 
 
 	static Object* Construct( pool_ptr pools )
 	{
-		return Construct( Hazel_MALLOC( pools , CHUNK_SIZE ) );
-		//return Hazel_NEW(  pools , T, () );
+		return Construct( JOMOO_MALLOC( pools , CHUNK_SIZE ) );
+		//return JOMOO_NEW(  pools , T, () );
 	}
 
 	static void Destroy(Object* pObj, pool_ptr pools )
 	{
 		Destroy( pObj );
-		Hazel_FREE( pools,pObj );
+		JOMOO_FREE( pools,pObj );
 	}
 };
 
@@ -146,11 +146,11 @@ public:
 
 	enum
 	{
-		CHUNK_HEAD_SIZE = HAZEL_LCD_DEF( sizeof( storage_type ) , HAZEL_TM )
+		CHUNK_HEAD_SIZE = JOMOO_LCD_DEF( sizeof( storage_type ) , JOMOO_TM )
 	};
 	enum
 	{
-		CHUNK_SIZE = HAZEL_LCD_DEF( CHUNK_HEAD_SIZE + sizeof( Object ) , HAZEL_TM )
+		CHUNK_SIZE = JOMOO_LCD_DEF( CHUNK_HEAD_SIZE + sizeof( Object ) , JOMOO_TM )
 	};
 
 	typedef CREATIONPOLICY< storage_type ,CHUNK_HEAD_SIZE , CHUNK_SIZE > CreationPolicy;
@@ -242,7 +242,7 @@ public:
 		//toString_ += ::toString( CHUNK_SIZE );
 		//toString_ += "]";
 
-		lpvAddr_ = Hazel_MALLOC( pools_, CHUNK_SIZE * number_ );
+		lpvAddr_ = JOMOO_MALLOC( pools_, CHUNK_SIZE * number_ );
 
 		if( lpvAddr_ == 0 )
 			ThrowException1( BadMemoryException, lastError() );
@@ -273,7 +273,7 @@ public:
 		size_t s = destroy_i_();
 		if( number_ == s )
 		{
-			Hazel_FREE( pools_, lpvAddr_ );
+			JOMOO_FREE( pools_, lpvAddr_ );
 		}
 		else
 		{

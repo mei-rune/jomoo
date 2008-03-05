@@ -1,29 +1,29 @@
 // Communication
 
 
-#ifndef __Hazel_TCP_CHANNEL_CONNECTOR__
-#define __Hazel_TCP_CHANNEL_CONNECTOR__
+#ifndef __JOMOO_TCP_CHANNEL_CONNECTOR__
+#define __JOMOO_TCP_CHANNEL_CONNECTOR__
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
 #include "../config_Networks.h"
 #include "../WIN32OperationOverlapped.H"
-#include "../hazel_socket.h"
-#include "../Hazel_INET_Addr.H"
+#include "../JOMOO_socket.h"
+#include "../JOMOO_INET_Addr.H"
 #include "TcpTransport.H"
-#include "../include/Hazel_Connector.H"
+#include "../include/JOMOO_Connector.H"
 
 _networks_begin
 
 class TcpConnector;
 
 class TCP_Connect_Result : public TCP_Asynch_Result
-	//, public Hazel_Connect_Result
+	//, public JOMOO_Connect_Result
 {
 public:
 
@@ -61,12 +61,12 @@ public:
 	 */
 	handler_type& handle();
 
-	Hazel_Transport_Ptr new_channel();
+	JOMOO_Transport_Ptr new_channel();
 
 	/**
 	 * 本次异步操作的connector句柄
 	 */
-	Hazel_Connector& connector();
+	JOMOO_Connector& connector();
 
 	void complete (size_t bytes_transferred,
 		int success,
@@ -85,7 +85,7 @@ private:
 };
 
 class TcpConnector
-	 : public Hazel_Connector
+	 : public JOMOO_Connector
 {
 public:
 
@@ -114,7 +114,7 @@ public:
 	 * @param[ in ] addr 连接的地址
 	 * @return 成功则返回true,否则返回false
 	 */
-	bool open( const Hazel_INET_Addr& addr );
+	bool open( const JOMOO_INET_Addr& addr );
 	
 	/**
 	 * 关闭接收器，停止监听
@@ -134,7 +134,7 @@ public:
 	 * 取得本地地址
 	 * @return 本地地址
 	 */
-	const Hazel_INET_Addr& getRemoteAddr() const;
+	const JOMOO_INET_Addr& getRemoteAddr() const;
 
 private:
 
@@ -144,11 +144,11 @@ private:
 
 	Instance_TCP& instance_;
 
-	Hazel_INET_Addr m_remoteaddr_;
+	JOMOO_INET_Addr m_remoteaddr_;
 
 	tstring toString_;
 };
 
 _networks_end
 
-#endif // __Hazel_TCP_CHANNEL_CONNECTOR__
+#endif // __JOMOO_TCP_CHANNEL_CONNECTOR__

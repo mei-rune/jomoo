@@ -1,14 +1,14 @@
 
 
-#ifndef Hazel_TCP_ASYNCH_TRANSMIT_RESULT_H
+#ifndef JOMOO_TCP_ASYNCH_TRANSMIT_RESULT_H
 #ifndef ___iopack___
-#define Hazel_TCP_ASYNCH_TRANSMIT_RESULT_H
+#define JOMOO_TCP_ASYNCH_TRANSMIT_RESULT_H
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
 #include "../config_Networks.h"
@@ -55,7 +55,7 @@ public:
 	*/
 	TcpTransport& native_transport();
 
-	Hazel_Transport& transport();
+	JOMOO_Transport& transport();
 
 	void complete (size_t bytes_transferred,
 		int success,
@@ -77,4 +77,4 @@ private:
 _networks_end
 
 #endif
-#endif // Hazel_TCP_ASYNCH_TRANSMIT_RESULT_H
+#endif // JOMOO_TCP_ASYNCH_TRANSMIT_RESULT_H

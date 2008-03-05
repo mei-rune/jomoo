@@ -1,27 +1,27 @@
 
 
-#ifndef Hazel_EVENT_H
-#define Hazel_EVENT_H
+#ifndef JOMOO_EVENT_H
+#define JOMOO_EVENT_H
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 #include "config_threading.h"
 
-#ifdef Hazel_MT
+#ifdef JOMOO_MT
 
 #include "os_threading.h"
 #include "Base/string.hpp"
 #include "Base/exception.hpp"
-_hazel_begin
+_JOMOO_begin
 
-class Hazel_Event
+class JOMOO_Event
 {
 public:
-	Hazel_Event( const tchar* name , bool ManualReset, bool InitialState )
+	JOMOO_Event( const tchar* name , bool ManualReset, bool InitialState )
 		: event_handler_( NULL )
 		, m_name_( name == 0 ? BT_TEXT("") : name )
 	{
@@ -33,7 +33,7 @@ public:
 				ThrowException1( RuntimeException, BT_TEXT("创建事件失败") );
 	}
 
-	~Hazel_Event(void )
+	~JOMOO_Event(void )
 	{
 		OS::close_handle( event_handler_ );
 	}
@@ -68,14 +68,14 @@ public:
 
 private:
 
-	DECLARE_NO_COPY_CLASS( Hazel_Event );
+	DECLARE_NO_COPY_CLASS( JOMOO_Event );
 
-	Hazel_HANDLE event_handler_;
+	JOMOO_HANDLE event_handler_;
 	tstring m_name_;
 };
 
-_hazel_end
+_JOMOO_end
 
-#endif // Hazel_MT
+#endif // JOMOO_MT
 
-#endif // Hazel_EVENT_H
+#endif // JOMOO_EVENT_H

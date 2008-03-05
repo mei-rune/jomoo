@@ -1,36 +1,36 @@
 
 #include "Guard.H"
 
-#ifndef Hazel_GUARD_CPP
-#define Hazel_GUARD_CPP
+#ifndef JOMOO_GUARD_CPP
+#define JOMOO_GUARD_CPP
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 
-_hazel_begin
+_JOMOO_begin
 
-template <class Hazel_LOCK>  bool
-Hazel_Guard<Hazel_LOCK>::acquire (void)
+template <class JOMOO_LOCK>  bool
+JOMOO_Guard<JOMOO_LOCK>::acquire (void)
 {
   return this->owner_ = this->lock_->acquire ();
 }
 
 #if(_WIN32_WINNT >= 0x0400)
 
-template <class Hazel_LOCK>  bool
-Hazel_Guard<Hazel_LOCK>::tryacquire ( )
+template <class JOMOO_LOCK>  bool
+JOMOO_Guard<JOMOO_LOCK>::tryacquire ( )
 {
   return this->owner_ = this->lock_->tryacquire ();
 }
 
 #endif // (_WIN32_WINNT >= 0x0400)
 
-template <class Hazel_LOCK>  void
-Hazel_Guard<Hazel_LOCK>::release (void)
+template <class JOMOO_LOCK>  void
+JOMOO_Guard<JOMOO_LOCK>::release (void)
 {
   if ( !this->owner_ )
     return ;
@@ -41,8 +41,8 @@ Hazel_Guard<Hazel_LOCK>::release (void)
     }
 }
 
-template <class Hazel_LOCK> 
-Hazel_Guard<Hazel_LOCK>::Hazel_Guard (Hazel_LOCK &l, bool nothrow )
+template <class JOMOO_LOCK> 
+JOMOO_Guard<JOMOO_LOCK>::JOMOO_Guard (JOMOO_LOCK &l, bool nothrow )
   : lock_ (&l),
     owner_ ( false )
 {
@@ -52,8 +52,8 @@ Hazel_Guard<Hazel_LOCK>::Hazel_Guard (Hazel_LOCK &l, bool nothrow )
 
 #if(_WIN32_WINNT >= 0x0400)
 
-template <class Hazel_LOCK> 
-Hazel_Guard<Hazel_LOCK>::Hazel_Guard (Hazel_LOCK &l, bool block, bool nothrow )
+template <class JOMOO_LOCK> 
+JOMOO_Guard<JOMOO_LOCK>::JOMOO_Guard (JOMOO_LOCK &l, bool block, bool nothrow )
   : lock_ (&l),
     owner_ ( false )
 {
@@ -66,39 +66,39 @@ Hazel_Guard<Hazel_LOCK>::Hazel_Guard (Hazel_LOCK &l, bool block, bool nothrow )
 
 #endif // (_WIN32_WINNT >= 0x0400)
 
-template <class Hazel_LOCK> 
-Hazel_Guard<Hazel_LOCK>::Hazel_Guard (Hazel_LOCK &l, bool block, bool become_owner, bool nothrow )
+template <class JOMOO_LOCK> 
+JOMOO_Guard<JOMOO_LOCK>::JOMOO_Guard (JOMOO_LOCK &l, bool block, bool become_owner, bool nothrow )
   : lock_ (&l),
     owner_ (become_owner == 0 ? false : true )
 {
-  //HAZEL_UNUSED_ARG (block);
+  //JOMOO_UNUSED_ARG (block);
 }
 
 
-template <class Hazel_LOCK> 
-Hazel_Guard<Hazel_LOCK>::~Hazel_Guard (void)
+template <class JOMOO_LOCK> 
+JOMOO_Guard<JOMOO_LOCK>::~JOMOO_Guard (void)
 {
   this->release ();
 }
 
-template <class Hazel_LOCK>  bool
-Hazel_Guard<Hazel_LOCK>::locked (void) const
+template <class JOMOO_LOCK>  bool
+JOMOO_Guard<JOMOO_LOCK>::locked (void) const
 {
   return this->owner_ ;
 }
 
-template <class Hazel_LOCK>  bool
-Hazel_Guard<Hazel_LOCK>::remove (void)
+template <class JOMOO_LOCK>  bool
+JOMOO_Guard<JOMOO_LOCK>::remove (void)
 {
   return this->lock_->remove ();
 }
 
-template <class Hazel_LOCK>  void
-Hazel_Guard<Hazel_LOCK>::disown (void)
+template <class JOMOO_LOCK>  void
+JOMOO_Guard<JOMOO_LOCK>::disown (void)
 {
   this->owner_ = false;
 }
 
-_hazel_end
+_JOMOO_end
 
-#endif //Hazel_GUARD_CPP
+#endif //JOMOO_GUARD_CPP

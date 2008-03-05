@@ -1,9 +1,9 @@
 
 #include "Url.H"
 
-Hazel_Url::Hazel_Url( const tstring& url )
+JOMOO_Url::JOMOO_Url( const tstring& url )
 : url_( url )
-, toString_( BT_TEXT("Hazel_Url[ ") )
+, toString_( BT_TEXT("JOMOO_Url[ ") )
 {
 	toString_ += url_;
 	toString_ += BT_TEXT(" ]");
@@ -43,27 +43,27 @@ Hazel_Url::Hazel_Url( const tstring& url )
 
 }
 
-const tstring& Hazel_Url::protocol() const
+const tstring& JOMOO_Url::protocol() const
 {
 	return protocol_;
 }
 
-const tstring& Hazel_Url::address() const
+const tstring& JOMOO_Url::address() const
 {
 	return address_;
 }
 
-const tstring& Hazel_Url::entity() const
+const tstring& JOMOO_Url::entity() const
 {
 	return entity_;
 }
 
-const tstring& Hazel_Url::url() const
+const tstring& JOMOO_Url::url() const
 {
 	return url_;
 }
 
-const tstring& Hazel_Url::toString() const
+const tstring& JOMOO_Url::toString() const
 {
 	return toString_;
 }

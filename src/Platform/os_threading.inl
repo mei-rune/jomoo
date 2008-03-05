@@ -1,53 +1,53 @@
 
 
-Hazel_HANDLE create_semaphore( long lInitialCount,long lMaxCount,const char* pSemaphoreName)
+JOMOO_HANDLE create_semaphore( long lInitialCount,long lMaxCount,const char* pSemaphoreName)
 {
 	return ::CreateSemaphore( NULL, lInitialCount,lMaxCount,pSemaphoreName );
 }
 
-bool close_semaphore( Hazel_HANDLE &handle )
+bool close_semaphore( JOMOO_HANDLE &handle )
 {
 	return close_handle( handle );
 }
 
-bool aquire_semaphore( Hazel_HANDLE &handle, unsigned long timeout )
+bool aquire_semaphore( JOMOO_HANDLE &handle, unsigned long timeout )
 {
 	return ( WaitForSingleObject( handle,timeout ) !=WAIT_TIMEOUT );
 }
 
-bool release_semaphore( Hazel_HANDLE &handle, long count )
+bool release_semaphore( JOMOO_HANDLE &handle, long count )
 {
 	return ( ReleaseSemaphore( handle,count,0) == TRUE );
 }
 
-Hazel_HANDLE create_event(  bool bManualReset,bool bInitialState,const char* lpName )
+JOMOO_HANDLE create_event(  bool bManualReset,bool bInitialState,const char* lpName )
 {
 	return CreateEvent( 0,bManualReset,bInitialState,lpName );
 }
 
-Hazel_HANDLE open_event( u_long DesiredAccess,bool bInheritHandle,const char* lpName )
+JOMOO_HANDLE open_event( u_long DesiredAccess,bool bInheritHandle,const char* lpName )
 {
 	return OpenEvent( DesiredAccess,bInheritHandle,lpName );
 }
 
-bool set_event( Hazel_HANDLE hEvent )
+bool set_event( JOMOO_HANDLE hEvent )
 {
 	return ( ::SetEvent( hEvent ) == TRUE );
 
 }
 
-bool reset_event( Hazel_HANDLE hEvent )
+bool reset_event( JOMOO_HANDLE hEvent )
 {
 	return ( ::ResetEvent( hEvent ) == TRUE );
 }
 
-bool pulse_event( Hazel_HANDLE hEvent )
+bool pulse_event( JOMOO_HANDLE hEvent )
 {
 	return ( ::PulseEvent( hEvent ) == TRUE );
 }
 
 u_long wait_for_singleobjectex(
-									   Hazel_HANDLE hHandle, 
+									   JOMOO_HANDLE hHandle, 
 									   u_long timeout,
 									   bool bAlertable        // alertable option
 									   )
@@ -56,7 +56,7 @@ u_long wait_for_singleobjectex(
 }
 
 u_long wait_for_singleobject(
-		Hazel_HANDLE hHandle,        // handle to object
+		JOMOO_HANDLE hHandle,        // handle to object
 		u_long timeout   // time-out interval
 		)
 {
@@ -64,7 +64,7 @@ u_long wait_for_singleobject(
 }
 
 u_long wait_for_multipleobjects(
-		const Hazel_HANDLE* hHandles,
+		const JOMOO_HANDLE* hHandles,
 		size_t n,
 		bool bWaitAll,            // wait option
 		u_long timeout      // time-out interval
@@ -74,7 +74,7 @@ u_long wait_for_multipleobjects(
 }
 
 u_long wait_for_multipleobjectsex(
-		const Hazel_HANDLE* hHandles,
+		const JOMOO_HANDLE* hHandles,
 		size_t n,
 		bool bWaitAll,            // wait option
 		u_long timeout,      // time-out interval
@@ -87,8 +87,8 @@ u_long wait_for_multipleobjectsex(
 #if(_WIN32_WINNT >= 0x0400)
 
 u_long signal_object_and_wait(
-		Hazel_HANDLE hObjectToSignal,  // handle to object to signal
-		Hazel_HANDLE hObjectToWaitOn,  // handle to object to watch
+		JOMOO_HANDLE hObjectToSignal,  // handle to object to signal
+		JOMOO_HANDLE hObjectToWaitOn,  // handle to object to watch
 		u_long timeout,      // time-out interval
 		bool bAlertable          // alertable option
 		)

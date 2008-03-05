@@ -1,19 +1,19 @@
 
 
-HAZEL_INLINE
-hazel_socket::hazel_socket (void)
+JOMOO_INLINE
+JOMOO_socket::JOMOO_socket (void)
 {
 
 }
 
-HAZEL_INLINE
-hazel_socket::~hazel_socket (void)
+JOMOO_INLINE
+JOMOO_socket::~JOMOO_socket (void)
 {
 
 }
 
-HAZEL_INLINE ssize_t
-hazel_socket::recv (void *buf,
+JOMOO_INLINE ssize_t
+JOMOO_socket::recv (void *buf,
                    size_t len,
                    int flags ) const
 {
@@ -24,8 +24,8 @@ hazel_socket::recv (void *buf,
                     flags );
 }
 
-HAZEL_INLINE ssize_t
-hazel_socket::recv (void *buf,
+JOMOO_INLINE ssize_t
+JOMOO_socket::recv (void *buf,
                    size_t len ) const
 {
 
@@ -33,8 +33,8 @@ hazel_socket::recv (void *buf,
                     len,
                     0);
 }
-HAZEL_INLINE ssize_t
-hazel_socket::recvv (iovec iov[],
+JOMOO_INLINE ssize_t
+JOMOO_socket::recvv (iovec iov[],
                    size_t n) const
 {
 
@@ -52,10 +52,10 @@ hazel_socket::recvv (iovec iov[],
 	return r;
 }
 
-HAZEL_INLINE bool
-hazel_socket::recvv (iovec iov[],
+JOMOO_INLINE bool
+JOMOO_socket::recvv (iovec iov[],
 					size_t n,
-					Hazel_OVERLAPPED& overlapped) const
+					JOMOO_OVERLAPPED& overlapped) const
 {
 	DWORD NumberOfBytesRecvd = 0;
 	DWORD Flags = 0;
@@ -68,10 +68,10 @@ hazel_socket::recvv (iovec iov[],
 		, 0 ) == 0 ) ? true : false;
 }
 
-HAZEL_INLINE bool
-hazel_socket::recv (void *buf,
+JOMOO_INLINE bool
+JOMOO_socket::recv (void *buf,
 				   size_t n,
-				   Hazel_OVERLAPPED& overlapped) const
+				   JOMOO_OVERLAPPED& overlapped) const
 {
 	DWORD bytes_read = 0;
 	DWORD short_nbyte = static_cast < DWORD>( n);
@@ -85,8 +85,8 @@ hazel_socket::recv (void *buf,
 	//return r;
 }
 
-HAZEL_INLINE ssize_t
-hazel_socket::send (const void *buf,
+JOMOO_INLINE ssize_t
+JOMOO_socket::send (const void *buf,
                    size_t len,
                    int flags ) const
 {
@@ -94,8 +94,8 @@ hazel_socket::send (const void *buf,
     return ::send (get_handle(), (const char *) buf, ( int )len, flags);
 }
 
-HAZEL_INLINE ssize_t
-hazel_socket::send (const void *buf,
+JOMOO_INLINE ssize_t
+JOMOO_socket::send (const void *buf,
                    size_t len ) const
 {
 
@@ -103,10 +103,10 @@ hazel_socket::send (const void *buf,
 }
 
 
-HAZEL_INLINE bool 
-hazel_socket::send (const void *buf,
+JOMOO_INLINE bool 
+JOMOO_socket::send (const void *buf,
 				   size_t n,
-				   Hazel_OVERLAPPED& overlapped) const
+				   JOMOO_OVERLAPPED& overlapped) const
 {
 	DWORD bytes_written;
 	DWORD short_nbyte = static_cast< DWORD >( n);
@@ -114,8 +114,8 @@ hazel_socket::send (const void *buf,
 }
 
 
-HAZEL_INLINE ssize_t
-hazel_socket::sendv ( const iovec iov[],
+JOMOO_INLINE ssize_t
+JOMOO_socket::sendv ( const iovec iov[],
                     size_t n ) const
 {
 	DWORD bytes_sent = 0;
@@ -131,10 +131,10 @@ hazel_socket::sendv ( const iovec iov[],
 	return r;
 }
 
-HAZEL_INLINE   bool 
-hazel_socket::sendv (const iovec iov[],
+JOMOO_INLINE   bool 
+JOMOO_socket::sendv (const iovec iov[],
 					size_t n,
-					Hazel_OVERLAPPED& overlapped) const
+					JOMOO_OVERLAPPED& overlapped) const
 {
 	DWORD bytes_sent = 0;
 	return (::WSASend ( get_handle(),
@@ -146,10 +146,10 @@ hazel_socket::sendv (const iovec iov[],
 		0) == 0 ) ? true : false;
 }
 
-HAZEL_INLINE   bool 
-hazel_socket::transmit (const iopack iov[],
+JOMOO_INLINE   bool 
+JOMOO_socket::transmit (const iopack iov[],
                  size_t n,
-                 Hazel_OVERLAPPED& overlapped) const
+                 JOMOO_OVERLAPPED& overlapped) const
 {
 #ifdef _WINXP_
 	return ::TransmitPackets ( get_handle(),

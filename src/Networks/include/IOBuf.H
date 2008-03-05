@@ -1,18 +1,18 @@
 // Communication
 
 
-#ifndef __Hazel_IOBUF__H__
-#define __Hazel_IOBUF__H__
+#ifndef __JOMOO_IOBUF__H__
+#define __JOMOO_IOBUF__H__
 
 #include "config.h"
 
-#if !defined (Hazel_LACKS_PRAGMA_ONCE)
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* Hazel_LACKS_PRAGMA_ONCE */
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
 #include "../config_Networks.h"
-#include "hazel_sap.h"
+#include "JOMOO_sap.h"
 
 _networks_begin
 
@@ -56,4 +56,4 @@ private:
 
 _networks_end
 
-#endif // __Hazel_IOBUF__H__
+#endif // __JOMOO_IOBUF__H__

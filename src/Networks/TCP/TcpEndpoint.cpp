@@ -47,7 +47,7 @@ TcpEndpoint::~TcpEndpoint(void)
 }
 
 
-void TcpEndpoint::init( Instance_TCP* instance, const Hazel_Url_Base* url )
+void TcpEndpoint::init( Instance_TCP* instance, const JOMOO_Url_Base* url )
 {
 	if( instance == 0 )
 		ThrowException1( NullException, BT_TEXT("instance") );
@@ -78,7 +78,7 @@ int TcpEndpoint::type() const
 	return nTcpTransport;
 }
 
-Hazel_Connector& TcpEndpoint::connector() const
+JOMOO_Connector& TcpEndpoint::connector() const
 {
 	if( connector_.get() != 0 )
 		return *connector_;
@@ -89,7 +89,7 @@ Hazel_Connector& TcpEndpoint::connector() const
 	return *connector_;
 }
 
-Hazel_Acceptor& TcpEndpoint::acceptor( ) const
+JOMOO_Acceptor& TcpEndpoint::acceptor( ) const
 {
 	if( acceptor_.get() != 0 )
 		return *acceptor_;

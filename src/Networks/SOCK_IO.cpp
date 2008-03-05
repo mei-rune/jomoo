@@ -12,12 +12,12 @@ static char THIS_FILE[] = __FILE__;
 
 _networks_begin
 
-#if defined (Hazel_LACKS_INLINE_FUNCTIONS)
-#include "hazel_socket.inl"
-#endif /* Hazel_LACKS_INLINE_FUNCTIONS */
+#if defined (JOMOO_LACKS_INLINE_FUNCTIONS)
+#include "JOMOO_socket.inl"
+#endif /* JOMOO_LACKS_INLINE_FUNCTIONS */
 
 ssize_t
-hazel_socket::send (size_t n, ...) const
+JOMOO_socket::send (size_t n, ...) const
 {
   va_list argp;
   int total_tuples = static_cast< int >( n) / 2;
@@ -39,7 +39,7 @@ hazel_socket::send (size_t n, ...) const
 
 
 ssize_t
-hazel_socket::recv (size_t n, ...) const
+JOMOO_socket::recv (size_t n, ...) const
 {
 	va_list argp;
 	int total_tuples = static_cast< int >(n / 2);
