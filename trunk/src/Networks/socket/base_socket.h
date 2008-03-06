@@ -18,8 +18,8 @@ _networks_begin
 enum select_mode
 {
 	  select_read = 1
-	, select_write = 2;
-	, select_error = 4;
+	, select_write = 2
+	, select_error = 4
 };
 
 class base_socket
@@ -89,12 +89,12 @@ public:
   /**
    * 是否可以读数据
    */
-  bool readable() const;
+  bool readable();
 
   /**
    * 是否可以写数据
    */
-  bool writable() const;
+  bool writable();
 
   /**
    * 设置socket为阻塞或非阻塞
@@ -131,13 +131,13 @@ protected:
    * 启动socket的选项
    * @params[ in ] value 可取值请见ioctlsocket
    */
-  bool enable (int value) const;
+  bool enable (int value);
 
   /**
    * 启动socket的选项
    * @params[ in ] value 可取值请见ioctlsocket
    */
-  bool disable (int value) const;
+  bool disable (int value);
 
 private:
   DECLARE_NO_COPY_CLASS( base_socket );
@@ -155,13 +155,12 @@ private:
             u_long flags,
             int reuse_addr);
 
-
   SOCKET handle_;
   bool blocking_;
-  inet_address local_addr_;
-  inet_address remote_addr_;
 
 protected:
+  inet_address local_addr_;
+  inet_address remote_addr_;
 	static LPFN_TRANSMITFILE _transmitfile;
 	static LPFN_ACCEPTEX _acceptex;
 	static LPFN_TRANSMITPACKETS _transmitpackets;

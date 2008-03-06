@@ -114,7 +114,7 @@ tcp_socket::send (const void *buf,
 
 
 inline ssize_t
-tcp_socket::sendv ( const iovec iov[],
+tcp_socket::sendv ( const iovec* iov,
                     size_t n )
 {
 	DWORD bytes_sent = 0;
@@ -131,7 +131,7 @@ tcp_socket::sendv ( const iovec iov[],
 }
 
 inline   bool 
-tcp_socket::sendv (const iovec iov[],
+tcp_socket::sendv (const iovec* iov,
 					size_t n,
 					JOMOO_OVERLAPPED& overlapped)
 {
@@ -146,20 +146,16 @@ tcp_socket::sendv (const iovec iov[],
 }
 
 inline   bool 
-tcp_socket::transmit (const iopack iov[],
+tcp_socket::transmit (const iopack* iov,
                  size_t n,
                  JOMOO_OVERLAPPED& overlapped)
 {
-#ifdef _WINXP_
-	return ::TransmitPackets ( get_handle(),
+	return _transmitpackets( get_handle(),
 		( iopack* )iov,
 		( DWORD )n,
 		0,
 		&overlapped,
 		0) ? true : false;
-#else
-	return sendv( iov, n ,overlapped );
-#endif // _WINXP_
 }
 
 
@@ -212,13 +208,14 @@ inline bool tcp_socket::connect( const inet_address& addr )
 		return false;
 	
 	this->remote_addr_ = addr;
-	::getsockname( this->get_handle(), this->local_addr_.addr(), this->local_addr_.size() );
+	int len = this->local_addr_.size();
+	::getsockname( this->get_handle(), this->local_addr_.addr(), &len );
 	return true;
 }
 
 inline bool tcp_socket::connect( const char* ip, int port )
 {
-	inet_address addr( port, ip );
+	inet_address addr( ip, (u_short)port );
 	return connect( addr );
 }
 
@@ -226,7 +223,7 @@ inline bool tcp_socket::connect( const inet_address& addr
  ,JOMOO_OVERLAPPED& overlapped )
 {
  DWORD sendbytes = 0;
- return (TRUE == _connectex( get_handle(), addr.get_addr(), addr.get_size(), NULL, 0, &sendbytes, &overlapped));
+ return (TRUE == _connectex( get_handle(), addr.addr(), addr.size(), NULL, 0, &sendbytes, &overlapped));
 }
 
 inline bool tcp_socket::connect( const inet_address& addr
@@ -235,12 +232,13 @@ inline bool tcp_socket::connect( const inet_address& addr
 	 , JOMOO_OVERLAPPED& overlapped )
 {
 	 DWORD sendbytes = 0;
-	 return (TRUE == _connectex( get_handle(), addr.get_addr(), addr.get_size(), sendBuffer, sendBufferLen, &sendbytes, &overlapped));
+	 return (TRUE == _connectex( get_handle(), addr.addr(), addr.size(), (void*)send_buffer, send_data_len, &sendbytes, &overlapped));
 }
 
 inline bool tcp_socket::accept( tcp_socket& accepted)
 {
-	accepted.set_handle( ::accept( get_handle(), accepted.addr(), accepted.size() ) );
+	int len = accepted.remote_addr_.size();
+	accepted.set_handle( ::accept( get_handle(), accepted.remote_addr_.addr(),&len ) );
 	return accepted.is_good();
 }
 

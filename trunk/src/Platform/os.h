@@ -32,10 +32,10 @@ typedef OVERLAPPED JOMOO_OVERLAPPED ;
 
 namespace OS
 {
-	JOMOO_NAMESPACE_INLINE_FUNCTION
+	inline
 		bool close_handle( JOMOO_HANDLE &handle );
 
-	JOMOO_NAMESPACE_INLINE_FUNCTION
+	inline
 		bool dup_handle( JOMOO_HANDLE hSourceProcessHandle,
 					JOMOO_HANDLE hSourceHandle,
 					JOMOO_HANDLE hTargetProcessHandle,
@@ -44,17 +44,17 @@ namespace OS
 					bool bInheritHandle,
 					DWORD dwOptions );
 
-	JOMOO_NAMESPACE_INLINE_FUNCTION
+	inline
 		bool get_handle_info( JOMOO_HANDLE hObject,DWORD& dwFlags );
 
 
-	JOMOO_NAMESPACE_INLINE_FUNCTION
+	inline
 		bool get_handle_info( JOMOO_HANDLE hObject, DWORD dwMask, DWORD dwFlags );
 
 
-	JOMOO_NAMESPACE_INLINE_FUNCTION
+	inline
 		long InterlockedIncrement( long& v );
-	JOMOO_NAMESPACE_INLINE_FUNCTION
+	inline
 		long InterlockedDecrement( long& v );
 
 # if defined (OS_HAS_INLINED)

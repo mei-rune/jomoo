@@ -63,21 +63,21 @@ inline bool inet_address::operator == (const inet_address &sap) const
 {
 	return (::memcmp (&this->m_addr_,
 		&sap.m_addr_,
-		this->get_size ()) == 0);
+		this->size ()) == 0);
 }
 
 inline bool inet_address::operator < (const inet_address &rhs) const
 {
   return (::memcmp (&this->m_addr_,
 		&rhs.m_addr_,
-		this->get_size ()) < 0 );
+		this->size ()) < 0 );
 }
 
 inline bool inet_address::operator > (const inet_address &rhs) const
 {
   return (::memcmp (&this->m_addr_,
 		&rhs.m_addr_,
-		this->get_size ()) > 0 );
+		this->size ()) > 0 );
 }
 
 inline inet_address& inet_address::operator=( const inet_address& sa)
@@ -86,6 +86,15 @@ inline inet_address& inet_address::operator=( const inet_address& sa)
 		::memcpy( &this->m_addr_, &sa.m_addr_, sa.size () );
 
 	return *this;
+}
+
+
+inline void inet_address::swap( inet_address& r)
+{
+	sockaddr address;
+	memcpy( &address, &this->m_addr_, sizeof( sockaddr ) );
+	memcpy( &this->m_addr_, &r.m_addr_, sizeof( sockaddr ) );
+	memcpy( &r.m_addr_, &address, sizeof( sockaddr ) );
 }
 
 inline void inet_address::reset (void)
@@ -140,25 +149,25 @@ inline void inet_address::size (size_t size)
 {
 }
 
-inline const void *inet_address::addr (void) const
+inline const sockaddr* inet_address::addr (void) const
 {
 	return &(this->m_addr_);
 }
 
-inline void *inet_address::addr (void)
+inline sockaddr* inet_address::addr (void)
 {
 	return &(this->m_addr_);
 }
 
-inline void inet_address::addr ( const void * addr, size_t len)
+inline void inet_address::addr ( const void * address, size_t len)
 {
-	if( len > get_size() )
-		memcpy( get_addr(), addr, get_size() );
+	if( len > size() )
+		memcpy( addr(), address, size() );
 	else
-		memcpy( get_addr(), addr, len );
+		memcpy( addr(), address, len );
 }
 
-inline int inet_address::parse (const char* address)
+inline bool inet_address::parse (const char* address)
 {
 	if( strnicmp( address, "TCP://", 6 ) == 0 )
 		address += 6;

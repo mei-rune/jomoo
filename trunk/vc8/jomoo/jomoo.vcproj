@@ -242,18 +242,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Networks\INET_Addr.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\Networks\INET_Addr.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\Networks\INET_Addr.inl"
-				>
-			</File>
-			<File
 				RelativePath="..\..\src\Networks\Instance_Networks.cpp"
 				>
 			</File>
@@ -534,6 +522,18 @@
 				</File>
 				<File
 					RelativePath="..\..\src\Networks\socket\base_socket.inl"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\Networks\socket\inet_address.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\Networks\socket\inet_address.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\Networks\socket\inet_address.inl"
 					>
 				</File>
 				<File
