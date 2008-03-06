@@ -25,14 +25,13 @@ public:
 
 	inet_address (const sockaddr_in *, int len);
 
-	inet_address (u_short port_number,
-		u_long ip_addr = INADDR_ANY );
+	inet_address (const void*, int len);
 
-	inet_address (u_short port_number,
-		const char* host_name );
+	inet_address (u_long ip, u_short port_number);
 
-	inet_address (const char* port_number,
-		const char* ip_addr );
+	inet_address (const char* name, u_short number);
+
+	inet_address (const char* name, const char* number);
 
 	explicit inet_address (const char* address);
 
@@ -46,57 +45,36 @@ public:
 
 	bool operator != (const inet_address &SAP) const;
 
-	void set_port_number (u_short port_number , bool encode = true );
+	inet_address& operator=( const inet_address& r);
 
-	void set_ip_address ( u_long ip_address , bool encode = false );
-    
-	u_long get_ip_address ( void ) const;
+	void port(u_short number , bool encode = true );
+	void port( const char* number);
+	u_short port() const;
 
-	u_short get_port_number( void ) const ;
+	void ip( u_long addr, bool encode = false);
+	void ip( const char* addr);
+	u_long ip() const;
+	const tstring& ip_string() const;
 
-	int set (const inet_address &);
+	size_t size (void) const;
+	void size (size_t size);
 
-	int set (const char* addr );
+	const void *addr (void) const ;
+	void *addr (void);
+	void addr (const void *, size_t len);
+	void addr(const sockaddr_in *, int len);
 
-	int set (u_short port_number,
-		u_long ip_addr = INADDR_ANY);
-
-	int set (const char port_name[],
-		const char host_name[] );
-
-	int set (const char port_name[],
-		u_long ip_addr );
-
-	int set (u_short port_number,
-		const char host_name[] );
-
-	int set (const sockaddr_in *,
-		int len);
-
-	size_t get_size (void) const;
-
-	void set_size (size_t size);
-
-	const void *get_addr (void) const ;
-
-	void *get_addr (void);
-
-	void set_addr (const void *, size_t len);
-
-	const tstring& toString( ) const;
-
-	int addr_to_string (char* s,
-							   size_t size ) const;
-
-   int string_to_addr ( const char* addres );
-
-private:
+	bool parse( const char* txt);
 
 	void reset (void);
+
+	const tstring& toString( ) const;
+private:
 
 	sockaddr m_addr_;
 
 	mutable tstring to_string_;
+	mutable tstring ip_string_;
 };
 
 #if !defined (JOMOO_LACKS_INLINE_FUNCTIONS)

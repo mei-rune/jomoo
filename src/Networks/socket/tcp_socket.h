@@ -11,6 +11,7 @@
 // Include files
 #include "config_Networks.h"
 #include "base_socket.h"
+#include "inet_address.h"
 
 _networks_begin
 
@@ -24,51 +25,69 @@ public:
 
   ssize_t recv (void *buf,
                 size_t n,
-                int flags ) const;
+                int flags );
 
   ssize_t recv (void *buf,
-                size_t n ) const;
+                size_t n );
 
   ssize_t recvv (iovec iov[],
-                size_t n) const;
+                size_t n);
 
   ssize_t recv (size_t n,
-                ...) const;
+                ...);
 
   bool recv (void *buf,
                 size_t n,
-                JOMOO_OVERLAPPED& overlapped) const;
+                JOMOO_OVERLAPPED& overlapped);
    
   bool recvv (iovec iov[],
                 size_t n,
-                JOMOO_OVERLAPPED& overlapped) const;
+                JOMOO_OVERLAPPED& overlapped);
 
   ssize_t send (const void *buf,
                 size_t n,
-                int flags ) const;
+                int flags );
 
   ssize_t send (const void *buf,
-                size_t n ) const;
+                size_t n );
 
   ssize_t sendv (const iovec iov[],
-                 size_t n ) const;
+                 size_t n );
 
   ssize_t send (size_t n,
-                ...) const;
+                ...);
 
   bool send (const void *buf,
                 size_t n,
-                JOMOO_OVERLAPPED& overlapped) const;
+                JOMOO_OVERLAPPED& overlapped);
 
   bool sendv (const iovec iov[],
                  size_t n,
-                 JOMOO_OVERLAPPED& overlapped) const;
+                 JOMOO_OVERLAPPED& overlapped);
 
   bool transmit (const iopack iov[],
                  size_t n,
-                 JOMOO_OVERLAPPED& overlapped) const;
+                 JOMOO_OVERLAPPED& overlapped);
 
-  bool connect( I )
+  bool connect( const inet_address& addr );
+
+  bool connect( const char* ip, int port );
+
+  bool connect( const inet_address& addr,JOMOO_OVERLAPPED& overlapped );
+
+  bool connect( const inet_address& addr
+	 , const void* send_buffer
+	 , size_t send_data_len
+	 , JOMOO_OVERLAPPED& overlapped );
+
+  bool accept( tcp_socket& accepted );
+
+  bool accept( tcp_socket& accepted
+						, void* data_buffer
+						, size_t data_len
+						, size_t local_addr_len
+						, size_t remote_addr_len
+						, JOMOO_OVERLAPPED& overlapped);
 };
 
 

@@ -1,173 +1,169 @@
 
 
-JOMOO_INLINE
-inet_address::inet_address (void)
+inline inet_address::inet_address (void)
 {
 	this->reset ();
 }
 
-JOMOO_INLINE
-inet_address::inet_address (const char* address)
+inline inet_address::inet_address (const inet_address &sa)
 {
 	this->reset ();
-	this->set (address);
+	*this = sa;
 }
 
-JOMOO_INLINE
-inet_address::inet_address (const inet_address &sa)
+inline inet_address::inet_address (const sockaddr_in *addr, int len)
 {
 	this->reset ();
-	this->set (sa);
+	this->addr(addr, len);
 }
 
-JOMOO_INLINE
-inet_address::inet_address (u_short port_number,
-							  const char* host_name )
+inline inet_address::inet_address (const void* addr, int len)
 {
 	this->reset ();
-	this->set (port_number,host_name );
+	this->addr(addr, len);
 }
 
-JOMOO_INLINE
-inet_address::inet_address (const char* port_number,
-		const char* ip_addr )
+inline inet_address::inet_address ( u_long ip,u_short number )
 {
 	this->reset ();
-	this->set (port_number,ip_addr );
+	this->ip( ip );
+	this->port( number );
 }
 
-JOMOO_INLINE
-inet_address::inet_address (const sockaddr_in *addr, int len)
+inline inet_address::inet_address ( const char* ipstr,u_short number)
 {
 	this->reset ();
-	this->set (addr, len);
+	this->ip( ipstr );
+	this->port( number );
 }
 
-JOMOO_INLINE
-inet_address::inet_address (u_short port_number,
-							  u_long inet_address)
+inline inet_address::inet_address ( const char* ipstr, const char* number)
 {
 	this->reset ();
-	this->set (port_number, inet_address);
+	this->ip( ipstr );
+	this->port( number );
 }
 
-JOMOO_INLINE
-inet_address::~inet_address (void)
+inline inet_address::inet_address (const char* address)
+{
+	this->reset ();
+	this->parse( address );
+}
+
+inline inet_address::~inet_address (void)
 {
 }
 
-JOMOO_INLINE
-bool inet_address::operator != (const inet_address &sap) const
+inline bool inet_address::operator != (const inet_address &sap) const
 {
 	return !((*this) == sap);
 }
 
-JOMOO_INLINE
-bool inet_address::operator == (const inet_address &sap) const
-{	return (::memcmp (&this->m_addr_,
+inline bool inet_address::operator == (const inet_address &sap) const
+{
+	return (::memcmp (&this->m_addr_,
 		&sap.m_addr_,
 		this->get_size ()) == 0);
 }
 
-JOMOO_INLINE
-bool inet_address::operator < (const inet_address &rhs) const
+inline bool inet_address::operator < (const inet_address &rhs) const
 {
   return (::memcmp (&this->m_addr_,
 		&rhs.m_addr_,
 		this->get_size ()) < 0 );
 }
 
-JOMOO_INLINE
-bool inet_address::operator > (const inet_address &rhs) const
+inline bool inet_address::operator > (const inet_address &rhs) const
 {
   return (::memcmp (&this->m_addr_,
 		&rhs.m_addr_,
 		this->get_size ()) > 0 );
 }
 
-JOMOO_INLINE void
-inet_address::reset (void)
+inline inet_address& inet_address::operator=( const inet_address& sa)
+{
+	if( this != &sa)
+		::memcpy( &this->m_addr_, &sa.m_addr_, sa.size () );
+
+	return *this;
+}
+
+inline void inet_address::reset (void)
 {
   memset (&this->m_addr_ , 0, sizeof (this->m_addr_ ));
   this->m_addr_.sa_family = AF_INET;
 }
 
-JOMOO_INLINE
-void inet_address::set_port_number (u_short port_number,
-									 bool encode )
+inline void inet_address::port(u_short number,
+							   bool encode )
 {
-
-	if (encode)
-		port_number = htons (port_number);
-
-	((sockaddr_in*) &m_addr_)->sin_port = port_number;
+	((sockaddr_in*) &m_addr_)->sin_port = encode?htons (number):number;
 }
 
-void inet_address::set_ip_address( u_long ip , bool encode )
+inline void inet_address::port( const char* number )
 {
-	if (encode)
-		ip = htonl ( ip );
-
-	((sockaddr_in*) &m_addr_)->sin_addr.s_addr = ip;
+	((sockaddr_in*) &m_addr_)->sin_port = htons( ::atoi( number ) );
 }
 
-u_long inet_address::get_ip_address ( void ) const
-{
-	return (((sockaddr_in*) &m_addr_)->sin_addr .s_addr);
-}
-
-u_short inet_address::get_port_number( void ) const 
+inline u_short inet_address::port( void ) const 
 {
 	return htons( ((sockaddr_in*) &m_addr_)->sin_port );
 }
 
-int inet_address::addr_to_string (char* s,
-							   size_t size ) const
+inline void inet_address::ip( u_long ip , bool encode )
 {
-	char* ipstr = inet_ntoa( ((sockaddr_in*) &m_addr_)->sin_addr );
-	if( ipstr == 0 )
-		return -1;
-	size_t len = strlen( ipstr );
-	if( size > len )
-	{
-		strcpy( s, ipstr );
-		s += len;		
-		size -= len;
-	}
-	char tmp[ 100 ] = "";
-	itoa( get_port_number(), tmp, 10 );
-	size_t lenp = strlen( tmp );
-	if( size > ( lenp + 1 ) )
-	{
-		*s = ':';
-		s ++;
-		strcpy( s, tmp );
-		return 0;
-	}
+	((sockaddr_in*) &m_addr_)->sin_addr.s_addr = encode? htonl ( ip ) : ip;
+}
+
+inline void inet_address::ip( const char* ipstr )
+{
+	((sockaddr_in*) &m_addr_)->sin_addr.s_addr = ::inet_addr( ipstr );
+}
+
+inline u_long inet_address::ip ( void ) const
+{
+	return (((sockaddr_in*) &m_addr_)->sin_addr .s_addr);
+}
+
+inline const tstring& inet_address::ip_string ( ) const
+{
+	ip_string_ = ::inet_ntoa(((sockaddr_in*) &m_addr_)->sin_addr );
+	return ip_string_;
+}
+
+inline size_t inet_address::size (void) const
+{
+	return sizeof( this->m_addr_ );
+}
+
+inline void inet_address::size (size_t size)
+{
+}
+
+inline const void *inet_address::addr (void) const
+{
+	return &(this->m_addr_);
+}
+
+inline void *inet_address::addr (void)
+{
+	return &(this->m_addr_);
+}
+
+inline void inet_address::addr ( const void * addr, size_t len)
+{
+	if( len > get_size() )
+		memcpy( get_addr(), addr, get_size() );
 	else
-	{
-		s[ 0 ] = 0;
-		return -1;
-	}
+		memcpy( get_addr(), addr, len );
 }
 
-
-int inet_address::string_to_addr ( const char* address )
+inline int inet_address::parse (const char* address)
 {
-	return this->set( address );
-}
-
-int inet_address::set (const inet_address &sa)
-{
-	::memcpy( &this->m_addr_, &sa.m_addr_, sa.get_size () );
-	return 0;
-}
-int inet_address::set (const char* address)
-{
-		if( strnicmp( address, "TCP://", sizeof( "TCP://") ) == 0 )
+	if( strnicmp( address, "TCP://", 6 ) == 0 )
 		address += 6;
 	else if( strstr( address, "://" ) != 0 )
-		return -1;
+		return false;
 
 	std::vector< char > ip_addr( strlen( address ) + 10 , 0 );
 	strcpy( &ip_addr[ 0 ], address );
@@ -177,135 +173,37 @@ int inet_address::set (const char* address)
 	{
 		u_long ip = inet_addr( &ip_addr[0] );
 		if( ip == INADDR_NONE )
-			return -1;
-		this->set_ip_address( ip );
-		return 0;
+			return false;
+		this->ip( ip );
+		return true;
 	}
 	else
 	{
 		*port_p = '\0'; ++port_p;
-		return this->set (port_p, &ip_addr[0]);
+		u_long ip = inet_addr( &ip_addr[0] );
+		if( ip == INADDR_NONE )
+			return false;
+		this->ip( ip );
+		this->port( port_p );
+		return true;
 	}
 }
 
-
-int inet_address::set (u_short port_number,
-						u_long inet_address )
+inline const tstring& inet_address::toString( ) const
 {
-	this->set_ip_address ( inet_address );
-	this->set_port_number ( port_number );
-	return 0;
-}
-
-
-int inet_address::set (u_short port_number,
-						const char* host_name )
-{
-	if (host_name == 0)
-		return -1;
-
-	this->reset();
-
-	while( isspace( *host_name ) && (*host_name) ) host_name ++;
-
-	u_long addr = inet_addr (host_name);
-	if ( addr != INADDR_NONE )
+	char* ipstr = inet_ntoa( ((sockaddr_in*) &m_addr_)->sin_addr );
+	if( ipstr == 0 )
 	{
-		this->set_ip_address ( addr );
-		this->set_port_number ( port_number );
-		return 0;
-	}
-	else
-	{
-		hostent *hp = ::gethostbyname( host_name );
-
-		if (hp == 0)
-			return -1;
-		if( hp->h_length <= 0 )
-			return -1;
-		this->set_ip_address ( *( u_long* )hp->h_addr );
-		this->set_port_number ( port_number );
-		return 0;
-	}
-}
-
-static int get_port_number_from_name (const char* port_name)
-{
-	int port_number = 0;
-	char *endp = 0;
-	port_number = static_cast < int>( strtol (port_name, &endp, 10));
-	if (port_number > 0 && *endp == '\0')
-	{
-		return static_cast <u_short>( port_number);
-	}
-	return port_number;
-}
-
-
-int inet_address::set (const char* port_name,
-						const char* host_name)
-{
-	int port_number = get_port_number_from_name (port_name);
-	if (port_number < 0)
-	{
-		return (-1);
-	}
-	return this->set ( static_cast< u_short>( port_number),
-		host_name );
-}
-
-int inet_address::set (const char* port_name,
-						u_long inet_address )
-{
-	int port_number = get_port_number_from_name (port_name);
-	if (port_number < 0)
-	{
-		return  (-1);
+		to_string_.clear();
+		return to_string_;
 	}
 
-	return this->set ( static_cast< u_short>( port_number),
-		inet_address );
-}
-
-int inet_address::set (const sockaddr_in *addr, int len)
-{
-	::memcpy (&this->m_addr_, addr, len);
-	return 0;
-}
-
-const tstring& inet_address::toString( ) const
-{
-	char ipstr[ 100 ] = "";
-	addr_to_string( ipstr, 100 );
 	to_string_ = ipstr;
+
+	char tmp[ 100 ] = "";
+	_itoa_s( port(), tmp, 100, 10);
+
+	to_string_ += ':';
+	to_string_ += tmp;
 	return to_string_;
-}
-
-
-size_t inet_address::get_size (void) const
-{
-	return sizeof( this->m_addr_ );
-}
-
-void inet_address::set_size (size_t size)
-{
-	
-}
-
-const void *inet_address::get_addr (void) const
-{
-	return &(this->m_addr_);
-}
-
-void *inet_address::get_addr (void)
-{
-	return &(this->m_addr_);
-}
-
-void inet_address::set_addr ( const void * addr, size_t len)
-{
-	if( len > get_size() )
-		memcpy( get_addr(), addr, get_size() );
-	else
-		memcpy( get_addr(), addr, len );
 }

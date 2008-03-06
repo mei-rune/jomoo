@@ -14,7 +14,6 @@
 # include "Mswsock.h"
 
  typedef SOCKET JOMOO_SOCK_HANDLE;
-# define JOMOO_NONBLOCK 1
  typedef unsigned long JOMOO_SOCK_GROUP;
 
 typedef WSABUF iovec;

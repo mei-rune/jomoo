@@ -1,20 +1,20 @@
 
 
-JOMOO_INLINE
+inline
 tcp_socket::tcp_socket (void)
 : base_socket(AF_INET , SOCK_STREAM, IPPROTO_TCP )   
 {
 }
 
-JOMOO_INLINE
+inline
 tcp_socket::~tcp_socket (void)
 {
 }
 
-JOMOO_INLINE ssize_t
+inline ssize_t
 tcp_socket::recv (void *buf,
                    size_t len,
-                   int flags ) const
+                   int flags )
 {
 
 	return ::recv ( this->get_handle (),
@@ -23,18 +23,18 @@ tcp_socket::recv (void *buf,
                     flags );
 }
 
-JOMOO_INLINE ssize_t
+inline ssize_t
 tcp_socket::recv (void *buf,
-                   size_t len ) const
+                   size_t len )
 {
 
 	return recv (  buf,
                     len,
                     0);
 }
-JOMOO_INLINE ssize_t
+inline ssize_t
 tcp_socket::recvv (iovec iov[],
-                   size_t n) const
+                   size_t n)
 {
 
 	DWORD NumberOfBytesRecvd = 0;
@@ -51,10 +51,10 @@ tcp_socket::recvv (iovec iov[],
 	return r;
 }
 
-JOMOO_INLINE bool
+inline bool
 tcp_socket::recvv (iovec iov[],
 					size_t n,
-					JOMOO_OVERLAPPED& overlapped) const
+					JOMOO_OVERLAPPED& overlapped)
 {
 	DWORD NumberOfBytesRecvd = 0;
 	DWORD Flags = 0;
@@ -67,10 +67,10 @@ tcp_socket::recvv (iovec iov[],
 		, 0 ) == 0 ) ? true : false;
 }
 
-JOMOO_INLINE bool
+inline bool
 tcp_socket::recv (void *buf,
 				   size_t n,
-				   JOMOO_OVERLAPPED& overlapped) const
+				   JOMOO_OVERLAPPED& overlapped)
 {
 	DWORD bytes_read = 0;
 	DWORD short_nbyte = static_cast < DWORD>( n);
@@ -84,28 +84,28 @@ tcp_socket::recv (void *buf,
 	//return r;
 }
 
-JOMOO_INLINE ssize_t
+inline ssize_t
 tcp_socket::send (const void *buf,
                    size_t len,
-                   int flags ) const
+                   int flags )
 {
 
     return ::send (get_handle(), (const char *) buf, ( int )len, flags);
 }
 
-JOMOO_INLINE ssize_t
+inline ssize_t
 tcp_socket::send (const void *buf,
-                   size_t len ) const
+                   size_t len )
 {
 
     return ::send (get_handle(), (const char *) buf, ( int )len, 0);
 }
 
 
-JOMOO_INLINE bool 
+inline bool 
 tcp_socket::send (const void *buf,
 				   size_t n,
-				   JOMOO_OVERLAPPED& overlapped) const
+				   JOMOO_OVERLAPPED& overlapped)
 {
 	DWORD bytes_written;
 	DWORD short_nbyte = static_cast< DWORD >( n);
@@ -113,9 +113,9 @@ tcp_socket::send (const void *buf,
 }
 
 
-JOMOO_INLINE ssize_t
+inline ssize_t
 tcp_socket::sendv ( const iovec iov[],
-                    size_t n ) const
+                    size_t n )
 {
 	DWORD bytes_sent = 0;
 	int r = ::WSASend ( get_handle(),
@@ -130,10 +130,10 @@ tcp_socket::sendv ( const iovec iov[],
 	return r;
 }
 
-JOMOO_INLINE   bool 
+inline   bool 
 tcp_socket::sendv (const iovec iov[],
 					size_t n,
-					JOMOO_OVERLAPPED& overlapped) const
+					JOMOO_OVERLAPPED& overlapped)
 {
 	DWORD bytes_sent = 0;
 	return (::WSASend ( get_handle(),
@@ -145,10 +145,10 @@ tcp_socket::sendv (const iovec iov[],
 		0) == 0 ) ? true : false;
 }
 
-JOMOO_INLINE   bool 
+inline   bool 
 tcp_socket::transmit (const iopack iov[],
                  size_t n,
-                 JOMOO_OVERLAPPED& overlapped) const
+                 JOMOO_OVERLAPPED& overlapped)
 {
 #ifdef _WINXP_
 	return ::TransmitPackets ( get_handle(),
@@ -163,8 +163,8 @@ tcp_socket::transmit (const iopack iov[],
 }
 
 
-JOMOO_INLINE ssize_t
-tcp_socket::send (size_t n, ...) const
+inline ssize_t
+tcp_socket::send (size_t n, ...)
 {
   va_list argp;
   int total_tuples = static_cast< int >( n) / 2;
@@ -185,8 +185,8 @@ tcp_socket::send (size_t n, ...) const
 }
 
 
-JOMOO_INLINE ssize_t
-tcp_socket::recv (size_t n, ...) const
+inline ssize_t
+tcp_socket::recv (size_t n, ...)
 {
 	va_list argp;
 	int total_tuples = static_cast< int >(n / 2);
@@ -203,4 +203,54 @@ tcp_socket::recv (size_t n, ...) const
 		total_tuples);
 	va_end (argp);
 	return result;
+}
+
+
+inline bool tcp_socket::connect( const inet_address& addr )
+{
+	if( 0 != ::connect( this->get_handle(), addr.addr(), addr.size() ) )
+		return false;
+	
+	this->remote_addr_ = addr;
+	::getsockname( this->get_handle(), this->local_addr_.addr(), this->local_addr_.size() );
+	return true;
+}
+
+inline bool tcp_socket::connect( const char* ip, int port )
+{
+	inet_address addr( port, ip );
+	return connect( addr );
+}
+
+inline bool tcp_socket::connect( const inet_address& addr
+ ,JOMOO_OVERLAPPED& overlapped )
+{
+ DWORD sendbytes = 0;
+ return (TRUE == _connectex( get_handle(), addr.get_addr(), addr.get_size(), NULL, 0, &sendbytes, &overlapped));
+}
+
+inline bool tcp_socket::connect( const inet_address& addr
+	 , const void* send_buffer
+	 , size_t send_data_len
+	 , JOMOO_OVERLAPPED& overlapped )
+{
+	 DWORD sendbytes = 0;
+	 return (TRUE == _connectex( get_handle(), addr.get_addr(), addr.get_size(), sendBuffer, sendBufferLen, &sendbytes, &overlapped));
+}
+
+inline bool tcp_socket::accept( tcp_socket& accepted)
+{
+	accepted.set_handle( ::accept( get_handle(), accepted.addr(), accepted.size() ) );
+	return accepted.is_good();
+}
+
+inline bool tcp_socket::accept(SOCKET accepted
+						, void* data_buffer
+						, size_t data_len
+						, size_t local_addr_len
+						, size_t remote_addr_len
+						, JOMOO_OVERLAPPED& overlapped )
+{
+	DWORD bytesReceived = 0;
+	return ( TRUE == _acceptex( get_handle(), accepted,data_buffer, data_len, local_addr_len, remote_addr_len, &bytesReceived, &overlapped ));
 }
