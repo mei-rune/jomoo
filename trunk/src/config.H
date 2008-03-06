@@ -8,8 +8,8 @@
  * -------------------------------------------------------------------------------
  */
 
-#ifndef _config_H_
-#define _config_H_
+#ifndef _config_h_
+#define _config_h_
 
 
 #if !defined (JOMOO_LACKS_PRAGMA_ONCE)
@@ -172,21 +172,6 @@ typedef _off_t off_t;
 
 #define JOMOO_TEMPLATES_REQUIRE_SOURCE 1
 #define JOMOO_TEMPLATE_SPECIALIZATION template< >
-//#define JOMOO_MT
-
-#define OS_HAS_INLINED 1
-
-#ifdef OS_HAS_INLINED
-#define OS_INLINE inline
-#define JOMOO_NAMESPACE_INLINE_FUNCTION inline
-#endif //OS_HAS_INLINED
-
-
-#define JOMOO_HAS_INLINED 1
-
-#ifdef JOMOO_HAS_INLINED
-#define JOMOO_INLINE inline
-#endif //JOMOO_HAS_INLINED
 
 #define KB_SIZE	1024
 
@@ -249,5 +234,5 @@ inline T get_ptr( T t )
 
 
 
-#define null_ptr 0
+#define null_ptr NULL
 #endif // _config_H_
