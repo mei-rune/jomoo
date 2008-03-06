@@ -19,7 +19,7 @@
 
 _JOMOO_begin
 
-template <JOMOO_Singleton_ST_1> JOMOO_INLINE
+template <JOMOO_Singleton_ST_1> inline
 JOMOO_Singleton<JOMOO_Singleton_ST_2>::JOMOO_Singleton ( )
 : instance_( 0 )
 {
