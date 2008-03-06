@@ -141,20 +141,20 @@ inline int base_socket::get_option (int level,
 			     option, (char *) optval, optlen);
 }
 
-inline int base_socket::enable (int value)
+inline bool base_socket::enable (int value)
 {
 	u_long nonblock = 1;
-	return ::ioctlsocket (this->handle_,
+	return ( 0 ==::ioctlsocket (this->handle_,
 		value,
-		&nonblock);
+		&nonblock));
 }
 
-inline int base_socket::disable (int value)
+inline bool base_socket::disable (int value)
 {
     u_long nonblock = 0;
-    return ioctlsocket (this->handle_,
+    return ( 0 == ioctlsocket (this->handle_,
                               value,
-                              &nonblock);
+                              &nonblock));
 }
 
 
@@ -186,16 +186,16 @@ inline void base_socket::close (void)
 inline bool base_socket::poll( const TIMEVAL& time_val, int mode)
 {
 	fd_set socket_set;
-	FD_CLR( socket_set );
-	FD_SET(get_handle(), socket_set );
+	FD_ZERO( &socket_set );
+	FD_SET(get_handle(), &socket_set );
 
-	return ( 1 = ::select( 0, (mode == select_mode::select_read)?socket_set
-		, (mode == select_mode::select_write)?socket_set
-		, (mode == select_mode::select_error)?socket_set
+	return ( 1 == ::select( 0, (mode == select_mode::select_read)?&socket_set:NULL
+		, (mode == select_mode::select_write)?&socket_set:NULL
+		, (mode == select_mode::select_error)?&socket_set:NULL
 		, &time_val ) );
 }
 
-inline bool base_socket::readable() const
+inline bool base_socket::readable()
 {
 	TIMEVAL time_val;
 	time_val.tv_sec = 0;
@@ -203,7 +203,7 @@ inline bool base_socket::readable() const
 	return poll( time_val, select_mode::select_read );
 }
 
-inline bool base_socket::writable() const
+inline bool base_socket::writable()
 {
 	TIMEVAL time_val;
 	time_val.tv_sec = 0;
@@ -337,7 +337,7 @@ inline bool  base_socket::initsocket()
 		_getacceptexsockaddrs = NULL;
 	}
 
-	:closesocket(  cliSock );
+	closesocket(  cliSock );
 
 	return true;
 }

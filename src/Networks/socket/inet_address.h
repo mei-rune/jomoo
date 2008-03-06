@@ -9,8 +9,8 @@
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
-# include "config_Networks.h"
-# include "Platform/os_networks.H"
+# include "../config_Networks.h"
+# include "os_networks.H"
 # include "Base/string.hpp"
 
 _networks_begin
@@ -46,6 +46,8 @@ public:
 	bool operator != (const inet_address &SAP) const;
 
 	inet_address& operator=( const inet_address& r);
+	
+	void swap( inet_address& r);
 
 	void port(u_short number , bool encode = true );
 	void port( const char* number);
@@ -59,10 +61,9 @@ public:
 	size_t size (void) const;
 	void size (size_t size);
 
-	const void *addr (void) const ;
-	void *addr (void);
+	const sockaddr *addr (void) const ;
+	sockaddr *addr (void);
 	void addr (const void *, size_t len);
-	void addr(const sockaddr_in *, int len);
 
 	bool parse( const char* txt);
 

@@ -39,7 +39,7 @@ inline tstring get_last_error( DWORD code )
 	tstring str =( const tchar* ) "[";
 
 	char tmp[110] = "";
-	ultoa( code, tmp, 10 );
+	_ultoa_s( code, tmp,110, 10 );
 	str += ( const tchar* )tmp;
 	str += ( const tchar* )"],";
 	str += (LPTSTR)lpMsgBuf;
