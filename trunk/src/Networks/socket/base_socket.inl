@@ -1,16 +1,16 @@
 
-JOMOO_INLINE
-base_socket::base_socket (void)
+inline base_socket::base_socket (void)
 : handle_ (INVALID_SOCKET )
+, blocking_( true )
 {
 }
 
-JOMOO_INLINE
-base_socket::base_socket (int type, 
+inline base_socket::base_socket (int type, 
                     int protocol_family, 
                     int protocol,
                     int reuse_addr)
-					  : handle_ (INVALID_SOCKET )
+: handle_ (INVALID_SOCKET )
+, blocking_( true )
 {
   this->open (type,
                   protocol_family, 
@@ -18,15 +18,15 @@ base_socket::base_socket (int type,
                   reuse_addr);
 }
 
-JOMOO_INLINE
-base_socket::base_socket (int type, 
+inline base_socket::base_socket (int type, 
                     int protocol_family, 
                     int protocol,
                     WSAPROTOCOL_INFO *protocolinfo,
                     JOMOO_SOCK_GROUP g,
                     u_long flags,
                     int reuse_addr)
-					  : handle_ (INVALID_SOCKET )
+: handle_ (INVALID_SOCKET )
+, blocking_( true )
 {
   this->open (type,
                   protocol_family,
@@ -37,18 +37,17 @@ base_socket::base_socket (int type,
                   reuse_addr);				  
 }
 
-JOMOO_INLINE
-base_socket::~base_socket (void)
+inline base_socket::~base_socket (void)
 {
 	close();
 }
 
-JOMOO_INLINE bool base_socket::is_good() const
+inline bool base_socket::is_good() const
 {
 	return INVALID_SOCKET != this->get_handle ();
 }
 
-JOMOO_INLINE int base_socket::open (int type, 
+inline int base_socket::open (int type, 
                 int protocol_family, 
                 int protocol,
                 int reuse_addr)
@@ -74,7 +73,7 @@ int one = 1;
   return 0;
 }
 
-JOMOO_INLINE int base_socket::open (int type, 
+inline int base_socket::open (int type, 
                 int protocol_family, 
                 int protocol,
                 WSAPROTOCOL_INFO *protocolinfo,
@@ -105,33 +104,26 @@ JOMOO_INLINE int base_socket::open (int type,
     return 0;
 }
 
-JOMOO_INLINE SOCKET
-base_socket::get_handle (void) const
+inline SOCKET base_socket::get_handle (void) const
 {
   return this->handle_;
 }
 
 
-JOMOO_INLINE void
-base_socket::set_handle (SOCKET handle)
+inline void base_socket::set_handle (SOCKET handle)
 {
   this->handle_ = handle;
 }
 
-JOMOO_INLINE void
-base_socket::swap( base_socket& r )
+inline void base_socket::swap( base_socket& r )
 {
 	std::swap( this->handle_, r.handle_ );
+	std::swap( this->blocking_, r.blocking_ );
+	this->local_addr_.swap( r.local_addr_ );
+	this->remote_addr_.swap( r.remote_addr_ );
 }
 
-//JOMOO_INLINE int 
-//base_socket::control (int cmd, void *arg) const
-//{
-//  return ::ioctlsocket (this->handle_, cmd, arg);
-//}
-
-JOMOO_INLINE int 
-base_socket::set_option (int level, 
+inline int base_socket::set_option (int level, 
 		      int option, 
 		      void *optval, 
 		      int optlen) const
@@ -140,8 +132,7 @@ base_socket::set_option (int level,
 			     option, (char *) optval, optlen);
 }
 
-JOMOO_INLINE int 
-base_socket::get_option (int level, 
+inline int base_socket::get_option (int level, 
 		      int option, 
 		      void *optval, 
 		      int *optlen) const
@@ -150,111 +141,208 @@ base_socket::get_option (int level,
 			     option, (char *) optval, optlen);
 }
 
-JOMOO_INLINE int base_socket::enable (int value) const
+inline int base_socket::enable (int value)
 {
-  switch (value)
-    {
-    case JOMOO_NONBLOCK:
-      {
-        u_long nonblock = 1;
-		return ::ioctlsocket (this->handle_,
-                              FIONBIO,
+	u_long nonblock = 1;
+	return ::ioctlsocket (this->handle_,
+		value,
+		&nonblock);
+}
+
+inline int base_socket::disable (int value)
+{
+    u_long nonblock = 0;
+    return ioctlsocket (this->handle_,
+                              value,
                               &nonblock);
-      }
-    default:
-      return (-1);
-    }
-}
-
-JOMOO_INLINE int base_socket::disable (int value) const
-{
-  switch (value)
-    {
-    case JOMOO_NONBLOCK:
-      {
-        u_long nonblock = 0;
-        return ioctlsocket (this->handle_,
-                              FIONBIO,
-                              &nonblock);
-      }
-    default:
-       return (-1);
-    }
 }
 
 
-JOMOO_INLINE int base_socket::get_remote_addr (JOMOO_INET_Addr &sa) const
+inline const inet_address& base_socket::remote_addr () const
 {
-  int len = sa.get_size ();
-  sockaddr *addr = reinterpret_cast< sockaddr * >( sa.get_addr ());
-
-  if ( getpeername (this->get_handle (),
-                           addr,
-                           &len) == -1)
-    return -1;
-  
-  sa.set_size (len);
-  return 0;
+	return remote_addr_;
 }
 
-JOMOO_INLINE int base_socket::get_local_addr (JOMOO_INET_Addr &sa) const
+inline const inet_address& base_socket::local_addr () const
 {
-  int len = sa.get_size ();
-  sockaddr *addr = reinterpret_cast< sockaddr * >( sa.get_addr ());
-
-  if ( getsockname (this->get_handle (),
-                           addr,
-                           &len) == -1)
-    return -1;
-
-  sa.set_size (len);
-  return 0;
+  return local_addr_;
 }
 
-// Close down a base_socket.
-
-JOMOO_INLINE int base_socket::close (void)
+inline void base_socket::close (void)
 {
-  int result = 0;
-  if (INVALID_SOCKET != this->get_handle () )
-    {
-      result = closesocket (this->get_handle ());
-      this->set_handle (INVALID_SOCKET );
-    }
-  return result;
+	if (INVALID_SOCKET == this->get_handle () )
+		return;
+
+	for( int i =0 ; i < 5; i ++ )
+	{
+		if( 0 == closesocket (this->get_handle ()) )
+		{
+			this->set_handle (INVALID_SOCKET );
+			return ;
+		}
+	}
 }
 
-JOMOO_INLINE int  base_socket::initsocket()
+inline bool base_socket::poll( const TIMEVAL& time_val, int mode)
 {
-	WORD wVersionRequested;
+	fd_set socket_set;
+	FD_CLR( socket_set );
+	FD_SET(get_handle(), socket_set );
+
+	return ( 1 = ::select( 0, (mode == select_mode::select_read)?socket_set
+		, (mode == select_mode::select_write)?socket_set
+		, (mode == select_mode::select_error)?socket_set
+		, &time_val ) );
+}
+
+inline bool base_socket::readable() const
+{
+	TIMEVAL time_val;
+	time_val.tv_sec = 0;
+	time_val.tv_usec = 0;
+	return poll( time_val, select_mode::select_read );
+}
+
+inline bool base_socket::writable() const
+{
+	TIMEVAL time_val;
+	time_val.tv_sec = 0;
+	time_val.tv_usec = 0;
+	return poll( time_val, select_mode::select_write );
+}
+
+inline void base_socket::blocking(bool val)
+{
+	if( val )
+	{
+		enable( FIONBIO );
+		blocking_ = false;
+	}
+	else
+	{
+		disable( FIONBIO );
+		blocking_ = true;
+	}
+}
+
+inline bool base_socket::blocking() const
+{
+	return blocking_;
+}
+
+inline bool  base_socket::initsocket()
+{
 	WSADATA wsaData;
-	int err;
-
-	wVersionRequested = MAKEWORD( 2, 2 );
-
-	err = WSAStartup( wVersionRequested, &wsaData );
-	if ( err != 0 ) {
-		/* Tell the user that we could not find a usable */
-		/* WinSock DLL.                                  */
-		return -1;
+	if ( 0 != WSAStartup( MAKEWORD( 2, 2 ), &wsaData ) )
+		return false;
+	
+	if ( LOBYTE( wsaData.wVersion ) != 2 ||
+		HIBYTE( wsaData.wVersion ) != 2 )
+	{
+			WSACleanup( );
+			return false; 
 	}
 
-	/* Confirm that the WinSock DLL supports 2.2.*/
-	/* Note that if the DLL supports versions greater    */
-	/* than 2.2 in addition to 2.2, it will still return */
-	/* 2.2 in wVersion since that is the version we      */
-	/* requested.                                        */
+	SOCKET cliSock = ::socket( AF_INET , SOCK_STREAM, IPPROTO_TCP);
 
-	if ( LOBYTE( wsaData.wVersion ) != 2 ||
-		HIBYTE( wsaData.wVersion ) != 2 ) {
-			/* Tell the user that we could not find a usable */
-			/* WinSock DLL.                                  */
-			WSACleanup( );
-			return -1; 
-		}
-		return 0;
+	GUID GuidConnectEx = WSAID_CONNECTEX;
+	GUID GuidDisconnectEx = WSAID_DISCONNECTEX;
+	GUID GuidGetAcceptExSockAddrs = WSAID_GETACCEPTEXSOCKADDRS;
+	GUID GuidAcceptEx = WSAID_ACCEPTEX;
+	GUID GuidTransmitFile = WSAID_TRANSMITFILE;
+	GUID GuidTransmitPackets = WSAID_TRANSMITPACKETS;
+
+	DWORD dwBytes = 0;
+	if( SOCKET_ERROR == WSAIoctl(cliSock,
+		SIO_GET_EXTENSION_FUNCTION_POINTER,
+		&GuidConnectEx,
+		sizeof(GuidConnectEx),
+		&_connectex,
+		sizeof(_connectex),
+		&dwBytes,
+		NULL,
+		NULL))
+	{
+		_connectex = NULL;
+	}
+
+	
+	dwBytes = 0;
+	if( SOCKET_ERROR == WSAIoctl(cliSock,
+		SIO_GET_EXTENSION_FUNCTION_POINTER,
+		&GuidDisconnectEx,
+		sizeof(GuidDisconnectEx),
+		&_disconnectex,
+		sizeof(_disconnectex),
+		&dwBytes,
+		NULL,
+		NULL))
+	{
+		_disconnectex = NULL;
+	}
+
+	dwBytes = 0;
+	if( SOCKET_ERROR == WSAIoctl(cliSock,
+		SIO_GET_EXTENSION_FUNCTION_POINTER,
+		&GuidTransmitFile,
+		sizeof(GuidTransmitFile),
+		&_transmitfile,
+		sizeof(_transmitfile),
+		&dwBytes,
+		NULL,
+		NULL))
+	{
+		_transmitfile = NULL;
+	}
+	
+	dwBytes = 0;
+	if( SOCKET_ERROR == WSAIoctl(cliSock,
+		SIO_GET_EXTENSION_FUNCTION_POINTER,
+		&GuidAcceptEx,
+		sizeof(GuidAcceptEx),
+		&_acceptex,
+		sizeof(_acceptex),
+		&dwBytes,
+		NULL,
+		NULL))
+	{
+		_acceptex = NULL;
+	}
+
+	dwBytes = 0;
+	if( SOCKET_ERROR == WSAIoctl(cliSock,
+		SIO_GET_EXTENSION_FUNCTION_POINTER,
+		&GuidTransmitPackets,
+		sizeof(GuidTransmitPackets),
+		&_transmitpackets,
+		sizeof(_transmitpackets),
+		&dwBytes,
+		NULL,
+		NULL))
+	{
+		_transmitpackets = NULL;
+	}
+
+	dwBytes = 0;
+	if( SOCKET_ERROR == WSAIoctl(cliSock,
+		SIO_GET_EXTENSION_FUNCTION_POINTER,
+		&GuidGetAcceptExSockAddrs,
+		sizeof(GuidGetAcceptExSockAddrs),
+		&_getacceptexsockaddrs,
+		sizeof(_getacceptexsockaddrs),
+		&dwBytes,
+		NULL,
+		NULL))
+	{
+		_getacceptexsockaddrs = NULL;
+	}
+
+	:closesocket(  cliSock );
+
+	return true;
 }
-JOMOO_INLINE void base_socket::shutdownsock()
+
+inline void base_socket::shutdownsock()
 {
 	WSACleanup( );
 }
