@@ -32,8 +32,7 @@ tcp_socket::recv (void *buf,
                     len,
                     0);
 }
-inline ssize_t
-tcp_socket::recvv (iovec iov[],
+inline ssize_t tcp_socket::recvv (iovec iov[],
                    size_t n)
 {
 
@@ -51,8 +50,7 @@ tcp_socket::recvv (iovec iov[],
 	return r;
 }
 
-inline bool
-tcp_socket::recvv (iovec iov[],
+inline bool tcp_socket::recvv (iovec iov[],
 					size_t n,
 					JOMOO_OVERLAPPED& overlapped)
 {
@@ -84,8 +82,7 @@ tcp_socket::recv (void *buf,
 	//return r;
 }
 
-inline ssize_t
-tcp_socket::send (const void *buf,
+inline ssize_t tcp_socket::send (const void *buf,
                    size_t len,
                    int flags )
 {
@@ -93,8 +90,7 @@ tcp_socket::send (const void *buf,
     return ::send (get_handle(), (const char *) buf, ( int )len, flags);
 }
 
-inline ssize_t
-tcp_socket::send (const void *buf,
+inline ssize_t tcp_socket::send (const void *buf,
                    size_t len )
 {
 
@@ -102,8 +98,7 @@ tcp_socket::send (const void *buf,
 }
 
 
-inline bool 
-tcp_socket::send (const void *buf,
+inline bool tcp_socket::send (const void *buf,
 				   size_t n,
 				   JOMOO_OVERLAPPED& overlapped)
 {
@@ -113,8 +108,7 @@ tcp_socket::send (const void *buf,
 }
 
 
-inline ssize_t
-tcp_socket::sendv ( const iovec* iov,
+inline ssize_t tcp_socket::sendv ( const iovec* iov,
                     size_t n )
 {
 	DWORD bytes_sent = 0;
@@ -130,8 +124,7 @@ tcp_socket::sendv ( const iovec* iov,
 	return r;
 }
 
-inline   bool 
-tcp_socket::sendv (const iovec* iov,
+inline bool tcp_socket::sendv (const iovec* iov,
 					size_t n,
 					JOMOO_OVERLAPPED& overlapped)
 {
@@ -145,8 +138,7 @@ tcp_socket::sendv (const iovec* iov,
 		0) == 0 ) ? true : false;
 }
 
-inline   bool 
-tcp_socket::transmit (const iopack* iov,
+inline   bool tcp_socket::transmit (const iopack* iov,
                  size_t n,
                  JOMOO_OVERLAPPED& overlapped)
 {
@@ -159,8 +151,7 @@ tcp_socket::transmit (const iopack* iov,
 }
 
 
-inline ssize_t
-tcp_socket::send (size_t n, ...)
+inline ssize_t tcp_socket::send (size_t n, ...)
 {
   va_list argp;
   int total_tuples = static_cast< int >( n) / 2;
@@ -255,6 +246,7 @@ inline bool tcp_socket::accept(SOCKET accepted
 
 ssize_t tcp_socket::send_n( const char* buf,ssize_t length)
 {
+	ssize_t result = length;
 	do
 	{
 		int n = ::send( get_handle(), buf, length, 0 ); 
@@ -266,11 +258,12 @@ ssize_t tcp_socket::send_n( const char* buf,ssize_t length)
 		buf += n;
 	}while( 0 < length );
 
-	return length;
+	return result;
 }
 
 ssize_t tcp_socket::recv_n( char* buf,ssize_t length)
 {
+	ssize_t result = 0;
 	do
 	{
 		int n = ::recv( get_handle(), buf, length, 0 ); 
@@ -278,17 +271,18 @@ ssize_t tcp_socket::recv_n( char* buf,ssize_t length)
 		if( 0 >= n)
 			return n;
 
+		result += n;
 		length -= n;
 		buf += n;
 	}
 	while( 0 < length );
-	return length;
+	return result;
 }
 
-bool tcp_socket::send_n( const WSABUF* wsaBuf, ssize_t size)
+bool tcp_socket::sendv_n( const iovec* wsaBuf, ssize_t size)
 {
-	std::vector<WSABUF> buf( wsaBuf, wsaBuf + size );
-	WSABUF* p = wsaBuf;
+	std::vector<iovec> buf( wsaBuf, wsaBuf + size );
+	iovec* p = &buf[0];
 
 	do
 	{
@@ -310,7 +304,36 @@ bool tcp_socket::send_n( const WSABUF* wsaBuf, ssize_t size)
 		}
 		while( 0 < numberOfBytesSent );
 	}
-	while( 0 != size );
+	while( 0 < size );
+
+	return true;
+}
+
+bool tcp_socket::recvv_n( iovec* wsaBuf, ssize_t size)
+{
+	iovec* p = wsaBuf;
+
+	do
+	{
+		DWORD numberOfBytesRecvd =0;
+		if( SOCKET_ERROR == ::WSARecv( get_handle(), p, size, &numberOfBytesRecvd,0,0 , 0 ) )
+			return false;
+
+		do
+		{
+			if( numberOfBytesRecvd < p->len)
+			{
+				p->len -= numberOfBytesSent;
+				p->buf = p->buf + numberOfBytesSent;
+				break;
+			}
+			numberOfBytesRecvd -= p->len;
+			++ p;
+			-- size;
+		}
+		while( 0 < numberOfBytesRecvd );
+	}
+	while( 0 < size );
 
 	return true;
 }

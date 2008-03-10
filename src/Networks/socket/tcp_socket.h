@@ -50,9 +50,13 @@ public:
 
   ssize_t send (const void *buf,
                 size_t n );
+  
+  ssize_t send_n( const char* buf,ssize_t length);
 
-  ssize_t sendv (const iovec* iov,
+  bool sendv (const iovec* iov,
                  size_t n );
+
+  bool sendv_n( const iovec* wsaBuf, ssize_t size);
 
   ssize_t send (size_t n,
                 ...);
@@ -68,6 +72,9 @@ public:
   bool transmit (const iopack* iov,
                  size_t n,
                  JOMOO_OVERLAPPED& overlapped);
+
+  ssize_t recv_n( char* buf,ssize_t length);
+  bool recv_n( iovec* wsaBuf, ssize_t size);
 
   bool connect( const inet_address& addr );
 
