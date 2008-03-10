@@ -252,3 +252,75 @@ inline bool tcp_socket::accept(SOCKET accepted
 	DWORD bytesReceived = 0;
 	return ( TRUE == _acceptex( get_handle(), accepted,data_buffer, data_len, local_addr_len, remote_addr_len, &bytesReceived, &overlapped ));
 }
+
+ssize_t tcp_socket::send_n( const char* buf,ssize_t length)
+{
+	do
+	{
+		int n = ::send( get_handle(), buf, length, 0 ); 
+
+		if( 0 >= n)
+			return n;
+
+		length -= n;
+		buf += n;
+	}while( 0 < length );
+
+	return length;
+}
+
+ssize_t tcp_socket::recv_n( char* buf,ssize_t length)
+{
+	do
+	{
+		int n = ::recv( get_handle(), buf, length, 0 ); 
+
+		if( 0 >= n)
+			return n;
+
+		length -= n;
+		buf += n;
+	}
+	while( 0 < length );
+	return length;
+}
+
+bool tcp_socket::send_n( const WSABUF* wsaBuf, ssize_t size)
+{
+	std::vector<WSABUF> buf( wsaBuf, wsaBuf + size );
+	WSABUF* p = wsaBuf;
+
+	do
+	{
+		DWORD numberOfBytesSent =0;
+		if( SOCKET_ERROR == ::WSASend( get_handle(), p, size, &numberOfBytesSent,0,0 , 0 ) )
+			return false;
+
+		do
+		{
+			if( numberOfBytesSent < p->len)
+			{
+				p->len -= numberOfBytesSent;
+				p->buf = p->buf + numberOfBytesSent;
+				break;
+			}
+			numberOfBytesSent -= p->len;
+			++ p;
+			-- size;
+		}
+		while( 0 < numberOfBytesSent );
+	}
+	while( 0 != size );
+
+	return true;
+}
+
+bool tcp_socket::bind( const inet_address& addr)
+{
+	return ( SOCKET_ERROR != ::bind( get_handle(), addr.addr(), addr.size() ) );
+}
+
+bool tcp_socket::listen( int backlog )
+{
+	return ( SOCKET_ERROR != ::listen( get_handle(), backlog ) );
+}
