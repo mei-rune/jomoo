@@ -88,6 +88,10 @@ public:
 						, size_t local_addr_len
 						, size_t remote_addr_len
 						, JOMOO_OVERLAPPED& overlapped);
+
+  bool bind( const inet_address& addr);
+
+  bool listen( int backlog = SOMAXCONN );
 };
 
 
