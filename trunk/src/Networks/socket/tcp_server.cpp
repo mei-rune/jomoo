@@ -1,5 +1,6 @@
 
-#include "inet_address.h"
+
+#include "tcp_server.h"
 #include <vector>
 
 #ifdef _MEMORY_DEBUG
@@ -12,7 +13,8 @@ static char THIS_FILE[] = __FILE__;
 _networks_begin
 
 #if !defined (JOMOO_INLINE_FUNCTIONS)
-#include "inet_address.inl"
+#include "tcp_server.inl"
 #endif /* JOMOO_INLINE_FUNCTIONS */
+
 
 _networks_end

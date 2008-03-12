@@ -8,7 +8,7 @@
 static char THIS_FILE[] = __FILE__;  
 #endif // _MEMORY_DEBUG
 
-#if !defined (OS_HAS_INLINED)
+#if !defined (JOMOO_INLINE_FUNCTIONS)
 # include "os_networks.inl"
 #endif /* JOMOO_HAS_INLINED_OS_CALLS */
 
