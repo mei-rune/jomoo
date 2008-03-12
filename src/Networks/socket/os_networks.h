@@ -23,10 +23,15 @@ typedef WSABUF iovec;
  typedef TRANSMIT_PACKETS_ELEMENT iopack;
 # endif // ___iopack___
 
+ # ifndef ___iofile___
+# define ___iopack___
+ typedef TRANSMIT_FILE_BUFFERS io_file_buf;
+# endif // ___iopack___
+
 namespace OS
 {
 
-# if defined (OS_HAS_INLINED)
+# if defined (JOMOO_INLINE_FUNCTIONS)
 #   include "os_networks.inl"
 # endif /* JOMOO_HAS_INLINED_OSCALLS */
 

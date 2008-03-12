@@ -67,16 +67,6 @@ public:
    * 关闭socket
    */
   void close (void);
-
-  /**
-   * 取得本机地址
-   */
-  const inet_address& local_addr () const;
-
-  /**
-   * 取得远程机地址
-   */
-  const inet_address& remote_addr () const;
   
   /**
    * 判断并等待直到socket可以进行读(写)操作，或出错，或超时
@@ -87,40 +77,29 @@ public:
   bool poll( const TIMEVAL& timeval, int select_mode);
 
   /**
-   * 是否可以读数据
+   * 返回一个人可读的字符串
    */
-  bool readable();
+  const tstring& toString() const;
 
   /**
-   * 是否可以写数据
+   * 初始化socket服务
    */
-  bool writable();
-
-  /**
-   * 设置socket为阻塞或非阻塞
-   */
-  void blocking(bool val);
-
-  /**
-   * 取得本socket是阻塞还是非阻塞
-   */
-  bool blocking() const;
-
   static bool initsocket();
 
+  /**
+   * 关闭socket服务
+   */
   static void shutdownsock();
-
-protected:
 
   base_socket (void);
 
-  base_socket (int type,
-            int protocol_family,
+  base_socket ( int protocol_family,
+			int type,
             int protocol = 0,
             int reuse_addr = 0);
 
-  base_socket (int type,
-            int protocol_family,
+  base_socket ( int protocol_family,
+			int type,
             int protocol,
             WSAPROTOCOL_INFO *protocolinfo,
             JOMOO_SOCK_GROUP g,
@@ -142,13 +121,13 @@ protected:
 private:
   DECLARE_NO_COPY_CLASS( base_socket );
 
-  int open (int type = SOCK_STREAM,
-            int protocol_family = AF_INET,
+  int open (int protocol_family = AF_INET,
+			int type = SOCK_STREAM,
             int protocol = IPPROTO_TCP,
             int reuse_addr = 0 );
 
-  int open (int type,
-            int protocol_family,
+  int open (int protocol_family,
+			int type,
             int protocol,
             WSAPROTOCOL_INFO *protocolinfo,
             JOMOO_SOCK_GROUP g,
@@ -156,22 +135,20 @@ private:
             int reuse_addr);
 
   SOCKET handle_;
-  bool blocking_;
+  mutable tstring toString_;
 
-protected:
-  inet_address local_addr_;
-  inet_address remote_addr_;
-	static LPFN_TRANSMITFILE _transmitfile;
-	static LPFN_ACCEPTEX _acceptex;
-	static LPFN_TRANSMITPACKETS _transmitpackets;
-	static LPFN_CONNECTEX _connectex;
-	static LPFN_DISCONNECTEX _disconnectex;
-	static LPFN_GETACCEPTEXSOCKADDRS _getacceptexsockaddrs;
+public:
+	static LPFN_TRANSMITFILE __transmitfile;
+	static LPFN_ACCEPTEX __acceptex;
+	static LPFN_TRANSMITPACKETS __transmitpackets;
+	static LPFN_CONNECTEX __connectex;
+	static LPFN_DISCONNECTEX __disconnectex;
+	static LPFN_GETACCEPTEXSOCKADDRS __getacceptexsockaddrs;
 };
 
-#if !defined (JOMOO_LACKS_INLINE_FUNCTIONS)
+#if defined (JOMOO_INLINE_FUNCTIONS)
 #include "base_socket.inl"
-#endif /* JOMOO_LACKS_INLINE_FUNCTIONS */
+#endif /* JOMOO_INLINE_FUNCTIONS */
 
 _networks_end
 

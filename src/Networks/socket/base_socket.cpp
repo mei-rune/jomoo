@@ -11,8 +11,8 @@ static char THIS_FILE[] = __FILE__;
 
 _networks_begin
 
-#if defined (JOMOO_LACKS_INLINE_FUNCTIONS)
-#include "JOMOO_sap.inl"
+#if !defined (JOMOO_INLINE_FUNCTIONS)
+#include "base_socket.inl"
 #endif
 
 _networks_end

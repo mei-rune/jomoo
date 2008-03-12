@@ -175,7 +175,7 @@ inline bool inet_address::parse (const char* address)
 		return false;
 
 	std::vector< char > ip_addr( strlen( address ) + 10 , 0 );
-	strcpy( &ip_addr[ 0 ], address );
+	string_traits<char>::strcpy( &ip_addr[ 0 ], ip_addr.size(), address );
 	char *port_p = ::strrchr (&ip_addr[0], ':');
 
 	if (port_p == 0) 
