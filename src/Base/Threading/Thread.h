@@ -11,16 +11,16 @@
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 #include "config_threading.h"
+#include <process.h>
 
 #ifdef JOMOO_MT
-
 
 _thread_begin
 
 /**
- * @Brief JOMOO_Base_Thread 线程接口，本线程封装了平台的各种线程接口
+ * @Brief thread 线程接口，本线程封装了平台的各种线程接口
  */
-class  JOMOO_Thread
+class  thread
 {
 public:
 	/**
@@ -39,18 +39,30 @@ public:
 		* 线程的回调接口
 		*/
 		virtual void run() = 0;
+
+		/**
+		 * 线程退出时的回调接口
+		 */
+		virtual void cleanup() = 0;
 	};
 
-	JOMOO_Thread ( Runnable& runfn , const tchar* descr );
+	thread ( Runnable& runfn , const tchar* descr );
 
-	~JOMOO_Thread();
+	~thread();
+
+
+	/**
+	 * 起动线程
+	 * @return 启动成功或已启动返回true,否则返回false
+	 */
+	bool activate ( );
 
 	/**
 	 * 等待线程结束
 	 * @remarks 注意不论该函数是否成功，本线程都一定结束，当然
 	 * 除非有人重新启动它了。
 	 */
-	void join (void);
+	void join ();
 
 	/**
 	 * 取得线程描述
@@ -58,42 +70,31 @@ public:
 	 */
 	const tstring& toString() const;
 
-	static void static_thread_svc( void * arg );
+	void __do_run();
+
+	void __do_cleanup();
 
 private:
-	DECLARE_NO_COPY_CLASS( JOMOO_Thread );
+	DECLARE_NO_COPY_CLASS( thread );
 
 	/**
-	 * 起动线程
-	 * @return 成功返回0,失败返回-1，已经启动返回1
+	 * 线程的系统回调函数
 	 */
-	int activate ( );
+	//static void static_thread_svc( void * arg );
 
 	uintptr_t m_thread_ ;
 
 	Runnable& m_runfn_;
 
 	tstring to_string_;
-
 };
 
 
-#ifdef OS_HAS_INLINED
+#if defined (JOMOO_INLINE_FUNCTIONS)
 
-#include "JOMOO_Thread.inl"
+#include "thread.inl"
 
 #endif //
-
-_thread_end
-
-#ifndef JOMOO_HAS_INLINED
-
-//JOMOO_Export_C _thread JOMOO_Thread* ___make_JOMOO_Thread( _thread Runnable& runfn ,const tchar* descr );
-JOMOO_Export_C _thread JOMOO_Thread* ___get_JOMOO_Thread( );
-
-#endif // JOMOO_HAS_INLINED
-
-_thread_begin
 
 namespace ThreadOP
 {
@@ -101,13 +102,9 @@ namespace ThreadOP
 	 * 取得本线的线程对象
 	 * 成功返回线程对象，失败返回0;
 	 */
-	inline JOMOO_Thread* get_self()
+	inline thread* get_self()
 	{
-#ifndef JOMOO_HAS_INLINED
-		return ___get_JOMOO_Thread( );
-#else 
 		return 0;
-#endif // JOMOO_HAS_INLINED
 	}
 
 	inline void yield()
