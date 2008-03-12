@@ -549,15 +549,27 @@
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Networks\socket\tcp_socket.cpp"
+					RelativePath="..\..\src\Networks\socket\tcp_client.cpp"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Networks\socket\tcp_socket.h"
+					RelativePath="..\..\src\Networks\socket\tcp_client.h"
 					>
 				</File>
 				<File
-					RelativePath="..\..\src\Networks\socket\tcp_socket.inl"
+					RelativePath="..\..\src\Networks\socket\tcp_client.inl"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\Networks\socket\tcp_server.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\Networks\socket\tcp_server.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\Networks\socket\tcp_server.inl"
 					>
 				</File>
 			</Filter>
@@ -898,6 +910,10 @@
 				</File>
 				<File
 					RelativePath="..\..\src\Base\Threading\Thread.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\Base\Threading\Thread.inl"
 					>
 				</File>
 				<File
