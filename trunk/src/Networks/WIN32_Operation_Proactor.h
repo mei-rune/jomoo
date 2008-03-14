@@ -1,7 +1,7 @@
 
 
-#ifndef JOMOO_WIN32_OPERATION_PROACTOR_H
-#define JOMOO_WIN32_OPERATION_PROACTOR_H
+#ifndef JOMOO_proactor_H
+#define JOMOO_proactor_H
 
 #include "config.h"
 
@@ -17,16 +17,13 @@
 
 _networks_begin
 
-class WIN32OperationOverlapped;
-//class WIN32_Defer;
-
-class WIN32_Operation_Proactor : public JOMOO_Operation_Proactor
+class proactor
 {
 public:
 
-	WIN32_Operation_Proactor( bool result_delete = true );
-	WIN32_Operation_Proactor( u_long milli_seconds , bool result_delete = true );
-	~WIN32_Operation_Proactor(void);
+	proactor( bool result_delete = true );
+	proactor( u_long milli_seconds , bool result_delete = true );
+	~proactor(void);
 
 	int open ( size_t number_of_threads = 0 );
 	void close (void);
@@ -34,9 +31,6 @@ public:
 	int register_handle (JOMOO_HANDLE handle,const void *completion_key);
 
 	int handle_events ( u_long milli_seconds);
-
-	//int post_completion ( WIN32_Operation_Result *result );
-	//int post_completion ( JOMOO_Operation_Result_Ptr result );
 
 	JOMOO_HANDLE get_handle();
 
@@ -50,10 +44,8 @@ private:
 	u_long m_number_of_threads_;
 
 	bool result_delete_;
-
-	//ThreadSafePtrQueue< WIN32_Defer > queue_;
 };
 
 _networks_end
 
-#endif // JOMOO_WIN32_OPERATION_PROACTOR_H
+#endif // JOMOO_proactor_H

@@ -13,7 +13,7 @@ static char THIS_FILE[] = __FILE__;
 
 _networks_begin
 
-WIN32_Operation_Proactor::WIN32_Operation_Proactor(  )
+proactor::proactor(  )
 : m_completion_port_( NULL )
 {
 	//for( int i = 0; i < 100; i ++ )
@@ -22,18 +22,18 @@ WIN32_Operation_Proactor::WIN32_Operation_Proactor(  )
 	//}
 }
 
-WIN32_Operation_Proactor::WIN32_Operation_Proactor( u_long milli_seconds)
+proactor::proactor( u_long milli_seconds)
 : m_completion_port_( NULL )
 {
 	open( milli_seconds );
 	//	ThrowException1( RuntimeException , BT_TEXT("创建完成端口失败") );
 }
 
-WIN32_Operation_Proactor::~WIN32_Operation_Proactor(void)
+proactor::~proactor(void)
 {
 }
 
-int WIN32_Operation_Proactor::open ( size_t number_of_threads )
+int proactor::open ( size_t number_of_threads )
 {
 	if( m_completion_port_ != NULL )
 		ThrowException1( RuntimeException , BT_TEXT("已经初始化过了!") );
@@ -50,7 +50,7 @@ int WIN32_Operation_Proactor::open ( size_t number_of_threads )
 	return 0;
 }
 
-void WIN32_Operation_Proactor::close (void)
+void proactor::close (void)
 {
 	if (is_null(m_completion_port_ ))
 		return ;
@@ -86,7 +86,7 @@ void WIN32_Operation_Proactor::close (void)
 
 }
 
-int WIN32_Operation_Proactor::handle_events (unsigned long milli_seconds)
+int proactor::handle_events (unsigned long milli_seconds)
 {
 	JOMOO_OVERLAPPED *overlapped = 0;
 	u_long bytes_transferred = 0;
@@ -128,7 +128,7 @@ int WIN32_Operation_Proactor::handle_events (unsigned long milli_seconds)
 	return 0;
 }
 
-void WIN32_Operation_Proactor::application_specific_code (WIN32_Operation_Result *asynch_result,
+void proactor::application_specific_code (WIN32_Operation_Result *asynch_result,
 														  size_t bytes_transferred,
 														  const void *completion_key,
 														  u_long error)
@@ -151,7 +151,7 @@ void WIN32_Operation_Proactor::application_specific_code (WIN32_Operation_Result
 	asynch_result->release();
 }
 
-int WIN32_Operation_Proactor::post_completion (WIN32_Operation_Result *result )
+int proactor::post_completion (WIN32_Operation_Result *result )
 {
 	if( is_null( result ) )
 		ThrowException1( IllegalArgumentException, "result" );
@@ -176,7 +176,7 @@ int WIN32_Operation_Proactor::post_completion (WIN32_Operation_Result *result )
 	return 0;
 }
 
-int WIN32_Operation_Proactor::post_completion ( JOMOO_Operation_Result_Ptr result)
+int proactor::post_completion ( JOMOO_Operation_Result_Ptr result)
 {
 	//std::auto_ptr< WIN32_Defer > defer( createDefer( result ) );
 	//if( defer.get() == 0 )
@@ -187,7 +187,7 @@ int WIN32_Operation_Proactor::post_completion ( JOMOO_Operation_Result_Ptr resul
 	//return 0;
 }
 
-//WIN32_Defer* WIN32_Operation_Proactor::createDefer( JOMOO_Operation_Result_Ptr result )
+//WIN32_Defer* proactor::createDefer( JOMOO_Operation_Result_Ptr result )
 //{
 //	//WIN32_Defer* p = queue_.pop();
 //	//if( p != 0 )
@@ -196,12 +196,12 @@ int WIN32_Operation_Proactor::post_completion ( JOMOO_Operation_Result_Ptr resul
 //	return 0;
 //}
 
-JOMOO_HANDLE WIN32_Operation_Proactor::get_handle()
+JOMOO_HANDLE proactor::get_handle()
 {
 	return m_completion_port_;
 }
 
-int WIN32_Operation_Proactor::register_handle (JOMOO_HANDLE handle,
+int proactor::register_handle (JOMOO_HANDLE handle,
 											   const void *completion_key)
 {
 	ULONG_PTR comp_key = reinterpret_cast < ULONG_PTR >( (void*)completion_key);

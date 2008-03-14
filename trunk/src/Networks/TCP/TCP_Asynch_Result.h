@@ -22,7 +22,7 @@ _networks_begin
 class Instance_TCP;
 class TcpTransport;
 
-class TCP_Asynch_Result : public WIN32_Operation_Result
+class TCP_Asynch_Result : public jomoo_io_request
 {
 public:
 

@@ -15,20 +15,20 @@
 
 _networks_begin
 
-class JOMOO_Operation_Result
+class jomoo_callable<typename T>
 {
 public:
 	
 	typedef counter_ptr< JOMOO_Operation_Result > ptr_type;
 
-	virtual ~JOMOO_Operation_Result(void){}
-	virtual  void complete (size_t bytes_transferred,
-                         int success,
-                         const void *completion_key,
-                         u_long error = 0) = 0;
+	virtual ~jomoo_callable(void){}
+	virtual  T call () = 0;
+	
+    virtual void incRef() = 0;
+    virtual void decRef() = 0;
 };
 
-typedef JOMOO_Operation_Result::ptr_type JOMOO_Operation_Result_Ptr;
+typedef jomoo_call::ptr_type jomoo_call_ptr;
 
 _networks_end
 

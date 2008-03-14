@@ -34,7 +34,7 @@ public:
 
 	bool isStop();
 
-	WIN32_Operation_Proactor& getNativeProactor();
+	proactor& getNativeProactor();
 
 	JOMOO_Operation_Proactor& getProactor();
 
@@ -58,7 +58,7 @@ private:
 
 	DECLARE_NO_COPY_CLASS( InstanceNetworks );
 
-	WIN32_Operation_Proactor m_proactor_;
+	proactor m_proactor_;
 
 	//std::auto_ptr< EndpointFactoryManager > EndpointManager_;
 
