@@ -42,7 +42,7 @@ bool InstanceNetworks::isStop()
 	return false;
 }
 
-WIN32_Operation_Proactor& InstanceNetworks::getNativeProactor()
+proactor& InstanceNetworks::getNativeProactor()
 {
 	return m_proactor_;
 }

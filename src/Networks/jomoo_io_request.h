@@ -16,16 +16,14 @@
 
 _networks_begin
 
-class WIN32_Operation_Result
+class jomoo_io_request
 	: public JOMOO_OVERLAPPED
-	, public JOMOO_Operation_Result
 {
 public:
 
-	WIN32_Operation_Result( )
+	jomoo_io_request( )
 		: instance_( 0 )
 		, m_handle_( JOMOO_INVALID_HANDLE_VALUE )
-		, handler_( 0 )
 	{
 		Internal =  0;
 		InternalHigh =  0;
@@ -34,18 +32,16 @@ public:
 		hEvent = 0;
 	}
 
-	virtual ~WIN32_Operation_Result(void)
+	virtual ~jomoo_io_callback(void)
 	{
 	}
 
-	void init( WIN32_Operation_Proactor* instance , JOMOO_HANDLE handle )
+	void init( proactor& instance , JOMOO_HANDLE handle )
 	{
-		if( instance == 0 )
-			ThrowException1( NullException, BT_TEXT("instance") );
 		if( handle == JOMOO_INVALID_HANDLE_VALUE )
 			ThrowException1( NullException, BT_TEXT("handle") );
 
-		instance_ = instance;
+		instance_ = &instance;
 		m_handle_ = handle;
 	}
 
@@ -55,38 +51,25 @@ public:
 		m_handle_ = JOMOO_INVALID_HANDLE_VALUE;
 	}
 
-	virtual int open( void* connection )
+	virtual bool bind( void* connection )
 	{
 		return instance_->register_handle( m_handle_, connection );
 	}
 
-	JOMOO_HANDLE getHandle() const
+	JOMOO_HANDLE get_handle() const
 	{
 		return m_handle_;
 	}
 
-	void setHandler( JOMOO_Operation_Result& handler )
-	{
-		handler_ = &handler;
-	}
-
-
-	//void complete (size_t bytes_transferred,
- //                        int success,
- //                        const void *completion_key,
- //                        u_long error )
-	//{
-	//	ASSERT( NULL != handler_);
-	//	handler_->complete( bytes_transferred
-	//						, success
-	//						, completion_key
-	//						, error );
-	//}
+	virtual  void complete (size_t bytes_transferred,
+                         int success,
+                         const void *completion_key,
+                         u_long error = 0) = 0;
 
 protected:
 	JOMOO_HANDLE m_handle_;
-	WIN32_Operation_Proactor* instance_;
-	//JOMOO_Operation_Result* handler_;
+	proactor* instance_;
+	DECLARE_SHARED();
 };
 
 _networks_begin
