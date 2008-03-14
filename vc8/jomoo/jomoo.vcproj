@@ -242,11 +242,19 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\Networks\connected_socket.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\Networks\Instance_Networks.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\src\Networks\Instance_Networks.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\Networks\jomoo_io_request.h"
 				>
 			</File>
 			<File
@@ -266,27 +274,19 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\Networks\proactor.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\Networks\proactor.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\Networks\Url.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\src\Networks\Url.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\Networks\WIN32_Operation_Proactor.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\Networks\WIN32_Operation_Proactor.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\Networks\WIN32_Operation_Result.H"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\Networks\WIN32OperationOverlapped.H"
 				>
 			</File>
 			<Filter
@@ -572,6 +572,10 @@
 					RelativePath="..\..\src\Networks\socket\tcp_server.inl"
 					>
 				</File>
+			</Filter>
+			<Filter
+				Name="io_request"
+				>
 			</Filter>
 		</Filter>
 		<Filter
@@ -1101,6 +1105,14 @@
 					>
 				</File>
 			</Filter>
+		</Filter>
+		<Filter
+			Name="buffer"
+			>
+			<File
+				RelativePath="..\..\src\buffer\data_black.h"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>
