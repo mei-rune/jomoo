@@ -56,33 +56,33 @@ JOMOO_INLINE bool base_socket::is_good() const
 	return INVALID_SOCKET != this->get_handle ();
 }
 
-JOMOO_INLINE int base_socket::open ( int protocol_family,
+JOMOO_INLINE bool base_socket::open ( int protocol_family,
 				int type, 
                 int protocol,
                 int reuse_addr)
 {
-int one = 1;
+  int one = 1;
 
   this->set_handle (socket (protocol_family,
                                     type,
                                     protocol));
 
   if (this->get_handle () == INVALID_SOCKET )
-    return -1;
+    return false;
   else if (protocol_family != PF_UNIX 
            && reuse_addr 
-           && this->set_option (SOL_SOCKET,
+           && !this->set_option (SOL_SOCKET,
                                 SO_REUSEADDR,
                                 &one,
-                                sizeof one) == -1)
+                                sizeof one) )
     {
       this->close ();
-      return -1;
+      return false;
     }
-  return 0;
+  return true;
 }
 
-JOMOO_INLINE int base_socket::open (int protocol_family,
+JOMOO_INLINE bool base_socket::open (int protocol_family,
 				int type, 
                 int protocol,
                 WSAPROTOCOL_INFO *protocolinfo,
@@ -99,18 +99,18 @@ JOMOO_INLINE int base_socket::open (int protocol_family,
   int one = 1;
 
   if (this->get_handle () == INVALID_SOCKET )
-    return -1;
+    return false;
   else if (reuse_addr 
-           && this->set_option (SOL_SOCKET,
+           && !this->set_option (SOL_SOCKET,
                                 SO_REUSEADDR,
                                 &one,
-                                sizeof one) == -1)
+                                sizeof one))
     {
       this->close ();
-	return -1;
+	  return false;
     }
   else
-    return 0;
+    return true;
 }
 
 JOMOO_INLINE SOCKET base_socket::get_handle (void) const
@@ -121,6 +121,7 @@ JOMOO_INLINE SOCKET base_socket::get_handle (void) const
 
 JOMOO_INLINE void base_socket::set_handle (SOCKET handle)
 {
+  close();
   this->handle_ = handle;
 }
 
@@ -129,22 +130,22 @@ JOMOO_INLINE void base_socket::swap( base_socket& r )
 	std::swap( this->handle_, r.handle_ );
 }
 
-JOMOO_INLINE int base_socket::set_option (int level, 
+JOMOO_INLINE bool base_socket::set_option (int level, 
 		      int option, 
 		      void *optval, 
 		      int optlen) const
 {
-  return setsockopt (this->get_handle (), level, 
-			     option, (char *) optval, optlen);
+  return ( SOCKET_ERROR == setsockopt (this->get_handle (), level, 
+			     option, (char *) optval, optlen) );
 }
 
-JOMOO_INLINE int base_socket::get_option (int level, 
+JOMOO_INLINE bool base_socket::get_option (int level, 
 		      int option, 
 		      void *optval, 
 		      int *optlen) const
 {
-  return getsockopt (this->get_handle (), level, 
-			     option, (char *) optval, optlen);
+  return ( SOCKET_ERROR == getsockopt (this->get_handle (), level, 
+			     option, (char *) optval, optlen) );
 }
 
 JOMOO_INLINE bool base_socket::enable (int value)

@@ -51,14 +51,14 @@ public:
   /**
    * 设置socket选项，请见setsockopt
    */
-  int set_option (int level,
+  bool set_option (int level,
                   int option,
                   void *optval,
                   int optlen) const;
   /**
    * 获得socket选项，请见getsockopt
    */
-  int get_option (int level,
+  bool get_option (int level,
                   int option,
                   void *optval,
                   int *optlen) const;
@@ -118,21 +118,21 @@ public:
    */
   bool disable (int value);
 
-private:
-  DECLARE_NO_COPY_CLASS( base_socket );
-
-  int open (int protocol_family = AF_INET,
+  bool open (int protocol_family = AF_INET,
 			int type = SOCK_STREAM,
             int protocol = IPPROTO_TCP,
             int reuse_addr = 0 );
 
-  int open (int protocol_family,
+  bool open (int protocol_family,
 			int type,
             int protocol,
             WSAPROTOCOL_INFO *protocolinfo,
             JOMOO_SOCK_GROUP g,
             u_long flags,
             int reuse_addr);
+
+private:
+  DECLARE_NO_COPY_CLASS( base_socket );
 
   SOCKET handle_;
   mutable tstring toString_;
