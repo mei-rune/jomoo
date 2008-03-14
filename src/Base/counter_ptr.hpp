@@ -43,7 +43,7 @@ inline T* get_ptr( std::auto_ptr< T >& t )
 class counter
 {
 public:
-	counter( long value = 1 )
+	counter( long value = 0 )
 		: counter_( value )
 	{
 	}
