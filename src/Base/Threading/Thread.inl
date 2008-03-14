@@ -36,10 +36,13 @@ JOMOO_INLINE thread::thread( Runnable& runfn , const tchar* descr)
 
 JOMOO_INLINE thread::~thread()
 {
+	/**
 	if( m_thread_ == 0 )
 		return ;
 	CloseHandle(reinterpret_cast<HANDLE>(m_thread_));
 	m_thread_ = 0;
+	 */
+	join();
 }
 
 JOMOO_INLINE void thread::__do_run()
@@ -58,16 +61,14 @@ JOMOO_INLINE void thread::__do_run()
 
 JOMOO_INLINE void thread::__do_cleanup()
 {
-	try
-	{
-		m_runfn_.cleanup();
-	}
-	catch( ... )
-	{
-	}
+	//try
+	//{
+	//	m_runfn_.cleanup();
+	//}
+	//catch( ... )
+	//{
+	//}
 }
-
-
 
 JOMOO_INLINE bool thread::activate ( )
 {
