@@ -3,10 +3,10 @@
 #include "stdafx.h"
 #include <list>
 #include <iostream>
-#include <boost/shared_ptr.hpp>
-#include <boost/bind.hpp>
+#include <boost/tr1/memory.hpp>
+#include <boost/tr1/functional.hpp>
+#include <boost/thread.hpp>
 #include "networks/socket/tcp_server.h"
-#include "base/threading/thread.h"
 
 
 class session;
@@ -24,25 +24,12 @@ public:
 	}
 };
 
-class session : _thread thread::Runnable
+class session
 {
 public:
 	session( session_manager& manager )
 		: manager_( manager )
 	{
-	}
-
-	void Start()
-	{
-		_stoped = false;
-		thread_.reset( new _thread thread( *this, "test" ) );
-	}
-
-	void Stop()
-	{
-		_stoped = true;
-		if( 0 != thread_.get() )
-			thread_->join();
 	}
 
 	void run()
@@ -52,7 +39,7 @@ public:
 		timeout.tv_usec = 0;
 		char buf[1024];
 
-		while(! manager_.stoped && !_stoped )
+		while(! manager_.stoped )
 		{
 			if( !socket_.socket().poll( timeout, select_mode::select_read ) )
 				continue;
@@ -65,6 +52,8 @@ public:
 		}
 		
 		std::cout << "来自" << socket_.remote_addr() << "的连接断开,剩余" << manager_.sessions.size() - 1 << "个连接!" << std::endl;
+
+		cleanup();
 	}
 
 	void cleanup()
@@ -82,7 +71,6 @@ public:
 private:
 	bool _stoped;
 	session_manager& manager_;
-	std::auto_ptr< _thread thread  > thread_;
 };
 
 int main(int argc, tchar* argv[])
@@ -117,6 +105,7 @@ int main(int argc, tchar* argv[])
 	
 	std::cout << "监听 " << addr << " 成功!" << std::endl;
 
+	
 	session_manager manager;
 	while( 1 )
 	{
@@ -124,16 +113,17 @@ int main(int argc, tchar* argv[])
 		if( !srv.accept( p->socket_ ) )
 			continue;
 
-		p->Start();
 		manager.sessions.push_back( p );
-		
-		std::cout << "接收来自" << socket_.remote_addr() << "的连接断开,共有" << manager_.sessions.size() << "个连接!" << std::endl;
+		std::cout << "接收来自" << p->socket_.remote_addr() << "的连接,共有" << manager.sessions.size() << "个连接!" << std::endl;
+
+		boost::thread t( boost::bind( &session::run, p ) );
+
 	}
 
-	for( std::list<sessionPtr>::iterator it = manager.sessions.begin();
-		it != manager.sessions.end();
-		it ++ )
-		(*it)->Stop();
+	//for( std::list<sessionPtr>::iterator it = manager.sessions.begin();
+	//	it != manager.sessions.end();
+	//	it ++ )
+	//	(*it)->Stop();
 
 	return 0;
 }
