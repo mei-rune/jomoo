@@ -76,7 +76,7 @@ public:
   const tstring& toString() const;
 
 private:
-	
+	DECLARE_NO_COPY_CLASS( tcp_server );
 	inet_address bind_addr_;
 	base_socket socket_;
 	mutable tstring toString_;

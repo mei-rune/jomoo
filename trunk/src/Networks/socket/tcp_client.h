@@ -20,7 +20,6 @@ class tcp_client
 public:
   tcp_client (void);
 
-
   ~tcp_client (void);
 
   /**
@@ -216,6 +215,7 @@ public:
 									  , JOMOO_OVERLAPPED& overlapped );
 
 private:
+  DECLARE_NO_COPY_CLASS( tcp_client );
   inet_address local_addr_;
   inet_address remote_addr_;
   bool blocking_;

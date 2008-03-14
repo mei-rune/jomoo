@@ -1,9 +1,10 @@
 
 
 JOMOO_INLINE tcp_client::tcp_client (void)
-: socket_(AF_INET , SOCK_STREAM, IPPROTO_TCP )   
+: socket_( )   
 , blocking_( true )
 {
+	//AF_INET , SOCK_STREAM, IPPROTO_TCP
 }
 
 JOMOO_INLINE tcp_client::~tcp_client (void)
@@ -297,6 +298,9 @@ JOMOO_INLINE bool tcp_client::transmit ( HANDLE hFile
 
 JOMOO_INLINE bool tcp_client::connect( const inet_address& addr )
 {
+	if( !socket_.open( AF_INET , SOCK_STREAM, IPPROTO_TCP ) )
+		return false;
+
 	if( 0 != ::connect( this->socket_.get_handle(), addr.addr(), addr.size() ) )
 		return false;
 	
@@ -309,8 +313,12 @@ JOMOO_INLINE bool tcp_client::connect( const inet_address& addr )
 JOMOO_INLINE bool tcp_client::connect( const inet_address& addr
 									  ,JOMOO_OVERLAPPED& overlapped )
 {
- DWORD sendbytes = 0;
- return (TRUE == base_socket::__connectex( socket_.get_handle(), addr.addr(), addr.size(), NULL, 0, &sendbytes, &overlapped));
+	
+	if( !socket_.open( AF_INET , SOCK_STREAM, IPPROTO_TCP ) )
+		return false;
+
+	DWORD sendbytes = 0;
+	return (TRUE == base_socket::__connectex( socket_.get_handle(), addr.addr(), addr.size(), NULL, 0, &sendbytes, &overlapped));
 }
 
 JOMOO_INLINE bool tcp_client::connect( const inet_address& addr
@@ -318,6 +326,9 @@ JOMOO_INLINE bool tcp_client::connect( const inet_address& addr
 									  , size_t send_data_len
 									  , JOMOO_OVERLAPPED& overlapped )
 {
+	if( !socket_.open( AF_INET , SOCK_STREAM, IPPROTO_TCP ) )
+		return false;
+
 	 DWORD sendbytes = 0;
 	 return (TRUE == base_socket::__connectex( socket_.get_handle(), addr.addr(), addr.size(), (void*)send_buffer, send_data_len, &sendbytes, &overlapped));
 }
