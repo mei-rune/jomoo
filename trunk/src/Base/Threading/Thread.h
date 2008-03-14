@@ -16,6 +16,24 @@
 #ifdef JOMOO_MT
 
 _thread_begin
+	
+/**
+ * @Brief 线程的回调接口
+ */
+class runnable 
+{ 
+public:
+
+	/**
+	* Runnable destructor
+	*/
+	virtual ~runnable() { };
+
+	/**
+	* 线程的回调接口
+	*/
+	virtual void run() = 0;
+};
 
 /**
  * @Brief thread 线程接口，本线程封装了平台的各种线程接口
@@ -23,33 +41,9 @@ _thread_begin
 class  thread
 {
 public:
-	/**
-	* @Brief 线程的回调接口
-	*/
-	class Runnable 
-	{ 
-	public:
-
-		/**
-		* Runnable destructor
-		*/
-		virtual ~Runnable() { };
-
-		/**
-		* 线程的回调接口
-		*/
-		virtual void run() = 0;
-
-		/**
-		 * 线程退出时的回调接口
-		 */
-		virtual void cleanup() = 0;
-	};
-
-	thread ( Runnable& runfn , const tchar* descr );
+	thread ( runnable& runfn , const tchar* descr );
 
 	~thread();
-
 
 	/**
 	 * 起动线程
@@ -84,9 +78,38 @@ private:
 
 	uintptr_t m_thread_ ;
 
-	Runnable& m_runfn_;
+	runnable& m_runfn_;
 
 	tstring to_string_;
+};
+
+
+
+class thread_t
+{
+public:
+	class thread_data
+	{
+	public:
+		tstring to_string
+		runnable runner;
+		uintptr_t pthread;
+	};
+	
+	/**
+	 * 等待线程结束
+	 * @remarks 注意不论该函数是否成功，本线程都一定结束，当然
+	 * 除非有人重新启动它了。
+	 */
+	void join ();
+
+	/**
+	 * 取得线程描述
+	 * @return 返回线程描述
+	 */
+	const tstring& toString() const;
+private:
+	thread_data* thread;
 };
 
 
@@ -116,6 +139,8 @@ namespace ThreadOP
 	{
 		::Sleep( millis );
 	}
+
+	inline void create_thread( 
 }
 
 _thread_end
