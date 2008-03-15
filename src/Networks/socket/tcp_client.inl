@@ -226,7 +226,7 @@ JOMOO_INLINE bool tcp_client::recvv (iovec* iov, size_t n,
 {
 	DWORD NumberOfBytesRecvd = 0;
 	DWORD Flags = 0;
-	return (WSARecv( socket_.get_handle()
+	return ( TRUE == WSARecv( socket_.get_handle()
 		, iov
 		, ( DWORD ) n
 		, &NumberOfBytesRecvd
@@ -239,7 +239,7 @@ JOMOO_INLINE bool tcp_client::recv (void *buf, size_t n,
 				   JOMOO_OVERLAPPED& overlapped)
 {
 	DWORD bytes_read = 0;
-	return ::ReadFile( ( HANDLE )socket_.get_handle ()
+	return TRUE == ::ReadFile( ( HANDLE )socket_.get_handle ()
 		, buf
 		, static_cast < DWORD>( n)
 		, &bytes_read
@@ -272,7 +272,7 @@ JOMOO_INLINE bool tcp_client::transmit ( HANDLE hFile
 				, size_t nNumberOfBytesPerSend
 				, io_file_buf* transmitBuffers )
 {
-	return (base_socket::__transmitfile( socket_.get_handle(),
+	return (TRUE == base_socket::__transmitfile( socket_.get_handle(),
 		hFile,
         (DWORD) nNumberOfBytesToWrite,
         (DWORD) nNumberOfBytesPerSend,
@@ -287,7 +287,7 @@ JOMOO_INLINE bool tcp_client::transmit ( HANDLE hFile
 				, io_file_buf* transmitBuffers
                 , JOMOO_OVERLAPPED& overlapped)
 {
-	return ( base_socket::__transmitfile( socket_.get_handle(),
+	return ( TRUE == base_socket::__transmitfile( socket_.get_handle(),
 		hFile,
         (DWORD) nNumberOfBytesToWrite,
         (DWORD) nNumberOfBytesPerSend,
@@ -301,11 +301,11 @@ JOMOO_INLINE bool tcp_client::connect( const inet_address& addr )
 	if( !socket_.open( AF_INET , SOCK_STREAM, IPPROTO_TCP ) )
 		return false;
 
-	if( 0 != ::connect( this->socket_.get_handle(), addr.addr(), addr.size() ) )
+	if( 0 != ::connect( this->socket_.get_handle(), addr.addr(), (int)addr.size() ) )
 		return false;
 	
 	this->remote_addr_ = addr;
-	int len = this->local_addr_.size();
+	int len = (int)this->local_addr_.size();
 	::getsockname( this->socket_.get_handle(), this->local_addr_.addr(), &len );
 	return true;
 }
