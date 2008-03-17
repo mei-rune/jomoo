@@ -10,7 +10,7 @@
 // Include files
 # include <list>
 
-_JOMOO_begin
+_jomoo_begin
 
 namespace detail
 {
@@ -145,6 +145,6 @@ private:
 	collection_type collection_;
 };
 
-_JOMOO_end
+_jomoo_end
 
 #endif // ENUMERATOR_H
