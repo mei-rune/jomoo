@@ -10,16 +10,23 @@
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
-#include "config_Networks.h"
-#include "Platform/OS.H"
-#include "jomoo_io_request.h"
+#include "counter_ptr.hpp"
+#include "counter_ptr.hpp"
 
 _networks_begin
 
-class proactor
+class data_black
 {
 public:
-private :
+
+	size_t capability() const;
+
+    void incRef();
+    void decRef();
+private:
+	counter counter_
+	char* pointer_;
+	size_t capability_;
 };
 
 _networks_end
