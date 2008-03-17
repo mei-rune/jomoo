@@ -37,7 +37,7 @@
 #include "exception.hpp"
 #include "string.hpp"
 
-_JOMOO_begin
+_jomoo_begin
 
 JOMOO_NAMESPACE_INLINE_FUNCTION
 DWORD get_application_directory(tchar *szModName, DWORD Size, bool slash = true );
@@ -160,6 +160,6 @@ tstring getFileName(const tstring& path);
 #   include "directory.inl"
 # endif /* JOMOO_HAS_INLINED_OSCALLS */
 
-_JOMOO_end
+_jomoo_end
 
 #endif // _System_Directory_H_

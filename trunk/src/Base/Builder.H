@@ -11,7 +11,7 @@
 # include "Memory/memory.h"
 # include "macro/macro_params.hpp"
 
-_JOMOO_begin
+_jomoo_begin
 
 template< typename B
 		>
@@ -244,6 +244,6 @@ private:
 };
 
 
-_JOMOO_end
+_jomoo_end
 
 #endif // NETWORKS_BUILDER_H

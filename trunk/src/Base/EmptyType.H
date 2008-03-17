@@ -9,12 +9,12 @@
 
 // Include files
 
-_JOMOO_begin
+_jomoo_begin
 
 class EmptyType
 {
 };
 
-_JOMOO_end
+_jomoo_end
 
 #endif // EmptyType_H

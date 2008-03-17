@@ -18,7 +18,7 @@
 #  pragma once
 # endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
-_JOMOO_begin
+_jomoo_begin
 
 class JOMOO_Cleanup
 {
@@ -29,6 +29,6 @@ public:
 	virtual void cleanup ( ) = 0;
 };
 
-_JOMOO_end
+_jomoo_end
 
 #endif /* ACE_CLEANUP_H */

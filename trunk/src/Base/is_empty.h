@@ -9,7 +9,7 @@
 
 // Include files
 
-_JOMOO_begin
+_jomoo_begin
 
 #ifdef _STRING_
 template<class _Elem,
@@ -111,6 +111,6 @@ template<class _Kty,
 	}
 #endif
 
-_JOMOO_end
+_jomoo_end
 
 #endif // is_empty_H

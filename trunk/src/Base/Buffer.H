@@ -23,7 +23,7 @@
 #include "jomoo_export.h"
 #include "Base/exception.hpp"
 
-_JOMOO_begin
+_jomoo_begin
 
 class JOMOO_Read_Buffer
 {
@@ -176,6 +176,6 @@ public :
 	virtual const tstring& toString() const = 0;
 };
 
-_JOMOO_end
+_jomoo_end
 
 #endif // _JOMOO_Buffer_H_
