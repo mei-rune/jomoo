@@ -16,7 +16,7 @@
 #include "os_threading.h"
 #include "Base/string.hpp"
 #include "Base/exception.hpp"
-_JOMOO_begin
+_jomoo_begin
 
 class JOMOO_Event
 {
@@ -74,7 +74,7 @@ private:
 	tstring m_name_;
 };
 
-_JOMOO_end
+_jomoo_end
 
 #endif // JOMOO_MT
 

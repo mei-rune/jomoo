@@ -13,7 +13,7 @@
 #include "../Exception.HPP"
 
 
-_JOMOO_begin
+_jomoo_begin
 
 template <class JOMOO_LOCK>
 class JOMOO_Guard
@@ -61,7 +61,7 @@ private:
 	DECLARE_NO_COPY_CLASS( JOMOO_Guard );
 };
 
-_JOMOO_end
+_jomoo_end
 
 #if defined (JOMOO_TEMPLATES_REQUIRE_SOURCE)
 #include "Guard.T"
