@@ -158,8 +158,8 @@ typedef long _off_t;
 typedef _off_t off_t;
 #endif //
 
-#define _JOMOO_begin 
-#define _JOMOO_end 
+#define _jomoo_begin 
+#define _jomoo_end 
 #define _hazel 
 #define use_hazel 
 
