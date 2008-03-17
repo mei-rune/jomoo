@@ -11,7 +11,7 @@
 # include <string>
 # include <vector>
 
-_JOMOO_begin
+_jomoo_begin
 
 namespace StringOps
 {
@@ -93,6 +93,6 @@ namespace StringOps
 		tchar *_Myptr;
 	};
 }
-_JOMOO_end
+_jomoo_end
 
 #endif // SEAL_BASE_OPS_STRING_OPS_H
