@@ -24,7 +24,9 @@
 #include <assert.h>
 
 
-namespace Logging
+_jomoo_begin
+
+namespace logging
 {
 
 /**
@@ -193,11 +195,9 @@ public:
 	virtual void pushNDC( const tchar* str ) = 0;
 	virtual void popNDC( ) = 0;
 };
-
-
-
-
 }
+
+_jomoo_end
 
 #ifndef _NO_LOG_
 
