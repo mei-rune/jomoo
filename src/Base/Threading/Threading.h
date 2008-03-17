@@ -20,11 +20,11 @@
 #include "Base_Thread_Manager.H"
 
 
-_JOMOO_begin
+_jomoo_begin
 
 typedef JOMOO_Thread_Mutex JOMOO_Mutex;
 typedef JOMOO_Thread_Semaphore JOMOO_Semaphore;
-_JOMOO_end
+_jomoo_end
 
 #define JOMOO_MUTEX_MUTABLE( x ) mutable JOMOO_Mutex x
 
@@ -42,12 +42,12 @@ _JOMOO_end
 
 #else
 
-_JOMOO_begin
+_jomoo_begin
 
 typedef JOMOO_Null_Mutex JOMOO_Mutex;
 typedef JOMOO_Null_Semaphore JOMOO_Semaphore;
 
-_JOMOO_end
+_jomoo_end
 
 #define JOMOO_MUTEX_MUTABLE( x )
 

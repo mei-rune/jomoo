@@ -16,7 +16,7 @@
 #include "os_threading.h"
 #include "JOMOO_Guard.h"
 
-_JOMOO_begin
+_jomoo_begin
 
 class JOMOO_Thread_Mutex
 {
@@ -55,7 +55,7 @@ private:
 	DECLARE_NO_COPY_CLASS( JOMOO_Thread_Mutex );
 };
 
-_JOMOO_end
+_jomoo_end
 
 #endif // JOMOO_MT
 

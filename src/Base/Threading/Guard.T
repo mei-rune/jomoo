@@ -11,7 +11,7 @@
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 
-_JOMOO_begin
+_jomoo_begin
 
 template <class JOMOO_LOCK>  bool
 JOMOO_Guard<JOMOO_LOCK>::acquire (void)
@@ -99,6 +99,6 @@ JOMOO_Guard<JOMOO_LOCK>::disown (void)
   this->owner_ = false;
 }
 
-_JOMOO_end
+_jomoo_end
 
 #endif //JOMOO_GUARD_CPP

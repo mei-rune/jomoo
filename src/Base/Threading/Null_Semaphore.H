@@ -12,7 +12,7 @@
 #include "config_threading.h"
 #include "Guard.h"
 
-_JOMOO_begin
+_jomoo_begin
 
 class JOMOO_Null_Semaphore
 {
@@ -50,7 +50,7 @@ private:
 	DECLARE_NO_COPY_CLASS( JOMOO_Null_Semaphore );
 };
 
-_JOMOO_end
+_jomoo_end
 
 
 #endif // JOMOO_NULL_SEMAPHORE_H
