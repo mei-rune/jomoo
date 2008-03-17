@@ -17,7 +17,7 @@
 #include <map>
 #include <exception>
 
-_JOMOO_begin
+_jomoo_begin
 
 namespace detail
 {
@@ -135,6 +135,6 @@ private:
 	IdToProductMap associations_;
 };
 
-_JOMOO_end
+_jomoo_end
 
 #endif // _Factory_H_

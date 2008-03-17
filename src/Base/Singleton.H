@@ -18,7 +18,7 @@
 
 #include "Cleanup.h"
 
-_JOMOO_begin
+_jomoo_begin
 
 #define JOMOO_Singleton_ST_1 class TYPE,  class JOMOO_LOCK
 #define JOMOO_Singleton_ST_2 TYPE, JOMOO_LOCK
@@ -69,7 +69,7 @@ protected:
 	static lock_type &lock_i ( );
 };
 
-_JOMOO_end
+_jomoo_end
 
 
 #if defined (JOMOO_TEMPLATES_REQUIRE_SOURCE)

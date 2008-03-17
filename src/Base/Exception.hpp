@@ -13,7 +13,7 @@
 #include "lastError.h"
 #include <stdexcept>
 
-_JOMOO_begin
+_jomoo_begin
 
 
 class Exception : public std::runtime_error 
@@ -195,6 +195,6 @@ MakeException( SystemException, SystemError );
 #define ThrowException3( type ,m1 ,m2 ,m3 ) throw type(__FILE__, __LINE__ , m1, m2, m3 )
 #define ThrowException4( type ,m1 ,m2 ,m3 ,m4) throw type(__FILE__, __LINE__ , m1, m2, m3, m4)
 
-_JOMOO_end
+_jomoo_end
 
 #endif

@@ -27,7 +27,7 @@
 #pragma warning (pop)
 
 
-_JOMOO_begin
+_jomoo_begin
 
 /**
  * Brief 本类是一个虚工厂接口模板，用于定义一个虚工厂接口
@@ -74,4 +74,4 @@ public:
 };
 
 
-_JOMOO_end
+_jomoo_end

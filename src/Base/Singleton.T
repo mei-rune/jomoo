@@ -17,7 +17,7 @@
 
 #include "Singleton.H"
 
-_JOMOO_begin
+_jomoo_begin
 
 template <JOMOO_Singleton_ST_1> inline
 JOMOO_Singleton<JOMOO_Singleton_ST_2>::JOMOO_Singleton ( )
@@ -88,6 +88,6 @@ template <JOMOO_Singleton_ST_1> JOMOO_Singleton<JOMOO_Singleton_ST_2>
 JOMOO_Singleton<JOMOO_Singleton_ST_2>::singleton_;
 
 
-_JOMOO_end
+_jomoo_end
 
 #endif // _JOMOO_Singleton_CPP_
