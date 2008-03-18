@@ -30,11 +30,23 @@ const int32_t pool_magic_v = *( int32_t *)pool_magic;
 
 MakeException( BadMemoryException , "分配内存块失败" );
 
+class memory_destructor
+{
+public:
+	virtual ~memory_destructor(){}
+
+	/**
+	 * 释放内存块
+	 * @param[ in ] block 内存块的地址
+	 * @remark 它可能会失败并扔出内存错误异常
+	 */
+	virtual void free (void* block ) = 0;
+};
 
 /**
  * @Brief 内存池接口
  */
-class pool
+class pool : public memory_destructor
 {
 public:
 	typedef pool* ptr_type;
@@ -55,12 +67,12 @@ public:
 	 */
 	virtual void* malloc (size_t nbytes , const char* file=0, size_t line=-1 ) = 0;
 
-	/**
-	 * 释放内存块
-	 * @param[ in ] block 内存块的地址
-	 * @remark 它可能会失败并扔出内存错误异常
-	 */
-	virtual void free (void* block ) = 0;
+	///**
+	// * 释放内存块
+	// * @param[ in ] block 内存块的地址
+	// * @remark 它可能会失败并扔出内存错误异常
+	// */
+	//virtual void free (void* block ) = 0;
 
 	/**
 	 * 打印出内存池的状态
@@ -78,7 +90,7 @@ public:
 /**
  * @Brief 固定大小内存池接口
  */
-class fixed_pool  
+class fixed_pool  : public memory_destructor
 {
 public:
 
@@ -99,12 +111,12 @@ public:
 	 */
 	virtual void* malloc( const char* file=0, size_t line=-1 ) = 0;
 
-	/**
-	 * 释放内存块
-	 * @param[ in ] block 内存块的地址
-	 * @remark 它可能会失败并扔出内存错误异常
-	 */
-	virtual void  free( void* block ) = 0;
+	///**
+	// * 释放内存块
+	// * @param[ in ] block 内存块的地址
+	// * @remark 它可能会失败并扔出内存错误异常
+	// */
+	//virtual void  free( void* block ) = 0;
 
 	/**
 	 * 取得每个内存块的大小
@@ -170,13 +182,6 @@ inline void   operator delete(void * chunk , _memory fixed_pool_ptr pools)
 {   
    pools->free(chunk);
 }
-
-//template<class _T1,
-//	class _T2> inline
-//	void JOMOO_Construct(_T1 _FARQ *_Ptr, const _T2& _Val )
-//	{	// construct object at _Ptr with value _Val
-//	new ((void _FARQ *)_Ptr) _T1(_Val);
-//	}
 
 		// TEMPLATE FUNCTION _Destroy
 template<class _Ty> inline

@@ -144,14 +144,26 @@ JOMOO_Export_C _memory fixed_pool_ptr ___findLoopPool( const tstring& name, size
  * @return 返回内存块的地址
  * @remark 它可能会失败并扔出内存错误异常
  */
-JOMOO_Export_C void* ___JOMOO_malloc (size_t nbytes , const char* file, size_t line );
+JOMOO_Export_C void* ___system_malloc (size_t nbytes , const char* file, size_t line );
 
 /**
  * 释放内存块
  * @param[ in ] block 内存块的地址
  * @remark 它可能会失败并扔出内存错误异常
  */
-JOMOO_Export_C void ___JOMOO_free (void* block );
+JOMOO_Export_C void ___system_free (void* block );
+
+
+JOMOO_Export_C void* ___memory_malloc (pool_ptr pool, size_t nbytes , const char* file, size_t line )
+{
+	
+}
+
+JOMOO_Export_C void* ___memory_malloc (fixed_pool_ptr pool, const char* file, size_t line )
+{
+}
+
+JOMOO_Export_C void ___memory_free (void* block );
 
 _memory_begin
 
@@ -224,9 +236,9 @@ inline _memory fixed_pool_ptr findPool( const tstring& name , size_t chunk_size 
  * @return 返回内存块的地址
  * @remark 它可能会失败并扔出内存错误异常
  */
-inline void* boe_malloc (size_t nbytes , const char* file, size_t line )
+inline void* system_malloc (size_t nbytes , const char* file, size_t line )
 {
-	return ___JOMOO_malloc( nbytes, file, line );
+	return ___system_malloc( nbytes, file, line );
 }
 
 /**
@@ -234,9 +246,9 @@ inline void* boe_malloc (size_t nbytes , const char* file, size_t line )
  * @param[ in ] block 内存块的地址
  * @remark 它可能会失败并扔出内存错误异常
  */
-inline void boe_free (void* block )
+inline void system_free (void* block )
 {
-	___JOMOO_free( block ); 
+	___system_free( block ); 
 }
 
 

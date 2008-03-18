@@ -103,6 +103,7 @@ private:
 	T *_Myptr;	// the wrapped object pointer
 	A *alloc_;
 	};
+
 template< typename T , typename V >
 inline bool is_null( const auto_ptr< T,V > p )
 {
