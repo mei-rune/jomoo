@@ -758,14 +758,6 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="Logging"
-				>
-				<File
-					RelativePath="..\..\src\Base\Logger.H"
-					>
-				</File>
-			</Filter>
-			<Filter
 				Name="string"
 				>
 				<File
@@ -1110,7 +1102,75 @@
 			Name="buffer"
 			>
 			<File
-				RelativePath="..\..\src\buffer\data_black.h"
+				RelativePath="..\..\src\jomoo\buffer\binary_reader.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\buffer\binary_writer.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\buffer\data_black.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="logging"
+			>
+			<File
+				RelativePath="..\..\src\jomoo\logging\logger.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="memory"
+			>
+			<File
+				RelativePath="..\..\src\jomoo\memory\auto_ptr.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\memory\config_Memory.H"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\memory\FixedPool.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\memory\FixedPool.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\memory\Memory.H"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\memory\Memory_Pool.H"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\memory\MemoryManager.CPP"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\memory\MemoryManager.H"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\memory\ObjectPool.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\memory\Pool.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\memory\SystemPool.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\memory\SystemPool.h"
 				>
 			</File>
 		</Filter>
