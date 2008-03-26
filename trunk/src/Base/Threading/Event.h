@@ -16,16 +16,17 @@
 #include "os_threading.h"
 #include "Base/string.hpp"
 #include "Base/exception.hpp"
+
 _jomoo_begin
 
-class JOMOO_Event
+class jomoo_event
 {
 public:
-	JOMOO_Event( const tchar* name , bool ManualReset, bool InitialState )
+	jomoo_event( const tchar* name , bool manualReset, bool initialState )
 		: event_handler_( NULL )
 		, m_name_( name == 0 ? BT_TEXT("") : name )
 	{
-		event_handler_ = OS::create_event( ManualReset,InitialState );
+		event_handler_ = OS::create_event( manualReset,initialState );
 		if( event_handler_ == NULL )
 			if( name != 0 )
 				ThrowException1( RuntimeException, BT_TEXT("创建事件[") + m_name_ + BT_TEXT("]失败") );
@@ -33,7 +34,7 @@ public:
 				ThrowException1( RuntimeException, BT_TEXT("创建事件失败") );
 	}
 
-	~JOMOO_Event(void )
+	~jomoo_event(void )
 	{
 		OS::close_handle( event_handler_ );
 	}
@@ -68,7 +69,7 @@ public:
 
 private:
 
-	DECLARE_NO_COPY_CLASS( JOMOO_Event );
+	DECLARE_NO_COPY_CLASS( jomoo_event );
 
 	JOMOO_HANDLE event_handler_;
 	tstring m_name_;

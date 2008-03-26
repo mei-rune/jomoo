@@ -13,61 +13,58 @@
 
 _jomoo_begin
 
-template <class JOMOO_LOCK>  bool
-JOMOO_Guard<JOMOO_LOCK>::acquire (void)
+template <class LOCK>  bool
+guard<LOCK>::lock (void)
 {
   return this->owner_ = this->lock_->acquire ();
 }
 
 #if(_WIN32_WINNT >= 0x0400)
 
-template <class JOMOO_LOCK>  bool
-JOMOO_Guard<JOMOO_LOCK>::tryacquire ( )
+template <class LOCK>  bool
+guard<LOCK>::try_lock ( )
 {
   return this->owner_ = this->lock_->tryacquire ();
 }
 
 #endif // (_WIN32_WINNT >= 0x0400)
 
-template <class JOMOO_LOCK>  void
-JOMOO_Guard<JOMOO_LOCK>::release (void)
+template <class LOCK>  void guard<LOCK>::unlock (void)
 {
   if ( !this->owner_ )
     return ;
-  else
-    {
-      this->owner_ = false;
-      this->lock_->release ();
-    }
+    
+  this->owner_ = false;
+  this->lock_->release ();
 }
 
-template <class JOMOO_LOCK> 
-JOMOO_Guard<JOMOO_LOCK>::JOMOO_Guard (JOMOO_LOCK &l, bool nothrow )
+template <class LOCK> 
+guard<LOCK>::guard (LOCK &l, bool nothrow )
   : lock_ (&l),
     owner_ ( false )
 {
-  if( !this->acquire () && !nothrow )
+  if( !this->lock () && !nothrow )
 	  ThrowException1( LockException , "进入锁失败" );
 }
 
 #if(_WIN32_WINNT >= 0x0400)
 
-template <class JOMOO_LOCK> 
-JOMOO_Guard<JOMOO_LOCK>::JOMOO_Guard (JOMOO_LOCK &l, bool block, bool nothrow )
+template <class LOCK> 
+guard<LOCK>::guard (LOCK &l, bool block, bool nothrow )
   : lock_ (&l),
     owner_ ( false )
 {
   if (block)
-    this->acquire ();
+    this->lock ();
   else
-    if( ! this->tryacquire () && !nothrow )
+    if( ! this->try_lock () && !nothrow )
 	  ThrowException1( LockException , "进入锁失败" );
 }
 
 #endif // (_WIN32_WINNT >= 0x0400)
 
-template <class JOMOO_LOCK> 
-JOMOO_Guard<JOMOO_LOCK>::JOMOO_Guard (JOMOO_LOCK &l, bool block, bool become_owner, bool nothrow )
+template <class LOCK> 
+guard<LOCK>::guard (LOCK &l, bool block, bool become_owner, bool nothrow )
   : lock_ (&l),
     owner_ (become_owner == 0 ? false : true )
 {
@@ -75,26 +72,26 @@ JOMOO_Guard<JOMOO_LOCK>::JOMOO_Guard (JOMOO_LOCK &l, bool block, bool become_own
 }
 
 
-template <class JOMOO_LOCK> 
-JOMOO_Guard<JOMOO_LOCK>::~JOMOO_Guard (void)
+template <class LOCK> 
+guard<LOCK>::~guard (void)
 {
-  this->release ();
+  this->unlock ();
 }
 
-template <class JOMOO_LOCK>  bool
-JOMOO_Guard<JOMOO_LOCK>::locked (void) const
+template <class LOCK>  bool
+guard<LOCK>::locked (void) const
 {
   return this->owner_ ;
 }
 
-template <class JOMOO_LOCK>  bool
-JOMOO_Guard<JOMOO_LOCK>::remove (void)
+template <class LOCK>  bool
+guard<LOCK>::remove (void)
 {
   return this->lock_->remove ();
 }
 
-template <class JOMOO_LOCK>  void
-JOMOO_Guard<JOMOO_LOCK>::disown (void)
+template <class LOCK>  void
+guard<LOCK>::disown (void)
 {
   this->owner_ = false;
 }
