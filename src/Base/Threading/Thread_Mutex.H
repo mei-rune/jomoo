@@ -1,7 +1,7 @@
 
 
-#ifndef JOMOO_THREAD_MUTEX_H
-#define JOMOO_THREAD_MUTEX_H
+#ifndef mutex_H
+#define mutex_H
 
 #include "config.h"
 
@@ -18,18 +18,18 @@
 
 _jomoo_begin
 
-class JOMOO_Thread_Mutex
+class mutex
 {
 private:
 	critical_section section_;
 public:
-	typedef JOMOO_Guard< JOMOO_Thread_Mutex > spcode_lock;
-	JOMOO_Thread_Mutex()
+	typedef JOMOO_Guard< mutex > spcode_lock;
+	mutex()
 	{
 		OS::create_critical_section( &section_ );
 	}
 
-	~JOMOO_Thread_Mutex()
+	~mutex()
 	{
 		OS::close_critical_section( &section_ );
 	}
@@ -52,11 +52,11 @@ public:
 #endif
 
 private:
-	DECLARE_NO_COPY_CLASS( JOMOO_Thread_Mutex );
+	DECLARE_NO_COPY_CLASS( mutex );
 };
 
 _jomoo_end
 
 #endif // JOMOO_MT
 
-#endif // JOMOO_THREAD_MUTEX_H
+#endif // mutex_H

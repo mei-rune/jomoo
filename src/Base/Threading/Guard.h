@@ -1,7 +1,7 @@
 
 
-#ifndef JOMOO_GUARD_H
-#define JOMOO_GUARD_H
+#ifndef _GUARD_H_
+#define _GUARD_H_
 
 #include "config.h"
 
@@ -15,32 +15,32 @@
 
 _jomoo_begin
 
-template <class JOMOO_LOCK>
-class JOMOO_Guard
+template <class LOCK>
+class guard
 {
 public:
 
   MakeException( LockException , LockError );
 
-  JOMOO_Guard (JOMOO_LOCK &l, bool nothrow = true );
+  guard (LOCK &l, bool nothrow = true );
 
 #if(_WIN32_WINNT >= 0x0400)
 
-  JOMOO_Guard (JOMOO_LOCK &l, bool block, bool nothrow );
+  guard (LOCK &l, bool block, bool nothrow );
 
 #endif // (_WIN32_WINNT >= 0x0400)
 
-  JOMOO_Guard (JOMOO_LOCK &l, bool block, bool become_owner, bool nothrow );
+  guard (LOCK &l, bool block, bool become_owner, bool nothrow );
 
-  ~JOMOO_Guard (void);
+  ~guard (void);
 
-  bool acquire (void);
+  bool lock (void);
 
 #if(_WIN32_WINNT >= 0x0400)
-  bool tryacquire (void);
+  bool try_lock (void);
 #endif // (_WIN32_WINNT >= 0x0400)
 
-  void release (void);
+  void unlock (void);
 
   void disown (void);
 
@@ -50,15 +50,15 @@ public:
 
 protected:
 
-  JOMOO_Guard (JOMOO_LOCK *lock): lock_ (lock) {}
+  guard (LOCK *lock): lock_ (lock) {}
 
-  JOMOO_LOCK *lock_;
+  LOCK *lock_;
 
   bool owner_;
 
 private:
 	
-	DECLARE_NO_COPY_CLASS( JOMOO_Guard );
+	DECLARE_NO_COPY_CLASS( guard );
 };
 
 _jomoo_end
@@ -71,4 +71,4 @@ _jomoo_end
 #pragma implementation ("Guard.T")
 #endif /* ACE_TEMPLATES_REQUIRE_PRAGMA */
 
-#endif //JOMOO_GUARD_H
+#endif //_GUARD_H_
