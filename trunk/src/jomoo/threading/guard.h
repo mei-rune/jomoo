@@ -107,12 +107,4 @@ private:
 
 _jomoo_end
 
-#if defined (JOMOO_TEMPLATES_REQUIRE_SOURCE)
-#include "Guard.T"
-#endif /* ACE_TEMPLATES_REQUIRE_SOURCE */
-
-#if defined (JOMOO_TEMPLATES_REQUIRE_PRAGMA)
-#pragma implementation ("Guard.T")
-#endif /* ACE_TEMPLATES_REQUIRE_PRAGMA */
-
 #endif //_GUARD_H_
