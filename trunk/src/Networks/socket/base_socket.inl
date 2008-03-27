@@ -1,5 +1,6 @@
 
-
+#ifndef SOCKET_EXTEND_VARIANT
+#define SOCKET_EXTEND_VARIANT
 
 LPFN_TRANSMITFILE base_socket::__transmitfile = 0;
 LPFN_ACCEPTEX base_socket::__acceptex = 0;
@@ -7,6 +8,8 @@ LPFN_TRANSMITPACKETS base_socket::__transmitpackets = 0;
 LPFN_CONNECTEX base_socket::__connectex = 0;
 LPFN_DISCONNECTEX base_socket::__disconnectex = 0;
 LPFN_GETACCEPTEXSOCKADDRS base_socket::__getacceptexsockaddrs = 0;
+
+#endif
 
 JOMOO_INLINE base_socket::base_socket (void)
 : handle_ (INVALID_SOCKET )
