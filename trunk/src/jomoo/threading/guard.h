@@ -10,7 +10,7 @@
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 #include "config_threading.h"
-#include "../Exception.HPP"
+#include "exception.hpp"
 
 
 _jomoo_begin

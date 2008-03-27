@@ -20,8 +20,9 @@ class thread_closure_0
 {
 public:
 
-	thread_closure_0(const F& f, const char* nm = 0)
-		: function( f )
+	thread_closure_0(pool_ptr pool, const F& f, const char* nm = 0)
+		: _pool( pool )
+		, _function( f )
 		, _name( (0 == nm) ? "" : nm )
 	{
 	}
@@ -31,14 +32,14 @@ public:
             thread_closure_0 *self = static_cast<thread_closure_0*>(c);
             try
 			{
-                self->function();
+                self->_function();
             }
 			catch ( ... )
 			{
-                delete self;
+                JOMOO_DELETE( self->_pool , self );
                 throw;
             }
-            delete self;
+                JOMOO_DELETE( self->_pool , self );
             return 0;
      }
 
@@ -47,7 +48,8 @@ public:
 		return _name;
 	}
 private:
-	F function;
+	F _function;
+	pool_ptr _pool;
 	tstring _name;
 };
 
@@ -56,8 +58,9 @@ class thread_closure_1
 {
 public:
 
-	thread_closure_1(const F& f, const P& x, const char* nm = 0)
-		: function( f )
+	thread_closure_1(pool_ptr pool, const F& f, const P& x, const char* nm = 0)
+		: _pool( pool )
+		, _function( f )
 		, _name( (0 == nm) ? "" : nm )
 		, arg1( x )
 	{
@@ -68,14 +71,14 @@ public:
             thread_closure_1 *self = static_cast<thread_closure_1*>(c);
             try
 			{
-                self->function( arg1 );
+                self->_function( arg1 );
             }
 			catch ( ... )
 			{
-                delete self;
+                JOMOO_DELETE( self->_pool , self );
                 throw;
             }
-            delete self;
+                JOMOO_DELETE( self->_pool , self );
             return 0;
     }
 
@@ -84,7 +87,8 @@ public:
 		return _name;
 	}
 private:
-	F function;
+	F _function;
+	pool_ptr _pool;
 	tstring _name;
 	P arg1;
 };
@@ -94,8 +98,9 @@ class thread_closure_2
 {
 public:
 
-	thread_closure_2(const F& f, const P1& x1, const P2& x2, const char* nm = 0)
-		: function( f )
+	thread_closure_2(pool_ptr pool, const F& f, const P1& x1, const P2& x2, const char* nm = 0)
+		: _pool( pool )
+		, _function( f )
 		, _name( (0 == nm) ? "" : nm )
 		, arg1( x1 )
 		, arg2( x2 )
@@ -107,14 +112,14 @@ public:
             thread_closure_2 *self = static_cast<thread_closure_2*>(c);
             try
 			{
-                self->function( arg1, arg2 );
+                self->_function( arg1, arg2 );
             }
 			catch ( ... )
 			{
-                delete self;
+                JOMOO_DELETE( self->_pool , self );
                 throw;
             }
-            delete self;
+                JOMOO_DELETE( self->_pool , self );
             return 0;
     }
 
@@ -123,7 +128,8 @@ public:
 		return _name;
 	}
 private:
-	F function;
+	F _function;
+	pool_ptr _pool;
 	tstring _name;
 	P1 arg1;
 	P2 arg2;
@@ -134,8 +140,9 @@ class thread_closure_3
 {
 public:
 
-	thread_closure_3(const F& f, const P1& x1, const P2& x2, const P3& x3, const char* nm = 0)
-		: function( f )
+	thread_closure_3(pool_ptr pool, const F& f, const P1& x1, const P2& x2, const P3& x3, const char* nm = 0)
+		: _pool( pool )
+		, _function( f )
 		, _name( (0 == nm) ? "" : nm )
 		, arg1( x1 )
 		, arg2( x2 )
@@ -147,14 +154,14 @@ public:
             thread_closure_3 *self = static_cast<thread_closure_3*>(c);
             try
 			{
-                self->function( arg1, arg2, arg3 );
+                self->_function( arg1, arg2, arg3 );
             }
 			catch ( ... )
 			{
-                delete self;
+                JOMOO_DELETE( self->_pool , self );
                 throw;
             }
-            delete self;
+                JOMOO_DELETE( self->_pool , self );
             return 0;
     }
 
@@ -163,7 +170,8 @@ public:
 		return _name;
 	}
 private:
-	F function;
+	F _function;
+	pool_ptr _pool;
 	tstring _name;
 	P1 arg1;
 	P2 arg2;

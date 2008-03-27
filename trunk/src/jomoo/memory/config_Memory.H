@@ -22,5 +22,5 @@
 #define _memory_begin namespace jomoo {
 #define _memory_end }// jomoo
 
-#define _memory MEMORY::
+#define _memory jomoo::
 #endif // _config_Memory_H_

@@ -11,8 +11,8 @@
 
 // Include files
 # include "config_Memory.H"
-# include "Memory_Pool.h"
-# include "../Collections/ThreadSafePtrQueue.HPP"
+# include "MemoryPool.h"
+# include "collections/thread_safe_ptr_queue.hpp"
 
 _memory_begin
 
@@ -59,7 +59,7 @@ private:
 
 	DECLARE_NO_COPY_CLASS( FixedPool );
 
-	ThreadSafePtrQueue< CHUNK > queue_;
+	thread_safe_ptr_queue< CHUNK > queue_;
 	void* lpvAddr_;
 	size_t chunk_size_;
 	size_t used_;
