@@ -18,32 +18,33 @@
 #define LIST_DEFINE( X )
 
 template< typename T >
-class ThreadSafePtrQueue
+class thread_safe_ptr_queue
 {
 public:
 
 	typedef T value_type;
-	typedef value_type* value_ptr_type;
+	typedef value_type* ptr_type;
 
-	ThreadSafePtrQueue()
+	thread_safe_ptr_queue()
 	{
 		InitializeSListHead(&head_);
 	}
 
-	value_ptr_type pop()
+	ptr_type pop()
 	{
 		return ( value_ptr_type ) InterlockedPopEntrySList( &head_ );
 	}
 
-	void push( value_ptr_type p )
+	void push( ptr_type p )
 	{
 		InterlockedPushEntrySList(&head_, p ); 
 	}
 
 private:
-	DECLARE_NO_COPY_CLASS( ThreadSafePtrQueue );
+	DECLARE_NO_COPY_CLASS( thread_safe_ptr_queue );
 	SLIST_HEADER head_;
 };
+
 #else
 
 #include "link.h"
@@ -52,7 +53,7 @@ private:
 #define LIST_DEFINE( X ) public: X* _next
 
 template< typename T >
-class ThreadSafePtrQueue
+class thread_safe_ptr_queue
 {
 public:
 	typedef T value_type;
@@ -65,7 +66,7 @@ public:
 
 	typedef head_type* head_ptr_type;
 
-	ThreadSafePtrQueue()
+	thread_safe_ptr_queue()
 	{
 		SLINK_Initialize( &head_ );
 	}
@@ -83,7 +84,7 @@ public:
 	}
 
 private:
-	DECLARE_NO_COPY_CLASS( ThreadSafePtrQueue );
+	DECLARE_NO_COPY_CLASS( thread_safe_ptr_queue );
 
 	head_type head_;
 };
