@@ -30,19 +30,6 @@ const int32_t pool_magic_v = *( int32_t *)pool_magic;
 
 MakeException( BadMemoryException , "分配内存块失败" );
 
-class memory_destructor
-{
-public:
-	virtual ~memory_destructor(){}
-
-	/**
-	 * 释放内存块
-	 * @param[ in ] block 内存块的地址
-	 * @remark 它可能会失败并扔出内存错误异常
-	 */
-	virtual void free (void* block ) = 0;
-};
-
 /**
  * @Brief 内存池接口
  */
@@ -67,12 +54,12 @@ public:
 	 */
 	virtual void* malloc (size_t nbytes , const char* file=0, size_t line=-1 ) = 0;
 
-	///**
-	// * 释放内存块
-	// * @param[ in ] block 内存块的地址
-	// * @remark 它可能会失败并扔出内存错误异常
-	// */
-	//virtual void free (void* block ) = 0;
+	/**
+	 * 释放内存块
+	 * @param[ in ] block 内存块的地址
+	 * @remark 它可能会失败并扔出内存错误异常
+	 */
+	virtual void free (void* block ) = 0;
 
 	/**
 	 * 打印出内存池的状态
@@ -111,12 +98,12 @@ public:
 	 */
 	virtual void* malloc( const char* file=0, size_t line=-1 ) = 0;
 
-	///**
-	// * 释放内存块
-	// * @param[ in ] block 内存块的地址
-	// * @remark 它可能会失败并扔出内存错误异常
-	// */
-	//virtual void  free( void* block ) = 0;
+	/**
+	 * 释放内存块
+	 * @param[ in ] block 内存块的地址
+	 * @remark 它可能会失败并扔出内存错误异常
+	 */
+	virtual void  free( void* block ) = 0;
 
 	/**
 	 * 取得每个内存块的大小
@@ -185,18 +172,18 @@ inline void   operator delete(void * chunk , _memory fixed_pool_ptr pools)
 
 		// TEMPLATE FUNCTION _Destroy
 template<class _Ty> inline
-	void JOMOO_Destroy(_Ty _FARQ *_Ptr)
+	void _Destroy(_Ty _FARQ *_Ptr)
 	{	// destroy object at _Ptr
 	_DESTRUCTOR(_Ty, _Ptr);
 	}
 
 template<> inline
-	void JOMOO_Destroy(char _FARQ *)
+	void _Destroy(char _FARQ *)
 	{	// destroy a char (do nothing)
 	}
 
 template<> inline
-	void JOMOO_Destroy(wchar_t _FARQ *)
+	void _Destroy(wchar_t _FARQ *)
 	{	// destroy a wchar_t (do nothing)
 	}
 
@@ -218,11 +205,9 @@ inline void* pool_malloc( fixed_pool_ptr pools ,size_t size ,const char* file , 
 #define JOMOO_FIXED_MALLOC( pool )pool->malloc( __FILE__,__LINE__ )
 #define JOMOO_FREE( pool , p )pool->free( p )
 
-#define JOMOO_DELETE( pool, ptr )  JOMOO_Destroy( ptr ), pool->free( ptr )
+#define JOMOO_DELETE( pool, ptr )  _Destroy( ptr ), pool->free( ptr )
 #define JOMOO_NEW( pool, T,a ) new ((void _FARQ *)pool_malloc( pool, sizeof( T ), __FILE__,__LINE__ ) ) T a
 #define JOMOO_FIXED_NEW( pool, T,a ) new ((void _FARQ *)pool_malloc( pool, __FILE__,__LINE__ ) ) T a
-
-#define JOMOO_DELETE( pool, ptr )  JOMOO_Destroy( ptr ), pool->free( ptr )
 
 _memory_end
 
