@@ -32,7 +32,7 @@ public:
 
 	ptr_type pop()
 	{
-		return ( value_ptr_type ) InterlockedPopEntrySList( &head_ );
+		return ( ptr_type ) InterlockedPopEntrySList( &head_ );
 	}
 
 	void push( ptr_type p )
