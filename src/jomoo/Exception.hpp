@@ -8,7 +8,7 @@
 # pragma once
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
-#include "ErrorDef.H"
+#include "error.H"
 #include "string.hpp"
 #include "lastError.h"
 #include <stdexcept>
