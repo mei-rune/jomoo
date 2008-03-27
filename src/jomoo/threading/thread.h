@@ -20,31 +20,6 @@ _thread_begin
 	
 typename uintptr_t thread_t;
 
-//{
-//public:
-//	class thread_data
-//	{
-//	public:
-//		tstring to_string;
-//		uintptr_t pthread;
-//	};
-//	
-//	/**
-//	 * 等待线程结束
-//	 * @remarks 注意不论该函数是否成功，本线程都一定结束，当然
-//	 * 除非有人重新启动它了。
-//	 */
-//	void join ();
-//
-//	/**
-//	 * 取得线程描述
-//	 * @return 返回线程描述
-//	 */
-//	const tstring& toString() const;
-//private:
-//	thread_data* thread;
-//};
-
 namespace ThreadOP
 {
 	inline void yield()
@@ -57,17 +32,43 @@ namespace ThreadOP
 		::Sleep( millis );
 	}
 
-	template<typename F>
-	inline thread_t create_thread( const F& f)
+	void join( thread_t t )
 	{
-		
+		::WaitForSingleObject(reinterpret_cast<HANDLE>(t), INFINITE);
+	}
 
+	template<typename F>
+	inline thread_t create_thread( const F& f, const char* nm = 0)
+	{
+		typedef thread_closure_0<F> closure_type;
+
+		return ::_beginthread( closure_type::start_routine, JOMOO_NEW( getPool(), closure_type, (f,nm) ) );
+	}
+
+	template<typename F, typename P>
+	inline thread_t create_thread( const F& f, const P& x, const char* nm = 0)
+	{
+		typedef thread_closure_1<F,P> closure_type;
+
+		return ::_beginthread( closure_type::start_routine, JOMOO_NEW( getPool(), closure_type, (f,x,nm) ) );
+	}
+	
+	template<typename F, typename P1, typename P2>
+	inline thread_t create_thread( const F& f, const P1& x1, const P2& x2, const char* nm = 0)
+	{
+		typedef thread_closure_1<F,P1,P2> closure_type;
+
+		return ::_beginthread( closure_type::start_routine, JOMOO_NEW( getPool(), closure_type, (f,x1,x2,nm) ) );
+	}
+
+	template<typename F, typename P1, typename P2, typename P3>
+	inline thread_t create_thread( const F& f, const P1& x1, const P2& x2, const P3& x3, const char* nm = 0)
+	{
+		typedef thread_closure_1<F,P1,P2,P3> closure_type;
+
+		return ::_beginthread( closure_type::start_routine, JOMOO_NEW( getPool(), closure_type, (f,x1,x2,x3,nm) ) );
 	}
 }
-
-#if defined (JOMOO_INLINE_FUNCTIONS)
-#include "thread.inl"
-#endif //
 
 _thread_end
 

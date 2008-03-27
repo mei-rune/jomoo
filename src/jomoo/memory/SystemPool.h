@@ -11,7 +11,7 @@
 
 // Include files
 # include "config_Memory.H"
-# include "Memory_Pool.h"
+# include "MemoryPool.h"
 
 _memory_begin
 

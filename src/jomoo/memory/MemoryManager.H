@@ -21,7 +21,7 @@
 
 // Include files
 # include "config_Memory.H"
-# include "Memory_Pool.h"
+# include "MemoryPool.h"
 # include "jomoo_export.H"
 
 _memory_begin
@@ -154,12 +154,12 @@ JOMOO_Export_C void* ___system_malloc (size_t nbytes , const char* file, size_t 
 JOMOO_Export_C void ___system_free (void* block );
 
 
-JOMOO_Export_C void* ___memory_malloc (pool_ptr pool, size_t nbytes , const char* file, size_t line )
+JOMOO_Export_C void* ___memory_malloc ( _memory pool_ptr pool, size_t nbytes , const char* file, size_t line )
 {
 	
 }
 
-JOMOO_Export_C void* ___memory_malloc (fixed_pool_ptr pool, const char* file, size_t line )
+JOMOO_Export_C void* ___memory_malloc (_memory fixed_pool_ptr pool, const char* file, size_t line )
 {
 }
 

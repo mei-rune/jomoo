@@ -20,8 +20,8 @@
 
 // Include files
 # include "config_Memory.H"
-# include "../string.hpp"
-# include "../exception.hpp"
+# include "base/string.hpp"
+# include "base/exception.hpp"
 
 _memory_begin
 
@@ -33,7 +33,7 @@ MakeException( BadMemoryException , "分配内存块失败" );
 /**
  * @Brief 内存池接口
  */
-class pool : public memory_destructor
+class pool
 {
 public:
 	typedef pool* ptr_type;
@@ -77,7 +77,7 @@ public:
 /**
  * @Brief 固定大小内存池接口
  */
-class fixed_pool  : public memory_destructor
+class fixed_pool
 {
 public:
 
@@ -127,6 +127,25 @@ public:
 typedef pool::pool_ptr pool_ptr;
 typedef fixed_pool::fixed_pool_ptr fixed_pool_ptr;
 
+		// TEMPLATE FUNCTION _Destroy
+template<class _Ty> inline
+	void _Destroy(_Ty _FARQ *_Ptr)
+	{	// destroy object at _Ptr
+	_DESTRUCTOR(_Ty, _Ptr);
+	}
+
+template<> inline
+	void _Destroy(char _FARQ *)
+	{	// destroy a char (do nothing)
+	}
+
+template<> inline
+	void _Destroy(wchar_t _FARQ *)
+	{	// destroy a wchar_t (do nothing)
+	}
+
+_memory_end
+
 /**
  * new "placement" 用内存池代替系统内存分配器
  * @param[ in ] size     对象需要的大小
@@ -170,33 +189,16 @@ inline void   operator delete(void * chunk , _memory fixed_pool_ptr pools)
    pools->free(chunk);
 }
 
-		// TEMPLATE FUNCTION _Destroy
-template<class _Ty> inline
-	void _Destroy(_Ty _FARQ *_Ptr)
-	{	// destroy object at _Ptr
-	_DESTRUCTOR(_Ty, _Ptr);
-	}
-
-template<> inline
-	void _Destroy(char _FARQ *)
-	{	// destroy a char (do nothing)
-	}
-
-template<> inline
-	void _Destroy(wchar_t _FARQ *)
-	{	// destroy a wchar_t (do nothing)
-	}
-
-inline void* pool_malloc( fixed_pool_ptr pools ,const char* file , size_t line )
+inline void* pool_malloc( _memory fixed_pool_ptr pools ,const char* file , size_t line )
 {
 	return pools->malloc( file,line );
 }
 
-inline void* pool_malloc( pool_ptr pools ,size_t size ,const char* file , size_t line )
+inline void* pool_malloc( _memory pool_ptr pools ,size_t size ,const char* file , size_t line )
 {
 	return pools->malloc(  size, file,line );
 }
-inline void* pool_malloc( fixed_pool_ptr pools ,size_t size ,const char* file , size_t line )
+inline void* pool_malloc( _memory fixed_pool_ptr pools ,size_t size ,const char* file , size_t line )
 {
 	return pools->malloc( file,line );
 }
@@ -209,6 +211,5 @@ inline void* pool_malloc( fixed_pool_ptr pools ,size_t size ,const char* file , 
 #define JOMOO_NEW( pool, T,a ) new ((void _FARQ *)pool_malloc( pool, sizeof( T ), __FILE__,__LINE__ ) ) T a
 #define JOMOO_FIXED_NEW( pool, T,a ) new ((void _FARQ *)pool_malloc( pool, __FILE__,__LINE__ ) ) T a
 
-_memory_end
 
 #endif // _Memory_Pool_H_

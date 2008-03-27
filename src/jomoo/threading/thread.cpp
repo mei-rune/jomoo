@@ -16,7 +16,7 @@
 
 _thread_begin
 
-#ifndef JOMOO_INLINE_FUNCTIONS
+#ifndef OS_HAS_INLINED
 
 #include "Thread.inl"
 
