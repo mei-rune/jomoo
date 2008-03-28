@@ -38,11 +38,11 @@ public:
 
 	void dumpFile( std::ostream& Target ) const
 	{
-			Target << BT_TEXT( "[ file:" )
+			Target << _T( "[ file:" )
 			<< getFile()
-			<< BT_TEXT( " line:" )
+			<< _T( " line:" )
 			<< ( int ) getLine()
-			<< BT_TEXT(" ] ");
+			<< _T(" ] ");
 	}
 
 	virtual Exception* clone() = 0;

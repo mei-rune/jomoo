@@ -24,7 +24,7 @@ typedef char_t tchar;
 #endif
 
 typedef std::stringstream StringStream;
-#define BT_TEXT __T
+//#define _T __T
 //template < typename T >
 //inline T c_str_ptr( T t )
 

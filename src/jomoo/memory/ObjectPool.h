@@ -161,11 +161,11 @@ public:
 		, toString_( name )
 	{
 		if( toString_.empty() )
-			toString_ = BT_TEXT("Pool_T[");
+			toString_ = _T("Pool_T[");
 		else
-			toString_ += BT_TEXT("[");
+			toString_ += _T("[");
 		toString_ += ::toString( CHUNK_SIZE );
-		toString_ += BT_TEXT("]");
+		toString_ += _T("]");
 		ASSERT( assert_chunk_size( pools , CHUNK_SIZE ) );
 
 	}
@@ -254,7 +254,7 @@ public:
 			////chunk->pointee_ = ;
 			storage_type* chunk = CreationPolicy::Construct( ( char*)lpvAddr_ + i * CHUNK_SIZE );
 			if( chunk == 0 )
-				ThrowException1( BadMemoryException, BT_TEXT("构造错误!") );
+				ThrowException1( BadMemoryException, _T("构造错误!") );
 				
 			m_oFree.push( chunk );
 		}

@@ -28,7 +28,7 @@ inline const tstring& to_string_t( const tstring& value )
 
 inline tstring to_string_t( bool value ) 
 {
-	return ( value ? BT_TEXT("true") : BT_TEXT("false") );
+	return ( value ? _T("true") : _T("false") );
 }
 
 inline tstring to_string_t( tchar value ) 
