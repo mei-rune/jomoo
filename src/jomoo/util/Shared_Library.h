@@ -19,7 +19,7 @@
 #include "config_Util.h"
 #include "Base/string.hpp"
 
-_util_begin
+_jomoo_begin
 
 typedef HMODULE BT_SHLIB_HANDLE;
 
@@ -116,7 +116,7 @@ private:
 	mutable LPVOID lpMsgBuf;
 };
 
-_util_end
+_jomoo_end
 
 #include "Shared_Library.inl"
 

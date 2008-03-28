@@ -1,7 +1,7 @@
 
 
-#ifndef _Config_Util_H
-#define _Config_Util_H
+#ifndef _config_Util_H
+#define _config_Util_H
 
 
 #include "config.h"
@@ -10,26 +10,17 @@
 # pragma once
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
-#define _util_begin  namespace UTIL{
-#define _util_end  } 
-#define _util UTIL::
-
-
 #include <vector>
 #include <map>
-#include "../string.hpp"
-#include "../counter_ptr.hpp"
+#include "string.hpp"
+#include "counter_ptr.hpp"
 
-_util_begin
+_jomoo_begin
 
 typedef std::map< tstring , tstring > PropertyDict;
 typedef counter_ptr< StringSeq > StringSeqPtr;
 typedef counter_ptr< PropertyDict > PropertyDictPtr;
 
-#ifndef UtilLoggerPtr
-#define UtilLoggerPtr JOMOO_Log_Impl*
-#endif 
+_jomoo_end
 
-_util_end
-
-#endif // _Config_Util_H
+#endif // _config_Util_H

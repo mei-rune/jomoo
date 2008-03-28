@@ -24,21 +24,21 @@ public:
 	
 	typedef guard< thread_semaphore > scoped_lock;
 
-	thread_semaphore(long lInitialCount,long lMaxCount,const char* pSemaphoreName=NULL)
+	thread_semaphore(long initialCount,long maxCount,const char* name=NULL)
 		: m_hSemaphore( NULL ),
 		m_delete_( true )
 	{
-		m_hSemaphore=OS::create_semaphore( lInitialCount,lMaxCount,pSemaphoreName);
+		m_hSemaphore=OS::create_semaphore( initialCount,maxCount,name);
 
 		if( NULL == m_hSemaphore )
 		{
-			if( pSemaphoreName != 0 )
-				ThrowException1( RuntimeException, BT_TEXT("创建Semaphore[") + m_name_ + BT_TEXT("]失败") );
+			if( name != 0 )
+				ThrowException1( RuntimeException, BT_TEXT("创建Semaphore[") + tstring( name ) + BT_TEXT("]失败") );
 			else
 				ThrowException1( RuntimeException, BT_TEXT("创建Semaphore失败") );
 		}
 
-		if ( pSemaphoreName && GetLastError()==ERROR_ALREADY_EXISTS)
+		if ( name && GetLastError()==ERROR_ALREADY_EXISTS)
 			m_delete_=false;
 	}
 

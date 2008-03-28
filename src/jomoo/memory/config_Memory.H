@@ -19,8 +19,8 @@
 # pragma once
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
-#define _memory_begin namespace jomoo {
-#define _memory_end }// jomoo
+#define _memory_begin _jomoo_begin
+#define _memory_end _jomoo_end
 
-#define _memory jomoo::
+#define _memory _jomoo
 #endif // _config_Memory_H_

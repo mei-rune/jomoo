@@ -1,9 +1,9 @@
 #include "windows.h"
 #include "servicemanager.h"
 
-_util_begin
+_jomoo_begin
 
-ServiceManager::ServiceManager( UtilLoggerPtr logger )
+ServiceManager::ServiceManager( logging::log_ptr logger )
 : logger_( logger )
 {
 }
@@ -375,4 +375,4 @@ void ServiceManager::showServiceStatus(const std::string& msg, SERVICE_STATUS& s
 	 << BT_TEXT("  等待次数据: " ) << status.dwWaitHint );
 }
 
-_util_end
+_jomoo_end

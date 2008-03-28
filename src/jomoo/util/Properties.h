@@ -11,7 +11,7 @@
 #include "config_Util.h"
 #include "jomoo_export.h"
 
-_util_begin
+_jomoo_begin
 
 
 class Properties 
@@ -113,29 +113,29 @@ public:
 
 typedef  Properties::PropertiesPtr PropertiesPtr;
 
-_util_end
+_jomoo_end
 
-JOMOO_Export_C _util Properties* ___createProperties();
-JOMOO_Export_C _util Properties* ___createProperties_args(const StringSeq&);
-JOMOO_Export_C _util Properties* ___createProperties_vec(int, char*[]);
-JOMOO_Export_C void ___freeProperties( _util Properties* );
+JOMOO_Export_C _jomoo Properties* ___createProperties();
+JOMOO_Export_C _jomoo Properties* ___createProperties_args(const StringSeq&);
+JOMOO_Export_C _jomoo Properties* ___createProperties_vec(int, char*[]);
+JOMOO_Export_C void ___freeProperties( _jomoo Properties* );
 
 
 typedef std::vector<tstring> StringSeq;
 
-inline _util PropertiesPtr createProperties()
+inline _jomoo PropertiesPtr createProperties()
 {
-	return _util PropertiesPtr( ___createProperties(),___freeProperties );
+	return _jomoo PropertiesPtr( ___createProperties(),___freeProperties );
 }
 
-inline _util PropertiesPtr createProperties( const StringSeq& args )
+inline _jomoo PropertiesPtr createProperties( const StringSeq& args )
 {
-	return _util PropertiesPtr( ___createProperties_args( args ),___freeProperties );
+	return _jomoo PropertiesPtr( ___createProperties_args( args ),___freeProperties );
 }
 
-inline _util PropertiesPtr createProperties(int argc , char* argv[] )
+inline _jomoo PropertiesPtr createProperties(int argc , char* argv[] )
 {
-	return _util PropertiesPtr( ___createProperties_vec( argc, argv ),___freeProperties );
+	return _jomoo PropertiesPtr( ___createProperties_vec( argc, argv ),___freeProperties );
 }
 
 inline  StringSeq argsToStringSeq(int argc, char* argv[])

@@ -188,6 +188,7 @@ MakeException( EOFException , EOFError );
 MakeException( URLException, URLError );
 MakeException( NoFindException, NoFindError );
 MakeException( SystemException, SystemError );
+MakeException( LockException , LockError );
 
 #define ThrowException( type ) throw type(__FILE__, __LINE__ )
 #define ThrowException1( type ,m1 ) throw type(__FILE__, __LINE__ , m1 )

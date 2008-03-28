@@ -160,8 +160,8 @@ typedef _off_t off_t;
 
 #define _jomoo_begin 
 #define _jomoo_end 
-#define _hazel 
-#define use_hazel 
+#define _jomoo
+#define use_jomoo
 
 
 #define HAVE_ITERATOR

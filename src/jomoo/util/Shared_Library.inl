@@ -4,7 +4,7 @@
 #ifndef _Shared_Library_Cpp_
 #define _Shared_Library_Cpp_
 
-_util_begin
+_jomoo_begin
 
 inline Share_Library::Share_Library( const tchar* name ,int close_on_destruction )
 : dll_handle_( NULL )
@@ -135,6 +135,6 @@ inline void Share_Library::set_handle (BT_SHLIB_HANDLE handle, int close_on_dest
 	close_on_destruction_ = close_on_destruction;
 }
 
-_util_end
+_jomoo_end
 
 #endif // _Shared_Library_Cpp_

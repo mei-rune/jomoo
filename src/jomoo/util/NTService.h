@@ -12,13 +12,13 @@
 #include "config_Util.h"
 #include <winsvc.h>
 #include <vector>
-#include "../Logger.h"
+#include "logging/logger.h"
 
-_util_begin
+_jomoo_begin
 
 #define SERVICE_CONTROL_USER 128
 
-class JOMOO_Service
+class IService
 {
 public:
 	
@@ -108,7 +108,7 @@ public:
 class CNTService
 {
 public:
-    CNTService(const tchar* szServiceName ,JOMOO_Service* svr, UtilLoggerPtr ptr );
+	CNTService(const tchar* szServiceName ,IService* svr, logging::log_ptr ptr );
     virtual ~CNTService();
     bool StartService( DWORD dwArgc, LPTSTR* lpszArgv );
     void SetStatus(DWORD dwState);
@@ -125,11 +125,11 @@ public:
     bool m_bIsRunning;
 private:
 
-	UtilLoggerPtr logger_;
+	logging::log_ptr logger_;
     static CNTService* m_pThis;
-	JOMOO_Service* m_svr_;
+	IService* m_svr_;
 };
 
-_util_end
+_jomoo_end
 
 #endif // _NTSERVICE_H_

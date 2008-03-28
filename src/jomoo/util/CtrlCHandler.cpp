@@ -18,7 +18,7 @@
 static char THIS_FILE[] = __FILE__;  
 #endif // _MEMORY_DEBUG
 
-_util_begin
+_jomoo_begin
 
 using namespace std;
 
@@ -189,4 +189,4 @@ CtrlCHandler::~CtrlCHandler()
 
 #endif
 
-_util_end
+_jomoo_end

@@ -14,7 +14,7 @@
 #ifdef JOMOO_MT
 
 #include "os_threading.h"
-#include "JOMOO_Guard.h"
+#include "guard.h"
 
 _jomoo_begin
 
@@ -22,7 +22,7 @@ class thread_mutex
 {
 public:
 	
-	typedef guard< mutex > spcode_lock;
+	typedef guard< thread_mutex > spcode_lock;
 
 	thread_mutex()
 	{

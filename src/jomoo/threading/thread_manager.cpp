@@ -1,6 +1,6 @@
 
-#ifndef JOMOO_THREAD_MANAGER_CPP
-#define JOMOO_THREAD_MANAGER_CPP
+#ifndef thread_manager_CPP
+#define thread_manager_CPP
 
 #include "config.h"
 
@@ -15,13 +15,11 @@
 _thread_begin
 
 #ifndef OS_HAS_INLINED
-
 #include "thread_manager.inl"
-
 #endif // OS_HAS_INLINED
 
 _thread_end
 
 #endif // JOMOO_MT
 
-#endif // JOMOO_THREAD_MANAGER_CPP
+#endif // thread_manager_CPP

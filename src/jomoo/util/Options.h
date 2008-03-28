@@ -15,7 +15,7 @@
 #include <map>
 #include <set>
 
-_util_begin
+_jomoo_begin
 
 class Options
 {
@@ -145,6 +145,6 @@ private:
 		const ::std::string& dflt);
 };
 
-_util_end
+_jomoo_end
 
 #endif

@@ -12,16 +12,16 @@
 #include <string>
 #include <vector>
 #include "winsvc.h"
-#include "../Logger.H"
+#include "logging/logger.h"
 
-_util_begin
+_jomoo_begin
 
 class ServiceManager
 {
 public:
 
 
-	ServiceManager( UtilLoggerPtr logger = 0 );
+	ServiceManager( logging::log_ptr logger = 0 );
 
     /**
      * 安装一个 Win32 服务
@@ -62,10 +62,9 @@ private:
 
 	void showServiceStatus(const std::string& msg, SERVICE_STATUS& status);
 
-	UtilLoggerPtr logger_;
-
+	logging::log_ptr logger_;
 };
 
-_util_end
+_jomoo_end
 
 #endif // SERVICEMANAGER_H

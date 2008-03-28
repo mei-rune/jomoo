@@ -21,7 +21,7 @@
 #include <stdexcept>
 
 
-_util_begin
+_jomoo_begin
 
 /** @Brief CtrlCHandler 提供了一个可移植的处理 CTRL+C 和类似于CTRL+C 信号的方法
  * <p>在 Unix/POSIX上, 它处理 SIGHUP, SIGINT 和 SIGTERM. 
@@ -63,6 +63,6 @@ public:
 	  }
 };
 
-_util_end
+_jomoo_end
 
 #endif
