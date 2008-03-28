@@ -42,7 +42,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/DNOLOG4CXX"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(BOOST_ROOT)&quot;;&quot;$(SolutionDir)\..\src\&quot;"
+				AdditionalIncludeDirectories="&quot;$(BOOST_ROOT)&quot;;&quot;$(SolutionDir)\..\src\jomoo\&quot;;&quot;$(SolutionDir)\..\src\&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;HazelBASE_EXPORTS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -227,356 +227,24 @@
 			>
 		</Filter>
 		<Filter
-			Name="Network"
+			Name="collections"
 			>
 			<File
-				RelativePath="..\..\src\Networks\Communicator.cpp"
+				RelativePath="..\..\src\jomoo\collections\enumerator.H"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Networks\Communicator.H"
+				RelativePath="..\..\src\jomoo\collections\IEnumerator.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Networks\config_Networks.H"
+				RelativePath="..\..\src\jomoo\collections\Link.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Networks\connected_socket.h"
+				RelativePath="..\..\src\jomoo\collections\thread_safe_ptr_queue.hpp"
 				>
 			</File>
-			<File
-				RelativePath="..\..\src\Networks\Instance_Networks.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\Networks\Instance_Networks.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\Networks\jomoo_io_request.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\Networks\mmap.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\Networks\mmap.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\Networks\Module.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\Networks\Networks.H"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\Networks\proactor.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\Networks\proactor.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\Networks\Url.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\Networks\Url.h"
-				>
-			</File>
-			<Filter
-				Name="Include"
-				>
-				<File
-					RelativePath="..\..\src\Networks\include\Acceptor.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\include\Communicator.H"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\include\Connector.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\include\Endpoint.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\include\Endpoint_Factory.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\include\IOBuf.H"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\include\IProtocol.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\include\IProtocolFactory.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\include\IReactorArbitrary.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\include\IReactorCore.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\include\IResolver.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\Logging\ITrace.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\include\ITransport.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\include\Operation_Result.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\include\OperationProactor.H"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\include\Transport.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\include\Transport_Result.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="IO"
-				>
-				<File
-					RelativePath="..\..\src\Networks\IO\config_IO.H"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\IO\Hazel_IO.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\IO\Hazel_IO.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\IO\IO.H"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="TCP"
-				>
-				<File
-					RelativePath="..\..\src\Networks\TCP\Instance_TCP.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\TCP\Instance_TCP.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\TCP\TCP_Asynch_Read_Array_Result.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\TCP\TCP_Asynch_Read_Array_Result.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\TCP\TCP_Asynch_Read_Result.CPP"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\TCP\TCP_Asynch_Read_Result.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\TCP\TCP_Asynch_Result.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\TCP\TCP_Asynch_Result.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\TCP\TCP_Asynch_Transmit_Result.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\TCP\TCP_Asynch_Transmit_Result.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\TCP\TCP_Asynch_Write_Array_Result.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\TCP\TCP_Asynch_Write_Array_Result.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\TCP\TCP_Asynch_Write_Result.CPP"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\TCP\TCP_Asynch_Write_Result.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\TCP\TCP_Endpoint_Factory.CPP"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\TCP\TCP_Endpoint_Factory.H"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\TCP\TcpAcceptor.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\TCP\TcpAcceptor.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\TCP\TcpConnector.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\TCP\TcpConnector.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\TCP\TcpEndpoint.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\TCP\TcpEndpoint.H"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\TCP\TcpTransport.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\TCP\TcpTransport.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="Template"
-				>
-				<File
-					RelativePath="..\..\src\Networks\Template\Acceptor.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\Template\Acceptor.T"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\Template\Connector.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\Template\Connector.T"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\Template\Transport.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\Template\Transport.T"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="socket"
-				>
-				<File
-					RelativePath="..\..\src\Networks\socket\base_socket.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\socket\base_socket.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\socket\base_socket.inl"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\socket\inet_address.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\socket\inet_address.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\socket\inet_address.inl"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\socket\os_networks.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\socket\os_networks.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\socket\os_networks.inl"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\socket\tcp_client.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\socket\tcp_client.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\socket\tcp_client.inl"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\socket\tcp_server.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\socket\tcp_server.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Networks\socket\tcp_server.inl"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="io_request"
-				>
-			</Filter>
 		</Filter>
 		<Filter
 			Name="Platform"
@@ -609,46 +277,10 @@
 				RelativePath="..\..\src\Platform\os_string.h"
 				>
 			</File>
-			<File
-				RelativePath="..\..\src\Platform\os_threading.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\Platform\os_threading.inl"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Base"
 			>
-			<Filter
-				Name="Collections"
-				>
-				<File
-					RelativePath="..\..\src\Base\Collections\CollectionsBase.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\Collections\enumerator.H"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\Collections\Link.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\Collections\ThreadSafePtrQueue.hpp"
-					>
-				</File>
-				<Filter
-					Name="unittest"
-					>
-					<File
-						RelativePath="..\..\src\Base\Collections\unittest\Test.CPP"
-						>
-					</File>
-				</Filter>
-			</Filter>
 			<Filter
 				Name="mpl"
 				>
@@ -656,82 +288,6 @@
 					RelativePath="..\..\src\Base\mpl\mpl.hpp"
 					>
 				</File>
-			</Filter>
-			<Filter
-				Name="Memory"
-				>
-				<File
-					RelativePath="..\..\src\Base\Memory\auto_ptr.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\Memory\config_Memory.H"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\Memory\FixedPool.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\Memory\FixedPool.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\Memory\Memory.H"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\Memory\Memory_Pool.H"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\Memory\MemoryManager.CPP"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\Memory\MemoryManager.H"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\Memory\ObjectPool.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\Memory\Pool.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\Memory\SystemPool.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\Memory\SystemPool.h"
-					>
-				</File>
-				<Filter
-					Name="unittest"
-					>
-					<File
-						RelativePath="..\..\src\Base\Memory\unittest\FixedPoolTest.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\src\Base\Memory\unittest\ObjectPoolTest.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\src\Base\Memory\unittest\PoolTest.cpp"
-						>
-					</File>
-					<File
-						RelativePath="..\..\src\Base\Memory\unittest\SystemPoolTest.h"
-						>
-					</File>
-					<File
-						RelativePath="..\..\src\Base\Memory\unittest\Test.h"
-						>
-					</File>
-				</Filter>
 			</Filter>
 			<Filter
 				Name="macro"
@@ -754,54 +310,6 @@
 				</File>
 				<File
 					RelativePath="..\..\src\Base\macro\macro_repeat.hpp"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="string"
-				>
-				<File
-					RelativePath="..\..\src\Base\string\case_functions.hpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\string\ctype_traits.hpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\string\functionals.hpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\string\string_append_iterator.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\string\string_token_iterator.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\string\string_traits.hpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\string\string_view.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\string\StringOps.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\string\StringPtr.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\string\toString.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\string\trim_functions.hpp"
 					>
 				</File>
 			</Filter>
@@ -880,167 +388,7 @@
 			<Filter
 				Name="include"
 				>
-				<File
-					RelativePath="..\..\src\Base\AbstractFactory.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\AbstractFactory0.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\AbstractFactory1.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\AbstractFactory10.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\AbstractFactory11.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\AbstractFactory12.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\AbstractFactory13.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\AbstractFactory14.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\AbstractFactory15.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\AbstractFactory16.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\AbstractFactory2.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\AbstractFactory3.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\AbstractFactory4.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\AbstractFactory5.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\AbstractFactory6.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\AbstractFactory7.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\AbstractFactory8.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\AbstractFactory9.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\AbstractFactoryTemplates.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\Buffer.H"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\Builder.H"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\Cleanup.H"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\counter_ptr.hpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\directory.H"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\directory.inl"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\EmptyType.H"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\ErrorDef.H"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\Exception.hpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\Factory.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\is_empty.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\lastError.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\make_null_ptr.hpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\random_iterator.hpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\Singleton.H"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\Singleton.T"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\string.hpp"
-					>
-				</File>
 			</Filter>
-		</Filter>
-		<Filter
-			Name="buffer"
-			>
-			<File
-				RelativePath="..\..\src\jomoo\buffer\binary_reader.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\buffer\binary_writer.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\buffer\data_black.h"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="logging"
@@ -1074,15 +422,15 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\jomoo\memory\Memory_Pool.H"
-				>
-			</File>
-			<File
 				RelativePath="..\..\src\jomoo\memory\MemoryManager.CPP"
 				>
 			</File>
 			<File
 				RelativePath="..\..\src\jomoo\memory\MemoryManager.H"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\memory\MemoryPool.H"
 				>
 			</File>
 			<File
@@ -1103,7 +451,7 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="Threading"
+			Name="threading"
 			>
 			<File
 				RelativePath="..\..\src\jomoo\threading\config_threading.h"
@@ -1142,6 +490,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\jomoo\threading\thread_closure.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\jomoo\threading\thread.inl"
 				>
 			</File>
@@ -1175,6 +527,66 @@
 			</File>
 			<File
 				RelativePath="..\..\src\jomoo\threading\worker_queue.T"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="string"
+			>
+			<File
+				RelativePath="..\..\src\jomoo\string\case_functions.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\string\ctype_traits.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\string\fast_string_concatenator.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\string\functionals.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\string\replace_functions.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\string\string_append_iterator.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\string\string_token_iterator.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\string\string_traits.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\string\string_view.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\string\StringOps.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\string\stringPtr.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\string\toString.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\string\trim_functions.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\string\with_functions.hpp"
 				>
 			</File>
 		</Filter>
