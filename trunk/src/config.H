@@ -232,10 +232,10 @@ inline T get_ptr( T t )
 #define MAKE_STRING( X ) #X
 #define ASSERT assert
 
-
-#define JOMOO_INLINE_FUNCTIONS 1
+#define OS_HAS_INLINED 1
+#define JOMOO_HAS_INLINE_FUNCTIONS 1
 #define JOMOO_INLINE inline
-
+#define OS_INLINE inline
 #define JOMOO_MT
 
 #define null_ptr NULL

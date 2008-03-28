@@ -10,6 +10,8 @@
 # pragma once
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
+#include "windows.h"
+
 #ifndef _critical_section_
 typedef CRITICAL_SECTION critical_section;
 #endif // critical_section
@@ -32,10 +34,10 @@ typedef OVERLAPPED JOMOO_OVERLAPPED ;
 
 namespace OS
 {
-	inline
+	OS_INLINE
 		bool close_handle( JOMOO_HANDLE &handle );
 
-	inline
+	OS_INLINE
 		bool dup_handle( JOMOO_HANDLE hSourceProcessHandle,
 					JOMOO_HANDLE hSourceHandle,
 					JOMOO_HANDLE hTargetProcessHandle,
@@ -44,22 +46,22 @@ namespace OS
 					bool bInheritHandle,
 					DWORD dwOptions );
 
-	inline
+	OS_INLINE
 		bool get_handle_info( JOMOO_HANDLE hObject,DWORD& dwFlags );
 
 
-	inline
+	OS_INLINE
 		bool get_handle_info( JOMOO_HANDLE hObject, DWORD dwMask, DWORD dwFlags );
 
 
-	inline
+	OS_INLINE
 		long InterlockedIncrement( long& v );
-	inline
+	OS_INLINE
 		long InterlockedDecrement( long& v );
 
 # if defined (OS_HAS_INLINED)
 #   include "os.inl"
-# endif /* JOMOO_HAS_INLINED_OSCALLS */
+# endif /* OS_HAS_INLINED */
 
 };
 
