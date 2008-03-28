@@ -1,7 +1,7 @@
 
 
-#ifndef JOMOO_NULL_SEMAPHORE_H
-#define JOMOO_NULL_SEMAPHORE_H
+#ifndef null_semaphore_h
+#define null_semaphore_h
 
 #include "config.h"
 
@@ -10,22 +10,22 @@
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 #include "config_threading.h"
-#include "Guard.h"
+#include "guard.h"
 
 _jomoo_begin
 
-class JOMOO_Null_Semaphore
+class null_semaphore
 {
 public:
 
-	typedef JOMOO_Guard< JOMOO_Null_Semaphore > spcode_lock;
+	typedef guard< null_semaphore > spcode_lock;
 
-	JOMOO_Null_Semaphore( long lInitialCount,long lMaxCount,const char* pSemaphoreName=NULL )
+	null_semaphore( long lInitialCount,long lMaxCount,const char* pSemaphoreName=NULL )
 	{
 		
 	}
 
-	~JOMOO_Null_Semaphore()
+	~null_semaphore()
 	{
 		
 	}
@@ -47,10 +47,10 @@ public:
 
 
 private:
-	DECLARE_NO_COPY_CLASS( JOMOO_Null_Semaphore );
+	DECLARE_NO_COPY_CLASS( null_semaphore );
 };
 
 _jomoo_end
 
 
-#endif // JOMOO_NULL_SEMAPHORE_H
+#endif // null_semaphore_h
