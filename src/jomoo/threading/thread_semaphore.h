@@ -14,7 +14,7 @@
 #ifdef JOMOO_MT
 
 #include "os_threading.h"
-#include "JOMOO_Guard.h"
+#include "guard.h"
 
 _jomoo_begin
 
