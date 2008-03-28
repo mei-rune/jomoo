@@ -18,7 +18,7 @@
 
 _thread_begin
 	
-typename uintptr_t thread_t;
+typedef uintptr_t thread_t;
 
 namespace ThreadOP
 {

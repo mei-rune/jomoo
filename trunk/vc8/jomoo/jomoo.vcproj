@@ -191,34 +191,6 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
-			<File
-				RelativePath="..\..\src\config.H"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo_export.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo_log_cxx.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo_log_cxx.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\stdafx.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\stdafx.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\stdlogger.H"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="资源文件"
@@ -279,122 +251,38 @@
 			</File>
 		</Filter>
 		<Filter
-			Name="Base"
+			Name="macro"
 			>
-			<Filter
-				Name="mpl"
+			<File
+				RelativePath="..\..\src\jomoo\macro\macro_counter.hpp"
 				>
-				<File
-					RelativePath="..\..\src\Base\mpl\mpl.hpp"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="macro"
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\macro\macro_define.hpp"
 				>
-				<File
-					RelativePath="..\..\src\Base\macro\macro_counter.hpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\macro\macro_define.hpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\macro\macro_misc.hpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\macro\macro_params.hpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\macro\macro_repeat.hpp"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="Util"
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\macro\macro_misc.hpp"
 				>
-				<File
-					RelativePath="..\..\src\Base\util\config_Util.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\util\Configuration.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\util\CtrlCHandler.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\util\CtrlCHandler.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\util\NTService.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\util\NTService.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\util\Options.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\util\Options.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\util\Properties.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\util\PropertiesI.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\util\PropertiesI.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\util\ServiceManager.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\util\ServiceManager.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\util\Shared_Library.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\util\Shared_Library.inl"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\util\Util.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="Globalization"
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\macro\macro_params.hpp"
 				>
-			</Filter>
-			<Filter
-				Name="include"
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\macro\macro_repeat.hpp"
 				>
-			</Filter>
+			</File>
 		</Filter>
 		<Filter
 			Name="logging"
 			>
 			<File
 				RelativePath="..\..\src\jomoo\logging\logger.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\logging\stdlogger.H"
 				>
 			</File>
 		</Filter>
@@ -490,11 +378,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\jomoo\threading\thread_closure.h"
+				RelativePath="..\..\src\jomoo\threading\thread.inl"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\jomoo\threading\thread.inl"
+				RelativePath="..\..\src\jomoo\threading\thread_closure.h"
 				>
 			</File>
 			<File
@@ -587,6 +475,182 @@
 			</File>
 			<File
 				RelativePath="..\..\src\jomoo\string\with_functions.hpp"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="patterns"
+			>
+			<File
+				RelativePath="..\..\src\jomoo\patterns\AbstractFactory.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\patterns\builder.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\patterns\factory.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\patterns\singleton.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\patterns\singleton.t"
+				>
+			</File>
+			<Filter
+				Name="abstractfactory"
+				>
+				<File
+					RelativePath="..\..\src\jomoo\patterns\AbstractFactory\AbstractFactory0.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\jomoo\patterns\AbstractFactory\AbstractFactory1.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\jomoo\patterns\AbstractFactory\AbstractFactory10.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\jomoo\patterns\AbstractFactory\AbstractFactory11.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\jomoo\patterns\AbstractFactory\AbstractFactory12.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\jomoo\patterns\AbstractFactory\AbstractFactory13.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\jomoo\patterns\AbstractFactory\AbstractFactory14.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\jomoo\patterns\AbstractFactory\AbstractFactory15.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\jomoo\patterns\AbstractFactory\AbstractFactory16.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\jomoo\patterns\AbstractFactory\AbstractFactory2.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\jomoo\patterns\AbstractFactory\AbstractFactory3.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\jomoo\patterns\AbstractFactory\AbstractFactory4.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\jomoo\patterns\AbstractFactory\AbstractFactory5.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\jomoo\patterns\AbstractFactory\AbstractFactory6.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\jomoo\patterns\AbstractFactory\AbstractFactory7.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\jomoo\patterns\AbstractFactory\AbstractFactory8.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\jomoo\patterns\AbstractFactory\AbstractFactory9.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\jomoo\patterns\AbstractFactory\AbstractFactoryTemplates.h"
+					>
+				</File>
+			</Filter>
+		</Filter>
+		<Filter
+			Name="util"
+			>
+			<File
+				RelativePath="..\..\src\jomoo\util\config_Util.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\util\Configuration.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\util\CtrlCHandler.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\util\CtrlCHandler.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\util\directory.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\util\directory.inl"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\util\NTService.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\util\NTService.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\util\Options.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\util\Options.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\util\Properties.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\util\PropertiesI.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\util\PropertiesI.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\util\ServiceManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\util\ServiceManager.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\util\Shared_Library.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\util\Shared_Library.inl"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\util\Util.h"
 				>
 			</File>
 		</Filter>

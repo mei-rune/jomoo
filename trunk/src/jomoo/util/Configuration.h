@@ -12,7 +12,7 @@
 # include "../Exception.HPP"
 # include "jomoo_export.h"
 
-_util_begin
+_jomoo_begin
 
 
 class ConfigurationException: public _hazel Exception
@@ -171,14 +171,14 @@ public:
 
 typedef  IConfiguration::ptr_type ConfigurationPtr;
 
-_util_end
+_jomoo_end
 
-JOMOO_Export_C _util IConfiguration* ___createConfiguration();
-JOMOO_Export_C _util IConfiguration* ___createConfiguration_args( int, char*[] );
-JOMOO_Export_C _util IConfiguration* ___createConfiguration_vec( const _util StringSeq&);
-JOMOO_Export_C void ___freeConfiguration( _util IConfiguration* );
+JOMOO_Export_C _jomoo IConfiguration* ___createConfiguration();
+JOMOO_Export_C _jomoo IConfiguration* ___createConfiguration_args( int, char*[] );
+JOMOO_Export_C _jomoo IConfiguration* ___createConfiguration_vec( const _jomoo StringSeq&);
+JOMOO_Export_C void ___freeConfiguration( _jomoo IConfiguration* );
 
-_util_begin
+_jomoo_begin
 
 inline ConfigurationPtr createConfiguration()
 {
@@ -195,9 +195,9 @@ inline ConfigurationPtr createConfiguration(int argc , char* argv[] )
 	return ConfigurationPtr( ___createConfiguration_args( argc, argv ),___freeConfiguration );
 }
 
-inline _util StringSeq argsToStringSeq(int argc, char* argv[])
+inline _jomoo StringSeq argsToStringSeq(int argc, char* argv[])
 {
-	_util StringSeq result;
+	_jomoo StringSeq result;
 	for(int i = 0; i < argc; i++)
 	{
 		result.push_back(argv[i]);
@@ -401,6 +401,6 @@ private:
 	ConfigurationPtr configuration_;
 };
 
-_util_end
+_jomoo_end
 
 #endif // __Configuration_h__

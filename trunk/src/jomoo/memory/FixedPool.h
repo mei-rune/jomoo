@@ -11,7 +11,7 @@
 
 // Include files
 # include "config_Memory.H"
-# include "MemoryPool.h"
+# include "pool.h"
 # include "collections/thread_safe_ptr_queue.hpp"
 
 _memory_begin
@@ -43,6 +43,7 @@ public:
 	};
 
 	FixedPool( const tstring& name ,size_t number, size_t size );
+
 	~FixedPool();
 
 	void* malloc ( const char* file=0, size_t line=-1 );

@@ -11,7 +11,7 @@
 #include "config_Util.h"
 #include "Properties.h"
 
-_util_begin
+_jomoo_begin
 
 class PropertiesI : public Properties
 {
@@ -38,10 +38,6 @@ public:
 
 private:
 
-    //friend BTNM_Export_C Properties* ___createProperties();
-    //friend BTNM_Export_C Properties* ___createProperties_args(const StringSeq&);
-    //friend BTNM_Export_C Properties* ___createProperties_vec(int, char*[]);
-
     void parseLine(const std::string&);
 
     void loadConfig();
@@ -49,6 +45,6 @@ private:
     std::map<std::string, std::string> _properties;
 };
 
-_util_end
+_jomoo_end
 
 #endif

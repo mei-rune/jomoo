@@ -1,7 +1,7 @@
 
 
-#ifndef JOMOO_THREAD_MANAGER_H
-#define JOMOO_THREAD_MANAGER_H
+#ifndef thread_manager_H
+#define thread_manager_H
 
 #include "config.h"
 
@@ -14,20 +14,22 @@
 #ifdef JOMOO_MT
 
 #include <set>
-#include "synch/synch_traits.h"
-#include "JOMOO_Thread.h"
+#include "thread.h"
+#include "thread_mutex.h"
 
 _thread_begin
 
-class JOMOO_Thread_Manager //: public JOMOO_Base_Thread_Manager
+class thread_manager
 {
 public:
 
-	typedef std::set< JOMOO_Thread* > container_type;
+	typedef void ( *function_type )( void * );
 
-	JOMOO_Thread_Manager( const tchar* descr );
+	typedef std::set< thread_t > container_type;
 
-	~JOMOO_Thread_Manager();
+	thread_manager( const tchar* descr );
+
+	~thread_manager();
 
 	/**
 	 * 创建一个线程
@@ -36,7 +38,7 @@ public:
 	 * @return 成功返回线程对象，否则返回0
 	 * @remarks 注意不要试图删除它，因为它是属于本线程组所有
 	 */
-	JOMOO_Thread* create_thread( JOMOO_Thread::Runnable& runfn , const tchar* descr = 0 );
+	thread_t create_thread( function_type runfn , const tchar* descr = 0 );
 
 	/**
 	 * 增加一个线程
@@ -44,14 +46,14 @@ public:
 	 * @remarks 注意，将线程对象添加到本线程组后，不要试图删
 	 * 除它，因为在本线程组柝构时会自动删除它。此外本函数可能会扔出异常。
 	 */
-	void add_thread( JOMOO_Thread* thrd );
+	void add_thread( thread_t thrd );
 
 	/**
 	 * 删除一个线程
 	 * @param[ in ] thrd 线程对象
 	 * @remarks 注意，本函数可能会扔出异常。
 	 */
-	void remove_thread( JOMOO_Thread* thrd);
+	void remove_thread( thread_t thrd);
 
 	/**
 	 * 等待所有线程结束
@@ -65,8 +67,9 @@ public:
 	const tstring& toString() const;
 
 private:
-	DECLARE_NO_COPY_CLASS( JOMOO_Thread_Manager );
-	JOMOO_MUTEX_MUTABLE( m_mutex_ );
+	DECLARE_NO_COPY_CLASS( thread_manager );
+
+	mutable thread_mutex m_mutex_;
 	container_type m_thread_group_;
 	tstring m_descr_;
 	mutable tstring m_to_string_;
@@ -74,9 +77,7 @@ private:
 
 
 #ifdef OS_HAS_INLINED
-
-#include "JOMOO_Thread_Manager.inl"
-
+#include "thread_manager.inl"
 #endif //
 
 _thread_end
@@ -84,4 +85,4 @@ _thread_end
 
 #endif // JOMOO_MT
 
-#endif // JOMOO_THREAD_MANAGER_H
+#endif // thread_manager_H

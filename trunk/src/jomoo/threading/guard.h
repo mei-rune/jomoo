@@ -20,8 +20,6 @@ class guard
 {
 public:
 
-  MakeException( LockException , LockError );
-
   guard (LOCK &l, bool nothrow = true )
 	  : lock_ (&l)
 	  , owner_ ( false )
@@ -30,26 +28,20 @@ public:
 		  ThrowException1( LockException , "进入锁失败" );
   }
 
-#if(_WIN32_WINNT >= 0x0400)
-
-  guard (LOCK &l, bool block, bool nothrow );
+  guard (LOCK &l, bool is_lock, bool nothrow )
   : lock_ (&l)
   , owner_ ( false )
   {
-	if (block)
-		this->lock ();
-	else
-		if( ! this->try_lock () && !nothrow )
+	if (is_lock && !this->lock () && !nothrow )
 			ThrowException1( LockException , "进入锁失败" );
   }
-#endif // (_WIN32_WINNT >= 0x0400)
 
-  guard (LOCK &l, bool block, bool become_owner, bool nothrow )
-	  : lock_ (&l)
-	  , owner_ (become_owner == 0 ? false : true )
-  {
-		//JOMOO_UNUSED_ARG (block);
-  }
+  //guard (LOCK &l, bool block, bool become_owner, bool nothrow )
+	 // : lock_ (&l)
+	 // , owner_ (become_owner == 0 ? false : true )
+  //{
+		////JOMOO_UNUSED_ARG (block);
+  //}
 
   ~guard (void)
   {

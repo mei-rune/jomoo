@@ -8,11 +8,11 @@
     static char THIS_FILE[] = __FILE__;  
 #endif
 
-_util_begin
+_jomoo_begin
 
 CNTService* CNTService::m_pThis = NULL;
 
-CNTService::CNTService(const tchar* szServiceName,JOMOO_Service* svr, UtilLoggerPtr ptr )
+CNTService::CNTService(const tchar* szServiceName,IService* svr, logging::log_ptr ptr )
 : m_svr_( svr )
 , logger_( ptr )
 {
@@ -192,4 +192,4 @@ void CNTService::Handler(DWORD dwOpcode)
 }
 
 
-_util_end
+_jomoo_end

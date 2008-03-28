@@ -21,7 +21,7 @@
 #include "Logger.h"
 #include <iostream>
 
-_boe_begin
+_jomoo_begin
 
 class StdLogger : public BOE_Log_Impl
 {
@@ -131,6 +131,6 @@ private:
 	LevelPtr l;
 };
 
-_boe_end
+_jomoo_end
 
 #endif // _StdLogger_H_

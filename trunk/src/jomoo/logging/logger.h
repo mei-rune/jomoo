@@ -187,7 +187,6 @@ public:
 	virtual void clearNDC() = 0;
 };
 
-
 class INDC
 {
 public:
@@ -195,6 +194,10 @@ public:
 	virtual void pushNDC( const tchar* str ) = 0;
 	virtual void popNDC( ) = 0;
 };
+
+
+typedef ILogger* log_ptr;
+
 }
 
 _jomoo_end

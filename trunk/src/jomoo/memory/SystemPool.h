@@ -11,11 +11,11 @@
 
 // Include files
 # include "config_Memory.H"
-# include "MemoryPool.h"
+# include "pool.h"
 
 _memory_begin
 
-class SystemPool : public  pool
+class SystemPool : public pool
 {
 public:
 

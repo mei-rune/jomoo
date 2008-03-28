@@ -10,7 +10,7 @@
 static char THIS_FILE[] = __FILE__;  
 #endif // _MEMORY_DEBUG
 
-_util_begin
+_jomoo_begin
 
 using namespace std;
 
@@ -354,25 +354,25 @@ PropertiesI::loadConfig()
 	setProperty("Hazel.Config", value);
 }
 
-_util_end
+_jomoo_end
 
-JOMOO_Export_C _util Properties* ___createProperties()
+JOMOO_Export_C _jomoo Properties* ___createProperties()
 {
-	return new _util PropertiesI();
+	return new _jomoo PropertiesI();
 }
 
-JOMOO_Export_C _util Properties* ___createProperties_args(const StringSeq& args )
+JOMOO_Export_C _jomoo Properties* ___createProperties_args(const StringSeq& args )
 {
-	return new _util PropertiesI( args );
+	return new _jomoo PropertiesI( args );
 }
 
-JOMOO_Export_C _util Properties* ___createProperties_vec(int argc, char* argv[])
+JOMOO_Export_C _jomoo Properties* ___createProperties_vec(int argc, char* argv[])
 {
     StringSeq args = argsToStringSeq(argc, argv);
     return ___createProperties_args(args);
 }
 
-JOMOO_Export_C void ___freeProperties( _util Properties* ptr )
+JOMOO_Export_C void ___freeProperties( _jomoo Properties* ptr )
 {
 	delete ptr;
 }

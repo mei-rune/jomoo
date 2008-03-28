@@ -9,7 +9,7 @@
 static char THIS_FILE[] = __FILE__;  
 #endif // _MEMORY_DEBUG
 
-_util_begin
+_jomoo_begin
 
 using namespace std;
 
@@ -605,4 +605,4 @@ Options::checkOptHasArg(const string& opt) const
 	return pos;
 }
 
-_util_end
+_jomoo_end

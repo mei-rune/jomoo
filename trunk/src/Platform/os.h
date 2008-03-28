@@ -12,25 +12,16 @@
 
 #include "windows.h"
 
-#ifndef _critical_section_
 typedef CRITICAL_SECTION critical_section;
-#endif // critical_section
 
-#ifndef _JOMOO_HANDLE_
 typedef HANDLE JOMOO_HANDLE;
-#endif // _JOMOO_HANDLE_
 
-#ifndef JOMOO_INVALID_HANDLE
 #define JOMOO_INVALID_HANDLE NULL
-#endif // JOMOO_INVALID_HANDLE_VALUE
 
-#ifndef JOMOO_INVALID_HANDLE_VALUE
 #define JOMOO_INVALID_HANDLE_VALUE INVALID_HANDLE_VALUE
-#endif // JOMOO_INVALID_HANDLE_VALUE
 
 typedef int ssize_t;
 typedef OVERLAPPED JOMOO_OVERLAPPED ;
-
 
 namespace OS
 {
