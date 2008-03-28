@@ -14,9 +14,11 @@
 namespace OS
 {
 
+
 	OS_INLINED
 		JOMOO_HANDLE create_semaphore( long lInitialCount,
 		long lMaxCount,const char* pSemaphoreName);
+
 
 	OS_INLINED
 		bool close_semaphore( JOMOO_HANDLE &handle );
@@ -27,7 +29,6 @@ namespace OS
 
 	OS_INLINED
 		bool release_semaphore( JOMOO_HANDLE &handle, long count );
-
 
 	OS_INLINED
 		JOMOO_HANDLE create_event(  bool bManualReset
@@ -76,6 +77,7 @@ namespace OS
 		bool bAlertable           // alertable option
 		);
 #if(_WIN32_WINNT >= 0x0400)
+
 	OS_INLINED
 		u_long signal_object_and_wait(
 		JOMOO_HANDLE hObjectToSignal,  // handle to object to signal
