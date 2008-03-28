@@ -74,12 +74,12 @@ PAGE_NOCACHE  */
 
 namespace OS
 {
-  JOMOO_NAMESPACE_INLINE_FUNCTION
+  OS_INLINE
   int madvise (void* addr,
                size_t len,
                int map_advice);
 
-  JOMOO_NAMESPACE_INLINE_FUNCTION
+  OS_INLINE
   void *mmap (void *addr,
               size_t len,
               int prot,
@@ -90,32 +90,32 @@ namespace OS
               LPSECURITY_ATTRIBUTES sa = 0,
               const tchar *file_mapping_name = 0);
 
-  JOMOO_NAMESPACE_INLINE_FUNCTION
+  OS_INLINE
   int mprotect (void *addr,
                 size_t len,
                 int prot);
 
-  JOMOO_NAMESPACE_INLINE_FUNCTION
+  OS_INLINE
   int msync (void *addr,
              size_t len,
              int sync);
 
-  JOMOO_NAMESPACE_INLINE_FUNCTION
+  OS_INLINE
   int munmap (void *addr,
               size_t len);
 
-  JOMOO_NAMESPACE_INLINE_FUNCTION
+  OS_INLINE
   JOMOO_HANDLE shm_open (const tchar *filename,
 	  int prot,
 	  int flags,
 	  LPSECURITY_ATTRIBUTES sa = 0);
 
-  JOMOO_NAMESPACE_INLINE_FUNCTION
+  OS_INLINE
   int shm_unlink (const tchar *path);
 
 # if defined (OS_HAS_INLINED)
 #   include "OS_mmap.inl"
-# endif /* JOMOO_HAS_INLINED_OSCALLS */
+# endif /* OS_HAS_INLINED */
 
 };
 

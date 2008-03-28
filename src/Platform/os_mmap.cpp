@@ -10,7 +10,7 @@ static char THIS_FILE[] = __FILE__;
 
 #if !defined (OS_HAS_INLINED)
 # include "OS_mmap.inl"
-#endif /* JOMOO_HAS_INLINED_OS_CALLS */
+#endif /* OS_HAS_INLINED */
 
 
 namespace OS
