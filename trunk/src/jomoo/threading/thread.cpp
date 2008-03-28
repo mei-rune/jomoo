@@ -18,7 +18,7 @@ _thread_begin
 
 #ifndef OS_HAS_INLINED
 
-#include "Thread.inl"
+#include "thread.inl"
 
 #endif // OS_HAS_INLINED
 
