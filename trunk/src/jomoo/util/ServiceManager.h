@@ -20,7 +20,6 @@ class ServiceManager
 {
 public:
 
-
 	ServiceManager( logging::log_ptr logger = 0 );
 
     /**

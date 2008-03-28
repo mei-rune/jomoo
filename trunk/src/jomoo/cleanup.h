@@ -20,11 +20,11 @@
 
 _jomoo_begin
 
-class JOMOO_Cleanup
+class ICleanup
 {
 public:
 
-	virtual ~JOMOO_Cleanup (void){}
+	virtual ~ICleanup (void){}
 
 	virtual void cleanup ( ) = 0;
 };

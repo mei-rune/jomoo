@@ -33,9 +33,9 @@ public:
 		if( NULL == m_hSemaphore )
 		{
 			if( name != 0 )
-				ThrowException1( RuntimeException, BT_TEXT("创建Semaphore[") + tstring( name ) + BT_TEXT("]失败") );
+				ThrowException1( RuntimeException, _T("创建Semaphore[") + tstring( name ) + _T("]失败") );
 			else
-				ThrowException1( RuntimeException, BT_TEXT("创建Semaphore失败") );
+				ThrowException1( RuntimeException, _T("创建Semaphore失败") );
 		}
 
 		if ( name && GetLastError()==ERROR_ALREADY_EXISTS)

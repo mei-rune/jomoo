@@ -24,14 +24,14 @@ class jomoo_event
 public:
 	jomoo_event( const tchar* name , bool manualReset, bool initialState )
 		: event_handler_( NULL )
-		, m_name_( name == 0 ? BT_TEXT("") : name )
+		, m_name_( name == 0 ? _T("") : name )
 	{
 		event_handler_ = OS::create_event( manualReset,initialState );
 		if( event_handler_ == NULL )
 			if( name != 0 )
-				ThrowException1( RuntimeException, BT_TEXT("创建事件[") + m_name_ + BT_TEXT("]失败") );
+				ThrowException1( RuntimeException, _T("创建事件[") + m_name_ + _T("]失败") );
 			else
-				ThrowException1( RuntimeException, BT_TEXT("创建事件失败") );
+				ThrowException1( RuntimeException, _T("创建事件失败") );
 	}
 
 	~jomoo_event(void )

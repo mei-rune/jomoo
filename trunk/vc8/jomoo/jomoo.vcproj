@@ -191,6 +191,54 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath="..\..\src\jomoo\cleanup.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\config.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\counter_ptr.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\empty_type.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\error.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\exception.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\is_empty.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\jomoo_export.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\lastError.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\make_null_ptr.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\random_iterator.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\string.hpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="资源文件"
@@ -603,10 +651,6 @@
 			</File>
 			<File
 				RelativePath="..\..\src\jomoo\util\directory.inl"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\util\NTService.cpp"
 				>
 			</File>
 			<File

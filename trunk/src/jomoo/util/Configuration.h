@@ -22,7 +22,7 @@ public:
 	ConfigurationException( const   char* const         srcFile
 		, size_t        srcLine
 		, const tstring& key )
-		: _hazel Exception( srcFile, srcLine ,BT_TEXT( "取配置属性值失败!" ) )
+		: _hazel Exception( srcFile, srcLine ,_T( "取配置属性值失败!" ) )
 		, key_( key )
 	{
 	}
@@ -44,13 +44,13 @@ public:
 
 	virtual void print(std::ostream& Target ) const
 	{
-		Target << BT_TEXT( "ConfigurationException" )
+		Target << _T( "ConfigurationException" )
 			<< what()
 			<< std::endl;
 		dumpFile( Target );
-		Target << BT_TEXT( "\t[ key=" )
+		Target << _T( "\t[ key=" )
 			<< key()
-			<< BT_TEXT( " ]" );
+			<< _T( " ]" );
 	}
 private:
 	tstring key_;
@@ -63,7 +63,7 @@ public:
 	NodeException( const   char* const         srcFile
 		, size_t        srcLine
 		, const tstring& key )
-		: _hazel Exception( srcFile, srcLine ,BT_TEXT( "取配置节点值失败!" ) )
+		: _hazel Exception( srcFile, srcLine ,_T( "取配置节点值失败!" ) )
 		, key_( key )
 	{
 	}
@@ -85,13 +85,13 @@ public:
 
 	virtual void print(std::ostream& Target ) const
 	{
-		Target << BT_TEXT( "NodeException" )
+		Target << _T( "NodeException" )
 			<< what()
 			<< std::endl;
 		dumpFile( Target );
-		Target << BT_TEXT( "\t[ key=" )
+		Target << _T( "\t[ key=" )
 			<< key()
-			<< BT_TEXT( " ]" );
+			<< _T( " ]" );
 	}
 private:
 	tstring key_;
