@@ -182,6 +182,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\test\Echo_Server\g.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\stdafx.cpp"
 				>
 				<FileConfiguration
