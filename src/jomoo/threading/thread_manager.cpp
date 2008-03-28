@@ -16,7 +16,7 @@ _thread_begin
 
 #ifndef OS_HAS_INLINED
 
-#include "JOMOO_Thread_Manager.inl"
+#include "thread_manager.inl"
 
 #endif // OS_HAS_INLINED
 
