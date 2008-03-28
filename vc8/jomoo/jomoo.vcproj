@@ -1106,67 +1106,75 @@
 			Name="Threading"
 			>
 			<File
-				RelativePath="..\..\src\Threading\config_threading.h"
+				RelativePath="..\..\src\jomoo\threading\config_threading.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Threading\event.h"
+				RelativePath="..\..\src\jomoo\threading\event.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Threading\guard.h"
+				RelativePath="..\..\src\jomoo\threading\guard.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Threading\null_mutex.H"
+				RelativePath="..\..\src\jomoo\threading\null_mutex.H"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Threading\null_semaphore.H"
+				RelativePath="..\..\src\jomoo\threading\null_semaphore.H"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Threading\thread.cpp"
+				RelativePath="..\..\src\jomoo\threading\os_threading.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Threading\thread.h"
+				RelativePath="..\..\src\jomoo\threading\os_threading.inl"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Threading\thread.inl"
+				RelativePath="..\..\src\jomoo\threading\thread.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Threading\thread_manager.CPP"
+				RelativePath="..\..\src\jomoo\threading\thread.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Threading\thread_manager.h"
+				RelativePath="..\..\src\jomoo\threading\thread.inl"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Threading\thread_manager.inl"
+				RelativePath="..\..\src\jomoo\threading\thread_manager.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Threading\thread_mutex.H"
+				RelativePath="..\..\src\jomoo\threading\thread_manager.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Threading\thread_semaphore.h"
+				RelativePath="..\..\src\jomoo\threading\thread_manager.inl"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Threading\threading.h"
+				RelativePath="..\..\src\jomoo\threading\thread_mutex.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Threading\worker_queue..h"
+				RelativePath="..\..\src\jomoo\threading\thread_semaphore.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\Threading\worker_queue.T"
+				RelativePath="..\..\src\jomoo\threading\threading.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\threading\worker_queue..h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\threading\worker_queue.T"
 				>
 			</File>
 		</Filter>
