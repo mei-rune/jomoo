@@ -3,14 +3,14 @@
 #ifndef COUNTER_PTR_H
 #define COUNTER_PTR_H
 
-#include "config.h"
+#include "jomoo/config.h"
 
 #if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 #include "boost/smart_ptr.hpp"
-#include "exception.hpp"
+# include "jomoo/exception.hpp"
 #include "Platform/OS.H"
 
 #define counter_ptr boost::shared_ptr

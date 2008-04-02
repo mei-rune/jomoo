@@ -2,14 +2,14 @@
 #if !defined(EXCEPTION_HPP)
 #define EXCEPTION_HPP
 
-#include "config.h"
+#include "jomoo/config.h"
 
 #if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 #include "error.H"
-#include "string.hpp"
+#include "jomoo/string.hpp"
 #include "lastError.h"
 #include <stdexcept>
 

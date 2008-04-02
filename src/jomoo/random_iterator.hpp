@@ -1,7 +1,7 @@
 #ifndef _random_iterator_hpp_
 #define _random_iterator_hpp_
 
-#include "config.h"
+#include "jomoo/config.h"
 
 #if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once

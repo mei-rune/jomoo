@@ -2,7 +2,7 @@
 #ifndef _string_hpp_
 #define _string_hpp_
 
-#include "config.h"
+#include "jomoo/config.h"
 
 #if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
