@@ -3,7 +3,7 @@
 #ifndef _Abstract_Factory_H_
 #define _Abstract_Factory_H_
 
-#include "config.h"
+#include "jomoo/config.h"
 
 #if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once

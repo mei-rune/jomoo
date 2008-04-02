@@ -4,14 +4,14 @@
 #define THREAD_CLOSURE_H
 
 
-#include "config.h"
+#include "jomoo/config.h"
 
 #if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 #include "config_threading.h"
-#include "memory/pool.h"
+#include "jomoo/memory/pool.h"
 
 _thread_begin
 

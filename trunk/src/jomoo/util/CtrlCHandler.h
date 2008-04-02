@@ -1,16 +1,8 @@
-// **********************************************************************
-//
-// Copyright (c) 2003-2005 ZeroC, Inc. All rights reserved.
-//
-// This copy of Ice is licensed to you under the terms described in the
-// ICE_LICENSE file included in this distribution.
-//
-// **********************************************************************
 
 #ifndef UTIL_CTRL_C_HANDLER_H
 #define UTIL_CTRL_C_HANDLER_H
 
-#include <config.h>
+#include "jomoo/config.h"
 
 #if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once

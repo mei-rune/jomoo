@@ -2,7 +2,7 @@
 #ifndef _replace_functions_hpp_
 #define _replace_functions_hpp_
 
-#include "config.h"
+#include "jomoo/config.h"
 
 #if !defined (Hazel_LACKS_PRAGMA_ONCE)
 # pragma once

@@ -3,7 +3,7 @@
 #ifndef JOMOO_SYNCH_TRAITS_H
 #define JOMOO_SYNCH_TRAITS_H
 
-#include "config.h"
+#include "jomoo/config.h"
 
 #if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once

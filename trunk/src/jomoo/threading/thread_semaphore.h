@@ -3,7 +3,7 @@
 #if !defined _JOMOO_THREAD_SEMAPHORE_H_
 #define _JOMOO_THREAD_SEMAPHORE_H_
 
-#include "config.h"
+#include "jomoo/config.h"
 
 #if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once

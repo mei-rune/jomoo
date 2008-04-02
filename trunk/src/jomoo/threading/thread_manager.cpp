@@ -2,7 +2,7 @@
 #ifndef thread_manager_CPP
 #define thread_manager_CPP
 
-#include "config.h"
+#include "jomoo/config.h"
 
 #if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once

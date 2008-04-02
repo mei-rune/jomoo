@@ -1,7 +1,7 @@
 #ifndef __Properties_h__
 #define __Properties_h__
 
-#include "config.h"
+#include "jomoo/config.h"
 
 #if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
@@ -9,7 +9,7 @@
 
 // Include files
 #include "config_Util.h"
-#include "jomoo_export.h"
+#include "jomoo/jomoo_export.h"
 
 _jomoo_begin
 
