@@ -3,13 +3,13 @@
 #ifndef JOMOO_GET_LAST_ERROR_H
 #define JOMOO_GET_LAST_ERROR_H
 
-#include "config.h"
+#include "jomoo/config.h"
 
 #if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
-#include "string.hpp"
+#include "jomoo/string.hpp"
 
 inline tstring get_last_error( DWORD code )
 {

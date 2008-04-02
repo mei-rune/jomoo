@@ -3,7 +3,7 @@
 #if !defined(ERRORDEF_HPP)
 #define ERRORDEF_HPP
 
-#include "config.h"
+#include "jomoo/config.h"
 
 #if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
