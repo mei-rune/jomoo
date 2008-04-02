@@ -2,7 +2,7 @@
 #include "MemoryManager.H"
 #include "SystemPool.h"
 #include "FixedPool.H"
-#include "../Threading/Threading.H"
+#include "jomoo/threading/threading.h"
 #include <map>
 
 _memory_begin
@@ -165,12 +165,12 @@ JOMOO_Export_C _memory fixed_pool_ptr ___findLoopPool( const tstring& name, size
 	return _memory POOL_Manager::get().findPool ( name ,chunk_size );
 }
 
-JOMOO_Export_C void* ___JOMOO_malloc (size_t nbytes , const char* file, size_t line )
+JOMOO_Export_C void* ___system_malloc (size_t nbytes , const char* file, size_t line )
 {
 	return _memory POOL_Manager::get().getPool()->malloc( nbytes, file, line );
 }
 
-JOMOO_Export_C void ___JOMOO_free (void* block )
+JOMOO_Export_C void ___system_free (void* block )
 {
 	return _memory POOL_Manager::get().getPool()->free( block );
 }
