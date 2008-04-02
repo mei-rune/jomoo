@@ -2,7 +2,7 @@
 #ifndef _NTSERVICE_H_
 #define _NTSERVICE_H_
 
-#include "config.h"
+#include "jomoo/config.h"
 
 #if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
@@ -12,7 +12,7 @@
 #include "config_Util.h"
 #include <winsvc.h>
 #include <vector>
-#include "logging/logger.h"
+#include "jomoo/logging/logger.h"
 
 _jomoo_begin
 

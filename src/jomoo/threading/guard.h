@@ -3,14 +3,14 @@
 #ifndef _GUARD_H_
 #define _GUARD_H_
 
-#include "config.h"
+#include "jomoo/config.h"
 
 #if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 #include "config_threading.h"
-#include "exception.hpp"
+# include "jomoo/exception.hpp"
 
 
 _jomoo_begin

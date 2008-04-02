@@ -3,7 +3,7 @@
 #ifndef _OS_Threading_H
 #define _OS_Threading_H
 
-#include "config.h"
+#include "jomoo/config.h"
 
 #if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once

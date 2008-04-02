@@ -1,7 +1,7 @@
 #ifndef SEAL_BASE_OPS_STRING_OPS_H
 # define SEAL_BASE_OPS_STRING_OPS_H
 
-#include "config.h"
+#include "jomoo/config.h"
 
 #if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once

@@ -1,7 +1,7 @@
 #ifndef SERVICEMANAGER_H
 #define SERVICEMANAGER_H
 
-#include "config.h"
+#include "jomoo/config.h"
 
 #if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
@@ -12,7 +12,7 @@
 #include <string>
 #include <vector>
 #include "winsvc.h"
-#include "logging/logger.h"
+#include "jomoo/logging/logger.h"
 
 _jomoo_begin
 

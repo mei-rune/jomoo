@@ -3,7 +3,7 @@
 #ifndef null_semaphore_h
 #define null_semaphore_h
 
-#include "config.h"
+#include "jomoo/config.h"
 
 #if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once

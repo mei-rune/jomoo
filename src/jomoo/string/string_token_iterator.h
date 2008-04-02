@@ -2,7 +2,7 @@
 #ifndef _string_token_iterator_
 #define _string_token_iterator_
 
-#include "config.h"
+#include "jomoo/config.h"
 
 #if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once

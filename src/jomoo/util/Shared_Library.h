@@ -9,7 +9,7 @@
 #ifndef _Shared_Library_H_
 #define _Shared_Library_H_
 
-#include "config.h"
+#include "jomoo/config.h"
 
 #if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once

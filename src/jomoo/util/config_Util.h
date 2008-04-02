@@ -4,7 +4,7 @@
 #define _config_Util_H
 
 
-#include "config.h"
+#include "jomoo/config.h"
 
 #if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
@@ -12,8 +12,8 @@
 
 #include <vector>
 #include <map>
-#include "string.hpp"
-#include "counter_ptr.hpp"
+#include "jomoo/string.hpp"
+#include "jomoo/counter_ptr.hpp"
 
 _jomoo_begin
 

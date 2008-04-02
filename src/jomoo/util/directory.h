@@ -12,7 +12,7 @@
 #ifndef _System_Directory_H_
 #define _System_Directory_H_
 
-#include "config.h"
+#include "jomoo/config.h"
 
 #if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
@@ -34,8 +34,8 @@
 #   include <dirent.h>
 #endif
 
-#include "exception.hpp"
-#include "string.hpp"
+# include "jomoo/exception.hpp"
+#include "jomoo/string.hpp"
 
 _jomoo_begin
 
