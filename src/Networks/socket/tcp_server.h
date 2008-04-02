@@ -2,16 +2,15 @@
 #ifndef tcp_server_h
 #define tcp_server_h
 
-#include "config.h"
+#include "jomoo/config.h"
 
 #if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
-#include "../config_Networks.h"
-#include "tcp_client.h"
-#include "inet_address.h"
+#include "jomoo/networks/sockets/tcp_client.h"
+#include "jomoo/networks/sockets/inet_address.h"
 
 _networks_begin
 
