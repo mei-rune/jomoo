@@ -12,7 +12,7 @@
 # ifndef _pool_h_
 # define _pool_h_
 
-# include "config.h"
+# include "jomoo/config.h"
 
 # if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
@@ -20,8 +20,8 @@
 
 // Include files
 # include "config_Memory.H"
-# include "string.hpp"
-# include "exception.hpp"
+# include "jomoo/string.hpp"
+# include "jomoo/exception.hpp"
 
 _memory_begin
 

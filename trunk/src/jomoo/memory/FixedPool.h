@@ -3,7 +3,7 @@
 #ifndef FIXED_POOL_H
 #define FIXED_POOL_H
 
-# include "config.h"
+# include "jomoo/config.h"
 
 # if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
@@ -11,8 +11,8 @@
 
 // Include files
 # include "config_Memory.H"
-# include "pool.h"
-# include "collections/thread_safe_ptr_queue.hpp"
+# include "jomoo/memory/pool.h"
+# include "jomoo/collections/thread_safe_ptr_queue.hpp"
 
 _memory_begin
 
