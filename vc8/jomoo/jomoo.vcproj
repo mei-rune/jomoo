@@ -42,7 +42,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/DNOLOG4CXX"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(BOOST_ROOT)&quot;;&quot;$(SolutionDir)\..\src\jomoo\&quot;;&quot;$(SolutionDir)\..\src\&quot;"
+				AdditionalIncludeDirectories="&quot;$(BOOST_ROOT)&quot;;&quot;$(SolutionDir)\..\src\&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;HazelBASE_EXPORTS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -263,38 +263,6 @@
 			</File>
 			<File
 				RelativePath="..\..\src\jomoo\collections\thread_safe_ptr_queue.hpp"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="Platform"
-			>
-			<File
-				RelativePath="..\..\src\Platform\os.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\Platform\os.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\Platform\os.inl"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\Platform\os_mmap.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\Platform\os_mmap.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\Platform\os_mmap.inl"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\Platform\os_string.h"
 				>
 			</File>
 		</Filter>
@@ -697,6 +665,78 @@
 				RelativePath="..\..\src\jomoo\util\Util.h"
 				>
 			</File>
+		</Filter>
+		<Filter
+			Name="networks"
+			>
+			<File
+				RelativePath="..\..\src\jomoo\networks\config_networks.h"
+				>
+			</File>
+			<Filter
+				Name="sockets"
+				>
+				<File
+					RelativePath="..\..\src\jomoo\networks\sockets\base_socket.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\jomoo\networks\sockets\base_socket.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\jomoo\networks\sockets\base_socket.inl"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\jomoo\networks\sockets\inet_address.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\jomoo\networks\sockets\inet_address.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\jomoo\networks\sockets\inet_address.inl"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\jomoo\networks\sockets\os_networks.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\jomoo\networks\sockets\os_networks.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\jomoo\networks\sockets\os_networks.inl"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\jomoo\networks\sockets\tcp_client.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\jomoo\networks\sockets\tcp_client.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\jomoo\networks\sockets\tcp_client.inl"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\jomoo\networks\sockets\tcp_server.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\jomoo\networks\sockets\tcp_server.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\jomoo\networks\sockets\tcp_server.inl"
+					>
+				</File>
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>
