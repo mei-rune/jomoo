@@ -13,7 +13,7 @@
 #define _Memory_Manager_H_
 
 
-#include "config.h"
+#include "jomoo/config.h"
 
 #if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
@@ -21,8 +21,8 @@
 
 // Include files
 # include "config_Memory.H"
-# include "pool.h"
-# include "jomoo_export.H"
+# include "jomoo/memory/pool.h"
+# include "jomoo/jomoo_export.h"
 
 _memory_begin
 

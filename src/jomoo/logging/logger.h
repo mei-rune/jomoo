@@ -12,15 +12,15 @@
 #ifndef _JOMOO_Log_Impl_H_
 #define _JOMOO_Log_Impl_H_
 
-#include "config.h"
+#include "jomoo/config.h"
 
 #if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
-#include "string.hpp"
-#include "counter_ptr.hpp"
-#include "jomoo_export.h"
+#include "jomoo/string.hpp"
+#include "jomoo/counter_ptr.hpp"
+#include "jomoo/jomoo_export.h"
 #include <assert.h>
 
 

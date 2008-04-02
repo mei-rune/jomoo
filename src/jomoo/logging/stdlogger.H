@@ -12,7 +12,7 @@
 #ifndef _StdLogger_H_
 #define _StdLogger_H_
 
-#include "config.h"
+#include "jomoo/config.h"
 
 #if !defined (BOE_LACKS_PRAGMA_ONCE)
 # pragma once
