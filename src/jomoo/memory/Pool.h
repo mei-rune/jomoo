@@ -127,22 +127,22 @@ public:
 typedef pool::pool_ptr pool_ptr;
 typedef fixed_pool::fixed_pool_ptr fixed_pool_ptr;
 
-		// TEMPLATE FUNCTION _Destroy
-template<class _Ty> inline
-	void _Destroy(_Ty _FARQ *_Ptr)
-	{	// destroy object at _Ptr
-	_DESTRUCTOR(_Ty, _Ptr);
-	}
-
-template<> inline
-	void _Destroy(char _FARQ *)
-	{	// destroy a char (do nothing)
-	}
-
-template<> inline
-	void _Destroy(wchar_t _FARQ *)
-	{	// destroy a wchar_t (do nothing)
-	}
+//// TEMPLATE FUNCTION _Destroy
+//template<class _Ty> inline
+//	void _Destroy(_Ty _FARQ *_Ptr)
+//	{	// destroy object at _Ptr
+//	_DESTRUCTOR(_Ty, _Ptr);
+//	}
+//
+//template<> inline
+//	void _Destroy(char _FARQ *)
+//	{	// destroy a char (do nothing)
+//	}
+//
+//template<> inline
+//	void _Destroy(wchar_t _FARQ *)
+//	{	// destroy a wchar_t (do nothing)
+//	}
 
 _memory_end
 
