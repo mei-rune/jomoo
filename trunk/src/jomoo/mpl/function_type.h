@@ -7,6 +7,18 @@
 # pragma once
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
+template< typename T>
+struct function_type
+{
+};
+
+template< typename T>
+struct function_type<std::unary_function<T,void> >
+{
+	typedef T arg_type;
+};
+
+
 template<typename R, typename T>
 struct function_type< R (T) >
 {	
@@ -20,7 +32,6 @@ struct function_type<std::unary_function<T,R> >
 	typedef R result_type;
 	typedef T arg_type;
 };
-
 
 template<typename R, typename T1, typename T2>
 struct function_type< R (T1,T2) >
