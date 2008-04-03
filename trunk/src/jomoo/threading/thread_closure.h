@@ -11,9 +11,27 @@
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 #include "config_threading.h"
+#include "boost/tr1/type_traits.hpp"
+#include "boost/tr1/memory.hpp"
 #include "jomoo/memory/pool.h"
+#include "jomoo/memory/memorymanager.h"
+#include "jomoo/mpl/function_type.h"
 
 _thread_begin
+
+
+
+template< typename R,typename T>
+R _cast( T t)
+{
+	return t;
+}
+
+template< typename R>
+R _cast( std::tr1::shared_ptr< typename std::tr1::remove_pointer<R>::type > t)
+{
+	return t.get();
+}
 
 template<typename F>
 class thread_closure_0
@@ -71,7 +89,7 @@ public:
 		thread_closure_1 *self = static_cast<thread_closure_1*>(c);
 		try
 		{
-			self->_function( arg1 );
+			self->_function( self->arg1 );
 		}
 		catch ( ... )
 		{
@@ -111,7 +129,7 @@ public:
 		thread_closure_2 *self = static_cast<thread_closure_2*>(c);
 		try
 		{
-			self->_function( arg1, arg2 );
+			self->_function( self->arg1, self->arg2 );
 		}
 		catch ( ... )
 		{
@@ -152,7 +170,7 @@ public:
 		thread_closure_3 *self = static_cast<thread_closure_3*>(c);
 		try
 		{
-			self->_function( arg1, arg2, arg3 );
+			self->_function( self->arg1, self->arg2, self->arg3 );
 		}
 		catch ( ... )
 		{

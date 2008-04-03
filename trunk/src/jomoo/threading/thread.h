@@ -42,7 +42,7 @@ namespace ThreadOP
 	{
 		typedef thread_closure_0<F> closure_type;
 
-		return ::_beginthread( closure_type::start_routine, JOMOO_NEW( getPool(), closure_type, (f,nm) ) );
+		return ::_beginthread( closure_type::start_routine, 0, JOMOO_NEW( getPool(), closure_type, (f,nm) ) );
 	}
 
 	template<typename F, typename P>
@@ -50,7 +50,9 @@ namespace ThreadOP
 	{
 		typedef thread_closure_1<F,P> closure_type;
 
-		return ::_beginthread( closure_type::start_routine, JOMOO_NEW( getPool(), closure_type, (f,x,nm) ) );
+		pool_ptr pl = getPool();
+		
+		return ::_beginthread( closure_type::start_routine, 0, JOMOO_NEW( pl, closure_type, (pl, f, x, nm) ) );
 	}
 	
 	template<typename F, typename P1, typename P2>
@@ -58,7 +60,8 @@ namespace ThreadOP
 	{
 		typedef thread_closure_1<F,P1,P2> closure_type;
 
-		return ::_beginthread( closure_type::start_routine, JOMOO_NEW( getPool(), closure_type, (f,x1,x2,nm) ) );
+		pool_ptr pl = getPool();
+		return ::_beginthread( closure_type::start_routine, 0, JOMOO_NEW( pl, closure_type, (pl, f, x1, x2, nm) ) );
 	}
 
 	template<typename F, typename P1, typename P2, typename P3>
@@ -66,7 +69,8 @@ namespace ThreadOP
 	{
 		typedef thread_closure_1<F,P1,P2,P3> closure_type;
 
-		return ::_beginthread( closure_type::start_routine, JOMOO_NEW( getPool(), closure_type, (f,x1,x2,x3,nm) ) );
+		pool_ptr pl = getPool();
+		return ::_beginthread( closure_type::start_routine, 0, JOMOO_NEW( pl, closure_type, (pl, f, x1, x2, x3, nm) ) );
 	}
 }
 
