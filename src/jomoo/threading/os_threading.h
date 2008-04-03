@@ -9,7 +9,7 @@
 # pragma once
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
-#include "Platform/OS.H"
+#include "jomoo/platform/os.H"
 
 namespace OS
 {
