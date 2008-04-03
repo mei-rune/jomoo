@@ -26,6 +26,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "JoMoo_TestUnit", "JoMoo_Tes
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "echoServer", "echoServer\echoServer.vcproj", "{4AC9C574-867D-4E21-8E09-792139B2E878}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "thread_test", "thread_test\thread_test.vcproj", "{B58A1C1D-0476-4436-A723-D1DAB86DAB9A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -73,6 +75,10 @@ Global
 		{4AC9C574-867D-4E21-8E09-792139B2E878}.Debug|Win32.Build.0 = Debug|Win32
 		{4AC9C574-867D-4E21-8E09-792139B2E878}.Release|Win32.ActiveCfg = Release|Win32
 		{4AC9C574-867D-4E21-8E09-792139B2E878}.Release|Win32.Build.0 = Release|Win32
+		{B58A1C1D-0476-4436-A723-D1DAB86DAB9A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B58A1C1D-0476-4436-A723-D1DAB86DAB9A}.Debug|Win32.Build.0 = Debug|Win32
+		{B58A1C1D-0476-4436-A723-D1DAB86DAB9A}.Release|Win32.ActiveCfg = Release|Win32
+		{B58A1C1D-0476-4436-A723-D1DAB86DAB9A}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,6 +93,7 @@ Global
 		{C15AC312-87DF-4CBC-954F-C47BBE89F501} = {2DA0FD56-0D48-4491-A183-FBF6666C90FB}
 		{4088A862-11EC-438C-B5E6-20607BF523CF} = {2DA0FD56-0D48-4491-A183-FBF6666C90FB}
 		{4AC9C574-867D-4E21-8E09-792139B2E878} = {2DA0FD56-0D48-4491-A183-FBF6666C90FB}
+		{B58A1C1D-0476-4436-A723-D1DAB86DAB9A} = {2DA0FD56-0D48-4491-A183-FBF6666C90FB}
 	EndGlobalSection
 	GlobalSection(DPCodeReviewSolutionGUID) = preSolution
 		DPCodeReviewSolutionGUID = {00000000-0000-0000-0000-000000000000}
