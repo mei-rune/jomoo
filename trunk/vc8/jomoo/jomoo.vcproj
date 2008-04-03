@@ -216,6 +216,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\jomoo\functional.hpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\jomoo\is_empty.h"
 				>
 			</File>
@@ -737,6 +741,14 @@
 					>
 				</File>
 			</Filter>
+		</Filter>
+		<Filter
+			Name="mpl"
+			>
+			<File
+				RelativePath="..\..\src\jomoo\mpl\function_type.h"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>
