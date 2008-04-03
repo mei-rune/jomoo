@@ -5,13 +5,14 @@
 #include <iostream>
 #include <boost/tr1/memory.hpp>
 #include <boost/tr1/functional.hpp>
-#include <boost/thread.hpp>
-#include "networks/socket/tcp_server.h"
+#include <jomoo/functional.hpp>
+#include "jomoo/networks/sockets/tcp_server.h"
+#include "jomoo/threading/threading.h"
 
 
 class session;
 
-typedef boost::shared_ptr<session> sessionPtr;
+typedef std::tr1::shared_ptr<session> sessionPtr;
 
 class session_manager
 {
@@ -116,8 +117,8 @@ int main(int argc, tchar* argv[])
 		manager.sessions.push_back( p );
 		std::cout << "接收来自" << p->socket_.remote_addr() << "的连接,共有" << manager.sessions.size() << "个连接!" << std::endl;
 
-		
-		boost::thread t( std::tr1::function< void(void) >( &session::run, p ) );
+		ThreadOP::create_thread( mem_fun( &session::run), p );
+		//boost::thread t( std::tr1::function< void(void) >( &session::run, p ) );
 
 	}
 
