@@ -35,74 +35,74 @@ _jomoo_begin
 //	 * @remarks 注意，不可以发生异常。如果想指定退出代码，请用SetLastError
 //	 * 或者SetLastErrorEx ，因为调用者会用GetLastError取得退出代码。
 //	 */
-//	virtual bool OnInit( DWORD dwArgc, LPTSTR* lpszArgv ) = 0;
+//	 bool OnInit( DWORD dwArgc, LPTSTR* lpszArgv ) = 0;
 //
 //	/**
 //	 * 接收到一个服务将停止的通知
 //	 * @remarks 注意，不可以发生异常。
 //	 */
-//    virtual void OnStop() = 0;
+//     void OnStop() = 0;
 //
 //	/**
 //	 * 接收到一个询问服务状态的通知
 //	 * @remarks 注意，不可以发生异常。
 //	 */
-//    virtual void OnInterrogate() = 0;
+//     void OnInterrogate() = 0;
 //
 //	/**
 //	 * 接收到一个服务暂停的通知
 //	 * @remarks 注意，不可以发生异常。
 //	 */
-//    virtual void OnPause() = 0;
+//     void OnPause() = 0;
 //
 //	/**
 //	 * 接收到一个服务恢复的通知
 //	 * @remarks 注意，不可以发生异常。
 //	 */
-//    virtual void OnContinue() = 0;
+//     void OnContinue() = 0;
 //	
 //	/**
 //	 * 接收到一个系统将关闭的通知
 //	 * @remarks 注意，不可以发生异常。
 //	 */
-//    virtual void OnShutdown() = 0;
+//     void OnShutdown() = 0;
 //
 //	/**
 //	 * 接收到一个新的网络组件被绑定的通知
 //	 * @remarks 注意，不可以发生异常。
 //	 */
-//    virtual void OnNetBindAdd() = 0;
+//     void OnNetBindAdd() = 0;
 //	
 //	/**
 //	 * 接收到一个网络组件绑定被启用的通知
 //	 * @remarks 注意，不可以发生异常。
 //	 */
-//    virtual void OnNetBindEnable() = 0;
+//     void OnNetBindEnable() = 0;
 //
 //	/**
 //	 * 接收到一个网络组件绑定被禁用的通知
 //	 * @remarks 注意，不可以发生异常。
 //	 */
-//    virtual void OnNetBindDisable() = 0;
+//     void OnNetBindDisable() = 0;
 //
 //	/**
 //	 * 接收到一个网络组件绑定被删除的通知
 //	 * @remarks 注意，不可以发生异常。
 //	 */
-//    virtual void OnNetBindRemove() = 0;
+//     void OnNetBindRemove() = 0;
 //	
 //	/**
 //	 * 接收到一个删除的通知
 //	 * @remarks 注意，不可以发生异常。
 //	 */
-//    virtual void OnParamChange() = 0;
+//     void OnParamChange() = 0;
 //
 //	/**
 //	 * 接收到一个用户定义的通知
 //	 * @param dwOpcode 用户定义的通知
 //	 * @remarks 注意，不可以发生异常。
 //	 */
-//    virtual void OnUserControl(DWORD dwOpcode) = 0;
+//     void OnControl(DWORD dwOpcode) = 0;
 //};
 template<SERVER>
 class CNTService
@@ -118,13 +118,13 @@ public:
 		, _isRunning( false )
 	{
 	if( _pThis != 0 )
-		throw std::runtime_error( _T( "服务实例只能有一个") );
+		throw std::runtime_error( "服务实例只能有一个" );
 
 	if( _name.empty() )
-		throw std::runtime_error( _T( "服务名不能为空") );
+		throw std::runtime_error( "服务名不能为空" );
 
 	if( _svr == 0 )
-		throw std::runtime_error( _T( "服务回调不能空") );
+		throw std::runtime_error( "服务回调不能空" );
 
     _pThis = this;
     
@@ -289,7 +289,7 @@ private:
 		default:
 			if (dwOpcode >= SERVICE_CONTROL_USER)
 			{
-				_svr->OnUserControl(dwOpcode);
+				_svr->OnControl(dwOpcode);
 			}
 			else
 			{
