@@ -52,7 +52,7 @@ public:
 
 	size_t chunk_size() const;
 
-	void dump( std::ostream& Target ) const;
+	void dump( tostream& Target ) const;
 
 	const tstring& toString() const;
 

@@ -61,9 +61,9 @@ public:
 	}
 
 	
-	void dump( std::ostream& Target ) const
+	void dump( tostream& Target ) const
 	{
-		Target << "<MemoryPool>";
+		Target << _T("<MemoryPool>");
 		SystemPool::get().dump( Target );
 
 		JOMOO_GUARD( lock, mutex_ );
@@ -71,7 +71,7 @@ public:
 			; it != loop_pools_.end()
 			; it ++ )
 			it->second->dump( Target );
-		Target << "</MemoryPool>";
+		Target << _T("</MemoryPool>");
 	}
 
 	
@@ -108,7 +108,7 @@ JOMOO_Export_C _jomoo_memory pool_mgr* ___getPoolManager()
  * 打印出内存池管理器的状态
  * @param[ in ] Target 输出流
  */
-JOMOO_Export_C void  ___dumpPoolManager( std::ostream& Target )
+JOMOO_Export_C void  ___dumpPoolManager( tostream& Target )
 {
 	_jomoo_memory POOL_Manager::get().dump( Target );
 }
