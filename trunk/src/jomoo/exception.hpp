@@ -35,7 +35,7 @@ public:
 		return fSrcLine;
 	}
 
-    void setPosition(const char* const file, size_t line);
+    void setPosition(const tchar* const file, size_t line);
 
     Exception()
 		: std::runtime_error( "<δ֪�쳣>" )
@@ -45,22 +45,22 @@ public:
 
 	}
 
-	Exception( const std::string& message )
+	Exception( const tstring& message )
 		: std::runtime_error( message )
 		, fSrcFile( 0 )
 	    , fSrcLine( 0 )
 	{
 	}
 
-	Exception(const char* const srcFile, size_t srcLine , const std::string& message )
+	Exception(const tchar* const srcFile, size_t srcLine , const tstring& message )
 		: std::runtime_error( message )
 		, fSrcFile( srcFile )
 	    , fSrcLine(srcLine)
 	{
 	}
 
-	Exception(const char* const srcFile, size_t srcLine , const std::string& message , const Exception& e )
-		: std::runtime_error( message + std::string( ",") + e.what() )
+	Exception(const tchar* const srcFile, size_t srcLine , const tstring& message , const Exception& e )
+		: std::runtime_error( message + tstring( ",") + e.what() )
 		, fSrcFile( srcFile )
 		, fSrcLine(srcLine)
 	{
@@ -94,7 +94,7 @@ protected:
  #endif /* _HAS_EXCEPTIONS */
 
 protected :
-    const char*     fSrcFile;
+    const tchar*     fSrcFile;
     size_t    fSrcLine;
 };
 
@@ -104,24 +104,24 @@ class theType : public Exception \
 { \
 public: \
  \
-    theType(const   char* const         srcFile \
+    theType(const   tchar* const         srcFile \
             , size_t        srcLine \
-			, const std::string & m				\
+			, const tstring & m				\
 			, const Exception& e				\
             ) : \
         Exception(srcFile, srcLine, msg + m ,e ) \
     { \
          \
     } \
-	theType(const   char* const         srcFile \
+	theType(const   tchar* const         srcFile \
             , size_t        srcLine \
-			, const std::string & m				\
+			, const tstring & m				\
             ) : \
         Exception(srcFile, srcLine, msg + m ) \
     { \
          \
     } \
-	theType(const   char* const         srcFile \
+	theType(const   tchar* const         srcFile \
             , size_t        srcLine \
             ) : \
         Exception(srcFile, srcLine, msg ) \
@@ -133,7 +133,7 @@ public: \
     { \
          \
     } \
-	theType( const std::string & m	) : \
+	theType( const tstring & m	) : \
         Exception( msg + m ) \
     { \
          \

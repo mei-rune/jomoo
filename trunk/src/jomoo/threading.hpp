@@ -1,7 +1,7 @@
 
 
-#ifndef JOMOO_SYNCH_TRAITS_H
-#define JOMOO_SYNCH_TRAITS_H
+#ifndef _threading_hpp_
+#define _threading_hpp_
 
 #include "jomoo/config.h"
 
@@ -11,10 +11,11 @@
 
 #ifdef JOMOO_MT
 
-#include "thread_mutex.h"
-#include "thread_semaphore.h"
-#include "thread.h"
-#include "thread_manager.h"
+#include "threading/thread.h"
+#include "threading/thread_manager.h"
+#include "threading/thread_mutex.h"
+#include "threading/thread_semaphore.h"
+#include "threading/event.h"
 
 _jomoo_begin
 
@@ -37,4 +38,4 @@ _jomoo_end
 
 #endif //JOMOO_MT
 
-#endif //SYNCH_TRAITS_H
+#endif //_threading_hpp_

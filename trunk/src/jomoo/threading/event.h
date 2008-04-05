@@ -14,8 +14,8 @@
 #ifdef JOMOO_MT
 
 #include "os_threading.h"
-#include "Base/string.hpp"
-#include "Base/exception.hpp"
+#include "jomoo/platform/os_string.h"
+#include "exception.hpp"
 
 _jomoo_begin
 
