@@ -24,7 +24,7 @@ public:
 	
 	typedef guard< thread_semaphore > scoped_lock;
 
-	thread_semaphore(long initialCount,long maxCount,const char* name=NULL)
+	thread_semaphore(long initialCount,long maxCount,const tchar* name=NULL)
 		: m_hSemaphore( NULL ),
 		m_delete_( true )
 	{
@@ -33,9 +33,9 @@ public:
 		if( NULL == m_hSemaphore )
 		{
 			if( name != 0 )
-				ThrowException1( RuntimeException, _T("创建Semaphore[") + tstring( name ) + _T("]失败") );
+				ThrowException1( RuntimeException, "创建Semaphore[" + std::string( name ) + "]失败");
 			else
-				ThrowException1( RuntimeException, _T("创建Semaphore失败") );
+				ThrowException1( RuntimeException, "创建Semaphore失败");
 		}
 
 		if ( name && GetLastError()==ERROR_ALREADY_EXISTS)

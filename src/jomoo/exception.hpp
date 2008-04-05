@@ -19,16 +19,52 @@ _jomoo_begin
 class Exception : public std::runtime_error 
 {
 public:
-    virtual ~Exception();
-    const tchar* getFile() const;
-    size_t getLine() const;
+    virtual ~Exception()
+	{
+	}
 
-    void setPosition(const tchar* const file, size_t line);
+    const tchar* getFile() const
+	{
+		if (!fSrcFile)
+			return _T("");
+		return fSrcFile;
+	}
 
-    Exception();
-	Exception( const tstring& _Message );
-    Exception(const tchar* const srcFile, size_t srcLine , const tstring& _Message );
-	Exception(const tchar* const srcFile, size_t srcLine , const tstring& _Message , const Exception& e );
+    size_t getLine() const
+	{
+		return fSrcLine;
+	}
+
+    void setPosition(const char* const file, size_t line);
+
+    Exception()
+		: std::runtime_error( "<未知异常>" )
+		, fSrcFile( 0 )
+		, fSrcLine( 0 )
+	{
+
+	}
+
+	Exception( const std::string& message )
+		: std::runtime_error( message )
+		, fSrcFile( 0 )
+	    , fSrcLine( 0 )
+	{
+	}
+
+	Exception(const char* const srcFile, size_t srcLine , const std::string& message )
+		: std::runtime_error( message )
+		, fSrcFile( srcFile )
+	    , fSrcLine(srcLine)
+	{
+	}
+
+	Exception(const char* const srcFile, size_t srcLine , const std::string& message , const Exception& e )
+		: std::runtime_error( message + std::string( ",") + e.what() )
+		, fSrcFile( srcFile )
+		, fSrcLine(srcLine)
+	{
+	}
 
 	template< typename E >
 	void Raise( E& e )
@@ -58,66 +94,10 @@ protected:
  #endif /* _HAS_EXCEPTIONS */
 
 protected :
-    const tchar*     fSrcFile;
+    const char*     fSrcFile;
     size_t    fSrcLine;
 };
 
-
-inline Exception::~Exception()
-{
-}
-
-
-inline void Exception::setPosition(const tchar* const file, size_t line)
-{
-    fSrcLine = line;
-    fSrcFile = file;
-}
-
-
-// ---------------------------------------------------------------------------
-inline Exception::Exception() 
-	: std::runtime_error( "<未知异常>" )
-	, fSrcFile( 0 )
-    , fSrcLine( 0 )
-{
-
-}
-
-inline Exception::Exception( const tstring& _Message )
-	: std::runtime_error( _Message )
-	, fSrcFile( 0 )
-    , fSrcLine( 0 )
-{
-}
-
-inline Exception::Exception( const   tchar* const     srcFile
-                            , size_t    srcLine
-							, const std::string& _Message )
-	: std::runtime_error( _Message )
-	, fSrcFile( srcFile )
-    , fSrcLine(srcLine)
-{
-}
-
-inline Exception::Exception(const tchar* const srcFile, size_t srcLine , const tstring& _Message , const Exception& e )
-	: std::runtime_error( _Message + tstring( ",") + e.what() )
-	, fSrcFile( srcFile )
-    , fSrcLine(srcLine)
-{
-}
-
-inline const tchar* Exception::getFile() const
-{
-    if (!fSrcFile)
-        return "";
-    return fSrcFile;
-}
-
-inline size_t Exception::getLine() const
-{
-    return fSrcLine;
-}
 
 #define MakeException(theType , msg ) \
 class theType : public Exception \

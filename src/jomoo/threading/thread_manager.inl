@@ -1,7 +1,7 @@
 
 
 OS_INLINE thread_manager::thread_manager( const tchar* descr )
-: m_descr_( descr == 0 ? "<empty>": descr )
+: m_descr_( descr == 0 ? _T("<empty>"): descr )
 {
 }
 

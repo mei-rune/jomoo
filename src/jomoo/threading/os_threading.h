@@ -9,7 +9,8 @@
 # pragma once
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
-#include "jomoo/platform/os.H"
+#include "jomoo/platform/os.h"
+#include "jomoo/platform/os_string.h"
 
 namespace OS
 {
@@ -17,7 +18,7 @@ namespace OS
 
 	OS_INLINE
 		JOMOO_HANDLE create_semaphore( long lInitialCount,
-		long lMaxCount,const char* pSemaphoreName);
+		long lMaxCount,const tchar* pSemaphoreName);
 
 
 	OS_INLINE
@@ -32,11 +33,11 @@ namespace OS
 
 	OS_INLINE
 		JOMOO_HANDLE create_event(  bool bManualReset
-		,bool bInitialState,const char* lpName = 0 );
+		,bool bInitialState,const tchar* lpName = 0 );
 
 	OS_INLINE
 		JOMOO_HANDLE open_event( u_long DesiredAccess
-		,bool bInheritHandle,const char* lpName = 0 );
+		,bool bInheritHandle,const tchar* lpName = 0 );
 
 	OS_INLINE
 		bool set_event( JOMOO_HANDLE hEvent );
