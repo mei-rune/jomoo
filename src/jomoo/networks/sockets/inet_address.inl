@@ -136,7 +136,7 @@ inline u_long inet_address::ip ( void ) const
 
 inline const tstring& inet_address::ip_string ( ) const
 {
-	ip_string_ = ::inet_ntoa(((sockaddr_in*) &m_addr_)->sin_addr );
+	ip_string_ = toTstring( ::inet_ntoa(((sockaddr_in*) &m_addr_)->sin_addr ) );
 	return ip_string_;
 }
 
@@ -169,14 +169,14 @@ inline void inet_address::addr ( const void * address, size_t len)
 
 inline bool inet_address::parse (const char* address)
 {
-	if( strnicmp( address, "TCP://", 6 ) == 0 )
+	if( string_traits<char>::strnicmp( address, "TCP://", 6 ) == 0 )
 		address += 6;
-	else if( strstr( address, "://" ) != 0 )
+	else if( string_traits<char>::strstr( address, "://" ) != 0 )
 		return false;
 
 	std::vector< char > ip_addr( strlen( address ) + 10 , 0 );
 	string_traits<char>::strcpy( &ip_addr[ 0 ], ip_addr.size(), address );
-	char *port_p = ::strrchr (&ip_addr[0], ':');
+	char *port_p = string_traits<char>::strrchr (&ip_addr[0], ':');
 
 	if (port_p == 0) 
 	{
@@ -207,12 +207,12 @@ inline const tstring& inet_address::toString( ) const
 		return to_string_;
 	}
 
-	to_string_ = ipstr;
+	to_string_ = toTstring(ipstr);
 
-	char tmp[ 100 ] = "";
-	_itoa_s( port(), tmp, 100, 10);
+	tchar tmp[ 100 ] = _T("");
+	string_traits<tstring::value_type>::itoa( port(), tmp, 100, 10);
 
-	to_string_ += ':';
+	to_string_ +=_T( ':');
 	to_string_ += tmp;
 	return to_string_;
 }

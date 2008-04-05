@@ -64,10 +64,13 @@ inline tstring lastError( )
 	return get_last_error( ::GetLastError() );
 }
 
+
+#pragma warning(disable: 4996)
 inline tstring get_c_error( int e )
 {
 	return _tcserror( e );
 }
+#pragma warning(default: 4996)
 
 inline tstring get_c_error()
 {

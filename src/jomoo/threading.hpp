@@ -17,24 +17,24 @@
 #include "threading/thread_semaphore.h"
 #include "threading/event.h"
 
-_jomoo_begin
+_thread_begin
 
 typedef thread_mutex mutex;
 typedef thread_semaphore semaphore;
 
-_jomoo_end
+_thread_end
 
 #else
 
 #include "null_mutex.h"
 #include "null_semaphore.h"
 
-_jomoo_begin
+_thread_begin
 
 typedef null_mutex mutex;
 typedef null_semaphore semaphore;
 
-_jomoo_end
+_thread_end
 
 #endif //JOMOO_MT
 

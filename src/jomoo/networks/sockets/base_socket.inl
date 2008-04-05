@@ -13,7 +13,7 @@ LPFN_GETACCEPTEXSOCKADDRS base_socket::__getacceptexsockaddrs = 0;
 
 JOMOO_INLINE base_socket::base_socket (void)
 : handle_ (INVALID_SOCKET )
-, toString_( "INVALID_SOCKET" )
+, toString_( _T("INVALID_SOCKET" ))
 
 {
 }
@@ -23,7 +23,7 @@ JOMOO_INLINE base_socket::base_socket (int protocol_family,
 					int protocol,
                     int reuse_addr)
 : handle_ (INVALID_SOCKET )
-, toString_( "INVALID_SOCKET" )
+, toString_( _T("INVALID_SOCKET") )
 {
   this->open (protocol_family,
 				  type, 
@@ -188,9 +188,9 @@ JOMOO_INLINE bool base_socket::poll( const TIMEVAL& time_val, int mode)
 	FD_ZERO( &socket_set );
 	FD_SET(get_handle(), &socket_set );
 
-	return ( 1 == ::select( 0, (mode == _networks select_mode::select_read)?&socket_set:NULL
-		, (mode == select_mode::select_write)?&socket_set:NULL
-		, (mode == select_mode::select_error)?&socket_set:NULL
+	return ( 1 == ::select( 0, (mode == select_read)?&socket_set:NULL
+		, (mode == select_write)?&socket_set:NULL
+		, (mode == select_error)?&socket_set:NULL
 		, &time_val ) );
 }
 
@@ -198,12 +198,15 @@ JOMOO_INLINE const tstring& base_socket::toString() const
 {
   if( INVALID_SOCKET == handle_)
   {
-	  toString_ = "INVALID_SOCKET";
+	  toString_ = _T("INVALID_SOCKET" );
   }
   else
   {
 	  tstring::value_type tmp[1024];
+ #pragma warning(disable: 4244)
 	  string_traits< tstring::value_type >::itoa( handle_, tmp, 1024, 10 );
+ #pragma warning(default: 4244)
+
 	  toString_ = tmp;
   }
   return toString_;

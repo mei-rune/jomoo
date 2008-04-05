@@ -12,8 +12,8 @@
 #    define JOMOO_Export_C extern "C"  __declspec (dllimport)
 #  endif /* JOMOO_HAS_DLL */
 #else /* JOMOO_HAS_DLL == 1 */
-#  define JOMOO_Export
-#  define JOMOO_Export_C
+#  define JOMOO_Export		
+#  define JOMOO_Export_C	
 #endif /* JOMOO_HAS_DLL == 1 */
 
 #endif /* _JOMOO_EXPORT_H */

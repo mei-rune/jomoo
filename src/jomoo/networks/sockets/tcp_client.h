@@ -222,8 +222,26 @@ private:
   base_socket socket_;
 };
 
+inline tostream& operator<<( tostream& target, const tcp_client& client )
+{
+  if( client.is_good() )
+  {
+	  target << _T("tcp_client[ ")
+		  <<  client.socket().get_handle() 
+		  << _T(":") << client.local_addr()
+		  << _T("<==>")<< client.remote_addr()
+		  << _T("|blocking=") << client.blocking()
+		  << _T("]" );
+  }
+  else
+  {
+	  target << _T("tcp_client[ disconnect ]" );
+  }
+  
+  return target;
+}
 
-#if defined (JOMOO_INLINE_FUNCTIONS)
+#if defined (JOMOO_HAS_INLINED)
 #include "tcp_client.inl"
 #endif
 

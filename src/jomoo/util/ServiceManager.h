@@ -30,15 +30,15 @@ public:
 	 * @param[ in ] args Win32 服务的参数
 	 * @return 成功返回0,否则返回非0
      */
-	int installService( const std::string& name, const std::string& display, 
-		const std::string& executable,const std::vector<std::string>& args);
+	int installService( const tstring& name, const tstring& display, 
+		const tstring& executable,const std::vector<tstring>& args);
 
     /**
      * 卸载一个 Win32 服务
 	 * @param[ in ] name Win32 服务的名称
 	 * @return 成功返回0,否则返回非0
 	 */
-    int uninstallService(const std::string& name );
+    int uninstallService(const tstring& name );
 
     /**
      * 启动一个 Win32 服务
@@ -46,20 +46,20 @@ public:
 	 * @param[ in ] args Win32 服务的参数
 	 * @return 成功返回0,否则返回非0
      */
-	int startService(const std::string& name, const std::vector<std::string>& args);
+	int startService(const tstring& name, const std::vector<tstring>& args);
 
     /**
      * 停止一个 Win32 服务
 	 * @param[ in ] name Win32 服务的名称
 	 * @return 成功返回0,否则返回非0
      */
-    int stopService(const std::string& name);
+    int stopService(const tstring& name);
 
 private:
 
 	bool waitForServiceState(SC_HANDLE hService, DWORD pendingState, SERVICE_STATUS& status);
 
-	void showServiceStatus(const std::string& msg, SERVICE_STATUS& status);
+	void showServiceStatus(const tstring& msg, SERVICE_STATUS& status);
 
 	logging::log_ptr logger_;
 };

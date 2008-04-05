@@ -31,9 +31,9 @@ typedef WSABUF iovec;
 namespace OS
 {
 
-# if defined (JOMOO_INLINE_FUNCTIONS)
+# if defined (OS_HAS_INLINED)
 #   include "os_networks.inl"
-# endif /* JOMOO_HAS_INLINED_OSCALLS */
+# endif /* OS_HAS_INLINED */
 
 };
 

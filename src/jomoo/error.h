@@ -9,22 +9,22 @@
 # pragma once
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
-#define IllegalArgumentError "无效参数"
-#define RuntimeError "运行时错误"
-#define OutOfRangeError "超出范围"
-#define LockError "锁出错"
-#define CtrlCHandlerError "设置Ctrl+C出错"
-#define NetworkError "网络错误"
-#define InvalidPointerError "无效指针"
-#define LengthError  "无效长度"
-#define EOFError "已经到结尾了"
-#define PluginError "插件错误"
-#define URLError "URL分析出错"
-#define CastError "转换失败"
-#define NullError "空指针"
-#define NoFindError  "没有找到"
-#define _ExistError  "已经存在"
-#define SystemError "系统错误"
+#define IllegalArgumentError	_T("无效参数")
+#define RuntimeError			_T("运行时错误")
+#define OutOfRangeError			_T("超出范围")
+#define LockError				_T("锁出错")
+#define CtrlCHandlerError		_T("设置Ctrl+C出错")
+#define NetworkError			_T("网络错误")
+#define InvalidPointerError		_T("无效指针")
+#define LengthError				_T("无效长度")
+#define EOFError				_T("已经到结尾了")
+#define PluginError				_T("插件错误")
+#define URLError				_T("URL分析出错")
+#define CastError				_T("转换失败")
+#define NullError				_T("空指针")
+#define NoFindError				_T("没有找到")
+#define _ExistError				_T("已经存在")
+#define SystemError				_T("系统错误")
 
 #define  ERR_SYS  -200 //  
 #define  ERR_ARG  -201
@@ -34,7 +34,7 @@
 #define  ERR_MAXMSGLEN	-205
 #define  ERR_HEADERLENGTH -206
 #define  ERR_HEADERTYPE -207
-#define  ERR_MEMORY -208
+#define  ERR_jomoo_memory -208
 
 #define ERR_PARAMETER -400
 

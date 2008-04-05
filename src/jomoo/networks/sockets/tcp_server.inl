@@ -3,7 +3,7 @@
 JOMOO_INLINE tcp_server::tcp_server (void)
 : socket_(AF_INET , SOCK_STREAM, IPPROTO_TCP )
 {
-	toString_ = "tcp_server - " + socket_.toString();
+	toString_ = _T("tcp_server - ") + socket_.toString();
 }
 
 JOMOO_INLINE tcp_server::~tcp_server (void)
@@ -32,10 +32,12 @@ JOMOO_INLINE bool tcp_server::is_good() const
 
 JOMOO_INLINE bool tcp_server::bind( const inet_address& addr)
 {
+#pragma warning(disable: 4267)
 	if ( SOCKET_ERROR != ::bind( socket_.get_handle(), addr.addr(), addr.size() ) )
+#pragma warning(default: 4267)
 	{
 		bind_addr_ = addr;
-		toString_ = "tcp_server " + socket_.toString() + " 绑定在 " + bind_addr_.toString();
+		toString_ = _T("tcp_server ") + socket_.toString() + _T(" 绑定在 ") + bind_addr_.toString();
 		return true;
 	}
 	return false;
@@ -45,7 +47,7 @@ JOMOO_INLINE bool tcp_server::listen( int backlog )
 {
 	if( SOCKET_ERROR != ::listen( socket_.get_handle(), backlog ) )
 	{
-		toString_ = "tcp_server " + socket_.toString() + " 监听在 " + bind_addr_.toString();
+		toString_ = _T("tcp_server ") + socket_.toString() + _T(" 监听在 ") + bind_addr_.toString();
 		return true;
 	}
 	return false;
@@ -53,7 +55,9 @@ JOMOO_INLINE bool tcp_server::listen( int backlog )
 
 JOMOO_INLINE bool tcp_server::accept( tcp_client& accepted)
 {
+#pragma warning(disable: 4267)
 	int len = accepted.remote_addr().size();
+#pragma warning(default: 4267)
 	accepted.socket().set_handle( ::accept( socket_.get_handle(),( sockaddr* ) accepted.remote_addr().addr(),&len ) );
 	return accepted.is_good();
 }
@@ -66,7 +70,9 @@ JOMOO_INLINE bool tcp_server::accept(tcp_client& accepted
 						, JOMOO_OVERLAPPED& overlapped )
 {
 	DWORD bytesReceived = 0;
+#pragma warning(disable: 4267)
 	return ( TRUE == base_socket::__acceptex( socket_.get_handle(), accepted.socket().get_handle(),data_buffer, data_len, local_addr_len, remote_addr_len, &bytesReceived, &overlapped ));
+#pragma warning(default: 4267)
 }
 
 JOMOO_INLINE void tcp_server::swap( tcp_server& r)

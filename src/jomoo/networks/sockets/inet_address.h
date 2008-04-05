@@ -78,13 +78,13 @@ private:
 	mutable tstring ip_string_;
 };
 
-inline std::ostream& operator<<( std::ostream& target, const inet_address& addr )
+inline tostream& operator<<( tostream& target, const inet_address& addr )
 {
-	target << addr.toString();
+	target << toTstring(addr.toString() );
 	return target;
 }
 
-#if defined (JOMOO_INLINE_FUNCTIONS)
+#if defined (JOMOO_HAS_INLINED)
 #include "inet_address.inl"
 #endif
 

@@ -16,7 +16,7 @@ JOMOO_INLINE bool tcp_client::readable()
 	TIMEVAL time_val;
 	time_val.tv_sec = 0;
 	time_val.tv_usec = 0;
-	return socket_.poll( time_val, select_mode::select_read );
+	return socket_.poll( time_val, select_read );
 }
 
 JOMOO_INLINE bool tcp_client::writable()
@@ -24,7 +24,7 @@ JOMOO_INLINE bool tcp_client::writable()
 	TIMEVAL time_val;
 	time_val.tv_sec = 0;
 	time_val.tv_usec = 0;
-	return socket_.poll( time_val, select_mode::select_write );
+	return socket_.poll( time_val, select_write );
 }
 
 JOMOO_INLINE void tcp_client::blocking(bool val)
@@ -126,8 +126,9 @@ JOMOO_INLINE bool tcp_client::send_n( const char* buf, size_t length)
 {
 	do
 	{
+ #pragma warning(disable: 4267)
 		int n = ::send( socket_.get_handle(), buf, length, 0 ); 
-
+ #pragma warning(default: 4267)
 		if( 0 >= n)
 			return false;
 
@@ -142,7 +143,9 @@ JOMOO_INLINE bool tcp_client::recv_n( char* buf, size_t length)
 {
 	do
 	{
+ #pragma warning(disable: 4267)
 		int n = ::recv( socket_.get_handle(), buf, length, 0 ); 
+ #pragma warning(default: 4267)
 
 		if( 0 >= n)
 			return false;
@@ -162,7 +165,9 @@ JOMOO_INLINE bool tcp_client::sendv_n( const iovec* wsaBuf, size_t size)
 	do
 	{
 		DWORD numberOfBytesSent =0;
+ #pragma warning(disable: 4267)
 		if( SOCKET_ERROR == ::WSASend( socket_.get_handle(), p, size, &numberOfBytesSent,0,0 , 0 ) )
+ #pragma warning(default: 4267)
 			return false;
 
 		do
@@ -191,7 +196,9 @@ JOMOO_INLINE bool tcp_client::recvv_n( iovec* wsaBuf, size_t size)
 	do
 	{
 		DWORD numberOfBytesRecvd =0;
+ #pragma warning(disable: 4267)
 		if( SOCKET_ERROR == ::WSARecv( socket_.get_handle(), p, size, &numberOfBytesRecvd,0,0 , 0 ) )
+ #pragma warning(default: 4267)
 			return false;
 
 		do
@@ -318,7 +325,9 @@ JOMOO_INLINE bool tcp_client::connect( const inet_address& addr
 		return false;
 
 	DWORD sendbytes = 0;
+#pragma warning(disable: 4267)
 	return (TRUE == base_socket::__connectex( socket_.get_handle(), addr.addr(), addr.size(), NULL, 0, &sendbytes, &overlapped));
+ #pragma warning(default: 4267)
 }
 
 JOMOO_INLINE bool tcp_client::connect( const inet_address& addr
@@ -330,5 +339,8 @@ JOMOO_INLINE bool tcp_client::connect( const inet_address& addr
 		return false;
 
 	 DWORD sendbytes = 0;
+ #pragma warning(disable: 4267)
 	 return (TRUE == base_socket::__connectex( socket_.get_handle(), addr.addr(), addr.size(), (void*)send_buffer, send_data_len, &sendbytes, &overlapped));
+ #pragma warning(default: 4267)
+
 }
