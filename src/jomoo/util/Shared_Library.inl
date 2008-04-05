@@ -6,7 +6,7 @@
 
 _jomoo_begin
 
-inline Share_Library::Share_Library( const tchar* name ,int close_on_destruction )
+inline shared_library::shared_library( const tchar* name ,int close_on_destruction )
 : dll_handle_( NULL )
 , close_on_destruction_( close_on_destruction )
 , lpMsgBuf( 0 )
@@ -24,7 +24,7 @@ inline Share_Library::Share_Library( const tchar* name ,int close_on_destruction
 }
 
 
-inline Share_Library::Share_Library( const tstring& name ,int close_on_destruction )
+inline shared_library::shared_library( const tstring& name ,int close_on_destruction )
 : dll_handle_( NULL )
 , close_on_destruction_( close_on_destruction )
 , lpMsgBuf( 0 )
@@ -41,21 +41,21 @@ inline Share_Library::Share_Library( const tstring& name ,int close_on_destructi
 	}
 }
 
-inline Share_Library::Share_Library( int close_on_destruction )
+inline shared_library::shared_library( int close_on_destruction )
 : dll_handle_( NULL )
 , close_on_destruction_( close_on_destruction )
 , lpMsgBuf( 0 )
 {
 }
 
-inline Share_Library::~Share_Library(void)
+inline shared_library::~shared_library(void)
 {
 	close();
 	if( lpMsgBuf != 0 )
 		LocalFree( lpMsgBuf );
 }
 
-inline int Share_Library::open( const tchar* name ,int close_on_destruction )
+inline int shared_library::open( const tchar* name ,int close_on_destruction )
 {
 	dll_handle_ = LoadLibrary( name );
 	if( dll_handle_ == NULL )
@@ -64,7 +64,7 @@ inline int Share_Library::open( const tchar* name ,int close_on_destruction )
 	return 0;
 }
 
-inline int Share_Library::open( const tstring& name ,int close_on_destruction )
+inline int shared_library::open( const tstring& name ,int close_on_destruction )
 {
 	dll_handle_ = LoadLibrary( name.c_str() );
 	if( dll_handle_ == NULL )
@@ -74,7 +74,7 @@ inline int Share_Library::open( const tstring& name ,int close_on_destruction )
 }
 
 
-inline int Share_Library::close (void)
+inline int shared_library::close (void)
 {
 	if( close_on_destruction_ == 0 )
 		return 0;
@@ -84,7 +84,7 @@ inline int Share_Library::close (void)
 	return -1;
 }
 
-inline void *Share_Library::symbol (const tchar *symbol_name, int ignore_errors )
+inline void *shared_library::symbol (const tchar *symbol_name, int ignore_errors )
 {
 	if( dll_handle_ == NULL )
 		return 0;
@@ -92,7 +92,7 @@ inline void *Share_Library::symbol (const tchar *symbol_name, int ignore_errors 
 	return GetProcAddress( dll_handle_,symbol_name );
 }
 
-inline void *Share_Library::symbol (const tstring& symbol_name, int ignore_errors )
+inline void *shared_library::symbol (const tstring& symbol_name, int ignore_errors )
 {
 	if( dll_handle_ == NULL )
 		return 0;
@@ -100,7 +100,7 @@ inline void *Share_Library::symbol (const tstring& symbol_name, int ignore_error
 	return GetProcAddress( dll_handle_,symbol_name.c_str() );
 }
 
-inline const tchar *Share_Library::error (void) const
+inline const tchar *shared_library::error (void) const
 {
 	if( lpMsgBuf != 0 )
 		LocalFree( lpMsgBuf );
@@ -123,12 +123,12 @@ inline const tchar *Share_Library::error (void) const
 	return (const char* ) lpMsgBuf;
 }
 
-inline BT_SHLIB_HANDLE Share_Library::get_handle ( ) const
+inline BT_SHLIB_HANDLE shared_library::get_handle ( ) const
 {
 	return dll_handle_;
 }
 
-inline void Share_Library::set_handle (BT_SHLIB_HANDLE handle, int close_on_destruction )
+inline void shared_library::set_handle (BT_SHLIB_HANDLE handle, int close_on_destruction )
 {
 	close();
 	dll_handle_ = handle;
