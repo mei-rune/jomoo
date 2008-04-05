@@ -25,7 +25,7 @@ public:
 	  , owner_ ( false )
   {
 	if( !this->lock () && !nothrow )
-		  ThrowException1( LockException , "进入锁失败" );
+		  ThrowException1( LockException , _T("进入锁失败") );
   }
 
   guard (LOCK &l, bool is_lock, bool nothrow )
@@ -33,7 +33,7 @@ public:
   , owner_ ( false )
   {
 	if (is_lock && !this->lock () && !nothrow )
-			ThrowException1( LockException , "进入锁失败" );
+			ThrowException1( LockException , _T("进入锁失败") );
   }
 
   //guard (LOCK &l, bool block, bool become_owner, bool nothrow )

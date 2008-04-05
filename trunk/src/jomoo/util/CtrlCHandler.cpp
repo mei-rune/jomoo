@@ -11,12 +11,12 @@
 #   include <windows.h>
 #endif
 
-#ifdef _MEMORY_DEBUG
+#ifdef _jomoo_memory_DEBUG
 #undef THIS_FILE
 #define new	   DEBUG_NEW  
 #define malloc DEBUG_MALLOC  
 static char THIS_FILE[] = __FILE__;  
-#endif // _MEMORY_DEBUG
+#endif // _jomoo_memory_DEBUG
 
 _jomoo_begin
 

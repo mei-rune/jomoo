@@ -20,8 +20,6 @@ _thread_begin
 	
 typedef uintptr_t thread_t;
 
-namespace ThreadOP
-{
 	inline void yield()
 	{
 		::Sleep( 0 );
@@ -32,7 +30,7 @@ namespace ThreadOP
 		::Sleep( millis );
 	}
 
-	void join( thread_t t )
+	inline void join_thread( thread_t t )
 	{
 		::WaitForSingleObject(reinterpret_cast<HANDLE>(t), INFINITE);
 	}
@@ -42,11 +40,13 @@ namespace ThreadOP
 	{
 		typedef thread_closure_0<F> closure_type;
 
-		return ::_beginthread( closure_type::start_routine, 0, JOMOO_NEW( getPool(), closure_type, (f,nm) ) );
+		pool_ptr pl = getPool();
+
+		return ::_beginthread( closure_type::start_routine, 0, JOMOO_NEW( pl, closure_type, (pl, f, nm) ) );
 	}
 
 	template<typename F, typename P>
-	inline thread_t create_thread( const F& f, const P& x, const char* nm = 0)
+	inline thread_t create_thread( const F& f, const P& x, const char* nm)
 	{
 		typedef thread_closure_1<F,P> closure_type;
 
@@ -56,23 +56,22 @@ namespace ThreadOP
 	}
 	
 	template<typename F, typename P1, typename P2>
-	inline thread_t create_thread( const F& f, const P1& x1, const P2& x2, const char* nm = 0)
+	inline thread_t create_thread( const F& f, const P1& x1, const P2& x2, const char* nm)
 	{
-		typedef thread_closure_1<F,P1,P2> closure_type;
+		typedef thread_closure_2<F,P1,P2> closure_type;
 
 		pool_ptr pl = getPool();
 		return ::_beginthread( closure_type::start_routine, 0, JOMOO_NEW( pl, closure_type, (pl, f, x1, x2, nm) ) );
 	}
 
 	template<typename F, typename P1, typename P2, typename P3>
-	inline thread_t create_thread( const F& f, const P1& x1, const P2& x2, const P3& x3, const char* nm = 0)
+	inline thread_t create_thread( const F& f, const P1& x1, const P2& x2, const P3& x3, const char* nm )
 	{
-		typedef thread_closure_1<F,P1,P2,P3> closure_type;
+		typedef thread_closure_3<F,P1,P2,P3> closure_type;
 
 		pool_ptr pl = getPool();
 		return ::_beginthread( closure_type::start_routine, 0, JOMOO_NEW( pl, closure_type, (pl, f, x1, x2, x3, nm) ) );
 	}
-}
 
 _thread_end
 

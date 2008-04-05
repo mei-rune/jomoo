@@ -23,10 +23,10 @@ public:
 	{
 	}
 
-    const tchar* getFile() const
+    const char* getFile() const
 	{
 		if (!fSrcFile)
-			return _T("");
+			return "";
 		return fSrcFile;
 	}
 
@@ -35,7 +35,11 @@ public:
 		return fSrcLine;
 	}
 
-    void setPosition(const tchar* const file, size_t line);
+    void setPosition(const char* const file, size_t line)
+	{
+		fSrcFile = file;
+		fSrcLine = line;
+	}
 
     Exception()
 		: std::runtime_error( "<δ֪�쳣>" )
@@ -46,21 +50,21 @@ public:
 	}
 
 	Exception( const tstring& message )
-		: std::runtime_error( message )
+		: std::runtime_error( toNarrowString(message) )
 		, fSrcFile( 0 )
 	    , fSrcLine( 0 )
 	{
 	}
 
-	Exception(const tchar* const srcFile, size_t srcLine , const tstring& message )
-		: std::runtime_error( message )
+	Exception(const char* const srcFile, size_t srcLine , const tstring& message )
+		: std::runtime_error( toNarrowString(message) )
 		, fSrcFile( srcFile )
 	    , fSrcLine(srcLine)
 	{
 	}
 
-	Exception(const tchar* const srcFile, size_t srcLine , const tstring& message , const Exception& e )
-		: std::runtime_error( message + tstring( ",") + e.what() )
+	Exception(const char* const srcFile, size_t srcLine , const tstring& message , const Exception& e )
+		: std::runtime_error(  toNarrowString(message) + "," + e.what() )
 		, fSrcFile( srcFile )
 		, fSrcLine(srcLine)
 	{
@@ -72,10 +76,10 @@ public:
 		throw e;
 	}
 
-	void dumpFile( std::ostream& Target ) const
+	void dumpFile( tostream& target ) const
 	{
-			Target << _T( "[ file:" )
-			<< getFile()
+			target << _T( "[ file:" )
+			<< toTstring( getFile() )
 			<< _T( " line:" )
 			<< ( int ) getLine()
 			<< _T(" ] ");
@@ -83,7 +87,7 @@ public:
 
 	virtual Exception* clone() = 0;
 	virtual void rethrow() = 0;
-	virtual void print(std::ostream&) const = 0;
+	virtual void print(tostream&) const = 0;
 
  #if !_HAS_EXCEPTIONS
 protected:
@@ -94,7 +98,7 @@ protected:
  #endif /* _HAS_EXCEPTIONS */
 
 protected :
-    const tchar*     fSrcFile;
+    const char*     fSrcFile;
     size_t    fSrcLine;
 };
 
@@ -104,7 +108,7 @@ class theType : public Exception \
 { \
 public: \
  \
-    theType(const   tchar* const         srcFile \
+    theType(const   char* const         srcFile \
             , size_t        srcLine \
 			, const tstring & m				\
 			, const Exception& e				\
@@ -113,7 +117,7 @@ public: \
     { \
          \
     } \
-	theType(const   tchar* const         srcFile \
+	theType(const   char* const         srcFile \
             , size_t        srcLine \
 			, const tstring & m				\
             ) : \
@@ -121,7 +125,7 @@ public: \
     { \
          \
     } \
-	theType(const   tchar* const         srcFile \
+	theType(const   char* const         srcFile \
             , size_t        srcLine \
             ) : \
         Exception(srcFile, srcLine, msg ) \
@@ -148,7 +152,7 @@ public: \
 	{														\
 		Raise( *this );										\
 	}														\
-	virtual void print(std::ostream& Target ) const 		\
+	virtual void print(tostream& Target ) const 		\
 	{														\
 			Target << MAKE_STRING( theType )				\
 			<< what()										\

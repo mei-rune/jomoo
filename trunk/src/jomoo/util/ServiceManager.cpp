@@ -8,10 +8,10 @@ ServiceManager::ServiceManager( logging::log_ptr logger )
 {
 }
 
-int ServiceManager::installService(const std::string& name, const std::string& display, const std::string& executable,
-								   const std::vector<std::string>& args)
+int ServiceManager::installService(const tstring& name, const tstring& display, const tstring& executable,
+								   const std::vector<tstring>& args)
 {
-	std::string disp, exec;
+	tstring disp, exec;
 
     disp = display;
     if(disp.empty())
@@ -25,7 +25,7 @@ int ServiceManager::installService(const std::string& name, const std::string& d
         //
         // 使用本执行文件
         //
-        char buf[_MAX_PATH];
+        tchar buf[_MAX_PATH];
         if(GetModuleFileName(NULL, buf, _MAX_PATH) == 0)
         {
             LOG_ERROR( logger_, _T("没有执行文件名") );
@@ -37,12 +37,12 @@ int ServiceManager::installService(const std::string& name, const std::string& d
     //
     // 如果有空格的话加上引号
     //
-	std::string command;
-	if(executable.find(' ') != std::string::npos)
+	tstring command;
+	if(executable.find( _T(' ')) != tstring::npos)
     {
-        command.push_back('"');
+        command.push_back( _T('"'));
         command.append(exec);
-        command.push_back('"');
+        command.push_back( _T('"'));
     }
     else
     {
@@ -52,15 +52,15 @@ int ServiceManager::installService(const std::string& name, const std::string& d
 	//
 	// 拼上选项字符串
 	//
-	for(std::vector<std::string>::const_iterator p = args.begin(); p != args.end(); ++p)
+	for(std::vector<tstring>::const_iterator p = args.begin(); p != args.end(); ++p)
     {
-        command.push_back(' ');
+        command.push_back( _T(' '));
 
-		if(p->find_first_of(" \t\n\r") != std::string::npos)
+		if(p->find_first_of( _T(" \t\n\r") ) != tstring::npos)
         {
-            command.push_back('"');
+            command.push_back( _T('"'));
             command.append(*p);
-            command.push_back('"');
+            command.push_back( _T('"'));
         }
         else
         {
@@ -91,7 +91,7 @@ int ServiceManager::installService(const std::string& name, const std::string& d
 
     if(hService == NULL)
     {
-        LOG_INFO( logger_, _T("不能安装服务[") << name << _T( "]") );
+        LOG_INFO( logger_, _T("不能安装服务[") << toTstring(name) << _T( "]") );
         CloseServiceHandle(hSCM);
         return -1;
     }
@@ -102,7 +102,7 @@ int ServiceManager::installService(const std::string& name, const std::string& d
     return 0;
 }
 
-int ServiceManager::uninstallService(const std::string& name)
+int ServiceManager::uninstallService(const tstring& name)
 {
     SC_HANDLE hSCM = OpenSCManager(NULL, NULL, SC_MANAGER_ALL_ACCESS);
     if(hSCM == NULL)
@@ -114,7 +114,7 @@ int ServiceManager::uninstallService(const std::string& name)
     SC_HANDLE hService = OpenService(hSCM, name.c_str(), SC_MANAGER_ALL_ACCESS);
     if(hService == NULL)
     {
-        LOG_INFO( logger_, _T("不能打开服务[") << name << _T( "]"));
+        LOG_INFO( logger_, _T("不能打开服务[") << toTstring(name) << _T( "]"));
         CloseServiceHandle(hSCM);
         return -1;
     }
@@ -123,7 +123,7 @@ int ServiceManager::uninstallService(const std::string& name)
 
     if(!b)
     {
-	    LOG_INFO( logger_, _T("不能卸载服务[") << name << _T( "]"));
+	    LOG_INFO( logger_, _T("不能卸载服务[") << toTstring(name) << _T( "]"));
     }
 
     CloseServiceHandle(hSCM);
@@ -132,7 +132,7 @@ int ServiceManager::uninstallService(const std::string& name)
 	return ( b?0:-1);
 }
 
-int ServiceManager::startService(const std::string& name, const std::vector<std::string>& args)
+int ServiceManager::startService(const tstring& name, const std::vector<tstring>& args)
 {
     SC_HANDLE hSCM = OpenSCManager(NULL, NULL, SC_MANAGER_ALL_ACCESS);
     if(hSCM == NULL)
@@ -144,7 +144,7 @@ int ServiceManager::startService(const std::string& name, const std::vector<std:
     SC_HANDLE hService = OpenService(hSCM, name.c_str(), SC_MANAGER_ALL_ACCESS);
     if(hService == NULL)
     {
-        LOG_INFO( logger_, _T("不能打开服务[") << name << _T( "]"));
+        LOG_INFO( logger_, _T("不能打开服务[") << toTstring(name) << _T( "]"));
         CloseServiceHandle(hSCM);
         return -1;
     }
@@ -153,30 +153,30 @@ int ServiceManager::startService(const std::string& name, const std::vector<std:
 	// 将字符串拼成 char* []形式
     //
     const size_t argc = args.size();
-    LPCSTR* argv = new LPCSTR[argc];
+    const char** argv = new const char*[argc];
     size_t i = 0;
-	for(std::vector<std::string>::const_iterator p = args.begin(); p != args.end(); ++p)
+	for(std::vector<tstring>::const_iterator p = args.begin(); p != args.end(); ++p)
     {
-        argv[i++] = strdup(p->c_str());
+		argv[i++] = string_traits<char>::strdup( toNarrowString(*p).c_str());
     }
 
     //
     // 启动服务
     //
-    BOOL b = StartService(hService, ( DWORD )argc, argv);
+    BOOL b = StartServiceA(hService, ( DWORD )argc, argv);
 
     //
     // 释放内存
     //
     for(i = 0; i < argc; ++i)
     {
-        free(const_cast<char*>(argv[i]));
+        string_traits<char>::free((char*)(argv[i]));
     }
     delete[] argv;
 
     if(!b)
     {
-		LOG_INFO( logger_, _T("不能启动服务[") << name << _T( "]"));
+		LOG_INFO( logger_, _T("不能启动服务[") << toTstring(name) << _T( "]"));
         CloseServiceHandle(hService);
         CloseServiceHandle(hSCM);
         return -1;
@@ -190,7 +190,7 @@ int ServiceManager::startService(const std::string& name, const std::vector<std:
     SERVICE_STATUS status;
     if(!waitForServiceState(hService, SERVICE_START_PENDING, status))
     {
-		LOG_INFO( logger_, _T("检测服务[") << name << _T( "]状态，发生错误。"));
+		LOG_INFO( logger_, _T("检测服务[") << toTstring(name) << _T( "]状态，发生错误。"));
         CloseServiceHandle(hService);
         CloseServiceHandle(hSCM);
         return -1;
@@ -212,7 +212,7 @@ int ServiceManager::startService(const std::string& name, const std::vector<std:
     return 0;
 }
 
-int ServiceManager::stopService(const std::string& name)
+int ServiceManager::stopService(const tstring& name)
 {
     SC_HANDLE hSCM = OpenSCManager(NULL, NULL, SC_MANAGER_ALL_ACCESS);
     if(hSCM == NULL)
@@ -224,7 +224,7 @@ int ServiceManager::stopService(const std::string& name)
     SC_HANDLE hService = OpenService(hSCM, name.c_str(), SC_MANAGER_ALL_ACCESS);
     if(hService == NULL)
     {
-        LOG_INFO( logger_, _T("不能打开服务[") << name << _T( "]"));
+        LOG_INFO( logger_, _T("不能打开服务[") << toTstring(name) << _T( "]"));
         CloseServiceHandle(hSCM);
         return -1;
     }
@@ -234,7 +234,7 @@ int ServiceManager::stopService(const std::string& name)
 
     if(!b)
     {
-		LOG_INFO( logger_, _T("不能停止服务[") << name << _T( "]"));
+		LOG_INFO( logger_, _T("不能停止服务[") << toTstring(name) << _T( "]"));
         CloseServiceHandle(hSCM);
         CloseServiceHandle(hService);
         return -1;
@@ -247,7 +247,7 @@ int ServiceManager::stopService(const std::string& name)
     //
     if(!waitForServiceState(hService, SERVICE_STOP_PENDING, status))
     {
-        LOG_INFO( logger_, _T("检测服务[") << name << _T( "]状态，发生错误。"));
+        LOG_INFO( logger_, _T("检测服务[") << toTstring(name) << _T( "]状态，发生错误。"));
         CloseServiceHandle(hService);
         CloseServiceHandle(hSCM);
         return -1;
@@ -335,9 +335,9 @@ bool ServiceManager::waitForServiceState(SC_HANDLE hService, DWORD pendingState,
     return true;
 }
 
-void ServiceManager::showServiceStatus(const std::string& msg, SERVICE_STATUS& status)
+void ServiceManager::showServiceStatus(const tstring& msg, SERVICE_STATUS& status)
 {
-	std::string state;
+	tstring state;
     switch(status.dwCurrentState)
     {
     case SERVICE_STOPPED:
@@ -362,7 +362,7 @@ void ServiceManager::showServiceStatus(const std::string& msg, SERVICE_STATUS& s
 	state = _T( "已暂停");
 	break;
     default:
-	state = "未知";
+	state = _T("未知");
 	break;
     }
 

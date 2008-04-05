@@ -150,7 +150,11 @@ inline tstring toString( T t )
 template< typename T >
 inline tstring toString( const T& t )
 {
+ #pragma warning(disable: 4267)
+ #pragma warning(disable: 4244)
 	return detail::to_string_t( t );
+ #pragma warning(default: 4244)
+ #pragma warning(default: 4267)
 }
 
 #endif

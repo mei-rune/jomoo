@@ -12,7 +12,7 @@
 
 #define _thread_begin _jomoo_begin
 #define _thread_end _jomoo_end
-#define _thread _jomoo
+#define _jomoo_thread _jomoo
 
 #ifdef JOMOO_MT
 #define JOMOO_MUTEX_MUTABLE( x ) mutable mutex x

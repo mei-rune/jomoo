@@ -112,8 +112,8 @@ public :
 template< typename B
 		, typename R
 		, typename D
-		, typename P = _memory pool
-		, typename POOL = _memory Pool_T< R , P >
+		, typename P = _jomoo_memory pool
+		, typename POOL = _jomoo_memory Pool_T< R , P >
 		, template< typename S > class OP = BuilderOP
 		>
 class Builder : public D
@@ -131,7 +131,7 @@ public :
 	};
 
 	typedef Builder< B,R,D,P,POOL, OP > this_type;
-	typedef _memory auto_ptr< B, this_type, AutoFree > auto_ptr;
+	typedef _jomoo_memory auto_ptr< B, this_type, AutoFree > auto_ptr;
 
 	typedef POOL pool_type;
 
@@ -146,7 +146,7 @@ public :
 
 	B* create( )
 	{
-		_memory auto_ptr< R, pool_type > handler( pool_.malloc() , pool_ );
+		_jomoo_memory auto_ptr< R, pool_type > handler( pool_.malloc() , pool_ );
 		OP< R >::Init( handler.get() );
 		return handler.release();
 	}
@@ -154,7 +154,7 @@ public :
 	template< JOMOO_MAKE_PARAMS1( 1, typename T) >
 	B* create( JOMOO_MAKE_PARAMS2( 1, T, a) )
 	{
-		_memory auto_ptr< R, pool_type > handler( pool_.malloc() , pool_ );
+		_jomoo_memory auto_ptr< R, pool_type > handler( pool_.malloc() , pool_ );
 		OP< R >::Init( handler.get() , JOMOO_MAKE_PARAMS1( 1, a) );
 		return handler.release();
 	}
@@ -162,7 +162,7 @@ public :
 	template< JOMOO_MAKE_PARAMS1( 2, typename T) >
 	B* create( JOMOO_MAKE_PARAMS2( 2, T, a) )
 	{
-		_memory auto_ptr< R, pool_type > handler( pool_.malloc() , pool_ );
+		_jomoo_memory auto_ptr< R, pool_type > handler( pool_.malloc() , pool_ );
 		OP< R >::Init( handler.get() , JOMOO_MAKE_PARAMS1( 2, a) );
 		return handler.release();
 	}
@@ -170,7 +170,7 @@ public :
 	template< JOMOO_MAKE_PARAMS1( 3, typename T) >
 	B* create( JOMOO_MAKE_PARAMS2( 3, T, a) )
 	{
-		_memory auto_ptr< R, pool_type > handler( pool_.malloc() , pool_ );
+		_jomoo_memory auto_ptr< R, pool_type > handler( pool_.malloc() , pool_ );
 		OP< R >::Init( handler.get() , JOMOO_MAKE_PARAMS1( 3, a) );
 		return handler.release();
 	}
@@ -178,7 +178,7 @@ public :
 	template< JOMOO_MAKE_PARAMS1( 4, typename T) >
 	B* create( JOMOO_MAKE_PARAMS2( 4, T, a) )
 	{
-		_memory auto_ptr< R, pool_type > handler( pool_.malloc() , pool_ );
+		_jomoo_memory auto_ptr< R, pool_type > handler( pool_.malloc() , pool_ );
 		OP< R >::Init( handler.get() , JOMOO_MAKE_PARAMS1( 4, a) );
 		return handler.release();
 	}
@@ -186,7 +186,7 @@ public :
 		template< JOMOO_MAKE_PARAMS1( 5, typename T) >
 	B* create( JOMOO_MAKE_PARAMS2( 5, T, a) )
 	{
-		_memory auto_ptr< R, pool_type > handler( pool_.malloc() , pool_ );
+		_jomoo_memory auto_ptr< R, pool_type > handler( pool_.malloc() , pool_ );
 		OP< R >::Init( handler.get() , JOMOO_MAKE_PARAMS1( 5, a) );
 		return handler.release();
 	}
@@ -194,7 +194,7 @@ public :
 	template< JOMOO_MAKE_PARAMS1( 6, typename T) >
 	B* create( JOMOO_MAKE_PARAMS2( 6, T, a) )
 	{
-		_memory auto_ptr< R, pool_type > handler( pool_.malloc() , pool_ );
+		_jomoo_memory auto_ptr< R, pool_type > handler( pool_.malloc() , pool_ );
 		OP< R >::Init( handler.get() , JOMOO_MAKE_PARAMS1( 6, a) );
 		return handler.release();
 	}
@@ -202,7 +202,7 @@ public :
 	template< JOMOO_MAKE_PARAMS1( 7, typename T) >
 	B* create( JOMOO_MAKE_PARAMS2( 7, T, a) )
 	{
-		_memory auto_ptr< R, pool_type > handler( pool_.malloc() , pool_ );
+		_jomoo_memory auto_ptr< R, pool_type > handler( pool_.malloc() , pool_ );
 		OP< R >::Init( handler.get() , JOMOO_MAKE_PARAMS1( 7, a) );
 		return handler.release();
 	}
@@ -210,7 +210,7 @@ public :
 	template< JOMOO_MAKE_PARAMS1( 8, typename T) >
 	B* create( JOMOO_MAKE_PARAMS2( 8, T, a) )
 	{
-		_memory auto_ptr< R, pool_type > handler( pool_.malloc() , pool_ );
+		_jomoo_memory auto_ptr< R, pool_type > handler( pool_.malloc() , pool_ );
 		OP< R >::Init( handler.get() , JOMOO_MAKE_PARAMS1( 8, a) );
 		return handler.release();
 	}
@@ -218,7 +218,7 @@ public :
 	template< JOMOO_MAKE_PARAMS1( 9, typename T) >
 	B* create( JOMOO_MAKE_PARAMS2( 9, T, a) )
 	{
-		_memory auto_ptr< R, pool_type > handler( pool_.malloc() , pool_ );
+		_jomoo_memory auto_ptr< R, pool_type > handler( pool_.malloc() , pool_ );
 		OP< R >::Init( handler.get() , JOMOO_MAKE_PARAMS1( 9, a) );
 		return handler.release();
 	}
@@ -226,7 +226,7 @@ public :
 	template< JOMOO_MAKE_PARAMS1( 10, typename T) >
 	B* create( JOMOO_MAKE_PARAMS2( 10, T, a) )
 	{
-		_memory auto_ptr< R, pool_type > handler( pool_.malloc() , pool_ );
+		_jomoo_memory auto_ptr< R, pool_type > handler( pool_.malloc() , pool_ );
 		OP< R >::Init( handler.get() , JOMOO_MAKE_PARAMS1( 10, a) );
 		return handler.release();
 	}
@@ -235,7 +235,7 @@ public :
 	{
 		if( h == 0 )
 			return ;
-		_memory auto_ptr< R, pool_type > handler( dynamicCast< R, B >( h ), pool_  );
+		_jomoo_memory auto_ptr< R, pool_type > handler( dynamicCast< R, B >( h ), pool_  );
 		if( handler.get() != NULL )
 			OP< R >::Fini( handler.get() );
 	}

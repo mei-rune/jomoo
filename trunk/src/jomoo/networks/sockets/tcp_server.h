@@ -83,7 +83,24 @@ private:
 };
 
 
-#if defined (JOMOO_INLINE_FUNCTIONS)
+inline tostream& operator<<( tostream& target, const tcp_server& server )
+{
+  if( server.is_good() )
+  {
+	  target << _T("tcp_server[ ")
+		  <<  server.socket().get_handle() 
+		  << _T(":") << server.bind_addr()
+		  << _T("]" );
+  }
+  else
+  {
+	  target << _T("tcp_client[ no listen ]" );
+  }
+  
+  return target;
+}
+
+#if defined (JOMOO_HAS_INLINED)
 #include "tcp_server.inl"
 #endif
 

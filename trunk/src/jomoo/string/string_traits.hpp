@@ -195,15 +195,23 @@ struct string_traits<char_t>
 		return ::strstr( str, strSearch );
 	}
 
+	
+#pragma warning(disable: 4996)
 	inline static char_type *strtok( char_type *strToken
 		, const char_type *strDelimit )
 	{
 		return ::strtok( strToken, strDelimit );
 	}
+#pragma warning(default: 4996)
 
 	inline static char_type *strdup( const char_type *strSource )
 	{
 		return ::_strdup( strSource );
+	}
+
+	inline static void free( char_type *strSource )
+	{
+		return ::free( strSource );
 	}
 
 	///反转字符串
@@ -212,11 +220,13 @@ struct string_traits<char_t>
 		return ::_strrev( str );
 	}
 
+#pragma warning(disable: 4996)
 	inline static char_type *strset( char_type *str
 		, int c )
 	{
 		return ::_strset( str , c );
 	}
+#pragma warning(default: 4996)
 
 	inline static int strcmp(  const char_type *string1,
 		const char_type *string2 )
@@ -427,15 +437,22 @@ struct string_traits<wchar_t>
 		return ::wcsstr( str, strSearch );
 	}
 
+#pragma warning(disable: 4996)
 	inline static  char_type *strtok( char_type *strToken
 		, const char_type *strDelimit )
 	{
 		return ::wcstok( strToken, strDelimit );
 	}
+#pragma warning(default: 4996)
 
 	inline static  char_type *strdup( const char_type *strSource )
 	{
 		return ::_wcsdup( strSource );
+	}
+
+	inline static void free( char_type *strSource )
+	{
+		return ::free( strSource );
 	}
 
 	///反转字符串
@@ -444,11 +461,13 @@ struct string_traits<wchar_t>
 		return ::_wcsrev( str );
 	}
 
+#pragma warning(disable: 4996)
 	inline static  char_type *strset( char_type *str
 		, int c )
 	{
 		return ::_wcsset( str , c );
 	}
+#pragma warning(default: 4996)
 
 	inline static  int strcmp(  const char_type *string1,
 		const char_type *string2 )

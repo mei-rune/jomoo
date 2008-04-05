@@ -146,9 +146,23 @@ public:
 	static LPFN_GETACCEPTEXSOCKADDRS __getacceptexsockaddrs;
 };
 
-#if defined (JOMOO_INLINE_FUNCTIONS)
+inline tostream& operator<<( tostream& target, const base_socket& s )
+{
+  if( INVALID_SOCKET == s.get_handle())
+  {
+	  target << _T("INVALID_SOCKET" );
+  }
+  else
+  {
+	  target << s.get_handle() ;
+  }
+  
+  return target;
+}
+
+#if defined (JOMOO_HAS_INLINED)
 #include "base_socket.inl"
-#endif /* JOMOO_INLINE_FUNCTIONS */
+#endif /* JOMOO_HAS_INLINED */
 
 _networks_end
 

@@ -2,16 +2,16 @@
 
 #include "base_socket.h"
 
-#ifdef _MEMORY_DEBUG
+#ifdef _jomoo_memory_DEBUG
 #undef THIS_FILE
 #define new	   DEBUG_NEW  
 #define malloc DEBUG_MALLOC  
 static char THIS_FILE[] = __FILE__;  
-#endif // _MEMORY_DEBUG
+#endif // _jomoo_memory_DEBUG
 
 _networks_begin
 
-#if !defined (JOMOO_INLINE_FUNCTIONS)
+#if !defined (JOMOO_HAS_INLINED)
 #include "base_socket.inl"
 #endif
 
