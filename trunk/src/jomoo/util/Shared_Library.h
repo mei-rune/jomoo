@@ -1,7 +1,7 @@
 /**
  * -*- C++ -*-
  * -------------------------------------------------------------------------------
- * - ¤╭⌒╮ ╭⌒╮			         Share_Library.h,v 1.0 2005/04/27 11:42:54
+ * - ¤╭⌒╮ ╭⌒╮			         shared_library.h,v 1.0 2005/04/27 11:42:54
  *  ╱◥██◣ ╭╭ ⌒╮
  * ︱田︱田田| ╰------
  * -------------------------------------------------------------------------------
@@ -23,37 +23,37 @@ _jomoo_begin
 
 typedef HMODULE BT_SHLIB_HANDLE;
 
-class Share_Library
+class shared_library
 {
 public:
 	/**
-	 * Share_Library constructor
+	 * shared_library constructor
 	 * @param[ in ] close_on_destruction 指定在本类析构时是否关闭动态库
 	 */
-	Share_Library( int close_on_destruction = 1 );
+	shared_library( int close_on_destruction = 1 );
 
 	/**
-	 * Share_Library constructor
+	 * shared_library constructor
 	 * 载入指定的动态库
 	 * @param[ in ] name 动态库的名称
 	 * @param[ in ] close_on_destruction 指定在本类析构时是否关闭动态库
 	 * @remarks 失败时会扔出异常;
 	 */
-	Share_Library( const tchar* name ,int close_on_destruction = 1 );
+	shared_library( const tchar* name ,int close_on_destruction = 1 );
 
 	/**
-	 * Share_Library constructor
+	 * shared_library constructor
 	 * 载入指定的动态库
 	 * @param[ in ] name 动态库的名称
 	 * @param[ in ] close_on_destruction 指定在本类析构时是否关闭动态库
 	 * @remarks 失败时会扔出异常;
 	 */
-	Share_Library( const tstring& name ,int close_on_destruction = 1 );
+	shared_library( const tstring& name ,int close_on_destruction = 1 );
 
 	/**
-	 * Share_Library destructor
+	 * shared_library destructor
 	 */
-	~Share_Library(void);
+	~shared_library(void);
 
 	/**
 	 * 载入指定的动态库
