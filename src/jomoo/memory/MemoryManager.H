@@ -76,7 +76,7 @@ public:
 	 * 打印出内存池管理器的状态
 	 * @param[ in ] Target 输出流
 	 */
-	virtual void dump( std::ostream& Target ) const = 0;
+	virtual void dump( tostream& Target ) const = 0;
 
 	/**
 	 * 内存池管理器的描述
@@ -97,7 +97,7 @@ JOMOO_Export_C _jomoo_memory pool_mgr* ___getPoolManager();
  * 打印出内存池管理器的状态
  * @param[ in ] Target 输出流
  */
-JOMOO_Export_C void  ___dumpPoolManager( std::ostream& Target );
+JOMOO_Export_C void  ___dumpPoolManager( tostream& Target );
 
 /**
  * 取得默认的内存池
@@ -153,25 +153,13 @@ JOMOO_Export_C void* ___system_malloc (size_t nbytes , const char* file, size_t 
  */
 JOMOO_Export_C void ___system_free (void* block );
 
-
-//JOMOO_Export_C void* ___jomoo_memory_malloc ( _jomoo_memory pool_ptr pool, size_t nbytes , const char* file, size_t line )
-//{
-//	
-//}
-//
-//JOMOO_Export_C void* ___jomoo_memory_malloc (_jomoo_memory fixed_pool_ptr pool, const char* file, size_t line )
-//{
-//}
-
-//JOMOO_Export_C void ___jomoo_memory_free (void* block );
-
 _jomoo_memory_begin
 
 /**
  * 打印出内存池管理器的状态
  * @param[ in ] Target 输出流
  */
-inline void dumpPoolManager( std::ostream& Target )
+inline void dumpPoolManager( tostream& Target )
 {
 	___dumpPoolManager( Target );
 }

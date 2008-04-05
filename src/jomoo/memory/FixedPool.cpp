@@ -66,7 +66,7 @@ size_t FixedPool::chunk_size() const
 	return chunk_size_;
 }
 
-void FixedPool::dump( std::ostream& Target ) const
+void FixedPool::dump( tostream& Target ) const
 {
 }
 

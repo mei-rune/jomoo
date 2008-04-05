@@ -65,7 +65,7 @@ public:
 	 * 打印出内存池的状态
 	 * @param[ in ] Target 输出流
 	 */
-	virtual void dump( std::ostream& Target ) const = 0;
+	virtual void dump( tostream& Target ) const = 0;
 
 	/**
 	 * 内存池的描述
@@ -115,7 +115,7 @@ public:
 	 * 打印出内存池的状态
 	 * @param[ in ] Target 输出流
 	 */
-	virtual void dump( std::ostream& Target ) const = 0;
+	virtual void dump( tostream& Target ) const = 0;
 
 	/**
 	 * 内存池的描述

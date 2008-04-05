@@ -25,7 +25,7 @@ public:
 
 	void free (void *);
 
-	void dump( std::ostream& Target ) const;
+	void dump( tostream& Target ) const;
 
 	const tstring& toString() const;
 
