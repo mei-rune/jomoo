@@ -12,7 +12,7 @@
 # include "MemoryManager.H"
 # include "../Collections/ThreadSafePtrQueue.HPP"
 
-_memory_begin
+_jomoo_memory_begin
 
 class AutoFree
 {
@@ -116,6 +116,6 @@ inline T* get_ptr( const auto_ptr< T,V > p )
 	return p.get();
 }
 
-_memory_end
+_jomoo_memory_end
 
 #endif // AUTO_PTR_H

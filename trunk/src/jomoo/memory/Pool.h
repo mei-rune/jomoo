@@ -23,12 +23,12 @@
 # include "jomoo/string.hpp"
 # include "jomoo/exception.hpp"
 
-_memory_begin
+_jomoo_memory_begin
 
 const char pool_magic[4] = { 'p','o','o','l'};
 const int32_t pool_magic_v = *( int32_t *)pool_magic;
 
-MakeException( BadMemoryException , "分配内存块失败" );
+MakeException( BadMemoryException , _T("分配内存块失败") );
 
 /**
  * @Brief 内存池接口
@@ -144,7 +144,7 @@ typedef fixed_pool::fixed_pool_ptr fixed_pool_ptr;
 //	{	// destroy a wchar_t (do nothing)
 //	}
 
-_memory_end
+_jomoo_memory_end
 
 /**
  * new "placement" 用内存池代替系统内存分配器
@@ -152,7 +152,7 @@ _memory_end
  * @param[ in ] pool     用户内存池
  * @return 分配的内存块
  */
-inline void * operator new(size_t size , _memory pool_ptr pools)
+inline void * operator new(size_t size , _jomoo_memory pool_ptr pools)
 {
    return pools->malloc( size );
 }
@@ -162,7 +162,7 @@ inline void * operator new(size_t size , _memory pool_ptr pools)
  * @param[ in ] chunk    内存块
  * @param[ in ] pool     用户内存池
  */
-inline void   operator delete(void * chunk , _memory pool_ptr pools)
+inline void   operator delete(void * chunk , _jomoo_memory pool_ptr pools)
 {
    pools->free(chunk);
 }
@@ -173,7 +173,7 @@ inline void   operator delete(void * chunk , _memory pool_ptr pools)
  * @param[ in ] pool     用户内存池
  * @return 分配的内存块
  */
-inline void * operator new(size_t size , _memory fixed_pool_ptr pools)
+inline void * operator new(size_t size , _jomoo_memory fixed_pool_ptr pools)
 {
    ASSERT( size <= pools->chunk_size() );
    return pools->malloc();
@@ -184,21 +184,21 @@ inline void * operator new(size_t size , _memory fixed_pool_ptr pools)
  * @param[ in ] chunk    内存块
  * @param[ in ] pool     用户内存池
  */
-inline void   operator delete(void * chunk , _memory fixed_pool_ptr pools)
+inline void   operator delete(void * chunk , _jomoo_memory fixed_pool_ptr pools)
 {   
    pools->free(chunk);
 }
 
-inline void* pool_malloc( _memory fixed_pool_ptr pools ,const char* file , size_t line )
+inline void* pool_malloc( _jomoo_memory fixed_pool_ptr pools ,const char* file , size_t line )
 {
 	return pools->malloc( file,line );
 }
 
-inline void* pool_malloc( _memory pool_ptr pools ,size_t size ,const char* file , size_t line )
+inline void* pool_malloc( _jomoo_memory pool_ptr pools ,size_t size ,const char* file , size_t line )
 {
 	return pools->malloc(  size, file,line );
 }
-inline void* pool_malloc( _memory fixed_pool_ptr pools ,size_t size ,const char* file , size_t line )
+inline void* pool_malloc( _jomoo_memory fixed_pool_ptr pools ,size_t size ,const char* file , size_t line )
 {
 	return pools->malloc( file,line );
 }
@@ -207,7 +207,7 @@ inline void* pool_malloc( _memory fixed_pool_ptr pools ,size_t size ,const char*
 #define JOMOO_FIXED_MALLOC( pool )pool->malloc( __FILE__,__LINE__ )
 #define JOMOO_FREE( pool , p )pool->free( p )
 
-#define JOMOO_DELETE( pool, ptr )  _Destroy( ptr ), pool->free( ptr )
+#define JOMOO_DELETE( pool, ptr )  std::_Destroy( ptr ), pool->free( ptr )
 #define JOMOO_NEW( pool, T,a ) new ((void _FARQ *)pool_malloc( pool, sizeof( T ), __FILE__,__LINE__ ) ) T a
 #define JOMOO_FIXED_NEW( pool, T,a ) new ((void _FARQ *)pool_malloc( pool, __FILE__,__LINE__ ) ) T a
 

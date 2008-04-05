@@ -13,7 +13,7 @@
 # include "MemoryManager.H"
 # include "../Collections/ThreadSafePtrQueue.HPP"
 
-_memory_begin
+_jomoo_memory_begin
 
 template< typename Object >
 struct POOL_CHUNK LIST_INTERFACE( POOL_CHUNK )
@@ -301,6 +301,6 @@ private:
 };
 
 
-_memory_end
+_jomoo_memory_end
 
 #endif // OBJECTPOOL_H

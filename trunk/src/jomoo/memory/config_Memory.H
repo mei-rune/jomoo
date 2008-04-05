@@ -19,8 +19,10 @@
 # pragma once
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
-#define _memory_begin _jomoo_begin
-#define _memory_end _jomoo_end
+#include <memory>
 
-#define _memory _jomoo
+#define _jomoo_memory_begin _jomoo_begin
+#define _jomoo_memory_end _jomoo_end
+
+#define _jomoo_memory _jomoo
 #endif // _config_Memory_H_

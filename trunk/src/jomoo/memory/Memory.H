@@ -9,8 +9,8 @@
 * -------------------------------------------------------------------------------
 */
 
-#ifndef _Memory_H_
-#define _Memory_H_
+#ifndef _jomoo_memory_H_
+#define _jomoo_memory_H_
 
 #include "jomoo/config.h"
 
@@ -24,4 +24,4 @@
 # include "ObjectPool.H"
 # include "auto_ptr.h"
 
-#endif // _Memory_H_
+#endif // _jomoo_memory_H_

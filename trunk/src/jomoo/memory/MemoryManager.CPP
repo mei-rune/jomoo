@@ -5,7 +5,7 @@
 #include "jomoo/threading.hpp"
 #include <map>
 
-_memory_begin
+_jomoo_memory_begin
 
 /**
  * @Brief 内存池管理器
@@ -83,7 +83,7 @@ public:
 private:
 
 	POOL_Manager()
-		: toString_( "POOL_Manager" )
+		: toString_( _T("POOL_Manager") )
 	{
 	}
 
@@ -93,15 +93,15 @@ private:
 	tstring toString_;
 };
 
-_memory_end
+_jomoo_memory_end
 
 /**
  * 取得默认的内存池
  * @return 返回默认的内存池的指针
  */
-JOMOO_Export_C _memory pool_mgr* ___getPoolManager()
+JOMOO_Export_C _jomoo_memory pool_mgr* ___getPoolManager()
 {
-	return & _memory POOL_Manager::get();
+	return & _jomoo_memory POOL_Manager::get();
 }
 
 /**
@@ -110,16 +110,16 @@ JOMOO_Export_C _memory pool_mgr* ___getPoolManager()
  */
 JOMOO_Export_C void  ___dumpPoolManager( std::ostream& Target )
 {
-	_memory POOL_Manager::get().dump( Target );
+	_jomoo_memory POOL_Manager::get().dump( Target );
 }
 
 /**
  * 取得默认的内存池
  * @return 返回默认的内存池的指针
  */
-JOMOO_Export_C _memory pool_ptr ___getPool( )
+JOMOO_Export_C _jomoo_memory pool_ptr ___getPool( )
 {
-	return _memory POOL_Manager::get().getPool();
+	return _jomoo_memory POOL_Manager::get().getPool();
 }
 
 /**
@@ -128,9 +128,9 @@ JOMOO_Export_C _memory pool_ptr ___getPool( )
  * @param[ in ] pages 指定内存池预分配内存块的大小
  * @return 返回内存池的指针
  */
-JOMOO_Export_C _memory pool_ptr ___createPool( const tstring& name , size_t pages )
+JOMOO_Export_C _jomoo_memory pool_ptr ___createPool( const tstring& name , size_t pages )
 {
-	return _memory POOL_Manager::get().createPool( name , pages );
+	return _jomoo_memory POOL_Manager::get().createPool( name , pages );
 }
 	
 /**
@@ -140,9 +140,9 @@ JOMOO_Export_C _memory pool_ptr ___createPool( const tstring& name , size_t page
  * @param[ in ] size 指定内存池每个预分配内存块的大小
  * @return 返回内存池的指针
  */
-JOMOO_Export_C _memory fixed_pool_ptr ___createLoopPool( const tstring& name, size_t number,size_t size )
+JOMOO_Export_C _jomoo_memory fixed_pool_ptr ___createLoopPool( const tstring& name, size_t number,size_t size )
 {
-	return _memory POOL_Manager::get().createPool( name , number, size );
+	return _jomoo_memory POOL_Manager::get().createPool( name , number, size );
 }
 
 /**
@@ -150,9 +150,9 @@ JOMOO_Export_C _memory fixed_pool_ptr ___createLoopPool( const tstring& name, si
  * @param[ in ] name 内存池名称
  * @return 返回内存池的指针
  */
-JOMOO_Export_C _memory pool_ptr ___findPool( const tstring& name  )
+JOMOO_Export_C _jomoo_memory pool_ptr ___findPool( const tstring& name  )
 {
-	return _memory POOL_Manager::get().findPool( name );
+	return _jomoo_memory POOL_Manager::get().findPool( name );
 }
 
 /**
@@ -160,17 +160,17 @@ JOMOO_Export_C _memory pool_ptr ___findPool( const tstring& name  )
  * @param[ in ] name 内存池名称
  * @return 返回内存池的指针
  */
-JOMOO_Export_C _memory fixed_pool_ptr ___findLoopPool( const tstring& name, size_t chunk_size)
+JOMOO_Export_C _jomoo_memory fixed_pool_ptr ___findLoopPool( const tstring& name, size_t chunk_size)
 {
-	return _memory POOL_Manager::get().findPool ( name ,chunk_size );
+	return _jomoo_memory POOL_Manager::get().findPool ( name ,chunk_size );
 }
 
 JOMOO_Export_C void* ___system_malloc (size_t nbytes , const char* file, size_t line )
 {
-	return _memory POOL_Manager::get().getPool()->malloc( nbytes, file, line );
+	return _jomoo_memory POOL_Manager::get().getPool()->malloc( nbytes, file, line );
 }
 
 JOMOO_Export_C void ___system_free (void* block )
 {
-	return _memory POOL_Manager::get().getPool()->free( block );
+	return _jomoo_memory POOL_Manager::get().getPool()->free( block );
 }

@@ -2,7 +2,7 @@
 #include "SystemPool.h"
 
 
-_memory_begin
+_jomoo_memory_begin
 
 SystemPool& SystemPool::get()
 {
@@ -11,7 +11,7 @@ SystemPool& SystemPool::get()
 }
 
 SystemPool::SystemPool()
-: toString_( "System" )
+: toString_( _T("System") )
 {
 }
 
@@ -35,4 +35,4 @@ const tstring& SystemPool::toString() const
 }
 
 
-_memory_end
+_jomoo_memory_end
