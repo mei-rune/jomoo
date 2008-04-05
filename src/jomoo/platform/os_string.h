@@ -1,6 +1,6 @@
 
-#ifndef _os_string_h_
-#define _os_string_h_
+#ifndef os_string_h
+#define os_string_h
 
 #include "jomoo/config.h"
 
@@ -16,17 +16,16 @@ typedef char char_t;
 #ifdef  _UNICODE
 typedef std::wstring tstring;
 typedef std::wstringstream tstringstream;
+typedef std::wstringstream StringStream;
 typedef wchar_t tchar;
 #else
 typedef std::string tstring;
 typedef std::stringstream tstringstream;
+typedef std::stringstream StringStream;
 typedef char_t tchar;
 #endif
 
-typedef std::stringstream StringStream;
-//#define _T __T
-//template < typename T >
-//inline T c_str_ptr( T t )
+
 
 inline const tchar* c_str_ptr( const tchar* t )
 {

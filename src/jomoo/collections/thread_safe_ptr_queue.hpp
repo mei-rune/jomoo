@@ -12,7 +12,7 @@
 
 #ifdef JOMOO_MT
 
-#include "Platform/OS.H"
+#include "jomoo/platform/os.h"
 
 #define LIST_INTERFACE( X ) : public SLIST_ENTRY
 #define LIST_DEFINE( X )

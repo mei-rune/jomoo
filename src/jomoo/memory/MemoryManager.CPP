@@ -2,7 +2,7 @@
 #include "MemoryManager.H"
 #include "SystemPool.h"
 #include "FixedPool.H"
-#include "jomoo/threading/threading.h"
+#include "jomoo/threading.hpp"
 #include <map>
 
 _memory_begin

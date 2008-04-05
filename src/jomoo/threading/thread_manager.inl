@@ -19,7 +19,7 @@ OS_INLINE void thread_manager::add_thread( thread_t thrd)
 {
 	thread_mutex::spcode_lock guard( m_mutex_ , false );
 	if( !guard.locked() )
-		ThrowException1(  LockException, "添加线程[" + ::toString( thrd ) + "]到[" + m_descr_ + "]失败" );
+		ThrowException1(  LockException, _T("添加线程[") + ::toString( thrd ) + _T("]到[") + m_descr_ + _T("]失败") );
 
 	m_thread_group_.insert( thrd );
 }
@@ -28,7 +28,7 @@ OS_INLINE void thread_manager::remove_thread( thread_t thrd)
 {
 	thread_mutex::spcode_lock guard( m_mutex_ , false );
 	if( !guard.locked() )
-		 ThrowException1(  LockException, "添加线程[" + ::toString( thrd ) + "]到[" + m_descr_ + "]失败" );
+		 ThrowException1(  LockException, _T("添加线程[") + ::toString( thrd ) + _T("]到[") + m_descr_ + _T("]失败") );
 
 	m_thread_group_.erase( thrd );
 }
