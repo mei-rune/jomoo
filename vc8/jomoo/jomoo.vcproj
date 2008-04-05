@@ -243,6 +243,10 @@
 				RelativePath="..\..\src\jomoo\string.hpp"
 				>
 			</File>
+			<File
+				RelativePath="..\..\src\jomoo\threading.hpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="资源文件"
@@ -423,10 +427,6 @@
 			</File>
 			<File
 				RelativePath="..\..\src\jomoo\threading\thread_semaphore.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\threading\threading.h"
 				>
 			</File>
 			<File
@@ -747,6 +747,38 @@
 			>
 			<File
 				RelativePath="..\..\src\jomoo\mpl\function_type.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="platform"
+			>
+			<File
+				RelativePath="..\..\src\jomoo\platform\os.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\platform\os.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\platform\os.inl"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\platform\os_mmap.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\platform\os_mmap.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\platform\os_mmap.inl"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\platform\os_string.h"
 				>
 			</File>
 		</Filter>
