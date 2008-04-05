@@ -1,8 +1,8 @@
 
 
-JOMOO_HANDLE create_semaphore( long lInitialCount,long lMaxCount,const char* pSemaphoreName)
+JOMOO_HANDLE create_semaphore( long initialCount,long maxCount,const tchar* pSemaphoreName)
 {
-	return ::CreateSemaphore( NULL, lInitialCount,lMaxCount,pSemaphoreName );
+	return ::CreateSemaphore( NULL, initialCount,maxCount,pSemaphoreName );
 }
 
 bool close_semaphore( JOMOO_HANDLE &handle )
@@ -20,12 +20,12 @@ bool release_semaphore( JOMOO_HANDLE &handle, long count )
 	return ( ReleaseSemaphore( handle,count,0) == TRUE );
 }
 
-JOMOO_HANDLE create_event(  bool bManualReset,bool bInitialState,const char* lpName )
+JOMOO_HANDLE create_event(  bool bManualReset,bool bInitialState,const tchar* lpName )
 {
 	return CreateEvent( 0,bManualReset,bInitialState,lpName );
 }
 
-JOMOO_HANDLE open_event( u_long DesiredAccess,bool bInheritHandle,const char* lpName )
+JOMOO_HANDLE open_event( u_long DesiredAccess,bool bInheritHandle,const tchar* lpName )
 {
 	return OpenEvent( DesiredAccess,bInheritHandle,lpName );
 }

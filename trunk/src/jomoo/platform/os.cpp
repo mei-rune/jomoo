@@ -9,5 +9,5 @@ static char THIS_FILE[] = __FILE__;
 #endif // _MEMORY_DEBUG
 
 #if !defined (OS_HAS_INLINED)
-# include "OS.inl"
+# include "os.inl"
 #endif /* OS_HAS_INLINED */

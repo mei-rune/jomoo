@@ -9,7 +9,7 @@
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 
-# include "Platform/os_string.h"
+# include "jomoo/platform/os_string.h"
 # include "string/toString.h"
 # include "string/string_view.h"
 # include "string/stringOps.h"
