@@ -14,7 +14,7 @@
 # include "jomoo/memory/pool.h"
 # include "jomoo/collections/thread_safe_ptr_queue.hpp"
 
-_memory_begin
+_jomoo_memory_begin
 
 class FixedPool : public  fixed_pool
 {
@@ -70,6 +70,6 @@ private:
 	//size_t CHUNK_HEAD_SIZE;
 };
 
-_memory_end
+_jomoo_memory_end
 
 #endif //FIXED_POOL_H

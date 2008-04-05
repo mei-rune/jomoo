@@ -9,8 +9,8 @@
 * -------------------------------------------------------------------------------
 */
 
-#ifndef _Memory_Manager_H_
-#define _Memory_Manager_H_
+#ifndef _jomoo_memory_Manager_H_
+#define _jomoo_memory_Manager_H_
 
 
 #include "jomoo/config.h"
@@ -24,7 +24,7 @@
 # include "jomoo/memory/pool.h"
 # include "jomoo/jomoo_export.h"
 
-_memory_begin
+_jomoo_memory_begin
 
 /**
  * @Brief 内存池管理器
@@ -85,13 +85,13 @@ public:
 	virtual const tstring& toString() const = 0;
 };
 
-_memory_end
+_jomoo_memory_end
 
 /**
  * 取得默认的内存池
  * @return 返回默认的内存池的指针
  */
-JOMOO_Export_C _memory pool_mgr* ___getPoolManager();
+JOMOO_Export_C _jomoo_memory pool_mgr* ___getPoolManager();
 
 /**
  * 打印出内存池管理器的状态
@@ -103,7 +103,7 @@ JOMOO_Export_C void  ___dumpPoolManager( std::ostream& Target );
  * 取得默认的内存池
  * @return 返回默认的内存池的指针
  */
-JOMOO_Export_C _memory pool_ptr ___getPool( );
+JOMOO_Export_C _jomoo_memory pool_ptr ___getPool( );
 
 /**
  * 创建一个内存池
@@ -111,7 +111,7 @@ JOMOO_Export_C _memory pool_ptr ___getPool( );
  * @param[ in ] pages 指定内存池预分配内存块的大小
  * @return 返回内存池的指针
  */
-JOMOO_Export_C _memory pool_ptr ___createPool( const tstring& name , size_t pages );
+JOMOO_Export_C _jomoo_memory pool_ptr ___createPool( const tstring& name , size_t pages );
 	
 /**
  * 创建一个固定大小内存池
@@ -120,21 +120,21 @@ JOMOO_Export_C _memory pool_ptr ___createPool( const tstring& name , size_t page
  * @param[ in ] size 指定内存池每个预分配内存块的大小
  * @return 返回内存池的指针
  */
-JOMOO_Export_C _memory fixed_pool_ptr ___createLoopPool( const tstring& name, size_t number,size_t size );
+JOMOO_Export_C _jomoo_memory fixed_pool_ptr ___createLoopPool( const tstring& name, size_t number,size_t size );
 
 /**
  * 查找一个内存池
  * @param[ in ] name 内存池名称
  * @return 返回内存池的指针
  */
-JOMOO_Export_C _memory pool_ptr ___findPool( const tstring& name  );
+JOMOO_Export_C _jomoo_memory pool_ptr ___findPool( const tstring& name  );
 
 /**
  * 查找一个固定大小内存池
  * @param[ in ] name 内存池名称
  * @return 返回内存池的指针
  */
-JOMOO_Export_C _memory fixed_pool_ptr ___findLoopPool( const tstring& name, size_t chunk_size);
+JOMOO_Export_C _jomoo_memory fixed_pool_ptr ___findLoopPool( const tstring& name, size_t chunk_size);
 
 /**
  * 分配指定大小的内存块
@@ -154,18 +154,18 @@ JOMOO_Export_C void* ___system_malloc (size_t nbytes , const char* file, size_t 
 JOMOO_Export_C void ___system_free (void* block );
 
 
-//JOMOO_Export_C void* ___memory_malloc ( _memory pool_ptr pool, size_t nbytes , const char* file, size_t line )
+//JOMOO_Export_C void* ___jomoo_memory_malloc ( _jomoo_memory pool_ptr pool, size_t nbytes , const char* file, size_t line )
 //{
 //	
 //}
 //
-//JOMOO_Export_C void* ___memory_malloc (_memory fixed_pool_ptr pool, const char* file, size_t line )
+//JOMOO_Export_C void* ___jomoo_memory_malloc (_jomoo_memory fixed_pool_ptr pool, const char* file, size_t line )
 //{
 //}
 
-//JOMOO_Export_C void ___memory_free (void* block );
+//JOMOO_Export_C void ___jomoo_memory_free (void* block );
 
-_memory_begin
+_jomoo_memory_begin
 
 /**
  * 打印出内存池管理器的状态
@@ -180,7 +180,7 @@ inline void dumpPoolManager( std::ostream& Target )
  * 取得默认的内存池
  * @return 返回默认的内存池的指针
  */
-inline _memory pool_ptr getPool( )
+inline _jomoo_memory pool_ptr getPool( )
 {
 	return ___getPool( );
 }
@@ -191,7 +191,7 @@ inline _memory pool_ptr getPool( )
  * @param[ in ] pages 指定内存池预分配内存块的大小
  * @return 返回内存池的指针
  */
-inline _memory pool_ptr createPool( const tstring& name , size_t pages )
+inline _jomoo_memory pool_ptr createPool( const tstring& name , size_t pages )
 {
 	return ___createPool( name ,pages);
 }
@@ -203,7 +203,7 @@ inline _memory pool_ptr createPool( const tstring& name , size_t pages )
  * @param[ in ] size 指定内存池每个预分配内存块的大小
  * @return 返回内存池的指针
  */
-inline _memory fixed_pool_ptr createPool( const tstring& name, size_t number,size_t size )
+inline _jomoo_memory fixed_pool_ptr createPool( const tstring& name, size_t number,size_t size )
 {
 	return ___createLoopPool( name ,number, size );
 }
@@ -213,7 +213,7 @@ inline _memory fixed_pool_ptr createPool( const tstring& name, size_t number,siz
  * @param[ in ] name 内存池名称
  * @return 返回内存池的指针
  */
-inline _memory pool_ptr findPool( const tstring& name  )
+inline _jomoo_memory pool_ptr findPool( const tstring& name  )
 {
 	return ___findPool( name );
 }
@@ -223,7 +223,7 @@ inline _memory pool_ptr findPool( const tstring& name  )
  * @param[ in ] name 内存池名称
  * @return 返回内存池的指针
  */
-inline _memory fixed_pool_ptr findPool( const tstring& name , size_t chunk_size )
+inline _jomoo_memory fixed_pool_ptr findPool( const tstring& name , size_t chunk_size )
 {
 	return ___findLoopPool( name,chunk_size );
 }
@@ -252,6 +252,6 @@ inline void system_free (void* block )
 }
 
 
-_memory_end
+_jomoo_memory_end
 
-#endif // _Memory_Base_H_
+#endif // _jomoo_memory_Base_H_

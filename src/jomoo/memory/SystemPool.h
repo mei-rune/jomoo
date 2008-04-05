@@ -13,7 +13,7 @@
 # include "config_Memory.H"
 # include "pool.h"
 
-_memory_begin
+_jomoo_memory_begin
 
 class SystemPool : public pool
 {
@@ -35,6 +35,6 @@ private:
 	tstring toString_;
 };
 
-_memory_end
+_jomoo_memory_end
 
 #endif //SYSTEM_POOL_H

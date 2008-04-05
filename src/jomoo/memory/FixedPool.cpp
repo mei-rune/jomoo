@@ -3,7 +3,7 @@
 #include "Windows.h"
 #include <new>
 
-_memory_begin
+_jomoo_memory_begin
 
 
 
@@ -32,11 +32,11 @@ FixedPool::FixedPool( const tstring& name , size_t number, size_t size )
 		queue_.push( chunk );
 	}
 
-	toString_ += "[";
-	toString_ += detail::to_string_t( number_ );
-	toString_ += ":";
-	toString_ += detail::to_string_t( chunk_size_ );
-	toString_ += "]";
+	toString_ += _T("[");
+	toString_ += ::toString( number_ );
+	toString_ += _T(":");
+	toString_ += ::toString( chunk_size_ );
+	toString_ += _T("]");
 }
 
 FixedPool::~FixedPool()
@@ -48,7 +48,7 @@ void* FixedPool::malloc ( const char* file, size_t line )
 {
 	CHUNK* p = queue_.pop();
 	if( p == 0 )
-		throw std::bad_alloc( (toString() + "> bad allocation").c_str() );
+		ThrowException1( BadMemoryException, (toString() + _T("> bad allocation")) );
 	return p->pointee_;
 }
 
@@ -76,4 +76,4 @@ const tstring& FixedPool::toString() const
 }
 
 
-_memory_end
+_jomoo_memory_end
