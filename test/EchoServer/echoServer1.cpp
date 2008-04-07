@@ -117,7 +117,7 @@ int main(int argc, tchar* argv[])
 		manager.sessions.push_back( p );
 		std::cout << "接收来自" << p->socket_.remote_addr() << "的连接,共有" << manager.sessions.size() << "个连接!" << std::endl;
 
-		ThreadOP::create_thread( mem_fun( &session::run), p );
+		_jomoo_thread create_thread( mem_fun( &session::run), p );
 		//boost::thread t( std::tr1::function< void(void) >( &session::run, p ) );
 
 	}
