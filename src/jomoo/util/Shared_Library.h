@@ -17,7 +17,7 @@
 
 // Include files
 #include "config_Util.h"
-#include "Base/string.hpp"
+#include "jomoo/string.hpp"
 
 _jomoo_begin
 

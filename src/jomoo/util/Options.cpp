@@ -30,23 +30,23 @@ Options::checkArgs(const string& shortOpt, const string& longOpt, bool needArg, 
 	{
 		if(shortOpt.size() != 1)
 		{
-			string err = "`";
+			tstring err = _T("`");
 			err += shortOpt;
-			err += "': 短选项名长度不能大于1";
+			err += _T("': 短选项名长度不能大于1");
 			throw APIError(err);
 		}
-		if(shortOpt.find_first_of(" \t\n\r\f\v") != string::npos)
+		if(shortOpt.find_first_of(_T(" \t\n\r\f\v")) != string::npos)
 		{
-			string err = "`";
+			tstring err = _T("`");
 			err += shortOpt;
-			err += "': 短选项名不能是空白符";
+			err += _T("': 短选项名不能是空白符");
 			throw APIError(err);
 		}
-		if(shortOpt[0] == '-')
+		if(shortOpt[0] == _T('-'))
 		{
-			string err = "`";
+			tstring err = _T("`");
 			err += shortOpt;
-			err += "': 短选项名不能是 `-'";
+			err += _T("': 短选项名不能是 `-'");
 			throw APIError(err);
 		}
 	}
@@ -55,16 +55,16 @@ Options::checkArgs(const string& shortOpt, const string& longOpt, bool needArg, 
 	{
 		if(longOpt.find_first_of(" \t\n\r\f\v") != string::npos)
 		{
-			string err = "`";
+			tstring err = _T("`");
 			err += longOpt;
-			err += "': 长选项名不能包含空白符";
+			err += _T("': 长选项名不能包含空白符");
 			throw APIError(err);
 		}
-		if(longOpt[0] == '-')
+		if(longOpt[0] == _T('-'))
 		{
-			string err = "`";
+			tstring err = _T("`");
 			err += longOpt;
-			err += "': 长选项名不能以`-'开头";
+			err += _T("': 长选项名不能以`-'开头");
 			throw APIError(err);
 		}
 	}
@@ -96,7 +96,7 @@ StringSeqPtr Options::parse( const StringSeq& argv)
 	}
 	parseCalled = true;
 
-	set<string> seenOpts; // To catch repeated non-repeatable options.
+	set<tstring> seenOpts; // To catch repeated non-repeatable options.
 
 	StringSeqPtr result( new StringSeq );
 
@@ -104,30 +104,31 @@ StringSeqPtr Options::parse( const StringSeq& argv)
 	size_t i;
 	for(i = 1; i < argv.size(); ++i)
 	{
-		if(strcmp(argv[i].c_str(), "-") == 0 || strcmp(argv[i].c_str(), "--") == 0)
+		if( string_traits<tstring::value_type>::strcmp(argv[i].c_str(), _T("-")) == 0 
+			|| string_traits<tstring::value_type>::strcmp(argv[i].c_str(), _T("--")) == 0)
 		{
 			++i;
 			break; // 单个"-" 和 "--" 表示选项结束.
 		}
 
-		string opt;
+		tstring opt;
 		ValidOpts::iterator pos;
 		bool argDone = false;
 
-		if(strncmp(argv[i].c_str(), "--", 2) == 0)
+		if( string_traits<tstring::value_type>::strncmp(argv[i].c_str(), _T("--"), 2) == 0)
 		{
 			//
 			// 长选项. 如果它有参数,可能用一个"="分隔或一个单独的参数，如
 			// "--name value" 与 "--name=value"是一样的.
 			//
-			const char *p = argv[i].c_str() + 2;
-			while(*p != '=' && *p != '\0')
+			const tchar *p = argv[i].c_str() + 2;
+			while(*p != _T('=') && *p != _T(_T('\0')))
 			{
 				++p;
 			}
 
 			// 取得选项名opt, 去除了"--"
-			if(*p == '=')
+			if(*p == _T('='))
 			{
 				opt.assign(argv[i].c_str() + 2, p - (argv[i].c_str() + 2));
 			}
@@ -139,15 +140,15 @@ StringSeqPtr Options::parse( const StringSeq& argv)
 			pos = checkOpt(opt, LongOpt);
 
 			// 保存选项
-			if(*p == '=')
+			if(*p == _T('='))
 			{
 				if(pos->second.arg == NoArg)
 				{
-					string err = "--";
+					tstring err = _T("--" );
 					err += opt;
 					err.push_back('=');
 					err += p + 1;
-					err += "': 选项没有参数";
+					err += _T("': 选项没有参数");
 					throw BadOpt(err);
 				}
 				setOpt(opt, p + 1, pos->second.repeat);
@@ -161,14 +162,14 @@ StringSeqPtr Options::parse( const StringSeq& argv)
 				ValidOpts::const_iterator validPos = _validOpts.find(opt);
 				if(validPos != _validOpts.end() && validPos->second.repeat == NoRepeat)
 				{
-					string err = "`--";
-					err += opt + ":' 选项不能重复";
+					tstring err = _T("`--");
+					err += opt + _T(":' 选项不能重复");
 					throw BadOpt(err);
 				}
 			}
 			seenOpts.insert(seenPos, opt);
 		}
-		else if(*(argv[i].c_str()) == '-')
+		else if(*(argv[i].c_str()) == _T(_T('-')))
 		{
 			//
 			// 短选项
@@ -177,16 +178,16 @@ StringSeqPtr Options::parse( const StringSeq& argv)
 
 			// 如果该选项没有参数值时，最后一个字符作为选项名。
 			char c;
-			while((c = *++p) != '\0')
+			while((c = *++p) !=_T( _T('\0')) )
 			{
 				opt.clear();
 				opt.push_back(c);
 				pos = checkOpt(opt, ShortOpt);
-				if(pos->second.arg == NeedArg && *(p + 1) != '\0')
+				if(pos->second.arg == NeedArg && *(p + 1) != _T(_T('\0')))
 				{
 					// 取得选项参数值
 					string optArg;
-					while(*++p != '\0')
+					while(*++p != _T(_T('\0')))
 					{
 						optArg.push_back(*p);
 					}
@@ -203,8 +204,8 @@ StringSeqPtr Options::parse( const StringSeq& argv)
 				ValidOpts::const_iterator validPos = _validOpts.find(opt);
 				if(validPos != _validOpts.end() && validPos->second.repeat == NoRepeat)
 				{
-					string err = "`-";
-					err += opt + ":' 选项不能重复";
+					tstring err = _T("`-");
+					err += opt + _T(":' 选项不能重复" );
 					throw BadOpt(err);
 				}
 			}
@@ -224,20 +225,20 @@ StringSeqPtr Options::parse( const StringSeq& argv)
 			{
 				if(i == argc - 1)
 				{
-					string err = "`-";
+					tstring err = _T("`-");
 					if(opt.size() != 1)
 					{
-						err += "-";
+						err += _T("-");
 					}
 					err += opt;
-					err += "' 选项需要一个参数";
+					err += _T("' 选项需要一个参数");
 					throw BadOpt(err);
 				}
 				setOpt(opt, argv[++i], pos->second.repeat);
 			}
 			else
 			{
-				setOpt(opt, "1", pos->second.repeat);
+				setOpt(opt, _T("1"), pos->second.repeat);
 			}
 		}
 	}
@@ -251,7 +252,7 @@ StringSeqPtr Options::parse( const StringSeq& argv)
 
 }
 
-StringSeqPtr Options::parse(int argc, char* argv[])
+StringSeqPtr Options::parse(int argc, tchar* argv[])
 {
 	if(parseCalled)
 	{
@@ -266,7 +267,7 @@ StringSeqPtr Options::parse(int argc, char* argv[])
 	int i;
 	for(i = 1; i < argc; ++i)
 	{
-		if(strcmp(argv[i], "-") == 0 || strcmp(argv[i], "--") == 0)
+		if(strcmp(argv[i], _T("-")) == 0 || strcmp(argv[i], _T("--")) == 0)
 		{
 			++i;
 			break; // 单个"-" 和 "--" 表示选项结束.
@@ -276,20 +277,20 @@ StringSeqPtr Options::parse(int argc, char* argv[])
 		ValidOpts::iterator pos;
 		bool argDone = false;
 
-		if(strncmp(argv[i], "--", 2) == 0)
+		if(strncmp(argv[i], _T("--"), 2) == 0)
 		{
 			//
 			// 长选项. 如果它有参数,可能用一个"="分隔或一个单独的参数，如
 			// "--name value" 与 "--name=value"是一样的.
 			//
-			const char *p = argv[i] + 2;
-			while(*p != '=' && *p != '\0')
+			const tchar *p = argv[i] + 2;
+			while(*p != _T('=') && *p != _T(_T('\0')))
 			{
 				++p;
 			}
 
 			// 取得选项名opt, 去除了"--"
-			if(*p == '=')
+			if(*p == _T('='))
 			{
 				opt.assign(argv[i] + 2, p - (argv[i] + 2));
 			}
@@ -301,15 +302,15 @@ StringSeqPtr Options::parse(int argc, char* argv[])
 			pos = checkOpt(opt, LongOpt);
 
 			// 保存选项
-			if(*p == '=')
+			if(*p == _T('='))
 			{
 				if(pos->second.arg == NoArg)
 				{
-					string err = "--";
+					tstring err = _T("--");
 					err += opt;
-					err.push_back('=');
+					err.push_back(_T('='));
 					err += p + 1;
-					err += "': 选项没有参数";
+					err += _T("': 选项没有参数");
 					throw BadOpt(err);
 				}
 				setOpt(opt, p + 1, pos->second.repeat);
@@ -323,14 +324,14 @@ StringSeqPtr Options::parse(int argc, char* argv[])
 				ValidOpts::const_iterator validPos = _validOpts.find(opt);
 				if(validPos != _validOpts.end() && validPos->second.repeat == NoRepeat)
 				{
-					string err = "`--";
-					err += opt + ":' 选项不能重复";
+					tstring err = _T("`--");
+					err += opt + _T(":' 选项不能重复");
 					throw BadOpt(err);
 				}
 			}
 			seenOpts.insert(seenPos, opt);
 		}
-		else if(*argv[i] == '-')
+		else if(*argv[i] == _T('-'))
 		{
 			//
 			// 短选项
@@ -339,16 +340,16 @@ StringSeqPtr Options::parse(int argc, char* argv[])
 
 			// 如果该选项没有参数值时，最后一个字符作为选项名。
 			char c;
-			while((c = *++p) != '\0')
+			while((c = *++p) != _T('\0'))
 			{
 				opt.clear();
 				opt.push_back(c);
 				pos = checkOpt(opt, ShortOpt);
-				if(pos->second.arg == NeedArg && *(p + 1) != '\0')
+				if(pos->second.arg == NeedArg && *(p + 1) != _T('\0'))
 				{
 					// 取得选项参数值
 					string optArg;
-					while(*++p != '\0')
+					while(*++p != _T('\0'))
 					{
 						optArg.push_back(*p);
 					}
@@ -365,8 +366,8 @@ StringSeqPtr Options::parse(int argc, char* argv[])
 				ValidOpts::const_iterator validPos = _validOpts.find(opt);
 				if(validPos != _validOpts.end() && validPos->second.repeat == NoRepeat)
 				{
-					string err = "`-";
-					err += opt + ":' 选项不能重复";
+					tstring err = _T("`-");
+					err += opt + _T(":' 选项不能重复" );
 					throw BadOpt(err);
 				}
 			}
@@ -386,13 +387,13 @@ StringSeqPtr Options::parse(int argc, char* argv[])
 			{
 				if(i == argc - 1)
 				{
-					string err = "`-";
+					tstring err = _T("`-");
 					if(opt.size() != 1)
 					{
 						err += "-";
 					}
 					err += opt;
-					err += "' 选项需要一个参数";
+					err += _T("' 选项需要一个参数");
 					throw BadOpt(err);
 				}
 				setOpt(opt, argv[++i], pos->second.repeat);
@@ -413,7 +414,7 @@ StringSeqPtr Options::parse(int argc, char* argv[])
 }
 
 bool
-Options::isSet(const string& opt) const
+Options::isSet(const tstring& opt) const
 {
 
 	if(!parseCalled)
@@ -425,8 +426,8 @@ Options::isSet(const string& opt) const
 	return pos->second.repeat == NoRepeat ? _opts.find(opt) != _opts.end() : _ropts.find(opt) != _ropts.end();
 }
 
-const std::string&
-Options::optArg(const string& opt) const
+const tstring&
+Options::optArg(const tstring& opt) const
 {
 
 	if(!parseCalled)
@@ -438,26 +439,26 @@ Options::optArg(const string& opt) const
 
 	if(pos->second.repeat == Repeat)
 	{
-		string err = "`-";
+		tstring err = _T("`-");
 		if(pos->second.length == LongOpt)
 		{
-			err.push_back('-');
+			err.push_back(_T('-'));
 		}
 		err += opt;
-		err += "': 是一个可重复的选项 -- 请使用 argVec()";
+		err += _T("': 是一个可重复的选项 -- 请使用 argVec()");
 		throw APIError(err);
 	}
 
 	map<string, string>::const_iterator p = _opts.find(opt);
 	if( p == _opts.end() )
 	{
-		string err = "`-";
+		tstring err = _T("`-");
 		if(pos->second.length == LongOpt)
 		{
-			err.push_back('-');
+			err.push_back(_T('-'));
 		}
 		err += opt;
-		err += "': 没有找到";
+		err += _T("': 没有找到");
 		throw BadFindOpt( err );
 	}
 	return p->second;
@@ -476,25 +477,25 @@ Options::argVec(const string& opt) const
 
 	if(pos->second.repeat == NoRepeat)
 	{
-		string err = "`-";
+		tstring err = _T("`-");
 		if(pos->second.length == LongOpt)
 		{
-			err.push_back('-');
+			err.push_back(_T('-'));
 		}
-		err += opt + "': 是一个不可重复的选项 -- 请使用 optArg()";
+		err += opt + _T("': 是一个不可重复的选项 -- 请使用 optArg()");
 		throw APIError(err);
 	}
 
 	map<string, vector<string> >::const_iterator p = _ropts.find(opt);
 	if( p == _ropts.end() )
 	{
-		string err = "`-";
+		tstring err = _T("`-");
 		if(pos->second.length == LongOpt)
 		{
-			err.push_back('-');
+			err.push_back(_T('-'));
 		}
 		err += opt;
-		err += "': 没有找到";
+		err += _T("': 没有找到");
 		throw BadFindOpt( err );
 	}
 	return p->second;
@@ -511,9 +512,9 @@ Options::addValidOpt(const string& opt, LengthType lt, ArgType at, const string&
 	ValidOpts::iterator pos = _validOpts.find(opt);
 	if(pos != _validOpts.end())
 	{
-		string err = "`";
+		tstring err = _T("`");
 		err += opt;
-		err += "': 有同样的选项名";
+		err += _T("': 有同样的选项名");
 		throw APIError(err);
 	}
 
@@ -537,13 +538,13 @@ Options::checkOpt(const string& opt, LengthType lt)
 	ValidOpts::iterator pos = _validOpts.find(opt);
 	if(pos == _validOpts.end())
 	{
-		string err = "错误选项: `-";
+		tstring err = _T("错误选项: `-");
 		if(lt == LongOpt)
 		{
-			err.push_back('-');
+			err.push_back(_T('-'));
 		}
 		err += opt;
-		err.push_back('\'');
+		err.push_back(_T('\''));
 		throw BadOpt(err);
 	}
 
@@ -579,9 +580,9 @@ Options::checkOptIsValid(const string& opt) const
 	ValidOpts::const_iterator pos = _validOpts.find(opt);
 	if(pos == _validOpts.end())
 	{
-		string err = "`";
+		tstring err = _T("`");
 		err += opt;
-		err += "': 无效选项";
+		err += _T("': 无效选项");
 		throw APIError(err);
 	}
 	return pos;
@@ -593,13 +594,13 @@ Options::checkOptHasArg(const string& opt) const
 	ValidOpts::const_iterator pos = checkOptIsValid(opt);
 	if(pos->second.arg == NoArg)
 	{
-		string err = "`-";
+		tstring err = _T("`-");
 		if(pos->second.length == LongOpt)
 		{
-			err.push_back('-');
+			err.push_back(_T('-'));
 		}
 		err += opt;
-		err += "': 选项没有参数据";
+		err += _T("': 选项没有参数据");
 		throw APIError(err);
 	}
 	return pos;

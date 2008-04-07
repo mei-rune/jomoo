@@ -56,6 +56,13 @@ private:
 	tstring key_;
 };
 
+
+class object
+{
+public:
+
+};
+
 class NodeException: public _hazel Exception
 {
 public:
@@ -83,7 +90,7 @@ public:
 		Raise( *this );
 	}
 
-	virtual void print(std::ostream& Target ) const
+	virtual void print(tostream& Target ) const
 	{
 		Target << _T( "NodeException" )
 			<< what()
