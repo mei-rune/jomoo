@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="jomoo"
-	ProjectGUID="{58B66B4B-2E16-4C0F-AA02-BE63D0B79635}"
-	RootNamespace="jomoo"
+	Name="jomoo_static"
+	ProjectGUID="{40D3BB18-27B7-42C2-A2CA-4927E4FAD720}"
+	RootNamespace="jomoo_static"
 	Keyword="Win32Proj"
 	>
 	<Platforms>
@@ -17,11 +17,10 @@
 	<Configurations>
 		<Configuration
 			Name="Debug|Win32"
-			OutputDirectory="$(SolutionDir)../../Debug"
-			IntermediateDirectory="../../../Debug/OBJ/jomoo"
-			ConfigurationType="2"
-			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
-			CharacterSet="2"
+			OutputDirectory="$(SolutionDir)../../$(ConfigurationName)"
+			IntermediateDirectory="$(ConfigurationName)"
+			ConfigurationType="4"
+			CharacterSet="1"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -40,20 +39,16 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalOptions="/DNOLOG4CXX"
 				Optimization="0"
 				AdditionalIncludeDirectories="&quot;$(BOOST_ROOT)&quot;;&quot;$(SolutionDir)\..\src\&quot;"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;_USRDLL;HazelBASE_EXPORTS"
+				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
-				DisableLanguageExtensions="false"
-				RuntimeTypeInfo="true"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="true"
 				DebugInformationFormat="4"
-				DisableSpecificWarnings="4996"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -65,20 +60,10 @@
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
-				Name="VCLinkerTool"
-				OutputFile="$(OutDir)/jomoo.dll"
-				LinkIncremental="2"
-				GenerateDebugInformation="true"
-				ProgramDatabaseFile="$(OutDir)/jomoo.pdb"
-				SubSystem="2"
-				ImportLibrary="$(OutDir)/jomoo.lib"
-				TargetMachine="1"
+				Name="VCLibrarianTool"
 			/>
 			<Tool
 				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -90,22 +75,16 @@
 				Name="VCFxCopTool"
 			/>
 			<Tool
-				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCWebDeploymentTool"
-			/>
-			<Tool
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
 		<Configuration
 			Name="Release|Win32"
-			OutputDirectory="Release"
-			IntermediateDirectory="Release"
-			ConfigurationType="2"
-			InheritedPropertySheets="$(VCInstallDir)VCProjectDefaults\UpgradeFromVC71.vsprops"
-			CharacterSet="2"
+			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
+			IntermediateDirectory="$(ConfigurationName)"
+			ConfigurationType="4"
+			CharacterSet="1"
+			WholeProgramOptimization="1"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -124,9 +103,9 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;HazelBASE_EXPORTS"
-				RuntimeLibrary="0"
-				UsePrecompiledHeader="0"
+				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
+				RuntimeLibrary="2"
+				UsePrecompiledHeader="2"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="true"
 				DebugInformationFormat="3"
@@ -141,21 +120,10 @@
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
-				Name="VCLinkerTool"
-				OutputFile="$(OutDir)/jomoo.dll"
-				LinkIncremental="1"
-				GenerateDebugInformation="true"
-				SubSystem="2"
-				OptimizeReferences="2"
-				EnableCOMDATFolding="2"
-				ImportLibrary="$(OutDir)/jomoo.lib"
-				TargetMachine="1"
+				Name="VCLibrarianTool"
 			/>
 			<Tool
 				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -165,12 +133,6 @@
 			/>
 			<Tool
 				Name="VCFxCopTool"
-			/>
-			<Tool
-				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCWebDeploymentTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -225,6 +187,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\jomoo\jomoo_export.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\jomoo_object.hpp"
 				>
 			</File>
 			<File
@@ -630,26 +596,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\jomoo\util\Options.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\util\Options.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\util\Properties.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\util\PropertiesI.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\util\PropertiesI.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\src\jomoo\util\ServiceManager.cpp"
 				>
 			</File>
@@ -779,6 +725,38 @@
 			</File>
 			<File
 				RelativePath="..\..\src\jomoo\platform\os_string.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="serialize"
+			>
+			<File
+				RelativePath="..\..\src\jomoo\serialize\config_serializing.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\serialize\reader.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\serialize\serialize.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\serialize\serialize_context.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\serialize\serialize_macro.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\serializing.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\serialize\writer.hpp"
 				>
 			</File>
 		</Filter>

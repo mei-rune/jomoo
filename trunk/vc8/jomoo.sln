@@ -1,7 +1,5 @@
 Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "jomoo", "jomoo\jomoo.vcproj", "{58B66B4B-2E16-4C0F-AA02-BE63D0B79635}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CollectionTest", "CollectionTest\CollectionTest.vcproj", "{4088A862-11EC-438C-B5E6-20607BF523CF}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PoolTest", "PoolTest\PoolTest.vcproj", "{573D2130-77CA-4B4C-A509-ED093B654956}"
@@ -28,16 +26,16 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "echoServer", "echoServer\ec
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "thread_test", "thread_test\thread_test.vcproj", "{B58A1C1D-0476-4436-A723-D1DAB86DAB9A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "jomoo_static", "jomoo_static\jomoo_static.vcproj", "{40D3BB18-27B7-42C2-A2CA-4927E4FAD720}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "serialize_generator", "serialize_generator\serialize_generator.vcproj", "{4B7A0395-6245-4720-909B-7FF18EF6F6D7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{58B66B4B-2E16-4C0F-AA02-BE63D0B79635}.Debug|Win32.ActiveCfg = Debug|Win32
-		{58B66B4B-2E16-4C0F-AA02-BE63D0B79635}.Debug|Win32.Build.0 = Debug|Win32
-		{58B66B4B-2E16-4C0F-AA02-BE63D0B79635}.Release|Win32.ActiveCfg = Release|Win32
-		{58B66B4B-2E16-4C0F-AA02-BE63D0B79635}.Release|Win32.Build.0 = Release|Win32
 		{4088A862-11EC-438C-B5E6-20607BF523CF}.Debug|Win32.ActiveCfg = Debug|Win32
 		{4088A862-11EC-438C-B5E6-20607BF523CF}.Debug|Win32.Build.0 = Debug|Win32
 		{4088A862-11EC-438C-B5E6-20607BF523CF}.Release|Win32.ActiveCfg = Release|Win32
@@ -79,6 +77,14 @@ Global
 		{B58A1C1D-0476-4436-A723-D1DAB86DAB9A}.Debug|Win32.Build.0 = Debug|Win32
 		{B58A1C1D-0476-4436-A723-D1DAB86DAB9A}.Release|Win32.ActiveCfg = Release|Win32
 		{B58A1C1D-0476-4436-A723-D1DAB86DAB9A}.Release|Win32.Build.0 = Release|Win32
+		{40D3BB18-27B7-42C2-A2CA-4927E4FAD720}.Debug|Win32.ActiveCfg = Debug|Win32
+		{40D3BB18-27B7-42C2-A2CA-4927E4FAD720}.Debug|Win32.Build.0 = Debug|Win32
+		{40D3BB18-27B7-42C2-A2CA-4927E4FAD720}.Release|Win32.ActiveCfg = Release|Win32
+		{40D3BB18-27B7-42C2-A2CA-4927E4FAD720}.Release|Win32.Build.0 = Release|Win32
+		{4B7A0395-6245-4720-909B-7FF18EF6F6D7}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4B7A0395-6245-4720-909B-7FF18EF6F6D7}.Debug|Win32.Build.0 = Debug|Win32
+		{4B7A0395-6245-4720-909B-7FF18EF6F6D7}.Release|Win32.ActiveCfg = Release|Win32
+		{4B7A0395-6245-4720-909B-7FF18EF6F6D7}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -94,6 +100,7 @@ Global
 		{4088A862-11EC-438C-B5E6-20607BF523CF} = {2DA0FD56-0D48-4491-A183-FBF6666C90FB}
 		{4AC9C574-867D-4E21-8E09-792139B2E878} = {2DA0FD56-0D48-4491-A183-FBF6666C90FB}
 		{B58A1C1D-0476-4436-A723-D1DAB86DAB9A} = {2DA0FD56-0D48-4491-A183-FBF6666C90FB}
+		{4B7A0395-6245-4720-909B-7FF18EF6F6D7} = {2DA0FD56-0D48-4491-A183-FBF6666C90FB}
 	EndGlobalSection
 	GlobalSection(DPCodeReviewSolutionGUID) = preSolution
 		DPCodeReviewSolutionGUID = {00000000-0000-0000-0000-000000000000}
