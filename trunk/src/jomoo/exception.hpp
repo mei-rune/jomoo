@@ -170,7 +170,7 @@ MakeException( LengthException, LengthError );
 MakeException( CastException, CastError );
 MakeException( EOFException , EOFError );
 MakeException( URLException, URLError );
-MakeException( NoFindException, NoFindError );
+MakeException( NotFindException, NotFindError );
 MakeException( SystemException, SystemError );
 MakeException( LockException , LockError );
 

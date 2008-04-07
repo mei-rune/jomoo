@@ -22,7 +22,7 @@
 #define URLError				_T("URL分析出错")
 #define CastError				_T("转换失败")
 #define NullError				_T("空指针")
-#define NoFindError				_T("没有找到")
+#define NotFindError			_T("没有找到")
 #define _ExistError				_T("已经存在")
 #define SystemError				_T("系统错误")
 

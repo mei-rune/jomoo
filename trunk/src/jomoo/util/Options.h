@@ -24,16 +24,20 @@ public:
 	struct APIError : public std::runtime_error
     {
         APIError(const ::std::string& r) : std::runtime_error(r) {}
+		
+        APIError(const ::std::wstring& r) : std::runtime_error( toNarrowString( r) ) {}
     };
 
     struct BadOpt : public std::runtime_error
     {
         BadOpt(const ::std::string& r) : std::runtime_error(r) {}
+        BadOpt(const ::std::wstring& r) : std::runtime_error( toNarrowString( r) ) {}
     };
 
 	struct BadFindOpt : public std::runtime_error
     {
         BadFindOpt(const ::std::string& r) : std::runtime_error(r) {}
+        BadFindOpt(const ::std::wstring& r) : std::runtime_error( toNarrowString( r) ) {}
     };
 
     enum LengthType { ShortOpt, LongOpt }; // { 短选项,长选项 }
@@ -59,7 +63,7 @@ public:
 	 * @return 返回不是以"-"开头的参数数组
 	 * @remarks 注意，它只能调用一次，并且跳过第一个参数
 	 */
-    StringSeqPtr parse(int, char*[]);
+    StringSeqPtr parse(int, tchar*[]);
 
 	/**
 	 * 分析参数
@@ -81,7 +85,7 @@ public:
 	 * @return 指定的选项的参数值
 	 * @remarks 注意，如果该选项是可重复的或没有找到会发生异常APIError和BadFindOpt
 	 */
-    const ::std::string& optArg(const ::std::string& opt ) const;
+    const ::std::string& optArg(const tstring& opt ) const;
 
 	/**
 	 * 取得指定的选项的参数值数组
@@ -89,7 +93,7 @@ public:
 	 * @return 指定的选项的参数值数组
 	 * @remarks 注意，如果该选项是不可重复的或没有找到会发生异常APIError和BadFindOpt
 	 */
-    const ::std::vector< ::std::string>& argVec(const ::std::string&) const;
+    const ::std::vector< ::std::string>& argVec(const tstring&) const;
 
 private:
 
