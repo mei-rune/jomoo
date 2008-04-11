@@ -7,63 +7,63 @@
 
 void printRecord( int record , std::ostream& target )
 {
-	target << "#define register_class( object";
+	target << "#define register_class_" << record << "( object";
 	for( int i = 0; i < record; i ++ )
 	{
 		target << ", member" << i;
 	}
 	target << " ) \\" << std::endl;
-	target << "inline bool serialize_##object(serialize_writer& strm, serialize_context& context, object & s1, const tchar* name=0) \\" << std::endl;
-    target << "{ return strm.open( context, #object, name) \\" << std::endl;
+	target << "inline bool serialize_##object(_jomoo_serializing serialize_writer& writer, _jomoo_serializing serialize_context& context, object & s1, const tchar* name=0) \\" << std::endl;
+    target << "{ return writer.open( context, #object, name) \\" << std::endl;
 	for( int i = 0; i < record; i ++ )
 	{
-		target << "  && serialize(strm, context, s1.##member" << i << ", #member" << i << ") \\" << std::endl;
+		target << "  && serialize(writer, context, s1.##member" << i << ", #member" << i << ") \\" << std::endl;
 	}
-	target << "  && strm.close( context); } \\" << std::endl;
-	target << "inline bool serialize(serialize_writer& strm, serialize_context& context, const object & s1, const tchar* name=0) \\" << std::endl;
-    target << "{ return serialize_##object(strm, context, s1, name);} \\" << std::endl;
+	target << "  && writer.close( context); } \\" << std::endl;
+	target << "inline bool serialize(_jomoo_serializing serialize_writer& writer, _jomoo_serializing serialize_context& context, const object & s1, const tchar* name=0) \\" << std::endl;
+    target << "{ return serialize_##object(writer, context, s1, name);} \\" << std::endl;
 	
-	target << "inline bool deserialize_##object(serialize_reader& strm, serialize_context& context, object & s1, const tchar* name=0) \\" << std::endl;
-    target << "{ return strm.open( context, #object, name) \\" << std::endl;
+	target << "inline bool deserialize_##object(_jomoo_serializing serialize_reader& reader, _jomoo_serializing serialize_context& context, object & s1, const tchar* name=0) \\" << std::endl;
+    target << "{ return reader.open( context, #object, name) \\" << std::endl;
 	for( int i = 0; i < record; i ++ )
 	{
-		target << "  && deserialize(strm, context, s1.##member" << i << ", #member" << i << ") \\" << std::endl;
+		target << "  && deserialize(reader, context, s1.##member" << i << ", #member" << i << ") \\" << std::endl;
 	}
-	target << "  && strm.close(context); } \\" << std::endl;
-	target << "inline bool deserialize(serialize_reader& strm, serialize_context& context, const object & s1, const tchar* name=0) \\" << std::endl;
-    target << "{ return deserialize_##object(strm, context, s1, name);}" << std::endl;
+	target << "  && reader.close(context); } \\" << std::endl;
+	target << "inline bool deserialize(_jomoo_serializing serialize_reader& reader, _jomoo_serializing serialize_context& context, const object & s1, const tchar* name=0) \\" << std::endl;
+    target << "{ return deserialize_##object(reader, context, s1, name);}" << std::endl;
 
 	target << "" << std::endl;
 }
 
 void printRecordv2( int record , std::ostream& target )
 {
-	target << "#define register_class_v2( object";
+	target << "#define register_class_with_type_" << record << "( object";
 	for( int i = 0; i < record; i ++ )
 	{
 		target << ", member" << i << ", member_type" << i;
 	}
 	target << " ) \\" << std::endl;
 
-	target << "inline bool serialize_##object(serialize_writer& strm, serialize_context& context, object & s1, const tchar* name=0) \\" << std::endl;
-    target << "{ return strm.open( context, #object, name) \\" << std::endl;
+	target << "inline bool serialize_##object( _jomoo_serializing serialize_writer& writer, _jomoo_serializing serialize_context& context, object & s1, const tchar* name=0) \\" << std::endl;
+    target << "{ return writer.open( context, #object, name) \\" << std::endl;
 	for( int i = 0; i < record; i ++ )
 	{
-		target << "  && serialize_##member_type" << i<< "(strm, context, s1.##member" << i << ", #member" << i << ") \\" << std::endl;
+		target << "  && serialize_##member_type" << i<< "(writer, context, s1.##member" << i << ", #member" << i << ") \\" << std::endl;
 	}
-	target << "  && strm.close( context); } \\" << std::endl;
-	target << "inline bool serialize(serialize_writer& strm, serialize_context& context, const object & s1, const tchar* name=0) \\" << std::endl;
-    target << "{ return serialize_##object(strm, context, s1, name);} \\" << std::endl;
+	target << "  && writer.close( context); } \\" << std::endl;
+	target << "inline bool serialize(_jomoo_serializing serialize_writer& writer, _jomoo_serializing serialize_context& context, const object & s1, const tchar* name=0) \\" << std::endl;
+    target << "{ return serialize_##object(writer, context, s1, name);} \\" << std::endl;
 	
-	target << "inline bool deserialize_##object(serialize_reader& strm, serialize_context& context, object & s1, const tchar* name=0) \\" << std::endl;
-    target << "{ return strm.open( context, #object, name) \\" << std::endl;
+	target << "inline bool deserialize_##object(_jomoo_serializing serialize_reader& reader, _jomoo_serializing serialize_context& context, object & s1, const tchar* name=0) \\" << std::endl;
+    target << "{ return reader.open( context, #object, name) \\" << std::endl;
 	for( int i = 0; i < record; i ++ )
 	{
-		target << "  && deserialize_##member_type" << i<< "(strm, context, s1.##member" << i << ", #member" << i << ") \\" << std::endl;
+		target << "  && deserialize_##member_type" << i<< "(reader, context, s1.##member" << i << ", #member" << i << ") \\" << std::endl;
 	}
-	target << "  && strm.close(context); } \\" << std::endl;
-	target << "inline bool deserialize(serialize_reader& strm, serialize_context& context, const object & s1, const tchar* name=0) \\" << std::endl;
-    target << "{ return deserialize_##object(strm, context, s1, name);}" << std::endl;
+	target << "  && writer.close(context); } \\" << std::endl;
+	target << "inline bool deserialize(_jomoo_serializing serialize_reader& reader,_jomoo_serializing serialize_context& context, const object & s1, const tchar* name=0) \\" << std::endl;
+    target << "{ return deserialize_##object(reader, context, s1, name);}" << std::endl;
 
 	target << "" << std::endl;
 }

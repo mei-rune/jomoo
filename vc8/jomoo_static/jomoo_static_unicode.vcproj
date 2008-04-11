@@ -2,8 +2,8 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="8.00"
-	Name="jomoo_static"
-	ProjectGUID="{0956207A-54FD-4BFE-9E96-C14AEEA22BC5}"
+	Name="jomoo_static_unicode"
+	ProjectGUID="{40D3BB18-27B7-42C2-A2CA-4927E4FAD720}"
 	RootNamespace="jomoo_static"
 	Keyword="Win32Proj"
 	>
@@ -20,7 +20,7 @@
 			OutputDirectory="$(SolutionDir)../../$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="4"
-			CharacterSet="2"
+			CharacterSet="1"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -759,26 +759,6 @@
 				RelativePath="..\..\src\jomoo\serialize\writer.hpp"
 				>
 			</File>
-			<File
-				RelativePath="..\..\src\jomoo\serialize\XML_serializer.h"
-				>
-			</File>
-			<Filter
-				Name="unittest"
-				>
-				<File
-					RelativePath="..\..\src\jomoo\serialize\unittest\SerializeTestFixture.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\jomoo\serialize\unittest\SerializeTestFixture.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\jomoo\serialize\unittest\testTypes.h"
-					>
-				</File>
-			</Filter>
 		</Filter>
 	</Files>
 	<Globals>
