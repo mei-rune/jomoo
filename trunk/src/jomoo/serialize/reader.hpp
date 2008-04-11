@@ -9,6 +9,7 @@
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 #include "config_serializing.h"
+#include "serialize_context.h"
 
 _serializing_begin
 
