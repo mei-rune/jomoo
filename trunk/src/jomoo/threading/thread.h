@@ -36,7 +36,7 @@ typedef uintptr_t thread_t;
 	}
 
 	template<typename F>
-	inline thread_t create_thread( const F& f, const char* nm = 0)
+	inline thread_t create_thread( const F& f, const tchar* nm = 0)
 	{
 		typedef thread_closure_0<F> closure_type;
 
@@ -46,7 +46,7 @@ typedef uintptr_t thread_t;
 	}
 
 	template<typename F, typename P>
-	inline thread_t create_thread( const F& f, const P& x, const char* nm)
+	inline thread_t create_thread( const F& f, const P& x, const tchar* nm)
 	{
 		typedef thread_closure_1<F,P> closure_type;
 
@@ -56,7 +56,7 @@ typedef uintptr_t thread_t;
 	}
 	
 	template<typename F, typename P1, typename P2>
-	inline thread_t create_thread( const F& f, const P1& x1, const P2& x2, const char* nm)
+	inline thread_t create_thread( const F& f, const P1& x1, const P2& x2, const tchar* nm)
 	{
 		typedef thread_closure_2<F,P1,P2> closure_type;
 
@@ -65,7 +65,7 @@ typedef uintptr_t thread_t;
 	}
 
 	template<typename F, typename P1, typename P2, typename P3>
-	inline thread_t create_thread( const F& f, const P1& x1, const P2& x2, const P3& x3, const char* nm )
+	inline thread_t create_thread( const F& f, const P1& x1, const P2& x2, const P3& x3, const tchar* nm )
 	{
 		typedef thread_closure_3<F,P1,P2,P3> closure_type;
 
