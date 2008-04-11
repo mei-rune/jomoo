@@ -19,6 +19,7 @@
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 #include "config_serializing.h"
+#include "jomoo/exception.hpp"
 #include <list>
 #include <map>
 #include <vector>
@@ -32,8 +33,8 @@ class serialize_object
 {
 public:
 	virtual ~serialize_object(){}
-	virtual bool write( serialize_writer& stream, serialize_context& context, const tchar* name="serialize_object") = 0;
-	virtual bool read( serialize_reader& stream, serialize_context& context, const tchar* name="serialize_object") = 0;
+	virtual bool write( serialize_writer& stream, serialize_context& context, const tchar* name= _T("serialize_object")) = 0;
+	virtual bool read( serialize_reader& stream, serialize_context& context, const tchar* name= _T("serialize_object") ) = 0;
 };
 
 bool inline serialize(serialize_writer& stream, serialize_context& context, bool t, const tchar* name = 0)
@@ -43,12 +44,12 @@ bool inline serialize(serialize_writer& stream, serialize_context& context, bool
 
 bool inline serialize(serialize_writer& stream, serialize_context& context, char t, const tchar* name= 0)
 {
-	return stream.write(context,(int)t,name);
+	return stream.write(context,(int8_t)t,name);
 }
 
 bool inline serialize(serialize_writer& stream, serialize_context& context, short t, const tchar* name= 0)
 {
-	return stream.write(context,(int)t,name);
+	return stream.write(context,(int16_t)t,name);
 }
 
 bool inline serialize(serialize_writer& stream, serialize_context& context, int t, const tchar* name= 0)
@@ -58,67 +59,68 @@ bool inline serialize(serialize_writer& stream, serialize_context& context, int 
 
 bool inline serialize(serialize_writer& stream, serialize_context& context, long t, const tchar* name= 0)
 {
-	return stream.write(context,(int)t,name);
+	return stream.write(context,(int32_t)t,name);
 }
 
 bool inline serialize(serialize_writer& stream, serialize_context& context, __int64 t, const tchar* name= 0)
 {
-	return stream.write(context,t,name);
+	return stream.write(context,(int64_t)t,name);
 }
 
 bool inline serialize(serialize_writer& stream, serialize_context& context, unsigned char t, const tchar* name= 0)
 {
-	return stream.write(context,(int)t,name);
+	return stream.write(context,(int8_t)t,name);
 }
 
 bool inline serialize(serialize_writer& stream, serialize_context& context, unsigned short t, const tchar* name= 0)
 {
-	return stream.write(context,(int)t,name);
+	return stream.write(context,(int16_t)t,name);
 }
 
 bool inline serialize(serialize_writer& stream, serialize_context& context, unsigned int t, const tchar* name= 0)
 {
-	return stream.write(context,(int)t,name);
+	return stream.write(context,(int32_t)t,name);
 }
 
 bool inline serialize(serialize_writer& stream, serialize_context& context, unsigned long t, const tchar* name= 0)
 {
-	return stream.write(context,(int)t,name);
+	return stream.write(context,(int32_t)t,name);
 }
 
 bool inline serialize(serialize_writer& stream, serialize_context& context, unsigned __int64 t, const tchar* name= 0)
 {
-	return stream.write(context,(__int64)t,name);
+	return stream.write(context,(int64_t)t,name);
 }
 
-bool inline serialize(serialize_writer& stream, serialize_context& context, const std::string& t, const tchar* name= 0)
+template< class _Elem,
+	class _Traits,
+	class _Ax >
+bool inline serialize(serialize_writer& stream, serialize_context& context, const std::basic_string<_Elem,_Traits,_Ax>& t, const tchar* name= 0)
 {
-	return stream.write(context,(int)t.size(),name) && stream.write(context, t.c_str(), t.size() + 1, name);
-}
-
-bool inline serialize(serialize_writer& stream, serialize_context& context, const std::wstring& t, const tchar* name= 0)
-{
-	return stream.write((int)(t.size() * sizeof( wchar_t)),name) && stream.write(t.c_str(), (int)(t.size() * sizeof( wchar_t)) + 1, name);
+	serialize_context::string_guard guard( context );
+	size_t len = (t.size()+ 1) * sizeof( std::basic_string<_Elem,_Traits,_Ax>::value_type );
+	return stream.write(context, (int32_t)( len ) ,name)
+		&& stream.write(context, t.c_str(), len , name);
 }
 
 template< typename T >
 bool inline serialize(serialize_writer& stream, serialize_context& context, const T& s1, const tchar* name= 0)
 {
-	return s1.write(strm, name);
+	return s1.write(stream, context, name);
 }
 
 //反序列化基础函数
 
 bool inline deserialize(serialize_writer& stream, serialize_context& context, bool& t, const tchar* name= 0)
 {
-	return stream.read(t,name);
+	return stream.read(context, t,name);
 }
 
 template< typename T,typename P>
 inline bool ___deserialize_object(serialize_writer& stream, serialize_context& context, P& t, const tchar* name= 0)
 {
 	T value;
-	if( stream.read( value, name) )
+	if( stream.read(context, value, name) )
 	{
 		t = (P)value;
 		return true;
@@ -128,12 +130,12 @@ inline bool ___deserialize_object(serialize_writer& stream, serialize_context& c
 
 bool inline deserialize(serialize_reader& stream, serialize_context& context, char& t, const tchar* name= 0)
 {
-	return ___deserialize_object< int, char>( t, stream, name );
+	return ___deserialize_object< int8_t, char>(stream, context, t, name );
 }
 
 bool inline deserialize(serialize_reader& stream, serialize_context& context, short& t, const tchar* name= 0)
 {
-	return ___deserialize_object< int, short>( t, stream, name );
+	return ___deserialize_object< int16_t, short>(stream, context, t, name );
 }
 
 bool inline deserialize(serialize_reader& stream, serialize_context& context, int& t, const tchar* name= 0)
@@ -143,78 +145,92 @@ bool inline deserialize(serialize_reader& stream, serialize_context& context, in
 
 bool inline deserialize(serialize_reader& stream, serialize_context& context, long& t, const tchar* name= 0)
 {
-	return ___deserialize_object< int, long>( t, stream, name );
+	return ___deserialize_object< int32_t, long>(stream, context, t, name );
 }
 
 bool inline deserialize(serialize_reader& stream, serialize_context& context, __int64& t, const tchar* name= 0)
 {
-	return stream.read(t,name);
+	return stream.read(context, t, name);
 }
 
 bool inline deserialize(serialize_reader& stream, serialize_context& context, unsigned char& t, const tchar* name= 0)
 {
-	return ___deserialize_object< int,unsigned char>( t, stream, name );
+	return ___deserialize_object< int8_t, unsigned char>(stream, context, t, name );
 }
 
 bool inline deserialize(serialize_reader& stream, serialize_context& context, unsigned short& t, const tchar* name= 0)
 {
-	return ___deserialize_object< int,unsigned short>( t, stream, name );
+	return ___deserialize_object< int16_t, unsigned short>(stream, context, t, name );
 }
 
-bool inline deserialize( unsigned int& t, const tchar* name= 0)
+bool inline deserialize(serialize_reader& stream, serialize_context& context, unsigned int& t, const tchar* name= 0)
 {
-	return ___deserialize_object< int,unsigned int>( t, stream, name );
+	return ___deserialize_object< int32_t,unsigned int>( t, stream, name );
 }
 
 bool inline deserialize(serialize_reader& stream, serialize_context& context, unsigned long& t, const tchar* name= 0)
 {
-	return ___deserialize_object< int,unsigned long>( t, stream, name );
+	return ___deserialize_object< int32_t,unsigned long>( t, stream, name );
 }
 
 bool inline deserialize(serialize_reader& stream, serialize_context& context, unsigned __int64& t, const tchar* name= 0)
 {
-	return ___deserialize_object< __int64,unsigned __int64>( t, stream, name );
+	return ___deserialize_object<int64_t,unsigned __int64>( t, stream, name );
 }
 
 
-bool inline deserialize(serialize_reader& stream, serialize_context& context, std::string& t, const tchar* name= 0)
+//bool inline deserialize(serialize_reader& stream, serialize_context& context, std::string& t, const tchar* name= 0)
+//{
+//	serialize_context::string_guard guard( context );
+//
+//	int value;
+//	if( !stream.read(context, value, name) )
+//		return false;
+//
+//	t.resize( value );
+//	size_t len = 0;
+//	if( !stream.read(context, (void*)t.c_str(),len, name) )
+//		return false;
+//
+//	t.resize( len- sizeof(wchar_t) );
+//	return true;
+//}
+
+
+template< class _Elem,
+	class _Traits,
+	class _Ax >
+bool inline deserialize(serialize_writer& stream, serialize_context& context, std::basic_string<_Elem,_Traits,_Ax>& t, const tchar* name= 0)
 {
+	//typedef std::basic_string<_Elem,_Traits,_Ax> string_type;
+
+	serialize_context::string_guard guard( context );
+
 	int value;
-	if( !stream.read( value, name) )
+	if( !stream.read(context, value, name) )
 		return false;
+
 	t.resize( value );
 	size_t len = 0;
-	if( !stream.read( (void*)t.c_str(),len, name) )
+	if( !stream.read(context, (void*)t.c_str(),len, name) )
 		return false;
 
 	t.resize( len-1 );
 	return true;
 }
 
-bool inline deserialize(serialize_reader& stream, serialize_context& context, std::wstring& t, const tchar* name = 0)
-{
-	int value;
-	if( !stream.read( value, name) )
-		return false;
-	t.resize( value );
-	size_t len = 0;
-	if( !stream.read( (void*)t.c_str(),len, name) )
-		return false;
 
-	t.resize( len-1 );
-	return true;
-}
 
 template< typename T >
 bool inline deserialize(serialize_reader& stream, serialize_context& context, T& s1, const tchar* name= 0)
 {
-	return s1.read(strm, name);
+	return s1.read(stream,context, name);
 }
 
 template< typename T>
 bool inline serialize(serialize_writer& stream, serialize_context& context, const std::auto_ptr<T>& ptr_, const tchar* name =  0)
 {
-	return serialize( *ptr_, stream,name);
+	return serialize( stream,context, *ptr_, name);
 }
 
 template< typename T1, typename T2>
@@ -222,6 +238,7 @@ bool inline serialize(serialize_writer& stream, serialize_context& context, cons
 {
 	return serialize( pair_.second, stream,name );
 }
+
 template< typename _Init>
 bool inline serialize(serialize_writer& stream, serialize_context& context, _Init _F, _Init _E, const size_t& size = -1, const tchar* name = 0)
 {

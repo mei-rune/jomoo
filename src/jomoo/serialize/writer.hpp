@@ -71,7 +71,7 @@ public:
 	 * @param[ in ] len 要序列化的数据块的长度
 	 * @param[ in ] field_name 字段名字
 	 */
-	virtual bool write(serialize_context& context, const void* blob, size_t len, const tchar* field_name = "blob") = 0;
+	virtual bool write(serialize_context& context, const void* blob, size_t len, const tchar* field_name = _T("blob") ) = 0;
 
 	/**
 	 * 流是否正常
