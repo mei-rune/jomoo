@@ -38,10 +38,10 @@ class thread_closure_0
 {
 public:
 
-	thread_closure_0( _jomoo_memory pool_ptr pool, const F& f, const char* nm = 0)
+	thread_closure_0( _jomoo_memory pool_ptr pool, const F& f, const tchar* nm = 0)
 		: _pool( pool )
 		, _function( f )
-		, _name( (0 == nm) ? "" : nm )
+		, _name( (0 == nm) ? _T("") : nm )
 	{
 	}
 
@@ -76,10 +76,10 @@ class thread_closure_1
 {
 public:
 
-	thread_closure_1(_jomoo_memory pool_ptr pool, const F& f, const P& x, const char* nm = 0)
+	thread_closure_1(_jomoo_memory pool_ptr pool, const F& f, const P& x, const tchar* nm = 0)
 		: _pool( pool )
 		, _function( f )
-		, _name( (0 == nm) ? "" : nm )
+		, _name( (0 == nm) ? _T("") : nm )
 		, arg1( x )
 	{
 	}
@@ -115,10 +115,10 @@ class thread_closure_2
 {
 public:
 
-	thread_closure_2(_jomoo_memory pool_ptr pool, const F& f, const P1& x1, const P2& x2, const char* nm = 0)
+	thread_closure_2(_jomoo_memory pool_ptr pool, const F& f, const P1& x1, const P2& x2, const tchar* nm = 0)
 		: _pool( pool )
 		, _function( f )
-		, _name( (0 == nm) ? "" : nm )
+		, _name( (0 == nm) ? _T("") : nm )
 		, arg1( x1 )
 		, arg2( x2 )
 	{
@@ -156,10 +156,10 @@ class thread_closure_3
 {
 public:
 
-	thread_closure_3(_jomoo_memory pool_ptr pool, const F& f, const P1& x1, const P2& x2, const P3& x3, const char* nm = 0)
+	thread_closure_3(_jomoo_memory pool_ptr pool, const F& f, const P1& x1, const P2& x2, const P3& x3, const tchar* nm = 0)
 		: _pool( pool )
 		, _function( f )
-		, _name( (0 == nm) ? "" : nm )
+		, _name( (0 == nm) ? _T("") : nm )
 		, arg1( x1 )
 		, arg2( x2 )
 		, arg3( x3 )
