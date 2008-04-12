@@ -166,6 +166,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\jomoo\DateTime.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\DateTimeFormatter.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\jomoo\empty_type.h"
 				>
 			</File>
@@ -211,6 +219,18 @@
 			</File>
 			<File
 				RelativePath="..\..\src\jomoo\threading.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\Timespan.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\Timestamp.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\Timezone.h"
 				>
 			</File>
 		</Filter>
@@ -596,6 +616,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\jomoo\util\NumberFormatter.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\jomoo\util\ServiceManager.cpp"
 				>
 			</File>
@@ -779,6 +803,10 @@
 					>
 				</File>
 			</Filter>
+		</Filter>
+		<Filter
+			Name="db"
+			>
 		</Filter>
 	</Files>
 	<Globals>

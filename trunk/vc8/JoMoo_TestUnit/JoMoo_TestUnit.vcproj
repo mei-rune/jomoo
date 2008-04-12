@@ -223,35 +223,71 @@
 			<Filter
 				Name="Collections"
 				>
-				<File
-					RelativePath="..\..\src\Base\Collections\unittest\collections_test.CPP"
-					>
-				</File>
 			</Filter>
 			<Filter
 				Name="Memory"
 				>
-				<File
-					RelativePath="..\..\src\Base\Memory\unittest\FixedPoolTest.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\Memory\unittest\ObjectPoolTest.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\Memory\unittest\PoolTest.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\Memory\unittest\SystemPoolTest.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\Base\Memory\unittest\Test.h"
-					>
-				</File>
 			</Filter>
+		</Filter>
+		<Filter
+			Name="Time"
+			>
+			<File
+				RelativePath="..\..\src\jomoo\unittest\DateTimeFormatterTest.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\unittest\DateTimeFormatterTest.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\unittest\DateTimeParserTest.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\unittest\DateTimeParserTest.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\unittest\DateTimeTest.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\unittest\DateTimeTest.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\unittest\DateTimeTestSuite.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\unittest\DateTimeTestSuite.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\unittest\TimespanTest.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\unittest\TimespanTest.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\unittest\TimestampTest.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\unittest\TimestampTest.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\unittest\TimezoneTest.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\unittest\TimezoneTest.h"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath=".\ReadMe.txt"
