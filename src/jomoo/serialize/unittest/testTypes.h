@@ -121,7 +121,7 @@ struct filler< string >
 
 #define DESERIALIZE_END() && strm.close(context); }
 
-_bt_begin
+_jomoo_db_begin
 
  /// (1.3.6.1.3.118.1.2.1)  -- 这个表专门给出了每一个端口MPLS的能力和关联信息
 struct Mpls_Vpn_Interface_Conf_Table
