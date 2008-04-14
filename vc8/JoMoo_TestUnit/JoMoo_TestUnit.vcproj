@@ -241,14 +241,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\jomoo\unittest\DateTimeParserTest.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\unittest\DateTimeParserTest.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\src\jomoo\unittest\DateTimeTest.cpp"
 				>
 			</File>
