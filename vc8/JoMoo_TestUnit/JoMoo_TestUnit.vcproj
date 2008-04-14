@@ -289,6 +289,22 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="serialize"
+			>
+			<File
+				RelativePath="..\..\src\jomoo\serialize\unittest\SerializeTestFixture.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\serialize\unittest\SerializeTestFixture.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\serialize\unittest\testTypes.h"
+				>
+			</File>
+		</Filter>
 		<File
 			RelativePath=".\ReadMe.txt"
 			>
