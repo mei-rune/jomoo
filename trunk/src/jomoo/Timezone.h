@@ -9,6 +9,7 @@
 
 // Include files
 # include <time.h>
+# include "Timestamp.h"
 
 _jomoo_begin
 
@@ -16,12 +17,12 @@ class Timezone
 {
 public:
 
-	int tzd()
+	static int tzd()
 	{
 		return utcOffset() + dst();
 	}
 
-	int utcOffset()
+	static int utcOffset()
 	{
 		TIME_ZONE_INFORMATION tzInfo;
 		DWORD dstFlag = GetTimeZoneInformation(&tzInfo);
@@ -29,7 +30,7 @@ public:
 	}
 
 
-	int dst()
+	static int dst()
 	{
 		TIME_ZONE_INFORMATION tzInfo;
 		DWORD dstFlag = GetTimeZoneInformation(&tzInfo);
@@ -37,15 +38,15 @@ public:
 	}
 
 
-	bool isDst(const Timestamp& timestamp)
+	static bool isDst(const Timestamp& timestamp)
 	{
-		std::time_t time = timestamp.epochTime();
-		struct std::tm* tms = std::localtime(&time);
+		time_t time = timestamp.epochTime();
+		struct std::tm* tms = ::localtime(&time);
 		return tms->tm_isdst > 0;
 	}
 
 
-	std::string name()
+	static std::string name()
 	{
 		std::string result;
 		TIME_ZONE_INFORMATION tzInfo;
@@ -61,7 +62,7 @@ public:
 		return result;
 	}
 
-	std::string standardName()
+	static std::string standardName()
 	{
 		std::string result;
 		TIME_ZONE_INFORMATION tzInfo;
@@ -78,7 +79,7 @@ public:
 	}
 
 
-	std::string dstName()
+	static std::string dstName()
 	{
 		std::string result;
 		TIME_ZONE_INFORMATION tzInfo;

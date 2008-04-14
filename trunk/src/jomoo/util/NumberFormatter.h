@@ -26,12 +26,24 @@ class NumberFormatter
 {
 public:
 
+	static void sprintf( tstring& buffer,const tchar* fmt, ... )
+	{
+		va_list argptr;
+		va_start(argptr,fmt );
+#ifdef  _UNICODE
+		buffer.resize( vsnwprintf_s(( char*) buffer.c_str(), buffer.capacity( ), buffer.size(), fmt, argptr ) );
+#else
+		buffer.resize( vsnprintf_s(( char*) buffer.c_str(), buffer.capacity( ), buffer.size(), fmt, argptr ) );
+#endif
+		va_end(argptr);
+	}
+
 	static tstring format(int value)
 	{
 		tstring buffer;
 		buffer.resize( 64 );
 
-		std::sprintf(buffer, _T("%d"), value);
+		sprintf(buffer, _T("%d"), value);
 		return buffer;
 	}
 
@@ -40,7 +52,7 @@ public:
 		tstring buffer;
 		buffer.resize( width + 10 );
 
-		std::sprintf(buffer, _T("%*d"), width, value);
+		sprintf(buffer, _T("%*d"), width, value);
 		return buffer;
 	}
 
@@ -49,7 +61,7 @@ public:
 		tstring buffer;
 		buffer.resize( width + 10 );
 		
-		std::sprintf(buffer, _T("%0*d"), width, value);
+		sprintf(buffer, _T("%0*d"), width, value);
 		return buffer;
 	}
 
@@ -58,7 +70,7 @@ public:
 		tstring buffer;
 		buffer.resize( 64 );
 
-		std::sprintf(buffer, _T("%X"), value);
+		sprintf(buffer, _T("%X"), value);
 		return buffer;
 	}
 
@@ -67,7 +79,7 @@ public:
 		tstring buffer;
 		buffer.resize( width + 10 );
 
-		std::sprintf(buffer, _T("%0*X"), width, value);
+		sprintf(buffer, _T("%0*X"), width, value);
 		return buffer;
 	}
 
@@ -76,7 +88,7 @@ public:
 		tstring buffer;
 		buffer.resize( 64 );
 
-		std::sprintf(buffer, _T("%u"), value);
+		sprintf(buffer, _T("%u"), value);
 		return buffer;
 	}
 
@@ -85,7 +97,7 @@ public:
 		tstring buffer;
 		buffer.resize( width + 10 );
 
-		std::sprintf(buffer, _T("%*u"), width, value);
+		sprintf(buffer, _T("%*u"), width, value);
 		return buffer;
 	}
 
@@ -94,7 +106,7 @@ public:
 		tstring buffer;
 		buffer.resize( width + 10 );
 
-		std::sprintf(buffer, _T("%0*u"), width, value);
+		sprintf(buffer, _T("%0*u"), width, value);
 		return buffer;
 	}
 
@@ -104,7 +116,7 @@ public:
 		tstring buffer;
 		buffer.resize( 64 );
 
-		std::sprintf(buffer, _T("%X"), value);
+		sprintf(buffer, _T("%X"), value);
 		return buffer;
 	}
 
@@ -113,7 +125,7 @@ public:
 		tstring buffer;
 		buffer.resize( width + 10 );
 
-		std::sprintf(buffer, _T("%0*X"), width, value);
+		sprintf(buffer, _T("%0*X"), width, value);
 		return buffer;
 	}
 
@@ -122,7 +134,7 @@ public:
 		tstring buffer;
 		buffer.resize( 64 );
 
-		std::sprintf(buffer, _T("%ld"), value);
+		sprintf(buffer, _T("%ld"), value);
 		return buffer;
 	}
 
@@ -131,7 +143,7 @@ public:
 		tstring buffer;
 		buffer.resize( width + 10 );
 
-		std::sprintf(buffer, _T("%*ld"), width, value);
+		sprintf(buffer, _T("%*ld"), width, value);
 		return buffer;
 	}
 
@@ -140,7 +152,7 @@ public:
 		tstring buffer;
 		buffer.resize( width + 10 );
 
-		std::sprintf(buffer, _T("%0*ld"), width, value);
+		sprintf(buffer, _T("%0*ld"), width, value);
 		return buffer;
 	}
 
@@ -149,7 +161,7 @@ public:
 		tstring buffer;
 		buffer.resize( 64 );
 
-		std::sprintf(buffer, _T("%lX"), value);
+		sprintf(buffer, _T("%lX"), value);
 		return buffer;
 	}
 
@@ -158,7 +170,7 @@ public:
 		tstring buffer;
 		buffer.resize( width + 10 );
 
-		std::sprintf(buffer, _T("%0*lX"), width, value);
+		sprintf(buffer, _T("%0*lX"), width, value);
 		return buffer;
 	}
 
@@ -167,7 +179,7 @@ public:
 		tstring buffer;
 		buffer.resize( 64 );
 
-		std::sprintf(buffer, _T("%lu"), value);
+		sprintf(buffer, _T("%lu"), value);
 		return buffer;
 	}
 
@@ -176,7 +188,7 @@ public:
 		tstring buffer;
 		buffer.resize( width + 10 );
 
-		std::sprintf(buffer, _T("%*lu"), width, value);
+		sprintf(buffer, _T("%*lu"), width, value);
 		return buffer;
 	}
 
@@ -185,7 +197,7 @@ public:
 		tstring buffer;
 		buffer.resize( width + 10 );
 
-		std::sprintf(buffer, _T("%0*lu"), width, value);
+		sprintf(buffer, _T("%0*lu"), width, value);
 		return buffer;
 	}
 
@@ -194,7 +206,7 @@ public:
 		tstring buffer;
 		buffer.resize( 64 );
 
-		std::sprintf(buffer, _T("%lX"), value);
+		sprintf(buffer, _T("%lX"), value);
 		return buffer;
 	}
 
@@ -203,7 +215,7 @@ public:
 		tstring buffer;
 		buffer.resize( width + 10 );
 
-		std::sprintf(buffer, _T("%0*lX"), width, value);
+		sprintf(buffer, _T("%0*lX"), width, value);
 		return buffer;
 	}
 
@@ -212,7 +224,7 @@ public:
 		tstring buffer;
 		buffer.resize( 64 );
 
-		std::sprintf(buffer, _T("%") I64_FMT _T("d"), value);
+		sprintf(buffer, _T("%") I64_FMT _T("d"), value);
 		return buffer;
 	}
 
@@ -221,7 +233,7 @@ public:
 		tstring buffer;
 		buffer.resize( width + 10 );
 
-		std::sprintf(buffer, _T("%*") I64_FMT _T("d"), width, value);
+		sprintf(buffer, _T("%*") I64_FMT _T("d"), width, value);
 		return buffer;
 	}
 
@@ -230,7 +242,7 @@ public:
 		tstring buffer;
 		buffer.resize( width + 10 );
 
-		std::sprintf(buffer, _T("%0*") I64_FMT _T("d"), width, value);
+		sprintf(buffer, _T("%0*") I64_FMT _T("d"), width, value);
 		return buffer;
 	}
 
@@ -239,7 +251,7 @@ public:
 		tstring buffer;
 		buffer.resize( 64 );
 
-		std::sprintf(buffer, _T("%") I64_FMT _T("X"), value);
+		sprintf(buffer, _T("%") I64_FMT _T("X"), value);
 		return buffer;
 	}
 
@@ -248,7 +260,7 @@ public:
 		tstring buffer;
 		buffer.resize( width + 10 );
 
-		std::sprintf(buffer, _T("%0*") I64_FMT _T("X"), width, value);
+		sprintf(buffer, _T("%0*") I64_FMT _T("X"), width, value);
 		return buffer;
 	}
 
@@ -257,7 +269,7 @@ public:
 		tstring buffer;
 		buffer.resize( 64 );
 
-		std::sprintf(buffer, _T("%") I64_FMT _T("u"), value);
+		sprintf(buffer, _T("%") I64_FMT _T("u"), value);
 		return buffer;
 	}
 
@@ -266,7 +278,7 @@ public:
 		tstring buffer;
 		buffer.resize( width + 10 );
 
-		std::sprintf(buffer, _T("%*") I64_FMT _T("u"), width, value);
+		sprintf(buffer, _T("%*") I64_FMT _T("u"), width, value);
 		return buffer;
 	}
 
@@ -275,7 +287,7 @@ public:
 		tstring buffer;
 		buffer.resize( width + 10 );
 
-		std::sprintf(buffer, _T("%0*") I64_FMT _T("u"), width, value);
+		sprintf(buffer, _T("%0*") I64_FMT _T("u"), width, value);
 		return buffer;
 	}
 
@@ -284,7 +296,7 @@ public:
 		tstring buffer;
 		buffer.resize( 64 );
 
-		std::sprintf(buffer, _T("%") I64_FMT _T("X"), value);
+		sprintf(buffer, _T("%") I64_FMT _T("X"), value);
 		return buffer;
 	}
 
@@ -293,7 +305,7 @@ public:
 		tstring buffer;
 		buffer.resize( width + 10 );
 
-		std::sprintf(buffer, _T("%0*") I64_FMT _T("X"), width, value);
+		sprintf(buffer, _T("%0*") I64_FMT _T("X"), width, value);
 		return buffer;
 	}
 
@@ -302,7 +314,7 @@ public:
 		tstring buffer;
 		buffer.resize( 64 );
 
-		std::sprintf(buffer, _T("%.*g"), 10, (double) value);
+		sprintf(buffer, _T("%.*g"), 10, (double) value);
 		return buffer;
 	}
 
@@ -311,25 +323,26 @@ public:
 		tstring buffer;
 		buffer.resize( 64 );
 
-		std::sprintf(buffer, _T("%.*g"), 20, value);
+		sprintf(buffer, _T("%.*g"), 20, value);
 		return buffer;
 	}
 
 	static tstring format(double value, int precision)
 	{
 		tstring buffer;
-		buffer.resize( 2*width + 10 );
+		buffer.resize( 2*precision + 10 );
 
-		std::sprintf(buffer, _T("%.*f"), precision, value);
+		sprintf(buffer, _T("%.*f"), precision, value);
 		return buffer;
 	}
+
 
 	static tstring format(double value, int width, int precision)
 	{
 		tstring buffer;
-		buffer.resize( 2*std::max(width, precision) + 10 );
+		buffer.resize( 2*((width > precision) ? width : precision) + 10 );
 
-		std::sprintf(buffer, _T("%*.*f"), width, precision, value);
+		sprintf(buffer, _T("%*.*f"), width, precision, value);
 		return buffer;
 	}
 
@@ -338,7 +351,7 @@ public:
 		tstring buffer;
 		buffer.resize( 64 );
 
-		std::sprintf(buffer, _T("%08lX"), (UIntPtr) ptr);
+		sprintf(buffer, _T("%08lX"), (int) ptr);
 		return buffer;
 	}
 };

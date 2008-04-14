@@ -1,5 +1,5 @@
-# ifndef timespan_h
-# define timespan_h
+# ifndef Timespan_H
+# define Timespan_H
 
 # include "jomoo/config.h"
 
@@ -11,7 +11,6 @@
 # include <time.h>
 
 _jomoo_begin
-
 
 class Timespan
 {
@@ -28,7 +27,7 @@ public:
 	}
 
 
-	explict Timespan(int64_t microseconds)
+	explicit Timespan(int64_t microseconds)
 		: _span(microseconds)
 	{
 	}
@@ -275,4 +274,4 @@ inline void swap(Timespan& s1, Timespan& s2)
 
 _jomoo_end
 
-#endif // timespan_h
+#endif // Timespan_H

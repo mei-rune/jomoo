@@ -238,5 +238,7 @@ inline T get_ptr( T t )
 #define OS_INLINE inline
 #define JOMOO_MT
 
+#define jomoo_assert assert
+
 #define null_ptr NULL
 #endif // _config_H_

@@ -1,5 +1,5 @@
-# ifndef date_time_h
-# define date_time_h
+# ifndef DateTime_H
+# define DateTime_H
 
 # include "jomoo/config.h"
 
@@ -9,6 +9,10 @@
 
 // Include files
 # include <time.h>
+# include <cmath>
+# include <assert.h>
+# include "Timespan.h"
+# include "Timestamp.h"
 
 _jomoo_begin
 
@@ -42,17 +46,17 @@ public:
 		SATURDAY
 	};
 
+	DateTime(const Timestamp& stamp)
+	//	: _utcTime(stamp.utcTime())
+	{
+		//computeGregorian(julianDay());
+		//computeDaytime();
+	}
+
 	DateTime()
 	{
 		Timestamp now;
 		_utcTime = now.utcTime();
-		computeGregorian(julianDay());
-		computeDaytime();
-	}
-
-	DateTime(const Timestamp& timestamp)
-		: _utcTime(timestamp.utcTime())
-	{
 		computeGregorian(julianDay());
 		computeDaytime();
 	}
@@ -126,9 +130,9 @@ public:
 	}
 
 
-	DateTime& operator = (const Timestamp& timestamp)
+	DateTime& operator= (const Timestamp& stamp)
 	{
-		_utcTime = timestamp.utcTime();
+		_utcTime = stamp.utcTime();
 		computeGregorian(julianDay());
 		computeDaytime();
 		return *this;
@@ -143,16 +147,16 @@ public:
 	}
 
 
-	DateTime& assign(int year, int month, int day, int hour, int minute, int second, int millisecond, int microsecond)
+	DateTime& assign(int year, int month, int day, int hour = 0, int minute = 0, int second = 0, int millisecond = 0, int microsecond = 0)
 	{
-		poco_assert (year >= 0 && year <= 9999);
-		poco_assert (month >= 1 && month <= 12);
-		poco_assert (day >= 1 && day <= daysOfMonth(year, month));
-		poco_assert (hour >= 0 && hour <= 23);
-		poco_assert (minute >= 0 && minute <= 59);
-		poco_assert (second >= 0 && second <= 59);
-		poco_assert (millisecond >= 0 && millisecond <= 999);
-		poco_assert (microsecond >= 0 && microsecond <= 999);
+		jomoo_assert (year >= 0 && year <= 9999);
+		jomoo_assert (month >= 1 && month <= 12);
+		jomoo_assert (day >= 1 && day <= daysOfMonth(year, month));
+		jomoo_assert (hour >= 0 && hour <= 23);
+		jomoo_assert (minute >= 0 && minute <= 59);
+		jomoo_assert (second >= 0 && second <= 59);
+		jomoo_assert (millisecond >= 0 && millisecond <= 999);
+		jomoo_assert (microsecond >= 0 && microsecond <= 999);
 
 		_utcTime     = toUtcTime(toJulianDay(year, month, day)) + 10*(hour*Timespan::HOURS + minute*Timespan::MINUTES + second*Timespan::SECONDS + millisecond*Timespan::MILLISECONDS + microsecond);
 		_year        = year;
@@ -205,6 +209,22 @@ public:
 	int month() const
 	{
 		return _month;
+	}
+	
+	int week(int firstDayOfWeek = MONDAY) const
+	{
+		jomoo_assert (firstDayOfWeek >= 0 && firstDayOfWeek <= 6);
+
+		/// find the first firstDayOfWeek.
+		int baseDay = 1;
+		while (DateTime(_year, 1, baseDay).dayOfWeek() != firstDayOfWeek) ++baseDay;
+
+		int doy  = dayOfYear();
+		int offs = baseDay <= 4 ? 0 : 1; 
+		if (doy < baseDay)
+			return offs;
+		else
+			return (doy - baseDay)/7 + 1 + offs;
 	}
 
 
@@ -371,7 +391,7 @@ public:
 
 	static int daysOfMonth(int year, int month)
 	{
-		poco_assert (month >= 1 && month <= 12);
+		jomoo_assert (month >= 1 && month <= 12);
 
 		static int daysOfMonthTable[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
@@ -381,7 +401,7 @@ public:
 			return daysOfMonthTable[month];
 	}
 
-	static bool isValid(int year, int month, int day, int hour = 0, int minute = 0, int second = 0, int millisecond = 0, int microsecond = 0);
+	static bool isValid(int year, int month, int day, int hour = 0, int minute = 0, int second = 0, int millisecond = 0, int microsecond = 0)
 	{
 		return
 			(year >= 0 && year <= 9999) &&
@@ -455,13 +475,13 @@ protected:
 
 		normalize();
 
-		poco_assert_dbg (_month >= 1 && _month <= 12);
-		poco_assert_dbg (_day >= 1 && _day <= daysOfMonth(_year, _month));
-		poco_assert_dbg (_hour >= 0 && _hour <= 23);
-		poco_assert_dbg (_minute >= 0 && _minute <= 59);
-		poco_assert_dbg (_second >= 0 && _second <= 59);
-		poco_assert_dbg (_millisecond >= 0 && _millisecond <= 999);
-		poco_assert_dbg (_microsecond >= 0 && _microsecond <= 999);
+		jomoo_assert (_month >= 1 && _month <= 12);
+		jomoo_assert (_day >= 1 && _day <= daysOfMonth(_year, _month));
+		jomoo_assert (_hour >= 0 && _hour <= 23);
+		jomoo_assert (_minute >= 0 && _minute <= 59);
+		jomoo_assert (_second >= 0 && _second <= 59);
+		jomoo_assert (_millisecond >= 0 && _millisecond <= 999);
+		jomoo_assert (_microsecond >= 0 && _microsecond <= 999);
 	}
 
 	void computeDaytime()
@@ -518,4 +538,4 @@ void swap(DateTime& d1, DateTime& d2)
 
 _jomoo_end
 
-#endif // date_time_h
+#endif // DateTime_H
