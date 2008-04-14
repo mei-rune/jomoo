@@ -73,9 +73,9 @@ public:
 		_ts = ts.QuadPart/10;
 	}
 
-	std::time_t epochTime() const
+	time_t epochTime() const
 	{
-		return std::time_t(_ts/resolution());
+		return time_t(_ts/resolution());
 	}
 
 	int64_t utcTime() const
@@ -158,14 +158,14 @@ public:
 		return *this;
 	}
 
-	static Timestamp Timestamp::fromEpochTime(std::time_t t)
+	static Timestamp fromEpochTime(time_t t)
 	{
-		return Timestamp(TimeVal(t)*resolution());
+		return Timestamp(int64_t(t)*resolution());
 	}
 
-	static Timestamp Timestamp::fromUtcTime(int64_t val)
+	static Timestamp fromUtcTime(int64_t val)
 	{
-		val -= (TimeDiff(0x01b21dd2) << 32) + 0x13814000;
+		val -= (int64_t(0x01b21dd2) << 32) + 0x13814000;
 		val /= 10;
 		return Timestamp(val);
 	}
@@ -175,7 +175,7 @@ public:
 		return 1000000;
 	}
 
-	static Timestamp fromFileTimeNP(UInt32 fileTimeLow, UInt32 fileTimeHigh)
+	static Timestamp fromFileTimeNP(u_int32_t fileTimeLow, u_int32_t fileTimeHigh)
 	{
 		ULARGE_INTEGER epoch; // UNIX epoch (1970-01-01 00:00:00) expressed in Windows NT FILETIME
 		epoch.LowPart  = 0xD53E8000;
@@ -189,7 +189,7 @@ public:
 		return Timestamp(ts.QuadPart/10);
 	}
 
-	void toFileTimeNP(UInt32& fileTimeLow, UInt32& fileTimeHigh) const
+	void toFileTimeNP(u_int32_t& fileTimeLow, u_int32_t& fileTimeHigh) const
 	{
 		ULARGE_INTEGER epoch; // UNIX epoch (1970-01-01 00:00:00) expressed in Windows NT FILETIME
 		epoch.LowPart  = 0xD53E8000;

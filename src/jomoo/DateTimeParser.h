@@ -1,5 +1,5 @@
 # ifndef DateTimeParser_H
-# define DateTimeFormatter_H
+# define DateTimeParser_H
 
 # include "jomoo/config.h"
 
@@ -9,26 +9,13 @@
 
 // Include files
 # include <time.h>
-#include "Poco/DateTime.h"
+#include "DateTime.h"
 
 
-namespace Poco {
+_jomoo_begin
 
 
-class Foundation_API DateTimeParser
-	/// This class provides a method for parsing dates and times
-	/// from strings. All parsing methods do their best to
-	/// parse a meaningful result, even from malformed input
-	/// strings.
-	///
-	/// The returned DateTime will always contain a time in the same
-	/// timezone as the time in the string. Call DateTime::makeUTC()
-	/// with the timeZoneDifferential returned by parse() to convert
-	/// the DateTime to UTC.
-	///
-	/// Note: When parsing a time in 12-hour (AM/PM) format, the hour
-	/// (%h) must be parsed before the AM/PM designator (%a, %A),
-	/// otherwise the AM/PM designator will be ignored.
+class DateTimeParser
 {
 public:
 	static void parse(const std::string& fmt, const std::string& str, DateTime& dateTime, int& timeZoneDifferential);
@@ -85,8 +72,7 @@ protected:
 	static int parseAMPM(std::string::const_iterator& it, const std::string::const_iterator& end, int hour);
 };
 
-
-} // namespace Poco
+_jomoo_end
 
 
 #endif // Foundation_DateTimeParser_INCLUDED
