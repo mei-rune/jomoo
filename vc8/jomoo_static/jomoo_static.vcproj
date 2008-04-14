@@ -787,22 +787,6 @@
 				RelativePath="..\..\src\jomoo\serialize\XML_serializer.h"
 				>
 			</File>
-			<Filter
-				Name="unittest"
-				>
-				<File
-					RelativePath="..\..\src\jomoo\serialize\unittest\SerializeTestFixture.cpp"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\jomoo\serialize\unittest\SerializeTestFixture.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\jomoo\serialize\unittest\testTypes.h"
-					>
-				</File>
-			</Filter>
 		</Filter>
 		<Filter
 			Name="db"
