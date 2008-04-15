@@ -11,7 +11,7 @@
 
 // Include files
 #include "config_Networks.h"
-#include "Platform/OS.H"
+#include "jomoo/platform/os.h"
 #include "io_request.h"
 
 _networks_begin
