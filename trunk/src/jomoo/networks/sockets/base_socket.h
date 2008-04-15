@@ -10,6 +10,7 @@
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
+# include "../config_Networks.h"
 # include "inet_address.h"
 # include "os_networks.h"
 
