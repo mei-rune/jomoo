@@ -3,7 +3,7 @@
 #ifndef _proactor_h_
 #define _proactor_h_
 
-#include "config.h"
+#include "jomoo/config.h"
 
 #if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once

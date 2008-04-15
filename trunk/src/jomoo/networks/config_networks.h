@@ -3,7 +3,6 @@
 #ifndef _Config_Networks_H
 #define _Config_Networks_H
 
-
 #include "jomoo/config.h"
 
 #if !defined (JOMOO_LACKS_PRAGMA_ONCE)
