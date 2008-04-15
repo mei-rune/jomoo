@@ -647,6 +647,26 @@
 				RelativePath="..\..\src\jomoo\networks\config_networks.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\src\jomoo\networks\connected_socket.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\networks\connection_status.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\networks\io_request.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\networks\proactor.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\networks\proactor.h"
+				>
+			</File>
 			<Filter
 				Name="sockets"
 				>
