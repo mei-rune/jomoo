@@ -1,6 +1,5 @@
 
-# include "WIN32OperationProactor.h"
-# include "WIN32OperationOverlapped.h"
+# include "proactor.h"
 # include "Base/exception.hpp"
 # include <iostream>
 
@@ -16,27 +15,27 @@ _networks_begin
 proactor::proactor(  )
 : m_completion_port_( NULL )
 {
-	//for( int i = 0; i < 100; i ++ )
-	//{
-	//	queue_.push( WIN32_Defer( 0, !result_delete_, this, JOMOO_INVALID_HANDLE_VALUE , 0 );
-	//}
 }
 
-proactor::proactor( u_long milli_seconds)
+proactor::proactor( size_t number_of_threads )
 : m_completion_port_( NULL )
 {
 	open( milli_seconds );
-	//	ThrowException1( RuntimeException , BT_TEXT("创建完成端口失败") );
 }
 
 proactor::~proactor(void)
 {
 }
 
-int proactor::open ( size_t number_of_threads )
+bool proactor::is_good() const
 {
-	if( m_completion_port_ != NULL )
-		ThrowException1( RuntimeException , BT_TEXT("已经初始化过了!") );
+	return NULL != m_completion_port_;
+}
+
+bool proactor::open ( size_t number_of_threads )
+{
+	if( ! is_null(m_completion_port_) )
+		return false;
 
 	m_number_of_threads_ = number_of_threads;
 	m_completion_port_ = ::CreateIoCompletionPort (INVALID_HANDLE_VALUE,
@@ -44,10 +43,7 @@ int proactor::open ( size_t number_of_threads )
 		0,
 		m_number_of_threads_);
 
-	if ( is_null(m_completion_port_) )
-		ThrowException1( RuntimeException , lastError() );
-	
-	return 0;
+	return  is_null(m_completion_port_);
 }
 
 void proactor::close (void)
@@ -75,8 +71,8 @@ void proactor::close (void)
 		if ( is_null(overlapped) || res == FALSE)
 			break;
 
-		WIN32_Operation_Result *asynch_result =
-			(WIN32_Operation_Result *) overlapped;
+		io_request *asynch_result =
+			(io_request *) overlapped;
 
 		asynch_result->release();
 	}
@@ -86,6 +82,41 @@ void proactor::close (void)
 
 }
 
+/// If the function dequeues a completion packet for a successful I/O operation 
+/// from the completion port, the return value is nonzero. The function stores 
+/// information in the variables pointed to by the lpNumberOfBytesTransferred, 
+/// lpCompletionKey, and lpOverlapped parameters
+/// 
+/// 如果函数从端口取出一个完成包，且完成操作是成功的，则返回非0值。上下文数据
+/// 保存在lpNumberOfBytesTransferred，lpCompletionKey，lpOverlapped中
+/// 
+/// If *lpOverlapped is NULL and the function does not dequeue a completion packet
+/// from the completion port, the return value is zero. The function does not 
+/// store information in the variables pointed to by the lpNumberOfBytes and 
+/// lpCompletionKey parameters. To get extended error information, call GetLastError.
+/// If the function did not dequeue a completion packet because the wait timed out,
+/// GetLastError returns WAIT_TIMEOUT.
+/// 
+///如lpOverlapped 是NULL，没有从端口取出一个完成包，则返回0值。lpNumberOfBytesTransferred
+/// ，lpCompletionKey，lpOverlapped也没有保存上下文数据，可以用GetLastError取
+/// 得详细错误。如果没有从端口取出一个完成包，可能是超时，GetLastError返回WAIT_TIMEOUT
+/// 
+///If *lpOverlapped is not NULL and the function dequeues a completion packet for
+/// a failed I/O operation from the completion port, the return value is zero. 
+/// The function stores information in the variables pointed to by lpNumberOfBytes,
+/// lpCompletionKey, and lpOverlapped. To get extended error information, call GetLastError.
+/// 
+///如果 lpOverlapped 不是NULL，但完成操作是失败的，则返回0值。上下文数据保存在
+/// lpNumberOfBytesTransferred，lpCompletionKey，lpOverlapped中，可以用GetLastError
+/// 取得详细错误。
+/// 
+///If a socket handle associated with a completion port is closed, GetQueuedCompletionStatus
+/// returns ERROR_SUCCESS, with *lpOverlapped non-NULL and lpNumberOfBytes equal zero.
+/// 
+///如一个socket句柄被关闭了，GetQueuedCompletionStatus返回ERROR_SUCCESS， lpOverlapped 
+/// 不是NULL,lpNumberOfBytes等于0。
+/// 
+/// </summary>
 int proactor::handle_events (unsigned long milli_seconds)
 {
 	JOMOO_OVERLAPPED *overlapped = 0;
@@ -98,9 +129,8 @@ int proactor::handle_events (unsigned long milli_seconds)
 		&completion_key,
 		&overlapped,
 		milli_seconds);
-	if (result == FALSE && is_null(overlapped) )
+	if (FALSE == result && is_null(overlapped) )
 	{
-
 		switch ( GetLastError() )
 		{
 		case WAIT_TIMEOUT:
@@ -115,7 +145,7 @@ int proactor::handle_events (unsigned long milli_seconds)
 	}
 	else
 	{
-		WIN32_Operation_Result *asynch_result = (WIN32_Operation_Result *) overlapped;
+		io_request *asynch_result = (io_request *) overlapped;
 		u_long error = 0;
 		if( !result )
 			error = GetLastError();
@@ -128,7 +158,7 @@ int proactor::handle_events (unsigned long milli_seconds)
 	return 0;
 }
 
-void proactor::application_specific_code (WIN32_Operation_Result *asynch_result,
+void proactor::application_specific_code (io_request *asynch_result,
 														  size_t bytes_transferred,
 														  const void *completion_key,
 														  u_long error)
@@ -151,70 +181,34 @@ void proactor::application_specific_code (WIN32_Operation_Result *asynch_result,
 	asynch_result->release();
 }
 
-int proactor::post_completion (WIN32_Operation_Result *result )
+bool proactor::post_completion (io_request *result )
 {
 	if( is_null( result ) )
-		ThrowException1( IllegalArgumentException, "result" );
+		return false;
 		
-
-	WIN32_Operation_Result* res = result;
-	if( is_null( res ) )
-		ThrowException( CastException );
-
 	DWORD bytes_transferred = 0;
 	ULONG_PTR comp_key = 0;
 
-	if (::PostQueuedCompletionStatus (m_completion_port_, // completion port
-		static_cast< DWORD >( bytes_transferred ) ,      // xfer count
+	return TRUE == ::PostQueuedCompletionStatus (m_completion_port_, // completion port
+		bytes_transferred ,      // xfer count
 		comp_key,               // completion key
-		res                  // overlapped
-		) == FALSE)
-	{
-		ThrowException1( RuntimeException, lastError() );
-	}
-
-	return 0;
+		result                  // overlapped
+		);
 }
-
-int proactor::post_completion ( JOMOO_Operation_Result_Ptr result)
-{
-	//std::auto_ptr< WIN32_Defer > defer( createDefer( result ) );
-	//if( defer.get() == 0 )
-	//	return -1;
-	//if( post_completion( defer.get() ) != 0 )
-		return -1;
-	//defer.release();
-	//return 0;
-}
-
-//WIN32_Defer* proactor::createDefer( JOMOO_Operation_Result_Ptr result )
-//{
-//	//WIN32_Defer* p = queue_.pop();
-//	//if( p != 0 )
-//	//	return p;
-//	//return ( new WIN32_Defer( result ,!result_delete_, *this , JOMOO_INVALID_HANDLE_VALUE , 0  ) );
-//	return 0;
-//}
 
 JOMOO_HANDLE proactor::get_handle()
 {
 	return m_completion_port_;
 }
 
-int proactor::register_handle (JOMOO_HANDLE handle,
-											   const void *completion_key)
+bool proactor::bind (JOMOO_HANDLE handle, const void *completion_key)
 {
 	ULONG_PTR comp_key = reinterpret_cast < ULONG_PTR >( (void*)completion_key);
 
-	JOMOO_HANDLE cp = ::CreateIoCompletionPort (handle,
+	return 0 != ::CreateIoCompletionPort (handle,
 		this->m_completion_port_,
 		comp_key,
 		this->m_number_of_threads_);
-	if (0 == cp )
-	{
-		ThrowException1( RuntimeException, lastError() );
-	}
-	return 0;
 }
 
 _networks_end
