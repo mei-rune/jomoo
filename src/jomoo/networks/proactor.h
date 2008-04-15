@@ -1,7 +1,7 @@
 
 
-#ifndef JOMOO_proactor_H
-#define JOMOO_proactor_H
+#ifndef _proactor_h_
+#define _proactor_h_
 
 #include "config.h"
 
@@ -11,8 +11,8 @@
 
 // Include files
 #include "config_Networks.h"
-#include "jomoo/platform/OS.H"
-#include "Base/Collections/ThreadSafePtrQueue.HPP"
+#include "Platform/OS.H"
+#include "io_request.h"
 
 _networks_begin
 
@@ -20,31 +20,54 @@ class proactor
 {
 public:
 
-	proactor( bool result_delete = true );
-	proactor( u_long milli_seconds , bool result_delete = true );
+	proactor();
+	
+	proactor( size_t number_of_threads );
+	
 	~proactor(void);
 
-	int open ( size_t number_of_threads = 0 );
+	/**
+	 * 本端口是否有效
+	 */
+	bool is_good() const;
+
+	/**
+	 * 初始化端口(如果已经初始化返回true)
+     * @param[ in ] 并行线程数
+	 */
+	bool open ( size_t number_of_threads = 1 );
+
+	/**
+	 * 关闭本对象
+	 */
 	void close (void);
 	
-	int register_handle (JOMOO_HANDLE handle,const void *completion_key);
+	/**
+	 * 将句柄绑定到本端口
+	 */
+	bool bind(JOMOO_HANDLE handle,const void *completion_key);
 
+	/**
+	 * 获取已完成的事件,并处理这个事件
+	 * @return 超时返回1,获取到事件并成功处理返回0,获取失败返回-1
+	 */
 	int handle_events ( u_long milli_seconds);
 
+	/**
+	 * 取得本端口的句柄
+	 */
 	JOMOO_HANDLE get_handle();
 
 private:
-	void application_specific_code (WIN32_Operation_Result *asynch_result,
+	void application_specific_code (io_request *asynch_result,
 		size_t bytes_transferred,
 		const void *completion_key,
 		u_long error);
 
 	JOMOO_HANDLE m_completion_port_;
 	u_long m_number_of_threads_;
-
-	bool result_delete_;
 };
 
 _networks_end
 
-#endif // JOMOO_proactor_H
+#endif // _proactor_h_
