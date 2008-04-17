@@ -667,6 +667,10 @@
 				RelativePath="..\..\src\jomoo\networks\proactor.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\src\jomoo\networks\request_queue.h"
+				>
+			</File>
 			<Filter
 				Name="sockets"
 				>
@@ -728,6 +732,14 @@
 				</File>
 				<File
 					RelativePath="..\..\src\jomoo\networks\sockets\tcp_server.inl"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="request"
+				>
+				<File
+					RelativePath="..\..\src\jomoo\networks\request\write_request.h"
 					>
 				</File>
 			</Filter>
