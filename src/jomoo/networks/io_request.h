@@ -10,7 +10,7 @@
 
 // Include files
 #include "config_Networks.h"
-#include <vector>
+#include "jomoo/counter_ptr.hpp"
 
 _networks_begin
 
@@ -59,15 +59,34 @@ public:
 		return m_handle_;
 	}
 
-	virtual  void complete (size_t bytes_transferred,
+    void incRef()
+	{
+		counter_.increment();
+	}
+    
+	void decRef()
+	{
+		if( 0 >= counter_.decrement() )
+			release( );
+	}
+
+	virtual bool post() = 0;
+	virtual void on_complete (size_t bytes_transferred,
                          int success,
                          const void *completion_key,
                          u_long error = 0) = 0;
 
 protected:
+
+	virtual void release()
+	{
+		delete this;
+	}
+
 	JOMOO_HANDLE m_handle_;
 	proactor* instance_;
-	DECLARE_SHARED();
+private:
+	counter counter_;
 };
 
 _networks_begin
