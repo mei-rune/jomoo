@@ -180,6 +180,9 @@ CppUnit::Test* DateTimeFormatterTest::suite()
 {
 	CppUnit::TestSuite* pSuite = new CppUnit::TestSuite("DateTimeFormatterTest");
 
+#define CppUnit_addTest(suite, cls, mth) \
+	suite->addTest(new CppUnit::TestCaller<cls>(#mth, &cls::mth))
+
 	//CppUnit_addTest(pSuite, DateTimeFormatterTest, testISO8601);
 	//CppUnit_addTest(pSuite, DateTimeFormatterTest, testRFC822);
 	//CppUnit_addTest(pSuite, DateTimeFormatterTest, testRFC1123);
