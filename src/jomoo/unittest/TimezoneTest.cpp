@@ -1,6 +1,6 @@
 
 #include "stdafx.h"
-
+#include "marco.h"
 #include "TimezoneTest.h"
 #include "CppUnit/TestCaller.h"
 #include "CppUnit/TestSuite.h"
@@ -45,7 +45,7 @@ CppUnit::Test* TimezoneTest::suite()
 {
 	CppUnit::TestSuite* pSuite = new CppUnit::TestSuite("TimezoneTest");
 
-	//CppUnit_addTest(pSuite, TimezoneTest, testTimezone);
+	CppUnit_addTest(pSuite, TimezoneTest, testTimezone);
 
 	return pSuite;
 }

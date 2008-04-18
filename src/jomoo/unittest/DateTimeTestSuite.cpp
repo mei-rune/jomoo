@@ -1,7 +1,6 @@
 
 #include "stdafx.h"
-
-
+#include "marco.h"
 #include "DateTimeTestSuite.h"
 #include "TimestampTest.h"
 #include "TimespanTest.h"

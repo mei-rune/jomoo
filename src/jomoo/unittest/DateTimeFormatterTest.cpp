@@ -2,6 +2,7 @@
 
 #include "stdafx.h"
 #include "DateTimeFormatterTest.h"
+#include "marco.h"
 #include "CppUnit/TestCaller.h"
 #include "CppUnit/TestSuite.h"
 #include "jomoo/DateTimeFormatter.h"
@@ -180,19 +181,18 @@ CppUnit::Test* DateTimeFormatterTest::suite()
 {
 	CppUnit::TestSuite* pSuite = new CppUnit::TestSuite("DateTimeFormatterTest");
 
-#define CppUnit_addTest(suite, cls, mth) \
-	suite->addTest(new CppUnit::TestCaller<cls>(#mth, &cls::mth))
 
-	//CppUnit_addTest(pSuite, DateTimeFormatterTest, testISO8601);
-	//CppUnit_addTest(pSuite, DateTimeFormatterTest, testRFC822);
-	//CppUnit_addTest(pSuite, DateTimeFormatterTest, testRFC1123);
-	//CppUnit_addTest(pSuite, DateTimeFormatterTest, testHTTP);
-	//CppUnit_addTest(pSuite, DateTimeFormatterTest, testRFC850);
-	//CppUnit_addTest(pSuite, DateTimeFormatterTest, testRFC1036);
-	//CppUnit_addTest(pSuite, DateTimeFormatterTest, testASCTIME);
-	//CppUnit_addTest(pSuite, DateTimeFormatterTest, testSORTABLE);
-	//CppUnit_addTest(pSuite, DateTimeFormatterTest, testCustom);
-	//CppUnit_addTest(pSuite, DateTimeFormatterTest, testTimespan);
+
+	CppUnit_addTest(pSuite, DateTimeFormatterTest, testISO8601);
+	CppUnit_addTest(pSuite, DateTimeFormatterTest, testRFC822);
+	CppUnit_addTest(pSuite, DateTimeFormatterTest, testRFC1123);
+	CppUnit_addTest(pSuite, DateTimeFormatterTest, testHTTP);
+	CppUnit_addTest(pSuite, DateTimeFormatterTest, testRFC850);
+	CppUnit_addTest(pSuite, DateTimeFormatterTest, testRFC1036);
+	CppUnit_addTest(pSuite, DateTimeFormatterTest, testASCTIME);
+	CppUnit_addTest(pSuite, DateTimeFormatterTest, testSORTABLE);
+	CppUnit_addTest(pSuite, DateTimeFormatterTest, testCustom);
+	CppUnit_addTest(pSuite, DateTimeFormatterTest, testTimespan);
 
 	return pSuite;
 }
