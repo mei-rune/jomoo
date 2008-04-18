@@ -55,7 +55,7 @@ class dictionary : public sequence
 	virtual jomoo_type value_type() const = 0;
 };
 
-class value
+class variant
 {
 public:
 
