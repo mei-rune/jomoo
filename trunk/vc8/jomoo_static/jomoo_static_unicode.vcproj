@@ -213,6 +213,14 @@
 				RelativePath="..\..\src\jomoo\threading.hpp"
 				>
 			</File>
+			<File
+				RelativePath="..\..\src\jomoo\types.hpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\variant.hpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="资源文件"
@@ -233,6 +241,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\jomoo\collections\Link.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\collections\sequence.h"
 				>
 			</File>
 			<File
