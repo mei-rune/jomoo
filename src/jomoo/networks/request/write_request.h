@@ -19,13 +19,15 @@ class write_request : io_request
 {
 
 public:
-	write_request(ConnectedSocket transport
-		, ByteBuffer byteBuffer)
-		: base(byteBuffer.Array)
+	write_request()
 	{
-		_transport = transport;
-		_byteBuffer = byteBuffer;
 	}
+
+	void init(  )
+	{
+	}
+
+
 
 	void on_complete(size_t bytes_transferred,
 		int success,
@@ -74,6 +76,9 @@ public:
 
 		throw new WriteError(errCode);
 	}
+private:
+	connected_socket* _transport;
+	std::vector<iovec> _iovec;
 };
 
 _networks_end
