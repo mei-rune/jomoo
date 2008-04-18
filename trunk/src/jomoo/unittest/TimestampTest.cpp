@@ -1,6 +1,6 @@
 
 #include "stdafx.h"
-
+#include "marco.h"
 #include "TimestampTest.h"
 #include "CppUnit/TestCaller.h"
 #include "CppUnit/TestSuite.h"
@@ -83,7 +83,7 @@ CppUnit::Test* TimestampTest::suite()
 {
 	CppUnit::TestSuite* pSuite = new CppUnit::TestSuite("TimestampTest");
 
-	//CppUnit_addTest(pSuite, TimestampTest, testTimestamp);
+	CppUnit_addTest(pSuite, TimestampTest, testTimestamp);
 
 	return pSuite;
 }
