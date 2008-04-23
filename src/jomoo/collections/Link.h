@@ -1,9 +1,16 @@
 #ifndef LINK_H
 #define LINK_H
 
-/*
-SLINK - 单向链表
-*/
+#include "jomoo/config.h"
+
+#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
+# pragma once
+#endif /* JOMOO_LACKS_PRAGMA_ONCE */
+
+// Include files
+
+
+// SLINK - 单向链表
 //
 //typedef struct _SLINK{
 //   _SLINK* _next;
@@ -40,17 +47,15 @@ inline void SLINK_Push(PSLINK  _head, PVALUE  _link)
  (_link)->_next =  (_head)->_next;
  (_head)->_next =  (_link);
 }
-//#define SLINK_Push(_head,_link)           (_link)->_next =  (_head)->_next;\
-//                                          (_head)->_next =  (_link)
+
 
 
 ///////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////DOUBLE///LINK/////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////
 
-///*
 //DLINK - 双向链表
-//*/
+//
 //typedef struct _DLINK{
 //   _DLINK* _prev;
 //   _DLINK* _next;
