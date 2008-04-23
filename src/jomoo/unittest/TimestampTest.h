@@ -5,22 +5,24 @@
 
 
 #include "CppUnit/TestCase.h"
+#include <cppunit/extensions/HelperMacros.h>
 
 
-class TimestampTest: public CppUnit::TestCase
+class TimestampTest: public CppUnit::TestFixture
 {
 public:
-	TimestampTest();
-	~TimestampTest();
+  CPPUNIT_TEST_SUITE( TimestampTest );
+
+	CPPUNIT_TEST( testTimestamp);
+
+  CPPUNIT_TEST_SUITE_END();
+
+public:
 
 	void testTimestamp();
 
 	void setUp();
 	void tearDown();
-
-	static CppUnit::Test* suite();
-
-private:
 };
 
 

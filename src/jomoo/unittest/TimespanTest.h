@@ -6,12 +6,21 @@
 
 #include "CppUnit/TestCase.h"
 
+#include <cppunit/extensions/HelperMacros.h>
 
-class TimespanTest: public CppUnit::TestCase
+class TimespanTest: public CppUnit::TestFixture
 {
 public:
-	TimespanTest();
-	~TimespanTest();
+  CPPUNIT_TEST_SUITE( TimespanTest );
+
+	CPPUNIT_TEST( testConversions);
+	CPPUNIT_TEST( testComparisons);
+	CPPUNIT_TEST( testArithmetics);
+	CPPUNIT_TEST( testSwap);
+
+  CPPUNIT_TEST_SUITE_END();
+
+public:
 
 	void testConversions();
 	void testComparisons();
@@ -21,7 +30,6 @@ public:
 	void setUp();
 	void tearDown();
 
-	static CppUnit::Test* suite();
 
 private:
 };

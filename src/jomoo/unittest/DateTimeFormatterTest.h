@@ -5,13 +5,25 @@
 
 
 #include "CppUnit/TestCase.h"
+#include <cppunit/extensions/HelperMacros.h>
 
-
-class DateTimeFormatterTest: public CppUnit::TestCase
+class DateTimeFormatterTest: public CppUnit::TestFixture
 {
 public:
-	DateTimeFormatterTest( );
-	~DateTimeFormatterTest();
+
+  CPPUNIT_TEST_SUITE( DateTimeFormatterTest );
+	CPPUNIT_TEST( testISO8601);
+	CPPUNIT_TEST( testRFC822);
+	CPPUNIT_TEST( testRFC1123);
+	CPPUNIT_TEST( testHTTP);
+	CPPUNIT_TEST( testRFC850);
+	CPPUNIT_TEST( testRFC1036);
+	CPPUNIT_TEST( testASCTIME);
+	CPPUNIT_TEST( testSORTABLE);
+	CPPUNIT_TEST( testCustom);
+	CPPUNIT_TEST( testTimespan);
+  CPPUNIT_TEST_SUITE_END();
+public:
 
 	void testISO8601();
 	void testRFC822();
@@ -27,7 +39,6 @@ public:
 	void setUp();
 	void tearDown();
 
-	static CppUnit::Test* suite();
 
 private:
 };

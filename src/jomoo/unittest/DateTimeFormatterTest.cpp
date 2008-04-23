@@ -11,15 +11,8 @@
 
 
 
+CPPUNIT_TEST_SUITE_REGISTRATION( DateTimeFormatterTest );
 
-DateTimeFormatterTest::DateTimeFormatterTest(): CppUnit::TestCase( )
-{
-}
-
-
-DateTimeFormatterTest::~DateTimeFormatterTest()
-{
-}
 
 
 void DateTimeFormatterTest::testISO8601()
@@ -176,23 +169,3 @@ void DateTimeFormatterTest::tearDown()
 {
 }
 
-
-CppUnit::Test* DateTimeFormatterTest::suite()
-{
-	CppUnit::TestSuite* pSuite = new CppUnit::TestSuite("DateTimeFormatterTest");
-
-
-
-	CppUnit_addTest(pSuite, DateTimeFormatterTest, testISO8601);
-	CppUnit_addTest(pSuite, DateTimeFormatterTest, testRFC822);
-	CppUnit_addTest(pSuite, DateTimeFormatterTest, testRFC1123);
-	CppUnit_addTest(pSuite, DateTimeFormatterTest, testHTTP);
-	CppUnit_addTest(pSuite, DateTimeFormatterTest, testRFC850);
-	CppUnit_addTest(pSuite, DateTimeFormatterTest, testRFC1036);
-	CppUnit_addTest(pSuite, DateTimeFormatterTest, testASCTIME);
-	CppUnit_addTest(pSuite, DateTimeFormatterTest, testSORTABLE);
-	CppUnit_addTest(pSuite, DateTimeFormatterTest, testCustom);
-	CppUnit_addTest(pSuite, DateTimeFormatterTest, testTimespan);
-
-	return pSuite;
-}
