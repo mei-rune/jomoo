@@ -531,7 +531,7 @@ private:
 	short  _microsecond;
 };
 
-void swap(DateTime& d1, DateTime& d2)
+inline void swap(DateTime& d1, DateTime& d2)
 {
 	d1.swap(d2);
 }

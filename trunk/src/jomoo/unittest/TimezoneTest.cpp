@@ -8,7 +8,7 @@
 #include <iostream>
 
 
-TimezoneTest::TimezoneTest(const std::string& name): CppUnit::TestCase(name)
+TimezoneTest::TimezoneTest( ): CppUnit::TestCase()
 {
 }
 

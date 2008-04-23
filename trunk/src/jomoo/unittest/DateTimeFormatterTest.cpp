@@ -12,7 +12,7 @@
 
 
 
-DateTimeFormatterTest::DateTimeFormatterTest(const std::string& name): CppUnit::TestCase(name)
+DateTimeFormatterTest::DateTimeFormatterTest(): CppUnit::TestCase( )
 {
 }
 

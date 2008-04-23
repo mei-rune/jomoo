@@ -10,7 +10,7 @@
 class DateTimeFormatterTest: public CppUnit::TestCase
 {
 public:
-	DateTimeFormatterTest(const std::string& name);
+	DateTimeFormatterTest( );
 	~DateTimeFormatterTest();
 
 	void testISO8601();

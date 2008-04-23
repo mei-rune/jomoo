@@ -62,7 +62,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="cppunitd_dll.lib"
 				LinkIncremental="2"
+				AdditionalLibraryDirectories="&quot;$(CPPUNIT_ROOT)/debug/&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				TargetMachine="1"

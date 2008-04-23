@@ -10,7 +10,7 @@
 class TimezoneTest: public CppUnit::TestCase
 {
 public:
-	TimezoneTest(const std::string& name);
+	TimezoneTest();
 	~TimezoneTest();
 
 	void testTimezone();

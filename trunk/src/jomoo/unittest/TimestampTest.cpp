@@ -8,7 +8,7 @@
 #include "jomoo/Threading.hpp"
 
 
-TimestampTest::TimestampTest(const std::string& name): CppUnit::TestCase(name)
+TimestampTest::TimestampTest( ): CppUnit::TestCase( )
 {
 }
 

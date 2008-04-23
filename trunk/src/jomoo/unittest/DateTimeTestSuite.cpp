@@ -21,7 +21,7 @@ CppUnit::Test* DateTimeTestSuite::suite()
 	pSuite->addTest(DateTimeTest::suite());
 	//pSuite->addTest(LocalDateTimeTest::suite());
 	pSuite->addTest(DateTimeFormatterTest::suite());
-	pSuite->addTest(DateTimeParserTest::suite());
+	//pSuite->addTest(DateTimeParserTest::suite());
 
 	return pSuite;
 }
