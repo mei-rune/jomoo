@@ -48,6 +48,11 @@ public:
 	bool bind(JOMOO_HANDLE handle,const void *completion_key);
 
 	/**
+	 * 发送一个已经完成的请求到完成端口
+	 */
+	bool post_completion (io_request *result );
+
+	/**
 	 * 获取已完成的事件,并处理这个事件
 	 * @return 超时返回1,获取到事件并成功处理返回0,获取失败返回-1
 	 */

@@ -1,6 +1,6 @@
 
 # include "proactor.h"
-# include "Base/exception.hpp"
+# include "jomoo/exception.hpp"
 # include <iostream>
 
 #ifdef _MEMORY_DEBUG
@@ -20,7 +20,7 @@ proactor::proactor(  )
 proactor::proactor( size_t number_of_threads )
 : m_completion_port_( NULL )
 {
-	open( milli_seconds );
+	open( number_of_threads );
 }
 
 proactor::~proactor(void)
@@ -74,7 +74,7 @@ void proactor::close (void)
 		io_request *asynch_result =
 			(io_request *) overlapped;
 
-		asynch_result->release();
+		asynch_result->decRef();
 	}
 
 	::CloseHandle( m_completion_port_);
@@ -165,7 +165,7 @@ void proactor::application_specific_code (io_request *asynch_result,
 {
 	try
 	{
-		asynch_result->complete (bytes_transferred,
+		asynch_result->on_complete (bytes_transferred,
 			error == 0 ? 0 : 1,
 			(void *) completion_key,
 			error );
@@ -178,7 +178,7 @@ void proactor::application_specific_code (io_request *asynch_result,
 	{	
 		std::cout << "unkown error!" << std::endl;
 	}
-	asynch_result->release();
+	asynch_result->decRef();
 }
 
 bool proactor::post_completion (io_request *result )
