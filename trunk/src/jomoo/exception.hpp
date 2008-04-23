@@ -173,6 +173,7 @@ MakeException( URLException, URLError );
 MakeException( NotFindException, NotFindError );
 MakeException( SystemException, SystemError );
 MakeException( LockException , LockError );
+MakeException( TimeSyntaxException , TimeSyntaxError );
 
 #define ThrowException( type ) throw type(__FILE__, __LINE__ )
 #define ThrowException1( type ,m1 ) throw type(__FILE__, __LINE__ , m1 )

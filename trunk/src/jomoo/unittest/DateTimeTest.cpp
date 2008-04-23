@@ -1,5 +1,6 @@
 
 #include "stdafx.h"
+#include <time.h>
 #include "marco.h"
 #include "DateTimeTest.h"
 #include "CppUnit/TestCaller.h"
@@ -11,16 +12,7 @@
 
 
 
-
-DateTimeTest::DateTimeTest(): CppUnit::TestCase()
-{
-}
-
-
-DateTimeTest::~DateTimeTest()
-{
-}
-
+CPPUNIT_TEST_SUITE_REGISTRATION( DateTimeTest );
 
 void DateTimeTest::testTimestamp()
 {
@@ -812,6 +804,23 @@ void DateTimeTest::testUTC()
 	CPPUNIT_ASSERT (dt.hour() == 12);
 }
 
+void DateTimeTest::testTM()
+{
+	DateTime dt = DateTime::now();
+	
+	time_t now = time( NULL ) ;
+	struct tm tt = *::gmtime( &now );
+
+	CPPUNIT_ASSERT (dt.year() == (tt.tm_year+1900));
+	CPPUNIT_ASSERT (dt.month() == ( tt.tm_mon + 1 ) );
+	CPPUNIT_ASSERT (dt.day() == tt.tm_mday );
+	CPPUNIT_ASSERT (dt.hour() == tt.tm_hour );
+	CPPUNIT_ASSERT (dt.minute() == tt.tm_min );
+	CPPUNIT_ASSERT (dt.second() == tt.tm_sec );
+	CPPUNIT_ASSERT (dt.dayOfWeek() == tt.tm_wday );
+	CPPUNIT_ASSERT (tt.tm_yday+1) == dt.dayOfYear() );
+}
+
 
 void DateTimeTest::setUp()
 {
@@ -822,28 +831,3 @@ void DateTimeTest::tearDown()
 {
 }
 
-
-CppUnit::Test* DateTimeTest::suite()
-{
-	CppUnit::TestSuite* pSuite = new CppUnit::TestSuite("DateTimeTest");
-
-	CppUnit_addTest(pSuite, DateTimeTest, testTimestamp);
-	CppUnit_addTest(pSuite, DateTimeTest, testJulian);
-	CppUnit_addTest(pSuite, DateTimeTest, testGregorian);
-	CppUnit_addTest(pSuite, DateTimeTest, testConversions);
-	CppUnit_addTest(pSuite, DateTimeTest, testStatics);
-	CppUnit_addTest(pSuite, DateTimeTest, testCalcs);
-	CppUnit_addTest(pSuite, DateTimeTest, testAMPM);
-	CppUnit_addTest(pSuite, DateTimeTest, testRelational);
-	CppUnit_addTest(pSuite, DateTimeTest, testArithmetics);
-	CppUnit_addTest(pSuite, DateTimeTest, testSwap);
-
-	CppUnit_addTest(pSuite, DateTimeTest, testUsage);
-	CppUnit_addTest(pSuite, DateTimeTest, testSetYearDay);
-	CppUnit_addTest(pSuite, DateTimeTest, testIsValid);
-	CppUnit_addTest(pSuite, DateTimeTest, testDayOfWeek);
-	CppUnit_addTest(pSuite, DateTimeTest, testIncrementDecrement);
-	CppUnit_addTest(pSuite, DateTimeTest, testUTC);
-
-	return pSuite;
-}

@@ -7,12 +7,34 @@
 
 #include "CppUnit/TestCase.h"
 
+#include <cppunit/extensions/HelperMacros.h>
 
-class DateTimeTest: public CppUnit::TestCase
+class DateTimeTest: public CppUnit::TestFixture
 {
 public:
-	DateTimeTest();
-	~DateTimeTest();
+  CPPUNIT_TEST_SUITE( DateTimeTest );
+	CPPUNIT_TEST( testTimestamp);
+	CPPUNIT_TEST( testJulian);
+	CPPUNIT_TEST( testGregorian);
+	CPPUNIT_TEST( testConversions);
+	CPPUNIT_TEST( testStatics);
+	CPPUNIT_TEST( testCalcs);
+	CPPUNIT_TEST( testAMPM);
+	CPPUNIT_TEST( testRelational);
+	CPPUNIT_TEST( testArithmetics);
+	CPPUNIT_TEST( testSwap);
+
+	CPPUNIT_TEST( testUsage);
+	CPPUNIT_TEST( testSetYearDay);
+	CPPUNIT_TEST( testIsValid);
+	CPPUNIT_TEST( testDayOfWeek);
+	CPPUNIT_TEST( testIncrementDecrement);
+	CPPUNIT_TEST( testUTC);
+	CPPUNIT_TEST( testTM);
+
+  CPPUNIT_TEST_SUITE_END();
+
+public:
 
 	void testTimestamp();
 	void testJulian();
@@ -30,11 +52,11 @@ public:
 	void testDayOfWeek();
 	void testIncrementDecrement();
 	void testUTC();
+	void testTM();
 
 	void setUp();
 	void tearDown();
 
-	static CppUnit::Test* suite();
 
 private:
 };

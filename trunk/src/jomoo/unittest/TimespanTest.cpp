@@ -7,16 +7,9 @@
 #include "jomoo/Timespan.h"
 
 
+CPPUNIT_TEST_SUITE_REGISTRATION( TimespanTest );
 
 
-TimespanTest::TimespanTest(): CppUnit::TestCase()
-{
-}
-
-
-TimespanTest::~TimespanTest()
-{
-}
 
 
 void TimespanTest::testConversions()
@@ -137,14 +130,3 @@ void TimespanTest::tearDown()
 }
 
 
-CppUnit::Test* TimespanTest::suite()
-{
-	CppUnit::TestSuite* pSuite = new CppUnit::TestSuite("TimespanTest");
-
-	CppUnit_addTest(pSuite, TimespanTest, testConversions);
-	CppUnit_addTest(pSuite, TimespanTest, testComparisons);
-	CppUnit_addTest(pSuite, TimespanTest, testArithmetics);
-	CppUnit_addTest(pSuite, TimespanTest, testSwap);
-
-	return pSuite;
-}
