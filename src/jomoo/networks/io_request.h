@@ -20,8 +20,8 @@ class io_request
 public:
 
 	io_request( )
-		: instance_( 0 )
-		, m_handle_( JOMOO_INVALID_HANDLE_VALUE )
+		: m_handle_( JOMOO_INVALID_HANDLE_VALUE )
+		//, instance_( 0 )
 	{
 		Internal =  0;
 		InternalHigh =  0;
@@ -34,25 +34,25 @@ public:
 	{
 	}
 
-	void init( proactor& instance , JOMOO_HANDLE handle )
-	{
-		if( handle == JOMOO_INVALID_HANDLE_VALUE )
-			ThrowException1( NullException, BT_TEXT("handle") );
+	//void init( proactor& instance , JOMOO_HANDLE handle )
+	//{
+	//	if( handle == JOMOO_INVALID_HANDLE_VALUE )
+	//		ThrowException1( NullException, BT_TEXT("handle") );
 
-		instance_ = &instance;
-		m_handle_ = handle;
-	}
+	//	instance_ = &instance;
+	//	m_handle_ = handle;
+	//}
 
-	void fini()
-	{
-		instance_ = 0;
-		m_handle_ = JOMOO_INVALID_HANDLE_VALUE;
-	}
+	//void fini()
+	//{
+	//	instance_ = 0;
+	//	m_handle_ = JOMOO_INVALID_HANDLE_VALUE;
+	//}
 
-	virtual bool bind( void* connection )
-	{
-		return instance_->register_handle( m_handle_, connection );
-	}
+	//virtual bool bind( void* connection )
+	//{
+	//	return instance_->register_handle( m_handle_, connection );
+	//}
 
 	JOMOO_HANDLE get_handle() const
 	{
@@ -70,6 +70,7 @@ public:
 			release( );
 	}
 
+    virtual bool bind( void* connection ) = 0;
 	virtual bool post() = 0;
 	virtual void on_complete (size_t bytes_transferred,
                          int success,
@@ -84,7 +85,7 @@ protected:
 	}
 
 	JOMOO_HANDLE m_handle_;
-	proactor* instance_;
+	//proactor* instance_;
 private:
 	counter counter_;
 };
