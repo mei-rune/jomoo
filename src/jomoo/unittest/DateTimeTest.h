@@ -11,7 +11,7 @@
 class DateTimeTest: public CppUnit::TestCase
 {
 public:
-	DateTimeTest(const std::string& name);
+	DateTimeTest();
 	~DateTimeTest();
 
 	void testTimestamp();

@@ -9,7 +9,7 @@
 
 
 
-TimespanTest::TimespanTest(const std::string& name): CppUnit::TestCase(name)
+TimespanTest::TimespanTest(): CppUnit::TestCase()
 {
 }
 

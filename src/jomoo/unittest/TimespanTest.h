@@ -10,7 +10,7 @@
 class TimespanTest: public CppUnit::TestCase
 {
 public:
-	TimespanTest(const std::string& name);
+	TimespanTest();
 	~TimespanTest();
 
 	void testConversions();

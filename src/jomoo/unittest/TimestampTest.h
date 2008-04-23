@@ -10,7 +10,7 @@
 class TimestampTest: public CppUnit::TestCase
 {
 public:
-	TimestampTest(const std::string& name);
+	TimestampTest();
 	~TimestampTest();
 
 	void testTimestamp();

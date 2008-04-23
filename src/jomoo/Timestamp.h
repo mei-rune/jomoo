@@ -206,7 +206,7 @@ private:
 	int64_t _ts;
 };
 
-void swap(Timestamp& s1, Timestamp& s2)
+inline void swap(Timestamp& s1, Timestamp& s2)
 {
 	s1.swap(s2);
 }
