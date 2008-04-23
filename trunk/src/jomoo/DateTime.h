@@ -16,6 +16,11 @@
 
 _jomoo_begin
 
+
+/**
+ * 注意月是从 1 开始的 ( dt.month() == ( tt.tm_mon + 1 )  )
+ * 而 dayOfYear 与 tm 结构相差一天( tt.tm_yday+1) == dt.dayOfYear() )
+ */
 class DateTime
 {
 public:
@@ -47,10 +52,10 @@ public:
 	};
 
 	DateTime(const Timestamp& stamp)
-	//	: _utcTime(stamp.utcTime())
+		: _utcTime(stamp.utcTime())
 	{
-		//computeGregorian(julianDay());
-		//computeDaytime();
+		computeGregorian(julianDay());
+		computeDaytime();
 	}
 
 	DateTime()
@@ -387,6 +392,11 @@ public:
 	static bool isLeapYear(int year)
 	{
 		return (year % 4) == 0 && ((year % 100) != 0 || (year % 400) == 0);
+	}
+
+	static DateTime now()
+	{
+		return DateTime();
 	}
 
 	static int daysOfMonth(int year, int month)

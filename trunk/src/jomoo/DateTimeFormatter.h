@@ -194,7 +194,7 @@ public:
 
 		tstring result;
 		const tchar* it  = fmt;
-		while ( it )
+		while ( *it )
 		{
 			if (*it != _T('%'))
 			{	
@@ -202,7 +202,7 @@ public:
 				continue;
 			}
 
-			if (0 == ++it)
+			if (0 == *++it)
 				break;
 
 
@@ -267,7 +267,7 @@ public:
 	{
 		tstring result;
 		const tchar* it  = fmt;
-		while ( it )
+		while ( *it )
 		{
 			if (*it != _T('%'))
 			{	
@@ -275,7 +275,7 @@ public:
 				continue;
 			}
 
-			if (0 == ++it)
+			if (0 == *++it)
 				break;
 
 			switch (*it)
