@@ -170,11 +170,27 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\jomoo\DateTimeFormatter.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\jomoo\DateTimeFormatter.h"
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\jomoo\DateTimeFormatter.inl"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\DateTimeParser.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\jomoo\DateTimeParser.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\DateTimeParser.inl"
 				>
 			</File>
 			<File
