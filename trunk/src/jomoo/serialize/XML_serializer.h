@@ -30,7 +30,7 @@
 
 _serializing_begin
 
-#define XMLNODESIZENAME "xmlnodesize"
+#define _XERCES XERCES_CPP_NAMESPACE_QUALIFIER;
 
 /**
  * @brief XML_serializer xml序列化类
@@ -41,7 +41,7 @@ class XML_serializer : T
 {
 public:
 
-	XML_serializer( XERCES_CPP_NAMESPACE_QUALIFIER DOMNode* node )
+	XML_serializer( _XERCES DOMNode* node )
 		: node_( 0 )
 		, document_( 0 )
 	{
@@ -54,18 +54,18 @@ public:
 
 	bool open(serialize_context& context, const tchar* className, const tchar* field)
 	{
-		XERCES_CPP_NAMESPACE_QUALIFIER DOMString name( ClassName );
+		_XERCES DOMString name( ClassName );
 
-		BT_Scope_Ptr< XERCES_CPP_NAMESPACE_QUALIFIER DOMElement > aNode =
+		BT_Scope_Ptr< _XERCES DOMElement > aNode =
 			document_->createElement( name.rawBuffer() );
 		if( aNode.get() == 0 )
 			return false;
 
 		if( size != -1 )
 		{
-			XERCES_CPP_NAMESPACE_QUALIFIER DOMString attrstr( XMLNODESIZENAME );
+			_XERCES DOMString attrstr( XMLNODESIZENAME );
 
-			XERCES_CPP_NAMESPACE_QUALIFIER DOMString attrvalue( convertIntegerToString( size ).c_str() );
+			_XERCES DOMString attrvalue( convertIntegerToString( size ).c_str() );
 			aNode ->setAttribute( attrstr.rawBuffer() ,attrvalue.rawBuffer() );
 		}
 
@@ -78,23 +78,49 @@ public:
 
 	bool close( serialize_context& context )
 	{
-		XERCES_CPP_NAMESPACE_QUALIFIER DOMNode* aNode =	node_->getParentNode();
+		_XERCES DOMNode* aNode =	node_->getParentNode();
 		if( aNode == 0 )
 			return false;
+
 		node_ = aNode;
 		return true;
 	}
 	
+	/**
+	 * 流是否正常
+	 */
+	bool is_good() const
+	{
+		return _is_good;
+	}
+
+	/**
+	 * 取得最后一次错误描述
+	 */
+	const tstring& last_error() const
+	{
+		return _last_error;
+	}
+
+	/**
+	 * 设置最后一次错误描述
+	 */
+	void last_error( const tstring& err )
+	{
+		_is_good = false;
+		_last_error = err;
+	}
 
 protected:
 
 	XML_serializer( )
 		: document_( 0 )
 		, node_( 0 )
+		, _is_good( true )
 	{
 	}
 
-	void init( XERCES_CPP_NAMESPACE_QUALIFIER DOMNode* node )
+	void init( _XERCES DOMNode* node )
 	{
 		node_ = node;
 		if( 0 == node_ )
@@ -104,13 +130,17 @@ protected:
 		if( 0 == document_ )
 			throw( std::runtime_error( "XML_serializer的document对象不能为空" ) );
 	}
+
+	bool _is_good;
+	tstring _last_error;
+
 private:
 
-	XERCES_CPP_NAMESPACE_QUALIFIER DOMDocument*  document_;
-	XERCES_CPP_NAMESPACE_QUALIFIER DOMNode*       node_;	
+	_XERCES DOMDocument*  document_;
+	_XERCES DOMNode*       node_;	
 };
 
-class XML_Writer
+class XML_Writer : XML_serializer< serialize_writer >
 {
 public:
 
@@ -118,19 +148,22 @@ public:
 		bool write_( const T& t, const tchar* fieldname  )
 	{
 		if( node_ == 0 )
+		{
+			last_error( _T("内部错误 - 节点为null!") )
 			return false;
+		}
 
 		try{
-			BT_Scope_Ptr< XERCES_CPP_NAMESPACE_QUALIFIER DOMNode > aNode(	
-				document_->createElement( XERCES_CPP_NAMESPACE_QUALIFIER DOMString( fieldname ).rawBuffer() ) );
+			BT_Scope_Ptr< _XERCES DOMNode > aNode(	
+				document_->createElement( _XERCES DOMString( fieldname ).rawBuffer() ) );
 			if( aNode.get() == 0 )
 				return false;
 			node_->appendChild( aNode.get() );
-			XERCES_CPP_NAMESPACE_QUALIFIER DOMNode* node = aNode.release();
+			_XERCES DOMNode* node = aNode.release();
 
-			XERCES_CPP_NAMESPACE_QUALIFIER DOMString str(  convertIntegerToString( t ).c_str() );
+			_XERCES DOMString str(  convertIntegerToString( t ).c_str() );
 
-			BT_Scope_Ptr< XERCES_CPP_NAMESPACE_QUALIFIER DOMText > textNode(
+			BT_Scope_Ptr< _XERCES DOMText > textNode(
 				document_->createTextNode( str.rawBuffer() ) );
 			if( textNode.get() == 0 )
 				return false;
@@ -144,97 +177,32 @@ public:
 		}
 		return false;
 	}
-	template< typename T >
-		bool write_str( const T& t, const tchar* fieldname  )
+
+	bool write(serialize_context& context, bool t, const tchar* fieldName )
 	{
-		if( node_ == 0 )
-			return false;
-
-		try{
-			BT_Scope_Ptr< XERCES_CPP_NAMESPACE_QUALIFIER DOMNode > aNode(	
-				document_->createElement( XERCES_CPP_NAMESPACE_QUALIFIER DOMString( fieldname ).rawBuffer() ) );
-			if( aNode.get() == 0 )
-				return false;
-			node_->appendChild( aNode.get() );
-			XERCES_CPP_NAMESPACE_QUALIFIER DOMNode* node = aNode.release();
-
-			XERCES_CPP_NAMESPACE_QUALIFIER DOMString str( t.c_str() );
-
-			BT_Scope_Ptr< XERCES_CPP_NAMESPACE_QUALIFIER DOMText > textNode(
-				document_->createTextNode( str.rawBuffer() ) );
-			if( textNode.get() == 0 )
-				return false;
-			if( node->appendChild(textNode.get() ) == 0 )	
-				return false;
-			textNode.release();
-			return true;
-		}
-		catch( ... )
-		{
-		}
-		return false;
+		return write_(context, t, fieldname );
 	}
-	bool write(const bool& t, const tchar* fieldname = "bool")
+	bool write(serialize_context& context, int8_t t, const tchar* fieldName )
 	{
-		return write_( t, fieldname );
+		return write_(context, t, fieldname );
+	}
+	bool write(serialize_context& context, int16_t t, const tchar* fieldName )
+	{
+		return write_(context, t, fieldname );
+	}
+	bool write(serialize_context& context, int32_t t, const tchar* fieldName)
+	{
+		return write_(context, t, fieldname );
+	}
+	bool write(serialize_context& context, int64_t t, const tchar* fieldName)
+	{
+		return write_(context, t, fieldname );
+	}
+	bool write(serialize_context& context, const void* blob, size_t len, const tchar* fieldName)
+	{
+		return write_str(context, t, fieldname );
 	}
 
-	bool write(const char& t, const tchar* fieldname = "char")
-	{
-		return write_( t, fieldname );
-	}
-	bool write(const short& t, const tchar* fieldname = "short")
-	{
-		return write_( t, fieldname );
-	}
-	bool write(const int& t, const tchar* fieldname = "int")
-	{
-		return write_( t, fieldname );
-	}
-	bool write(const long& t, const tchar* fieldname = "long")
-	{
-		return write_( t, fieldname );
-	}
-
-	bool write(const __int64& t, const tchar* fieldname = "__int64")
-	{
-		return write_( t, fieldname );
-	}
-	bool write(const unsigned char& t, const tchar* fieldname = "unsignedchar")
-	{
-		return write_( t, fieldname );
-	}
-	bool write(const unsigned short& t, const tchar* fieldname = "unsingedshort")
-	{
-		return write_( t, fieldname );
-	}
-
-	bool write(const unsigned int& t, const tchar* fieldname = "unsignedint")
-	{
-		return write_( t, fieldname );
-	}
-	bool write(const unsigned long& t, const tchar* fieldname = "unsignedlong")
-	{
-		return write_( t, fieldname );
-	}
-
-	bool write(const unsigned __int64& t, const tchar* fieldname = "unsigned__int64")
-	{
-		return write_( t, fieldname );
-	}
-
-	bool write(const  double& t, const tchar* fieldname = "double")
-	{
-		return write_( t, fieldname );
-	}
-	bool write(const float& t, const tchar* fieldname = "float")
-	{
-		return write_( t, fieldname );
-	}
-	bool write(const tstring& t, const tchar* fieldname = "string")
-	{
-		return write_str( t, fieldname );
-	}
 };
 
 #define XMLOUT( NODE )
@@ -247,7 +215,7 @@ public:
 class XML_deserializer : public serialize_istream_base
 {
 public:
-	XML_deserializer( XERCES_CPP_NAMESPACE_QUALIFIER DOMNode* node )
+	XML_deserializer( _XERCES DOMNode* node )
 		: document_( 0 )
 		, node_( node )
 		, isjump_( true )
@@ -260,19 +228,19 @@ public:
 		node_stack_.pop();
 	}
 	
-	XERCES_CPP_NAMESPACE_QUALIFIER DOMNode* find_child_node( const XERCES_CPP_NAMESPACE_QUALIFIER DOMString& str
-		,XERCES_CPP_NAMESPACE_QUALIFIER DOMNode* node )
+	_XERCES DOMNode* find_child_node( const _XERCES DOMString& str
+		,_XERCES DOMNode* node )
 	{
-		XERCES_CPP_NAMESPACE_QUALIFIER DOMNodeList* nodes = node->getChildNodes();
+		_XERCES DOMNodeList* nodes = node->getChildNodes();
 		unsigned int l = nodes->getLength();
-		XERCES_CPP_NAMESPACE_QUALIFIER DOMNode* aNode = 0;
+		_XERCES DOMNode* aNode = 0;
 		for( unsigned int i = 0; i < l ; i ++ )
 		{
-			XERCES_CPP_NAMESPACE_QUALIFIER DOMNode* tmp = nodes->item( i );
+			_XERCES DOMNode* tmp = nodes->item( i );
 			if( tmp == 0 )
 				continue;
-			if( tmp->getNodeType() != XERCES_CPP_NAMESPACE_QUALIFIER DOMNode:: ELEMENT_NODE	
-				|| ( XERCES_CPP_NAMESPACE_QUALIFIER XMLString::compareIString( str.rawBuffer(), tmp->getNodeName() ) != 0 ) )
+			if( tmp->getNodeType() != _XERCES DOMNode:: ELEMENT_NODE	
+				|| ( _XERCES XMLString::compareIString( str.rawBuffer(), tmp->getNodeName() ) != 0 ) )
 				continue;
 			aNode = tmp;
 			break;
@@ -283,51 +251,51 @@ public:
 
 	bool open(const tchar* ClassName)
 	{
-		XERCES_CPP_NAMESPACE_QUALIFIER DOMNode* aNode = node_stack_.top().second;
+		_XERCES DOMNode* aNode = node_stack_.top().second;
 		if( aNode != 0 )
 		{
-			XERCES_CPP_NAMESPACE_QUALIFIER DOMString str( ClassName );
+			_XERCES DOMString str( ClassName );
 			for( ; aNode != 0 ; aNode = aNode->getNextSibling() )
 			{
-				if( aNode->getNodeType() != XERCES_CPP_NAMESPACE_QUALIFIER DOMNode::ELEMENT_NODE )
+				if( aNode->getNodeType() != _XERCES DOMNode::ELEMENT_NODE )
 					continue;
-				if( XERCES_CPP_NAMESPACE_QUALIFIER XMLString::compareIString( str.rawBuffer(), aNode->getNodeName() ) == 0 )
+				if( _XERCES XMLString::compareIString( str.rawBuffer(), aNode->getNodeName() ) == 0 )
 					break;
 			}
 			if( aNode == 0 )
 				return false;
 
 			node_ = aNode;
-			XERCES_CPP_NAMESPACE_QUALIFIER DOMNode* next = node_->getNextSibling();
+			_XERCES DOMNode* next = node_->getNextSibling();
 			node_stack_.top().second = next;
 			if( next == 0 )
 				node_stack_.top().first = 0;
-			node_stack_.push( std::make_pair( node_, ( XERCES_CPP_NAMESPACE_QUALIFIER DOMNode* )0 ) );
+			node_stack_.push( std::make_pair( node_, ( _XERCES DOMNode* )0 ) );
 			XMLOUT( node_ );
 			return true;
 		}
 		if( node_ == 0 || !node_->hasChildNodes() )
 			return false;
-		XERCES_CPP_NAMESPACE_QUALIFIER DOMString str( ClassName );
+		_XERCES DOMString str( ClassName );
 		aNode = find_child_node( str,node_ );										
 		if( aNode == 0 )
 			return false;
 		node_ = aNode;
-		node_stack_.push( std::make_pair( node_, ( XERCES_CPP_NAMESPACE_QUALIFIER DOMNode* )0 ) );
+		node_stack_.push( std::make_pair( node_, ( _XERCES DOMNode* )0 ) );
 		XMLOUT( node_ );
 		return true;
 	}
 
-	bool getListSize( XERCES_CPP_NAMESPACE_QUALIFIER DOMNode* Node , size_t& size )
+	bool getListSize( _XERCES DOMNode* Node , size_t& size )
 	{
 		if( Node == 0 )
 			return false;
 
-		if( Node->getNodeType() != XERCES_CPP_NAMESPACE_QUALIFIER DOMNode::ELEMENT_NODE )
+		if( Node->getNodeType() != _XERCES DOMNode::ELEMENT_NODE )
 			return false;
-		XERCES_CPP_NAMESPACE_QUALIFIER DOMElement* de = ( XERCES_CPP_NAMESPACE_QUALIFIER DOMElement* ) Node;
-		XERCES_CPP_NAMESPACE_QUALIFIER DOMString atrrname( XMLNODESIZENAME );
-		XERCES_CPP_NAMESPACE_QUALIFIER DOMAttr* attr = de->getAttributeNode( atrrname.rawBuffer() );
+		_XERCES DOMElement* de = ( _XERCES DOMElement* ) Node;
+		_XERCES DOMString atrrname( XMLNODESIZENAME );
+		_XERCES DOMAttr* attr = de->getAttributeNode( atrrname.rawBuffer() );
 		if( attr == 0 )
 			return false;
 		const XMLCh* v = attr->getNodeValue();
@@ -345,15 +313,15 @@ public:
 	{
 //		#define XMLNODESIZENAME "xmlnodesize"
 
-		XERCES_CPP_NAMESPACE_QUALIFIER DOMNode* aNode = node_stack_.top().second;
+		_XERCES DOMNode* aNode = node_stack_.top().second;
 		if( aNode != 0 )
 		{
-			XERCES_CPP_NAMESPACE_QUALIFIER DOMString str( ClassName );
+			_XERCES DOMString str( ClassName );
 			for( ; aNode != 0 ; aNode = aNode->getNextSibling() )
 			{
-				if( aNode->getNodeType() != XERCES_CPP_NAMESPACE_QUALIFIER DOMNode::ELEMENT_NODE )
+				if( aNode->getNodeType() != _XERCES DOMNode::ELEMENT_NODE )
 					continue;
-				if( XERCES_CPP_NAMESPACE_QUALIFIER XMLString::compareIString( str.rawBuffer(), aNode->getNodeName() ) == 0 )
+				if( _XERCES XMLString::compareIString( str.rawBuffer(), aNode->getNodeName() ) == 0 )
 					break;					
 			}
 			if( aNode == 0 )
@@ -361,7 +329,7 @@ public:
 
 			node_ = aNode;
 			node_stack_.top().second = node_->getNextSibling();
-			node_stack_.push( std::make_pair( node_, ( XERCES_CPP_NAMESPACE_QUALIFIER DOMNode* )0 ) );
+			node_stack_.push( std::make_pair( node_, ( _XERCES DOMNode* )0 ) );
 
 			XMLOUT( node_ );
 			return true; //getListSize( node_, size );
@@ -370,7 +338,7 @@ public:
 		if( node_ == 0 || !node_->hasChildNodes() )
 			return false;
 		
-		XERCES_CPP_NAMESPACE_QUALIFIER DOMString str( ClassName );
+		_XERCES DOMString str( ClassName );
 		aNode = find_child_node( str, node_ );
 		if( aNode == 0 )																
 			return false;
@@ -392,21 +360,21 @@ public:
 	template< typename T >
 	bool read_( T& t, const tchar* fieldname )
 	{
-		XERCES_CPP_NAMESPACE_QUALIFIER DOMNode* aNode = node_stack_.top().second;
+		_XERCES DOMNode* aNode = node_stack_.top().second;
 		if( aNode != 0 )
 		{
-			XERCES_CPP_NAMESPACE_QUALIFIER DOMString str( fieldname );
+			_XERCES DOMString str( fieldname );
 			for( ; aNode != 0 ; aNode = aNode->getNextSibling() )
 			{
-				if( aNode->getNodeType() != XERCES_CPP_NAMESPACE_QUALIFIER DOMNode::ELEMENT_NODE )
+				if( aNode->getNodeType() != _XERCES DOMNode::ELEMENT_NODE )
 					continue;
-				if( XERCES_CPP_NAMESPACE_QUALIFIER XMLString::compareIString( str.rawBuffer(), aNode->getNodeName() ) == 0 )
+				if( _XERCES XMLString::compareIString( str.rawBuffer(), aNode->getNodeName() ) == 0 )
 					break;					
 			}
 			if( aNode == 0 )
 				return false;
 
-			XERCES_CPP_NAMESPACE_QUALIFIER DOMNode* next = aNode->getNextSibling();
+			_XERCES DOMNode* next = aNode->getNextSibling();
 			node_stack_.top().second = next;
 			if( next == 0 )
 			{
@@ -419,7 +387,7 @@ public:
 		{
 			if( node_ == 0 || !node_->hasChildNodes() )
 				return false;
-			XERCES_CPP_NAMESPACE_QUALIFIER DOMString str( fieldname );
+			_XERCES DOMString str( fieldname );
 			aNode = find_child_node( str, node_ );
 			if( aNode == 0 && isjump_ )
 				return true;
@@ -432,9 +400,9 @@ public:
 			return true;
 
 		_bt_xml StrX sx( aNode->getNodeValue() );
-		//XERCES_CPP_NAMESPACE_QUALIFIER DOMString value(  );
+		//_XERCES DOMString value(  );
 		//std::vector< char > cc( value.length() + 3,'\0' );
-		//XERCES_CPP_NAMESPACE_QUALIFIER XMLString::transcode( value.rawBuffer() , &cc[0], value.length() + 2 );
+		//_XERCES XMLString::transcode( value.rawBuffer() , &cc[0], value.length() + 2 );
 		if( sx.localForm() != 0 )
 		t = convertStringToInteger< T >( sx.localForm() );
 		return true;
@@ -443,21 +411,21 @@ public:
 	template< typename T >
 		bool read_str( T& t, const tchar* fieldname )
 	{
-		XERCES_CPP_NAMESPACE_QUALIFIER DOMNode* aNode = node_stack_.top().second;
+		_XERCES DOMNode* aNode = node_stack_.top().second;
 		if( aNode != 0 )
 		{
-			XERCES_CPP_NAMESPACE_QUALIFIER DOMString str( fieldname );
+			_XERCES DOMString str( fieldname );
 			for( ; aNode != 0 ; aNode = aNode->getNextSibling() )
 			{
-				if( aNode->getNodeType() != XERCES_CPP_NAMESPACE_QUALIFIER DOMNode::ELEMENT_NODE )
+				if( aNode->getNodeType() != _XERCES DOMNode::ELEMENT_NODE )
 					continue;
-				if( XERCES_CPP_NAMESPACE_QUALIFIER XMLString::compareIString( str.rawBuffer(), aNode->getNodeName() ) == 0 )
+				if( _XERCES XMLString::compareIString( str.rawBuffer(), aNode->getNodeName() ) == 0 )
 					break;					
 			}
 			if( aNode == 0 )
 				return false;
 
-			XERCES_CPP_NAMESPACE_QUALIFIER DOMNode* next = aNode->getNextSibling();
+			_XERCES DOMNode* next = aNode->getNextSibling();
 			node_stack_.top().second = next;
 			if( next == 0 )
 			{
@@ -470,7 +438,7 @@ public:
 		{
 			if( node_ == 0 || !node_->hasChildNodes() )
 				return false;
-			XERCES_CPP_NAMESPACE_QUALIFIER DOMString str( fieldname );
+			_XERCES DOMString str( fieldname );
 			aNode = find_child_node( str, node_ );
 			if( aNode == 0 && isjump_ )
 				return true;
@@ -482,9 +450,9 @@ public:
 		if( aNode == 0 )
 			return true;
 		_bt_xml StrX sx( aNode->getNodeValue() );
-		//XERCES_CPP_NAMESPACE_QUALIFIER DOMString value(  );
+		//_XERCES DOMString value(  );
 		//std::vector< char > cc( value.length() + 3,'\0' );
-		//XERCES_CPP_NAMESPACE_QUALIFIER XMLString::transcode( value.rawBuffer() , &cc[0], value.length() + 2 );
+		//_XERCES XMLString::transcode( value.rawBuffer() , &cc[0], value.length() + 2 );
 		if( sx.localForm() != 0 )
 			t = sx.localForm();
 		return true;
@@ -568,7 +536,7 @@ protected:
 	{
 	}
 
-	void init( XERCES_CPP_NAMESPACE_QUALIFIER DOMNode* node )
+	void init( _XERCES DOMNode* node )
 	{
 		node_ = node;
 		if( node_ == 0 )
@@ -576,16 +544,16 @@ protected:
 		document_ = node_->getOwnerDocument();
 		if( document_ == 0 )
 			throw( std::runtime_error( "XML_deserializer的document对象不能为空" ) );
-		node_stack_.push( std::make_pair( node_, ( XERCES_CPP_NAMESPACE_QUALIFIER DOMNode* ) 0 ) );
+		node_stack_.push( std::make_pair( node_, ( _XERCES DOMNode* ) 0 ) );
 	}
 
 private:
 
 	bool isjump_;
 
-	XERCES_CPP_NAMESPACE_QUALIFIER DOMDocument*  document_;
-	XERCES_CPP_NAMESPACE_QUALIFIER DOMNode*       node_;
-	std::stack < std::pair< XERCES_CPP_NAMESPACE_QUALIFIER DOMNode*,XERCES_CPP_NAMESPACE_QUALIFIER DOMNode* >  > node_stack_;
+	_XERCES DOMDocument*  document_;
+	_XERCES DOMNode*       node_;
+	std::stack < std::pair< _XERCES DOMNode*,_XERCES DOMNode* >  > node_stack_;
 };
 
 _serializing_end
