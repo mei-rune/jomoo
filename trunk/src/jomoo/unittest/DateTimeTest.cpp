@@ -818,7 +818,7 @@ void DateTimeTest::testTM()
 	CPPUNIT_ASSERT (dt.minute() == tt.tm_min );
 	CPPUNIT_ASSERT (dt.second() == tt.tm_sec );
 	CPPUNIT_ASSERT (dt.dayOfWeek() == tt.tm_wday );
-	CPPUNIT_ASSERT (tt.tm_yday+1) == dt.dayOfYear() );
+	CPPUNIT_ASSERT ((tt.tm_yday+1) == dt.dayOfYear() );
 }
 
 

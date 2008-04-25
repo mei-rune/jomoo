@@ -25,7 +25,7 @@
 #define NotFindError			_T("没有找到")
 #define _ExistError				_T("已经存在")
 #define SystemError				_T("系统错误")
-#define TimeSyntaxException     _T("时间格式错误")
+#define TimeSyntaxError         _T("时间格式错误")
 
 #define  ERR_SYS  -200 //  
 #define  ERR_ARG  -201

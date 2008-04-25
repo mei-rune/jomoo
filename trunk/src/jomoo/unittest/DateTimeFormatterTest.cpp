@@ -19,13 +19,13 @@ void DateTimeFormatterTest::testISO8601()
 {
 	DateTime dt(2005, 1, 8, 12, 30, 00);
 
-	std::string str = DateTimeFormatter::format(dt, DateTimeFormatter::ISO8601_FORMAT);
+	std::string str = DateTimeFormatter::format(dt, DateTime::ISO8601_FORMAT);
 	CPPUNIT_ASSERT (str == "2005-01-08T12:30:00Z");
 
-	str = DateTimeFormatter::format(dt, DateTimeFormatter::ISO8601_FORMAT, 3600);
+	str = DateTimeFormatter::format(dt, DateTime::ISO8601_FORMAT, 3600);
 	CPPUNIT_ASSERT (str == "2005-01-08T12:30:00+01:00");
 
-	str = DateTimeFormatter::format(dt, DateTimeFormatter::ISO8601_FORMAT, -3600);
+	str = DateTimeFormatter::format(dt, DateTime::ISO8601_FORMAT, -3600);
 	CPPUNIT_ASSERT (str == "2005-01-08T12:30:00-01:00");
 }
 
@@ -34,13 +34,13 @@ void DateTimeFormatterTest::testRFC822()
 {
 	DateTime dt(2005, 1, 8, 12, 30, 00);
 
-	std::string str = DateTimeFormatter::format(dt, DateTimeFormatter::RFC822_FORMAT);
+	std::string str = DateTimeFormatter::format(dt, DateTime::RFC822_FORMAT);
 	CPPUNIT_ASSERT (str == "Sat, 8 Jan 05 12:30:00 GMT");
 
-	str = DateTimeFormatter::format(dt, DateTimeFormatter::RFC822_FORMAT, 3600);
+	str = DateTimeFormatter::format(dt, DateTime::RFC822_FORMAT, 3600);
 	CPPUNIT_ASSERT (str == "Sat, 8 Jan 05 12:30:00 +0100");
 
-	str = DateTimeFormatter::format(dt, DateTimeFormatter::RFC822_FORMAT, -3600);
+	str = DateTimeFormatter::format(dt, DateTime::RFC822_FORMAT, -3600);
 	CPPUNIT_ASSERT (str == "Sat, 8 Jan 05 12:30:00 -0100");
 }
 
@@ -49,13 +49,13 @@ void DateTimeFormatterTest::testRFC1123()
 {
 	DateTime dt(2005, 1, 8, 12, 30, 00);
 
-	std::string str = DateTimeFormatter::format(dt, DateTimeFormatter::RFC1123_FORMAT);
+	std::string str = DateTimeFormatter::format(dt, DateTime::RFC1123_FORMAT);
 	CPPUNIT_ASSERT (str == "Sat, 8 Jan 2005 12:30:00 GMT");
 
-	str = DateTimeFormatter::format(dt, DateTimeFormatter::RFC1123_FORMAT, 3600);
+	str = DateTimeFormatter::format(dt, DateTime::RFC1123_FORMAT, 3600);
 	CPPUNIT_ASSERT (str == "Sat, 8 Jan 2005 12:30:00 +0100");
 
-	str = DateTimeFormatter::format(dt, DateTimeFormatter::RFC1123_FORMAT, -3600);
+	str = DateTimeFormatter::format(dt, DateTime::RFC1123_FORMAT, -3600);
 	CPPUNIT_ASSERT (str == "Sat, 8 Jan 2005 12:30:00 -0100");
 }
 
@@ -64,13 +64,13 @@ void DateTimeFormatterTest::testHTTP()
 {
 	DateTime dt(2005, 1, 8, 12, 30, 00);
 
-	std::string str = DateTimeFormatter::format(dt, DateTimeFormatter::HTTP_FORMAT);
+	std::string str = DateTimeFormatter::format(dt, DateTime::HTTP_FORMAT);
 	CPPUNIT_ASSERT (str == "Sat, 08 Jan 2005 12:30:00 GMT");
 
-	str = DateTimeFormatter::format(dt, DateTimeFormatter::HTTP_FORMAT, 3600);
+	str = DateTimeFormatter::format(dt, DateTime::HTTP_FORMAT, 3600);
 	CPPUNIT_ASSERT (str == "Sat, 08 Jan 2005 12:30:00 +0100");
 
-	str = DateTimeFormatter::format(dt, DateTimeFormatter::HTTP_FORMAT, -3600);
+	str = DateTimeFormatter::format(dt, DateTime::HTTP_FORMAT, -3600);
 	CPPUNIT_ASSERT (str == "Sat, 08 Jan 2005 12:30:00 -0100");
 }
 
@@ -79,13 +79,13 @@ void DateTimeFormatterTest::testRFC850()
 {
 	DateTime dt(2005, 1, 8, 12, 30, 00);
 
-	std::string str = DateTimeFormatter::format(dt, DateTimeFormatter::RFC850_FORMAT);
+	std::string str = DateTimeFormatter::format(dt, DateTime::RFC850_FORMAT);
 	CPPUNIT_ASSERT (str == "Saturday, 8-Jan-05 12:30:00 GMT");
 
-	str = DateTimeFormatter::format(dt, DateTimeFormatter::RFC850_FORMAT, 3600);
+	str = DateTimeFormatter::format(dt, DateTime::RFC850_FORMAT, 3600);
 	CPPUNIT_ASSERT (str == "Saturday, 8-Jan-05 12:30:00 +0100");
 
-	str = DateTimeFormatter::format(dt, DateTimeFormatter::RFC850_FORMAT, -3600);
+	str = DateTimeFormatter::format(dt, DateTime::RFC850_FORMAT, -3600);
 	CPPUNIT_ASSERT (str == "Saturday, 8-Jan-05 12:30:00 -0100");
 }
 
@@ -94,13 +94,13 @@ void DateTimeFormatterTest::testRFC1036()
 {
 	DateTime dt(2005, 1, 8, 12, 30, 00);
 
-	std::string str = DateTimeFormatter::format(dt, DateTimeFormatter::RFC1036_FORMAT);
+	std::string str = DateTimeFormatter::format(dt, DateTime::RFC1036_FORMAT);
 	CPPUNIT_ASSERT (str == "Saturday, 8 Jan 05 12:30:00 GMT");
 
-	str = DateTimeFormatter::format(dt, DateTimeFormatter::RFC1036_FORMAT, 3600);
+	str = DateTimeFormatter::format(dt, DateTime::RFC1036_FORMAT, 3600);
 	CPPUNIT_ASSERT (str == "Saturday, 8 Jan 05 12:30:00 +0100");
 
-	str = DateTimeFormatter::format(dt, DateTimeFormatter::RFC1036_FORMAT, -3600);
+	str = DateTimeFormatter::format(dt, DateTime::RFC1036_FORMAT, -3600);
 	CPPUNIT_ASSERT (str == "Saturday, 8 Jan 05 12:30:00 -0100");
 }
 
@@ -109,7 +109,7 @@ void DateTimeFormatterTest::testASCTIME()
 {
 	DateTime dt(2005, 1, 8, 12, 30, 00);
 
-	std::string str = DateTimeFormatter::format(dt, DateTimeFormatter::ASCTIME_FORMAT);
+	std::string str = DateTimeFormatter::format(dt, DateTime::ASCTIME_FORMAT);
 	CPPUNIT_ASSERT (str == "Sat Jan  8 12:30:00 2005");
 }
 
@@ -118,7 +118,7 @@ void DateTimeFormatterTest::testSORTABLE()
 {
 	DateTime dt(2005, 1, 8, 12, 30, 00);
 
-	std::string str = DateTimeFormatter::format(dt, DateTimeFormatter::SORTABLE_FORMAT);
+	std::string str = DateTimeFormatter::format(dt, DateTime::SORTABLE_FORMAT);
 	CPPUNIT_ASSERT (str == "2005-01-08 12:30:00");
 }
 

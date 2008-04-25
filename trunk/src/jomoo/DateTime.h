@@ -25,6 +25,11 @@ class DateTime
 {
 public:
 	
+	enum
+	{
+		UTC = 0xFFFF /// Special value for timeZoneDifferential denoting UTC. 
+	};
+
 	enum DATETIME_FORMAT
 	{
 
@@ -113,6 +118,58 @@ public:
 		FRIDAY,
 		SATURDAY
 	};
+
+	
+
+	static const tchar* GET_WEEKDAY_NAME( int week )
+	{
+		// names used by formatter and parser
+		/// English names of week days (Sunday, Monday, Tuesday, ...).
+		static tchar* WEEKDAY_NAMES[7] = {
+			_T("Sunday"),
+			_T("Monday"),
+			_T("Tuesday"),
+			_T("Wednesday"),
+			_T("Thursday"),
+			_T("Friday"),
+			_T("Saturday")	};
+
+			return WEEKDAY_NAMES[ week ];
+	}
+
+	static const tchar* GET_MONTH_NAME( int month )
+	{
+		/// English names of months (January, February, ...).	
+		static tchar* MONTH_NAMES[] = 
+		{
+			_T("January"),
+			_T("February"),
+			_T("March"),
+			_T("April"),
+			_T("May"),
+			_T("June"),
+			_T("July"),
+			_T("August"),
+			_T("September"),
+			_T("October"),
+			_T("November"),
+			_T("December")
+		};
+		return MONTH_NAMES[ month ];
+	}
+
+	static const tchar* getFormatStr( DateTime::DATETIME_FORMAT fmt )
+	{
+		static const tchar* formats[8]  = { _T("%Y-%m-%dT%H:%M:%S%z"),
+											 _T("%w, %e %b %y %H:%M:%S %Z"),
+											 _T("%w, %e %b %Y %H:%M:%S %Z"),
+											 _T("%w, %d %b %Y %H:%M:%S %Z"),
+											 _T("%W, %e-%b-%y %H:%M:%S %Z"),
+											 _T("%W, %e %b %y %H:%M:%S %Z"),
+											 _T("%w %b %f %H:%M:%S %Y"),
+											 _T("%Y-%m-%d %H:%M:%S") };
+		return formats[ fmt ];
+	}
 
 	DateTime(const Timestamp& stamp)
 		: _utcTime(stamp.utcTime())
