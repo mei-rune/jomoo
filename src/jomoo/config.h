@@ -233,11 +233,20 @@ inline T get_ptr( T t )
 #define ASSERT assert
 
 #define OS_HAS_INLINED 1
+
+#if defined (OS_HAS_INLINED)
 #define OS_INLINE inline
+#else
+#define OS_INLINE
+#endif
 
 //#define JOMOO_HAS_INLINED 1
-#define JOMOO_INLINE inline
 
+#if defined (JOMOO_HAS_INLINED)
+#define JOMOO_INLINE inline
+#else
+#define JOMOO_INLINE 
+#endif
 
 #define JOMOO_MT
 
