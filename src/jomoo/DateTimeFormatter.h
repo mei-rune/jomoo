@@ -60,7 +60,7 @@ public:
 	static tstring format(const Timestamp& timestamp, DateTime::DATETIME_FORMAT fmt = DateTime::ISO8601_FORMAT, int timeZoneDifferential = DateTime::UTC )
 	{
 		DateTime dateTime(timestamp);
-		return format( dateTime, getFormatStr( fmt ), timeZoneDifferential );
+		return format( dateTime, DateTime::getFormatStr( fmt ), timeZoneDifferential );
 	}
 
 	/// Formats the given date and time according to the given format.
@@ -72,7 +72,7 @@ public:
 
 	static tstring format( const DateTime& dateTime, DateTime::DATETIME_FORMAT fmt = DateTime::ISO8601_FORMAT, int timeZoneDifferential = DateTime::UTC )
 	{
-		return format( dateTime, getFormatStr( fmt ), timeZoneDifferential );
+		return format( dateTime, DateTime::getFormatStr( fmt ), timeZoneDifferential );
 	}
 	
 	static tstring format(const DateTime& dateTime, const tchar* fmt, int timeZoneDifferential = DateTime::UTC);

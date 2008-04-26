@@ -18,10 +18,10 @@ JOMOO_INLINE tstring DateTimeFormatter::format(const DateTime& dateTime, const t
 
 		switch (*it)
 		{
-		case _T('w'): result.append(GET_WEEKDAY_NAME(dateTime.dayOfWeek()), 0, 3); break;
-		case _T('W'): result.append(GET_WEEKDAY_NAME(dateTime.dayOfWeek())); break;
-		case _T('b'): result.append(GET_MONTH_NAME(dateTime.month() - 1), 0, 3); break;
-		case _T('B'): result.append(GET_MONTH_NAME(dateTime.month() - 1)); break;
+		case _T('w'): result.append(DateTime::GET_WEEKDAY_NAME(dateTime.dayOfWeek()), 0, 3); break;
+		case _T('W'): result.append(DateTime::GET_WEEKDAY_NAME(dateTime.dayOfWeek())); break;
+		case _T('b'): result.append(DateTime::GET_MONTH_NAME(dateTime.month() - 1), 0, 3); break;
+		case _T('B'): result.append(DateTime::GET_MONTH_NAME(dateTime.month() - 1)); break;
 		case _T('d'): result.append(NumberFormatter::format0(dateTime.day(), 2)); break;
 		case _T('e'): result.append(NumberFormatter::format(dateTime.day())); break;
 		case _T('f'): result.append(NumberFormatter::format(dateTime.day(), 2)); break;
@@ -113,7 +113,7 @@ JOMOO_INLINE tstring DateTimeFormatter::tzdISO(int timeZoneDifferential)
 JOMOO_INLINE tstring DateTimeFormatter::tzdRFC(int timeZoneDifferential)
 {
 	tstring tzd;
-	if (timeZoneDifferential != UTC)
+	if (timeZoneDifferential != DateTime::UTC)
 	{
 		if (timeZoneDifferential >= 0)
 		{

@@ -10,7 +10,7 @@
 // Include files
 # include <time.h>
 # include <cmath>
-# include <assert.h>
+# include "string.hpp"
 # include "Timespan.h"
 # include "Timestamp.h"
 
@@ -170,6 +170,7 @@ public:
 											 _T("%Y-%m-%d %H:%M:%S") };
 		return formats[ fmt ];
 	}
+
 
 	DateTime(const Timestamp& stamp)
 		: _utcTime(stamp.utcTime())
