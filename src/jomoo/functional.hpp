@@ -9,6 +9,7 @@
 
 // Include files
 #include <functional>
+#include <boost/tr1/memory.hpp>
 
 _jomoo_begin
 
