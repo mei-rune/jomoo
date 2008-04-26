@@ -204,6 +204,8 @@ public:
 
 private:
 	int64_t _ts;
+
+	friend std::ostream& operator<<( std::ostream& target, const Timestamp& );
 };
 
 inline void swap(Timestamp& s1, Timestamp& s2)
@@ -213,5 +215,9 @@ inline void swap(Timestamp& s1, Timestamp& s2)
 
 _jomoo_end
 
+inline std::ostream& operator<<( std::ostream& target, const Timestamp& ts)
+{
+	target << ts._ts;
+}
 
 #endif // Timestamp_H
