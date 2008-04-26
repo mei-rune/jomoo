@@ -7,7 +7,7 @@
 #include <boost/tr1/functional.hpp>
 #include <jomoo/functional.hpp>
 #include "jomoo/networks/sockets/tcp_server.h"
-#include "jomoo/threading/threading.h"
+#include "jomoo/threading.hpp"
 
 
 class session;
@@ -117,7 +117,7 @@ int main(int argc, tchar* argv[])
 		manager.sessions.push_back( p );
 		std::cout << "接收来自" << p->socket_.remote_addr() << "的连接,共有" << manager.sessions.size() << "个连接!" << std::endl;
 
-		_jomoo_thread create_thread( mem_fun( &session::run), p );
+		_jomoo_thread create_thread( _jomoo mem_fun( &session::run), p , "aa" );
 		//boost::thread t( std::tr1::function< void(void) >( &session::run, p ) );
 
 	}
