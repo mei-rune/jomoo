@@ -5,13 +5,26 @@
 
 
 #include "CppUnit/TestCase.h"
+#include <cppunit/extensions/HelperMacros.h>
 
 
-class DateTimeParserTest: public CppUnit::TestCase
+class DateTimeParserTest: public CppUnit::TestFixture
 {
+  CPPUNIT_TEST_SUITE( DateTimeParserTest );
+	CPPUNIT_TEST( testISO8601);
+	CPPUNIT_TEST( testRFC822);
+	CPPUNIT_TEST( testRFC1123);
+	CPPUNIT_TEST( testHTTP);
+	CPPUNIT_TEST( testRFC850);
+	CPPUNIT_TEST( testRFC1036);
+	CPPUNIT_TEST( testASCTIME);
+	CPPUNIT_TEST( testSORTABLE);
+	CPPUNIT_TEST( testCustom);
+	CPPUNIT_TEST( testGuess);
+	CPPUNIT_TEST( testParseMonth);
+	CPPUNIT_TEST( testParseDayOfWeek);
+  CPPUNIT_TEST_SUITE_END();
 public:
-	DateTimeParserTest(const std::string& name);
-	~DateTimeParserTest();
 
 	void testISO8601();
 	void testRFC822();
@@ -29,7 +42,6 @@ public:
 	void setUp();
 	void tearDown();
 
-	static CppUnit::Test* suite();
 
 private:
 };
