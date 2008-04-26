@@ -32,58 +32,75 @@ class DateTimeParser
 {
 public:
 	
-	void parse(const tstring& fmt, const tstring& str, DateTime& dateTime )
+	static void parse(const tstring& fmt, const tstring& str, DateTime& dateTime )
 	{
 		int timeZoneDifferential = 0;
 		parse( fmt.c_str(), str.c_str(), dateTime, timeZoneDifferential );
 	}
 
-	void parse(const tchar* fmt, const tchar* str, DateTime& dateTime)
+	static void parse(const tchar* fmt, const tchar* str, DateTime& dateTime)
 	{
 		int timeZoneDifferential = 0;
 		parse( fmt, str, dateTime, timeZoneDifferential );
 	}
 
-	void parse(const tstring& fmt, const tstring& str, DateTime& dateTime, int& timeZoneDifferential)
+	static void parse( DateTime::DATETIME_FORMAT fmt, const tchar* str, DateTime& dateTime)
+	{
+		int timeZoneDifferential = 0;
+		parse(DateTime::getFormatStr( fmt ), str, dateTime, timeZoneDifferential );
+	}
+
+	static void parse(const tstring& fmt, const tstring& str, DateTime& dateTime, int& timeZoneDifferential)
 	{
 		parse( fmt.c_str(), str.c_str(), dateTime, timeZoneDifferential );
 	}
 
-	void parse(const tchar* fmt, const tchar* str, DateTime& dateTime, int& timeZoneDifferential)
+	static void parse(const tchar* fmt, const tchar* str, DateTime& dateTime, int& timeZoneDifferential)
 	{
 		if( !tryParse( fmt, str, dateTime,timeZoneDifferential) )
 			ThrowException( TimeSyntaxException );
 	}
 
+	static void parse( DateTime::DATETIME_FORMAT fmt, const tchar* str, DateTime& dateTime, int& timeZoneDifferential)
+	{
+		parse(DateTime::getFormatStr( fmt ), str, dateTime, timeZoneDifferential );
+	}
 
-	DateTime parse(const tstring& fmt, const tstring& str, int& timeZoneDifferential)
+	static DateTime parse(const tstring& fmt, const tstring& str, int& timeZoneDifferential)
 	{
 		DateTime result;
 		parse(fmt, str, result, timeZoneDifferential);
 		return result;
 	}
 
-	DateTime parse(const tchar* fmt, const tchar* str, int& timeZoneDifferential)
+	static DateTime parse(const tchar* fmt, const tchar* str, int& timeZoneDifferential)
 	{
 		DateTime result;
 		parse(fmt, str, result, timeZoneDifferential);
 		return result;
 	}
 
-	bool tryParse(const tchar* fmt, const tchar* str, DateTime& dateTime, int& timeZoneDifferential);
+	static DateTime parse(DateTime::DATETIME_FORMAT fmt, const tchar* str, int& timeZoneDifferential)
+	{
+		DateTime result;
+		parse(DateTime::getFormatStr( fmt ), str, result, timeZoneDifferential);
+		return result;
+	}
+
+	static bool tryParse(const tchar* fmt, const tchar* str, DateTime& dateTime, int& timeZoneDifferential);
 	
-	bool tryParse(DateTime::DATETIME_FORMAT fmt, const tchar* str, DateTime& dateTime, int& timeZoneDifferential)
+	static bool tryParse(DateTime::DATETIME_FORMAT fmt, const tchar* str, DateTime& dateTime, int& timeZoneDifferential)
 	{
-		return tryParse( DateTimeFormatter::getFormatStr( fmt ), str, dateTime, timeZoneDifferential );
+		return tryParse( DateTime::getFormatStr( fmt ), str, dateTime, timeZoneDifferential );
 	}
 
-	void parse(const tstring& str, DateTime& dateTime, int& timeZoneDifferential)
+	static void parse(const tstring& str, DateTime& dateTime, int& timeZoneDifferential)
 	{
 		if (!tryParse(str, dateTime, timeZoneDifferential))
 			ThrowException( TimeSyntaxException );
 	}
 
-	DateTime parse(const tstring& str, int& timeZoneDifferential)
+	static DateTime parse(const tstring& str, int& timeZoneDifferential)
 	{
 		DateTime result;
 		if (tryParse(str, result, timeZoneDifferential))
@@ -92,17 +109,16 @@ public:
 		ThrowException( TimeSyntaxException );
 	}
 
-	bool tryParse(const tstring& str, DateTime& dateTime, int& timeZoneDifferential);
+	static bool tryParse(const tstring& str, DateTime& dateTime, int& timeZoneDifferential);
 
-	int parseMonth(const tchar* it );
+	static int parseMonth(const tchar* it );
 
-
-	int parseDayOfWeek(const tchar* it);
+	static int parseDayOfWeek(const tchar* it);
 
 protected:
-	int parseTZD(const tchar* it);
+	static int parseTZD(const tchar* it);
 
-	int parseAMPM(const tchar* it, int hour);
+	static int parseAMPM(const tchar* it, int hour);
 };
 
 #if defined (JOMOO_HAS_INLINED)
