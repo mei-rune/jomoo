@@ -3,12 +3,12 @@
 #include "stdafx.h"
 #include <list>
 #include <iostream>
-#include <boost/tr1/memory.hpp>
-#include <boost/tr1/functional.hpp>
+
 #include <jomoo/functional.hpp>
 #include "jomoo/networks/sockets/tcp_server.h"
 #include "jomoo/threading.hpp"
-
+#include <boost/tr1/memory.hpp>
+#include <boost/tr1/functional.hpp>
 
 class session;
 
