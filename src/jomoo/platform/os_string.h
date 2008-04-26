@@ -148,7 +148,7 @@ inline const std::string& toNarrowString( const std::string& str )
 
     inline tstring toTstring( const wchar_t* p , size_t len=-1 )
     {
-        return (len < 0) ? p : std::wstring(p,len) ;
+        return (-1 == len) ? p : std::wstring(p,len) ;
     }
 
 #else 
@@ -166,7 +166,7 @@ inline const std::string& toNarrowString( const std::string& str )
     }
     inline tstring toTstring( const char* p , size_t len=-1 )
     {
-        return (len < 0) ? p : std::string(p,len) ;
+        return (-1 == len) ? p : std::string(p,len) ;
     }
     inline tstring toTstring( const std::wstring& s )
     {
