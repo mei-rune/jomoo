@@ -624,6 +624,9 @@ protected:
 		_millisecond = span.milliseconds();
 		_microsecond = span.microseconds();
 	}
+
+	friend std::ostream& operator<<( std::ostream& target, const DateTime& dt);
+
 private:
 	void checkLimit(short& lower, short& higher, short limit)
 	{
@@ -668,5 +671,10 @@ inline void swap(DateTime& d1, DateTime& d2)
 }
 
 _jomoo_end
+
+inline std::ostream& operator<<( std::ostream& target, const DateTime& ts)
+{
+	target << ts._microsecond;
+}
 
 #endif // DateTime_H
