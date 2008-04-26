@@ -22,7 +22,7 @@ JOMOO_INLINE bool DateTimeParser::tryParse(const tchar* fmt, const tchar* str, D
 			continue;
 		}
 
-		if (*++itf)
+		if (!*++itf)
 			continue;
 
 		switch (*itf)
@@ -162,7 +162,7 @@ JOMOO_INLINE int DateTimeParser::parseMonth(const tchar* it )
 
 	for (int i = 0; i < 12; ++i) 
 	{
-		if ( string_traits<tchar>::stricmp( MONTH_NAMES[i], month.c_str() ) == 0)
+		if ( string_traits<tchar>::strnicmp( MONTH_NAMES[i], month.c_str(), month.size() ) == 0)
 			return i + 1;
 	}
 
@@ -195,7 +195,7 @@ JOMOO_INLINE int DateTimeParser::parseDayOfWeek(const tchar* it )
 
 	for (int i = 0; i < 7; ++i) 
 	{
-		if ( string_traits<tchar>::stricmp( WEEKDAY_NAMES[i], dow.c_str() ) == 0)
+		if ( string_traits<tchar>::strnicmp( WEEKDAY_NAMES[i], dow.c_str(), dow.size() ) == 0)
 			return i;
 	}
 	ThrowException1( TimeSyntaxException,_T("Not a valid weekday name") );
@@ -206,46 +206,46 @@ JOMOO_INLINE int DateTimeParser::parseTZD(const tchar* it )
 {
 	struct Zone
 	{
-		const char* designator;
+		const tchar* designator;
 		int         timeZoneDifferential;
 	};
 
 	static Zone zones[] =
 	{
-		{"Z",           0},
-		{"UT",          0},
-		{"GMT",         0},
-		{"BST",    1*3600},
-		{"IST",    1*3600},
-		{"WET",         0},
-		{"WEST",   1*3600},
-		{"CET",    1*3600},
-		{"CEST",   2*3600},
-		{"EET",    2*3600},
-		{"EEST",   3*3600},
-		{"MSK",    3*3600},
-		{"MSD",    4*3600},
-		{"NST",   -3*3600-1800},
-		{"NDT",   -2*3600-1800},
-		{"AST",   -4*3600},
-		{"ADT",   -3*3600},
-		{"EST",   -5*3600},
-		{"EDT",   -4*3600},
-		{"CST",   -6*3600},
-		{"CDT",   -5*3600},
-		{"MST",   -7*3600},
-		{"MDT",   -6*3600},
-		{"PST",   -8*3600},
-		{"PDT",   -7*3600},
-		{"AKST",  -9*3600},
-		{"AKDT",  -8*3600},
-		{"HST",  -10*3600},
-		{"AEST",  10*3600},
-		{"AEDT",  11*3600},
-		{"ACST",   9*3600+1800},
-		{"ACDT",  10*3600+1800},
-		{"AWST",   8*3600},
-		{"AWDT",   9*3600}
+		{_T("Z"),           0},
+		{_T("UT"),          0},
+		{_T("GMT"),         0},
+		{_T("BST"),    1*3600},
+		{_T("IST"),    1*3600},
+		{_T("WET"),         0},
+		{_T("WEST"),   1*3600},
+		{_T("CET"),    1*3600},
+		{_T("CEST"),   2*3600},
+		{_T("EET"),    2*3600},
+		{_T("EEST"),   3*3600},
+		{_T("MSK"),    3*3600},
+		{_T("MSD"),    4*3600},
+		{_T("NST"),   -3*3600-1800},
+		{_T("NDT"),   -2*3600-1800},
+		{_T("AST"),   -4*3600},
+		{_T("ADT"),   -3*3600},
+		{_T("EST"),   -5*3600},
+		{_T("EDT"),   -4*3600},
+		{_T("CST"),   -6*3600},
+		{_T("CDT"),   -5*3600},
+		{_T("MST"),   -7*3600},
+		{_T("MDT"),   -6*3600},
+		{_T("PST"),   -8*3600},
+		{_T("PDT"),   -7*3600},
+		{_T("AKST"),  -9*3600},
+		{_T("AKDT"),  -8*3600},
+		{_T("HST"),  -10*3600},
+		{_T("AEST"),  10*3600},
+		{_T("AEDT"),  11*3600},
+		{_T("ACST"),   9*3600+1800},
+		{_T("ACDT"),  10*3600+1800},
+		{_T("AWST"),   8*3600},
+		{_T("AWDT"),   9*3600}
 	};
 
 	while (*it && ::isspace(*it)) ++it;
