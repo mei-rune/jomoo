@@ -62,9 +62,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="cppunitd_dll.lib"
+				AdditionalDependencies="cppunitd_dll.lib jomoo_static.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;$(CPPUNIT_ROOT)/debug/&quot;"
+				AdditionalLibraryDirectories="&quot;$(OutDir)&quot;;&quot;$(CPPUNIT_ROOT)/debug/&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="2"
 				TargetMachine="1"
@@ -240,6 +240,14 @@
 			</File>
 			<File
 				RelativePath="..\..\src\jomoo\unittest\DateTimeFormatterTest.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\unittest\DateTimeParserTest.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\unittest\DateTimeParserTest.h"
 				>
 			</File>
 			<File
