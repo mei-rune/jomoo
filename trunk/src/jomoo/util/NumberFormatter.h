@@ -10,9 +10,12 @@
 
 // Include files
 #include "config_Util.h"
+#include <stdio.h>
+#include <wchar.h>
+#include <stdarg.h>
 
 #if defined(_MSC_VER)
-	#define I64_FMT ") I64_T("
+	#define I64_FMT _T(") I64_T(" )
 #elif defined(__APPLE__) 
 	#define I64_FMT _T("q_T("
 #else
@@ -31,9 +34,9 @@ public:
 		va_list argptr;
 		va_start(argptr,fmt );
 #ifdef  _UNICODE
-		buffer.resize( vsnwprintf_s(( char*) buffer.c_str(), buffer.capacity( ), buffer.size(), fmt, argptr ) );
+		buffer.resize( _vsnwprintf_s(( tchar*) buffer.c_str(), buffer.capacity( ), buffer.size(), fmt, argptr ) );
 #else
-		buffer.resize( vsnprintf_s(( char*) buffer.c_str(), buffer.capacity( ), buffer.size(), fmt, argptr ) );
+		buffer.resize( vsnprintf_s(( tchar*) buffer.c_str(), buffer.capacity( ), buffer.size(), fmt, argptr ) );
 #endif
 		va_end(argptr);
 	}
