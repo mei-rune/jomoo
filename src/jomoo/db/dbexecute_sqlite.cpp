@@ -152,7 +152,7 @@ bool DbExecute_SQLITE::bind( const tchar* name, size_t len, int value )
 	int index = tsqlite3_bind_parameter_index( stmt_, name );
 	if( index == 0 )
 	{
-		con_->last_error( "指定的列名[" + tstring( name ) + "]不存在!" );
+		con_->last_error( _T("指定的列名[") + tstring( name ) + _T("]不存在!") );
 		return false;
 	}
 
@@ -169,7 +169,7 @@ bool DbExecute_SQLITE::bind( const tchar* name, size_t len, __int64 value )
 	int index = tsqlite3_bind_parameter_index( stmt_, name );
 	if( index == 0 )
 	{
-		con_->last_error( "指定的列名[" + tstring( name ) + "]不存在!" );
+		con_->last_error( _T("指定的列名[") + tstring( name ) + _T("]不存在!") );
 		return false;
 	}
 
@@ -186,7 +186,7 @@ bool DbExecute_SQLITE::bind( const tchar* name, size_t len, double value )
 	int index = tsqlite3_bind_parameter_index( stmt_, name );
 	if( index == 0 )
 	{
-		con_->last_error( "指定的列名[" + tstring( name ) + "]不存在!" );
+		con_->last_error( _T("指定的列名[") + tstring( name ) + _T("]不存在!") );
 		return false;
 	}
 
@@ -203,7 +203,7 @@ bool DbExecute_SQLITE::bind( const tchar* name, size_t len, const char* str , si
 	int index = tsqlite3_bind_parameter_index( stmt_, name );
 	if( index == 0 )
 	{
-		con_->last_error( "指定的列名[" + tstring( name ) + "]不存在!" );
+		con_->last_error( _T("指定的列名[") + tstring( name ) + _T("]不存在!") );
 		return false;
 	}
 
@@ -220,7 +220,7 @@ bool DbExecute_SQLITE::bind( const tchar* name, size_t len, const wchar_t* str ,
 	int index = tsqlite3_bind_parameter_index( stmt_, name );
 	if( index == 0 )
 	{
-		con_->last_error( "指定的列名[" + tstring( name ) + "]不存在!" );
+		con_->last_error( _T("指定的列名[") + tstring( name ) + _T("]不存在!") );
 		return false;
 	}
 
@@ -232,13 +232,12 @@ bool DbExecute_SQLITE::bind( const tstring& name, const wchar_t* str , size_t n 
 	return bind( name.c_str(), name.size(), str ,n );
 }
 
-#ifdef _BOOST_TIME_
 bool DbExecute_SQLITE::bind( const tchar* name, size_t len, const ptime& time )
 {
 	int index = tsqlite3_bind_parameter_index( stmt_, name );
 	if( index == 0 )
 	{
-		con_->last_error( "指定的列名[" + tstring( name ) + "]不存在!" );
+		con_->last_error( _T("指定的列名[") + tstring( name ) + _T("]不存在!") );
 		return false;
 	}
 
@@ -249,7 +248,6 @@ bool DbExecute_SQLITE::bind( const tstring& name, const ptime& time )
 {
 	return bind( name.c_str(),name.size(), time );
 }
-#endif
 
 int DbExecute_SQLITE::affected_rows( )
 {
@@ -270,6 +268,8 @@ bool DbExecute_SQLITE::direct_exec( const tstring& sql, bool reportWarningsAsErr
 {
 	return direct_exec( sql.c_str(),sql.size(), reportWarningsAsErrors );
 }
+
+DEFINE_SHARED( DbExecute_SQLITE );
 
 _jomoo_db_end
 

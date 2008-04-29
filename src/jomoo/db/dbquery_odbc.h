@@ -21,7 +21,7 @@ _jomoo_db_begin
 
 class DbConnection_ODBC;
 
-class DbQuery_ODBC : public DbQuery2 {
+class DbQuery_ODBC : public DbQuery {
 public:
 	DbQuery_ODBC(DbConnection_ODBC* con, int timeout = 120);
 	virtual ~DbQuery_ODBC();
@@ -31,11 +31,6 @@ public:
 	virtual bool nextRow();
 	virtual bool nextSet();
 	virtual int  columns();
-
-
-	virtual const Variant&     get(u_int_t column);
-	virtual const Variant&     get(const tstring& column);
-
 
 	bool getBoolean(u_int_t column);
 	bool getBoolean(const tstring& column);
@@ -47,10 +42,11 @@ public:
 	double getDouble(const tstring& column);
 	const tstring& getString(u_int_t column);
 	const tstring& getString(const tstring& column);
-#ifdef _BOOST_TIME_
-	const ptime& getTime(u_int_t column);
-	const ptime& getTime(const tstring& column);
-#endif
+
+	virtual const Timestamp& getTimestamp(u_int_t column) = 0;
+	virtual const Timestamp& getTimestamp(const tstring& column) = 0;
+	virtual const Timestamp& getTimestamp(const tchar* column) = 0;
+
 	int getColumnType( size_t pos );
 	const tstring& getColumnName( size_t pos );
 

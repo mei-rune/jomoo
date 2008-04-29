@@ -29,7 +29,7 @@ DbExecute_ODBC::DbExecute_ODBC( DbConnection_ODBC* con , int timeout )
 		&stmt_);                      // OutputHandlePtr
 	if (SQLERROR(r))
 	{
-		throw std::runtime_error( "取得odbc执行句柄失败" );
+		ThrowException1( DbException, _T("取得odbc执行句柄失败") );
 	}
 
 	// Make sure we are in Forward Only cursor
@@ -41,7 +41,7 @@ DbExecute_ODBC::DbExecute_ODBC( DbConnection_ODBC* con , int timeout )
 	if (SQLERROR(r))
 	{
 		SQLFreeHandle(SQL_HANDLE_STMT, stmt_);
-		throw std::runtime_error("设置odbc执行句柄光标属性失败");
+		ThrowException1( DbException, _T("设置odbc执行句柄光标属性失败") );
 	}
 	//// Make sure we are in synchronous mode
 	//r = SQLSetStmtAttr(
@@ -52,7 +52,7 @@ DbExecute_ODBC::DbExecute_ODBC( DbConnection_ODBC* con , int timeout )
 	//if (SQLERROR(r))
 	//{
 	//	SQLFreeHandle(SQL_HANDLE_STMT, stmt_);
-	//	throw std::runtime_error("设置odbc执行句柄异步属性失败");
+	//	ThrowException1( DbException, _T("设置odbc执行句柄异步属性失败") );
 	//}
 	//// Change the time out
 	//SQLUINTEGER sqlTimeout = timeout;
@@ -64,7 +64,7 @@ DbExecute_ODBC::DbExecute_ODBC( DbConnection_ODBC* con , int timeout )
 	//if (SQLERROR(r))
 	//{
 	//	SQLFreeHandle(SQL_HANDLE_STMT, stmt_);
-	//	throw std::runtime_error("设置odbc执行句柄超时属性失败");
+	//	ThrowException1( DbException, _T("设置odbc执行句柄超时属性失败") );
 	//}
 }
 
@@ -110,7 +110,7 @@ bool DbExecute_ODBC::exec( )
 	case SQL_SUCCESS_WITH_INFO:
 		if (reportWarningsAsErrors_)
 		{
-			reportError_("在执行语句 '"+ tstring( ( const char* )sqlText_) +"'时");
+			reportError_(_T("在执行语句 '")+ toTstring( ( const char* )sqlText_) + _T("'时"));
 		}
 		else
 		{
@@ -119,7 +119,7 @@ bool DbExecute_ODBC::exec( )
 		break;
 
 	default:
-		reportError_("在执行语句 '"+ tstring( ( const char* )sqlText_) +"'时");
+		reportError_(_T("在执行语句 '")+ toTstring( ( const char* )sqlText_) +_T("'时"));
 	}
 	return false;
 }
@@ -129,7 +129,7 @@ bool DbExecute_ODBC::bind( int index, int value )
 	SQLRETURN retcode = SQLBindParameter( stmt_, index, SQL_PARAM_INPUT, SQL_C_SLONG,SQL_INTEGER, 0, 0, &value, 0, 0 );
 	if ( (retcode == SQL_SUCCESS) || (retcode == SQL_SUCCESS_WITH_INFO) )
 		return true;
-	reportError_( "在绑定[" + convertIntegerToString( index ) + "]时" );
+	reportError_( _T("在绑定[") + convertIntegerToString( index ) + _T("]时") );
 	return false;
 }
 
@@ -138,7 +138,7 @@ bool DbExecute_ODBC::bind( int index, __int64 value )
 	SQLRETURN retcode = SQLBindParameter( stmt_, index, SQL_PARAM_INPUT, SQL_C_SBIGINT,SQL_BIGINT, 0, 0, &value, 0, 0 );
 	if ( (retcode == SQL_SUCCESS) || (retcode == SQL_SUCCESS_WITH_INFO) )
 		return true;
-	reportError_( "在绑定[" + convertIntegerToString( index ) + "]时" );
+	reportError_( _T("在绑定[") + convertIntegerToString( index ) + ("]时") );
 	return false;
 }
 
@@ -153,7 +153,6 @@ bool DbExecute_ODBC::bind( int index, double value )
 
 bool DbExecute_ODBC::bind( int index, const char* str, size_t n )
 {// sqlite3_bind_text
-
 SQLINTEGER len = ( SQLINTEGER ) n;
 	SQLRETURN retcode = SQLBindParameter( stmt_, index, SQL_PARAM_INPUT, SQL_C_CHAR,SQL_CHAR, len, 0, &str, 0, &len );
 	if ( (retcode == SQL_SUCCESS) || (retcode == SQL_SUCCESS_WITH_INFO) )
@@ -171,8 +170,8 @@ bool DbExecute_ODBC::bind( int index, const wchar_t* str, size_t n )
 	reportError_( "在绑定[" + convertIntegerToString( index ) + "]时" );
 	return false;
 }
-#ifdef _BOOST_TIME_
-bool DbExecute_ODBC::bind( int index, const ptime& time )
+
+bool DbExecute_ODBC::bind( int index, const Timestamp& time )
 {
 	pdate date= time.date();
 	ptime_duration time_duration = time.time_of_day();
@@ -202,17 +201,16 @@ bool DbExecute_ODBC::bind( int index, const ptime& time )
 	}
 	if ( (retcode == SQL_SUCCESS) || (retcode == SQL_SUCCESS_WITH_INFO) )
 		return true;
-	reportError_( "在绑定[" + convertIntegerToString( index ) + "]时" );
+	reportError_( _T("在绑定[") + convertIntegerToString( index ) + _T("]时") );
 	return false;
 }
-#endif
 
 bool DbExecute_ODBC::bind( const tchar* name, size_t len, int value )
 {
 	//int index = sqlite3_bind_parameter_index( stmt_, name.c_str() );
 	//if( index == 0 )
 	//{
-		con_->last_error( "指定的列名[" + tstring( name ) + "]不存在!" );
+		con_->last_error( _T("指定的列名[") + tstring( name ) + _T("]不存在!") );
 		return false;
 	//}
 
@@ -229,7 +227,7 @@ bool DbExecute_ODBC::bind( const tchar* name, size_t len, __int64 value )
 	//int index = sqlite3_bind_parameter_index( stmt_, name.c_str() );
 	//if( index == 0 )
 	//{
-		con_->last_error( "指定的列名[" + tstring( name ) + "]不存在!" );
+		con_->last_error( _T("指定的列名[") + tstring( name ) + _T("]不存在!") );
 		return false;
 	//}
 
@@ -246,7 +244,7 @@ bool DbExecute_ODBC::bind( const tchar* name, size_t len, double value )
 	//int index = sqlite3_bind_parameter_index( stmt_, name.c_str() );
 	//if( index == 0 )
 	//{
-		con_->last_error( "指定的列名[" + tstring( name ) + "]不存在!" );
+		con_->last_error( _T("指定的列名[") + tstring( name ) + _T("]不存在!") );
 		return false;
 	//}
 
@@ -263,7 +261,7 @@ bool DbExecute_ODBC::bind( const tchar* name, size_t len, const char* str , size
 	//int index = sqlite3_bind_parameter_index( stmt_, name.c_str() );
 	//if( index == 0 )
 	//{
-		con_->last_error( "指定的列名[" + tstring( name ) + "]不存在!" );
+		con_->last_error( _T("指定的列名[") + tstring( name ) + _T("]不存在!") );
 		return false;
 	//}
 
@@ -280,7 +278,7 @@ bool DbExecute_ODBC::bind( const tchar* name, size_t len, const wchar_t* str , s
 	//int index = sqlite3_bind_parameter_index( stmt_, name.c_str() );
 	//if( index == 0 )
 	//{
-		con_->last_error( "指定的列名[" + tstring( name ) + "]不存在!" );
+		con_->last_error( _T("指定的列名[") + tstring( name ) + _T("]不存在!") );
 		return false;
 	//}
 
@@ -291,26 +289,23 @@ bool DbExecute_ODBC::bind( const tstring& name,const wchar_t* str , size_t n )
 {
 	return bind( name.c_str(), name.size(), str,n );
 }
-#ifdef _BOOST_TIME_
+
 bool DbExecute_ODBC::bind( const tchar* name, size_t len, const ptime& time )
 {
 	//int index = sqlite3_bind_parameter_index( stmt_, name.c_str() );
 	//if( index == 0 )
 	//{
-		con_->last_error( "指定的列名[" + tstring( name ) + "]不存在!" );
+		con_->last_error( _T("指定的列名[") + tstring( name ) + _T("]不存在!") );
 		return false;
 	//}
 
 	//return bind( index, time );
 }
 
-
 bool DbExecute_ODBC::bind( const tstring& name, const ptime& time )
 {
 	return bind( name.c_str(), name.size(), time );
 }
-
-#endif
 
 void DbExecute_ODBC::reportError_(const tstring& message)
 {
@@ -323,7 +318,7 @@ int DbExecute_ODBC::affected_rows( )
 	SQLRETURN r = SQLRowCount( stmt_,& RowCount );
 	if (SQLERROR(r))
 	{
-		reportError_( "在读改动行数据时" );
+		reportError_( _T("在读改动行数据时") );
 		return -1;
 	}
 	return RowCount;
@@ -342,6 +337,8 @@ bool DbExecute_ODBC::direct_exec( const tstring& sql, bool reportWarningsAsError
 		return false;
 	return exec();
 }
+
+DEFINE_SHARED( DbExecute_ODBC );
 
 _jomoo_db_end
 

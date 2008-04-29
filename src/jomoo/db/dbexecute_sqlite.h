@@ -21,48 +21,43 @@ _jomoo_db_begin
 
 class DbConnection_SQLITE;
 
-class DbExecute_SQLITE : public DbExecute2
+class DbExecute_SQLITE : public DbExecute
 {
 public:
 	DbExecute_SQLITE( DbConnection_SQLITE* con );
 	~DbExecute_SQLITE();
+	
+	bool direct_exec( const tchar* sql, size_t len , bool reportWarningsAsErrors );
+	bool direct_exec( const tstring& sql, bool reportWarningsAsErrors );
 
 	bool prepare( const tchar* sql, size_t len, bool reportWarningsAsErrors = true );
 	bool prepare( const tstring& sql, bool reportWarningsAsErrors = true );
 	bool exec( );
 	bool reset( );
+	int affected_rows( );
 
 	bool bind( int index, int value );
 	bool bind( int index, __int64 value );
 	bool bind( int index, double value );
 	bool bind( int index, const char* str , size_t n);
 	bool bind( int index, const wchar_t* str , size_t n );
-#ifdef _BOOST_TIME_
-	bool bind( int index, const ptime& time );
-#endif
+	bool bind( int index, const Timestamp& time );
 
 	bool bind( const tstring& name, int value );
 	bool bind( const tstring& name, __int64 value );
 	bool bind( const tstring& name, double value );
 	bool bind( const tstring& name, const char* str , size_t n );
 	bool bind( const tstring& name, const wchar_t* str , size_t n );
-#ifdef _BOOST_TIME_
-	bool bind( const tstring& name, const ptime& time );
-#endif
+	bool bind( const tstring& name, const Timestamp& time );
 
 	bool bind( const tchar* name, size_t len, int value );
 	bool bind( const tchar* name, size_t len, __int64 value );
 	bool bind( const tchar* name, size_t len, double value );
 	bool bind( const tchar* name, size_t len, const char* str , size_t n );
 	bool bind( const tchar* name, size_t len, const wchar_t* str , size_t n );
-#ifdef _BOOST_TIME_
-	bool bind( const tchar* name, size_t len, const ptime& time );
-#endif
-
-	int affected_rows( );
-	bool direct_exec( const tchar* sql, size_t len , bool reportWarningsAsErrors );
-	bool direct_exec( const tstring& sql, bool reportWarningsAsErrors );
-
+	bool bind( const tchar* name, size_t len, const Timestamp& time );
+	
+	DECLARE_SHARED( );
 private:
 
 	DbConnection_SQLITE *con_;

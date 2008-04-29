@@ -46,53 +46,56 @@ public:
 	}
 
 
-	static std::string name()
+	static tstring name()
 	{
-		std::string result;
 		TIME_ZONE_INFORMATION tzInfo;
 		DWORD dstFlag = GetTimeZoneInformation(&tzInfo);
 		WCHAR* ptr = dstFlag == TIME_ZONE_ID_DAYLIGHT ? tzInfo.DaylightName : tzInfo.StandardName;
-#if defined(POCO_WIN32_UTF8)
-		UnicodeConverter::toUTF8(ptr, result);
+#ifdef  _UNICODE
+		return tstring( ptr );
 #else
-		char buffer[256];
-		DWORD rc = WideCharToMultiByte(CP_ACP, 0, ptr, -1, buffer, sizeof(buffer), NULL, NULL);
-		if (rc) result = buffer;
-#endif
+		tstring result ;
+		result.resize( 256 );
+		int rc = WideCharToMultiByte(CP_ACP, 0, ptr, -1, ( char_t* )result.c_str(), result.size(), NULL, NULL);
+		if (rc)
+			result.size( rc );
 		return result;
+#endif
 	}
 
-	static std::string standardName()
+	static tstring standardName()
 	{
-		std::string result;
 		TIME_ZONE_INFORMATION tzInfo;
 		DWORD dstFlag = GetTimeZoneInformation(&tzInfo);
 		WCHAR* ptr = tzInfo.StandardName;
-#if defined(POCO_WIN32_UTF8)
-		UnicodeConverter::toUTF8(ptr, result);
+#ifdef  _UNICODE
+		return tstring( ptr );
 #else
-		char buffer[256];
-		DWORD rc = WideCharToMultiByte(CP_ACP, 0, ptr, -1, buffer, sizeof(buffer), NULL, NULL);
-		if (rc) result = buffer;
-#endif
+		tstring result;
+		result.resize( 256 );
+		int rc = WideCharToMultiByte(CP_ACP, 0, ptr, -1, ( char_t* )result.c_str(), result.size(), NULL, NULL);
+		if (rc)
+			result.size( rc );
 		return result;
+#endif
 	}
 
 
-	static std::string dstName()
+	static tstring dstName()
 	{
-		std::string result;
 		TIME_ZONE_INFORMATION tzInfo;
 		DWORD dstFlag = GetTimeZoneInformation(&tzInfo);
 		WCHAR* ptr = tzInfo.DaylightName;
-#if defined(POCO_WIN32_UTF8)
-		UnicodeConverter::toUTF8(ptr, result);
+#ifdef  _UNICODE
+		return tstring( ptr );
 #else
-		char buffer[256];
-		DWORD rc = WideCharToMultiByte(CP_ACP, 0, ptr, -1, buffer, sizeof(buffer), NULL, NULL);
-		if (rc) result = buffer;
-#endif
+		tstring result;
+		result.resize( 256 );
+		int rc = WideCharToMultiByte(CP_ACP, 0, ptr, -1, ( char_t* )result.c_str(), result.size(), NULL, NULL);
+		if (rc)
+			result.size( rc );
 		return result;
+#endif
 	}
 };
 

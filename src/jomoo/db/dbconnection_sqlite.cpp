@@ -19,8 +19,9 @@ _jomoo_db_begin
 DbConnection_SQLITE::DbConnection_SQLITE(const tstring& name) : name_(name)
 , db_( 0 )
 {
-	if (tsqlite3_open(name.c_str(), &db_) != SQLITE_OK || db_ == NULL)
-		throw std::runtime_error( "打开数据库[" + name + "]失败" );
+	if (tsqlite3_open(name.c_str(), &db_) != SQLITE_OK || db_ == NULL)		
+		ThrowException1( DbException, _T("打开数据库[") + name + _T("]失败") );
+
 	for( int i=0; i< g_sqlite_fun_count; i++ )
 	{
 		if( tsqlite3_create_function( db_
@@ -31,7 +32,7 @@ DbConnection_SQLITE::DbConnection_SQLITE(const tstring& name) : name_(name)
 			, g_sqlite_fun[i].xFunc
 			, g_sqlite_fun[i].xStep
 			, g_sqlite_fun[i].xFinal ) != SQLITE_OK )
-			throw std::runtime_error( "DbConnection_SQLITE > 注册函数" + tstring( g_sqlite_fun[i].zFunctionName )+ "时失败" );
+			ThrowException1( DbException, _T("DbConnection_SQLITE > 注册函数") + toTstring( g_sqlite_fun[i].zFunctionName )+ _T("时失败") );
 	}
 }
 
@@ -95,7 +96,7 @@ PDbExecute2 DbConnection_SQLITE::execute2()
 bool DbConnection_SQLITE::begin()
 {
 	char *errmsg;
-	if ( tsqlite3_exec(db_, "BEGIN TRANSACTION", NULL, NULL, &errmsg) != SQLITE_OK)
+	if ( tsqlite3_exec(db_, _T("BEGIN TRANSACTION"), NULL, NULL, &errmsg) != SQLITE_OK)
 	{
 		last_error( errmsg );
 		return false;
@@ -106,7 +107,7 @@ bool DbConnection_SQLITE::begin()
 bool DbConnection_SQLITE::commit()
 {
 	char *errmsg;
-	int result = tsqlite3_exec(db_, "COMMIT TRANSACTION", NULL, NULL, &errmsg);
+	int result = tsqlite3_exec(db_, _T("COMMIT TRANSACTION"), NULL, NULL, &errmsg);
 	if (result != SQLITE_OK)
 	{
 		last_error( errmsg );
@@ -118,7 +119,7 @@ bool DbConnection_SQLITE::commit()
 bool DbConnection_SQLITE::rollback()
 {
 	char *errmsg;
-	int result = tsqlite3_exec(db_, "ROLLBACK TRANSACTION", NULL, NULL, &errmsg);
+	int result = tsqlite3_exec(db_, _T("ROLLBACK TRANSACTION"), NULL, NULL, &errmsg);
 	if (result != SQLITE_OK)
 	{
 		last_error( errmsg );
@@ -154,8 +155,11 @@ const tstring& DbConnection_SQLITE::last_error( sqlite3* message )
 	{
 		const char* err = tsqlite3_errmsg( message );
 		if( err != 0 )
-			error_ = err;
+			error_ = toTstring(err);
 	}
 	return error_;
 }
+
+DEFINE_SHARED( DbConnection_SQLITE );
+
 _jomoo_db_end
