@@ -36,9 +36,6 @@ public:
 	virtual PDbQuery query();
 	virtual PDbExecute execute();
 
-	virtual PDbQuery2 query2();
-	virtual PDbExecute2 execute2();
-
 	virtual bool begin();
 	virtual bool commit();
 	virtual bool rollback();
@@ -47,18 +44,19 @@ public:
 
 	DbConnection_ODBC(const tstring& name);
 
-	bool    active_;
-	SQLHENV dbe_;
-	SQLHDBC dbc_;
-
 	const tstring& last_error( ) const;
 
+	DECLARE_SHARED( );
 private:
 
 	void reportError_(const tstring& message, SQLSMALLINT handleType, SQLHANDLE handle);
 	bool autoCommit_(bool on);
 
 	const tstring& last_error( const tstring& message );
+
+	bool    active_;
+	SQLHENV dbe_;
+	SQLHDBC dbc_;
 
 	tstring error_;
 	tstring name_;

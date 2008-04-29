@@ -16,8 +16,6 @@
 #include "Sqlite/Sqlite3.h"
 #include "QSqlite.h"
 
-
-
 _jomoo_db_begin
 
 class DbConnection_SQLITE : public DbConnection2
@@ -36,13 +34,6 @@ public:
 
 	virtual PDbQuery query();
 	virtual PDbExecute execute();
-	
-	// query creation
-	virtual PDbQuery2 query2();
-
-	// execute creation
-	virtual PDbExecute2 execute2();
-
 
 	virtual bool begin();
 	virtual bool commit();
@@ -50,8 +41,9 @@ public:
 
 	virtual const tstring& name() const;
 	DbConnection_SQLITE(const tstring& name);
-
 	const tstring& last_error() const;
+
+	DECLARE_SHARED( );
 private:
 
 	tstring error_;

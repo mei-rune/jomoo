@@ -441,7 +441,6 @@ void DbQuery_ODBC::fetchColumnTypes_()
 		  break;
 
 	  default:
-
 		  throw std::runtime_error("[" + columnNames_[i] + "]不支持的数据类型[" + convertIntegerToString( dataType ) + "]");
 		};
 	}

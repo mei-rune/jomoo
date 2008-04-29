@@ -11,27 +11,30 @@
 
 // Include files
 # include "config_db.h"
+# include "jomoo/counter_ptr.hpp"
+# include "jomoo/exception.hpp"
 
 _jomoo_db_begin
+
+enum columntype
+{
+	STRING,
+	INTEGER,
+	DOUBLE,
+	TIME
+};
 
 class DbConnection;
 class DbQuery;
 class DbExecute;
-class DbConnection2;
-class DbQuery2;
-class DbExecute2;
 
-typedef boost::shared_ptr<DbConnection> PDbConnection;
-typedef boost::shared_ptr<DbQuery>      PDbQuery;
-typedef boost::shared_ptr<DbExecute>    PDbExecute;
+typedef intrusive_ptr<DbConnection> PDbConnection;
+typedef intrusive_ptr<DbQuery>      PDbQuery;
+typedef intrusive_ptr<DbExecute>    PDbExecute;
 
-typedef boost::shared_ptr<DbConnection2> PDbConnection2;
-typedef boost::shared_ptr<DbQuery2>      PDbQuery2;
-typedef boost::shared_ptr<DbExecute2>    PDbExecute2;
 
-class DbException : public std::runtime_error{};
+MakeException( DbException , _T("数据库操作发生错误!") );
 
-// Abstract DbConnection class
 class DbConnection
 {
 public:
@@ -54,22 +57,12 @@ public:
 	virtual bool rollback() = 0;
 
 	virtual const tstring& last_error() const = 0;
-	//
 	virtual const tstring& name() const = 0;
 
+	virtual void incRef() = 0;
+    virtual void decRef() = 0;
 };
 
-class DbConnection2 : public DbConnection
-{
-public:
-	virtual ~DbConnection2() {}
-		
-	// query creation
-	virtual PDbQuery2 query2() = 0;
-
-	// execute creation
-	virtual PDbExecute2 execute2() = 0;
-};
 
 _jomoo_db_end
 

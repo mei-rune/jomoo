@@ -20,7 +20,7 @@ _jomoo_db_begin
 DbConnection_ODBC::DbConnection_ODBC(const tstring& name) : name_(name)
 {
 	if( !open( name ) )
-		throw std::runtime_error( error_ );
+		ThrowException1( DbException, error_ );
 		
 }
 
@@ -45,7 +45,7 @@ bool DbConnection_ODBC::open(const tstring& parameters)
 		&dbe_);                  // OutputHandlePtr
 	if (SQLERROR(r)) 
 	{
-		error_ = "分配环境句柄失败";
+		error_ = _T("分配环境句柄失败");
 		return false;
 	}
 
@@ -57,7 +57,7 @@ bool DbConnection_ODBC::open(const tstring& parameters)
 		SQL_IS_UINTEGER);          // StringLength)
 	if (SQLERROR(r)) 
 	{
-		error_ = "设置环境句柄属性失败";
+		error_ = _T("设置环境句柄属性失败");
 		SQLFreeHandle(SQL_HANDLE_ENV, dbe_);
 		return false;
 	}
@@ -69,7 +69,7 @@ bool DbConnection_ODBC::open(const tstring& parameters)
 		&dbc_);                  // OutputHandlePtr
 	if (SQLERROR(r))
 	{
-		error_ = "分配数据库句柄失败";
+		error_ = _T("分配数据库句柄失败");
 		SQLFreeHandle(SQL_HANDLE_ENV, dbe_);
 		return false;
 	}
@@ -92,7 +92,7 @@ bool DbConnection_ODBC::open(const tstring& parameters)
 
 	if (SQLERROR(r))
 	{
-		reportError_("不能打开数据库", SQL_HANDLE_DBC, dbc_);
+		reportError_(_T("不能打开数据库"), SQL_HANDLE_DBC, dbc_);
 		return false;
 	}
 
@@ -144,16 +144,16 @@ void DbConnection_ODBC::reportError_(const tstring& message, SQLSMALLINT handleT
 				if( first )
 				{
 					first = false;
-					error_ += " {";
+					error_ += _T(" {");
 				}
 				buffer[ SQL_MAX_MESSAGE_LENGTH ] = 0;
-				error_ +=  (const char*)state;
-				error_ += ",";
-				error_ += (const char*)buffer;
-				error_ += "\r\n";
+				error_ +=  toTstring( (const char*)state );
+				error_ += _T(",");
+				error_ += toTstring( (const char*)buffer);
+				error_ += _T("\r\n");
 			}
 			if( !first )
-				error_ += "}";
+				error_ += _T("}");
 	}
 }
 
@@ -166,18 +166,6 @@ PDbQuery DbConnection_ODBC::query()
 PDbExecute DbConnection_ODBC::execute()
 {
 	PDbExecute result(new DbExecute_ODBC(this));
-	return result;
-}
-
-PDbQuery2 DbConnection_ODBC::query2()
-{
-	PDbQuery2 result(new DbQuery_ODBC(this));
-	return result;
-}
-
-PDbExecute2 DbConnection_ODBC::execute2()
-{
-	PDbExecute2 result(new DbExecute_ODBC(this));
 	return result;
 }
 
@@ -196,7 +184,7 @@ bool DbConnection_ODBC::commit()
 
 	if (SQLERROR(r))
 	{
-		reportError_("不能提交一个事务", SQL_HANDLE_DBC, dbc_);
+		reportError_(_T("不能提交一个事务"), SQL_HANDLE_DBC, dbc_);
 		return false;
 	}
 
@@ -213,7 +201,7 @@ bool DbConnection_ODBC::rollback()
 
 	if (SQLERROR(r))
 	{
-		reportError_("不能回滚一个事务", SQL_HANDLE_DBC, dbc_);
+		reportError_( _T("不能回滚一个事务"), SQL_HANDLE_DBC, dbc_);
 		return false;
 	}
 
@@ -238,7 +226,7 @@ bool DbConnection_ODBC::autoCommit_(bool on)
 
 	if (SQLERROR(r))
 	{
-		reportError_("不能设置自动提交事务", SQL_HANDLE_DBC, dbc_);
+		reportError_(_T("不能设置自动提交事务"), SQL_HANDLE_DBC, dbc_);
 		return false;
 	}
 	return true;
@@ -254,5 +242,7 @@ const tstring& DbConnection_ODBC::last_error( const tstring& message )
 	error_ = message;
 	return error_;
 }
+
+DEFINE_SHARED( DbConnection_ODBC );
 
 _jomoo_db_end
