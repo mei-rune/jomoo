@@ -16,14 +16,15 @@
 
 _jomoo_db_begin
 
-class DbExecute {
+class DbExecute : jomoo_shared
+{
 public:
 	virtual ~DbExecute() {}
 
-	virtual bool direct_exec( const tchar* sql, size_t len , bool reportWarningsAsErrors = true ) = 0;
+	virtual bool direct_exec( const tchar* sql, size_t len = -1 , bool reportWarningsAsErrors = true ) = 0;
 	virtual bool direct_exec( const tstring& sql, bool reportWarningsAsErrors = true ) = 0;
 
-	virtual bool prepare( const tchar* sql, size_t len, bool reportWarningsAsErrors = true ) = 0;
+	virtual bool prepare( const tchar* sql, size_t len= -1, bool reportWarningsAsErrors = true ) = 0;
 	virtual bool prepare( const tstring& sql, bool reportWarningsAsErrors = true ) = 0;
 	virtual bool exec( ) = 0;
 	virtual bool reset( ) = 0;
@@ -52,8 +53,8 @@ public:
 	virtual bool bind( const tchar* name, size_t len, const Timestamp& time ) = 0;
 
 	
-	virtual void incRef() = 0;
-    virtual void decRef() = 0;
+	//virtual void incRef() = 0;
+    //virtual void decRef() = 0;
 };
 
 

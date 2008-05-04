@@ -1,6 +1,6 @@
 
-#ifndef _DbQuery_H_
-#define _DbQuery_H_
+#ifndef _Query_H_
+#define _Query_H_
 
 #include "jomoo/config.h"
 
@@ -10,6 +10,7 @@
 
 // Include files
 # include "config_db.h"
+# include "jomoo/counter_ptr.h"
 # include "jomoo/exception.hpp"
 # include "jomoo/datetime.h"
 # include "jomoo/timespan.h"
@@ -17,10 +18,10 @@
 
 _jomoo_db_begin
 
-class DbQuery : jomoo_shared
+class IQuery : jomoo_shared
 {
 public:
-	virtual ~DbQuery() {}
+	virtual ~IQuery() {}
 
 	/**
 	 * 执行sql语句
@@ -163,6 +164,12 @@ public:
 	 * @exception OutOfRangeException 超出范围记录的列数
 	 */
 	virtual bool read(u_int_t column, double& value) = 0;
+	/**
+	 * 从当前记录中读取指定列名的值
+	 * @param[ in ] columnName 列名
+	 * @param[ out ] value 读取的值
+	 * @exception IllegalArgumentException 没有找到列名为 columnName 的列
+	 */
 	virtual bool read(const tchar* columnName, double& value) = 0;
 
 	/**
@@ -183,4 +190,4 @@ public:
 
 _jomoo_db_end
 
-#endif // _DbQuery_H_
+#endif // _Query_H_
