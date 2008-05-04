@@ -34,7 +34,7 @@ const tstring& DbConnection_ODBC::name() const
 	return name_;
 }
 
-bool DbConnection_ODBC::open(const tstring& parameters)
+bool DbConnection_ODBC::open(const tchar* parameters, size_t len)
 {
 	SQLRETURN r;
 
@@ -75,8 +75,11 @@ bool DbConnection_ODBC::open(const tstring& parameters)
 	}
 
 	// Opens the connection
-	SQLCHAR    *odbcDSN = (SQLCHAR*)parameters.c_str();
-	SQLSMALLINT odbcDSBSize = (SQLSMALLINT)parameters.size();
+	SQLCHAR    *odbcDSN = (SQLCHAR*)parameters;
+	if( -1 == len )
+		len = string_traits< tchar >::strlen( parameters );
+
+	SQLSMALLINT odbcDSBSize = (SQLSMALLINT)len;
 	SQLCHAR     dummy[256];
 	SQLSMALLINT dummySize;
 
@@ -108,10 +111,13 @@ void DbConnection_ODBC::close()
 	SQLFreeHandle(SQL_HANDLE_ENV, dbe_);
 }
 
-bool DbConnection_ODBC::uses(const tstring& database)
+bool DbConnection_ODBC::uses(const tchar* database, size_t len)
 {
 	SQLCHAR    *odbcBase     = (SQLCHAR*)database.c_str();
-	SQLSMALLINT odbcBaseSize = (SQLSMALLINT)database.size();
+	if( -1 == len )
+		len = string_traits< tchar >::strlen( database );
+	SQLSMALLINT odbcBaseSize = (SQLSMALLINT)len;
+
 
 	SQLSetConnectAttr(
 		dbc_,                       // ConnectionHandle

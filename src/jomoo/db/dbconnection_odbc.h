@@ -10,8 +10,8 @@
 
 // Include files
 # include "config_db.h"
-#define HAVE_DB_ODBC
-#include "DbConnection.h"
+#define HAVE_ODBC_DRIVER
+#include "IConnection.h"
 #include <sql.h>
 #include <sqlext.h>
 
@@ -19,7 +19,7 @@
 
 _jomoo_db_begin
 
-class DbConnection_ODBC : public DbConnection2
+class DbConnection_ODBC : public IConnection
 {
 	friend class DbConnection;
 	friend class DbQuery_ODBC;
@@ -29,14 +29,14 @@ public:
 	virtual ~DbConnection_ODBC();
 
 	// Implements DbConnection
-	virtual bool open(const tstring& parameters);
+	virtual bool open(const tchar* parameters, size_t len);
 	virtual void close();
-	virtual bool uses(const tstring& database);
+	virtual bool uses(const tchar* database, size_t len);
 	
 	virtual PDbQuery query();
 	virtual PDbExecute execute();
 
-	virtual bool begin();
+	virtual bool beginTransaction();
 	virtual bool commit();
 	virtual bool rollback();
 

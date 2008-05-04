@@ -1,7 +1,7 @@
 
 
-#ifndef _DbConnection_H_
-#define _DbConnection_H_
+#ifndef _Connection_H_
+#define _Connection_H_
 
 #include "jomoo/config.h"
 
@@ -50,23 +50,17 @@ enum IsolationLevel
  Unspecified
 };
 
-class DbConnection;
-class DbQuery;
-class DbExecute;
-
-typedef intrusive_ptr<DbConnection> PDbConnection;
-typedef intrusive_ptr<DbQuery>      PDbQuery;
-typedef intrusive_ptr<DbExecute>    PDbExecute;
+class ITransaction;
+class IConnection;
+class IQuery;
+class ICommand;
 
 MakeException( DbException , _T("数据库操作发生错误!") );
 
-
-
-
-class DbConnection : jomoo_shared
+class IConnection : jomoo_shared
 {
 public:
-	virtual ~DbConnection() {}
+	virtual ~IConnection() {}
 
 	/**
 	 * 创建一个数据库连接
@@ -90,27 +84,37 @@ public:
 	/**
 	 * 创建一个查询对象
 	 */
-	virtual PDbQuery query() = 0;
+	virtual IQuery* createQuery() = 0;
+	
+	/**
+	 * 释放一个查询对象
+	 */
+	virtual void releaseQuery(IQuery* query) = 0;
 
 	/**
 	 * 创建一个执行对象
 	 */
-	virtual PDbExecute execute() = 0;
+	virtual ICommand* createCommand() = 0;
+	
+	/**
+	 * 释放一个执行对象
+	 */
+	virtual void releaseCommand(ICommand* command) = 0;
 
 	/**
 	 * 开始一个事务
 	 */
-	virtual DbTransaction beginTransaction( IsolationLevel level )    = 0;
+	virtual ITransaction* beginTransaction( IsolationLevel level )    = 0;
 
 	/**
 	 * 提交事务
 	 */
-	virtual bool commitTransaction()   = 0;
+	virtual bool commitTransaction( ITransaction* transaction )   = 0;
 
 	/**
 	 * 回滚事务
 	 */
-	virtual bool rollbackTransaction() = 0;
+	virtual bool rollbackTransaction( ITransaction* transaction ) = 0;
 
 	/**
 	 * 取得最后一次错误
@@ -121,12 +125,9 @@ public:
 	 * 数据库连接名
 	 */
 	virtual const tstring& name() const = 0;
-
-	//virtual void incRef() = 0;
-    //virtual void decRef() = 0;
 };
 
 
 _jomoo_db_end
 
-#endif // _DbConnection_H_
+#endif // _Connection_H_

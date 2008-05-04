@@ -2,7 +2,7 @@
 #ifndef _DbQuery_ODBC_H_
 #define _DbQuery_ODBC_H_
 
-#include "jomoo/config.h"
+# include "jomoo/config.h"
 
 #if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
@@ -10,12 +10,12 @@
 
 // Include files
 # include "config_db.h"
-#define HAVE_DB_ODBC
+# define HAVE_ODBC_DRIVER
 
-#include "DbQuery.h"
-#include <map>
-#include <vector>
-#include <sql.h>
+# include "DbQuery.h"
+# include <map>
+# include <vector>
+# include <sql.h>
 
 _jomoo_db_begin
 
