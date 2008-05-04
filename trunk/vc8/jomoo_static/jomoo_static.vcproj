@@ -924,6 +924,22 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\jomoo\db\ICommand.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\db\IConnection.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\db\IQuery.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\db\ITransaction.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\jomoo\db\Jsqlite.cpp"
 				>
 			</File>
