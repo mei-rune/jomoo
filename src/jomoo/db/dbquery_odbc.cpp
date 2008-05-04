@@ -553,4 +553,7 @@ const tstring& DbQuery_ODBC::getColumnName( size_t pos )
 	}
 	return columnNames_[ pos ];
 }
+
+DEFINE_SHARED( DbExecute_SQLITE );
+
 _jomoo_db_end

@@ -20,32 +20,70 @@ class DbQuery {
 public:
 	virtual ~DbQuery() {}
 
-	virtual bool exec(const char* sql, size_t len, bool reportWarningsAsErrors = true ) = 0;
-	virtual bool exec(const tstring& sql, bool reportWarningsAsErrors = true ) = 0;
-	virtual bool nextRow() = 0;
-	virtual bool nextSet() = 0;
-	virtual int columns() = 0;
-	virtual int getColumnType( size_t pos ) = 0;
-	virtual const tstring& getColumnName( size_t pos ) = 0;
+	/**
+	 * 执行sql语句
+	 * @param[ in ] sql sql语句
+	 * @param[ in ] len sql语句的长度,默认为-1表示不知道有多长
+	 * @param[ in ] reportWarningsAsErrors 是否将警告当成错误
+	 */
+	virtual bool exec(const tchar* sql, size_t len = -1, bool reportWarningsAsErrors = true ) = 0;
 
-	virtual bool getBoolean(u_int_t column) = 0;
-	virtual bool getBoolean(const tstring& column) = 0;
-	virtual bool getBoolean(const tchar* column) = 0;
-	virtual int getInt(u_int_t column) = 0;
-	virtual int getInt(const tstring& column) = 0;
-	virtual int getInt(const tchar* column) = 0;
-	virtual __int64 getInt64(u_int_t column) = 0;
-	virtual __int64 getInt64(const tstring& column) = 0;
-	virtual __int64 getInt64(const tchar* column) = 0;
-	virtual double getDouble(u_int_t column) = 0;
-	virtual double getDouble(const tstring& column) = 0;
-	virtual double getDouble(const tchar* column) = 0;
-	virtual const tstring& getString(u_int_t column) = 0;
-	virtual const tstring& getString(const tstring& column) = 0;
-	virtual const tstring& getString(const tchar* column) = 0;
-	virtual const Timestamp& getTimestamp(u_int_t column) = 0;
-	virtual const Timestamp& getTimestamp(const tstring& column) = 0;
-	virtual const Timestamp& getTimestamp(const tchar* column) = 0;
+	/**
+	 * 执行sql语句
+	 * @param[ in ] sql sql语句
+	 * @param[ in ] reportWarningsAsErrors 是否将警告当成错误
+	 */
+	virtual bool exec(const tstring& sql, bool reportWarningsAsErrors = true ) = 0;
+
+	/**
+	 * 切换到下一个记录
+	 */
+	virtual bool nextRow() = 0;
+
+	/**
+	 * 切换到下一记录集
+	 */
+	virtual bool nextSet() = 0;
+
+	/**
+	 * 取得当前结果共有多少列
+	 */
+	virtual int columns() = 0;
+
+	/**
+	 * 取得指定列的数据类型,请见枚举 DBType
+	 * @see DBType
+	 */
+	virtual int columnType( size_t pos ) = 0;
+
+	/**
+	 * 取得指定列的列名
+	 */
+	virtual const tchar* columnName( size_t pos ) = 0;
+
+	virtual bool read(u_int_t column, bool& value) = 0;
+	virtual bool read(const tchar* columnName, bool& value) = 0;
+
+	virtual bool read(u_int_t column, int8_t& value) = 0;
+	virtual bool read(const tchar* columnName, int8_t& value) = 0;
+
+	virtual bool read(u_int_t column, int16_t& value) = 0;
+	virtual bool read(const tchar* columnName, int16_t& value) = 0;
+
+	virtual bool read(u_int_t column, int32_t& value) = 0;
+	virtual bool read(const tchar* columnName, int32_t& value) = 0;
+
+	virtual bool read(u_int_t column, int64_t& value) = 0;
+	virtual bool read(const tchar* columnName, int64_t& value) = 0;
+
+	virtual bool read(u_int_t column, Timestamp& value) = 0;
+	virtual bool read(const tchar* columnName, Timestamp& value) = 0;
+
+	virtual bool read(u_int_t column, double& value) = 0;
+	virtual bool read(const tchar* columnName, double& value) = 0;
+
+	virtual bool read(u_int_t column, char* buf, size_t& len ) = 0;
+	virtual bool read(const tchar* columnName, char* buf, size_t& len ) = 0;
 
 	virtual void incRef() = 0;
     virtual void decRef() = 0;

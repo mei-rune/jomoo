@@ -16,10 +16,14 @@
 
 _jomoo_db_begin
 
-enum columntype
+enum DBType
 {
+	UNKOWN,
 	STRING,
-	INTEGER,
+	INTEGER_8,
+	INTEGER_16,
+	INTEGER_32,
+	INTEGER_64,
 	DOUBLE,
 	TIME
 };
@@ -31,7 +35,6 @@ class DbExecute;
 typedef intrusive_ptr<DbConnection> PDbConnection;
 typedef intrusive_ptr<DbQuery>      PDbQuery;
 typedef intrusive_ptr<DbExecute>    PDbExecute;
-
 
 MakeException( DbException , _T("数据库操作发生错误!") );
 

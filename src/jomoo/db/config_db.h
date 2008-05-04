@@ -14,8 +14,8 @@
 # include "jomoo/logging/logger.h"
 # include "jomoo/counter_ptr.hpp"
 
-#define _jomoo_db_begin _jomoo_begin namespace db {
+#define _jomoo_db_begin _jomoo_begin namespace DB {
 #define _jomoo_db_end _jomoo_end }
-#define _jomoo_db _jomoo _jomoo db::
+#define _jomoo_db _jomoo DB::
 
 #endif // _Config_DB_H

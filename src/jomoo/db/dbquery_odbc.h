@@ -26,30 +26,40 @@ public:
 	DbQuery_ODBC(DbConnection_ODBC* con, int timeout = 120);
 	virtual ~DbQuery_ODBC();
 
-	virtual bool exec(const char* sql, size_t len, bool reportWarningsAsErrors = true );
-	virtual bool exec(const tstring& sql, bool reportWarningsAsErrors = true);
-	virtual bool nextRow();
-	virtual bool nextSet();
-	virtual int  columns();
+	bool exec(const char* sql, size_t len, bool reportWarningsAsErrors = true );
+	bool exec(const tstring& sql, bool reportWarningsAsErrors = true);
+	bool nextRow();
+	bool nextSet();
+	int  columns();
+	int columnType( size_t pos );
+	const tchar* columnName( size_t pos );
 
-	bool getBoolean(u_int_t column);
-	bool getBoolean(const tstring& column);
-	int getInt(u_int_t column);
-	int getInt(const tstring& column);
-	__int64 getInt64(u_int_t column);
-	__int64 getInt64(const tstring& column);
-	double getDouble(u_int_t column);
-	double getDouble(const tstring& column);
-	const tstring& getString(u_int_t column);
-	const tstring& getString(const tstring& column);
 
-	virtual const Timestamp& getTimestamp(u_int_t column) = 0;
-	virtual const Timestamp& getTimestamp(const tstring& column) = 0;
-	virtual const Timestamp& getTimestamp(const tchar* column) = 0;
+	bool read(u_int_t column, bool& value);
+	bool read(const tchar* column, bool& value);
 
-	int getColumnType( size_t pos );
-	const tstring& getColumnName( size_t pos );
+	bool read(u_int_t column, int8_t& value);
+	bool read(const tchar* column, int8_t& value);
 
+	bool read(u_int_t column, int16_t& value);
+	bool read(const tchar* column, int16_t& value);
+
+	bool read(u_int_t column, int32_t& value);
+	bool read(const tchar* column, int32_t& value);
+
+	bool read(u_int_t column, int64_t& value);
+	bool read(const tchar* column, int64_t& value);
+
+	bool read(u_int_t column, Timestamp& value);
+	bool read(const tchar* column, Timestamp& value);
+
+	bool read(u_int_t column, double& value);
+	bool read(const tchar* column, double& value);
+
+	bool read(u_int_t column, char* buf, size_t& len );
+	bool read(const tchar* columnName, char* buf, size_t& len );
+
+	DECLARE_SHARED( );
 private:
 	DbConnection_ODBC* con_;
 	SQLHSTMT           dbs_;
@@ -66,9 +76,7 @@ private:
 	
 	// 
 	tstring		String_;
-#ifdef _BOOST_TIME_
-	ptime		Time_;
-#endif
+	Timestamp		Time_;
 
 	// row data
 	typedef std::vector<Variant> RowData;
