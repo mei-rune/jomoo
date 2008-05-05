@@ -32,14 +32,7 @@ public:
 	 * @param[ in ] len sql语句的长度,默认为-1表示不知道有多长
 	 * @param[ in ] reportWarningsAsErrors 是否将警告当成错误
 	 */
-	virtual bool exec(const tchar* sql, size_t len = -1, bool reportWarningsAsErrors = true ) = 0;
-
-	/**
-	 * 执行sql语句
-	 * @param[ in ] sql sql语句
-	 * @param[ in ] reportWarningsAsErrors 是否将警告当成错误
-	 */
-	virtual bool exec(const tstring& sql, bool reportWarningsAsErrors = true ) = 0;
+	virtual bool exec(const tchar* sql, size_t len, bool reportWarningsAsErrors ) = 0;
 
 	/**
 	 * 切换到下一个记录

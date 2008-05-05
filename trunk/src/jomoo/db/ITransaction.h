@@ -17,16 +17,10 @@ _jomoo_db_begin
 namespace spi
 {
 
-class transaction : jomoo_shared
+class transaction
 {
 public:
 	virtual ~transaction() {}
-
-	/**
-	 * 获得数据库连接对象
-	 * @remarks 所得的数据库连接对象指针的生命周期不可超过本对象
-	 */
-    virtual connection& connection() = 0;
 
 	/**
 	 * 取得得事务的 IsolationLevel

@@ -19,31 +19,34 @@
 
 _jomoo_db_begin
 
-class DbConnection_ODBC : public IConnection
+namespace spi
 {
-	friend class DbConnection;
+
+class DbConnection_ODBC : public connection
+{
 	friend class DbQuery_ODBC;
 	friend class DbExecute_ODBC;
 
 public:
-	virtual ~DbConnection_ODBC();
+	DbConnection_ODBC(const tstring& name);
+	~DbConnection_ODBC();
 
 	// Implements DbConnection
 	virtual bool open(const tchar* parameters, size_t len);
 	virtual void close();
 	virtual bool uses(const tchar* database, size_t len);
 	
-	virtual PDbQuery query();
-	virtual PDbExecute execute();
+	query* createQuery();
+	void releaseQuery(query* query);
 
-	virtual bool beginTransaction();
-	virtual bool commit();
-	virtual bool rollback();
+	command* createCommand();
+	void releaseCommand(command* cmd);
 
-	virtual const tstring& name() const;
+	transaction* beginTransaction( IsolationLevel level );
+	bool commitTransaction( transaction* t );
+	bool rollbackTransaction( transaction* t );
 
-	DbConnection_ODBC(const tstring& name);
-
+	const tstring& name() const;
 	const tstring& last_error( ) const;
 
 	DECLARE_SHARED( );
@@ -61,6 +64,8 @@ private:
 	tstring error_;
 	tstring name_;
 };
+
+}
 
 _jomoo_db_end
 

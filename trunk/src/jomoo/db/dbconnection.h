@@ -46,6 +46,8 @@ public:
 		
 		if( null_ptr != _connection )
 			_connection->incRef();
+
+		return *this;
 	}
 
 	void release()
@@ -97,7 +99,7 @@ public:
 	{
 		if( null_ptr == _connection )
 			ThrowException( NullException );
-		return DbQuery( _connection->query() );
+		return DbQuery( _connection, _connection->query() );
 	}
 
 	/**
@@ -107,7 +109,7 @@ public:
 	{
 		if( null_ptr == _connection )
 			ThrowException( NullException );
-		return DbCommand( _connection->execute() );
+		return DbCommand( _connection, _connection->execute() );
 	}
 
 	/**
@@ -117,7 +119,7 @@ public:
 	{
 		if( null_ptr == _connection )
 			ThrowException( NullException );
-		return DbTransaction( _connection->beginTransaction(level) );
+		return DbTransaction( _connection, _connection->beginTransaction(level) );
 	}
 
 	/**

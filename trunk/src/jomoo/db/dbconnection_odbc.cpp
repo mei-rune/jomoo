@@ -17,11 +17,13 @@
 
 _jomoo_db_begin
 
+namespace spi
+{
+
 DbConnection_ODBC::DbConnection_ODBC(const tstring& name) : name_(name)
 {
 	if( !open( name ) )
 		ThrowException1( DbException, error_ );
-		
 }
 
 DbConnection_ODBC::~DbConnection_ODBC()
@@ -163,19 +165,26 @@ void DbConnection_ODBC::reportError_(const tstring& message, SQLSMALLINT handleT
 	}
 }
 
-PDbQuery DbConnection_ODBC::query()
+query* DbConnection_ODBC::createQuery()
 {
-	PDbQuery result(new DbQuery_ODBC(this));
-	return result;
+	return new DbQuery_ODBC(this);
 }
 
-PDbExecute DbConnection_ODBC::execute()
+void DbConnection_ODBC::releaseQuery(query* q)
 {
-	PDbExecute result(new DbExecute_ODBC(this));
-	return result;
+
 }
 
-bool DbConnection_ODBC::begin()
+command* DbConnection_ODBC::createCommand()
+{
+	return new DbExecute_ODBC(this);
+}
+
+void DbConnection_ODBC::releaseCommand(command* cmd)
+{
+}
+
+bool DbConnection_ODBC::beginTransaction( IsolationLevel level)
 {
 	autoCommit_(false);
 	return true;
@@ -250,5 +259,7 @@ const tstring& DbConnection_ODBC::last_error( const tstring& message )
 }
 
 DEFINE_SHARED( DbConnection_ODBC );
+
+}
 
 _jomoo_db_end

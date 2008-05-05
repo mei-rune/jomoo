@@ -19,7 +19,7 @@ _jomoo_db_begin
 class DbCommand
 {
 public:
-	explicit DbCommand(DbConnection connection, spi::command* cmd )
+	explicit DbCommand(DbConnection& connection, spi::command* cmd )
 		: _connection( connection )
 		, _command( cmd )
 	{
@@ -49,6 +49,8 @@ public:
 		
 		if( null_ptr != _command )
 			_command->incRef();
+
+		return *this;
 	}
 
 	void release()
@@ -58,6 +60,14 @@ public:
 			return;
 		_command->decRef();
 		_command = null_ptr;
+	}
+
+	/**
+	 * 获得数据库连接对象
+	 */
+    DbConnection& connection()
+	{
+		return _connection;
 	}
 
 	/**
