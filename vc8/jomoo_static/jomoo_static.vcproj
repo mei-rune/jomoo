@@ -920,10 +920,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\jomoo\db\dbtransaction.inl"
-				>
-			</File>
-			<File
 				RelativePath="..\..\src\jomoo\db\ICommand.h"
 				>
 			</File>

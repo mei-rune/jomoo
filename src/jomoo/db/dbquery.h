@@ -17,53 +17,137 @@
 
 _jomoo_db_begin
 
-class DbQuery : jomoo_shared
+class DbQuery
 {
 public:
-	virtual ~DbQuery() {}
+	explicit DbQuery(DbConnection connection, spi::query* q )
+		: _connection( connection )
+		, _query( q )
+	{
+		if( null_ptr != _query )
+			_query->incRef();
+	}
+
+	~DbQuery()
+	{
+		release();
+	}
+	
+	explicit DbQuery( DbQuery& q )
+		: _connection( q._connection )
+		, _query( q._query )
+	{
+		if( null_ptr != _query )
+			_query->incRef();
+	}
+
+	DbQuery& operator=( DbQuery& q )
+	{
+		release();
+
+		_connection = q._connection;
+		_query = q._query;
+		
+		if( null_ptr != _query )
+			_query->incRef();
+
+		return *this;
+	}
+
+	void release()
+	{
+		_connection.release();
+		if( null_ptr == _query )
+			return;
+		_query->decRef();
+		_query = null_ptr;
+	}
+
+	/**
+	 * 获得数据库连接对象
+	 */
+    DbConnection& connection()
+	{
+		return _connection;
+	}
 
 	/**
 	 * 执行sql语句
-	 * @param[ in ] sql sql语句
+	 * @param[ in ] sql_string sql语句
 	 * @param[ in ] len sql语句的长度,默认为-1表示不知道有多长
 	 * @param[ in ] reportWarningsAsErrors 是否将警告当成错误
 	 */
-	virtual bool exec(const tchar* sql, size_t len = -1, bool reportWarningsAsErrors = true ) = 0;
+	bool exec(const tchar* sql_string, size_t len = -1, bool reportWarningsAsErrors = true )
+	{
+		if( null_ptr == _query )
+			ThrowException( NullException );
+		return _query->exec( sql_string, len, reportWarningsAsErrors);
+	}
 
 	/**
 	 * 执行sql语句
 	 * @param[ in ] sql sql语句
 	 * @param[ in ] reportWarningsAsErrors 是否将警告当成错误
 	 */
-	virtual bool exec(const tstring& sql, bool reportWarningsAsErrors = true ) = 0;
+	bool exec(const tstring& sql, bool reportWarningsAsErrors = true )
+	{
+		if( null_ptr == _query )
+			ThrowException( NullException );
+		return _query->exec( sql.c_str(), sql.size(), reportWarningsAsErrors);
+	}
 
 	/**
 	 * 切换到下一个记录
 	 */
-	virtual bool nextRow() = 0;
+	bool nextRow()
+	{
+		if( null_ptr == _query )
+			ThrowException( NullException );
+		return _query->nextRow( );
+	}
 
 	/**
 	 * 切换到下一记录集
 	 */
-	virtual bool nextSet() = 0;
+	bool nextSet()
+	{
+		if( null_ptr == _query )
+			ThrowException( NullException );
+		return _query->nextSet( );
+	}
 
 	/**
 	 * 取得当前结果共有多少列
 	 */
-	virtual int columns() = 0;
+	int columns()
+	{
+		if( null_ptr == _query )
+			ThrowException( NullException );
+		return _query->columns( );
+	}
 
 	/**
 	 * 取得指定列的数据类型,请见枚举 DBType
 	 * @see DBType
 	 * @exception OutOfRangeException 超出范围记录的列数
 	 */
-	virtual int columnType( size_t pos ) = 0;
+	int columnType( size_t pos )
+	{
+		if( null_ptr == _query )
+			ThrowException( NullException );
+		return _query->columnType( pos );
+	}
 
 	/**
 	 * 取得指定列的列名
 	 * @exception OutOfRangeException 超出范围记录的列数
 	 */
-	virtual const tchar* columnName( size_t pos ) = 0;
+	const tchar* columnName( size_t pos )
+	{
+		if( null_ptr == _query )
+			ThrowException( NullException );
+		return _query->columnName( pos );
+	}
 
 	/**
 	 * 从当前记录中读取指定列的值
@@ -71,7 +155,12 @@ public:
 	 * @param[ out ] value 读取的值
 	 * @exception OutOfRangeException 超出范围记录的列数
 	 */
-	virtual bool read(u_int_t column, bool& value) = 0;
+	bool read(u_int_t column, bool& value)
+	{
+		if( null_ptr == _query )
+			ThrowException( NullException );
+		return _query->read( column, value );
+	}
 
 	/**
 	 * 从当前记录中读取指定列名的值
@@ -79,7 +168,7 @@ public:
 	 * @param[ out ] value 读取的值
 	 * @exception IllegalArgumentException 没有找到列名为 columnName 的列
 	 */
-	virtual bool read(const tchar* columnName, bool& value) = 0;
+	bool read(const tchar* columnName, bool& value)
 
 	/**
 	 * 从当前记录中读取指定列的值
@@ -87,14 +176,19 @@ public:
 	 * @param[ out ] value 读取的值
 	 * @exception OutOfRangeException 超出范围记录的列数
 	 */
-	virtual bool read(u_int_t column, int8_t& value) = 0;
+	bool read(u_int_t column, int8_t& value)
+	{
+		if( null_ptr == _query )
+			ThrowException( NullException );
+		return _query->read( column, value );
+	}
 	/**
 	 * 从当前记录中读取指定列名的值
 	 * @param[ in ] columnName 列名
 	 * @param[ out ] value 读取的值
 	 * @exception IllegalArgumentException 没有找到列名为 columnName 的列
 	 */
-	virtual bool read(const tchar* columnName, int8_t& value) = 0;
+	bool read(const tchar* columnName, int8_t& value)
 
 	/**
 	 * 从当前记录中读取指定列的值
@@ -102,14 +196,19 @@ public:
 	 * @param[ out ] value 读取的值
 	 * @exception OutOfRangeException 超出范围记录的列数
 	 */
-	virtual bool read(u_int_t column, int16_t& value) = 0;
+	bool read(u_int_t column, int16_t& value)
+	{
+		if( null_ptr == _query )
+			ThrowException( NullException );
+		return _query->read( column, value );
+	}
 	/**
 	 * 从当前记录中读取指定列名的值
 	 * @param[ in ] columnName 列名
 	 * @param[ out ] value 读取的值
 	 * @exception IllegalArgumentException 没有找到列名为 columnName 的列
 	 */
-	virtual bool read(const tchar* columnName, int16_t& value) = 0;
+	bool read(const tchar* columnName, int16_t& value)
 
 	/**
 	 * 从当前记录中读取指定列的值
@@ -117,14 +216,19 @@ public:
 	 * @param[ out ] value 读取的值
 	 * @exception OutOfRangeException 超出范围记录的列数
 	 */
-	virtual bool read(u_int_t column, int32_t& value) = 0;
+	bool read(u_int_t column, int32_t& value)
+	{
+		if( null_ptr == _query )
+			ThrowException( NullException );
+		return _query->read( column, value );
+	}
 	/**
 	 * 从当前记录中读取指定列名的值
 	 * @param[ in ] columnName 列名
 	 * @param[ out ] value 读取的值
 	 * @exception IllegalArgumentException 没有找到列名为 columnName 的列
 	 */
-	virtual bool read(const tchar* columnName, int32_t& value) = 0;
+	bool read(const tchar* columnName, int32_t& value)
 
 	/**
 	 * 从当前记录中读取指定列的值
@@ -132,14 +236,20 @@ public:
 	 * @param[ out ] value 读取的值
 	 * @exception OutOfRangeException 超出范围记录的列数
 	 */
-	virtual bool read(u_int_t column, int64_t& value) = 0;
+	bool read(u_int_t column, int64_t& value)
+	{
+		if( null_ptr == _query )
+			ThrowException( NullException );
+		return _query->read( column, value );
+	}
+
 	/**
 	 * 从当前记录中读取指定列名的值
 	 * @param[ in ] columnName 列名
 	 * @param[ out ] value 读取的值
 	 * @exception IllegalArgumentException 没有找到列名为 columnName 的列
 	 */
-	virtual bool read(const tchar* columnName, int64_t& value) = 0;
+	bool read(const tchar* columnName, int64_t& value)
 
 	/**
 	 * 从当前记录中读取指定列的值
@@ -147,14 +257,20 @@ public:
 	 * @param[ out ] value 读取的值
 	 * @exception OutOfRangeException 超出范围记录的列数
 	 */
-	virtual bool read(u_int_t column, Timestamp& value) = 0;
+	bool read(u_int_t column, Timestamp& value)
+	{
+		if( null_ptr == _query )
+			ThrowException( NullException );
+		return _query->read( column, value );
+	}
+
 	/**
 	 * 从当前记录中读取指定列名的值
 	 * @param[ in ] columnName 列名
 	 * @param[ out ] value 读取的值
 	 * @exception IllegalArgumentException 没有找到列名为 columnName 的列
 	 */
-	virtual bool read(const tchar* columnName, Timestamp& value) = 0;
+	bool read(const tchar* columnName, Timestamp& value)
 
 	/**
 	 * 从当前记录中读取指定列的值
@@ -162,23 +278,55 @@ public:
 	 * @param[ out ] value 读取的值
 	 * @exception OutOfRangeException 超出范围记录的列数
 	 */
-	virtual bool read(u_int_t column, double& value) = 0;
-	virtual bool read(const tchar* columnName, double& value) = 0;
+	bool read(u_int_t column, double& value)
+	{
+		if( null_ptr == _query )
+			ThrowException( NullException );
+		return _query->read( column, value );
+	}
 
-	/**
-	 * 从当前记录中读取指定列的值
-	 * @param[ in ] column 列在记录中的索引,从0开始
-	 * @param[ out ] value 读取的值
-	 * @exception OutOfRangeException 超出范围记录的列数
-	 */
-	virtual bool read(u_int_t column, char* buf, size_t& len ) = 0;
 	/**
 	 * 从当前记录中读取指定列名的值
 	 * @param[ in ] columnName 列名
 	 * @param[ out ] value 读取的值
 	 * @exception IllegalArgumentException 没有找到列名为 columnName 的列
 	 */
-	virtual bool read(const tchar* columnName, char* buf, size_t& len ) = 0;
+	bool read(const tchar* columnName, double& value)
+	{
+		if( null_ptr == _query )
+			ThrowException( NullException );
+		return _query->read( columnName, value );
+	}
+
+	/**
+	 * 从当前记录中读取指定列的值
+	 * @param[ in ] column 列在记录中的索引,从0开始
+	 * @param[ out ] value 读取的值
+	 * @exception OutOfRangeException 超出范围记录的列数
+	 */
+	bool read(u_int_t column, char* buf, size_t& len )
+	{
+		if( null_ptr == _query )
+			ThrowException( NullException );
+		return _query->read( column, buf, len );
+	}
+
+	/**
+	 * 从当前记录中读取指定列名的值
+	 * @param[ in ] columnName 列名
+	 * @param[ out ] value 读取的值
+	 * @exception IllegalArgumentException 没有找到列名为 columnName 的列
+	 */
+	bool read(const tchar* columnName, char* buf, size_t& len )
+	{
+		if( null_ptr == _query )
+			ThrowException( NullException );
+		return _query->read( columnName, buf, len );
+	}
+
+private:
+	DbConnection _connection;
+	spi::query* _query;
 };
 
 _jomoo_db_end
