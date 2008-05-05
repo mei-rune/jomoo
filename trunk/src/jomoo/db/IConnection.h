@@ -50,24 +50,28 @@ enum IsolationLevel
  Unspecified
 };
 
-class ITransaction;
-class IConnection;
-class IQuery;
-class ICommand;
+
 
 MakeException( DbException , _T("数据库操作发生错误!") );
 
-class IConnection : jomoo_shared
+namespace spi
+{
+
+class transaction;
+class query;
+class command;
+
+class connection : jomoo_shared
 {
 public:
-	virtual ~IConnection() {}
+	virtual ~connection() {}
 
 	/**
 	 * 创建一个数据库连接
 	 * @param[ in ] parameters 连接参数,一般是dsn字符串
 	 * @param[ in ] len 连接参数字符串的长度,默认为-1表示不知有多长
 	 */
-	virtual bool open(const tchar* parameters, size_t len = -1) = 0;
+	virtual bool open(const tchar* parameters, size_t len ) = 0;
 
 	/**
 	 * 关闭数据库连接
@@ -79,42 +83,42 @@ public:
 	 * @param[ in ] database 数据库名字
 	 * @param[ in ] len 数据库名字字符串的长度,默认为-1表示不知有多长
 	 */
-	virtual bool uses(const tchar* database, size_t len = -1) = 0;
+	virtual bool uses(const tchar* database, size_t len ) = 0;
 
 	/**
 	 * 创建一个查询对象
 	 */
-	virtual IQuery* createQuery() = 0;
+	virtual query* createQuery() = 0;
 	
 	/**
 	 * 释放一个查询对象
 	 */
-	virtual void releaseQuery(IQuery* query) = 0;
+	virtual void releaseQuery(query* query) = 0;
 
 	/**
 	 * 创建一个执行对象
 	 */
-	virtual ICommand* createCommand() = 0;
+	virtual command* createCommand() = 0;
 	
 	/**
 	 * 释放一个执行对象
 	 */
-	virtual void releaseCommand(ICommand* command) = 0;
+	virtual void releaseCommand(command* cmd) = 0;
 
 	/**
 	 * 开始一个事务
 	 */
-	virtual ITransaction* beginTransaction( IsolationLevel level )    = 0;
+	virtual transaction* beginTransaction( IsolationLevel level )    = 0;
 
 	/**
 	 * 提交事务
 	 */
-	virtual bool commitTransaction( ITransaction* transaction )   = 0;
+	virtual bool commitTransaction( transaction* t )   = 0;
 
 	/**
 	 * 回滚事务
 	 */
-	virtual bool rollbackTransaction( ITransaction* transaction ) = 0;
+	virtual bool rollbackTransaction( transaction* t ) = 0;
 
 	/**
 	 * 取得最后一次错误
@@ -127,6 +131,7 @@ public:
 	virtual const tstring& name() const = 0;
 };
 
+}
 
 _jomoo_db_end
 

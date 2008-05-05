@@ -10,9 +10,7 @@
 
 // Include files
 # include "config_db.h"
-# define HAVE_ODBC_DRIVER
-
-# include "DbQuery.h"
+# include "IQuery.h"
 # include <map>
 # include <vector>
 # include <sql.h>
@@ -21,10 +19,11 @@ _jomoo_db_begin
 
 class DbConnection_ODBC;
 
-class DbQuery_ODBC : public DbQuery {
+class DbQuery_ODBC : public IQuery
+{
 public:
 	DbQuery_ODBC(DbConnection_ODBC* con, int timeout = 120);
-	virtual ~DbQuery_ODBC();
+	virtual ~DbQuery_ODBC();  
 
 	bool exec(const char* sql, size_t len, bool reportWarningsAsErrors = true );
 	bool exec(const tstring& sql, bool reportWarningsAsErrors = true);
@@ -33,7 +32,6 @@ public:
 	int  columns();
 	int columnType( size_t pos );
 	const tchar* columnName( size_t pos );
-
 
 	bool read(u_int_t column, bool& value);
 	bool read(const tchar* column, bool& value);

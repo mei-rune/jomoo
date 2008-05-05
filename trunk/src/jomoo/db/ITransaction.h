@@ -14,16 +14,19 @@
 
 _jomoo_db_begin
 
-class ITransaction : jomoo_shared
+namespace spi
+{
+
+class transaction : jomoo_shared
 {
 public:
-	virtual ~IDbTransaction() {}
+	virtual ~transaction() {}
 
 	/**
 	 * 获得数据库连接对象
 	 * @remarks 所得的数据库连接对象指针的生命周期不可超过本对象
 	 */
-    virtual IConnection* connection() = 0;
+    virtual connection& connection() = 0;
 
 	/**
 	 * 取得得事务的 IsolationLevel
@@ -40,6 +43,8 @@ public:
 	 */
 	virtual bool rollback() = 0;
 };
+
+}
 
 _jomoo_db_end
 
