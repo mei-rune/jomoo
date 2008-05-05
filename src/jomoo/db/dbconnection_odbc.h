@@ -2,7 +2,7 @@
 #ifndef _DbConnection_ODBC_
 #define _DbConnection_ODBC_
 
-#include "jomoo/config.h"
+# include "jomoo/config.h"
 
 #if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
@@ -10,10 +10,10 @@
 
 // Include files
 # include "config_db.h"
-#define HAVE_ODBC_DRIVER
-#include "IConnection.h"
-#include <sql.h>
-#include <sqlext.h>
+# define HAVE_ODBC_DRIVER
+# include "IConnection.h"
+# include <sql.h>
+# include <sqlext.h>
 
 #define SQLERROR(r) (r!=SQL_SUCCESS && r!=SQL_SUCCESS_WITH_INFO)
 

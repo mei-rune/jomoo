@@ -18,10 +18,13 @@
 
 _jomoo_db_begin
 
-class IQuery : jomoo_shared
+namespace spi
+{
+
+class query : jomoo_shared
 {
 public:
-	virtual ~IQuery() {}
+	virtual ~query() {}
 
 	/**
 	 * ÷¥––sql”Ôæ‰
@@ -187,6 +190,8 @@ public:
 	 */
 	virtual bool read(const tchar* columnName, char* buf, size_t& len ) = 0;
 };
+
+}
 
 _jomoo_db_end
 

@@ -17,10 +17,13 @@
 
 _jomoo_db_begin
 
-class ICommand : jomoo_shared
+namespace spi
+{
+
+class command : jomoo_shared
 {
 public:
-	virtual ~ICommand() {}
+	virtual ~command() {}
 
 	/**
 	 * 编译并执行sql语句
@@ -31,25 +34,12 @@ public:
 	virtual bool direct_exec( const tchar* sql_string, size_t len = -1 , bool reportWarningsAsErrors = true ) = 0;
 
 	/**
-	 * 编译并执行sql语句
-	 * @param[ in ] sql_string sql语句
-	 * @param[ in ] reportWarningsAsErrors 是否将警告当成错误
-	 */
-	virtual bool direct_exec( const tstring& sql_string, bool reportWarningsAsErrors = true ) = 0;
-
-	/**
 	 * 编译sql语句
 	 * @param[ in ] sql_string sql语句
 	 * @param[ in ] len sql语句字符串的长度,默认为-1表示不知有多长
 	 * @param[ in ] reportWarningsAsErrors 是否将警告当成错误
 	 */
 	virtual bool prepare( const tchar* sql_string, size_t len= -1, bool reportWarningsAsErrors = true ) = 0;
-	/**
-	 * 编译sql语句
-	 * @param[ in ] sql_string sql语句
-	 * @param[ in ] reportWarningsAsErrors 是否将警告当成错误
-	 */
-	virtual bool prepare( const tstring& sql_string, bool reportWarningsAsErrors = true ) = 0;
 
 	/**
 	 * 执行语句
@@ -195,6 +185,7 @@ public:
 	virtual bool bind( const tchar* columnName, const Timestamp& time ) = 0;
 };
 
+}
 
 _jomoo_db_end
 
