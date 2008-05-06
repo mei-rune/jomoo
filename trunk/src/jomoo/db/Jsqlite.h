@@ -97,8 +97,10 @@ extern sqlite3_busy_timeout_t sqlite3_busy_timeout_;
 extern sqlite3_changes_t sqlite3_changes_;
 
 
-bool ___init_sqlite( );
-void ___fini_sqlite( );
+#define SQLITE_DLL  "sqlite3.dll"
+
+bool ___init_sqlite(  const char* name );
+void ___shutdown_sqlite( );
 
 
 
