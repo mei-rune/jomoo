@@ -10,7 +10,7 @@
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
-# include "config_db.h"
+# include "jomoo/db/config_db.h"
 # include "jomoo/counter_ptr.hpp"
 # include "jomoo/exception.hpp"
 
