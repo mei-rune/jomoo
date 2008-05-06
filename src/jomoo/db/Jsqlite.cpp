@@ -53,9 +53,9 @@ sqlite3_busy_timeout_t sqlite3_busy_timeout_;
 sqlite3_changes_t sqlite3_changes_;
 
 
-bool ___init_sqlite( )
+bool ___init_sqlite( const char* name )
 {
-	hIns = LoadLibrary( "sqlite3.dll" );
+	hIns = LoadLibrary( name );
 	if( hIns == NULL )
 		return false;
 	sqlite3_open_ = ( sqlite3_open_t ) GetProcAddress( hIns, "sqlite3_open" );
@@ -155,7 +155,7 @@ bool ___init_sqlite( )
 	return true;
 }
 
-void ___fini_sqlite( )
+void ___shutdown_sqlite( )
 {
 	if( hIns != NULL )
 		FreeLibrary(hIns);
