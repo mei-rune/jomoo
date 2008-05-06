@@ -10,7 +10,7 @@
 
 // Include files
 # include "config_db.h"
-# include "DbConnection.h"
+#include "DbConnection.h"
 
 _jomoo_db_begin
 
@@ -81,14 +81,6 @@ public:
 		if( null_ptr == _transaction ) return true;
 
 		return _connection->rollbackTransaction( _transaction );
-	}
-
-	/**
-	 * 取得最后一次错误
-	 */
-	const tstring& last_error() const
-	{
-		return _connection->last_error();
 	}
 
 protected:
