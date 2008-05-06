@@ -14,6 +14,7 @@
 # include "jomoo/datetime.h"
 # include "jomoo/timespan.h"
 # include "jomoo/Timestamp.h"
+# include "dbconnection.h"
 
 _jomoo_db_begin
 
