@@ -916,15 +916,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\jomoo\db\dbtransaction.inl"
+				RelativePath="..\..\src\jomoo\db\dbtransaction_odbc.cpp"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\jomoo\db\Jsqlite.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\db\Jsqlite.h"
+				RelativePath="..\..\src\jomoo\db\dbtransaction_odbc.h"
 				>
 			</File>
 			<File
@@ -933,6 +929,14 @@
 			</File>
 			<File
 				RelativePath="..\..\src\jomoo\db\sqlite_function.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\db\sqlite_wrapper.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\db\sqlite_wrapper.h"
 				>
 			</File>
 			<File

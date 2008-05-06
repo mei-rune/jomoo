@@ -2,7 +2,7 @@
 #ifndef _QSqlite_H_
 #define _QSqlite_H_
 
-#include "jomoo/config.h"
+# include "jomoo/config.h"
 
 #if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
@@ -10,7 +10,7 @@
 
 // Include files
 # include "config_db.h"
-#include "sqlite/sqlite3.h"
+# include "sqlite/sqlite3.h"
 
 _jomoo_db_begin
 

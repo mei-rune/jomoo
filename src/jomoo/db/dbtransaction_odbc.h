@@ -1,6 +1,6 @@
 
-#ifndef _DbConnection_ODBC_
-#define _DbConnection_ODBC_
+#ifndef _DbTransaction_ODBC_
+#define _DbTransaction_ODBC_
 
 # include "jomoo/config.h"
 
@@ -10,22 +10,19 @@
 
 // Include files
 # include "config_db.h"
-# include "connection.h"
 # include <sql.h>
 # include <sqlext.h>
-
-#define SQLERROR(r) (r!=SQL_SUCCESS && r!=SQL_SUCCESS_WITH_INFO)
 
 _jomoo_db_begin
 
 namespace spi
 {
 
-class DbConnection_ODBC : public connection
+class DbTransaction_ODBC : public connection
 {
 public:
-	DbConnection_ODBC(const tstring& name);
-	~DbConnection_ODBC();
+	DbTransaction_ODBC(const tstring& name);
+	~DbTransaction_ODBC();
 
 	// Implements DbConnection
 	bool open(const tchar* parameters, size_t len);
