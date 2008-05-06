@@ -848,6 +848,26 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\jomoo\db\dbcommand.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\db\dbcommand_odbc.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\db\dbcommand_odbc.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\db\dbcommand_sqlite.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\db\dbcommand_sqlite.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\jomoo\db\dbconnection.h"
 				>
 			</File>
@@ -876,26 +896,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\jomoo\db\dbexecute.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\db\dbexecute_odbc.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\db\dbexecute_odbc.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\db\dbexecute_sqlite.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\db\dbexecute_sqlite.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\src\jomoo\db\dbquery.h"
 				>
 			</File>
@@ -916,23 +916,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\jomoo\db\dbtransaction.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\db\ICommand.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\db\IConnection.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\db\IQuery.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\db\ITransaction.h"
+				RelativePath="..\..\src\jomoo\db\dbtransaction.inl"
 				>
 			</File>
 			<File
@@ -951,6 +935,30 @@
 				RelativePath="..\..\src\jomoo\db\sqlite_function.h"
 				>
 			</File>
+			<File
+				RelativePath="..\..\src\jomoo\db\transactionscope.h"
+				>
+			</File>
+			<Filter
+				Name="spi"
+				>
+				<File
+					RelativePath="..\..\src\jomoo\db\spi\command.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\jomoo\db\spi\connection.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\jomoo\db\spi\query.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\jomoo\db\spi\transaction.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>
