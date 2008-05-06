@@ -89,36 +89,16 @@ public:
 	 * 创建一个查询对象
 	 */
 	virtual query* createQuery() = 0;
-	
-	/**
-	 * 释放一个查询对象
-	 */
-	virtual void releaseQuery(query* query) = 0;
 
 	/**
 	 * 创建一个执行对象
 	 */
 	virtual command* createCommand() = 0;
-	
-	/**
-	 * 释放一个执行对象
-	 */
-	virtual void releaseCommand(command* cmd) = 0;
 
 	/**
 	 * 开始一个事务
 	 */
 	virtual transaction* beginTransaction( IsolationLevel level )    = 0;
-
-	/**
-	 * 提交事务
-	 */
-	virtual bool commitTransaction( transaction* t )   = 0;
-
-	/**
-	 * 回滚事务
-	 */
-	virtual bool rollbackTransaction( transaction* t ) = 0;
 
 	/**
 	 * 取得最后一次错误
