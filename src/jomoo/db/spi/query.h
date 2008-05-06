@@ -9,12 +9,13 @@
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
-# include "config_db.h"
+# include "jomoo/db/config_db.h"
 # include "jomoo/counter_ptr.h"
 # include "jomoo/exception.hpp"
 # include "jomoo/datetime.h"
 # include "jomoo/timespan.h"
 # include "jomoo/Timestamp.h"
+# include "connection.h"
 
 _jomoo_db_begin
 

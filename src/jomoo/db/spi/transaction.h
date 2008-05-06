@@ -2,15 +2,15 @@
 #ifndef __TRANSACTION__
 #define __TRANSACTION__
 
-#include "jomoo/config.h"
+# include "jomoo/config.h"
 
 #if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
-# include "config_db.h"
-#include "IConnection.h"
+# include "jomoo/db/config_db.h"
+# include "connection.h"
 
 _jomoo_db_begin
 
