@@ -83,6 +83,14 @@ public:
 		return _connection->rollbackTransaction( _transaction );
 	}
 
+	/**
+	 * 取得最后一次错误
+	 */
+	const tstring& last_error() const
+	{
+		return _connection->last_error();
+	}
+
 protected:
 	DECLARE_NO_COPY_CLASS( TransactionScope );
 	DbConnection _connection;
