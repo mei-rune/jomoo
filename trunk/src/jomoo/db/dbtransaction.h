@@ -1,6 +1,6 @@
 
-#ifndef _SWORD_DB_DBTRANSACTION_
-#define _SWORD_DB_DBTRANSACTION_
+#ifndef _TransactionScope_
+#define _TransactionScope_
 
 #include "jomoo/config.h"
 
@@ -14,20 +14,35 @@
 
 _jomoo_db_begin
 
-class DbTransaction
+class TransactionScope
 {
 public:
-	DbTransaction( DbConnection& connection, spi::transaction* tr)
+	explicit TransactionScope( DbConnection& connection )
+		: _connection( connection )
+		, _transaction( 0 )
+	{
+			_transaction = connection.beginTransaction( Unspecified );
+	}
+	
+	TransactionScope( DbConnection& connection, IsolationLevel l)
+		: _connection( connection )
+		, _transaction( 0 )
+	{
+			_transaction = connection.beginTransaction( l );
+	}
+	
+	TransactionScope( DbConnection& connection, spi::transaction* tr)
 		: _connection( connection )
 		, _transaction( tr )
 	{
-		if( null_ptr != _transaction)
-			_transaction->incRef();
+		if( null_ptr == _transaction )
+			ThrowException( NullException );
 	}
 
-	~DbTransaction()
+	~TransactionScope()
 	{
-		rollback();
+		if( !rollback() )
+			ThrowException1( DbException, _connection.last_error() );
 	}
 
 	/**
@@ -43,8 +58,8 @@ public:
 	 */
 	IsolationLevel level() const
 	{
-		if( null_ptr == _transaction )
-			ThrowException( NullException );
+		if( null_ptr == _transaction ) return Unspecified;
+
 		return _transaction->level();
 	}
 
@@ -53,8 +68,8 @@ public:
 	 */
 	bool commit()
 	{
-		if( null_ptr == _transaction )
-			ThrowException( NullException );
+		if( null_ptr == _transaction ) return true;
+
 		return _connection->commitTransaction( _transaction );
 	}
 
@@ -63,17 +78,17 @@ public:
 	 */
 	bool rollback()
 	{
-		if( null_ptr == _transaction )
-			ThrowException( NullException );
+		if( null_ptr == _transaction ) return true;
+
 		return _connection->rollbackTransaction( _transaction );
 	}
 
 protected:
-	DECLARE_NO_COPY_CLASS( DbTransaction );
+	DECLARE_NO_COPY_CLASS( TransactionScope );
 	DbConnection _connection;
 	spi::transaction* _transaction;
 };
 
 _jomoo_db_end
 
-#endif // _SWORD_DB_DBTRANSACTION_
+#endif // _TransactionScope_
