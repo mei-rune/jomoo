@@ -2,46 +2,39 @@
 #ifndef _DbConnection_SQLITE_
 #define _DbConnection_SQLITE_
 
-#include "jomoo/config.h"
+# include "jomoo/config.h"
 
 #if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
-# include "config_db.h"
-#define HAVE_DB_SQLITE
-
-#include "DbConnection.h"
-#include "Sqlite/Sqlite3.h"
-#include "QSqlite.h"
+# include "jomoo/db/config_db.h"
+# include "jomoo/db/spi/connection.h"
+# include "sqlite_wrapper.h"
 
 _jomoo_db_begin
 
-class DbConnection_SQLITE : public DbConnection2
+namespace spi
 {
-	friend class DbConnection;
-	friend class DbQuery_SQLITE;
-	friend class DbExecute_SQLITE;
 
+class DbConnection_SQLITE : public connection
+{
 public:
-	virtual ~DbConnection_SQLITE();
+	DbConnection_SQLITE();
+	~DbConnection_SQLITE();
 
 	// Implements DbConnection
-	virtual bool open(const tstring& parameters);
-	virtual void close();
-	virtual bool uses(const tstring& database);
+	bool open(const tchar* parameters, size_t len);
+	void close();
+	bool uses(const tchar* database, size_t len);
+	
+	query* createQuery();
+	command* createCommand();
+	transaction* beginTransaction( IsolationLevel level );
 
-	virtual PDbQuery query();
-	virtual PDbExecute execute();
-
-	virtual bool begin();
-	virtual bool commit();
-	virtual bool rollback();
-
-	virtual const tstring& name() const;
-	DbConnection_SQLITE(const tstring& name);
-	const tstring& last_error() const;
+	const tstring& name() const;
+	const tstring& last_error( ) const;
 
 	DECLARE_SHARED( );
 private:
@@ -55,6 +48,8 @@ private:
 	const tstring& last_error( const tstring& message);
 
 };
+
+}
 
 _jomoo_db_end
 

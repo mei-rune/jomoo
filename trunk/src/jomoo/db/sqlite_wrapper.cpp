@@ -1,8 +1,7 @@
 
 #include <windows.h>
-#include "Qsqlite.h"
+#include "sqlite_wrapper.h"
 
-#include "include/config.h"
 #ifdef _MEMORY_DEBUG 
 	#undef THIS_FILE
 	#define new	   DEBUG_NEW  
