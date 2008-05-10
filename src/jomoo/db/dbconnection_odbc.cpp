@@ -80,11 +80,8 @@ bool DbConnection_ODBC::open(const tchar* parameters, size_t len)
 	}
 
 	// Opens the connection
-	SQLCHAR    *odbcDSN = (SQLCHAR*)parameters;
-	if( -1 == len )
-		len = string_traits< tchar >::strlen( parameters );
-
-	SQLSMALLINT odbcDSBSize = (SQLSMALLINT)len;
+	SQLCHAR    *odbcDSN = (SQLCHAR*)name_.c_str();
+	SQLSMALLINT odbcDSBSize = (SQLSMALLINT)name_.size();
 	SQLCHAR     dummy[256];
 	SQLSMALLINT dummySize;
 
@@ -100,7 +97,7 @@ bool DbConnection_ODBC::open(const tchar* parameters, size_t len)
 
 	if (SQLERROR(r))
 	{
-		reportError_(_T("不能打开数据库"), SQL_HANDLE_DBC, dbc_);
+		reportError_(_T("不能打开数据库[") + name_ + _T("]"), SQL_HANDLE_DBC, dbc_);
 		return false;
 	}
 
@@ -179,42 +176,7 @@ command* DbConnection_ODBC::createCommand()
 
 transaction* DbConnection_ODBC::beginTransaction( IsolationLevel level)
 {
-	autoCommit_(false);
-	return true;
-}
-
-bool DbConnection_ODBC::commit()
-{
-	SQLRETURN r = SQLEndTran(
-		SQL_HANDLE_DBC,     // HandleType
-		dbc_,               // Handle
-		SQL_COMMIT);        // CompletionType
-
-	if (SQLERROR(r))
-	{
-		reportError_(_T("不能提交一个事务"), SQL_HANDLE_DBC, dbc_);
-		return false;
-	}
-
-	autoCommit_(true);
-	return true;
-}
-
-bool DbConnection_ODBC::rollback()
-{
-	SQLRETURN r = SQLEndTran(
-		SQL_HANDLE_DBC,     // HandleType
-		dbc_,               // Handle
-		SQL_ROLLBACK);      // CompletionType
-
-	if (SQLERROR(r))
-	{
-		reportError_( _T("不能回滚一个事务"), SQL_HANDLE_DBC, dbc_);
-		return false;
-	}
-
-	autoCommit_(true);
-	return true;
+	return new DbTransaction_ODBC( this, level );
 }
 
 bool DbConnection_ODBC::autoCommit_(bool on)

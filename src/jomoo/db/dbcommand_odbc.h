@@ -9,29 +9,30 @@
 
 // Include files
 # include "config_db.h"
-# include "DbExecute.h"
+# include "spi/command.h"
+# include "DbConnection_ODBC.h"
 # include <sql.h>
 
 _jomoo_db_begin
 
-class DbConnection_ODBC;
+namespace spi
+{
 
-class DbExecute_ODBC : public DbExecute2
+class DbCommand_ODBC : public command
 {
 public:
-	DbExecute_ODBC( DbConnection_ODBC* con , int timeout = 120 );
-	~DbExecute_ODBC();
+	DbCommand_ODBC( DbConnection_ODBC* odbc , int timeout = 120 );
+	~DbCommand_ODBC();
 
 	bool direct_exec( const tchar* sql, size_t len , bool reportWarningsAsErrors );
-	bool direct_exec( const tstring& sql, bool reportWarningsAsErrors );
 	bool prepare( const tchar* sql, size_t len, bool reportWarningsAsErrors = true );
 	bool prepare( const tstring& sql, bool reportWarningsAsErrors = true );
 	bool exec( );
 	bool reset( );
 	int affected_rows( );
 
-	bool bind( int index, int value );
-	bool bind( int index, __int64 value );
+	bool bind( int index, bool value );
+	bool bind( int index, int8_t value );
 	bool bind( int index, double value );
 	bool bind( int index, const char* str , size_t n);
 	bool bind( int index, const wchar_t* str , size_t n );
@@ -68,6 +69,7 @@ private:
 	bool reportWarningsAsErrors_;
 };
 
+}
 
 _jomoo_db_end
 

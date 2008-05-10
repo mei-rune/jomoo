@@ -20,238 +20,69 @@ _jomoo_db_begin
 namespace spi
 {
 
-DbConnection_ODBC::DbConnection_ODBC()
+
+DbTransaction_ODBC::DbTransaction_ODBC(DbConnection_ODBC* odbc, IsolationLevel level)
+: _odbc( odbc )
+, _level( level )
 {
+	if( null_ptr == odbc )
+		ThrowException( NullException );
+
+	_odbc->incRef();
+	_odbc->autoCommit_(true);
 }
 
-DbConnection_ODBC::~DbConnection_ODBC()
+DbTransaction_ODBC::~DbTransaction_ODBC()
 {
-	close();
+	release();
 }
 
-const tstring& DbConnection_ODBC::name() const
+void DbTransaction_ODBC::release()
 {
-	return name_;
+	if( null_ptr == _odbc )return;
+	_odbc->decRef();
+	_odbc = null_ptr;
 }
 
-bool DbConnection_ODBC::open(const tchar* parameters, size_t len)
+bool DbTransaction_ODBC::beginTransaction( IsolationLevel level )
 {
-	if( -1 == len )
-		name_ = parameters;
-	else
-		name_.assign( parameters , len );
-
-	SQLRETURN r;
-
-	// Allocate an environment handle
-	r = SQLAllocHandle(
-		SQL_HANDLE_ENV,          // HandleType
-		SQL_NULL_HANDLE,         // InputHandle
-		&dbe_);                  // OutputHandlePtr
-	if (SQLERROR(r)) 
-	{
-		error_ = _T("分配环境句柄失败");
-		return false;
-	}
-
-	// Declare the ODBC version we'll use
-	r = SQLSetEnvAttr(
-		dbe_,                      // EnvironmentHandle
-		SQL_ATTR_ODBC_VERSION,     // Attribute
-		(SQLPOINTER)SQL_OV_ODBC3,  // ValuePtr
-		SQL_IS_UINTEGER);          // StringLength)
-	if (SQLERROR(r)) 
-	{
-		error_ = _T("设置环境句柄属性失败");
-		SQLFreeHandle(SQL_HANDLE_ENV, dbe_);
-		return false;
-	}
-
-	// Allocate a db handle
-	r = SQLAllocHandle(
-		SQL_HANDLE_DBC,          // HandleType
-		dbe_,                    // InputHandle
-		&dbc_);                  // OutputHandlePtr
-	if (SQLERROR(r))
-	{
-		error_ = _T("分配数据库句柄失败");
-		SQLFreeHandle(SQL_HANDLE_ENV, dbe_);
-		return false;
-	}
-
-	// Opens the connection
-	SQLCHAR    *odbcDSN = (SQLCHAR*)parameters;
-	if( -1 == len )
-		len = string_traits< tchar >::strlen( parameters );
-
-	SQLSMALLINT odbcDSBSize = (SQLSMALLINT)len;
-	SQLCHAR     dummy[256];
-	SQLSMALLINT dummySize;
-
-	r = SQLDriverConnect(
-		dbc_,                    // ConnectionHandle
-		0,                       // WindowHandle
-		odbcDSN,                 // InConnectionString
-		odbcDSBSize,             // StringLength1
-		dummy,                   // OutConnectionString
-		255,                     // BufferLength
-		&dummySize,              // StringLength2Ptr
-		SQL_DRIVER_COMPLETE);    // DriverCompletion
-
-	if (SQLERROR(r))
-	{
-		reportError_(_T("不能打开数据库"), SQL_HANDLE_DBC, dbc_);
-		return false;
-	}
-
-	autoCommit_(true);
-	return true;
+	_level = level;
+	return _odbc->autoCommit_( false );
 }
 
-void DbConnection_ODBC::close()
-{
-	SQLDisconnect(dbc_);
-
-	SQLFreeHandle(SQL_HANDLE_DBC, dbc_);
-	SQLFreeHandle(SQL_HANDLE_ENV, dbe_);
-}
-
-bool DbConnection_ODBC::uses(const tchar* database, size_t len)
-{
-	SQLCHAR    *odbcBase     = (SQLCHAR*)database.c_str();
-	if( -1 == len )
-		len = string_traits< tchar >::strlen( database );
-	SQLSMALLINT odbcBaseSize = (SQLSMALLINT)len;
-
-	SQLSetConnectAttr(
-		dbc_,                       // ConnectionHandle
-		SQL_ATTR_CURRENT_CATALOG,   // Attribute
-		odbcBase,                   // ValuePtr
-		odbcBaseSize);              // StringLength
-	return true;
-}
-
-void DbConnection_ODBC::reportError_(const tstring& message, SQLSMALLINT handleType, SQLHANDLE handle)
-{
-	error_ =  message;
-	bool first = true;
-	{
-		SQLCHAR state[  SQL_MAX_MESSAGE_LENGTH + 1  ];
-		SQLINTEGER code;
-		SQLCHAR buffer[ SQL_MAX_MESSAGE_LENGTH + 1 ];
-		SQLSMALLINT tmp;
-
-		while ( SQL_NO_DATA != SQLGetDiagRec(
-			handleType,           // HandleType
-			handle,               // Handle
-			1,                    // RecNumber
-			state,                // Sqlstate
-			&code,                // NativeErrorPtr
-			buffer,               // MessageText
-			SQL_MAX_MESSAGE_LENGTH,                  // BufferLength
-			&tmp) )               // TextLengthPtr
-			{
-				if( first )
-				{
-					first = false;
-					error_ += _T(" {");
-				}
-				buffer[ SQL_MAX_MESSAGE_LENGTH ] = 0;
-				error_ +=  toTstring( (const char*)state );
-				error_ += _T(",");
-				error_ += toTstring( (const char*)buffer);
-				error_ += _T("\r\n");
-			}
-			if( !first )
-				error_ += _T("}");
-	}
-}
-
-query* DbConnection_ODBC::createQuery()
-{
-	return new DbQuery_ODBC(this);
-}
-
-command* DbConnection_ODBC::createCommand()
-{
-	return new DbExecute_ODBC(this);
-}
-
-transaction* DbConnection_ODBC::beginTransaction( IsolationLevel level)
-{
-	autoCommit_(false);
-	return true;
-}
-
-bool DbConnection_ODBC::commit()
+bool DbTransaction_ODBC::commit()
 {
 	SQLRETURN r = SQLEndTran(
 		SQL_HANDLE_DBC,     // HandleType
-		dbc_,               // Handle
+		_odbc->dbc_,               // Handle
 		SQL_COMMIT);        // CompletionType
 
 	if (SQLERROR(r))
 	{
-		reportError_(_T("不能提交一个事务"), SQL_HANDLE_DBC, dbc_);
+		_odbc->reportError_(_T("不能提交一个事务"), SQL_HANDLE_DBC, dbc_);
 		return false;
 	}
 
-	autoCommit_(true);
+	_odbc->autoCommit_(true);
 	return true;
 }
 
-bool DbConnection_ODBC::rollback()
+bool DbTransaction_ODBC::rollback()
 {
 	SQLRETURN r = SQLEndTran(
 		SQL_HANDLE_DBC,     // HandleType
-		dbc_,               // Handle
+		_odbc->dbc_,               // Handle
 		SQL_ROLLBACK);      // CompletionType
 
 	if (SQLERROR(r))
 	{
-		reportError_( _T("不能回滚一个事务"), SQL_HANDLE_DBC, dbc_);
+		_odbc->reportError_( _T("不能回滚一个事务"), SQL_HANDLE_DBC, dbc_);
 		return false;
 	}
 
-	autoCommit_(true);
+	_odbc->autoCommit_(true);
 	return true;
 }
-
-bool DbConnection_ODBC::autoCommit_(bool on)
-{
-
-	SQLUINTEGER value;
-	if (on)
-		value = SQL_AUTOCOMMIT_ON;
-	else
-		value = SQL_AUTOCOMMIT_OFF;
-
-	SQLRETURN r = SQLSetConnectAttr(
-		dbc_,                 // ConnectionHandle
-		SQL_ATTR_AUTOCOMMIT,  // Attribute
-		(SQLPOINTER) value,   // ValuePtr
-		SQL_IS_UINTEGER);     // StringLength
-
-	if (SQLERROR(r))
-	{
-		reportError_(_T("不能设置自动提交事务"), SQL_HANDLE_DBC, dbc_);
-		return false;
-	}
-	return true;
-}
-
-const tstring& DbConnection_ODBC::last_error( ) const
-{
-	return error_;
-}
-
-const tstring& DbConnection_ODBC::last_error( const tstring& message )
-{
-	error_ = message;
-	return error_;
-}
-
-DEFINE_SHARED( DbConnection_ODBC );
 
 }
 
