@@ -33,25 +33,22 @@ public:
 
 	bool bind( int index, bool value );
 	bool bind( int index, int8_t value );
+	bool bind( int index, int16_t value );
+	bool bind( int index, int32_t value );
+	bool bind( int index, int64_t value );
 	bool bind( int index, double value );
 	bool bind( int index, const char* str , size_t n);
-	bool bind( int index, const wchar_t* str , size_t n );
 	bool bind( int index, const Timestamp& time );
 
-	bool bind( const tstring& name, int value );
-	bool bind( const tstring& name, __int64 value );
-	bool bind( const tstring& name, double value );
-	bool bind( const tstring& name, const char* str , size_t n );
-	bool bind( const tstring& name, const wchar_t* str , size_t n );
-	bool bind( const tstring& name, const Timestamp& time );
 
-	bool bind( const tchar* name, size_t len, int value );
-	bool bind( const tchar* name, size_t len, __int64 value );
-	bool bind( const tchar* name, size_t len, double value );
-	bool bind( const tchar* name, size_t len, const char* str , size_t n );
-	bool bind( const tchar* name, size_t len, const wchar_t* str , size_t n );
-	bool bind( const tchar* name, size_t len, const Timestamp& time );
-
+	bool bind( const tchar* columnName, bool value );
+	bool bind( const tchar* columnName, int8_t value );
+	bool bind( const tchar* columnName, int16_t value );
+	bool bind( const tchar* columnName, int32_t value );
+	bool bind( const tchar* columnName, int64_t value );
+	bool bind( const tchar* columnName, double value );
+	bool bind( const tchar* columnName, const char* str , size_t n);
+	bool bind( const tchar* columnName, const Timestamp& time );
 
 	DECLARE_SHARED( );
 private:
