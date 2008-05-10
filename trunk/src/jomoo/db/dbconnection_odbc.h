@@ -10,7 +10,7 @@
 
 // Include files
 # include "config_db.h"
-# include "connection.h"
+# include "spi/connection.h"
 # include <sql.h>
 # include <sqlext.h>
 
@@ -20,6 +20,9 @@ _jomoo_db_begin
 
 namespace spi
 {
+
+class DbTransaction_ODBC;
+class DbTransaction_ODBC;
 
 class DbConnection_ODBC : public connection
 {
@@ -41,6 +44,8 @@ public:
 
 	DECLARE_SHARED( );
 private:
+
+	friend class DbTransaction_ODBC;
 
 	void reportError_(const tstring& message, SQLSMALLINT handleType, SQLHANDLE handle);
 	bool autoCommit_(bool on);

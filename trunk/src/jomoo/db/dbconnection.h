@@ -11,6 +11,7 @@
 
 // Include files
 # include "config_db.h"
+# include "spi/connection.h"
 # include "jomoo/counter_ptr.hpp"
 # include "jomoo/exception.hpp"
 

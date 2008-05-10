@@ -18,38 +18,27 @@ _jomoo_db_begin
 namespace spi
 {
 
-class DbTransaction_ODBC : public connection
+class DbTransaction_ODBC : transaction
 {
 public:
-	DbTransaction_ODBC(const tstring& name);
+
+	DbTransaction_ODBC(DbConnection_ODBC* odbc, IsolationLevel level);
+	
 	~DbTransaction_ODBC();
 
-	// Implements DbConnection
-	bool open(const tchar* parameters, size_t len);
-	void close();
-	bool uses(const tchar* database, size_t len);
-	
-	query* createQuery();
-	command* createCommand();
-	transaction* beginTransaction( IsolationLevel level );
+	void release();
 
-	const tstring& name() const;
-	const tstring& last_error( ) const;
+	bool beginTransaction( IsolationLevel level );
 
-	DECLARE_SHARED( );
+	IsolationLevel level() const;
+
+	bool commit();
+
+	bool rollback();
+
 private:
-
-	void reportError_(const tstring& message, SQLSMALLINT handleType, SQLHANDLE handle);
-	bool autoCommit_(bool on);
-
-	const tstring& last_error( const tstring& message );
-
-	bool    active_;
-	SQLHENV dbe_;
-	SQLHDBC dbc_;
-
-	tstring error_;
-	tstring name_;
+	DbConnection_ODBC* _odbc;
+	IsolationLevel _level;
 };
 
 }
