@@ -158,6 +158,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\jomoo\codecs.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\jomoo\config.h"
 				>
 			</File>
@@ -924,6 +928,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\jomoo\db\dbtransaction_sqlite.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\jomoo\db\dbtransaction_sqlite.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\jomoo\db\sqlite_function.cpp"
 				>
 			</File>
@@ -963,6 +975,22 @@
 					>
 				</File>
 			</Filter>
+		</Filter>
+		<Filter
+			Name="exception"
+			>
+			<File
+				RelativePath="..\..\src\jomoo\exception\OutOfRangeException.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="encoding"
+			>
+			<File
+				RelativePath="..\..\src\jomoo\encoding\utf8encoding.h"
+				>
+			</File>
 		</Filter>
 	</Files>
 	<Globals>
