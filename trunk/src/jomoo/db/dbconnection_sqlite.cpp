@@ -1,7 +1,8 @@
 
 #include "DbConnection_SQLITE.h"
 #include "DbQuery_SQLITE.h"
-#include "DbExecute_SQLITE.h"
+#include "DbCommand_SQLITE.h"
+#include "DbTransaction_ODBC.h"
 #include "SQLite_Fun.h"
 
 #include "include/config.h"
@@ -46,14 +47,23 @@ const tstring& DbConnection_SQLITE::name() const
 	return name_;
 }
 
-bool DbConnection_SQLITE::open(const tstring& parameters)
+bool DbConnection_SQLITE::open(const tchar* parameters, size_t len)
 {
 	if ( db_ != NULL )
 		tsqlite3_close(db_);
-	if (tsqlite3_open(parameters.c_str(), &db_) != SQLITE_OK || db_ == NULL)	{
+
+	if (tsqlite3_open(parameters, &db_) != SQLITE_OK || db_ == NULL)
+	{
 		last_error( db_ );
 		return false;
 	}
+
+	
+	if( -1 == len )
+		name_ = parameters;
+	else
+		name_.assign( parameters, len);
+
 	return true;
 }
 
@@ -64,68 +74,26 @@ void DbConnection_SQLITE::close()
 	db_ = NULL;
 }
 
-bool DbConnection_SQLITE::uses(const tstring& database)
+bool DbConnection_SQLITE::uses(const tchar* database, size_t len)
 {
 	// NOP]
+	last_error( _T("不支持的操作") );
 	return false;
 }
 
-PDbQuery DbConnection_SQLITE::query()
+query* DbConnection_SQLITE::createQuery()
 {
-	return PDbQuery(new DbQuery_SQLITE(this));
+	return new DbQuery_SQLITE(this);
 }
 
-PDbExecute DbConnection_SQLITE::execute()
+command* DbConnection_SQLITE::createCommand()
 {
-	return PDbExecute( new DbExecute_SQLITE( this ) );
+	return new DbCommand_SQLITE( this ) );
 }
 
-
-	// query creation
-PDbQuery2 DbConnection_SQLITE::query2()
+transaction* DbConnection_SQLITE::beginTransaction( IsolationLevel level )
 {
-	return PDbQuery2(new DbQuery_SQLITE(this));
-}
-
-	// execute creation
-PDbExecute2 DbConnection_SQLITE::execute2()
-{
-	return PDbExecute2( new DbExecute_SQLITE( this ) );
-}
-
-bool DbConnection_SQLITE::begin()
-{
-	char *errmsg;
-	if ( tsqlite3_exec(db_, _T("BEGIN TRANSACTION"), NULL, NULL, &errmsg) != SQLITE_OK)
-	{
-		last_error( errmsg );
-		return false;
-	}
-	return true;
-}
-
-bool DbConnection_SQLITE::commit()
-{
-	char *errmsg;
-	int result = tsqlite3_exec(db_, _T("COMMIT TRANSACTION"), NULL, NULL, &errmsg);
-	if (result != SQLITE_OK)
-	{
-		last_error( errmsg );
-		return false;
-	}
-	return true;
-}
-
-bool DbConnection_SQLITE::rollback()
-{
-	char *errmsg;
-	int result = tsqlite3_exec(db_, _T("ROLLBACK TRANSACTION"), NULL, NULL, &errmsg);
-	if (result != SQLITE_OK)
-	{
-		last_error( errmsg );
-		return false;
-	}
-	return true;
+	return new DbTransaction_ODBC( this ) );
 }
 
 const tstring& DbConnection_SQLITE::last_error(char *message)

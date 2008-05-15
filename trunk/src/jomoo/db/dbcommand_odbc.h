@@ -26,7 +26,6 @@ public:
 
 	bool direct_exec( const tchar* sql, size_t len , bool reportWarningsAsErrors );
 	bool prepare( const tchar* sql, size_t len, bool reportWarningsAsErrors = true );
-	bool prepare( const tstring& sql, bool reportWarningsAsErrors = true );
 	bool exec( );
 	bool reset( );
 	int affected_rows( );
@@ -39,7 +38,7 @@ public:
 	bool bind( int index, double value );
 	bool bind( int index, const char* str , size_t n);
 	bool bind( int index, const Timestamp& time );
-
+	bool bind( int index, const Timespan& time );
 
 	bool bind( const tchar* columnName, bool value );
 	bool bind( const tchar* columnName, int8_t value );
@@ -49,6 +48,7 @@ public:
 	bool bind( const tchar* columnName, double value );
 	bool bind( const tchar* columnName, const char* str , size_t n);
 	bool bind( const tchar* columnName, const Timestamp& time );
+	bool bind( const tchar* columnName, const Timespan& time_span );
 
 	DECLARE_SHARED( );
 private:

@@ -48,26 +48,25 @@ public:
 	/**
 	 * 取得当前结果共有多少列
 	 */
-	virtual int columns() = 0;
+	virtual size_t columns() const = 0;
 
 	/**
 	 * 取得指定列的数据类型,请见枚举 DBType
 	 * @see DBType
 	 * @exception OutOfRangeException 超出范围记录的列数
 	 */
-	virtual int columnType( size_t pos ) = 0;
+	virtual int columnType( size_t pos ) const = 0;
 
 	/**
 	 * 取得指定列的列名
 	 * @exception OutOfRangeException 超出范围记录的列数
 	 */
-	virtual const tchar* columnName( size_t pos ) = 0;
+	virtual const tchar* columnName( size_t pos ) const = 0;
 
 	/**
 	 * 从当前记录中读取指定列的值
 	 * @param[ in ] column 列在记录中的索引,从0开始
 	 * @param[ out ] value 读取的值
-	 * @exception OutOfRangeException 超出范围记录的列数
 	 */
 	virtual bool read(u_int_t column, bool& value) = 0;
 
@@ -75,7 +74,6 @@ public:
 	 * 从当前记录中读取指定列名的值
 	 * @param[ in ] columnName 列名
 	 * @param[ out ] value 读取的值
-	 * @exception IllegalArgumentException 没有找到列名为 columnName 的列
 	 */
 	virtual bool read(const tchar* columnName, bool& value) = 0;
 
@@ -83,14 +81,12 @@ public:
 	 * 从当前记录中读取指定列的值
 	 * @param[ in ] column 列在记录中的索引,从0开始
 	 * @param[ out ] value 读取的值
-	 * @exception OutOfRangeException 超出范围记录的列数
 	 */
 	virtual bool read(u_int_t column, int8_t& value) = 0;
 	/**
 	 * 从当前记录中读取指定列名的值
 	 * @param[ in ] columnName 列名
 	 * @param[ out ] value 读取的值
-	 * @exception IllegalArgumentException 没有找到列名为 columnName 的列
 	 */
 	virtual bool read(const tchar* columnName, int8_t& value) = 0;
 
@@ -98,14 +94,12 @@ public:
 	 * 从当前记录中读取指定列的值
 	 * @param[ in ] column 列在记录中的索引,从0开始
 	 * @param[ out ] value 读取的值
-	 * @exception OutOfRangeException 超出范围记录的列数
 	 */
 	virtual bool read(u_int_t column, int16_t& value) = 0;
 	/**
 	 * 从当前记录中读取指定列名的值
 	 * @param[ in ] columnName 列名
 	 * @param[ out ] value 读取的值
-	 * @exception IllegalArgumentException 没有找到列名为 columnName 的列
 	 */
 	virtual bool read(const tchar* columnName, int16_t& value) = 0;
 
@@ -113,14 +107,12 @@ public:
 	 * 从当前记录中读取指定列的值
 	 * @param[ in ] column 列在记录中的索引,从0开始
 	 * @param[ out ] value 读取的值
-	 * @exception OutOfRangeException 超出范围记录的列数
 	 */
 	virtual bool read(u_int_t column, int32_t& value) = 0;
 	/**
 	 * 从当前记录中读取指定列名的值
 	 * @param[ in ] columnName 列名
 	 * @param[ out ] value 读取的值
-	 * @exception IllegalArgumentException 没有找到列名为 columnName 的列
 	 */
 	virtual bool read(const tchar* columnName, int32_t& value) = 0;
 
@@ -128,14 +120,12 @@ public:
 	 * 从当前记录中读取指定列的值
 	 * @param[ in ] column 列在记录中的索引,从0开始
 	 * @param[ out ] value 读取的值
-	 * @exception OutOfRangeException 超出范围记录的列数
 	 */
 	virtual bool read(u_int_t column, int64_t& value) = 0;
 	/**
 	 * 从当前记录中读取指定列名的值
 	 * @param[ in ] columnName 列名
 	 * @param[ out ] value 读取的值
-	 * @exception IllegalArgumentException 没有找到列名为 columnName 的列
 	 */
 	virtual bool read(const tchar* columnName, int64_t& value) = 0;
 
@@ -143,14 +133,12 @@ public:
 	 * 从当前记录中读取指定列的值
 	 * @param[ in ] column 列在记录中的索引,从0开始
 	 * @param[ out ] value 读取的值
-	 * @exception OutOfRangeException 超出范围记录的列数
 	 */
 	virtual bool read(u_int_t column, Timestamp& value) = 0;
 	/**
 	 * 从当前记录中读取指定列名的值
 	 * @param[ in ] columnName 列名
 	 * @param[ out ] value 读取的值
-	 * @exception IllegalArgumentException 没有找到列名为 columnName 的列
 	 */
 	virtual bool read(const tchar* columnName, Timestamp& value) = 0;
 
@@ -158,31 +146,65 @@ public:
 	 * 从当前记录中读取指定列的值
 	 * @param[ in ] column 列在记录中的索引,从0开始
 	 * @param[ out ] value 读取的值
-	 * @exception OutOfRangeException 超出范围记录的列数
 	 */
 	virtual bool read(u_int_t column, double& value) = 0;
 	/**
 	 * 从当前记录中读取指定列名的值
 	 * @param[ in ] columnName 列名
 	 * @param[ out ] value 读取的值
-	 * @exception IllegalArgumentException 没有找到列名为 columnName 的列
 	 */
 	virtual bool read(const tchar* columnName, double& value) = 0;
 
 	/**
 	 * 从当前记录中读取指定列的值
 	 * @param[ in ] column 列在记录中的索引,从0开始
-	 * @param[ out ] value 读取的值
-	 * @exception OutOfRangeException 超出范围记录的列数
+	 * @param[ out ] buf 数据buf
+	 * @param[ in,out ] len buf的长度,在成功或发生DB_INSUFFICIENT错误时返回读取的长度
+	 * @return 成功返回DB_OK
+	 * @see DB_ERROR
 	 */
-	virtual bool read(u_int_t column, char* buf, size_t& len ) = 0;
+	virtual int read(u_int_t column, char* buf, size_t& len ) = 0;
+	/**
+	 * 从当前记录中读取指定列名的值
+	 * @param[ in ] column 列在记录中的索引,从0开始
+	 * @param[ out ] buf 数据buf
+	 * @param[ in,out ] len buf的长度,在成功或发生DB_INSUFFICIENT错误时返回读取的长度
+	 * @return 成功返回DB_OK
+	 * @see DB_ERROR
+	 */
+	virtual int read(const tchar* columnName, char* buf, size_t& len ) = 0;
+
+	/**
+	 * 从当前记录中读取指定列的值
+	 * @param[ in ] column 列在记录中的索引,从0开始
+	 * @param[ out ] buf 数据buf
+	 * @param[ in,out ] len buf的长度,在成功或发生DB_INSUFFICIENT错误时返回读取的长度
+	 * @return 成功返回DB_OK
+	 * @see DB_ERROR
+	 */
+	virtual int readBLOB(u_int_t column, void* buf, size_t& len ) = 0;
 	/**
 	 * 从当前记录中读取指定列名的值
 	 * @param[ in ] columnName 列名
-	 * @param[ out ] value 读取的值
-	 * @exception IllegalArgumentException 没有找到列名为 columnName 的列
+	 * @param[ out ] buf 数据buf
+	 * @param[ in,out ] len buf的长度,在成功或发生DB_INSUFFICIENT错误时返回读取的长度
+	 * @return 成功返回DB_OK
+	 * @see DB_ERROR
 	 */
-	virtual bool read(const tchar* columnName, char* buf, size_t& len ) = 0;
+	virtual int readBLOB(const tchar* columnName, void* buf, size_t& len ) = 0;
+
+	/**
+	 * 当列为DB_TEXT和DB_BLOB时,从当前记录中读取指定列的数据长度,否则返回错误
+	 * @param[ in ] column 列在记录中的索引,从0开始
+	 * @param[ out ] len 数据长度
+	 */
+	virtual bool readLenght(u_int_t column, size_t& len ) = 0;
+	/**
+	 * 当列为DB_TEXT和DB_BLOB时,从当前记录中读取指定列的数据长度,否则返回错误
+	 * @param[ in ] column 列在记录中的索引,从0开始
+	 * @param[ out ] len 数据长度
+	 */
+	virtual bool readLenght(const tchar* columnName, size_t& len ) = 0;
 };
 
 }

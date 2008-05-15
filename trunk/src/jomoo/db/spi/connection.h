@@ -18,14 +18,32 @@ _jomoo_db_begin
 
 enum DBType
 {
-	UNKOWN,
-	STRING,
-	INTEGER_8,
-	INTEGER_16,
-	INTEGER_32,
-	INTEGER_64,
-	DOUBLE,
-	TIME
+	DB_UNKOWN,
+	DB_TEXT,
+	DB_INTEGER_8,
+	DB_INTEGER_16,
+	DB_INTEGER_32,
+	DB_INTEGER_64,
+	DB_DOUBLE,
+	DB_TIMESTAMP,
+	DB_TIMESPAN,
+	DB_BLOB,
+	DB_NULL
+};
+
+enum DB_ERROR
+{
+	DB_OK = 0,
+	DB_INSUFFICIENT = -1, /* 数据buf不足 */
+	DB_INTERNAL = -2,	  /* 数据库内部错误 */
+	DB_MISMATCH  = -3     /* 数据内型不匹配 */
+	DB_NOTFOUND  = -4     /* 列没有找到 */
+};
+
+struct columnItem
+{
+	DBType columnType;
+	tstring columnName;
 };
 
 /**
@@ -49,8 +67,6 @@ enum IsolationLevel
  // 当使用 OdbcTransaction 时，如果不设置 IsolationLevel 或者将 IsolationLevel 设置为 Unspecied，事务将根据基础 ODBC 驱动程序的默认隔离级别来执行。
  Unspecified
 };
-
-
 
 MakeException( DbException , _T("数据库操作发生错误!") );
 

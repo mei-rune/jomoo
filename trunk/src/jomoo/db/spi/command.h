@@ -10,7 +10,7 @@
 
 // Include files
 # include "jomoo/db/config_db.h"
-# include "jomoo/counter_ptr.h"
+# include "jomoo/counter_ptr.hpp"
 # include "jomoo/datetime.h"
 # include "jomoo/timespan.h"
 # include "jomoo/Timestamp.h"
@@ -123,6 +123,14 @@ public:
 
 	/**
 	 * 将值绑定到当前记录中指定的字段
+	 * @param[ in ] column 字段在记录中的索引,从0开始
+	 * @param[ out ] value 指定的值
+	 * @exception OutOfRangeException 超出范围记录的列数
+	 */
+	virtual bool bind( int index, const Timespan& time ) = 0;
+
+	/**
+	 * 将值绑定到当前记录中指定的字段
 	 * @param[ in ] columnName 列名
 	 * @param[ out ] value 指定的值
 	 * @exception IllegalArgumentException 没有找到列名为 columnName 的列
@@ -184,6 +192,14 @@ public:
 	 * @exception IllegalArgumentException 没有找到列名为 columnName 的列
 	 */
 	virtual bool bind( const tchar* columnName, const Timestamp& time ) = 0;
+	
+	/**
+	 * 将值绑定到当前记录中指定的字段
+	 * @param[ in ] columnName 列名
+	 * @param[ out ] value 指定的值
+	 * @exception IllegalArgumentException 没有找到列名为 columnName 的列
+	 */
+	virtual bool bind( const tchar* columnName, const Timespan& time ) = 0;
 };
 
 }

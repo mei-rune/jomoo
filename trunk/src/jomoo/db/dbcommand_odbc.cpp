@@ -129,7 +129,30 @@ bool DbCommand_ODBC::exec( )
 	return false;
 }
 
-bool DbCommand_ODBC::bind( int index, int value )
+bool DbCommand_ODBC::bind( int index, bool value )
+{
+	return bind( index, (int)(value?1:0));
+}
+
+bool DbCommand_ODBC::bind( int index, int8_t value )
+{
+	SQLRETURN retcode = SQLBindParameter( stmt_, index, SQL_PARAM_INPUT, SQL_C_STINYINT,SQL_TINYINT, 0, 0, &value, 0, 0 );
+	if ( (retcode == SQL_SUCCESS) || (retcode == SQL_SUCCESS_WITH_INFO) )
+		return true;
+	reportError_( _T("在绑定[") + convertIntegerToString( index ) + _T("]时") );
+	return false;
+}
+
+bool DbCommand_ODBC::bind( int index, int16_t value )
+{
+	SQLRETURN retcode = SQLBindParameter( stmt_, index, SQL_PARAM_INPUT, SQL_C_SSHORT,SQL_SMALLINT, 0, 0, &value, 0, 0 );
+	if ( (retcode == SQL_SUCCESS) || (retcode == SQL_SUCCESS_WITH_INFO) )
+		return true;
+	reportError_( _T("在绑定[") + convertIntegerToString( index ) + _T("]时") );
+	return false;
+}
+
+bool DbCommand_ODBC::bind( int index, int32_t value )
 {
 	SQLRETURN retcode = SQLBindParameter( stmt_, index, SQL_PARAM_INPUT, SQL_C_SLONG,SQL_INTEGER, 0, 0, &value, 0, 0 );
 	if ( (retcode == SQL_SUCCESS) || (retcode == SQL_SUCCESS_WITH_INFO) )
@@ -138,12 +161,12 @@ bool DbCommand_ODBC::bind( int index, int value )
 	return false;
 }
 
-bool DbCommand_ODBC::bind( int index, __int64 value )
-{ //sqlite3_bind_int64
+bool DbCommand_ODBC::bind( int index, int64_t value )
+{
 	SQLRETURN retcode = SQLBindParameter( stmt_, index, SQL_PARAM_INPUT, SQL_C_SBIGINT,SQL_BIGINT, 0, 0, &value, 0, 0 );
 	if ( (retcode == SQL_SUCCESS) || (retcode == SQL_SUCCESS_WITH_INFO) )
 		return true;
-	reportError_( _T("在绑定[") + convertIntegerToString( index ) + ("]时") );
+	reportError_( _T("在绑定[") + convertIntegerToString( index ) + _T("]时") );
 	return false;
 }
 
@@ -158,18 +181,8 @@ bool DbCommand_ODBC::bind( int index, double value )
 
 bool DbCommand_ODBC::bind( int index, const char* str, size_t n )
 {// sqlite3_bind_text
-SQLINTEGER len = ( SQLINTEGER ) n;
-	SQLRETURN retcode = SQLBindParameter( stmt_, index, SQL_PARAM_INPUT, SQL_C_CHAR,SQL_CHAR, len, 0, &str, 0, &len );
-	if ( (retcode == SQL_SUCCESS) || (retcode == SQL_SUCCESS_WITH_INFO) )
-		return true;
-	reportError_( "在绑定[" + convertIntegerToString( index ) + "]时" );
-	return false;
-}
-
-bool DbCommand_ODBC::bind( int index, const wchar_t* str, size_t n )
-{ // sqlite3_bind_text16
 	SQLINTEGER len = ( SQLINTEGER ) n;
-	SQLRETURN retcode = SQLBindParameter( stmt_, index, SQL_PARAM_INPUT, SQL_C_CHAR,SQL_CHAR, 0, len, &str, 0, &len );
+	SQLRETURN retcode = SQLBindParameter( stmt_, index, SQL_PARAM_INPUT, SQL_C_CHAR,SQL_VARCHAR, len, 0, &str, 0, &len );
 	if ( (retcode == SQL_SUCCESS) || (retcode == SQL_SUCCESS_WITH_INFO) )
 		return true;
 	reportError_( "在绑定[" + convertIntegerToString( index ) + "]时" );
@@ -178,138 +191,74 @@ bool DbCommand_ODBC::bind( int index, const wchar_t* str, size_t n )
 
 bool DbCommand_ODBC::bind( int index, const Timestamp& time )
 {
-	pdate date= time.date();
-	ptime_duration time_duration = time.time_of_day();
-	SQLRETURN retcode;
-
-	if(  !date.is_not_a_date() )
-	{
+	DateTime date( time );
 	SQL_TIMESTAMP_STRUCT timestamp;
 	timestamp.year =( SQLSMALLINT ) date.year();
     timestamp.month = ( SQLUSMALLINT ) date.month();
     timestamp.day = ( SQLUSMALLINT ) date.day();
-    timestamp.hour = ( SQLUSMALLINT ) time_duration.hours();
-    timestamp.minute = ( SQLUSMALLINT ) time_duration.minutes();
-    timestamp.second = ( SQLUSMALLINT ) time_duration.seconds();
+    timestamp.hour = ( SQLUSMALLINT ) date.hour();
+    timestamp.minute = ( SQLUSMALLINT ) date.minute();
+    timestamp.second = ( SQLUSMALLINT ) date.second();
     timestamp.fraction = ( SQLUINTEGER ) 0;
 	SQLINTEGER len = sizeof( timestamp );
 	retcode = SQLBindParameter( stmt_, index, SQL_PARAM_INPUT, SQL_C_TYPE_TIMESTAMP,SQL_TIMESTAMP, 0, 0, &timestamp, 0, &len );
-	}
-	else
-	{
-	TIME_STRUCT time;
-    time.hour = ( SQLUSMALLINT ) time_duration.hours();
-    time.minute = ( SQLUSMALLINT ) time_duration.minutes();
-    time.second = ( SQLUSMALLINT ) time_duration.seconds();
-	SQLINTEGER len = sizeof( time );
-		retcode = SQLBindParameter( stmt_, index, SQL_PARAM_INPUT, SQL_C_TYPE_TIME,SQL_TIME, 0, 0, &time, 0, &len );
-	}
 	if ( (retcode == SQL_SUCCESS) || (retcode == SQL_SUCCESS_WITH_INFO) )
 		return true;
 	reportError_( _T("在绑定[") + convertIntegerToString( index ) + _T("]时") );
 	return false;
 }
 
-bool DbCommand_ODBC::bind( const tchar* name, size_t len, int value )
+bool DbCommand_ODBC::bind( int index, const Timespan& time )
 {
-	//int index = sqlite3_bind_parameter_index( stmt_, name.c_str() );
-	//if( index == 0 )
-	//{
+	return bind( index, time.totalMicroseconds );
+}
+
+bool DbCommand_ODBC::bind( const tchar* columnName, bool value )
+{
 		con_->last_error( _T("指定的列名[") + tstring( name ) + _T("]不存在!") );
 		return false;
-	//}
-
-	//return bind( index, value );
 }
 
-bool DbCommand_ODBC::bind( const tstring& name,int value )
+bool DbCommand_ODBC::bind( const tchar* columnName, int8_t value )
 {
-	return bind( name.c_str(), name.size(), value );
-}
-
-bool DbCommand_ODBC::bind( const tchar* name, size_t len, __int64 value )
-{
-	//int index = sqlite3_bind_parameter_index( stmt_, name.c_str() );
-	//if( index == 0 )
-	//{
 		con_->last_error( _T("指定的列名[") + tstring( name ) + _T("]不存在!") );
 		return false;
-	//}
-
-	//return bind( index, value );
 }
 
-bool DbCommand_ODBC::bind( const tstring& name,__int64 value )
+bool DbCommand_ODBC::bind( const tchar* columnName, int16_t value )
 {
-	return bind( name.c_str(), name.size(), value );
-}
-
-bool DbCommand_ODBC::bind( const tchar* name, size_t len, double value )
-{
-	//int index = sqlite3_bind_parameter_index( stmt_, name.c_str() );
-	//if( index == 0 )
-	//{
 		con_->last_error( _T("指定的列名[") + tstring( name ) + _T("]不存在!") );
 		return false;
-	//}
-
-	//return bind( index, value );
 }
 
-bool DbCommand_ODBC::bind( const tstring& name,double value )
+bool DbCommand_ODBC::bind( const tchar* columnName, int32_t value )
 {
-	return bind( name.c_str(), name.size(), value );
-}
-
-bool DbCommand_ODBC::bind( const tchar* name, size_t len, const char* str , size_t n )
-{
-	//int index = sqlite3_bind_parameter_index( stmt_, name.c_str() );
-	//if( index == 0 )
-	//{
 		con_->last_error( _T("指定的列名[") + tstring( name ) + _T("]不存在!") );
 		return false;
-	//}
-
-	//return bind( index, str ,n );
 }
 
-bool DbCommand_ODBC::bind( const tstring& name,const char* str , size_t n )
+bool DbCommand_ODBC::bind( const tchar* columnName, int64_t value )
 {
-	return bind( name.c_str(), name.size(), str,n );
-}
-
-bool DbCommand_ODBC::bind( const tchar* name, size_t len, const wchar_t* str , size_t n )
-{
-	//int index = sqlite3_bind_parameter_index( stmt_, name.c_str() );
-	//if( index == 0 )
-	//{
 		con_->last_error( _T("指定的列名[") + tstring( name ) + _T("]不存在!") );
 		return false;
-	//}
-
-	//return bind( index, str ,n );
 }
 
-bool DbCommand_ODBC::bind( const tstring& name,const wchar_t* str , size_t n )
+bool DbCommand_ODBC::bind( const tchar* columnName, double value )
 {
-	return bind( name.c_str(), name.size(), str,n );
-}
-
-bool DbCommand_ODBC::bind( const tchar* name, size_t len, const ptime& time )
-{
-	//int index = sqlite3_bind_parameter_index( stmt_, name.c_str() );
-	//if( index == 0 )
-	//{
 		con_->last_error( _T("指定的列名[") + tstring( name ) + _T("]不存在!") );
 		return false;
-	//}
-
-	//return bind( index, time );
 }
 
-bool DbCommand_ODBC::bind( const tstring& name, const ptime& time )
+bool DbCommand_ODBC::bind( const tchar* columnName, const char* str , size_t n )
 {
-	return bind( name.c_str(), name.size(), time );
+		con_->last_error( _T("指定的列名[") + tstring( name ) + _T("]不存在!") );
+		return false;
+}
+
+bool DbCommand_ODBC::bind( const tchar* columnName, const Timespan& time_span )
+{
+		con_->last_error( _T("指定的列名[") + tstring( name ) + _T("]不存在!") );
+		return false;
 }
 
 void DbCommand_ODBC::reportError_(const tstring& message)

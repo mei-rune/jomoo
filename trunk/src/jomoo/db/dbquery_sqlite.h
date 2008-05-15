@@ -2,7 +2,7 @@
 #ifndef _DbQuery_SQLITE_H_
 #define _DbQuery_SQLITE_H_
 
-#include "jomoo/config.h"
+# include "jomoo/config.h"
 
 #if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
@@ -10,90 +10,86 @@
 
 // Include files
 # include "config_db.h"
-#define HAVE_DB_SQLITE
-
-#include <vector>
-#include "sqlite/sqlite3.h"
-#include "QSqlite.h"
-#include "DbQuery.h"
+# include <vector>
+# include "sqlite/sqlite3.h"
+# include "sqlite_wrapper.h"
+# include "spi/query.h"
 
 _jomoo_db_begin
 
-class DbConnection_SQLITE;
+namespace spi
+{
 
-class DbQuery_SQLITE : public DbQuery2
+class DbQuery_SQLITE : public query
 {
 public:
 	DbQuery_SQLITE(DbConnection_SQLITE* con, int timeout = 120);
 	virtual ~DbQuery_SQLITE();
+  
 
-	virtual bool exec(const char* sql, size_t len, bool reportWarningsAsErrors = true );
-	virtual bool exec(const tstring& sql, bool reportWarningsAsErrors = true);
-	virtual bool nextRow();
-	virtual bool nextSet();
-	virtual int  columns();
+	bool exec(const tchar* sql_string, size_t len, bool reportWarningsAsErrors = true );
+	bool nextRow();
+	bool nextSet();
+	size_t  columns() const;
+	int columnType( size_t pos ) const;
+	const tchar* columnName( size_t pos ) const;
 
-	virtual const Variant&     get(u_int_t column);
-	virtual const Variant&     get(const tstring& column);
+	bool read(u_int_t column, bool& value);
+	bool read(const tchar* columnName, bool& value);
 
-	bool getBoolean(u_int_t column);
-	bool getBoolean(const tstring& column);
-	int getInt(u_int column);
-	int getInt(const tstring& column);
-	__int64 getInt64(u_int column);
-	__int64 getInt64(const tstring& column);
-	double getDouble(u_int column);
-	double getDouble(const tstring& column);
-	const tstring& getString(u_int column);
-	const tstring& getString(const tstring& column);
+	bool read(u_int_t column, int8_t& value);
+	bool read(const tchar* columnName, int8_t& value);
 
-#ifdef _BOOST_TIME_
-	const ptime& getTime(u_int column);
-	const ptime& getTime(const tstring& column);
-#endif
+	bool read(u_int_t column, int16_t& value);
+	bool read(const tchar* columnName, int16_t& value);
 
-	int getColumnType( size_t pos );
-	const tstring& getColumnName( size_t pos );
+	bool read(u_int_t column, int32_t& value);
+	bool read(const tchar* columnName, int32_t& value);
+
+	bool read(u_int_t column, int64_t& value);
+	bool read(const tchar* columnName, int64_t& value);
+
+	bool read(u_int_t column, Timestamp& value);
+	bool read(const tchar* columnName, Timestamp& value);
+
+	bool read(u_int_t column, Timespan& value);
+	bool read(const tchar* columnName, Timespan& value);
+
+	bool read(u_int_t column, double& value);
+	bool read(const tchar* columnName, double& value);
+
+	int read(u_int_t column, char* buf, size_t& len );
+	int read(const tchar* columnName, char* buf, size_t& len );
+
+	int readBLOB(u_int_t column, void* buf, size_t& len );
+	int readBLOB(const tchar* columnName, void* buf, size_t& len );
+
+	bool readLenght(u_int_t column, size_t& len );
+	bool readLenght(const tchar* columnName, size_t& len );
+
+	void release();
+
+	DECLARE_SHARED( );
 
 private:
-	DbConnection_SQLITE *con_;
+	DbConnection_SQLITE *_connection;
 
-	const tchar* tail_;
-	tstring sql_str_;
+	const tchar* _pzTail;
+	tstring _sql_string;
+	sqlite3_stmt   *_stmt;
 
-	//
-	sqlite3_stmt   *stmt_;
-	// row data
-	Variant            result_;
-	tstring		String_;
+	bool         _firstRow;
+	bool         _columnTypesReady;
+	std::vector<columnItem> _columnItems;
+	variant _variant;
 
-#ifdef _BOOST_TIME_
-	ptime		Time_;
-#endif
+	bool fetchRow(bool isFirst);
+	void fetchColumnTypes();
+	bool prepare( );
+	u_int_t columnPosition(const tstring& columnName);
+	u_int_t columnPosition(const tchar* columnName);
 
-	bool         firstRow_;
-
-	bool               columnTypesReady_;
-
-	// columns type description
-	typedef std::vector<Variant_Type::Type> ColumnTypes;
-	ColumnTypes        columnTypes_;
-	// columns names
-	typedef std::vector<tstring> ColumnNames;
-	ColumnNames        columnNames_;
-
-	int columns_;
-
-	bool nextSet_();
-
-	bool fetchRow_();
-	bool fetchRow_2();
-
-	void fetchColumnTypes_();
-
-	bool execOne_( );
-
-	u_int_t columnPosition_(const tstring& columnName);
+	static const tchar** _typeName;
 };
 
 _jomoo_db_end

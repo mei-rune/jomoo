@@ -1,9 +1,6 @@
 
 #include <windows.h>
-#include "DbConnection_ODBC.h"
-#include "DbQuery_ODBC.h"
-#include "DbExecute_ODBC.h"
-
+#include "DbTransaction_ODBC.h"
 
 #include "include/config.h"
 #ifdef _MEMORY_DEBUG 
@@ -12,8 +9,6 @@
 	#define malloc DEBUG_MALLOC  
     static char THIS_FILE[] = __FILE__;  
 #endif
-
-
 
 _jomoo_db_begin
 
