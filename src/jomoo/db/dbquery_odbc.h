@@ -10,23 +10,37 @@
 
 // Include files
 # include "config_db.h"
-# include "IQuery.h"
+# include "spi/query.h"
+# include "DbConnection_ODBC.h"
 # include <map>
 # include <vector>
 # include <sql.h>
 
 _jomoo_db_begin
 
-class DbConnection_ODBC;
+namespace spi
+{
 
-class DbQuery_ODBC : public IQuery
+union variant
+{
+public:	
+	bool bool_value;
+	int8_t int8_value;
+	int16_t int16_value;
+	int32_t int32_value;
+	int64_t int64_value;
+	Timestamp time_stamp;
+	Timespan time_span;
+	StringPtr<char> stringPtr;
+};
+
+class DbQuery_ODBC : public query
 {
 public:
 	DbQuery_ODBC(DbConnection_ODBC* con, int timeout = 120);
 	virtual ~DbQuery_ODBC();  
 
-	bool exec(const char* sql, size_t len, bool reportWarningsAsErrors = true );
-	bool exec(const tstring& sql, bool reportWarningsAsErrors = true);
+	bool exec(const tchar* sql_string, size_t len, bool reportWarningsAsErrors = true );
 	bool nextRow();
 	bool nextSet();
 	int  columns();
@@ -34,28 +48,39 @@ public:
 	const tchar* columnName( size_t pos );
 
 	bool read(u_int_t column, bool& value);
-	bool read(const tchar* column, bool& value);
+	bool read(const tchar* columnName, bool& value);
 
 	bool read(u_int_t column, int8_t& value);
-	bool read(const tchar* column, int8_t& value);
+	bool read(const tchar* columnName, int8_t& value);
 
 	bool read(u_int_t column, int16_t& value);
-	bool read(const tchar* column, int16_t& value);
+	bool read(const tchar* columnName, int16_t& value);
 
 	bool read(u_int_t column, int32_t& value);
-	bool read(const tchar* column, int32_t& value);
+	bool read(const tchar* columnName, int32_t& value);
 
 	bool read(u_int_t column, int64_t& value);
-	bool read(const tchar* column, int64_t& value);
+	bool read(const tchar* columnName, int64_t& value);
 
 	bool read(u_int_t column, Timestamp& value);
-	bool read(const tchar* column, Timestamp& value);
+	bool read(const tchar* columnName, Timestamp& value);
+
+	bool read(u_int_t column, Timespan& value);
+	bool read(const tchar* columnName, Timespan& value);
 
 	bool read(u_int_t column, double& value);
-	bool read(const tchar* column, double& value);
+	bool read(const tchar* columnName, double& value);
 
-	bool read(u_int_t column, char* buf, size_t& len );
-	bool read(const tchar* columnName, char* buf, size_t& len );
+	int read(u_int_t column, char* buf, size_t& len );
+	int read(const tchar* columnName, char* buf, size_t& len );
+
+	int readBLOB(u_int_t column, void* buf, size_t& len );
+	int readBLOB(const tchar* columnName, void* buf, size_t& len );
+
+	bool readLenght(u_int_t column, size_t& len );
+	bool readLenght(const tchar* columnName, size_t& len );
+
+	void release();
 
 	DECLARE_SHARED( );
 private:
@@ -63,22 +88,18 @@ private:
 	SQLHSTMT           dbs_;
 	int                columns_;
 	// columns type description
-	typedef std::vector<Variant_Type::Type > ColumnTypes;
+	typedef std::vector<DBType> ColumnTypes;
+	typedef std::vector<tstring> ColumnNames;
+	typedef stdext::hash_map<tstring, u_int_t> ColumnPositions;
+
 	ColumnTypes        columnTypes_;
 	bool               columnTypesReady_;
 	// columns names
-	typedef std::vector<tstring> ColumnNames;
 	ColumnNames        columnNames_;
-	typedef std::map<tstring, u_int_t> ColumnPositions;
 	ColumnPositions    columnPositions_;
-	
-	// 
-	tstring		String_;
-	Timestamp		Time_;
 
 	// row data
-	typedef std::vector<Variant> RowData;
-	RowData            row_;
+	std::vector<variant> row_;
 	bool               rowReady_;
 	// error handling
 	bool errorThrown_;
@@ -89,9 +110,10 @@ private:
 
 	void fetchRow_();
 	void fetchColumnTypes_();
-
 	u_int_t columnPosition_(const tstring& columnName);
 };
+
+}
 
 _jomoo_db_end
 

@@ -1,7 +1,7 @@
 
 #include "DbConnection_SQLITE.h"
-#include "DbExecute_SQLITE.h"
-#include "../../util/codecs.h"
+#include "DbCommand_SQLITE.h"
+#include "jomoo/codecs.h"
 
 #include "include/config.h"
 #ifdef _MEMORY_DEBUG 
@@ -17,20 +17,23 @@
 
 _jomoo_db_begin
 
-DbExecute_SQLITE::DbExecute_SQLITE( DbConnection_SQLITE* con )
+namespace spi
+{
+
+DbCommand_SQLITE::DbCommand_SQLITE( DbConnection_SQLITE* con )
 : con_(con)
 , stmt_(NULL)
 , tail_(NULL)
 {
 }
 
-DbExecute_SQLITE::~DbExecute_SQLITE()
+DbCommand_SQLITE::~DbCommand_SQLITE()
 {
 	if( stmt_ != NULL )
 		tsqlite3_finalize( stmt_ );
 }
 
-bool DbExecute_SQLITE::prepare( const tchar* sql, size_t len, bool reportWarningsAsErrors )
+bool DbCommand_SQLITE::prepare( const tchar* sql, size_t len, bool reportWarningsAsErrors )
 {
 	if( stmt_ != NULL )
 	{
@@ -39,9 +42,8 @@ bool DbExecute_SQLITE::prepare( const tchar* sql, size_t len, bool reportWarning
 	}
 	buffer_.clear();
 
-	std::string utf8;
+	std::string utf8 = to_utf8( sql , len );
 	std::list< tstring >::iterator it = buffer_.insert( buffer_.begin(), utf8 );
-	char_to_utf_8( sql ,*it );
 
 	if( tsqlite3_prepare( con_->db_,
 		it->c_str(), 
@@ -51,12 +53,7 @@ bool DbExecute_SQLITE::prepare( const tchar* sql, size_t len, bool reportWarning
 	return false;
 }
 
-bool DbExecute_SQLITE::prepare(const tstring& sql, bool reportWarningsAsErrors ) 
-{
-	return prepare( sql.c_str(), sql.size() , reportWarningsAsErrors );
-}
-
-bool DbExecute_SQLITE::reset( )
+bool DbCommand_SQLITE::reset( )
 {
 	buffer_.clear();
 	if( stmt_ == NULL )
@@ -67,7 +64,7 @@ bool DbExecute_SQLITE::reset( )
 	return false;
 }
 
-bool DbExecute_SQLITE::exec( )
+bool DbCommand_SQLITE::exec( )
 {
 	int i = 0;
 l:
@@ -92,15 +89,54 @@ l:
 	return false;
 }
 
-bool DbExecute_SQLITE::bind( int index, int value )
+int DbCommand_SQLITE::affected_rows( )
+{
+	int n = tsqlite3_changes ( con_->db_ );
+	if( n < 0 )
+		con_->last_error( con_ ->db_ );
+	return n;
+}
+
+bool DbCommand_SQLITE::direct_exec( const tchar* sql, size_t len , bool reportWarningsAsErrors )
+{
+	if( !prepare( sql, len , reportWarningsAsErrors ) )
+		return false;
+	return this->exec( );
+}
+
+bool DbCommand_SQLITE::bind( int index, bool value )
 {// sqlite3_bind_int
-	if(tsqlite3_bind_int( stmt_ , index, value ) == SQLITE_OK )
+	if(tsqlite3_bind_int( stmt_ , index, value?1:0 ) == SQLITE_OK )
 		return true;
 	con_->last_error( con_ ->db_ );
 	return false;
 }
 
-bool DbExecute_SQLITE::bind( int index, __int64 value )
+bool DbCommand_SQLITE::bind( int index, int8_t value )
+{ //sqlite3_bind_int64
+	if( tsqlite3_bind_int( stmt_ , index, value ) == SQLITE_OK )
+		return true;
+	con_->last_error( con_ ->db_ );
+	return false;
+}
+
+bool DbCommand_SQLITE::bind( int index, int16_t value )
+{ //sqlite3_bind_int64
+	if( tsqlite3_bind_int( stmt_ , index, value ) == SQLITE_OK )
+		return true;
+	con_->last_error( con_ ->db_ );
+	return false;
+}
+
+bool DbCommand_SQLITE::bind( int index, int32_t value )
+{ //sqlite3_bind_int64
+	if( tsqlite3_bind_int( stmt_ , index, value ) == SQLITE_OK )
+		return true;
+	con_->last_error( con_ ->db_ );
+	return false;
+}
+
+bool DbCommand_SQLITE::bind( int index, int64_t value )
 { //sqlite3_bind_int64
 	if( tsqlite3_bind_int64( stmt_ , index, value ) == SQLITE_OK )
 		return true;
@@ -108,7 +144,7 @@ bool DbExecute_SQLITE::bind( int index, __int64 value )
 	return false;
 }
 
-bool DbExecute_SQLITE::bind( int index, double value )
+bool DbCommand_SQLITE::bind( int index, double value )
 { // sqlite3_bind_double
 	if( tsqlite3_bind_double( stmt_ , index, value ) == SQLITE_OK )
 		return true;
@@ -116,7 +152,7 @@ bool DbExecute_SQLITE::bind( int index, double value )
 	return false;
 }
 
-bool DbExecute_SQLITE::bind( int index, const char* str, size_t n )
+bool DbCommand_SQLITE::bind( int index, const char* str, size_t n )
 {// sqlite3_bind_text
 
 	//注意， sqlite3_bind_text操作并不拷贝字符串，它只是记住了字符串的地址
@@ -129,147 +165,73 @@ bool DbExecute_SQLITE::bind( int index, const char* str, size_t n )
 	return false;
 }
 
-
-
-bool DbExecute_SQLITE::bind( int index, const wchar_t* str, size_t n )
-{ // sqlite3_bind_text16
-	if( tsqlite3_bind_text16( stmt_ , index, str, ( int )n  ,NULL ) == SQLITE_OK )
-		return true;
-	con_->last_error( con_ ->db_ );
-	return false;
+bool DbCommand_SQLITE::bind( int index, const Timestamp& time )
+{
+	return bind( index, time.epochMicroseconds() );
 }
 
-#ifdef _BOOST_TIME_
-bool DbExecute_SQLITE::bind( int index, const ptime& time )
+bool DbCommand_SQLITE::bind( int index, const Timespan& time )
 {
-	tstring timestr = boost::posix_time::to_iso_extended_string( time );
-	return bind( index,timestr.c_str(), timestr.size() );
+	return bind( index, time.totalMicroseconds() );
 }
-#endif
 
-bool DbExecute_SQLITE::bind( const tchar* name, size_t len, int value )
+bool DbCommand_SQLITE::bind( int index, bool value )
 {
-	int index = tsqlite3_bind_parameter_index( stmt_, name );
-	if( index == 0 )
-	{
 		con_->last_error( _T("指定的列名[") + tstring( name ) + _T("]不存在!") );
 		return false;
-	}
-
-	return bind( index, value );
 }
 
-bool DbExecute_SQLITE::bind( const tstring& name, int value )
+bool DbCommand_SQLITE::bind( int index, int8_t value )
 {
-	return bind( name.c_str(),name.size(), value );
-}
-
-bool DbExecute_SQLITE::bind( const tchar* name, size_t len, __int64 value )
-{
-	int index = tsqlite3_bind_parameter_index( stmt_, name );
-	if( index == 0 )
-	{
 		con_->last_error( _T("指定的列名[") + tstring( name ) + _T("]不存在!") );
 		return false;
-	}
-
-	return bind( index, value );
 }
 
-bool DbExecute_SQLITE::bind( const tstring& name, __int64 value )
+bool DbCommand_SQLITE::bind( int index, int16_t value )
 {
-	return bind( name.c_str(),name.size(), value );
-}
-
-bool DbExecute_SQLITE::bind( const tchar* name, size_t len, double value )
-{
-	int index = tsqlite3_bind_parameter_index( stmt_, name );
-	if( index == 0 )
-	{
 		con_->last_error( _T("指定的列名[") + tstring( name ) + _T("]不存在!") );
 		return false;
-	}
-
-	return bind( index, value );
 }
 
-bool DbExecute_SQLITE::bind( const tstring& name, double value )
+bool DbCommand_SQLITE::bind( int index, int32_t value )
 {
-	return bind( name.c_str(),name.size(), value );
-}
-
-bool DbExecute_SQLITE::bind( const tchar* name, size_t len, const char* str , size_t n )
-{
-	int index = tsqlite3_bind_parameter_index( stmt_, name );
-	if( index == 0 )
-	{
 		con_->last_error( _T("指定的列名[") + tstring( name ) + _T("]不存在!") );
 		return false;
-	}
-
-	return bind( index, str ,n );
 }
 
-bool DbExecute_SQLITE::bind( const tstring& name, const char* str , size_t n )
+bool DbCommand_SQLITE::bind( int index, int64_t value )
 {
-	return bind( name.c_str(),name.size(), str ,n );
-}
-
-bool DbExecute_SQLITE::bind( const tchar* name, size_t len, const wchar_t* str , size_t n )
-{
-	int index = tsqlite3_bind_parameter_index( stmt_, name );
-	if( index == 0 )
-	{
 		con_->last_error( _T("指定的列名[") + tstring( name ) + _T("]不存在!") );
 		return false;
-	}
-
-	return bind( index, str ,n );
 }
 
-bool DbExecute_SQLITE::bind( const tstring& name, const wchar_t* str , size_t n )
+bool DbCommand_SQLITE::bind( int index, double value )
 {
-	return bind( name.c_str(), name.size(), str ,n );
-}
-
-bool DbExecute_SQLITE::bind( const tchar* name, size_t len, const ptime& time )
-{
-	int index = tsqlite3_bind_parameter_index( stmt_, name );
-	if( index == 0 )
-	{
 		con_->last_error( _T("指定的列名[") + tstring( name ) + _T("]不存在!") );
 		return false;
-	}
-
-	return bind( index, time );
 }
 
-bool DbExecute_SQLITE::bind( const tstring& name, const ptime& time )
+bool DbCommand_SQLITE::bind( int index, const char* str, size_t n )
 {
-	return bind( name.c_str(),name.size(), time );
-}
-
-int DbExecute_SQLITE::affected_rows( )
-{
-	int n = tsqlite3_changes ( con_->db_ );
-	if( n < 0 )
-		con_->last_error( con_ ->db_ );
-	return n;
-}
-
-bool DbExecute_SQLITE::direct_exec( const tchar* sql, size_t len , bool reportWarningsAsErrors )
-{
-	if( !prepare( sql, len , reportWarningsAsErrors ) )
+		con_->last_error( _T("指定的列名[") + tstring( name ) + _T("]不存在!") );
 		return false;
-	return this->exec( );
 }
 
-bool DbExecute_SQLITE::direct_exec( const tstring& sql, bool reportWarningsAsErrors )
+bool DbCommand_SQLITE::bind( int index, const Timestamp& time )
 {
-	return direct_exec( sql.c_str(),sql.size(), reportWarningsAsErrors );
+		con_->last_error( _T("指定的列名[") + tstring( name ) + _T("]不存在!") );
+		return false;
 }
 
-DEFINE_SHARED( DbExecute_SQLITE );
+bool DbCommand_SQLITE::bind( int index, const Timespan& time )
+{
+		con_->last_error( _T("指定的列名[") + tstring( name ) + _T("]不存在!") );
+		return false;
+}
+
+DEFINE_SHARED( DbCommand_SQLITE );
+
+}
 
 _jomoo_db_end
 

@@ -1,7 +1,6 @@
 
 #include <windows.h>
 #include "DbQuery_ODBC.h"
-#include "DbConnection_ODBC.h"
 
 #include "include/config.h"
 #ifdef _MEMORY_DEBUG 
@@ -11,19 +10,22 @@
     static char THIS_FILE[] = __FILE__;  
 #endif
 
-
-
-
 _jomoo_db_begin
+
+namespace spi
+{
 
 DbQuery_ODBC::DbQuery_ODBC(DbConnection_ODBC* con, int timeout)
 : con_(con)
 , rowReady_(false)
 , errorThrown_(false)
-#ifdef _BOOST_TIME_
-, Time_( invailptime )
-#endif
+, _timeStamp( )
+, _timeSpan( )
 {
+	if( null_ptr == odbc )
+		ThrowException( NullException );
+	con_->incRef();
+
 	// Allocate a statement handle
 	SQLRETURN r = SQLAllocHandle(
 		SQL_HANDLE_STMT,             // HandleType
@@ -96,13 +98,24 @@ DbQuery_ODBC::~DbQuery_ODBC()
 	}
 	//
 	SQLFreeHandle(SQL_HANDLE_STMT, dbs_);
+	release();
 }
 
-bool DbQuery_ODBC::exec( const char* sql, size_t len, bool reportWarningsAsErrors)
+void DbQuery_ODBC::release()
+{
+	if( null_ptr == con_ )return;
+	con_->decRef();
+	con_ = null_ptr;
+}
+
+bool DbQuery_ODBC::exec( const tchar* sql_string, size_t len, bool reportWarningsAsErrors)
 {
 	rowReady_         = false;
 	columnTypesReady_ = false;
-	//
+	
+	if( -1 == len )
+		len = string_traits<tchar>::strlen( sql_string );
+
 	SQLCHAR    *sqlText = (SQLCHAR*)sql;
 	SQLSMALLINT sqlTextSize = (SQLSMALLINT)len;
 	SQLRETURN r = SQLExecDirect(
@@ -137,11 +150,6 @@ bool DbQuery_ODBC::exec( const char* sql, size_t len, bool reportWarningsAsError
 	// - sometimes it means "no data at all"
 	// - sometimes it means "no data on the first result set"
 	//   (but maybe some data in further sets)
-}
-
-bool DbQuery_ODBC::exec( const tstring& sql,bool reportWarningsAsErrors  )
-{
-	return exec( sql.c_str(), sql.size(), reportWarningsAsErrors );
 }
 
 void DbQuery_ODBC::reportError_(const tstring& message)
@@ -244,16 +252,17 @@ const Variant& DbQuery_ODBC::get(const tstring& name)
 void DbQuery_ODBC::fetchRow_()
 {
 	if (rowReady_) return;
-	fetchColumnTypes_();
+		fetchColumnTypes_();
 
 	// The row was not already fetched. Get the values now.
 	row_.resize(columns_);
 	for(int i=0; i<columns_; ++i)
 	{
-		Variant& result = row_[i];
+		variant& result = row_[i];
 
-		switch(columnTypes_[i]) {
-	  case Variant_Type::INTEGER:
+		switch(columnTypes_[i])
+		{
+		  case Variant_Type::INTEGER:
 		  {
 			  // Obtain an integer value for column 'i'
 			  SQLINTEGER value;
@@ -554,6 +563,8 @@ const tstring& DbQuery_ODBC::getColumnName( size_t pos )
 	return columnNames_[ pos ];
 }
 
-DEFINE_SHARED( DbExecute_SQLITE );
+DEFINE_SHARED( DbQuery_ODBC );
+
+}
 
 _jomoo_db_end
