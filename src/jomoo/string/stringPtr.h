@@ -10,53 +10,64 @@
 # include <memory>
 # include <string>
 # include <vector>
+# include "string_traits.hpp"
 
 _jomoo_begin
 
 namespace StringOps
 {
-
 	namespace detail
 	{
+		template< typename charT >
 		class StringOp
 		{
 		public:
-			static tchar* dup( const tchar* p )
+			static charT* dup( const charT* p )
 			{
-				return _tcsdup( p );
+				return string_traits< charT>::strdup( p );
 			}
 
-			static void free( tchar* p)
+			static void free( charT* p)
 			{
-				::free( p );
+				string_traits< charT>::free( p );
 			}
 		};
-	}
+	};
 
-	template< typename OP = StringOp >
+	template< typename charT , template OP = StringOp<charT> >
 	class StringPtr
 	{
 	public:
-		explicit StringPtr(tchar *_Ptr = 0) _THROW0()
-			: _Myptr(_Ptr)
+		StringPtr(charT * ptr = 0, size_t len) _THROW0()
+			: _ptr(ptr)
+			, _length( len )
 		{
 		}
 
-		StringPtr(StringPtr& _Right) _THROW0()
-			: _Myptr(_Right.release())
+		StringPtr(StringPtr& right) _THROW0()
+			: _ptr( 0 )
+			, _length( 0 )
 		{
+			_length = right.size();
+			_ptr = right.release();
 		}
 
-		StringPtr(const tstring& _Right) _THROW0()
-			: _Myptr( 0 )
+		template< STRING >
+		StringPtr(const STRING& right) _THROW0()
+			: _ptr( 0 )
+			, _length( 0 )
 		{
-			if( !_Right.empty() )
-				_Myptr = OP::dup(_Right.c_str() );
+			if( !right.empty() )
+			{
+				_ptr = OP::dup( right.c_str() );
+				_length = right.size();
+			}
 		}
 
-		StringPtr& operator=(StringPtr& _Right) _THROW0()
+		StringPtr& operator=(StringPtr& right) _THROW0()
 		{
-			reset(_Right.release());
+			size_t l = right.size();
+			reset(right.release(), l );
 			return (*this);
 		}
 
@@ -65,32 +76,43 @@ namespace StringOps
 			reset();
 		}
 
-		tchar *get() const _THROW0()
+		charT *get() const _THROW0()
 		{
-			return (_Myptr);
+			return (_ptr);
 		}
 
-		tchar *c_str() const _THROW0()
+		charT *c_str() const _THROW0()
 		{
-			return (_Myptr);
+			return (_ptr);
 		}
 
-		tchar *release() _THROW0()
+		size_t size() const
 		{
-			tchar *_Tmp = _Myptr;
-			_Myptr = 0;
+			return _lenght;
+		}
+
+		charT *release() _THROW0()
+		{
+			charT *_Tmp = _ptr;
+			_ptr = 0;
+			//_lenght = 0;
 			return (_Tmp);
 		}
 
-		void reset(tchar* _Ptr = 0)
+		void reset(charT* ptr = 0, size_t l = -1)
 		{
-			if (_Ptr != _Myptr)
-				OP::free( _Myptr );
-			_Myptr = _Ptr;
+			if (_Ptr != _ptr)
+			{
+				OP::free( _ptr );
+				_lenght = 0;
+			}
+			_ptr = ptr;
+			_lenght = (-1 == l)?string_traits<charT>::strlen( _ptr ): l ;
 		}
 
 	private:
-		tchar *_Myptr;
+		charT *_ptr;
+		size_t _length;
 	};
 }
 _jomoo_end

@@ -191,72 +191,60 @@ public:
 		return _span;
 	}
 
-
 	bool operator == (const Timespan& ts) const
 	{
 		return _span == ts._span;
 	}
-
 
 	bool operator != (const Timespan& ts) const
 	{
 		return _span != ts._span;
 	}
 
-
 	bool operator >  (const Timespan& ts) const
 	{
 		return _span > ts._span;
 	}
-
 
 	bool operator >= (const Timespan& ts) const
 	{
 		return _span >= ts._span;
 	}
 
-
 	bool operator <  (const Timespan& ts) const
 	{
 		return _span < ts._span;
 	}
-
 
 	bool operator <= (const Timespan& ts) const
 	{
 		return _span <= ts._span;
 	}
 
-
 	bool operator == (int64_t microseconds) const
 	{
 		return _span == microseconds;
 	}
-
 
 	bool operator != (int64_t microseconds) const
 	{
 		return _span != microseconds;
 	}
 
-
 	bool operator >  (int64_t microseconds) const
 	{
 		return _span > microseconds;
 	}
-
 
 	bool operator >= (int64_t microseconds) const
 	{
 		return _span >= microseconds;
 	}
 
-
 	bool operator <  (int64_t microseconds) const
 	{
 		return _span < microseconds;
 	}
-
 
 	bool operator <= (int64_t microseconds) const
 	{

@@ -164,7 +164,7 @@ public: \
 MakeException( NullException , NullError );
 MakeException( RuntimeException , RuntimeError );
 MakeException( IllegalArgumentException, IllegalArgumentError );
-MakeException( OutOfRangeException, OutOfRangeError );
+//MakeException( OutOfRangeException, OutOfRangeError );
 MakeException( InvalidPointerException, InvalidPointerError );
 MakeException( LengthException, LengthError );
 MakeException( CastException, CastError );
@@ -180,6 +180,8 @@ MakeException( TimeSyntaxException , TimeSyntaxError );
 #define ThrowException2( type ,m1 ,m2 ) throw type(__FILE__, __LINE__ , m1, m2 )
 #define ThrowException3( type ,m1 ,m2 ,m3 ) throw type(__FILE__, __LINE__ , m1, m2, m3 )
 #define ThrowException4( type ,m1 ,m2 ,m3 ,m4) throw type(__FILE__, __LINE__ , m1, m2, m3, m4)
+
+#include "exception/OutOfRangeException.h"
 
 _jomoo_end
 
