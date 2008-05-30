@@ -31,8 +31,6 @@ public:
 	bool reset( );
 	int affected_rows( );
 
-
-
 	bool bind( int index, bool value );
 	bool bind( int index, int8_t value );
 	bool bind( int index, int16_t value );

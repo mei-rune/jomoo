@@ -10,15 +10,15 @@
 
 // Include files
 # include "config_db.h"
-# include <sql.h>
-# include <sqlext.h>
+# include "jomoo/db/spi/transaction.h"
+# include "DbConnection_SQLITE.h"
 
 _jomoo_db_begin
 
 namespace spi
 {
 
-class DbTransaction_SQLITE : transaction
+class DbTransaction_SQLITE : public transaction
 {
 public:
 

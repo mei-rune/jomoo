@@ -40,7 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(BOOST_ROOT)&quot;;&quot;$(SolutionDir)\..\src\&quot;"
+				AdditionalIncludeDirectories="&quot;$(SQLITE_ROOT)&quot;;&quot;$(BOOST_ROOT)&quot;;&quot;$(SolutionDir)\..\src\&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -856,14 +856,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\jomoo\db\dbcommand_odbc.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\db\dbcommand_odbc.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\src\jomoo\db\dbcommand_sqlite.cpp"
 				>
 			</File>
@@ -876,11 +868,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\jomoo\db\dbconnection_odbc.cpp"
+				RelativePath="..\..\src\jomoo\db\dbconnection_impl.h"
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\jomoo\db\dbconnection_odbc.h"
+				RelativePath="..\..\src\jomoo\db\dbconnection_impl.inl"
 				>
 			</File>
 			<File
@@ -904,27 +896,11 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\jomoo\db\dbquery_odbc.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\db\dbquery_odbc.h"
-				>
-			</File>
-			<File
 				RelativePath="..\..\src\jomoo\db\dbquery_sqlite.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\..\src\jomoo\db\dbquery_sqlite.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\db\dbtransaction_odbc.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\db\dbtransaction_odbc.h"
 				>
 			</File>
 			<File
@@ -972,6 +948,18 @@
 				</File>
 				<File
 					RelativePath="..\..\src\jomoo\db\spi\transaction.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="unittest"
+				>
+				<File
+					RelativePath="..\..\src\jomoo\db\unittest\dbTest.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\..\src\jomoo\db\unittest\dbTest.h"
 					>
 				</File>
 			</Filter>

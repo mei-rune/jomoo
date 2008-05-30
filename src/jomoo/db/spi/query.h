@@ -10,7 +10,7 @@
 
 // Include files
 # include "jomoo/db/config_db.h"
-# include "jomoo/counter_ptr.h"
+# include "jomoo/counter_ptr.hpp"
 # include "jomoo/exception.hpp"
 # include "jomoo/datetime.h"
 # include "jomoo/timespan.h"
@@ -22,7 +22,7 @@ _jomoo_db_begin
 namespace spi
 {
 
-class query : jomoo_shared
+class query : public jomoo_shared
 {
 public:
 	virtual ~query() {}
@@ -198,13 +198,13 @@ public:
 	 * @param[ in ] column 列在记录中的索引,从0开始
 	 * @param[ out ] len 数据长度
 	 */
-	virtual bool readLenght(u_int_t column, size_t& len ) = 0;
+	virtual bool readLength(u_int_t column, size_t& len ) = 0;
 	/**
 	 * 当列为DB_TEXT和DB_BLOB时,从当前记录中读取指定列的数据长度,否则返回错误
 	 * @param[ in ] column 列在记录中的索引,从0开始
 	 * @param[ out ] len 数据长度
 	 */
-	virtual bool readLenght(const tchar* columnName, size_t& len ) = 0;
+	virtual bool readLength(const tchar* columnName, size_t& len ) = 0;
 };
 
 }

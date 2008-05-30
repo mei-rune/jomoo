@@ -9,13 +9,6 @@
     static char THIS_FILE[] = __FILE__;  
 #endif
 
-
-
-
-
-
-_jomoo_db_begin
-
 HINSTANCE hIns = 0;		//Ö÷DLLµÄ¾ä±ú.
 sqlite3_close_t sqlite3_close_;
 sqlite3_open_t sqlite3_open_;
@@ -37,6 +30,7 @@ sqlite3_column_int_t sqlite3_column_int_;
 sqlite3_column_int64_t sqlite3_column_int64_;
 sqlite3_column_text_t sqlite3_column_text_;
 sqlite3_column_text16_t sqlite3_column_text16_;
+sqlite3_column_blob_t sqlite3_column_blob_;
 sqlite3_column_type_t sqlite3_column_type_;
 sqlite3_column_double_t sqlite3_column_double_;
 sqlite3_column_name_t sqlite3_column_name_;
@@ -99,6 +93,9 @@ bool ___init_sqlite( const char* name )
 	sqlite3_bind_text16_ = ( sqlite3_bind_text16_t ) GetProcAddress( hIns, "sqlite3_bind_text16" );
 	if( sqlite3_bind_text16_ == 0 )
 		return false;
+	sqlite3_column_blob_ = ( sqlite3_column_blob_t ) GetProcAddress( hIns, "sqlite3_column_blob" );
+	if( sqlite3_column_blob_ == 0 )
+		return false;
 	sqlite3_bind_parameter_index_ = ( sqlite3_bind_parameter_index_t ) GetProcAddress( hIns, "sqlite3_bind_parameter_index" );
 	if( sqlite3_bind_parameter_index_ == 0 )
 		return false;
@@ -160,6 +157,3 @@ void ___shutdown_sqlite( )
 		FreeLibrary(hIns);
 	hIns = NULL;
 }
-
-_jomoo_db_end
-

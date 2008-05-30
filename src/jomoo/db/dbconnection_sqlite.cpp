@@ -2,10 +2,9 @@
 #include "DbConnection_SQLITE.h"
 #include "DbQuery_SQLITE.h"
 #include "DbCommand_SQLITE.h"
-#include "DbTransaction_ODBC.h"
-#include "SQLite_Fun.h"
+#include "DbTransaction_SQLITE.h"
+#include "sqlite_function.h"
 
-#include "include/config.h"
 #ifdef _MEMORY_DEBUG 
 	#undef THIS_FILE
 	#define new	   DEBUG_NEW  
@@ -15,7 +14,8 @@
 
 _jomoo_db_begin
 
-
+namespace spi
+{
 
 DbConnection_SQLITE::DbConnection_SQLITE(const tstring& name) : name_(name)
 , db_( 0 )
@@ -88,12 +88,12 @@ query* DbConnection_SQLITE::createQuery()
 
 command* DbConnection_SQLITE::createCommand()
 {
-	return new DbCommand_SQLITE( this ) );
+	return new DbCommand_SQLITE( this );
 }
 
 transaction* DbConnection_SQLITE::beginTransaction( IsolationLevel level )
 {
-	return new DbTransaction_ODBC( this ) );
+	return new DbTransaction_SQLITE( this, level );
 }
 
 const tstring& DbConnection_SQLITE::last_error(char *message)
@@ -128,6 +128,8 @@ const tstring& DbConnection_SQLITE::last_error( sqlite3* message )
 	return error_;
 }
 
-DEFINE_SHARED( DbConnection_SQLITE );
+DEFINE_SHARED( DbConnection_SQLITE )
+
+}
 
 _jomoo_db_end

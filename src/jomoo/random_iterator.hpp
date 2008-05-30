@@ -8,6 +8,7 @@
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 #include <stdexcept>
+#include <iterator>
 #include "make_null_ptr.hpp"
 
 #define ITERATOR_DEBUG( X ) check( X )
@@ -17,10 +18,10 @@ template<class _Ty,
 	class _Diff,
 	class _Pointer,
 	class _Reference  >
-class random_iterator : std::_Ranit<_Ty, _Diff, _Pointer, _Reference >
+class random_iterator : std::iterator<std::random_access_iterator_tag, _Ty, _Diff, _Pointer, _Reference >
 {
 public:
-	typedef std::_Ranit<_Ty, _Diff, _Pointer, _Reference >
+	typedef std::iterator<std::random_access_iterator_tag, _Ty, _Diff, _Pointer, _Reference >
             base;
     typedef random_iterator self;
 	typedef size_t size_type;
@@ -110,7 +111,7 @@ public:
 
 	void check( const random_iterator& it)
 	{
-		if( pointer_ != it.pointer_ 
+		if( pointer_ != it.pointer_
 			||  length_ != it.length_ )
 			throw std::invalid_argument( "pointer_" );
 	}
@@ -120,7 +121,7 @@ public:
 		if( is_null( pt ) )
 			throw std::invalid_argument( "pointer_" );
 	}
-		
+
 	void check( size_type idx )
 	{
 		if( 0 > idx || idx > length_ )

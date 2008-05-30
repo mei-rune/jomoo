@@ -2,8 +2,6 @@
 #include <windows.h>
 #include "DbTransaction_SQLITE.h"
 
-
-#include "include/config.h"
 #ifdef _MEMORY_DEBUG 
 	#undef THIS_FILE
 	#define new	   DEBUG_NEW  
@@ -11,13 +9,10 @@
     static char THIS_FILE[] = __FILE__;  
 #endif
 
-
-
 _jomoo_db_begin
 
 namespace spi
 {
-
 
 DbTransaction_SQLITE::DbTransaction_SQLITE(DbConnection_SQLITE* conn, IsolationLevel level)
 : _conn( conn )
@@ -49,7 +44,7 @@ bool DbTransaction_SQLITE::beginTransaction( IsolationLevel level )
 {
 	_level = level;
 	char *errmsg;
-	if ( tsqlite3_exec(db_, _T("BEGIN TRANSACTION"), NULL, NULL, &errmsg) != SQLITE_OK)
+	if ( tsqlite3_exec(_conn->db_, _T("BEGIN TRANSACTION"), NULL, NULL, &errmsg) != SQLITE_OK)
 	{
 		_conn->last_error( errmsg );
 		return false;
@@ -60,19 +55,19 @@ bool DbTransaction_SQLITE::beginTransaction( IsolationLevel level )
 bool DbTransaction_SQLITE::commit()
 {
 	char *errmsg;
-	int result = tsqlite3_exec(db_, _T("COMMIT TRANSACTION"), NULL, NULL, &errmsg);
+	int result = tsqlite3_exec(_conn->db_, _T("COMMIT TRANSACTION"), NULL, NULL, &errmsg);
 	if (result != SQLITE_OK)
 	{
 		_conn->last_error( errmsg );
 		return false;
-	}
+	d
 	return true;
 }
 
 bool DbTransaction_SQLITE::rollback()
 {
 	char *errmsg;
-	int result = tsqlite3_exec(db_, _T("ROLLBACK TRANSACTION"), NULL, NULL, &errmsg);
+	int result = tsqlite3_exec(_conn->db_, _T("ROLLBACK TRANSACTION"), NULL, NULL, &errmsg);
 	if (result != SQLITE_OK)
 	{
 		_conn->last_error( errmsg );

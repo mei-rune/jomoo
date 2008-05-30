@@ -1,9 +1,10 @@
 
-#include "sqlite_fun.h"
+#include "sqlite_function.h"
+
 #ifdef _NO_BOOST_REGEX_
 #include <boost/regex.hpp>
 #endif
-#include "include/config.h"
+
 #ifdef _MEMORY_DEBUG 
 	#undef THIS_FILE
 	#define new	   DEBUG_NEW  
@@ -11,10 +12,6 @@
     static char THIS_FILE[] = __FILE__;  
 #endif
 
-
-
-
-use_bt;
 #ifdef _NO_BOOST_REGEX_
 static void regex_match(sqlite3_context *context, int argc, sqlite3_value **argv)
 {

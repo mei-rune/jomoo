@@ -11,8 +11,7 @@
 // Include files
 # include "config_db.h"
 # include <vector>
-# include "sqlite/sqlite3.h"
-# include "sqlite_wrapper.h"
+# include "DbConnection_SQLITE.h"
 # include "spi/query.h"
 
 _jomoo_db_begin
@@ -64,8 +63,8 @@ public:
 	int readBLOB(u_int_t column, void* buf, size_t& len );
 	int readBLOB(const tchar* columnName, void* buf, size_t& len );
 
-	bool readLenght(u_int_t column, size_t& len );
-	bool readLenght(const tchar* columnName, size_t& len );
+	bool readLength(u_int_t column, size_t& len );
+	bool readLength(const tchar* columnName, size_t& len );
 
 	void release();
 
@@ -81,7 +80,7 @@ private:
 	bool         _firstRow;
 	bool         _columnTypesReady;
 	std::vector<columnItem> _columnItems;
-	variant _variant;
+	//variant _variant;
 
 	bool fetchRow(bool isFirst);
 	void fetchColumnTypes();
@@ -89,8 +88,10 @@ private:
 	u_int_t columnPosition(const tstring& columnName);
 	u_int_t columnPosition(const tchar* columnName);
 
-	static const tchar** _typeName;
+	//static const tchar*[] _typeName;
 };
+
+}
 
 _jomoo_db_end
 

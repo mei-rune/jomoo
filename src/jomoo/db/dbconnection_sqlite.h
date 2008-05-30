@@ -21,7 +21,7 @@ namespace spi
 class DbConnection_SQLITE : public connection
 {
 public:
-	DbConnection_SQLITE();
+	DbConnection_SQLITE(const tstring& name);
 	~DbConnection_SQLITE();
 
 	// Implements DbConnection
@@ -38,6 +38,10 @@ public:
 
 	DECLARE_SHARED( );
 private:
+
+	friend class DbCommand_SQLITE;
+	friend class DbQuery_SQLITE;
+	friend class DbTransaction_SQLITE;
 
 	tstring error_;
 	tstring name_;

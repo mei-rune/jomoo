@@ -34,7 +34,7 @@ namespace StringOps
 		};
 	};
 
-	template< typename charT , template OP = StringOp<charT> >
+	template< typename charT , typename OP = StringOp<charT> >
 	class StringPtr
 	{
 	public:
@@ -52,7 +52,7 @@ namespace StringOps
 			_ptr = right.release();
 		}
 
-		template< STRING >
+		template< typename STRING >
 		StringPtr(const STRING& right) _THROW0()
 			: _ptr( 0 )
 			, _length( 0 )

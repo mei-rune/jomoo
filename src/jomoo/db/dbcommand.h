@@ -13,16 +13,15 @@
 # include "jomoo/datetime.h"
 # include "jomoo/timespan.h"
 # include "jomoo/Timestamp.h"
-# include "dbconnection.h"
+# include "spi/command.h"
 
 _jomoo_db_begin
 
 class DbCommand
 {
 public:
-	explicit DbCommand(DbConnection& connection, spi::command* cmd )
-		: _connection( connection )
-		, _command( cmd )
+	explicit DbCommand( spi::command* cmd )
+		: _command( cmd )
 	{
 		if( null_ptr != _command )
 			_command->incRef();
@@ -33,9 +32,8 @@ public:
 		release();
 	}
 	
-	explicit DbCommand( DbCommand& cmd )
-		: _connection( cmd._connection )
-		, _command( cmd._command )
+	DbCommand( DbCommand& cmd )
+		: _command( cmd._command )
 	{
 		if( null_ptr != _command )
 			_command->incRef();
@@ -44,8 +42,6 @@ public:
 	DbCommand& operator=( DbCommand& cmd )
 	{
 		release();
-
-		_connection = cmd._connection;
 		_command = cmd._command;
 		
 		if( null_ptr != _command )
@@ -56,19 +52,10 @@ public:
 
 	void release()
 	{
-		_connection.release();
 		if( null_ptr == _command )
 			return;
 		_command->decRef();
 		_command = null_ptr;
-	}
-
-	/**
-	 * 获得数据库连接对象
-	 */
-    DbConnection& connection()
-	{
-		return _connection;
 	}
 
 	/**
@@ -356,12 +343,11 @@ public:
 	 {
 		if( null_ptr == _command )
 			ThrowException( NullException );
-		return _command->bind( columnName, value );
+		return _command->bind( columnName, time );
 	 }
 
 private:
 	spi::command* _command;
-	DbConnection _connection;
 };
 
 

@@ -10,8 +10,8 @@
 
 // Include files
 # include "config_db.h"
-# include <sql.h>
-# include <sqlext.h>
+# include "DbConnection_ODBC.h"
+# include "spi/transaction.h"
 
 _jomoo_db_begin
 

@@ -2,7 +2,6 @@
 #include "DbQuery_SQLITE.h"
 #include "jomoo/codecs.h"
 
-#include "include/config.h"
 #ifdef _MEMORY_DEBUG 
 	#undef THIS_FILE
 	#define new	   DEBUG_NEW  
@@ -15,7 +14,7 @@ _jomoo_db_begin
 namespace spi
 {
 
-static tchar** _typeName = new tchar*[]
+static tchar* _typeName[] = 
 {
 	_T("DB_UNKOWN"),
 	_T("DB_TEXT"),
@@ -37,7 +36,7 @@ DbQuery_SQLITE::DbQuery_SQLITE(DbConnection_SQLITE* con, int timeout)
 , _columnTypesReady( false )
 , _firstRow( true )
 {
-	if( null_ptr == odbc )
+	if( null_ptr == con )
 		ThrowException( NullException );
 	_connection->incRef();
 
@@ -54,9 +53,11 @@ DbQuery_SQLITE::~DbQuery_SQLITE()
 	release();
 }
 
-bool DbQuery_SQLITE::exec(const char* sql, size_t len, bool reportWarningsAsErrors  )
+bool DbQuery_SQLITE::exec(const tchar* sql, size_t len, bool reportWarningsAsErrors  )
 {
-	_sql_string = to_utf8( sql );
+	if( -1 == len )
+		len = string_traits<tchar>::strlen( sql );
+	_sql_string = to_utf8( sql, len );
 	_pzTail = _sql_string.c_str();
 	return nextSet();
 }
@@ -127,7 +128,8 @@ l:
 		return false;
 		}
 	}
-	
+
+	fetchColumnTypes();
 	return true;
 }
 
@@ -141,10 +143,9 @@ bool DbQuery_SQLITE::nextRow()
 	return fetchRow( false );
 }
 
-int DbQuery_SQLITE::columns()
+size_t DbQuery_SQLITE::columns() const
 {
-	fetchColumnTypes();
-	return columns_;
+	return _columnItems.size();
 }
 
 void DbQuery_SQLITE::fetchColumnTypes()
@@ -167,19 +168,19 @@ void DbQuery_SQLITE::fetchColumnTypes()
 		switch( t )
 		{
 		case SQLITE_INTEGER:
-			columnTypes_[i] = DB_INTEGER_32;
+			_columnItems[i].columnType = DB_INTEGER_32;
 			break;
 		case SQLITE_FLOAT:
-			columnTypes_[i] = DB_DOUBLE;
+			_columnItems[i].columnType = DB_DOUBLE;
 			break;
 		case SQLITE_TEXT:
-			columnTypes_[i] = DB_TEXT;
+			_columnItems[i].columnType = DB_TEXT;
 			break;
 		case SQLITE_BLOB:
-			columnTypes_[i] = DB_BLOB;
+			_columnItems[i].columnType = DB_BLOB;
 			break;
 		case SQLITE_NULL:
-			columnTypes_[i] = DB_NULL;
+			_columnItems[i].columnType = DB_NULL;
 			break;
 		default:
 			ThrowException1( DbException, _T("不支持的数据类型") );
@@ -191,28 +192,28 @@ void DbQuery_SQLITE::fetchColumnTypes()
 
 u_int_t DbQuery_SQLITE::columnPosition(const tchar* columnName)
 {
-	for( int i=0; i<columns_; ++i)
+	for( int i=0; i<_columnItems.size(); ++i)
 		if ( 0 == string_traits<tchar>::stricmp(_columnItems[i].columnName.c_str(), columnName) )
 			return i;
 
-	//ThrowException1( IllegalArgumentException, _T("没有找到") + columnName + _T("列") );
+	//ThrowException1( IllegalArgumentException, _T("没有找到") + tstring( columnName ) + _T("列") );
 	return -1;
 }
 
-int DbQuery_SQLITE::columnType( size_t pos )
+int DbQuery_SQLITE::columnType( size_t column ) const
 {
-	if( _columnItems.size() <= pos )
+	if( _columnItems.size() <= column )
 		ThrowException( OutOfRangeException );
 
-	return _columnItems[ pos ].columnType;
+	return _columnItems[ column ].columnType;
 }
 
-const tchar* DbQuery_SQLITE::columnName( size_t pos )
+const tchar* DbQuery_SQLITE::columnName( size_t column ) const
 {
-	if( _columnItems.size() <= pos )
+	if( _columnItems.size() <= column )
 		ThrowException( OutOfRangeException );
 
-	return _columnItems[ pos ].columnName.c_str();
+	return _columnItems[ column ].columnName.c_str();
 }
 
 
@@ -220,7 +221,7 @@ const tchar* DbQuery_SQLITE::columnName( size_t pos )
 //{
 //	fetchColumnTypes();
 //	
-//	if( _columnItems.size() <= pos )
+//	if( _columnItems.size() <= column )
 //		ThrowException2( OutOfRangeException, column, _columnItems.size() );
 //
 //	switch(_columnItems[ column ].columnType )
@@ -252,10 +253,10 @@ const tchar* DbQuery_SQLITE::columnName( size_t pos )
 bool DbQuery_SQLITE::read(u_int_t column, bool& value)
 {
 	fetchColumnTypes();
-	if( _columnItems.size() <= pos )
+	if( _columnItems.size() <= column )
 	{
 		_connection->last_error( _T("超出范围[") + toString(_columnItems.size())
-			+ _T("],实际[") + toString(pos) + _T("]") );
+			+ _T("],实际[") + toString(column) + _T("]") );
 		return false;
 	}
 
@@ -276,7 +277,7 @@ bool DbQuery_SQLITE::read(const tchar* columnName, bool& value)
 	u_int_t index = columnPosition(columnName);
 	if( -1 == index )
 	{
-		_connection->last_error( _T("没有找到") + columnName + _T("列") );
+		_connection->last_error( _T("没有找到") + tstring( columnName ) + _T("列") );
 		return false;
 	}
 	return read( index, value );
@@ -285,10 +286,10 @@ bool DbQuery_SQLITE::read(const tchar* columnName, bool& value)
 bool DbQuery_SQLITE::read(u_int_t column, int8_t& value)
 {
 	fetchColumnTypes();
-	if( _columnItems.size() <= pos )
+	if( _columnItems.size() <= column )
 	{
 		_connection->last_error( _T("超出范围[") + toString(_columnItems.size())
-			+ _T("],实际[") + toString(pos) + _T("]") );
+			+ _T("],实际[") + toString(column) + _T("]") );
 		return false;
 	}
 
@@ -309,7 +310,7 @@ bool DbQuery_SQLITE::read(const tchar* columnName, int8_t& value)
 	u_int_t index = columnPosition(columnName);
 	if( -1 == index )
 	{
-		_connection->last_error( _T("没有找到") + columnName + _T("列") );
+		_connection->last_error( _T("没有找到") + tstring( columnName ) + _T("列") );
 		return false;
 	}
 	return read( index, value );
@@ -319,10 +320,10 @@ bool DbQuery_SQLITE::read(const tchar* columnName, int8_t& value)
 bool DbQuery_SQLITE::read(u_int_t column, int16_t& value)
 {
 	fetchColumnTypes();
-	if( _columnItems.size() <= pos )
+	if( _columnItems.size() <= column )
 	{
 		_connection->last_error( _T("超出范围[") + toString(_columnItems.size())
-			+ _T("],实际[") + toString(pos) + _T("]") );
+			+ _T("],实际[") + toString(column) + _T("]") );
 		return false;
 	}
 
@@ -343,7 +344,7 @@ bool DbQuery_SQLITE::read(const tchar* columnName, int16_t& value)
 	u_int_t index = columnPosition(columnName);
 	if( -1 == index )
 	{
-		_connection->last_error( _T("没有找到") + columnName + _T("列") );
+		_connection->last_error( _T("没有找到") + tstring( columnName ) + _T("列") );
 		return false;
 	}
 	return read( index, value );
@@ -352,10 +353,10 @@ bool DbQuery_SQLITE::read(const tchar* columnName, int16_t& value)
 bool DbQuery_SQLITE::read(u_int_t column, int32_t& value)
 {
 	fetchColumnTypes();
-	if( _columnItems.size() <= pos )
+	if( _columnItems.size() <= column )
 	{
 		_connection->last_error( _T("超出范围[") + toString(_columnItems.size())
-			+ _T("],实际[") + toString(pos) + _T("]") );
+			+ _T("],实际[") + toString(column) + _T("]") );
 		return false;
 	}
 
@@ -376,7 +377,7 @@ bool DbQuery_SQLITE::read(const tchar* columnName, int32_t& value)
 	u_int_t index = columnPosition(columnName);
 	if( -1 == index )
 	{
-		_connection->last_error( _T("没有找到") + columnName + _T("列") );
+		_connection->last_error( _T("没有找到") + tstring( columnName ) + _T("列") );
 		return false;
 	}
 	return read( index, value );
@@ -385,10 +386,10 @@ bool DbQuery_SQLITE::read(const tchar* columnName, int32_t& value)
 bool DbQuery_SQLITE::read(u_int_t column, int64_t& value)
 {
 	fetchColumnTypes();
-	if( _columnItems.size() <= pos )
+	if( _columnItems.size() <= column )
 	{
 		_connection->last_error( _T("超出范围[") + toString(_columnItems.size())
-			+ _T("],实际[") + toString(pos) + _T("]") );
+			+ _T("],实际[") + toString(column) + _T("]") );
 		return false;
 	}
 
@@ -409,7 +410,7 @@ bool DbQuery_SQLITE::read(const tchar* columnName, int64_t& value)
 	u_int_t index = columnPosition(columnName);
 	if( -1 == index )
 	{
-		_connection->last_error( _T("没有找到") + columnName + _T("列") );
+		_connection->last_error( _T("没有找到") + tstring( columnName ) + _T("列") );
 		return false;
 	}
 	return read( index, value );
@@ -432,7 +433,7 @@ bool DbQuery_SQLITE::read(const tchar* columnName, Timestamp& value)
 	u_int_t index = columnPosition(columnName);
 	if( -1 == index )
 	{
-		_connection->last_error( _T("没有找到") + columnName + _T("列") );
+		_connection->last_error( _T("没有找到") + tstring( columnName ) + _T("列") );
 		return false;
 	}
 	return read( index, value );
@@ -455,7 +456,7 @@ bool DbQuery_SQLITE::read(const tchar* columnName, Timespan& value)
 	u_int_t index = columnPosition(columnName);
 	if( -1 == index )
 	{
-		_connection->last_error( _T("没有找到") + columnName + _T("列") );
+		_connection->last_error( _T("没有找到") + tstring( columnName ) + _T("列") );
 		return false;
 	}
 	return read( index, value );
@@ -464,10 +465,10 @@ bool DbQuery_SQLITE::read(const tchar* columnName, Timespan& value)
 bool DbQuery_SQLITE::read(u_int_t column, double& value)
 {
 	fetchColumnTypes();
-	if( _columnItems.size() <= pos )
+	if( _columnItems.size() <= column )
 	{
 		_connection->last_error( _T("超出范围[") + toString(_columnItems.size())
-			+ _T("],实际[") + toString(pos) + _T("]") );
+			+ _T("],实际[") + toString(column) + _T("]") );
 		return false;
 	}
 
@@ -488,7 +489,7 @@ bool DbQuery_SQLITE::read(const tchar* columnName, double& value)
 	u_int_t index = columnPosition(columnName);
 	if( -1 == index )
 	{
-		_connection->last_error( _T("没有找到") + columnName + _T("列") );
+		_connection->last_error( _T("没有找到") + tstring( columnName ) + _T("列") );
 		return false;
 	}
 	return read( index, value );
@@ -497,10 +498,10 @@ bool DbQuery_SQLITE::read(const tchar* columnName, double& value)
 int DbQuery_SQLITE::read(u_int_t column, char* buf, size_t& len )
 {
 	fetchColumnTypes();
-	if( _columnItems.size() <= pos )
+	if( _columnItems.size() <= column )
 	{
 		_connection->last_error( _T("超出范围[") + toString(_columnItems.size())
-			+ _T("],实际[") + toString(pos) + _T("]") );
+			+ _T("],实际[") + toString(column) + _T("]") );
 		return DB_NOTFOUND;
 	}
 
@@ -514,31 +515,31 @@ int DbQuery_SQLITE::read(u_int_t column, char* buf, size_t& len )
 	
 	size_t bufLength = len;
 	len = sqlite3_column_bytes(_stmt, column);
-	const char* txt = (const char*)tqlite3_column_text( _stmt, column);
-	if( from_utf8( buf, bufLength, txt, len ) )
+	const char* txt = (const char*)tsqlite3_column_text( _stmt, column);
+	if( try_from_utf8( txt, len, buf, bufLength, len ) )
 		return DB_OK;
 	return DB_INSUFFICIENT;
 }
 
-bool DbQuery_SQLITE::read(const tchar* columnName, char* buf, size_t& len )
+int DbQuery_SQLITE::read(const tchar* columnName, char* buf, size_t& len )
 {
 	fetchColumnTypes();
 	u_int_t index = columnPosition(columnName);
 	if( -1 == index )
 	{
-		_connection->last_error( _T("没有找到") + columnName + _T("列") );
+		_connection->last_error( _T("没有找到") + tstring( columnName ) + _T("列") );
 		return DB_NOTFOUND;
 	}
-	return read( index, value );
+	return read( index, buf, len );
 }
 
 int DbQuery_SQLITE::readBLOB(u_int_t column, void* buf, size_t& len )
 {
 	fetchColumnTypes();
-	if( _columnItems.size() <= pos )
+	if( _columnItems.size() <= column )
 	{
 		_connection->last_error( _T("超出范围[") + toString(_columnItems.size())
-			+ _T("],实际[") + toString(pos) + _T("]") );
+			+ _T("],实际[") + toString(column) + _T("]") );
 		return DB_NOTFOUND;
 	}
 
@@ -560,25 +561,25 @@ int DbQuery_SQLITE::readBLOB(u_int_t column, void* buf, size_t& len )
 	return DB_OK;
 }
 
-bool DbQuery_SQLITE::readBLOB(const tchar* columnName, void* buf, size_t& len )
+int DbQuery_SQLITE::readBLOB(const tchar* columnName, void* buf, size_t& len )
 {
 	fetchColumnTypes();
 	u_int_t index = columnPosition(columnName);
 	if( -1 == index )
 	{
-		_connection->last_error( _T("没有找到") + columnName + _T("列") );
+		_connection->last_error( _T("没有找到") + tstring( columnName ) + _T("列") );
 		return DB_NOTFOUND;
 	}
-	return read( index, buf, len );
+	return readBLOB( index, buf, len );
 }
 
 bool DbQuery_SQLITE::readLength(u_int_t column, size_t& len )
 {
 	fetchColumnTypes();
-	if( _columnItems.size() <= pos )
+	if( _columnItems.size() <= column )
 	{
 		_connection->last_error( _T("超出范围[") + toString(_columnItems.size())
-			+ _T("],实际[") + toString(pos) + _T("]") );
+			+ _T("],实际[") + toString(column) + _T("]") );
 		return false;
 	}
 
@@ -601,10 +602,12 @@ bool DbQuery_SQLITE::readLength(const tchar* columnName, size_t& len )
 	u_int_t index = columnPosition(columnName);
 	if( -1 == index )
 	{
-		_connection->last_error( _T("没有找到") + columnName + _T("列") );
+		_connection->last_error( _T("没有找到") + tstring( columnName ) + _T("列") );
 		return false;
 	}
 	return readLength( index, len );
+}
+
 }
 
 _jomoo_db_end

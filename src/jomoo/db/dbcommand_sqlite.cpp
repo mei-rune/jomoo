@@ -3,17 +3,12 @@
 #include "DbCommand_SQLITE.h"
 #include "jomoo/codecs.h"
 
-#include "include/config.h"
 #ifdef _MEMORY_DEBUG 
 	#undef THIS_FILE
 	#define new	   DEBUG_NEW  
 	#define malloc DEBUG_MALLOC  
     static char THIS_FILE[] = __FILE__;  
 #endif
-
-
-
-
 
 _jomoo_db_begin
 
@@ -156,9 +151,7 @@ bool DbCommand_SQLITE::bind( int index, const char* str, size_t n )
 {// sqlite3_bind_text
 
 	//注意， sqlite3_bind_text操作并不拷贝字符串，它只是记住了字符串的地址
-	std::string utf8;
-	std::list< tstring >::iterator it = buffer_.insert( buffer_.begin(), utf8 );
-	char_to_utf_8( str ,*it );
+	std::list< tstring >::iterator it = buffer_.insert( buffer_.begin(), to_utf8( str, n) );
 	if( tsqlite3_bind_text( stmt_ , index, it->c_str(), ( int )it->size() ,NULL ) == SQLITE_OK )
 		return true;
 	con_->last_error( con_ ->db_ );
@@ -175,57 +168,57 @@ bool DbCommand_SQLITE::bind( int index, const Timespan& time )
 	return bind( index, time.totalMicroseconds() );
 }
 
-bool DbCommand_SQLITE::bind( int index, bool value )
+bool DbCommand_SQLITE::bind( const tchar* columnName, bool value )
 {
-		con_->last_error( _T("指定的列名[") + tstring( name ) + _T("]不存在!") );
+		con_->last_error( _T("指定的列名[") + tstring( columnName ) + _T("]不存在!") );
 		return false;
 }
 
-bool DbCommand_SQLITE::bind( int index, int8_t value )
+bool DbCommand_SQLITE::bind( const tchar* columnName, int8_t value )
 {
-		con_->last_error( _T("指定的列名[") + tstring( name ) + _T("]不存在!") );
+		con_->last_error( _T("指定的列名[") + tstring( columnName ) + _T("]不存在!") );
 		return false;
 }
 
-bool DbCommand_SQLITE::bind( int index, int16_t value )
+bool DbCommand_SQLITE::bind( const tchar* columnName, int16_t value )
 {
-		con_->last_error( _T("指定的列名[") + tstring( name ) + _T("]不存在!") );
+		con_->last_error( _T("指定的列名[") + tstring( columnName ) + _T("]不存在!") );
 		return false;
 }
 
-bool DbCommand_SQLITE::bind( int index, int32_t value )
+bool DbCommand_SQLITE::bind( const tchar* columnName, int32_t value )
 {
-		con_->last_error( _T("指定的列名[") + tstring( name ) + _T("]不存在!") );
+		con_->last_error( _T("指定的列名[") + tstring( columnName ) + _T("]不存在!") );
 		return false;
 }
 
-bool DbCommand_SQLITE::bind( int index, int64_t value )
+bool DbCommand_SQLITE::bind( const tchar* columnName, int64_t value )
 {
-		con_->last_error( _T("指定的列名[") + tstring( name ) + _T("]不存在!") );
+		con_->last_error( _T("指定的列名[") + tstring( columnName ) + _T("]不存在!") );
 		return false;
 }
 
-bool DbCommand_SQLITE::bind( int index, double value )
+bool DbCommand_SQLITE::bind( const tchar* columnName, double value )
 {
-		con_->last_error( _T("指定的列名[") + tstring( name ) + _T("]不存在!") );
+		con_->last_error( _T("指定的列名[") + tstring( columnName ) + _T("]不存在!") );
 		return false;
 }
 
-bool DbCommand_SQLITE::bind( int index, const char* str, size_t n )
+bool DbCommand_SQLITE::bind( const tchar* columnName, const char* str, size_t n )
 {
-		con_->last_error( _T("指定的列名[") + tstring( name ) + _T("]不存在!") );
+		con_->last_error( _T("指定的列名[") + tstring( columnName ) + _T("]不存在!") );
 		return false;
 }
 
-bool DbCommand_SQLITE::bind( int index, const Timestamp& time )
+bool DbCommand_SQLITE::bind( const tchar* columnName, const Timestamp& time )
 {
-		con_->last_error( _T("指定的列名[") + tstring( name ) + _T("]不存在!") );
+		con_->last_error( _T("指定的列名[") + tstring( columnName ) + _T("]不存在!") );
 		return false;
 }
 
-bool DbCommand_SQLITE::bind( int index, const Timespan& time )
+bool DbCommand_SQLITE::bind( const tchar* columnName, const Timespan& time )
 {
-		con_->last_error( _T("指定的列名[") + tstring( name ) + _T("]不存在!") );
+		con_->last_error( _T("指定的列名[") + tstring( columnName ) + _T("]不存在!") );
 		return false;
 }
 
