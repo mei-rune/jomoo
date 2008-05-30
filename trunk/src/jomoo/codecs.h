@@ -18,6 +18,6 @@
 #  pragma once
 # endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
-# include "utf8encoding.h"
+# include "encoding/utf8encoding.h"
 
 #endif /* _codecs_h_ */

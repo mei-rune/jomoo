@@ -14,16 +14,15 @@
 # include "jomoo/datetime.h"
 # include "jomoo/timespan.h"
 # include "jomoo/Timestamp.h"
-# include "dbconnection.h"
+# include "spi/query.h"
 
 _jomoo_db_begin
 
 class DbQuery
 {
 public:
-	explicit DbQuery(DbConnection connection, spi::query* q )
-		: _connection( connection )
-		, _query( q )
+	DbQuery( spi::query* q )
+		: _query( q )
 	{
 		if( null_ptr != _query )
 			_query->incRef();
@@ -34,9 +33,8 @@ public:
 		release();
 	}
 	
-	explicit DbQuery( DbQuery& q )
-		: _connection( q._connection )
-		, _query( q._query )
+	DbQuery( DbQuery& q )
+		: _query( q._query )
 	{
 		if( null_ptr != _query )
 			_query->incRef();
@@ -46,7 +44,6 @@ public:
 	{
 		release();
 
-		_connection = q._connection;
 		_query = q._query;
 		
 		if( null_ptr != _query )
@@ -57,19 +54,11 @@ public:
 
 	void release()
 	{
-		_connection.release();
 		if( null_ptr == _query )
 			return;
+
 		_query->decRef();
 		_query = null_ptr;
-	}
-
-	/**
-	 * 获得数据库连接对象
-	 */
-    DbConnection& connection()
-	{
-		return _connection;
 	}
 
 	/**
@@ -170,6 +159,11 @@ public:
 	 * @exception IllegalArgumentException 没有找到列名为 columnName 的列
 	 */
 	bool read(const tchar* columnName, bool& value)
+	{
+		if( null_ptr == _query )
+			ThrowException( NullException );
+		return _query->read( columnName, value );
+	}
 
 	/**
 	 * 从当前记录中读取指定列的值
@@ -190,6 +184,11 @@ public:
 	 * @exception IllegalArgumentException 没有找到列名为 columnName 的列
 	 */
 	bool read(const tchar* columnName, int8_t& value)
+	{
+		if( null_ptr == _query )
+			ThrowException( NullException );
+		return _query->read( columnName, value );
+	}
 
 	/**
 	 * 从当前记录中读取指定列的值
@@ -210,6 +209,11 @@ public:
 	 * @exception IllegalArgumentException 没有找到列名为 columnName 的列
 	 */
 	bool read(const tchar* columnName, int16_t& value)
+	{
+		if( null_ptr == _query )
+			ThrowException( NullException );
+		return _query->read( columnName, value );
+	}
 
 	/**
 	 * 从当前记录中读取指定列的值
@@ -230,6 +234,11 @@ public:
 	 * @exception IllegalArgumentException 没有找到列名为 columnName 的列
 	 */
 	bool read(const tchar* columnName, int32_t& value)
+	{
+		if( null_ptr == _query )
+			ThrowException( NullException );
+		return _query->read( columnName, value );
+	}
 
 	/**
 	 * 从当前记录中读取指定列的值
@@ -243,7 +252,6 @@ public:
 			ThrowException( NullException );
 		return _query->read( column, value );
 	}
-
 	/**
 	 * 从当前记录中读取指定列名的值
 	 * @param[ in ] columnName 列名
@@ -251,6 +259,11 @@ public:
 	 * @exception IllegalArgumentException 没有找到列名为 columnName 的列
 	 */
 	bool read(const tchar* columnName, int64_t& value)
+	{
+		if( null_ptr == _query )
+			ThrowException( NullException );
+		return _query->read( columnName, value );
+	}
 
 	/**
 	 * 从当前记录中读取指定列的值
@@ -272,6 +285,11 @@ public:
 	 * @exception IllegalArgumentException 没有找到列名为 columnName 的列
 	 */
 	bool read(const tchar* columnName, Timestamp& value)
+	{
+		if( null_ptr == _query )
+			ThrowException( NullException );
+		return _query->read( columnName, value );
+	}
 
 	/**
 	 * 从当前记录中读取指定列的值
@@ -326,7 +344,6 @@ public:
 	}
 
 private:
-	DbConnection _connection;
 	spi::query* _query;
 };
 

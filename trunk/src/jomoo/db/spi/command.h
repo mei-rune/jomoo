@@ -21,7 +21,7 @@ _jomoo_db_begin
 namespace spi
 {
 
-class command : jomoo_shared
+class command : public jomoo_shared
 {
 public:
 	virtual ~command() {}

@@ -303,6 +303,10 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="db"
+			>
+		</Filter>
 		<File
 			RelativePath=".\ReadMe.txt"
 			>

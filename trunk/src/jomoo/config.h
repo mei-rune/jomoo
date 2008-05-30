@@ -92,6 +92,8 @@ typedef unsigned int u_int32_t;
 typedef unsigned __int64 u_int64_t;
 #endif // _u_int16_t_
 
+#ifdef _MSVC_
+
 #ifndef _ssize_t_
 #define _ssize_t_
 typedef int ssize_t;
@@ -118,6 +120,7 @@ typedef int int32_t;
 typedef  __int64 int64_t;
 #endif // _u_int64_t_
 
+#endif
 
 #ifndef _Byte_
 #define _Byte_
@@ -158,8 +161,8 @@ typedef long _off_t;
 typedef _off_t off_t;
 #endif //
 
-#define _jomoo_begin 
-#define _jomoo_end 
+#define _jomoo_begin
+#define _jomoo_end
 #define _jomoo
 #define use_jomoo
 
@@ -208,7 +211,7 @@ inline size_t JOMOO_LCD( size_t SIZE , size_t TM )
 	I_don_t_know_how_to_define_reverse_iterator
 # endif
 
-#define JOMOO_INTERFACE( X ) 
+#define JOMOO_INTERFACE( X )
 
 
 template< typename T >
@@ -245,7 +248,7 @@ inline T get_ptr( T t )
 #if defined (JOMOO_HAS_INLINED)
 #define JOMOO_INLINE inline
 #else
-#define JOMOO_INLINE 
+#define JOMOO_INLINE
 #endif
 
 #define JOMOO_MT

@@ -36,7 +36,7 @@ enum DB_ERROR
 	DB_OK = 0,
 	DB_INSUFFICIENT = -1, /* 数据buf不足 */
 	DB_INTERNAL = -2,	  /* 数据库内部错误 */
-	DB_MISMATCH  = -3     /* 数据内型不匹配 */
+	DB_MISMATCH  = -3,     /* 数据内型不匹配 */
 	DB_NOTFOUND  = -4     /* 列没有找到 */
 };
 
@@ -77,7 +77,7 @@ class transaction;
 class query;
 class command;
 
-class connection : jomoo_shared
+class connection : public jomoo_shared
 {
 public:
 	virtual ~connection() {}

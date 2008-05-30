@@ -11,6 +11,7 @@
 // Include files
 # include "config_db.h"
 # include "DbConnection.h"
+# include "spi/transaction.h"
 
 _jomoo_db_begin
 
@@ -21,14 +22,14 @@ public:
 		: _connection( connection )
 		, _transaction( 0 )
 	{
-			_transaction = connection.beginTransaction( Unspecified );
+			_transaction = _connection._connection.beginTransaction( Unspecified );
 	}
 	
 	TransactionScope( DbConnection& connection, IsolationLevel l)
 		: _connection( connection )
 		, _transaction( 0 )
 	{
-			_transaction = connection.beginTransaction( l );
+			_transaction = connection._connection.beginTransaction( l );
 	}
 	
 	TransactionScope( DbConnection& connection, spi::transaction* tr)

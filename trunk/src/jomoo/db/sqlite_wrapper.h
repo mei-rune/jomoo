@@ -1,6 +1,6 @@
 
-#ifndef _QSqlite_H_
-#define _QSqlite_H_
+#ifndef _sqlite_wrapper_h_
+#define _sqlite_wrapper_h_
 
 # include "jomoo/config.h"
 
@@ -11,8 +11,6 @@
 // Include files
 # include "config_db.h"
 # include "sqlite/sqlite3.h"
-
-_jomoo_db_begin
 
 typedef int (*sqlite3_open_t) (	const char* ,sqlite3 ** );
 typedef int (*sqlite3_close_t)(sqlite3 * );
@@ -33,6 +31,7 @@ typedef int (*sqlite3_step_t)(sqlite3_stmt*);
 typedef int (*sqlite3_column_int_t)(sqlite3_stmt* , int );
 typedef sqlite_int64 (*sqlite3_column_int64_t)(sqlite3_stmt* , int );
 typedef const unsigned char *(*sqlite3_column_text_t)(sqlite3_stmt* , int );
+typedef const void* (*sqlite3_column_blob_t)(sqlite3_stmt*, int );
 typedef const void *(*sqlite3_column_text16_t)(sqlite3_stmt* , int );
 typedef int (*sqlite3_column_type_t)(sqlite3_stmt* , int );
 typedef double (*sqlite3_column_double_t)(sqlite3_stmt* , int );
@@ -80,6 +79,7 @@ extern sqlite3_column_int_t sqlite3_column_int_;
 extern sqlite3_column_int64_t sqlite3_column_int64_;
 extern sqlite3_column_text_t sqlite3_column_text_;
 extern sqlite3_column_text16_t sqlite3_column_text16_;
+extern sqlite3_column_blob_t sqlite3_column_blob_;
 extern sqlite3_column_type_t sqlite3_column_type_;
 extern sqlite3_column_double_t sqlite3_column_double_;
 extern sqlite3_column_name_t sqlite3_column_name_;
@@ -102,8 +102,6 @@ extern sqlite3_changes_t sqlite3_changes_;
 bool ___init_sqlite(  const char* name );
 void ___shutdown_sqlite( );
 
-
-
 #define tsqlite3_open							( *sqlite3_open_ )
 #define tsqlite3_close							( *sqlite3_close_ )
 #define tsqlite3_exec							( *sqlite3_exec_ )
@@ -123,6 +121,7 @@ void ___shutdown_sqlite( );
 #define tsqlite3_column_int64					( *sqlite3_column_int64_ )
 #define tsqlite3_column_double					( *sqlite3_column_double_ )
 #define tsqlite3_column_text					( *sqlite3_column_text_ )
+#define tsqlite3_column_blob					( *sqlite3_column_blob_)
 #define tsqlite3_column_count					( *sqlite3_column_count_ )
 #define tsqlite3_column_type					( *sqlite3_column_type_ )
 #define tsqlite3_column_name					( *sqlite3_column_name_ )
@@ -136,7 +135,4 @@ void ___shutdown_sqlite( );
 #define tsqlite3_busy_timeout					( *sqlite3_busy_timeout_)
 #define tsqlite3_changes						( *sqlite3_changes_)
 
-
-_jomoo_db_end
-
-#endif // _QSqlite_H_
+#endif // _sqlite_wrapper_h_

@@ -5,14 +5,14 @@ public:
  
     OutOfRangeException(const   char* const         srcFile
             , size_t        srcLine
-			, int lenght
+			, int length
 			, int range )
 			: Exception(srcFile, srcLine, _T("超出范围,访问第") + toString( length ) + _T("个但只有") + toString( range ) + _T( "个" ) )
     {
 	}
 	OutOfRangeException(const   char* const         srcFile
             , size_t        srcLine )
-			: Exception(srcFile, srcLine, msg )
+			: Exception(srcFile, srcLine, OutOfRangeError )
     {
 	}
 

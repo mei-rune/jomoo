@@ -9,7 +9,7 @@
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 # include "Platform/os_string.h"
-
+# include "ctype_traits.hpp"
 template<   typename S
         ,   typename F
         >
@@ -22,7 +22,7 @@ inline S &transform_impl(S &s, F f)
 template <typename S>
 inline S &make_upper(S &s)
 {
-	typedef ctype_traits<typename S::value_type>   ctype_traits_t;
+	typedef ctype_traits< typename S::value_type >   ctype_traits_t;
     return transform_impl(s, &ctype_traits_t::to_upper);
 }
 

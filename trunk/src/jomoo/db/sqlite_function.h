@@ -12,7 +12,7 @@
 
 // Include files
 # include "config_db.h"
-#include "QSqlite.h"
+# include "sqlite_wrapper.h"
 
 struct SQLite_Fun
 {

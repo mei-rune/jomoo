@@ -8,17 +8,16 @@
 # pragma once
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
-#include <xutility>
 #include "stringOps.h"
 #include "../random_iterator.hpp"
 
 #if _DEBUG
 
-#define STRING_DEBUG_POINTER(first) std::_Debug_pointer(first, __FILEW__,__LINE__)
+#define STRING_DEBUG_POINTER(first) std::_Debug_pointer(first, __FILE__,__LINE__)
 
 #else
 
-#define STRING_DEBUG_POINTER(first) 
+#define STRING_DEBUG_POINTER(first)
 
 #endif
 
@@ -56,9 +55,9 @@ public:
 	typedef typename _Types::reference reference;
 	typedef typename _Types::const_pointer const_pointer;
 	typedef typename _Types::const_reference const_reference;
-	
-	typedef _SIZT size_type;
-	typedef _PDFT difference_type;
+
+	typedef size_t size_type;
+	typedef ptrdiff_t difference_type;
 	typedef basic_string_view< _Elem, _Types,_Traits > _Myt;
 
 	typedef random_iterator< value_type, difference_type, pointer, reference  > iterator;
@@ -84,12 +83,12 @@ public:
 
 	basic_string_view(const basic_string_view& rhs)
 	: pointer_(rhs.pointer_)
-	, length_(rhs.length_) 
+	, length_(rhs.length_)
 	{}
 
 	basic_string_view(const basic_string_view& rhs, size_type _Off, size_type _Count = npos)
 	: pointer_( rhs.pointer_ + _Off )
-	, length_( _Count ) 
+	, length_( _Count )
 	{
 		if (rhs.size() < _Off)
 			_policy::out_of_range();
@@ -180,7 +179,7 @@ public:
 		return (length_ == 0);
 		}
 
-	
+
 	size_type find(const _Myt& _Right, size_type _Off = 0) const
 		{	// look for _Right beginnng at or after _Off
 		return (find(_Right.buf(), _Off, _Right.size()));
@@ -439,7 +438,7 @@ public:
 			*this = _Right;
 			_Right = _Tmp;
 		}
-		
+
 public:
 
 	static const size_type npos = -1 ;
@@ -459,7 +458,7 @@ private:
 //	class _Types ,
 //	class _Traits > inline
 //	class _Alloc ,
-//	
+//
 //	basic_string<_Elem, _Traits, _Alloc> operator+(
 //		const std::basic_string<_Elem, _Traits, _Alloc>& _Left,
 //		const basic_string_view<_Elem,_Types, _Traits>& _Right)
@@ -470,7 +469,7 @@ private:
 //	class _Types ,
 //	class _Traits > inline
 //	class _Alloc ,
-//	
+//
 //	basic_string<_Elem, _Traits, _Alloc> operator+(
 //		const basic_string_view<_Elem,_Types, _Traits>& _Left,
 //		const std::basic_string<_Elem, _Traits, _Alloc>& _Right)
@@ -481,7 +480,7 @@ private:
 //template<class _Elem,
 //	class _Types ,
 //	class _Traits > inline
-//	
+//
 //	basic_string<_Elem, _Traits > operator+(
 //		const _Elem *_Left,
 //		const basic_string_view<_Elem,_Types, _Traits>& _Right)
@@ -492,7 +491,7 @@ private:
 //template<class _Elem,
 //	class _Types ,
 //	class _Traits > inline
-//	
+//
 //	basic_string<_Elem, _Traits, _Alloc> operator+(
 //		const _Elem _Left,
 //		const basic_string_view<_Elem,_Types, _Traits>& _Right)
@@ -503,7 +502,7 @@ private:
 //template<class _Elem,
 //	class _Types ,
 //	class _Traits > inline
-//	
+//
 //	basic_string<_Elem, _Traits, _Alloc> operator+(
 //		const basic_string_view<_Elem,_Types, _Traits>& _Left,
 //		const _Elem *_Right)
@@ -514,7 +513,7 @@ private:
 //template<class _Elem,
 //	class _Types ,
 //	class _Traits > inline
-//	
+//
 //	basic_string<_Elem, _Traits, _Alloc> operator+(
 //		const basic_string_view<_Elem,_Types, _Traits>& _Left,
 //		const _Elem _Right)
@@ -525,7 +524,7 @@ private:
 template<class _Elem,
 	class _Types ,
 	class _Traits > inline
-	
+
 	bool operator==(
 		const basic_string_view<_Elem,_Types, _Traits>& _Left,
 		const basic_string_view<_Elem,_Types, _Traits>& _Right)
@@ -537,7 +536,7 @@ template<class _Elem,
 	class _Types ,
 	class _Traits ,
 	class _Alloc  > inline
-	
+
 	bool operator==(
 		const std::basic_string<_Elem, _Traits, _Alloc>& _Left,
 		const basic_string_view<_Elem,_Types, _Traits>& _Right)
@@ -549,7 +548,7 @@ template<class _Elem,
 	class _Types ,
 	class _Traits ,
 	class _Alloc  > inline
-	
+
 	bool operator==(
 		const basic_string_view<_Elem,_Types, _Traits>& _Left,
 		const std::basic_string<_Elem, _Traits, _Alloc>& _Right)
@@ -560,7 +559,7 @@ template<class _Elem,
 template<class _Elem,
 	class _Types ,
 	class _Traits > inline
-	
+
 	bool operator==(
 		const _Elem * _Left,
 		const basic_string_view<_Elem,_Types, _Traits>& _Right)
@@ -571,7 +570,7 @@ template<class _Elem,
 template<class _Elem,
 	class _Types ,
 	class _Traits > inline
-	
+
 	bool operator==(
 		const basic_string_view<_Elem,_Types, _Traits>& _Left,
 		const _Elem *_Right)
@@ -582,7 +581,7 @@ template<class _Elem,
 template<class _Elem,
 	class _Types ,
 	class _Traits > inline
-	
+
 	bool operator!=(
 		const basic_string_view<_Elem,_Types, _Traits>& _Left,
 		const basic_string_view<_Elem,_Types, _Traits>& _Right)
@@ -594,7 +593,7 @@ template<class _Elem,
 	class _Types ,
 	class _Traits ,
 	class _Alloc > inline
-	
+
 	bool operator!=(
 		const basic_string_view<_Elem,_Types, _Traits>& _Left,
 		const std::basic_string<_Elem, _Traits, _Alloc>& _Right)
@@ -606,7 +605,7 @@ template<class _Elem,
 	class _Types ,
 	class _Traits ,
 	class _Alloc  > inline
-	
+
 	bool operator!=(
 		const std::basic_string<_Elem, _Traits, _Alloc>& _Left,
 		const basic_string_view<_Elem,_Types, _Traits>& _Right)
@@ -617,7 +616,7 @@ template<class _Elem,
 template<class _Elem,
 	class _Types ,
 	class _Traits > inline
-	
+
 	bool operator!=(
 		const _Elem *_Left,
 		const basic_string_view<_Elem,_Types, _Traits>& _Right)
@@ -628,7 +627,7 @@ template<class _Elem,
 template<class _Elem,
 	class _Types ,
 	class _Traits > inline
-	
+
 	bool operator!=(
 		const basic_string_view<_Elem,_Types, _Traits>& _Left,
 		const _Elem *_Right)
@@ -639,7 +638,7 @@ template<class _Elem,
 template<class _Elem,
 	class _Types ,
 	class _Traits > inline
-	
+
 	bool operator<(
 		const basic_string_view<_Elem,_Types, _Traits>& _Left,
 		const basic_string_view<_Elem,_Types, _Traits>& _Right)
@@ -651,7 +650,7 @@ template<class _Elem,
 	class _Types ,
 	class _Traits ,
 	class _Alloc   > inline
-	
+
 	bool operator<(
 		const basic_string_view<_Elem,_Types, _Traits>& _Left,
 		const std::basic_string<_Elem, _Traits, _Alloc>& _Right)
@@ -663,7 +662,7 @@ template<class _Elem,
 	class _Types ,
 	class _Traits ,
 	class _Alloc   > inline
-	
+
 	bool operator<(
 		const std::basic_string<_Elem, _Traits, _Alloc>& _Left,
 		const basic_string_view<_Elem,_Types, _Traits>& _Right)
@@ -674,7 +673,7 @@ template<class _Elem,
 template<class _Elem,
 	class _Types ,
 	class _Traits > inline
-	
+
 	bool operator<(
 		const _Elem * _Left,
 		const basic_string_view<_Elem,_Types, _Traits>& _Right)
@@ -685,7 +684,7 @@ template<class _Elem,
 template<class _Elem,
 	class _Types ,
 	class _Traits > inline
-	
+
 	bool operator<(
 		const basic_string_view<_Elem,_Types, _Traits>& _Left,
 		const _Elem *_Right)
@@ -696,7 +695,7 @@ template<class _Elem,
 template<class _Elem,
 	class _Types ,
 	class _Traits > inline
-	
+
 	bool operator>(
 		const basic_string_view<_Elem,_Types, _Traits>& _Left,
 		const basic_string_view<_Elem,_Types, _Traits>& _Right)
@@ -708,7 +707,7 @@ template<class _Elem,
 	class _Types ,
 	class _Traits ,
 	class _Alloc   > inline
-	
+
 	bool operator>(
 		const basic_string_view<_Elem,_Types, _Traits>& _Left,
 		const std::basic_string<_Elem, _Traits, _Alloc>& _Right)
@@ -720,7 +719,7 @@ template<class _Elem,
 	class _Types ,
 	class _Traits ,
 	class _Alloc  > inline
-	
+
 	bool operator>(
 		const std::basic_string<_Elem, _Traits, _Alloc>& _Left,
 		const basic_string_view<_Elem,_Types, _Traits>& _Right)
@@ -731,7 +730,7 @@ template<class _Elem,
 template<class _Elem,
 	class _Types ,
 	class _Traits > inline
-	
+
 	bool operator>(
 		const _Elem * _Left,
 		const basic_string_view<_Elem,_Types, _Traits>& _Right)
@@ -742,7 +741,7 @@ template<class _Elem,
 template<class _Elem,
 	class _Types ,
 	class _Traits > inline
-	
+
 	bool operator>(
 		const basic_string_view<_Elem,_Types, _Traits>& _Left,
 		const _Elem *_Right)
@@ -753,7 +752,7 @@ template<class _Elem,
 template<class _Elem,
 	class _Types ,
 	class _Traits > inline
-	
+
 	bool operator<=(
 		const basic_string_view<_Elem,_Types, _Traits>& _Left,
 		const basic_string_view<_Elem,_Types, _Traits>& _Right)
@@ -765,7 +764,7 @@ template<class _Elem,
 	class _Types ,
 	class _Traits ,
 	class _Alloc > inline
-	
+
 	bool operator<=(
 		const basic_string_view<_Elem,_Types, _Traits>& _Left,
 		const std::basic_string<_Elem, _Traits, _Alloc>& _Right)
@@ -777,7 +776,7 @@ template<class _Elem,
 	class _Types ,
 	class _Traits ,
 	class _Alloc > inline
-	
+
 	bool operator<=(
 		const std::basic_string<_Elem, _Traits, _Alloc>& _Left,
 		const basic_string_view<_Elem,_Types, _Traits>& _Right)
@@ -788,7 +787,7 @@ template<class _Elem,
 template<class _Elem,
 	class _Types ,
 	class _Traits > inline
-	
+
 	bool operator<=(
 		const _Elem * _Left,
 		const basic_string_view<_Elem,_Types, _Traits>& _Right)
@@ -799,7 +798,7 @@ template<class _Elem,
 template<class _Elem,
 	class _Types ,
 	class _Traits > inline
-	
+
 	bool operator<=(
 		const basic_string_view<_Elem,_Types, _Traits>& _Left,
 		const _Elem *_Right)
@@ -810,7 +809,7 @@ template<class _Elem,
 template<class _Elem,
 	class _Types ,
 	class _Traits > inline
-	
+
 	bool operator>=(
 		const basic_string_view<_Elem,_Types, _Traits>& _Left,
 		const basic_string_view<_Elem,_Types, _Traits>& _Right)
@@ -822,7 +821,7 @@ template<class _Elem,
 	class _Types ,
 	class _Traits ,
 	class _Alloc > inline
-	
+
 	bool operator>=(
 		const basic_string_view<_Elem,_Types, _Traits>& _Left,
 		const std::basic_string<_Elem, _Traits, _Alloc>& _Right)
@@ -834,7 +833,7 @@ template<class _Elem,
 	class _Types ,
 	class _Traits ,
 	class _Alloc > inline
-	
+
 	bool operator>=(
 		const std::basic_string<_Elem, _Traits, _Alloc>& _Left,
 		const basic_string_view<_Elem,_Types, _Traits>& _Right)
@@ -845,7 +844,7 @@ template<class _Elem,
 template<class _Elem,
 	class _Types ,
 	class _Traits > inline
-	
+
 	bool operator>=(
 		const _Elem * _Left,
 		const basic_string_view<_Elem,_Types, _Traits>& _Right)
@@ -856,7 +855,7 @@ template<class _Elem,
 template<class _Elem,
 	class _Types ,
 	class _Traits > inline
-	
+
 	bool operator>=(
 		const basic_string_view<_Elem,_Types, _Traits>& _Left,
 		const _Elem *_Right)
