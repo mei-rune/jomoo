@@ -2,7 +2,7 @@
 class OutOfRangeException : public Exception
 {
 public:
- 
+
     OutOfRangeException(const   char* const         srcFile
             , size_t        srcLine
 			, int length
@@ -31,11 +31,11 @@ public:
 	{
 	}
 
-    virtual ~OutOfRangeException()
+    virtual ~OutOfRangeException() throw()
 	{}
-	
+
 	virtual Exception* clone()
-	{						
+	{
 		return new OutOfRangeException( *this );
 	}
 	virtual void rethrow()
@@ -43,7 +43,7 @@ public:
 		Raise( *this );
 	}
 	virtual void print(tostream& Target ) const
-	{										
+	{
 			Target << _T("OutOfRangeException")
 			<< what()
 			<< std::endl;

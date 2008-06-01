@@ -15,11 +15,11 @@
 #include <stdarg.h>
 
 #if defined(_MSC_VER)
-	#define I64_FMT _T(") I64_T(" )
-#elif defined(__APPLE__) 
-	#define I64_FMT _T("q_T("
+	#define I64_FMT _T("I64")
+#elif defined(__APPLE__)
+	#define I64_FMT _T("q")
 #else
-	#define I64_FMT _T("ll_T("
+	#define I64_FMT _T("ll")
 #endif
 
 _jomoo_begin
@@ -33,10 +33,18 @@ public:
 	{
 		va_list argptr;
 		va_start(argptr,fmt );
+#ifdef __GNUG__
+#ifdef  _UNICODE
+		buffer.resize( _vsnwprintf(( tchar*) buffer.c_str(), buffer.size(), fmt, argptr ) );
+#else
+		buffer.resize( vsnprintf(( tchar*) buffer.c_str(), buffer.size(), fmt, argptr ) );
+#endif
+#else
 #ifdef  _UNICODE
 		buffer.resize( _vsnwprintf_s(( tchar*) buffer.c_str(), buffer.capacity( ), buffer.size(), fmt, argptr ) );
 #else
 		buffer.resize( vsnprintf_s(( tchar*) buffer.c_str(), buffer.capacity( ), buffer.size(), fmt, argptr ) );
+#endif
 #endif
 		va_end(argptr);
 	}
@@ -63,7 +71,7 @@ public:
 	{
 		tstring buffer;
 		buffer.resize( width + 10 );
-		
+
 		sprintf(buffer, _T("%0*d"), width, value);
 		return buffer;
 	}

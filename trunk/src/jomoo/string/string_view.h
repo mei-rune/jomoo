@@ -11,14 +11,10 @@
 #include "stringOps.h"
 #include "../random_iterator.hpp"
 
-#if _DEBUG
-
+#if _DEBUG && _MSVC_
 #define STRING_DEBUG_POINTER(first) std::_Debug_pointer(first, __FILE__,__LINE__)
-
 #else
-
 #define STRING_DEBUG_POINTER(first)
-
 #endif
 
 template<class _Elem>
@@ -91,7 +87,11 @@ public:
 	, length_( _Count )
 	{
 		if (rhs.size() < _Off)
+#ifdef __GNUG__
+            std::__throw_out_of_range( _Off );
+#else
 			_policy::out_of_range();
+#endif
 		if (rhs.length_ - _Off < _Count)
 			length_ = rhs.length_ - _Off;
 	}
@@ -401,7 +401,11 @@ public:
 		size_type _Roff, size_type _Count) const
 		{
 		if (_Right.size() < _Roff)
+#ifdef __GNUG__
+            std::__throw_out_of_range( _Roff );
+#else
 			_policy::out_of_range();
+#endif
 		if (_Right.length_ - _Roff < _Count)
 			_Count = _Right.length_ - _Roff;	// trim _Count to size
 		return (compare(_Off, _N0, _Right.buf() + _Roff, _Count));

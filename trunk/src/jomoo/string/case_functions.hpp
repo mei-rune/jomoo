@@ -10,6 +10,8 @@
 
 # include "Platform/os_string.h"
 # include "ctype_traits.hpp"
+# include <algorithm>
+
 template<   typename S
         ,   typename F
         >

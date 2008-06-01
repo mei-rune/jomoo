@@ -9,14 +9,15 @@
 # pragma once
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
-#include "jomoo/string.hpp"
+#include <tchar.h>
+#include <string.h>
 
 inline tstring get_last_error( DWORD code )
 {
 	LPVOID lpMsgBuf = 0;
-	DWORD ret = FormatMessage( 
-		FORMAT_MESSAGE_ALLOCATE_BUFFER | 
-		FORMAT_MESSAGE_FROM_SYSTEM | 
+	DWORD ret = FormatMessage(
+		FORMAT_MESSAGE_ALLOCATE_BUFFER |
+		FORMAT_MESSAGE_FROM_SYSTEM |
 		FORMAT_MESSAGE_IGNORE_INSERTS,
 		NULL,
 		code,
@@ -26,22 +27,22 @@ inline tstring get_last_error( DWORD code )
 		NULL );
 	if ( ret <= 0 )
 	{
-		return tstring( ( const tchar* )"<不知道>" );
+		return tstring(_T("<不知道>") );
 	}
 
 	LPTSTR s = (LPTSTR)lpMsgBuf;
 	s[ ret ] = 0;
-	if( s[ret - 1 ] == '\r' || s[ ret - 1 ] == '\n')
+	if( s[ret - 1 ] == _T('\r') || s[ ret - 1 ] == _T('\n'))
 		s[ret - 1 ] = 0;
-	if( s[ret - 2 ] == '\r' || s[ ret - 2 ] == '\n')
+	if( s[ret - 2 ] == _T('\r') || s[ ret - 2 ] == _T('\n'))
 		s[ret - 2 ] = 0;
 
-	tstring str =( const tchar* ) "[";
+	tstring str( _T("[") );
 
-	char tmp[110] = "";
-	_ultoa_s( code, tmp,110, 10 );
+	tchar tmp[110] = _T("");
+	string_traits<tchar>::ultoa( code, tmp,110, 10 );
 	str += ( const tchar* )tmp;
-	str += ( const tchar* )"],";
+	str += ( const tchar* )_T("],");
 	str += (LPTSTR)lpMsgBuf;
 	// Free the buffer.
 	LocalFree( lpMsgBuf );
@@ -65,12 +66,14 @@ inline tstring lastError( )
 }
 
 
-#pragma warning(disable: 4996)
 inline tstring get_c_error( int e )
 {
-	return _tcserror( e );
+#ifndef _UNICODE
+	return strerror( e );
+#else
+	return _wcserror( e );
+#endif
 }
-#pragma warning(default: 4996)
 
 inline tstring get_c_error()
 {

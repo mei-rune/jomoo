@@ -20,7 +20,6 @@ typedef HANDLE JOMOO_HANDLE;
 
 #define JOMOO_INVALID_HANDLE_VALUE INVALID_HANDLE_VALUE
 
-typedef int ssize_t;
 typedef OVERLAPPED JOMOO_OVERLAPPED ;
 
 namespace OS

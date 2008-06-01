@@ -34,13 +34,13 @@ namespace StringOps
 		};
 	};
 
-	template< typename charT , typename OP = StringOp<charT> >
+	template< typename charT , typename OP = detail::StringOp<charT> >
 	class StringPtr
 	{
 	public:
-		StringPtr(charT * ptr = 0, size_t len) _THROW0()
+		StringPtr(charT * ptr = 0, size_t len = -1) _THROW0()
 			: _ptr(ptr)
-			, _length( len )
+			, _length( (-1 == len)?string_traits< charT>::strlen( ptr): len )
 		{
 		}
 
@@ -88,26 +88,26 @@ namespace StringOps
 
 		size_t size() const
 		{
-			return _lenght;
+			return _length;
 		}
 
 		charT *release() _THROW0()
 		{
 			charT *_Tmp = _ptr;
 			_ptr = 0;
-			//_lenght = 0;
+			//_length = 0;
 			return (_Tmp);
 		}
 
 		void reset(charT* ptr = 0, size_t l = -1)
 		{
-			if (_Ptr != _ptr)
+			if (ptr != _ptr)
 			{
 				OP::free( _ptr );
-				_lenght = 0;
+				_length = 0;
 			}
 			_ptr = ptr;
-			_lenght = (-1 == l)?string_traits<charT>::strlen( _ptr ): l ;
+			_length = (-1 == l)?string_traits<charT>::strlen( _ptr ): l ;
 		}
 
 	private:

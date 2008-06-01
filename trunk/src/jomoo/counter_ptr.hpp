@@ -9,12 +9,15 @@
 # pragma once
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
-#include "boost/smart_ptr.hpp"
 # include "jomoo/exception.hpp"
-#include "Platform/OS.H"
+# include "Platform/OS.H"
+# include <tr1/memory>
+# include "intrusive_ptr.hpp"
 
-#define counter_ptr boost::shared_ptr
+#define counter_ptr std::tr1::shared_ptr
 
+
+_jomoo_begin
 
 template< typename T >
 inline bool is_null( const counter_ptr< T >& t )
@@ -52,7 +55,7 @@ public:
 	{
 		return OS::InterlockedIncrement( counter_ );
 	}
-	
+
 	long decrement( )
 	{
 		return OS::InterlockedDecrement( counter_ );
@@ -99,9 +102,6 @@ inline      void intrusive_ptr_release( jomoo_shared * p)
 	p->decRef();
 }
 
-
-#define intrusive_ptr boost::intrusive_ptr
-
 template< typename T >
 inline bool is_null( const intrusive_ptr< T >& t )
 {
@@ -117,13 +117,13 @@ inline T* get_ptr( intrusive_ptr< T >& t )
 template< typename T , typename B >
 inline counter_ptr< T > dynamicCast( counter_ptr< B >const& p )
 {
-	return counter_ptr< T >( p , boost::detail::dynamic_cast_tag() );
+	return std::tr1::dynamic_pointer_cast<T,B>( p );
 }
 
 template< typename T , typename B >
 inline intrusive_ptr< T > dynamicCast( intrusive_ptr< B >const& p )
 {
-	return intrusive_ptr< T >( p , boost::detail::dynamic_cast_tag() );
+	return dynamic_pointer_cast<T,B>( p );
 }
 
 template< typename T , typename B >
@@ -131,7 +131,7 @@ inline std::auto_ptr< T > dynamicCast( std::auto_ptr< B >const& p )
 {
 	T* t = dynamic_cast< T*>( p );
 	if( t == 0 )
-		ThrowException1( CastException , ",dynamicCast" ); 
+		ThrowException1( CastException , ",dynamicCast" );
 	return std::auto_ptr< T >( t );
 }
 
@@ -140,8 +140,10 @@ inline T* dynamicCast( B* p )
 {
 	T* t = dynamic_cast< T* >( p );
 	if( t == 0 )
-		ThrowException1( CastException , ",dynamicCast" ); 
+		ThrowException1( CastException , ",dynamicCast" );
 	return t;
 }
+
+_jomoo_end
 
 #endif //COUNTER_PTR_H
