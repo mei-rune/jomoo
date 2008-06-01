@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="jomoo_static_unicode" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug Win32">
+				<Option output="lib" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output="Debug Win32" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-DWIN32" />
+					<Add option="-D_DEBUG" />
+					<Add option="-D_LIB" />
+					<Add option="-W" />
+					<Add option="-g" />
+					<Add option="-O0" />
+					<Add directory="$(BOOST_ROOT)" />
+					<Add directory="$(SolutionDir)\..\src\" />
+				</Compiler>
+				<ResourceCompiler>
+					<Add directory="$(BOOST_ROOT)" />
+					<Add directory="$(SolutionDir)\..\src\" />
+				</ResourceCompiler>
+			</Target>
+			<Target title="Release Win32">
+				<Option output="lib" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="" />
+				<Option object_output="Release Win32" />
+				<Option type="2" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Compiler>
+					<Add option="-DWIN32" />
+					<Add option="-DNDEBUG" />
+					<Add option="-D_LIB" />
+					<Add option="-W" />
+				</Compiler>
+			</Target>
+		</Build>
+		<Unit filename="..\..\src\jomoo\cleanup.h" />
+		<Unit filename="..\..\src\jomoo\config.h" />
+		<Unit filename="..\..\src\jomoo\counter_ptr.hpp" />
+		<Unit filename="..\..\src\jomoo\DateTime.h" />
+		<Unit filename="..\..\src\jomoo\DateTimeFormatter.cpp" />
+		<Unit filename="..\..\src\jomoo\DateTimeFormatter.h" />
+		<Unit filename="..\..\src\jomoo\DateTimeFormatter.inl" />
+		<Unit filename="..\..\src\jomoo\DateTimeParser.cpp" />
+		<Unit filename="..\..\src\jomoo\DateTimeParser.h" />
+		<Unit filename="..\..\src\jomoo\DateTimeParser.inl" />
+		<Unit filename="..\..\src\jomoo\empty_type.h" />
+		<Unit filename="..\..\src\jomoo\error.h" />
+		<Unit filename="..\..\src\jomoo\exception.hpp" />
+		<Unit filename="..\..\src\jomoo\functional.hpp" />
+		<Unit filename="..\..\src\jomoo\is_empty.h" />
+		<Unit filename="..\..\src\jomoo\jomoo_export.h" />
+		<Unit filename="..\..\src\jomoo\jomoo_object.hpp" />
+		<Unit filename="..\..\src\jomoo\lastError.h" />
+		<Unit filename="..\..\src\jomoo\make_null_ptr.hpp" />
+		<Unit filename="..\..\src\jomoo\random_iterator.hpp" />
+		<Unit filename="..\..\src\jomoo\string.hpp" />
+		<Unit filename="..\..\src\jomoo\threading.hpp" />
+		<Unit filename="..\..\src\jomoo\Timespan.h" />
+		<Unit filename="..\..\src\jomoo\Timestamp.h" />
+		<Unit filename="..\..\src\jomoo\Timezone.h" />
+		<Unit filename="..\..\src\jomoo\types.hpp" />
+		<Unit filename="..\..\src\jomoo\variant.hpp" />
+		<Unit filename="..\..\src\jomoo\collections\enumerator.H" />
+		<Unit filename="..\..\src\jomoo\collections\IEnumerator.h" />
+		<Unit filename="..\..\src\jomoo\collections\Link.h" />
+		<Unit filename="..\..\src\jomoo\collections\sequence.h" />
+		<Unit filename="..\..\src\jomoo\collections\thread_safe_ptr_queue.hpp" />
+		<Unit filename="..\..\src\jomoo\macro\macro_counter.hpp" />
+		<Unit filename="..\..\src\jomoo\macro\macro_define.hpp" />
+		<Unit filename="..\..\src\jomoo\macro\macro_misc.hpp" />
+		<Unit filename="..\..\src\jomoo\macro\macro_params.hpp" />
+		<Unit filename="..\..\src\jomoo\macro\macro_repeat.hpp" />
+		<Unit filename="..\..\src\jomoo\logging\logger.h" />
+		<Unit filename="..\..\src\jomoo\logging\stdlogger.H" />
+		<Unit filename="..\..\src\jomoo\memory\auto_ptr.h" />
+		<Unit filename="..\..\src\jomoo\memory\config_Memory.H" />
+		<Unit filename="..\..\src\jomoo\memory\FixedPool.cpp" />
+		<Unit filename="..\..\src\jomoo\memory\FixedPool.h" />
+		<Unit filename="..\..\src\jomoo\memory\Memory.H" />
+		<Unit filename="..\..\src\jomoo\memory\MemoryManager.CPP" />
+		<Unit filename="..\..\src\jomoo\memory\MemoryManager.H" />
+		<Unit filename="..\..\src\jomoo\memory\MemoryPool.H" />
+		<Unit filename="..\..\src\jomoo\memory\ObjectPool.h" />
+		<Unit filename="..\..\src\jomoo\memory\Pool.h" />
+		<Unit filename="..\..\src\jomoo\memory\SystemPool.cpp" />
+		<Unit filename="..\..\src\jomoo\memory\SystemPool.h" />
+		<Unit filename="..\..\src\jomoo\threading\config_threading.h" />
+		<Unit filename="..\..\src\jomoo\threading\event.h" />
+		<Unit filename="..\..\src\jomoo\threading\guard.h" />
+		<Unit filename="..\..\src\jomoo\threading\null_mutex.H" />
+		<Unit filename="..\..\src\jomoo\threading\null_semaphore.H" />
+		<Unit filename="..\..\src\jomoo\threading\os_threading.h" />
+		<Unit filename="..\..\src\jomoo\threading\os_threading.inl" />
+		<Unit filename="..\..\src\jomoo\threading\thread.cpp" />
+		<Unit filename="..\..\src\jomoo\threading\thread.h" />
+		<Unit filename="..\..\src\jomoo\threading\thread.inl" />
+		<Unit filename="..\..\src\jomoo\threading\thread_closure.h" />
+		<Unit filename="..\..\src\jomoo\threading\thread_manager.cpp" />
+		<Unit filename="..\..\src\jomoo\threading\thread_manager.h" />
+		<Unit filename="..\..\src\jomoo\threading\thread_manager.inl" />
+		<Unit filename="..\..\src\jomoo\threading\thread_mutex.h" />
+		<Unit filename="..\..\src\jomoo\threading\thread_semaphore.h" />
+		<Unit filename="..\..\src\jomoo\threading\worker_queue..h" />
+		<Unit filename="..\..\src\jomoo\threading\worker_queue.T" />
+		<Unit filename="..\..\src\jomoo\string\case_functions.hpp" />
+		<Unit filename="..\..\src\jomoo\string\ctype_traits.hpp" />
+		<Unit filename="..\..\src\jomoo\string\fast_string_concatenator.hpp" />
+		<Unit filename="..\..\src\jomoo\string\functionals.hpp" />
+		<Unit filename="..\..\src\jomoo\string\replace_functions.hpp" />
+		<Unit filename="..\..\src\jomoo\string\string_append_iterator.h" />
+		<Unit filename="..\..\src\jomoo\string\string_token_iterator.h" />
+		<Unit filename="..\..\src\jomoo\string\string_traits.hpp" />
+		<Unit filename="..\..\src\jomoo\string\string_view.h" />
+		<Unit filename="..\..\src\jomoo\string\StringOps.h" />
+		<Unit filename="..\..\src\jomoo\string\stringPtr.h" />
+		<Unit filename="..\..\src\jomoo\string\toString.h" />
+		<Unit filename="..\..\src\jomoo\string\trim_functions.hpp" />
+		<Unit filename="..\..\src\jomoo\string\with_functions.hpp" />
+		<Unit filename="..\..\src\jomoo\patterns\AbstractFactory.h" />
+		<Unit filename="..\..\src\jomoo\patterns\builder.h" />
+		<Unit filename="..\..\src\jomoo\patterns\factory.h" />
+		<Unit filename="..\..\src\jomoo\patterns\singleton.h" />
+		<Unit filename="..\..\src\jomoo\patterns\singleton.t" />
+		<Unit filename="..\..\src\jomoo\patterns\AbstractFactory\AbstractFactory0.h" />
+		<Unit filename="..\..\src\jomoo\patterns\AbstractFactory\AbstractFactory1.h" />
+		<Unit filename="..\..\src\jomoo\patterns\AbstractFactory\AbstractFactory10.h" />
+		<Unit filename="..\..\src\jomoo\patterns\AbstractFactory\AbstractFactory11.h" />
+		<Unit filename="..\..\src\jomoo\patterns\AbstractFactory\AbstractFactory12.h" />
+		<Unit filename="..\..\src\jomoo\patterns\AbstractFactory\AbstractFactory13.h" />
+		<Unit filename="..\..\src\jomoo\patterns\AbstractFactory\AbstractFactory14.h" />
+		<Unit filename="..\..\src\jomoo\patterns\AbstractFactory\AbstractFactory15.h" />
+		<Unit filename="..\..\src\jomoo\patterns\AbstractFactory\AbstractFactory16.h" />
+		<Unit filename="..\..\src\jomoo\patterns\AbstractFactory\AbstractFactory2.h" />
+		<Unit filename="..\..\src\jomoo\patterns\AbstractFactory\AbstractFactory3.h" />
+		<Unit filename="..\..\src\jomoo\patterns\AbstractFactory\AbstractFactory4.h" />
+		<Unit filename="..\..\src\jomoo\patterns\AbstractFactory\AbstractFactory5.h" />
+		<Unit filename="..\..\src\jomoo\patterns\AbstractFactory\AbstractFactory6.h" />
+		<Unit filename="..\..\src\jomoo\patterns\AbstractFactory\AbstractFactory7.h" />
+		<Unit filename="..\..\src\jomoo\patterns\AbstractFactory\AbstractFactory8.h" />
+		<Unit filename="..\..\src\jomoo\patterns\AbstractFactory\AbstractFactory9.h" />
+		<Unit filename="..\..\src\jomoo\patterns\AbstractFactory\AbstractFactoryTemplates.h" />
+		<Unit filename="..\..\src\jomoo\util\config_Util.h" />
+		<Unit filename="..\..\src\jomoo\util\Configuration.h" />
+		<Unit filename="..\..\src\jomoo\util\CtrlCHandler.cpp" />
+		<Unit filename="..\..\src\jomoo\util\CtrlCHandler.h" />
+		<Unit filename="..\..\src\jomoo\util\directory.h" />
+		<Unit filename="..\..\src\jomoo\util\directory.inl" />
+		<Unit filename="..\..\src\jomoo\util\NTService.h" />
+		<Unit filename="..\..\src\jomoo\util\ServiceManager.cpp" />
+		<Unit filename="..\..\src\jomoo\util\ServiceManager.h" />
+		<Unit filename="..\..\src\jomoo\util\Shared_Library.h" />
+		<Unit filename="..\..\src\jomoo\util\Shared_Library.inl" />
+		<Unit filename="..\..\src\jomoo\util\Util.h" />
+		<Unit filename="..\..\src\jomoo\networks\config_networks.h" />
+		<Unit filename="..\..\src\jomoo\networks\connected_socket.h" />
+		<Unit filename="..\..\src\jomoo\networks\connection_status.h" />
+		<Unit filename="..\..\src\jomoo\networks\io_request.h" />
+		<Unit filename="..\..\src\jomoo\networks\proactor.cpp" />
+		<Unit filename="..\..\src\jomoo\networks\proactor.h" />
+		<Unit filename="..\..\src\jomoo\networks\sockets\base_socket.cpp" />
+		<Unit filename="..\..\src\jomoo\networks\sockets\base_socket.h" />
+		<Unit filename="..\..\src\jomoo\networks\sockets\base_socket.inl" />
+		<Unit filename="..\..\src\jomoo\networks\sockets\inet_address.cpp" />
+		<Unit filename="..\..\src\jomoo\networks\sockets\inet_address.h" />
+		<Unit filename="..\..\src\jomoo\networks\sockets\inet_address.inl" />
+		<Unit filename="..\..\src\jomoo\networks\sockets\os_networks.cpp" />
+		<Unit filename="..\..\src\jomoo\networks\sockets\os_networks.h" />
+		<Unit filename="..\..\src\jomoo\networks\sockets\os_networks.inl" />
+		<Unit filename="..\..\src\jomoo\networks\sockets\tcp_client.cpp" />
+		<Unit filename="..\..\src\jomoo\networks\sockets\tcp_client.h" />
+		<Unit filename="..\..\src\jomoo\networks\sockets\tcp_client.inl" />
+		<Unit filename="..\..\src\jomoo\networks\sockets\tcp_server.cpp" />
+		<Unit filename="..\..\src\jomoo\networks\sockets\tcp_server.h" />
+		<Unit filename="..\..\src\jomoo\networks\sockets\tcp_server.inl" />
+		<Unit filename="..\..\src\jomoo\mpl\function_type.h" />
+		<Unit filename="..\..\src\jomoo\platform\os.cpp" />
+		<Unit filename="..\..\src\jomoo\platform\os.h" />
+		<Unit filename="..\..\src\jomoo\platform\os.inl" />
+		<Unit filename="..\..\src\jomoo\platform\os_mmap.cpp" />
+		<Unit filename="..\..\src\jomoo\platform\os_mmap.h" />
+		<Unit filename="..\..\src\jomoo\platform\os_mmap.inl" />
+		<Unit filename="..\..\src\jomoo\platform\os_string.h" />
+		<Unit filename="..\..\src\jomoo\serialize\config_serializing.h" />
+		<Unit filename="..\..\src\jomoo\serialize\reader.hpp" />
+		<Unit filename="..\..\src\jomoo\serialize\serialize.h" />
+		<Unit filename="..\..\src\jomoo\serialize\serialize_context.h" />
+		<Unit filename="..\..\src\jomoo\serialize\serialize_macro.h" />
+		<Unit filename="..\..\src\jomoo\serializing.hpp" />
+		<Unit filename="..\..\src\jomoo\serialize\writer.hpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

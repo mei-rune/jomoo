@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="JoMoo_TestUnit" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug Win32">
+				<Option output="JoMoo_TestUnit" prefix_auto="1" extension_auto="1" />
+				<Option object_output="$(SolutionDir)..\..\obj\Debug Win32" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-DWIN32" />
+					<Add option="-D_DEBUG" />
+					<Add option="-D_WINDOWS" />
+					<Add option="-D_USRDLL" />
+					<Add option="-DJOMOO_TESTUNIT_EXPORTS" />
+					<Add option="-W" />
+					<Add option="-g" />
+					<Add option="-O0" />
+					<Add option="-DTEST=1" />
+					<Add directory="D:\programing\work\JoMoo\trunk\vc8\JoMoo_TestUnit\" />
+					<Add directory="$(SolutionDir)..\src\" />
+					<Add directory="$(CPPUNIT_ROOT)\include" />
+					<Add directory="$(BOOST_ROOT)" />
+				</Compiler>
+				<ResourceCompiler>
+					<Add directory="D:\programing\work\JoMoo\trunk\vc8\JoMoo_TestUnit\" />
+					<Add directory="$(SolutionDir)..\src\" />
+					<Add directory="$(CPPUNIT_ROOT)\include" />
+					<Add directory="$(BOOST_ROOT)" />
+				</ResourceCompiler>
+				<Linker>
+					<Add library="cppunitd_dll" />
+					<Add library="jomoo_static" />
+					<Add directory="$(SolutionDir)..\..\Debug Win32" />
+					<Add directory="$(CPPUNIT_ROOT)\debug\" />
+				</Linker>
+			</Target>
+			<Target title="Release Win32">
+				<Option output="JoMoo_TestUnit" prefix_auto="1" extension_auto="1" />
+				<Option object_output="Release Win32" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-DWIN32" />
+					<Add option="-DNDEBUG" />
+					<Add option="-D_WINDOWS" />
+					<Add option="-D_USRDLL" />
+					<Add option="-DJOMOO_TESTUNIT_EXPORTS" />
+					<Add option="-W" />
+				</Compiler>
+			</Target>
+		</Build>
+		<Unit filename="ReadMe.txt" />
+		<Unit filename="JoMoo_TestUnit.cpp" />
+		<Unit filename="stdafx.cpp" />
+		<Unit filename="stdafx.h" />
+		<Unit filename="..\..\src\jomoo\unittest\DateTimeFormatterTest.cpp" />
+		<Unit filename="..\..\src\jomoo\unittest\DateTimeFormatterTest.h" />
+		<Unit filename="..\..\src\jomoo\unittest\DateTimeParserTest.cpp" />
+		<Unit filename="..\..\src\jomoo\unittest\DateTimeParserTest.h" />
+		<Unit filename="..\..\src\jomoo\unittest\DateTimeTest.cpp" />
+		<Unit filename="..\..\src\jomoo\unittest\DateTimeTest.h" />
+		<Unit filename="marco.h" />
+		<Unit filename="..\..\src\jomoo\unittest\TimespanTest.cpp" />
+		<Unit filename="..\..\src\jomoo\unittest\TimespanTest.h" />
+		<Unit filename="..\..\src\jomoo\unittest\TimestampTest.cpp" />
+		<Unit filename="..\..\src\jomoo\unittest\TimestampTest.h" />
+		<Unit filename="..\..\src\jomoo\unittest\TimezoneTest.cpp" />
+		<Unit filename="..\..\src\jomoo\unittest\TimezoneTest.h" />
+		<Unit filename="..\..\src\jomoo\serialize\unittest\SerializeTestFixture.cpp" />
+		<Unit filename="..\..\src\jomoo\serialize\unittest\SerializeTestFixture.h" />
+		<Unit filename="..\..\src\jomoo\serialize\unittest\testTypes.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
