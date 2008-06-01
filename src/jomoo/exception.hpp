@@ -15,11 +15,12 @@
 
 _jomoo_begin
 
+#define _RAISE( x ) throw x
 
-class Exception : public std::runtime_error 
+class Exception : public std::runtime_error
 {
 public:
-    virtual ~Exception()
+    virtual ~Exception() throw()
 	{
 	}
 
@@ -143,7 +144,7 @@ public: \
          \
     } \
  \
-    virtual ~theType() {}									\
+    virtual ~theType() throw() {}									\
 	virtual Exception* clone()								\
 	{														\
 		return new theType( *this );						\

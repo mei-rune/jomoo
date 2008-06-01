@@ -16,12 +16,12 @@ public:
 	typedef C char_type;
 	typedef size_t size_type;
 
-  string_token_iterator() : str(0), start(0), end(0) {}
+  string_token_iterator() : _ptr(0), start(0), end(0) {}
 
   template< typename S >
-  string_token_iterator(const S & str_, const char_type * separator_ = " ") :
+  string_token_iterator(const S & s, const char_type * separator_ = " ") :
     separator(separator_),
-    str( c_str_ptr(str_) ),
+    _ptr( c_str_ptr(s) ),
     end(0)
   {
     find_next();
@@ -29,7 +29,7 @@ public:
 
   string_token_iterator(const string_token_iterator & rhs) :
     separator(rhs.separator),
-    str(rhs.str),
+    _ptr(rhs._ptr),
     start(rhs.start),
     end(rhs.end)
   {
@@ -50,12 +50,12 @@ public:
 
   tstring operator*() const
   {
-    return tstring(*str, start, end - start);
+    return tstring(*_ptr, start, end - start);
   }
 
   bool operator==(const string_token_iterator & rhs) const
   {
-    return (rhs.str == str && rhs.start == start && rhs.end == end);
+    return (rhs._ptr == _ptr && rhs.start == start && rhs.end == end);
   }
 
   bool operator!=(const string_token_iterator & rhs) const
@@ -67,19 +67,19 @@ private:
 
   void find_next(void)
   {
-    start = str->find_first_not_of(separator, end);
+    start = _ptr->find_first_not_of(separator, end);
     if(start == tstring::npos)
     {
       start = end = 0;
-      str = 0;
+      _ptr = 0;
       return;
     }
 
-    end = str->find_first_of(separator, start);
+    end = _ptr->find_first_of(separator, start);
   }
 
   const char_type * separator;
-  const char_type * const str_;
+  const char_type * const _ptr;
   size_type start;
   size_type end;
 };

@@ -257,4 +257,22 @@ inline T get_ptr( T t )
 
 #define null_ptr NULL
 
+#ifdef __GNUG__
+#define _T L
+#endif
+
+typedef  int errno_t;
+
+#ifdef __GNUG__
+#define _THROW0() throw()
+#endif
+
+#ifndef __GNUG__
+typedef int ssize_t;
+#endif
+
+#ifdef __GNUG__
+#define __MSVCRT_VERSION__ 0x0700
+#endif
+
 #endif // _config_H_

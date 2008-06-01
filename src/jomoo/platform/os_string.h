@@ -8,7 +8,8 @@
 # pragma once
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
-#include "TCHAR.H"
+#include <tchar.h>
+#include <string.h>
 #include <string>
 #include <sstream>
 typedef char char_t;

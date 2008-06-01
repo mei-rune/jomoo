@@ -43,14 +43,24 @@ struct string_traits<char_t>
 				char_type **endptr,
 				int base )
 	{
+#ifdef __GNUG__
+        *endptr = null_ptr;
+        return _atoi64(nptr);
+#else
 		return ::_strtoi64( nptr, endptr , base );
+#endif
 	}
 
 	inline static   unsigned __int64 strtoui64( const char_type *nptr,
 				char_type **endptr,
 				int base )
 	{
+#ifdef __GNUG__
+        #pragma message("strtoui64 没有实现")
+        return 0;
+#else
 		return ::_strtoui64( nptr, endptr , base );
+#endif
 	}
 
 	inline static   double atof(  const char_type *str )
@@ -78,7 +88,11 @@ struct string_traits<char_t>
 				 size_t len,
 				 int radix )
 	{
+#ifdef __GNUG__
+        return _itoa(value, str, radix);
+#else
 		return ( 0 == ::_itoa_s( value, str,len, radix ) )? str : 0;
+#endif
 	}
 
 	inline static   char_type *ltoa( long value,
@@ -86,7 +100,11 @@ struct string_traits<char_t>
 				 size_t len,
 				 int radix )
 	{
+#ifdef __GNUG__
+        return _ltoa(value, str, radix);
+#else
 		return ( 0 == ::_ltoa_s( value, str, len, radix ))? str : 0;
+#endif
 	}
 
 	inline static   char_type *ultoa( unsigned long value,
@@ -94,7 +112,11 @@ struct string_traits<char_t>
 				 size_t len,
 				 int radix )
 	{
+#ifdef __GNUG__
+        return _ultoa(value, str, radix);
+#else
 		return ( 0 == ::_ultoa_s( value, str, len, radix ))? str : 0;
+#endif
 	}
 
 	inline static   char_type *i64toa( __int64 value,
@@ -102,7 +124,11 @@ struct string_traits<char_t>
 				 size_t len,
 				 int radix )
 	{
+#ifdef __GNUG__
+        return _i64toa(value, str, radix);
+#else
 		return ( 0 == ::_i64toa_s( value, str, len, radix ))? str : 0;
+#endif
 	}
 
 	inline static   char_type *ui64toa( unsigned __int64 value,
@@ -110,21 +136,35 @@ struct string_traits<char_t>
 				 size_t len,
 				 int radix )
 	{
+#ifdef __GNUG__
+        return _ui64toa(value, str, radix);
+#else
 		return ( 0 == ::_ui64toa_s( value, str, len, radix ))? str : 0;
+#endif
 	}
 
 	/* String functions */
- 
+
 	inline static   errno_t strcat(char_type *strDestination, size_t length,
 				const char_type *strSource )
 	{
+#ifdef __GNUG__
+        ::strcat( strDestination, strSource );
+        return 0;
+#else
 		return ::strcat_s( strDestination, length, strSource );
+#endif
 	}
 
 	inline static   errno_t strcpy(char_type *strDestination, size_t length,
 				const char_type *strSource )
 	{
+#ifdef __GNUG__
+        ::strcpy( strDestination, strSource );
+        return 0;
+#else
 		return ::strcpy_s( strDestination, length, strSource );
+#endif
 	}
 
 	//寻找strCharSet字符集中任意一个字符在str字符串中第一次出现的位置
@@ -195,7 +235,7 @@ struct string_traits<char_t>
 		return ::strstr( str, strSearch );
 	}
 
-	
+
 #pragma warning(disable: 4996)
 	inline static char_type *strtok( char_type *strToken
 		, const char_type *strDelimit )
@@ -285,19 +325,34 @@ struct string_traits<wchar_t>
 				char_type **endptr,
 				int base )
 	{
+#ifdef __GNUG__
+        #pragma warn("_strtoi64 没有完全实现")
+        return ::_wtoi64( nptr );
+#else
 		return ::_wcstoi64( nptr, endptr , base );
+#endif
 	}
 
 	inline static  unsigned __int64 strtoui64( const char_type *nptr,
 				char_type **endptr,
 				int base )
 	{
+#ifdef __GNUG__
+        #pragma message("strtoui64 没有实现")
+        return 0;
+#else
 		return ::_wcstoui64( nptr, endptr , base );
+#endif
 	}
 
 	inline static  double atof(  const char_type *str )
 	{
+#ifdef __GNUG__
+        char_type* endptr = null_ptr;
+		return ::wcstod( str ,&endptr );
+#else
 		return ::_wtof( str );
+#endif
 	}
 
 	inline static  long atol(  const char_type *str )
@@ -320,7 +375,11 @@ struct string_traits<wchar_t>
 				 size_t len,
 				 int radix )
 	{
+#ifdef __GNUG__
+		return ::_itow( value, str, radix );
+#else
 		return ( 0 == ::_itow_s( value, str, len, radix ))? str : 0;
+#endif
 	}
 
 	inline static  char_type *ltoa( long value,
@@ -328,7 +387,11 @@ struct string_traits<wchar_t>
 				 size_t len,
 				 int radix )
 	{
+#ifdef __GNUG__
+		return ::_ltow( value, str, radix );
+#else
 		return ( 0 == ::_ltow_s( value, str, len, radix ))? str : 0;
+#endif
 	}
 
 	inline static  char_type *ultoa( unsigned long value,
@@ -336,7 +399,11 @@ struct string_traits<wchar_t>
 				 size_t len,
 				 int radix )
 	{
+#ifdef __GNUG__
+		return ::_ultow( value, str, radix );
+#else
 		return ( 0 == ::_ultow_s( value, str, len, radix ))? str : 0;
+#endif
 	}
 
 	inline static  char_type *i64toa( __int64 value,
@@ -344,7 +411,11 @@ struct string_traits<wchar_t>
 				 size_t len,
 				 int radix )
 	{
+#ifdef __GNUG__
+		return ::_ultow( value, str, radix );
+#else
 		return ( 0 == ::_i64tow_s( value, str, len, radix ))? str : 0;
+#endif
 	}
 
 	inline static  char_type *ui64toa( unsigned __int64 value,
@@ -352,21 +423,35 @@ struct string_traits<wchar_t>
 				 size_t len,
 				 int radix )
 	{
+#ifdef __GNUG__
+		return ::_ui64tow( value, str, radix );
+#else
 		return ( 0 == ::_ui64tow_s( value, str, len, radix ))? str : 0;
+#endif
 	}
 
 	/* String functions */
- 
+
 	inline static  errno_t strcat(char_type *strDestination, size_t length,
 				const char_type *strSource )
 	{
+#ifdef __GNUG__
+		::wcscat( strDestination, strSource );
+		return 0;
+#else
 		return ::wcscat_s( strDestination,length, strSource );
+#endif
 	}
-	
+
 	inline static  errno_t strcpy(char_type *strDestination, size_t length,
 				const char_type *strSource )
 	{
+#ifdef __GNUG__
+		::wcscpy( strDestination, strSource );
+		return 0;
+#else
 		return ::wcscpy_s( strDestination,length, strSource );
+#endif
 	}
 
 	//寻找strCharSet字符集中任意一个字符在str字符串中第一次出现的位置
