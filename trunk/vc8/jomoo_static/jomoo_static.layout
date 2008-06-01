@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<ActiveTarget name="Debug Win32" />
+	<File name="..\..\src\jomoo\DateTime.h" open="0" top="0" tabpos="0">
+		<Cursor position="3124" topLine="146" />
+	</File>
+	<File name="..\..\src\jomoo\DateTimeFormatter.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="183" topLine="0" />
+	</File>
+	<File name="..\..\src\jomoo\DateTimeFormatter.h" open="0" top="0" tabpos="0">
+		<Cursor position="4574" topLine="107" />
+	</File>
+	<File name="..\..\src\jomoo\DateTimeParser.cpp" open="0" top="0" tabpos="0">
+		<Cursor position="120" topLine="0" />
+	</File>
+	<File name="..\..\src\jomoo\DateTimeParser.h" open="0" top="0" tabpos="0">
+		<Cursor position="332" topLine="0" />
+	</File>
+	<File name="..\..\src\jomoo\config.h" open="0" top="0" tabpos="0">
+		<Cursor position="5415" topLine="255" />
+	</File>
+	<File name="..\..\src\jomoo\counter_ptr.hpp" open="0" top="0" tabpos="0">
+		<Cursor position="2411" topLine="115" />
+	</File>
+	<File name="..\..\src\jomoo\exception.hpp" open="0" top="0" tabpos="0">
+		<Cursor position="1840" topLine="131" />
+	</File>
+	<File name="..\..\src\jomoo\exception\OutOfRangeException.h" open="0" top="0" tabpos="0">
+		<Cursor position="777" topLine="23" />
+	</File>
+	<File name="..\..\src\jomoo\intrusive_ptr.hpp" open="1" top="1" tabpos="7">
+		<Cursor position="3739" topLine="180" />
+	</File>
+	<File name="..\..\src\jomoo\lastError.h" open="0" top="0" tabpos="0">
+		<Cursor position="1422" topLine="64" />
+	</File>
+	<File name="..\..\src\jomoo\platform\os_string.h" open="0" top="0" tabpos="0">
+		<Cursor position="3757" topLine="146" />
+	</File>
+	<File name="..\..\src\jomoo\string\case_functions.hpp" open="0" top="0" tabpos="0">
+		<Cursor position="446" topLine="23" />
+	</File>
+	<File name="..\..\src\jomoo\string\ctype_traits.hpp" open="0" top="0" tabpos="0">
+		<Cursor position="2370" topLine="42" />
+	</File>
+	<File name="..\..\src\jomoo\string\stringPtr.h" open="0" top="0" tabpos="0">
+		<Cursor position="275" topLine="0" />
+	</File>
+	<File name="..\..\src\jomoo\string\string_token_iterator.h" open="0" top="0" tabpos="0">
+		<Cursor position="1476" topLine="54" />
+	</File>
+	<File name="..\..\src\jomoo\string\string_traits.hpp" open="0" top="0" tabpos="0">
+		<Cursor position="210" topLine="4" />
+	</File>
+	<File name="..\..\src\jomoo\string\string_view.h" open="0" top="0" tabpos="0">
+		<Cursor position="10439" topLine="413" />
+	</File>
+	<File name="..\..\src\jomoo\util\NumberFormatter.h" open="1" top="0" tabpos="2">
+		<Cursor position="607" topLine="28" />
+	</File>
+	<File name="..\..\src\jomoo\util\config_Util.h" open="0" top="0" tabpos="0">
+		<Cursor position="397" topLine="5" />
+	</File>
+</CodeBlocks_layout_file>

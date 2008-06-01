@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_workspace_file>
+	<Workspace title="jomoo workspace">
+		<Project filename="..\vc8\CollectionTest\CollectionTest.cbp" />
+		<Project filename="..\vc8\PoolTest\PoolTest.cbp" />
+		<Project filename="..\test\PluginCreation\PluginCreation.cbp" />
+		<Project filename="..\test\PluginFactory\PluginFactory.cbp" />
+		<Project filename="..\test\PluginFactoryArgs\PluginFactoryArgs.cbp" />
+		<Project filename="..\test\PluginInit\PluginInit.cbp" />
+		<Project filename="..\test\PluginSample\PluginSample.cbp" />
+		<Project filename="..\vc8\PluginTools\PluginTools.cbp" />
+		<Project filename="..\vc8\JoMoo_TestUnit\JoMoo_TestUnit.cbp" />
+		<Project filename="..\vc8\echoServer\echoServer.cbp" />
+		<Project filename="..\vc8\thread_test\thread_test.cbp" />
+		<Project filename="..\vc8\jomoo_static\jomoo_static_unicode.cbp" />
+		<Project filename="..\vc8\serialize_generator\serialize_generator.cbp" />
+		<Project filename="..\vc8\jomoo_static\jomoo_static.cbp" active="1" />
+		<Project filename="..\vc8\serialize_test\serialize_test.cbp" />
+	</Workspace>
+</CodeBlocks_workspace_file>

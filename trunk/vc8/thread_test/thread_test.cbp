@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="thread_test" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug Win32">
+				<Option output="thread_test" prefix_auto="1" extension_auto="1" />
+				<Option object_output="Debug Win32" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-DWIN32" />
+					<Add option="-D_DEBUG" />
+					<Add option="-D_CONSOLE" />
+					<Add option="-W" />
+					<Add option="-g" />
+					<Add option="-O0" />
+					<Add directory="D:\programing\work\JoMoo\trunk\vc8\thread_test\..\..\src" />
+					<Add directory="$(BOOST_ROOT)" />
+				</Compiler>
+				<ResourceCompiler>
+					<Add directory="D:\programing\work\JoMoo\trunk\vc8\thread_test\..\..\src" />
+					<Add directory="$(BOOST_ROOT)" />
+				</ResourceCompiler>
+				<Linker>
+					<Add library="jomoo_static" />
+					<Add directory="$(SolutionDir)..\..\Debug Win32" />
+				</Linker>
+			</Target>
+			<Target title="Release Win32">
+				<Option output="thread_test" prefix_auto="1" extension_auto="1" />
+				<Option object_output="Release Win32" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-DWIN32" />
+					<Add option="-DNDEBUG" />
+					<Add option="-D_CONSOLE" />
+					<Add option="-W" />
+				</Compiler>
+			</Target>
+		</Build>
+		<Unit filename="ReadMe.txt" />
+		<Unit filename="stdafx.cpp" />
+		<Unit filename="thread_test.cpp" />
+		<Unit filename="stdafx.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
