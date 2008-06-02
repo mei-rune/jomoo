@@ -78,7 +78,6 @@ public:
 		sequenue_guard( serialize_context& context )
 			: _context( 0 )
 		{
-			_isSequence = context.isSequenue( false );
 			_context = &context;
 		}
 

@@ -15,7 +15,7 @@
 
 _jomoo_begin
 
-#define _RAISE( x ) throw x
+ #define _RAISE(x)	throw (x)
 
 class Exception : public std::runtime_error
 {

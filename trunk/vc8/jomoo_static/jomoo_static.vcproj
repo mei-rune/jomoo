@@ -39,6 +39,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalOptions="/DHAS_BOOST"
 				Optimization="0"
 				AdditionalIncludeDirectories="&quot;$(SQLITE_ROOT)&quot;;&quot;$(BOOST_ROOT)&quot;;&quot;$(SolutionDir)\..\src\&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
