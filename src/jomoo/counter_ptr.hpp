@@ -11,7 +11,11 @@
 
 # include "jomoo/exception.hpp"
 # include "Platform/OS.H"
+# ifndef HAS_BOOST
 # include <tr1/memory>
+# else
+# include "boost/tr1/memory.hpp"
+# endif
 # include "intrusive_ptr.hpp"
 
 #define counter_ptr std::tr1::shared_ptr

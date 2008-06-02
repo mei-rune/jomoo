@@ -92,7 +92,7 @@ typedef unsigned int u_int32_t;
 typedef unsigned __int64 u_int64_t;
 #endif // _u_int16_t_
 
-#ifdef _MSVC_
+#ifndef __GNUG__
 
 #ifndef _ssize_t_
 #define _ssize_t_
@@ -265,10 +265,6 @@ typedef  int errno_t;
 
 #ifdef __GNUG__
 #define _THROW0() throw()
-#endif
-
-#ifndef __GNUG__
-typedef int ssize_t;
 #endif
 
 #ifdef __GNUG__
