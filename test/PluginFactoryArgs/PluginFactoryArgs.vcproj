@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="gb2312"?>
 <VisualStudioProject
 	ProjectType="Visual C++"
-	Version="8.00"
+	Version="9.00"
 	Name="PluginFactoryArgs"
 	ProjectGUID="{E0E3A890-6BDE-493C-837B-8E932B7B4C96}"
 	Keyword="Win32Proj"
+	TargetFrameworkVersion="131072"
 	>
 	<Platforms>
 		<Platform
@@ -70,6 +71,8 @@
 				GenerateDebugInformation="true"
 				ProgramDatabaseFile="$(OutDir)/PluginFactoryArgs.pdb"
 				SubSystem="2"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
 				ImportLibrary="$(OutDir)/PluginFactoryArgs.lib"
 				TargetMachine="1"
 			/>
@@ -90,9 +93,6 @@
 			/>
 			<Tool
 				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCWebDeploymentTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
@@ -147,6 +147,8 @@
 				SubSystem="2"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
+				RandomizedBaseAddress="1"
+				DataExecutionPrevention="0"
 				ImportLibrary="$(OutDir)/PluginFactoryArgs.lib"
 				TargetMachine="1"
 			/>
@@ -167,9 +169,6 @@
 			/>
 			<Tool
 				Name="VCAppVerifierTool"
-			/>
-			<Tool
-				Name="VCWebDeploymentTool"
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
