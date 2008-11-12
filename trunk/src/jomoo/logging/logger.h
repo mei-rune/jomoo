@@ -29,6 +29,7 @@ _jomoo_begin
 namespace logging
 {
 
+
 /**
  * @Brief ILogger 日志接口
  * 这是BT的日志接口，每一个具体的日志都必须从它继承，每一个需要记日志的都可以得到一个这样的接，
