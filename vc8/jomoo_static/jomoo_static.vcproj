@@ -508,6 +508,14 @@
 				RelativePath="..\..\src\jomoo\string\with_functions.hpp"
 				>
 			</File>
+			<Filter
+				Name="platform"
+				>
+				<File
+					RelativePath="..\..\src\jomoo\platform\os_string.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="patterns"
@@ -802,10 +810,6 @@
 			</File>
 			<File
 				RelativePath="..\..\src\jomoo\platform\os_mmap.inl"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\platform\os_string.h"
 				>
 			</File>
 		</Filter>

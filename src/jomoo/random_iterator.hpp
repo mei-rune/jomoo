@@ -13,7 +13,6 @@
 
 #define ITERATOR_DEBUG( X ) check( X )
 
-
 template<class _Ty,
 	class _Diff,
 	class _Pointer,
