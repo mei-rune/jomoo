@@ -8,7 +8,6 @@
 # pragma once
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
-# include "Platform/os_string.h"
 # include "ctype_traits.hpp"
 # include <algorithm>
 

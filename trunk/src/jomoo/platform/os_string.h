@@ -46,10 +46,6 @@ inline tstring::const_pointer c_str_ptr( const tstring* t )
 #pragma warning(disable: 4267)
 inline std::wstring toWideString( const char* pStr , size_t len=-1 )
 {
-    //ASSERT_PTR( pStr ) ;
-    //ASSERT( len >= 0 || len == -1 , _T("Invalid string length: ") << len );
-
-    // figure out how many wide characters we are going to get
     int nChars = MultiByteToWideChar( CP_ACP , 0 , pStr , len , NULL , 0 ) ;
     if ( (size_t)-1 == len )
         -- nChars;
@@ -82,12 +78,7 @@ inline const std::wstring& toWideString( const std::wstring& str )
 #pragma warning(disable: 4267)
 inline std::string toNarrowString( const wchar_t* pStr , size_t len=-1 )
 {
-    //ASSERT_PTR( pStr ) ;
-    //ASSERT( len >= 0 || len == -1 , _T("Invalid string length: ") << len ) ;
-
-    // figure out how many narrow characters we are going to get
-
-    int nChars = WideCharToMultiByte( CP_ACP , 0 ,
+	int nChars = WideCharToMultiByte( CP_ACP , 0 ,
              pStr , len , NULL , 0 , NULL , NULL ) ;
     if ( (size_t)-1 == len )
         -- nChars ;
