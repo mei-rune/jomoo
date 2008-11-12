@@ -11,41 +11,10 @@
 # include "Hazel.Platform/os_string.h"
 # include "string_traits.hpp"
 
-namespace String
-{
-
-template <typename S>
-struct quoter
-	: public std::unary_function<char const*, void>
-{
-public:
-    S operator()(S const &s) const
-    {
-        if(!is_null( ::strpbrk( c_str_ptr( s), " \t\"") ))
-        {
-            // Check whether it has quotes. If it does, we'll just assume it's ok
-            if(!is_null( ::strchr(c_str_ptr( s), '"')))
-            {
-                return s;
-            }
-            else
-            {
-                return '"' + s + '"';
-            }
-        }
-        else
-        {
-            return s;
-        }
-    }
-};
-
 template <typename C>
 struct string_begin_with_function
 	: public std::unary_function<C const*, bool>
 {
-public:
-
 public:
     string_begin_with_function(C const *prefix)
         : m_prefix(prefix)
@@ -57,7 +26,6 @@ public:
         , m_prefixLen( prefixLen )
     {}
 
-public:
     bool operator ()(C const *line) const
     {
         return 0 == string_traits< C >::strncmp(line, m_prefix, m_prefixLen);
@@ -108,6 +76,18 @@ private:
     C const *const  m_suffix;
     const size_t m_suffixLen;
 };
+
+template <typename C>
+inline string_begins_with_function<C> make_begins_with(C const *prefix)
+{
+    return string_begins_with_function<C>(prefix);
+}
+
+template <typename C>
+inline string_ends_with_function<C> make_ends_with(C const *suffix)
+{
+    return string_ends_with_function<C>(suffix);
+}
 
 template<typename char_type>
 inline bool begin_with( const char_type* str, typename char_type const * prefix, size_t count)
@@ -181,8 +161,6 @@ template<typename stringT>
 inline bool end_with( const stringT& str, const stringT& prefix)
 {
 	return end_with( c_str_ptr(str), str.size(), c_str_ptr( prefix ), prefix.size() );
-}
-
 }
 
 #endif // _with_functions_hpp_

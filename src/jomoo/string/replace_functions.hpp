@@ -8,10 +8,7 @@
 # pragma once
 #endif /* Hazel_LACKS_PRAGMA_ONCE */
 
-# include "Hazel.Platform/os_string.h"
-
-namespace String
-{
+# include "platform/os_string.h"
 
 /**
  * 在指定字符串忽略大小查找字符串
@@ -22,7 +19,6 @@ namespace String
  * @return 找到返回它以0开始的位置，没有返回npos
  * @remark 如果what字空时返回npos
  */
-
 template<typename stringT>
 inline typename stringT::size_type case_find (const stringT	&s,
 											 typename stringT::value_type const *what,

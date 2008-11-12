@@ -8,7 +8,7 @@
 # pragma once
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
-# include "Platform/os_string.h"
+# include "platform/os_string.h"
 
 template <typename C>
 struct string_traits;
