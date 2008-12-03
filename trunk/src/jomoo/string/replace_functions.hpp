@@ -48,19 +48,19 @@ inline typename stringT::size_type case_find (const stringT	&s,
  * @param[ in ] offset 偏移量
  * @param[ in ] what 子字符串
  * @param[ in ] with 子字符串
- * @param[ in ] Casesensitive 是否区分大小写，( true 区分， false 不区分 )
+ * @param[ in ] casesensitive 是否区分大小写，( true 区分， false 不区分 )
  * @return 返回替换后的字符串。
  */
 template<typename stringT>
-inline stringT& replace (stringT	&s,
+inline stringT& replace_all (stringT	&s,
 						 typename stringT::size_type			offset,
 						 const typename stringT::value_type*	what,
 						 typename stringT::size_type	whatlen,
 						 const typename stringT::value_type* with,
 						 typename stringT::size_type withlen,
-						 bool Casesensitive = true )
+						 bool casesensitive = true )
 {
-	if( Casesensitive )
+	if( casesensitive )
 	{
 		while ( stringT::npos != (offset = case_find( what, offset, whatlen ) ))
 		{
@@ -80,90 +80,90 @@ inline stringT& replace (stringT	&s,
 }
 
 template<typename stringT>
-inline stringT& replace (stringT	&s,
+inline stringT& replace_all (stringT	&s,
 			typename stringT::size_type			offset,
 		    typename stringT::value_type		what,
 		    typename stringT::value_type const * with,
 			typename stringT::size_type len,
-			bool Casesensitive = true )
+			bool casesensitive = true )
 {
-	return replace( s, offset, &what, 1, with, len, Casesensitive );
+	return replace_all( s, offset, &what, 1, with, len, casesensitive );
 }
 
 template<typename stringT>
-inline stringT& replace (stringT	&s,
+inline stringT& replace_all (stringT	&s,
 			typename stringT::size_type			offset,
 		    typename stringT::value_type		what,
 		    typename stringT::value_type const * with,
-			bool Casesensitive )
+			bool casesensitive )
 {
-	return replace( s, offset,
+	return replace_all( s, offset,
 		&what, 1,
 		with, string_traits<typename stringT::value_type>::strlen( with ),
-		Casesensitive );
+		casesensitive );
 }
 
 template<typename stringT>
-inline stringT& replace (stringT	&s,
+inline stringT& replace_all (stringT	&s,
 			stringT::size_type			offset,
 		    typename stringT::value_type what,
 		    const stringT	&with,
-			bool Casesensitive )
+			bool casesensitive  = true)
 {
-	return replace( s, offset,
+	return replace_all( s, offset,
 		what,
-		with.c_str(),with.size(),
-		Casesensitive );
+		c_str_ptr(with),with.size(),
+		casesensitive );
 }
 
 template<typename stringT>
-inline stringT& replace (stringT	&s,
+inline stringT& replace_all (stringT	&s,
 			typename stringT::size_type			offset,
 		    typename stringT::value_type const * what,
 		    typename stringT::value_type const * with,
-			bool Casesensitive )
+			bool casesensitive  = true)
 {
-	return replace( s, offset,
+	return replace_all( s, offset,
 		what,string_traits<typename stringT::value_type>::strlen( what ),
 		with, string_traits<typename stringT::value_type>::strlen( with ),
-		Casesensitive );
+		casesensitive );
 }
 
 template<typename stringT>
-inline stringT& replace (stringT	&s,
+inline stringT& replace_all (stringT	&s,
 			typename stringT::size_type			offset,
 		    const stringT& what,
 		    const stringT& with,
-			bool Casesensitive )
+			bool casesensitive  = true)
 {
-	return replace( s, offset,
-		what.c_str(),what.size( ),
-		with.c_str(), with.size( ),
-		Casesensitive );
+	return replace_all( s, offset,
+		c_str_ptr(what),what.size( ),
+		c_str_ptr(with), with.size( ),
+		casesensitive );
 }
 
 template<typename stringT>
-inline stringT& replace (stringT	&s,
+inline stringT& replace_all (stringT	&s,
 		    typename stringT::value_type const * what,
 		    typename stringT::value_type const * with,
-			bool Casesensitive )
+			bool casesensitive  = true)
 {
-	return replace( s, 0,
+	return replace_all( s, 0,
 		what,string_traits<typename stringT::value_type>::strlen( what ),
 		with, string_traits<typename stringT::value_type>::strlen( with ),
-		Casesensitive );
+		casesensitive );
 }
 
 template<typename stringT>
-inline stringT& replace (stringT	&s,
+inline stringT& replace_all (stringT	&s,
 		    const stringT	&what,
 		    const stringT	&with,
-			bool Casesensitive )
+			bool casesensitive  = true)
 {
-	return replace (s, 0,
-		what.c_str(), what.size(),
-		with.c_str(), with.size(),
-		Casesensitive );
+	return replace_all (s, 0,
+		c_str_ptr( what ), what.size(),
+		c_str_ptr( with ), with.size(),
+		casesensitive );
 }
 
 #endif /* _replace_functions_hpp_ */
