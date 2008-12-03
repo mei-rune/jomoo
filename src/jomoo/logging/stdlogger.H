@@ -23,7 +23,10 @@
 
 _jomoo_begin
 
-class StdLogger : public BOE_Log_Impl
+namespace logging
+{
+
+class StdLogger : public ILogger
 {
 public:
 
@@ -130,6 +133,8 @@ public:
 private:
 	LevelPtr l;
 };
+
+}
 
 _jomoo_end
 
