@@ -15,7 +15,9 @@
 
 _jomoo_begin
 
+#ifdef __GNUG__
  #define _RAISE(x)	throw (x)
+#endif
 
 class Exception : public std::runtime_error
 {

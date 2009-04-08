@@ -68,29 +68,26 @@ inline tstring lastError( )
 
 inline tstring get_c_error( int e )
 {
-#ifndef _UNICODE
-	tstring err( 1024, ' ' );
 
-	if( 0 == strerror_s( ( tstring::value_type*) err.c_str(), 1024 , e ) )
-	{
-		err.resize( string_traits<tstring::value_type>::strlen( err.c_str() ) );
-	}
-	else
-	{
-		err = "<<unkown error>>";
-	}
-	return err;
+#ifdef __GNUG__
+
+#ifdef _UNICODE
+	return _wcserror( e );
 #else
-	tstring err( 1024, L' ' );
+	return strerror( e );
+#endif
 
+#else
+
+	tstring err( 1024, ' ' );
+#ifdef _UNICODE
 	if( 0 == _wcserror_s( ( tstring::value_type*) err.c_str(), 1024 , e ) )
-	{
+#else
+	if( 0 == strerror_s( ( tstring::value_type*) err.c_str(), 1024 , e ) )
+#endif
 		err.resize( string_traits<tstring::value_type>::strlen( err.c_str() ) );
-	}
 	else
-	{
-		err = L"<<unkown error>>";
-	}
+		err = _T("<<unkown error>>");
 	return err;
 #endif
 }
