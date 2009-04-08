@@ -11,10 +11,10 @@
 
 # include "jomoo/exception.hpp"
 # include "Platform/OS.H"
-# ifndef HAS_BOOST
-# include <tr1/memory>
-# else
+# ifdef HAS_BOOST
 # include "boost/tr1/memory.hpp"
+# else
+# include <tr1/memory>
 # endif
 # include "intrusive_ptr.hpp"
 

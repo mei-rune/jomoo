@@ -10,7 +10,7 @@
 // Include files
 # include <time.h>
 # include "Timestamp.h"
-
+# include "string.hpp"
 _jomoo_begin
 
 class Timezone
@@ -58,7 +58,7 @@ public:
 		result.resize( 256 );
 		int rc = WideCharToMultiByte(CP_ACP, 0, ptr, -1, ( char_t* )result.c_str(), result.size(), NULL, NULL);
 		if (rc)
-			result.size( rc );
+			result.resize( rc );
 		return result;
 #endif
 	}
@@ -75,7 +75,7 @@ public:
 		result.resize( 256 );
 		int rc = WideCharToMultiByte(CP_ACP, 0, ptr, -1, ( char_t* )result.c_str(), result.size(), NULL, NULL);
 		if (rc)
-			result.size( rc );
+			result.resize( rc );
 		return result;
 #endif
 	}
@@ -93,7 +93,7 @@ public:
 		result.resize( 256 );
 		int rc = WideCharToMultiByte(CP_ACP, 0, ptr, -1, ( char_t* )result.c_str(), result.size(), NULL, NULL);
 		if (rc)
-			result.size( rc );
+			result.resize( rc );
 		return result;
 #endif
 	}

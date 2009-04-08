@@ -8,7 +8,7 @@
 # pragma once
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
-#ifdef BOOST
+#ifdef HAS_BOOST
 
 #pragma warning(push,3)
  #pragma warning(disable: 4819)
@@ -136,7 +136,7 @@ struct to_stringer< true >
 
 }
 
-#ifdef BOOST
+#ifdef HAS_BOOST
 
 template< typename T >
 inline tstring toString( T t )

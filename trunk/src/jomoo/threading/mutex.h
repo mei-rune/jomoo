@@ -13,52 +13,51 @@
 
 #ifdef JOMOO_MT
 
-#include "os_threading.h"
 #include "guard.h"
 
-_jomoo_begin
+_thread_begin
 
-class thread_mutex
+class mutex
 {
 public:
 	
-	typedef guard< thread_mutex > spcode_lock;
+	typedef guard< mutex > spcode_lock;
 
-	thread_mutex()
+	mutex()
 	{
-		OS::create_critical_section( &section_ );
+		InitializeCriticalSection( &section_ );
 	}
 
-	~thread_mutex()
+	~mutex()
 	{
-		OS::close_critical_section( &section_ );
+		DeleteCriticalSection( &section_ );
 	}
 
 	bool acquire()
 	{
-		OS::enter_critical_section( &section_ );
+		EnterCriticalSection( &section_ );
 		return true;
 	}
 	void release()
 	{
-		OS::leave_critical_section( &section_ );
+		LeaveCriticalSection( &section_ );
 	}
 
 #if(_WIN32_WINNT >= 0x0400)
 	bool tryacquire()
 	{
-		return OS::try_enter_critical_section( &section_ );
+		return TryEnterCriticalSection( &section_ );
 	}
 #endif
 
 private:
 
-	DECLARE_NO_COPY_CLASS( thread_mutex );
+	DECLARE_NO_COPY_CLASS( mutex );
 
-	critical_section section_;
+	CRITICAL_SECTION section_;
 };
 
-_jomoo_end
+_thread_end
 
 #endif // JOMOO_MT
 

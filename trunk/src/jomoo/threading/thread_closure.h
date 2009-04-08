@@ -10,12 +10,17 @@
 # pragma once
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
-#include "config_threading.h"
-#include "boost/tr1/type_traits.hpp"
-#include "boost/tr1/memory.hpp"
-#include "jomoo/memory/pool.h"
-#include "jomoo/memory/memorymanager.h"
-#include "jomoo/mpl/function_type.h"
+# include "config_threading.h"
+
+# ifdef HAS_BOOST
+# include "boost/tr1/memory.hpp"
+# include "boost/tr1/type_traits.hpp"
+# else
+# include <tr1/memory>
+# include <tr1/type_traits.hpp>
+# endif
+
+# include "jomoo/mpl/function_type.h"
 
 _thread_begin
 
@@ -38,9 +43,8 @@ class thread_closure_0
 {
 public:
 
-	thread_closure_0( _jomoo_memory pool_ptr pool, const F& f, const tchar* nm = 0)
-		: _pool( pool )
-		, _function( f )
+	thread_closure_0( const F& f, const tchar* nm = 0)
+		: _function( f )
 		, _name( (0 == nm) ? _T("") : nm )
 	{
 	}
@@ -54,11 +58,11 @@ public:
 		}
 		catch ( ... )
 		{
-			JOMOO_DELETE( self->_pool , self );
+			delete self;
 			throw;
 		}
 
-		JOMOO_DELETE( self->_pool , self );
+		delete self;
 	}
 
 	const tstring& name() const
@@ -67,7 +71,6 @@ public:
 	}
 private:
 	F _function;
-	_jomoo_memory pool_ptr _pool;
 	tstring _name;
 };
 
@@ -76,9 +79,8 @@ class thread_closure_1
 {
 public:
 
-	thread_closure_1(_jomoo_memory pool_ptr pool, const F& f, const P& x, const tchar* nm = 0)
-		: _pool( pool )
-		, _function( f )
+	thread_closure_1( const F& f, const P& x, const tchar* nm = 0)
+		: _function( f )
 		, _name( (0 == nm) ? _T("") : nm )
 		, arg1( x )
 	{
@@ -93,10 +95,10 @@ public:
 		}
 		catch ( ... )
 		{
-			JOMOO_DELETE( self->_pool , self );
+			delete self;
 			throw;
 		}
-		JOMOO_DELETE( self->_pool , self );
+		delete self;
 	}
 
 	const tstring& name() const
@@ -105,7 +107,6 @@ public:
 	}
 private:
 	F _function;
-	_jomoo_memory pool_ptr _pool;
 	tstring _name;
 	P arg1;
 };
@@ -115,9 +116,8 @@ class thread_closure_2
 {
 public:
 
-	thread_closure_2(_jomoo_memory pool_ptr pool, const F& f, const P1& x1, const P2& x2, const tchar* nm = 0)
-		: _pool( pool )
-		, _function( f )
+	thread_closure_2( const F& f, const P1& x1, const P2& x2, const tchar* nm = 0)
+		: _function( f )
 		, _name( (0 == nm) ? _T("") : nm )
 		, arg1( x1 )
 		, arg2( x2 )
@@ -133,10 +133,10 @@ public:
 		}
 		catch ( ... )
 		{
-			JOMOO_DELETE( self->_pool , self );
+			delete self;
 			throw;
 		}
-		JOMOO_DELETE( self->_pool , self );
+		delete self;
 	}
 
 	const tstring& name() const
@@ -145,7 +145,6 @@ public:
 	}
 private:
 	F _function;
-	_jomoo_memory pool_ptr _pool;
 	tstring _name;
 	P1 arg1;
 	P2 arg2;
@@ -156,9 +155,8 @@ class thread_closure_3
 {
 public:
 
-	thread_closure_3(_jomoo_memory pool_ptr pool, const F& f, const P1& x1, const P2& x2, const P3& x3, const tchar* nm = 0)
-		: _pool( pool )
-		, _function( f )
+	thread_closure_3( const F& f, const P1& x1, const P2& x2, const P3& x3, const tchar* nm = 0)
+		: _function( f )
 		, _name( (0 == nm) ? _T("") : nm )
 		, arg1( x1 )
 		, arg2( x2 )
@@ -175,10 +173,10 @@ public:
 		}
 		catch ( ... )
 		{
-			JOMOO_DELETE( self->_pool , self );
+			delete self;
 			throw;
 		}
-		JOMOO_DELETE( self->_pool , self );
+		delete self;
 	}
 
 	const tstring& name() const
@@ -187,7 +185,6 @@ public:
 	}
 private:
 	F _function;
-	_jomoo_memory pool_ptr _pool;
 	tstring _name;
 	P1 arg1;
 	P2 arg2;

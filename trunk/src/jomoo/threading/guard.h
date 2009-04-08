@@ -13,7 +13,7 @@
 # include "jomoo/exception.hpp"
 
 
-_jomoo_begin
+_thread_begin
 
 template <class LOCK>
 class guard
@@ -97,6 +97,6 @@ private:
 	DECLARE_NO_COPY_CLASS( guard );
 };
 
-_jomoo_end
+_thread_end
 
 #endif //_GUARD_H_

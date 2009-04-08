@@ -10,6 +10,8 @@
 # pragma once
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
+#include "jomoo/platform/os_string.h"
+
 #define _thread_begin _jomoo_begin
 #define _thread_end _jomoo_end
 #define _jomoo_thread _jomoo

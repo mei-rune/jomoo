@@ -9,7 +9,11 @@
 
 // Include files
 #include <functional>
-#include <boost/tr1/memory.hpp>
+# ifdef HAS_BOOST
+# include "boost/tr1/memory.hpp"
+# else
+# include <tr1/memory>
+# endif
 
 _jomoo_begin
 
