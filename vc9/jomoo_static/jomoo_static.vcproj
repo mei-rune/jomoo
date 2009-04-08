@@ -6,6 +6,7 @@
 	ProjectGUID="{0956207A-54FD-4BFE-9E96-C14AEEA22BC5}"
 	RootNamespace="jomoo_static"
 	Keyword="Win32Proj"
+	AssemblyReferenceSearchPaths="&quot;..\..\src&quot;"
 	TargetFrameworkVersion="131072"
 	>
 	<Platforms>
@@ -42,14 +43,14 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/DHAS_BOOST"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(SQLITE_ROOT)&quot;;&quot;$(BOOST_ROOT)&quot;;&quot;$(JOMOO_ROOT)\src\&quot;"
+				AdditionalIncludeDirectories="&quot;$(SQLITE_ROOT)&quot;;&quot;$(BOOST_ROOT)&quot;;&quot;$(JOMOO_ROOT)&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
-				Detect64BitPortabilityProblems="true"
+				Detect64BitPortabilityProblems="false"
 				DebugInformationFormat="4"
 			/>
 			<Tool
@@ -952,10 +953,6 @@
 					RelativePath="..\..\src\jomoo\db\spi\transaction.h"
 					>
 				</File>
-			</Filter>
-			<Filter
-				Name="unittest"
-				>
 			</Filter>
 		</Filter>
 		<Filter
