@@ -9,7 +9,10 @@
 
 #ifdef HAS_BOOST
 
+# include "boost/intrusive_ptr.hpp"
+
 _jomoo_begin
+
 
 using boost::intrusive_ptr;
 

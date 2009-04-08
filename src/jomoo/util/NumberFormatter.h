@@ -362,6 +362,7 @@ public:
 		tstring buffer;
 		buffer.resize( 64 );
 
+		//string_traits<tstring::value_type>::sp
 		sprintf(buffer, _T("%08lX"), (int) ptr);
 		return buffer;
 	}

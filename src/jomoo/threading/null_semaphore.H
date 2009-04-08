@@ -12,7 +12,7 @@
 #include "config_threading.h"
 #include "guard.h"
 
-_jomoo_begin
+_thread_begin
 
 class null_semaphore
 {
@@ -50,7 +50,7 @@ private:
 	DECLARE_NO_COPY_CLASS( null_semaphore );
 };
 
-_jomoo_end
+_thread_end
 
 
 #endif // null_semaphore_h

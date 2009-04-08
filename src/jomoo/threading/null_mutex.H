@@ -12,7 +12,7 @@
 #include "config_threading.h"
 #include "guard.h"
 
-_jomoo_begin
+_thread_begin
 
 class null_mutex
 {
@@ -49,7 +49,7 @@ private:
 	DECLARE_NO_COPY_CLASS( null_mutex );
 };
 
-_jomoo_end
+_thread_end
 
 
 #endif // null_mutex_H

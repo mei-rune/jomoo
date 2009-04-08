@@ -12,17 +12,9 @@
 #ifdef JOMOO_MT
 
 #include "threading/thread.h"
-#include "threading/thread_manager.h"
-#include "threading/thread_mutex.h"
-#include "threading/thread_semaphore.h"
+#include "threading/mutex.h"
+#include "threading/semaphore.h"
 #include "threading/event.h"
-
-_thread_begin
-
-typedef thread_mutex mutex;
-typedef thread_semaphore semaphore;
-
-_thread_end
 
 #else
 

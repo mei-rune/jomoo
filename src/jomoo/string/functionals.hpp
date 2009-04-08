@@ -11,6 +11,5 @@
 # include "platform/os_string.h"
 # include "string_traits.hpp"
 
-# include ""
 
 #endif // _functionals_hpp_

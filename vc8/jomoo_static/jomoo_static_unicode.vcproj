@@ -40,8 +40,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(BOOST_ROOT)&quot;;&quot;$(SolutionDir)\..\src\&quot;"
-				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
+				AdditionalIncludeDirectories="&quot;$(BOOST_ROOT)&quot;;&quot;$(JOMOO_ROOT)&quot;"
+				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;HAS_BOOST"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -339,122 +339,10 @@
 				RelativePath="..\..\src\jomoo\memory\config_Memory.H"
 				>
 			</File>
-			<File
-				RelativePath="..\..\src\jomoo\memory\FixedPool.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\memory\FixedPool.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\memory\Memory.H"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\memory\MemoryManager.CPP"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\memory\MemoryManager.H"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\memory\MemoryPool.H"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\memory\ObjectPool.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\memory\Pool.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\memory\SystemPool.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\memory\SystemPool.h"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="threading"
 			>
-			<File
-				RelativePath="..\..\src\jomoo\threading\config_threading.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\threading\event.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\threading\guard.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\threading\null_mutex.H"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\threading\null_semaphore.H"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\threading\os_threading.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\threading\os_threading.inl"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\threading\thread.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\threading\thread.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\threading\thread.inl"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\threading\thread_closure.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\threading\thread_manager.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\threading\thread_manager.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\threading\thread_manager.inl"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\threading\thread_mutex.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\threading\thread_semaphore.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\threading\worker_queue..h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\threading\worker_queue.T"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="string"
