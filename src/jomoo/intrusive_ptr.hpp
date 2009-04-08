@@ -7,6 +7,8 @@
 # pragma once
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
+# include "boost/intrusive_ptr.hpp"
+
 #ifdef HAS_BOOST
 
 # include "boost/intrusive_ptr.hpp"
