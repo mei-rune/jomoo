@@ -9,8 +9,13 @@
 #endif /* JINGXIAN_LACKS_PRAGMA_ONCE */
 
 // Include files
-# include "connector.h"
-# include "acceptor.h"
+# include "IConcurrentPort.h"
+# include "IEndpoint.h"
+# include "ITransport.h"
+# include "IProtocol.h"
+# include "IProtocolFactory.h"
+# include "IConnector.h"
+# include "IAcceptor.h"
 
 _jingxian_begin
 
@@ -22,36 +27,36 @@ public:
     /**
 	 * 创建一个连接器
 	 */
-    connector* connectWith(const tchar* endPoint);
+    virtual IConnector* connectWith(const tchar* endPoint) = 0;
 
 	
     /**
 	 * 创建一个连接器
 	 */
-    connector* connectWith(const tchar* endPoint
-            , IDictionary& kw);
+    virtual IConnector* connectWith(const tchar* endPoint
+			, IDictionary& kw) = 0;
 
 	
     /**
 	 * 创建一个监听服务
 	 */
-    acceptor* listenWith(const IEndpoint& endPoint
-		, IProtocolFactory* protocolFactory);
+    virtual IAcceptor* listenWith(const IEndpoint& endPoint
+			, IProtocolFactory* protocolFactory) = 0;
 
 	/**
 	 * 开始运行直到调用Interrupt才返回
 	 */
-	void runForever();
+	virtual void runForever() = 0;
 
 	/**
 	 * 停止运行
 	 */
-	void interrupt();
+	virtual void interrupt() = 0;
 
 	/**
 	 * 将句柄绑定到本端口
 	 */
-	bool bind(HANDLE systemHandler);
+	virtual bool bind(HANDLE systemHandler) = 0;
 };
 
 _jingxian_end

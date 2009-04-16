@@ -10,15 +10,21 @@
 
 // Include files
 # include "buffer.h"
-# include "transport.h"
 # include "IDictionary.h"
 
 _jingxian_begin
+
+class IAcceptor;
+class ITransport;
 
 class ProtocolContext
 {
 public:
 	virtual ~ProtocolContext(){}
+
+	virtual IAcceptor& acceptor() = 0;
+
+	virtual const IAcceptor& acceptor() const = 0;
 
 	virtual ITransport& transport() = 0;
 

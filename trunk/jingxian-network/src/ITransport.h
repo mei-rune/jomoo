@@ -10,7 +10,7 @@
 
 // Include files
 # include "buffer.h"
-# include "endpoint.h"
+# include "IEndpoint.h"
 # include "exception.hpp"
 
 _jingxian_begin
@@ -75,7 +75,18 @@ public:
          * 引发 @see{protocol} 的onTimeout事件的超时时间
          */
         virtual time_t timeout() const = 0;
+
+		/**
+		 * 取得地址的描述
+		 */
+		virtual const tstring& toString() const = 0;
 };
+
+inline tostream& operator<<( tostream& target, const ITransport& transport )
+{
+	target << transport.toString();
+	return target;
+}
 
 _jingxian_end
 

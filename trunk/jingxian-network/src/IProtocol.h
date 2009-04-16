@@ -1,6 +1,6 @@
 
-#ifndef _protocol_h_
-#define _protocol_h_
+#ifndef _IProtocol_H_
+#define _IProtocol_H_
 
 #include "config.h"
 
@@ -9,10 +9,11 @@
 #endif /* JINGXIAN_LACKS_PRAGMA_ONCE */
 
 // Include files
-# include "ProtocolContext.h"
 # include "exception.hpp"
 
-_jomoo_networks_begin
+_jingxian_begin
+
+class ProtocolContext;
 
 class IProtocol
 {
@@ -55,9 +56,20 @@ public:
      * @param[ in ] lastBuffer 上一次用来读取数据的缓冲区</param>
      * @param[ in ] buffer 包含新到来信息的缓冲区
 	 */
-    Buffer createBuffer(Buffer& lastBuffer);
+	Buffer createBuffer(Buffer& lastBuffer);
+
+	/**
+	* 取得地址的描述
+	*/
+	virtual const tstring& toString() const = 0;
 };
 
-_jomoo_networks_end
+inline tostream& operator<<( tostream& target, const IProtocol& protocol )
+{
+	target << protocol.toString();
+	return target;
+}
 
-#endif // _protocol_h_
+_jingxian_end
+
+#endif // _IProtocol_H_

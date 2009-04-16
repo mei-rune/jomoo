@@ -1,6 +1,6 @@
 
-#ifndef ENDPOINT_H
-#define ENDPOINT_H
+#ifndef _IEndpoint_H
+#define _IEndpoint_H
 
 #include "config.h"
 
@@ -49,4 +49,4 @@ inline tostream& operator<<( tostream& target, const IEndpoint& addr )
 
 _jingxian_end
 
-#endif //ENDPOINT_H
+#endif //_IEndpoint_H

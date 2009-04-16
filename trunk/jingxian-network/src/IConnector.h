@@ -11,20 +11,19 @@
 // Include files
 # include "string.hpp"
 # include "Exception.hpp"
-# include "IEndpoint.h"
 
 _jingxian_begin
 
-typedef IProtocol* (*BuildProtocol)(ITransport* transport,void* context);
+class IEndpoint;
 
-typedef void (*OnConnectError)(void* context, const Exception& exception);
-
-
+typedef IProtocol* (*BuildProtocol)( ITransport* transport, void* context);
+typedef void (*OnConnectError)( const Exception& exception, void* context);
 
 class IConnector
 {
 public:
-	virtual ~IReactorCore() {};
+
+	virtual ~IConnector() {};
     /**
      * 建立一个连接
      * 
@@ -41,7 +40,18 @@ public:
 	 * 连接的目标地址
 	 */
     virtual const IEndpoint& connectTo() const = 0;
+
+	/**
+	* 取得地址的描述
+	*/
+	virtual const tstring& toString() const = 0;
 };
+
+inline tostream& operator<<( tostream& target, const IConnector& connector )
+{
+	target << connector.toString();
+	return target;
+}
 
 _jingxian_end
 
