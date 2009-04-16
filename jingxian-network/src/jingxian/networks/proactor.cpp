@@ -169,7 +169,7 @@ int proactor::handle_events (unsigned long milli_seconds)
 	return 0;
 }
 
-void proactor::application_specific_code (command *asynch_result,
+void proactor::application_specific_code (ICommand *asynch_result,
 														  size_t bytes_transferred,
 														  const void *completion_key,
 														  u_long error)
@@ -193,7 +193,7 @@ void proactor::application_specific_code (command *asynch_result,
 	command_queue::release( asynch_result );
 }
 
-bool proactor::post(command *result )
+bool proactor::post(ICommand *result )
 {
 	if( is_null( result ) )
 		return false;

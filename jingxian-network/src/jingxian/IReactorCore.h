@@ -36,13 +36,12 @@ public:
     virtual IConnector* connectWith(const tchar* endPoint
 			, IDictionary& kw) = 0;
 
-	
     /**
 	 * 创建一个监听服务
 	 */
-    virtual IAcceptor* listenWith(const IEndpoint& endPoint
+    virtual IAcceptor* listenWith( const tchar* endPoint
 			, IProtocolFactory* protocolFactory) = 0;
-
+	
 	/**
 	 * 开始运行直到调用Interrupt才返回
 	 */
