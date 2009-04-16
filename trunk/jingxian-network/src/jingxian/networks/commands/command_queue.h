@@ -10,8 +10,7 @@
 #endif /* JINGXIAN_LACKS_PRAGMA_ONCE */
 
 // Include files
-#include "os_networks.h"
-#include "command.h"
+#include "ICommand.h"
 
 _jingxian_begin
 
@@ -19,7 +18,7 @@ class command_queue
 {
 public:
 
-	static void release( command* cmd );
+	static void release( ICommand* cmd );
 };
 
 _jingxian_end

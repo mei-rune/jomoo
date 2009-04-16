@@ -9,8 +9,8 @@
 #endif /* JINGXIAN_LACKS_PRAGMA_ONCE */
 
 // Include files
-# include "os_string.hpp"
 # include <ctype.h>
+# include "os_string.hpp"
 
 
 template <typename C>

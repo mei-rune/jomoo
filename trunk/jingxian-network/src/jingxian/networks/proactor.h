@@ -1,7 +1,7 @@
 
 
-#ifndef _PROACTOR_H_
-#define _PROACTOR_H_
+#ifndef _IOCPServer_H_
+#define _IOCPServer_H_
 
 #include "config.h"
 
@@ -10,8 +10,8 @@
 #endif /* JINGXIAN_LACKS_PRAGMA_ONCE */
 
 // Include files
-#include "os_networks.h"
-#include "command.h"
+# include "jingxian/networks/commands/ICommand.h"
+# include "jingxian/IReactorCore.h"
 
 _jingxian_begin
 
@@ -49,7 +49,7 @@ public:
 	/**
 	 * 发送一个已经完成的请求到完成端口
 	 */
-	bool post(command *result );
+	bool post(ICommand *result );
 
 	/**
 	 * 获取已完成的事件,并处理这个事件
@@ -63,7 +63,7 @@ public:
 	HANDLE handle();
 
 private:
-	void application_specific_code (command *asynch_result,
+	void application_specific_code (ICommand *asynch_result,
 		size_t bytes_transferred,
 		const void *completion_key,
 		u_long error);
@@ -74,4 +74,4 @@ private:
 
 _jingxian_end
 
-#endif // _PROACTOR_H_
+#endif // _IOCPServer_H_

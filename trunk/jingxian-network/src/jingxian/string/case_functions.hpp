@@ -9,8 +9,8 @@
 #endif /* JINGXIAN_LACKS_PRAGMA_ONCE */
 
 // Include files
-# include "ctype_traits.hpp"
 # include <algorithm>
+# include "ctype_traits.hpp"
 
 template<   typename S
         ,   typename F

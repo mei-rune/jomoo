@@ -15,10 +15,10 @@ _jingxian_begin
 /**
  * 方法接口
  */
-class runnable
+class IRunnable
 {
 public:
-	virtual ~runnable() {}
+	virtual ~IRunnable() {}
 
 	virtual void run() = 0;
 };
@@ -37,7 +37,7 @@ public:
      *
      * @param[ in ] run 执行方法
 	 */
-    virtual void send( runnable* run ) = 0;
+    virtual void send( IRunnable* run ) = 0;
 
 	/**
 	* 取得地址的描述

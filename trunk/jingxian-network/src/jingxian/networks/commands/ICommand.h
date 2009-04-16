@@ -1,6 +1,6 @@
 
-#ifndef COMMAND_H
-#define COMMAND_H
+#ifndef _ICommand_H
+#define _ICommand_H
 
 #include "config.h"
 
@@ -13,11 +13,11 @@
 
 _jingxian_begin
 
-class command : public OVERLAPPED
+class ICommand : public OVERLAPPED
 {
 public:
 
-	command( )
+	ICommand( )
 		: handle_( INVALID_HANDLE_VALUE )
 		//, instance_( 0 )
 	{
@@ -28,7 +28,7 @@ public:
 		hEvent = 0;
 	}
 
-	virtual ~command(void)
+	virtual ~ICommand(void)
 	{
 	}
 
@@ -50,4 +50,4 @@ protected:
 
 _jingxian_end
 
-#endif //COMMAND_H
+#endif //_ICommand_H
