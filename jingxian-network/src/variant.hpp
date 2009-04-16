@@ -13,7 +13,14 @@
 _jingxian_begin
 
 
-class DictionaryObject
+
+struct stringData;
+{
+	size_t len;
+	char* ptr;
+};
+
+class variantObject
 {
 public:
 
@@ -42,7 +49,7 @@ public:
 
 	virtual int64_t toInt64()const = 0;
 
-	virtual const tstring& toString()const = 0;
+	virtual const stringData& toString()const = 0;
 
 	virtual void* toPtr()const = 0;
 
@@ -51,29 +58,20 @@ public:
 	virtual int getType()const = 0;
 };
 
-class variant : ObjectBase
+struct variant
 {
-public:
-
-private:
-		struct stringData;
-		{
-			size_t len;
-			char* str;
-		};
-
-		int type;
-		union
-		{
-			bool bVal;
-			int8_t i8;
-			int16_t i16;
-			int32_t i32;
-			int64_t i64;
-			stringData str;
-			void* ptr;
-		} record;
-}
+	int type;
+	union 
+	{
+		bool bVal;
+		int8_t i8;
+		int16_t i16;
+		int32_t i32;
+		int64_t i64;
+		stringData str;
+		void* ptr;
+	} record;
+};
 
 _jingxian_end
 

@@ -256,22 +256,6 @@
 			Name="networks"
 			>
 			<File
-				RelativePath=".\src\networks\sockets\base_socket.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\networks\sockets\base_socket.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\networks\sockets\base_socket.inl"
-				>
-			</File>
-			<File
-				RelativePath=".\src\networks\command.h"
-				>
-			</File>
-			<File
 				RelativePath=".\src\networks\command_queue.cpp"
 				>
 			</File>
@@ -292,6 +276,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\networks\ICommand.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\networks\inet_address.cpp"
 				>
 			</File>
@@ -300,53 +288,77 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\networks\sockets\os_networks.cpp"
+				RelativePath=".\src\networks\IOCPServer.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\networks\os_networks.h"
+				RelativePath=".\src\networks\IOCPServer.h"
 				>
 			</File>
-			<File
-				RelativePath=".\src\networks\sockets\os_networks.inl"
+			<Filter
+				Name="commands"
 				>
-			</File>
-			<File
-				RelativePath=".\src\networks\proactor.cpp"
+				<File
+					RelativePath=".\src\networks\commands\AcceptRequest.cs"
+					>
+				</File>
+				<File
+					RelativePath=".\src\networks\commands\ConnectRequest.cs"
+					>
+				</File>
+				<File
+					RelativePath=".\src\networks\commands\DisconnectRequest.cs"
+					>
+				</File>
+				<File
+					RelativePath=".\src\networks\commands\ReadRequest.cs"
+					>
+				</File>
+				<File
+					RelativePath=".\src\networks\commands\write_request.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="sockets"
 				>
-			</File>
-			<File
-				RelativePath=".\src\networks\proactor.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\networks\sockets\tcp_client.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\networks\sockets\tcp_client.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\networks\sockets\tcp_client.inl"
-				>
-			</File>
-			<File
-				RelativePath=".\src\networks\sockets\tcp_server.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\networks\sockets\tcp_server.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\networks\sockets\tcp_server.inl"
-				>
-			</File>
-			<File
-				RelativePath=".\src\networks\request\write_request.h"
-				>
-			</File>
+				<File
+					RelativePath=".\src\networks\sockets\base_socket.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\networks\sockets\base_socket.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\networks\sockets\base_socket.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\src\networks\sockets\tcp_client.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\networks\sockets\tcp_client.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\networks\sockets\tcp_client.inl"
+					>
+				</File>
+				<File
+					RelativePath=".\src\networks\sockets\tcp_server.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\src\networks\sockets\tcp_server.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\networks\sockets\tcp_server.inl"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="commons"
@@ -442,10 +454,6 @@
 		</File>
 		<File
 			RelativePath=".\src\IEndpoint.h"
-			>
-		</File>
-		<File
-			RelativePath=".\src\IListeningPort.h"
 			>
 		</File>
 		<File

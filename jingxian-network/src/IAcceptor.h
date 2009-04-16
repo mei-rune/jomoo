@@ -1,6 +1,6 @@
 
-#ifndef _acceptor_h_
-#define _acceptor_h_
+#ifndef _IAcceptor_H_
+#define _IAcceptor_H_
 
 #include "config.h"
 
@@ -10,29 +10,44 @@
 
 // Include files
 # include "buffer.h"
-# include "endpoint.h"
+# include "IDictionary.h"
 
 _jingxian_begin
+
+class IEndpoint;
+class IProtocolFactory;
 
 class IAcceptor
 {
 public:
-
 	virtual ~IAcceptor(){}
 
     virtual  time_t timeout () const = 0;
 
-    virtual const IEndpoint& bindpoint() const = 0;
+    virtual const IEndpoint& bindPoint() const = 0;
 
     virtual void stopListening() = 0;
 
     virtual void startListening() = 0;
 
-    virtual ProtocolFactory& protocolFactory() = 0;
+    virtual IProtocolFactory& protocolFactory() = 0;
 
     virtual IDictionary& misc() = 0;
+	
+	virtual const IDictionary& misc() const = 0;
+
+	/**
+	* 取得地址的描述
+	*/
+	virtual const tstring& toString() const = 0;
 };
+
+inline tostream& operator<<( tostream& target, const IAcceptor& acceptor )
+{
+	target << acceptor.toString();
+	return target;
+}
 
 _jingxian_end
 
-#endif //_acceptor_h_ 
+#endif //_IAcceptor_H_ 

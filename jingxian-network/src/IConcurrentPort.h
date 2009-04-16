@@ -1,6 +1,6 @@
 
-#ifndef _COMPLETIONPORT_H_
-#define _COMPLETIONPORT_H_
+#ifndef _IConcurrentPort_H_
+#define _IConcurrentPort_H_
 
 #include "config.h"
 
@@ -38,8 +38,19 @@ public:
      * @param[ in ] run 执行方法
 	 */
     virtual void send( runnable* run ) = 0;
+
+	/**
+	* 取得地址的描述
+	*/
+	virtual const tstring& toString() const = 0;
 };
+
+inline tostream& operator<<( tostream& target, const IConcurrentPort& concurrentPort )
+{
+	target << concurrentPort.toString();
+	return target;
+}
 
 _jingxian_end
 
-#endif // _COMPLETIONPORT_H_
+#endif // _IConcurrentPort_H_

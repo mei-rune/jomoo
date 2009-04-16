@@ -12,15 +12,14 @@
 
 _jingxian_begin
 
-class IPHostEntry
+struct IPHostEntry
 {
-public:
 	//获取或设置与主机关联的 IP 地址列表。 
 	std::vector<tstring> AddressList;
 	//获取或设置与主机关联的别名列表。 
 	std::vector<tstring> Aliases;
 	//获取或设置主机的 DNS 名称。 
-	tstring HostName  
+	tstring HostName 
 };
 
 typedef void (*ResolveHost)(const tstring& name, const IPHostEntry& hostEntry, void* context);
