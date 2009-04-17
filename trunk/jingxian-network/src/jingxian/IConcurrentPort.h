@@ -2,13 +2,14 @@
 #ifndef _IConcurrentPort_H_
 #define _IConcurrentPort_H_
 
-#include "config.h"
+#include "jingxian/config.h"
 
 #if !defined (JINGXIAN_LACKS_PRAGMA_ONCE)
 # pragma once
 #endif /* JINGXIAN_LACKS_PRAGMA_ONCE */
 
 // Include files
+# include "jingxian/string/string.hpp"
 
 _jingxian_begin
 

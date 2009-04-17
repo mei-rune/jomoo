@@ -2,11 +2,16 @@
 #ifndef _mem_block_h_
 #define _mem_block_h_
 
-#include "config.h"
+#include "jingxian/config.h"
 
 #if !defined (JINGXIAN_LACKS_PRAGMA_ONCE)
 # pragma once
 #endif /* JINGXIAN_LACKS_PRAGMA_ONCE */
+
+// Include files
+# include <jingxian/exception.hpp>
+# include <jingxian/string/string.hpp>
+
 
 _jingxian_begin
 
@@ -27,13 +32,13 @@ public:
 	/**
 	 * 注意这里的tallocator是用来分内部数据块的，不是分配它本身;
 	 */
-	data_block( size_t len = 1024 , BT_Memory_Base* alloc_ = 0 );
+	data_block( size_t len = 1024 );
 
 	/**
 	 * @remarks 注意，如果flag指定自动删除，则一定要指定allocator，否则
 	 * 会试图调用默认的allocator来删除同msg_data.
 	 */
-	data_block( char* msg_data, size_t len , MessageFlags flag = DONT_DELETE ,BT_Memory_Base* alloc_ = 0 );
+	data_block( char* msg_data, size_t len , MessageFlags flag = DONT_DELETE );
 
 	~data_block();
 
@@ -60,8 +65,6 @@ public:
 	*/
 	size_t capacity (void) const;
 
-	BT_Memory_Base *allocator( );
-
 private:
 
 	data_block( const data_block& ref );
@@ -79,8 +82,6 @@ private:
 
 	/// Misc flags (e.g., DONT_DELETE and USER_FLAGS).
 	MessageFlags flags_;
-
-	BT_Memory_Base* allocator_;
 };
 
 class message_block
@@ -90,7 +91,7 @@ public:
 	 * message_block constructor
 	 * @param[ in ] len 缓存大小
 	 */
-	message_block( size_t len = 1024 , BT_Memory_Base* alloc_ = 0 );
+	message_block( size_t len = 1024 );
 
 	/**
 	 * message_block constructor
@@ -101,7 +102,7 @@ public:
 	 * @remarks 注意，如果flag指定自动删除，则一定要指定allocator，否则
 	 * 会试图调用默认的allocator来删除同msg_data.
 	 */
-	message_block( char* msg_data, size_t len , MessageFlags flag = DONT_DELETE , BT_Memory_Base* alloc_ = 0 );
+	message_block( char* msg_data, size_t len , MessageFlags flag = DONT_DELETE  );
 
 	/**
 	 * message_block constructor
@@ -111,7 +112,7 @@ public:
  	 * @remarks 注意，如果flag指定自动删除，则一定要指定allocator，否则
 	 * 会试图调用默认的allocator来删除同msg_data.
 	 */
-	message_block( data_block* data , MessageFlags flag = DONT_DELETE , BT_Memory_Base* allocator_ = 0 );
+	message_block( data_block* data , MessageFlags flag = DONT_DELETE );
 
 	/**
 	 * message_block destructor
@@ -185,12 +186,6 @@ public:
 	 */
 	size_t capacity( );
 
-	/**
-	 * 取得分配器
-	 * @return 成功返回分配器指针，否则返回0;
-	 */
-	BT_Memory_Base *allocator( );
-
 public:
 
 	/**
@@ -207,10 +202,8 @@ public:
 	size_t rd_size_;
 
 	MessageFlags flags_;
-
-	BT_Memory_Base* allocator_;
 };
 
-_bt_end
+_jingxian_end
 
 #endif // _mem_block_h_

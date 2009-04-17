@@ -2,14 +2,14 @@
 #ifndef CONNECTOR_H
 #define CONNECTOR_H
 
-#include "config.h"
+#include "jingxian/config.h"
 
 #if !defined (JINGXIAN_LACKS_PRAGMA_ONCE)
 # pragma once
 #endif /* JINGXIAN_LACKS_PRAGMA_ONCE */
 
 // Include files
-# include "string.hpp"
+# include "jingxian/string/string.hpp"
 # include "Exception.hpp"
 
 _jingxian_begin

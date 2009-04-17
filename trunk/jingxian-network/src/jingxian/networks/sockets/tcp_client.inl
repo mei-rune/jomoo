@@ -1,17 +1,17 @@
 
 
-JOMOO_INLINE tcp_client::tcp_client (void)
+OS_INLINE tcp_client::tcp_client (void)
 : socket_( )   
 , blocking_( true )
 {
 	//AF_INET , SOCK_STREAM, IPPROTO_TCP
 }
 
-JOMOO_INLINE tcp_client::~tcp_client (void)
+OS_INLINE tcp_client::~tcp_client (void)
 {
 }
 
-JOMOO_INLINE bool tcp_client::readable()
+OS_INLINE bool tcp_client::readable()
 {
 	TIMEVAL time_val;
 	time_val.tv_sec = 0;
@@ -19,7 +19,7 @@ JOMOO_INLINE bool tcp_client::readable()
 	return socket_.poll( time_val, select_read );
 }
 
-JOMOO_INLINE bool tcp_client::writable()
+OS_INLINE bool tcp_client::writable()
 {
 	TIMEVAL time_val;
 	time_val.tv_sec = 0;
@@ -27,7 +27,7 @@ JOMOO_INLINE bool tcp_client::writable()
 	return socket_.poll( time_val, select_write );
 }
 
-JOMOO_INLINE void tcp_client::blocking(bool val)
+OS_INLINE void tcp_client::blocking(bool val)
 {
 	if( val )
 	{
@@ -41,37 +41,37 @@ JOMOO_INLINE void tcp_client::blocking(bool val)
 	}
 }
 
-JOMOO_INLINE bool tcp_client::blocking() const
+OS_INLINE bool tcp_client::blocking() const
 {
 	return blocking_;
 }
 
-JOMOO_INLINE const inet_address& tcp_client::remote_addr () const
+OS_INLINE const inet_address& tcp_client::remote_addr () const
 {
 	return remote_addr_;
 }
 
-JOMOO_INLINE const inet_address& tcp_client::local_addr () const
+OS_INLINE const inet_address& tcp_client::local_addr () const
 {
   return local_addr_;
 }
 
-JOMOO_INLINE base_socket& tcp_client::socket()
+OS_INLINE base_socket& tcp_client::socket()
 {
 	return socket_;
 }
 	
-JOMOO_INLINE const base_socket& tcp_client::socket() const
+OS_INLINE const base_socket& tcp_client::socket() const
 {
 	return socket_;
 }
 
-JOMOO_INLINE bool tcp_client::is_good() const
+OS_INLINE bool tcp_client::is_good() const
 {
 	return socket_.is_good();
 }
 
-JOMOO_INLINE ssize_t tcp_client::recv (void *buf,
+OS_INLINE ssize_t tcp_client::recv (void *buf,
                    size_t len,
                    int flags )
 {
@@ -82,7 +82,7 @@ JOMOO_INLINE ssize_t tcp_client::recv (void *buf,
                     flags );
 }
 
-JOMOO_INLINE ssize_t tcp_client::send (const void *buf,
+OS_INLINE ssize_t tcp_client::send (const void *buf,
                    size_t len,
                    int flags )
 {
@@ -90,7 +90,7 @@ JOMOO_INLINE ssize_t tcp_client::send (const void *buf,
     return ::send (socket_.get_handle(), (const char *) buf, ( int )len, flags);
 }
 
-JOMOO_INLINE ssize_t tcp_client::recvv (iovec* iov, size_t n)
+OS_INLINE ssize_t tcp_client::recvv (iovec* iov, size_t n)
 {
 	DWORD bytes_recvd = 0;
 	DWORD Flags = 0;
@@ -106,7 +106,7 @@ JOMOO_INLINE ssize_t tcp_client::recvv (iovec* iov, size_t n)
 	return r;
 }
 
-JOMOO_INLINE ssize_t tcp_client::sendv ( const iovec* iov,
+OS_INLINE ssize_t tcp_client::sendv ( const iovec* iov,
                     size_t n )
 {
 	DWORD bytes_sent = 0;
@@ -122,7 +122,7 @@ JOMOO_INLINE ssize_t tcp_client::sendv ( const iovec* iov,
 	return r;
 }
 
-JOMOO_INLINE bool tcp_client::send_n( const char* buf, size_t length)
+OS_INLINE bool tcp_client::send_n( const char* buf, size_t length)
 {
 	do
 	{
@@ -139,7 +139,7 @@ JOMOO_INLINE bool tcp_client::send_n( const char* buf, size_t length)
 	return true;
 }
 
-JOMOO_INLINE bool tcp_client::recv_n( char* buf, size_t length)
+OS_INLINE bool tcp_client::recv_n( char* buf, size_t length)
 {
 	do
 	{
@@ -157,7 +157,7 @@ JOMOO_INLINE bool tcp_client::recv_n( char* buf, size_t length)
 	return true;
 }
 
-JOMOO_INLINE bool tcp_client::sendv_n( const iovec* wsaBuf, size_t size)
+OS_INLINE bool tcp_client::sendv_n( const iovec* wsaBuf, size_t size)
 {
 	std::vector<iovec> buf( wsaBuf, wsaBuf + size );
 	iovec* p = &buf[0];
@@ -189,7 +189,7 @@ JOMOO_INLINE bool tcp_client::sendv_n( const iovec* wsaBuf, size_t size)
 	return true;
 }
 
-JOMOO_INLINE bool tcp_client::recvv_n( iovec* wsaBuf, size_t size)
+OS_INLINE bool tcp_client::recvv_n( iovec* wsaBuf, size_t size)
 {
 	iovec* p = wsaBuf;
 
@@ -220,16 +220,16 @@ JOMOO_INLINE bool tcp_client::recvv_n( iovec* wsaBuf, size_t size)
 	return true;
 }
 
-JOMOO_INLINE bool tcp_client::send (const void *buf, size_t n,
-				   JOMOO_OVERLAPPED& overlapped)
+OS_INLINE bool tcp_client::send (const void *buf, size_t n,
+				   OVERLAPPED& overlapped)
 {
 	DWORD bytes_written;
 	DWORD short_nbyte = static_cast< DWORD >( n);
 	return ::WriteFile ( ( HANDLE ) socket_.get_handle(), buf, short_nbyte, &bytes_written, &overlapped) ? true : false;
 }
 
-JOMOO_INLINE bool tcp_client::recvv (iovec* iov, size_t n,
-					JOMOO_OVERLAPPED& overlapped)
+OS_INLINE bool tcp_client::recvv (iovec* iov, size_t n,
+					OVERLAPPED& overlapped)
 {
 	DWORD NumberOfBytesRecvd = 0;
 	DWORD Flags = 0;
@@ -242,8 +242,8 @@ JOMOO_INLINE bool tcp_client::recvv (iovec* iov, size_t n,
 		, 0 ));
 }
 
-JOMOO_INLINE bool tcp_client::recv (void *buf, size_t n,
-				   JOMOO_OVERLAPPED& overlapped)
+OS_INLINE bool tcp_client::recv (void *buf, size_t n,
+				   OVERLAPPED& overlapped)
 {
 	DWORD bytes_read = 0;
 	return TRUE == ::ReadFile( ( HANDLE )socket_.get_handle ()
@@ -253,7 +253,7 @@ JOMOO_INLINE bool tcp_client::recv (void *buf, size_t n,
 		, &overlapped );
 }
 
-JOMOO_INLINE   bool tcp_client::transmit (const iopack* iov, size_t n )
+OS_INLINE   bool tcp_client::transmit (const iopack* iov, size_t n )
 {
 	return ( TRUE == base_socket::__transmitpackets( socket_.get_handle(),
 		( iopack* )iov,
@@ -263,8 +263,8 @@ JOMOO_INLINE   bool tcp_client::transmit (const iopack* iov, size_t n )
 		0) );
 }
 
-JOMOO_INLINE   bool tcp_client::transmit (const iopack* iov, size_t n,
-                 JOMOO_OVERLAPPED& overlapped)
+OS_INLINE   bool tcp_client::transmit (const iopack* iov, size_t n,
+                 OVERLAPPED& overlapped)
 {
 	return ( TRUE == base_socket::__transmitpackets( socket_.get_handle(),
 		( iopack* )iov,
@@ -274,7 +274,7 @@ JOMOO_INLINE   bool tcp_client::transmit (const iopack* iov, size_t n,
 		0) );
 }
 
-JOMOO_INLINE bool tcp_client::transmit ( HANDLE hFile
+OS_INLINE bool tcp_client::transmit ( HANDLE hFile
 				, size_t nNumberOfBytesToWrite
 				, size_t nNumberOfBytesPerSend
 				, io_file_buf* transmitBuffers )
@@ -288,11 +288,11 @@ JOMOO_INLINE bool tcp_client::transmit ( HANDLE hFile
         0 ) );
 }
 
-JOMOO_INLINE bool tcp_client::transmit ( HANDLE hFile
+OS_INLINE bool tcp_client::transmit ( HANDLE hFile
 				, size_t nNumberOfBytesToWrite
 				, size_t nNumberOfBytesPerSend
 				, io_file_buf* transmitBuffers
-                , JOMOO_OVERLAPPED& overlapped)
+                , OVERLAPPED& overlapped)
 {
 	return ( TRUE == base_socket::__transmitfile( socket_.get_handle(),
 		hFile,
@@ -303,7 +303,7 @@ JOMOO_INLINE bool tcp_client::transmit ( HANDLE hFile
         0 ) );
 }
 
-JOMOO_INLINE bool tcp_client::connect( const inet_address& addr )
+OS_INLINE bool tcp_client::connect( const inet_address& addr )
 {
 	if( !socket_.open( AF_INET , SOCK_STREAM, IPPROTO_TCP ) )
 		return false;
@@ -317,8 +317,8 @@ JOMOO_INLINE bool tcp_client::connect( const inet_address& addr )
 	return true;
 }
 
-JOMOO_INLINE bool tcp_client::connect( const inet_address& addr
-									  ,JOMOO_OVERLAPPED& overlapped )
+OS_INLINE bool tcp_client::connect( const inet_address& addr
+									  ,OVERLAPPED& overlapped )
 {
 	
 	if( !socket_.open( AF_INET , SOCK_STREAM, IPPROTO_TCP ) )
@@ -330,10 +330,10 @@ JOMOO_INLINE bool tcp_client::connect( const inet_address& addr
  #pragma warning(default: 4267)
 }
 
-JOMOO_INLINE bool tcp_client::connect( const inet_address& addr
+OS_INLINE bool tcp_client::connect( const inet_address& addr
 									  , const void* send_buffer
 									  , size_t send_data_len
-									  , JOMOO_OVERLAPPED& overlapped )
+									  , OVERLAPPED& overlapped )
 {
 	if( !socket_.open( AF_INET , SOCK_STREAM, IPPROTO_TCP ) )
 		return false;

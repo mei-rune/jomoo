@@ -2,14 +2,15 @@
 #ifndef _IProtocol_H_
 #define _IProtocol_H_
 
-#include "config.h"
+#include "jingxian/config.h"
 
 #if !defined (JINGXIAN_LACKS_PRAGMA_ONCE)
 # pragma once
 #endif /* JINGXIAN_LACKS_PRAGMA_ONCE */
 
 // Include files
-# include "exception.hpp"
+# include "jingxian/exception.hpp"
+# include "jingxian/buffer.h"
 
 _jingxian_begin
 

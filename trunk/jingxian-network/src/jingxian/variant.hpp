@@ -1,7 +1,7 @@
 #ifndef _variant_h_
 # define _variant_h_
 
-#include "config.h"
+#include "jingxian/config.h"
 
 #if !defined (JINGXIAN_LACKS_PRAGMA_ONCE)
 # pragma once

@@ -2,7 +2,7 @@
 #ifndef _StdLogger_H_
 #define _StdLogger_H_
 
-#include "config.h"
+#include "jingxian/config.h"
 
 #if !defined (JINGXIAN_LACKS_PRAGMA_ONCE)
 # pragma once

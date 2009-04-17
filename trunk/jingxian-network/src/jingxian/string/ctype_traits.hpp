@@ -2,7 +2,7 @@
 #ifndef _ctype_traits_hpp_
 #define _ctype_traits_hpp_
 
-#include "config.h"
+#include "jingxian/config.h"
 
 #if !defined (JINGXIAN_LACKS_PRAGMA_ONCE)
 # pragma once

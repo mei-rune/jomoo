@@ -1,25 +1,25 @@
 
-#ifndef _REACTORARBITRARY_H_
-#define _REACTORARBITRARY_H_
+#ifndef _IReactorCore_H_
+#define _IReactorCore_H_
 
-#include "config.h"
+#include "jingxian/config.h"
 
 #if !defined (JINGXIAN_LACKS_PRAGMA_ONCE)
 # pragma once
 #endif /* JINGXIAN_LACKS_PRAGMA_ONCE */
 
 // Include files
-# include "IConcurrentPort.h"
-# include "IEndpoint.h"
-# include "ITransport.h"
-# include "IProtocol.h"
-# include "IProtocolFactory.h"
-# include "IConnector.h"
-# include "IAcceptor.h"
+# include "jingxian/IConcurrentPort.h"
+# include "jingxian/IEndpoint.h"
+# include "jingxian/ITransport.h"
+# include "jingxian/IProtocol.h"
+# include "jingxian/IProtocolFactory.h"
+# include "jingxian/IConnector.h"
+# include "jingxian/IAcceptor.h"
 
 _jingxian_begin
 
-public class IReactorCore : public IConcurrentPort
+class IReactorCore : public IConcurrentPort
 {
 public:
 	virtual ~IReactorCore() {};
@@ -60,4 +60,4 @@ public:
 
 _jingxian_end
 
-#endif // _REACTORARBITRARY_H_
+#endif // _IReactorCore_H_

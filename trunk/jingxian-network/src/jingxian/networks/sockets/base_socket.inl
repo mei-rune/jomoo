@@ -8,14 +8,14 @@ LPFN_DISCONNECTEX base_socket::__disconnectex = 0;
 LPFN_GETACCEPTEXSOCKADDRS base_socket::__getacceptexsockaddrs = 0;
 
 
-JOMOO_INLINE base_socket::base_socket (void)
+OS_INLINE base_socket::base_socket (void)
 : handle_ (INVALID_SOCKET )
 , toString_( _T("INVALID_SOCKET" ))
 
 {
 }
 
-JOMOO_INLINE base_socket::base_socket (int protocol_family,
+OS_INLINE base_socket::base_socket (int protocol_family,
 					int type, 
 					int protocol,
                     int reuse_addr)
@@ -28,11 +28,11 @@ JOMOO_INLINE base_socket::base_socket (int protocol_family,
                   reuse_addr);
 }
 
-JOMOO_INLINE base_socket::base_socket (int protocol_family,
+OS_INLINE base_socket::base_socket (int protocol_family,
 					int type, 
 					int protocol,
-                    WSAPROTOCOL_INFO *protocolinfo,
-                    JOMOO_SOCK_GROUP g,
+                    LPWSAPROTOCOL_INFO protocolinfo,
+                    GROUP g,
                     u_long flags,
                     int reuse_addr)
 : handle_ (INVALID_SOCKET )
@@ -46,17 +46,17 @@ JOMOO_INLINE base_socket::base_socket (int protocol_family,
                   reuse_addr);				  
 }
 
-JOMOO_INLINE base_socket::~base_socket (void)
+OS_INLINE base_socket::~base_socket (void)
 {
 	close();
 }
 
-JOMOO_INLINE bool base_socket::is_good() const
+OS_INLINE bool base_socket::is_good() const
 {
 	return INVALID_SOCKET != this->get_handle ();
 }
 
-JOMOO_INLINE bool base_socket::open ( int protocol_family,
+OS_INLINE bool base_socket::open ( int protocol_family,
 				int type, 
                 int protocol,
                 int reuse_addr)
@@ -82,11 +82,11 @@ JOMOO_INLINE bool base_socket::open ( int protocol_family,
   return true;
 }
 
-JOMOO_INLINE bool base_socket::open (int protocol_family,
+OS_INLINE bool base_socket::open (int protocol_family,
 				int type, 
                 int protocol,
-                WSAPROTOCOL_INFO *protocolinfo,
-                JOMOO_SOCK_GROUP g,
+                LPWSAPROTOCOL_INFO protocolinfo,
+                GROUP g,
                 u_long flags,
                 int reuse_addr)
 {
@@ -113,24 +113,24 @@ JOMOO_INLINE bool base_socket::open (int protocol_family,
     return true;
 }
 
-JOMOO_INLINE SOCKET base_socket::get_handle (void) const
+OS_INLINE SOCKET base_socket::get_handle (void) const
 {
   return this->handle_;
 }
 
 
-JOMOO_INLINE void base_socket::set_handle (SOCKET handle)
+OS_INLINE void base_socket::set_handle (SOCKET handle)
 {
   close();
   this->handle_ = handle;
 }
 
-JOMOO_INLINE void base_socket::swap( base_socket& r )
+OS_INLINE void base_socket::swap( base_socket& r )
 {
 	std::swap( this->handle_, r.handle_ );
 }
 
-JOMOO_INLINE bool base_socket::set_option (int level, 
+OS_INLINE bool base_socket::set_option (int level, 
 		      int option, 
 		      void *optval, 
 		      int optlen) const
@@ -139,7 +139,7 @@ JOMOO_INLINE bool base_socket::set_option (int level,
 			     option, (char *) optval, optlen) );
 }
 
-JOMOO_INLINE bool base_socket::get_option (int level, 
+OS_INLINE bool base_socket::get_option (int level, 
 		      int option, 
 		      void *optval, 
 		      int *optlen) const
@@ -148,7 +148,7 @@ JOMOO_INLINE bool base_socket::get_option (int level,
 			     option, (char *) optval, optlen) );
 }
 
-JOMOO_INLINE bool base_socket::enable (int value)
+OS_INLINE bool base_socket::enable (int value)
 {
 	u_long nonblock = 1;
 	return ( 0 ==::ioctlsocket (this->handle_,
@@ -156,7 +156,7 @@ JOMOO_INLINE bool base_socket::enable (int value)
 		&nonblock));
 }
 
-JOMOO_INLINE bool base_socket::disable (int value)
+OS_INLINE bool base_socket::disable (int value)
 {
     u_long nonblock = 0;
     return ( 0 == ioctlsocket (this->handle_,
@@ -164,7 +164,7 @@ JOMOO_INLINE bool base_socket::disable (int value)
                               &nonblock));
 }
 
-JOMOO_INLINE void base_socket::close (void)
+OS_INLINE void base_socket::close (void)
 {
 	if (INVALID_SOCKET == this->get_handle () )
 		return;
@@ -179,7 +179,7 @@ JOMOO_INLINE void base_socket::close (void)
 	}
 }
 
-JOMOO_INLINE bool base_socket::poll( const TIMEVAL& time_val, int mode)
+OS_INLINE bool base_socket::poll( const TIMEVAL& time_val, int mode)
 {
 	fd_set socket_set;
 	FD_ZERO( &socket_set );
@@ -191,7 +191,7 @@ JOMOO_INLINE bool base_socket::poll( const TIMEVAL& time_val, int mode)
 		, &time_val ) );
 }
 
-JOMOO_INLINE const string& base_socket::toString() const
+OS_INLINE const tstring& base_socket::toString() const
 {
   if( INVALID_SOCKET == handle_)
   {
@@ -199,9 +199,9 @@ JOMOO_INLINE const string& base_socket::toString() const
   }
   else
   {
-	  string::value_type tmp[1024];
+	  tstring::value_type tmp[1024];
  #pragma warning(disable: 4244)
-	  string_traits< string::value_type >::itoa( handle_, tmp, 1024, 10 );
+	  string_traits< tstring::value_type >::itoa( handle_, tmp, 1024, 10 );
  #pragma warning(default: 4244)
 
 	  toString_ = tmp;
@@ -209,7 +209,7 @@ JOMOO_INLINE const string& base_socket::toString() const
   return toString_;
 }
 
-JOMOO_INLINE bool  base_socket::initsocket()
+OS_INLINE bool  base_socket::initsocket()
 {
 	WSADATA wsaData;
 	if ( 0 != WSAStartup( MAKEWORD( 2, 2 ), &wsaData ) )
@@ -321,7 +321,7 @@ JOMOO_INLINE bool  base_socket::initsocket()
 	return true;
 }
 
-JOMOO_INLINE void base_socket::shutdownsock()
+OS_INLINE void base_socket::shutdownsock()
 {
 	WSACleanup( );
 }

@@ -2,18 +2,17 @@
 #ifndef tcp_client_h
 #define tcp_client_h
 
-#include "jomoo/config.h"
+#include "jingxian/config.h"
 
 #if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
-#include "../config_Networks.h"
-#include "base_socket.h"
-#include "inet_address.h"
+# include "jingxian/networks/inet_address.h"
+# include "jingxian/networks/sockets/base_socket.h"
 
-_networks_begin
+_jingxian_begin
 
 class tcp_client
 {
@@ -141,7 +140,7 @@ public:
    * @param[ in ] overlapped 重叠IO数据指针
    */
   bool recv (void *buf, size_t n,
-                JOMOO_OVERLAPPED& overlapped);
+                OVERLAPPED& overlapped);
   /**
    * 异步方式发送数据
    * @param[ in,out ] buf 数据缓冲区
@@ -149,7 +148,7 @@ public:
    * @param[ in ] overlapped 重叠IO数据指针
    */
   bool send (const void *buf, size_t n,
-                JOMOO_OVERLAPPED& overlapped);
+                OVERLAPPED& overlapped);
 
   /**
    * 异步方式读取数据
@@ -158,7 +157,7 @@ public:
    * @param[ in ] overlapped 重叠IO数据指针
    */
   bool recvv (iovec* iov, size_t n,
-                JOMOO_OVERLAPPED& overlapped);
+                OVERLAPPED& overlapped);
 
   /**
    * 异步方式发送数据
@@ -167,7 +166,7 @@ public:
    * @param[ in ] overlapped 重叠IO数据指针
    */
   bool sendv (const iovec* iov, size_t n,
-                 JOMOO_OVERLAPPED& overlapped);
+                 OVERLAPPED& overlapped);
 
   /**
    * 发送一个文件
@@ -178,7 +177,7 @@ public:
    * 发送一个文件
    */
   bool transmit (const iopack* iov, size_t n
-                , JOMOO_OVERLAPPED& overlapped);
+                , OVERLAPPED& overlapped);
 
   /**
    * 发送一个文件
@@ -194,7 +193,7 @@ public:
 				, size_t nNumberOfBytesToWrite
 				, size_t nNumberOfBytesPerSend
 				, io_file_buf* transmitBuffers
-                , JOMOO_OVERLAPPED& overlapped);
+                , OVERLAPPED& overlapped);
 
   /**
    * 连接到远程主机
@@ -204,7 +203,7 @@ public:
   /**
    * 异步连接到远程主机
    */
-  bool connect( const inet_address& addr, JOMOO_OVERLAPPED& overlapped );
+  bool connect( const inet_address& addr, OVERLAPPED& overlapped );
 
   /**
    * 异步连接到远程主机，并发送数据（仅用于 ATM ）
@@ -212,10 +211,10 @@ public:
   bool tcp_client::connect( const inet_address& addr
 									  , const void* send_buffer
 									  , size_t send_data_len
-									  , JOMOO_OVERLAPPED& overlapped );
+									  , OVERLAPPED& overlapped );
 
 private:
-  DECLARE_NO_COPY_CLASS( tcp_client );
+  NOCOPY( tcp_client );
   inet_address local_addr_;
   inet_address remote_addr_;
   bool blocking_;
@@ -241,10 +240,10 @@ inline tostream& operator<<( tostream& target, const tcp_client& client )
   return target;
 }
 
-#if defined (JOMOO_HAS_INLINED)
+#if defined (OS_HAS_INLINED)
 #include "tcp_client.inl"
 #endif
 
-_networks_end
+_jingxian_end
 
 #endif /* tcp_client_h */

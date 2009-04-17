@@ -2,16 +2,16 @@
 #ifndef _Exception_H_
 #define _Exception_H_
 
-#include "config.h"
+#include "jingxian/config.h"
 
 #if !defined (JINGXIAN_LACKS_PRAGMA_ONCE)
 # pragma once
 #endif /* JINGXIAN_LACKS_PRAGMA_ONCE */
 
-#include "error.h"
-#include "string.hpp"
-#include "lastError.h"
+// Include files
 #include <stdexcept>
+#include "jingxian/string/string.hpp"
+#include "jingxian/lastError.h"
 
 _jingxian_begin
 
@@ -180,6 +180,7 @@ public: \
 #define _ExistError				_T("已经存在")
 #define SystemError				_T("系统错误")
 #define TimeSyntaxError         _T("时间格式错误")
+#define NotImplementedError     _T("没有实现")
 
 #define  ERR_SYS  -200 //  
 #define  ERR_ARG  -201
@@ -193,6 +194,8 @@ public: \
 
 #define ERR_PARAMETER -400
 
+#define ERR_BAD_BUF         -2
+#define ERR_BAD_BUF_LEN     -1
 #define ERR_OBJECT_NOEXIST	-501	//	对象不存在
 #define ERR_INTERNAL		-502	//	内部错误
 #define ERR_UNKNOWN_COMMAND	-503	//  不可识别的命令
@@ -216,6 +219,7 @@ MakeException( NotFindException, NotFindError );
 MakeException( SystemException, SystemError );
 MakeException( LockException , LockError );
 MakeException( TimeSyntaxException , TimeSyntaxError );
+MakeException( NotImplementedException, NotImplementedError );
 
 #define ThrowException( type ) throw type(__FILE__, __LINE__ )
 #define ThrowException1( type ,m1 ) throw type(__FILE__, __LINE__ , m1 )

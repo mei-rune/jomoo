@@ -1,9 +1,9 @@
 
 # include "pro_config.h"
-# include "proactor.h"
-# include "Jexception.hpp"
+# include "jingxian/exception.hpp"
 # include "jingxian/logging/logging.hpp"
-# include "jingxian/netowrks/commands/command_queue.h"
+# include "jingxian/networks/proactor.h"
+# include "jingxian/networks/commands/command_queue.h"
 
 #ifdef _MEMORY_DEBUG
 #undef THIS_FILE
@@ -82,8 +82,8 @@ void proactor::close (void)
 		if ( is_null(overlapped) || FALSE == res )
 			break;
 
-		command *asynch_result =
-			(command *) overlapped;
+		ICommand *asynch_result =
+			(ICommand *) overlapped;
 
 		command_queue::release( asynch_result );
 	}
@@ -108,23 +108,23 @@ void proactor::close (void)
 /// If the function did not dequeue a completion packet because the wait timed out,
 /// GetLastError returns WAIT_TIMEOUT.
 /// 
-///如lpOverlapped 是NULL，没有从端口取出一个完成包，则返回0值。lpNumberOfBytesTransferred
+/// 如lpOverlapped 是NULL，没有从端口取出一个完成包，则返回0值。lpNumberOfBytesTransferred
 /// ，lpCompletionKey，lpOverlapped也没有保存上下文数据，可以用GetLastError取
 /// 得详细错误。如果没有从端口取出一个完成包，可能是超时，GetLastError返回WAIT_TIMEOUT
 /// 
-///If *lpOverlapped is not NULL and the function dequeues a completion packet for
+/// If *lpOverlapped is not NULL and the function dequeues a completion packet for
 /// a failed I/O operation from the completion port, the return value is zero. 
 /// The function stores information in the variables pointed to by lpNumberOfBytes,
 /// lpCompletionKey, and lpOverlapped. To get extended error information, call GetLastError.
 /// 
-///如果 lpOverlapped 不是NULL，但完成操作是失败的，则返回0值。上下文数据保存在
+/// 如果 lpOverlapped 不是NULL，但完成操作是失败的，则返回0值。上下文数据保存在
 /// lpNumberOfBytesTransferred，lpCompletionKey，lpOverlapped中，可以用GetLastError
 /// 取得详细错误。
 /// 
-///If a socket handle associated with a completion port is closed, GetQueuedCompletionStatus
+/// If a socket handle associated with a completion port is closed, GetQueuedCompletionStatus
 /// returns ERROR_SUCCESS, with *lpOverlapped non-NULL and lpNumberOfBytes equal zero.
 /// 
-///如一个socket句柄被关闭了，GetQueuedCompletionStatus返回ERROR_SUCCESS， lpOverlapped 
+/// 如一个socket句柄被关闭了，GetQueuedCompletionStatus返回ERROR_SUCCESS， lpOverlapped 
 /// 不是NULL,lpNumberOfBytes等于0。
 /// 
 /// </summary>
@@ -156,7 +156,7 @@ int proactor::handle_events (unsigned long milli_seconds)
 	}
 	else
 	{
-		command *asynch_result = (command *) overlapped;
+		ICommand *asynch_result = (ICommand *) overlapped;
 		u_long error = 0;
 		if( !result )
 			error = GetLastError();

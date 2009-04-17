@@ -2,15 +2,15 @@
 #ifndef _INET_ADDRESS_H_
 #define _INET_ADDRESS_H_
 
-#include "config.h"
+#include "jingxian/config.h"
 
 #if !defined (JINGXIAN_LACKS_PRAGMA_ONCE)
 # pragma once
 #endif /* JINGXIAN_LACKS_PRAGMA_ONCE */
 
 // Include files
-# include "os_networks.H"
-# include "string.hpp"
+# include <Winsock2.h>
+# include "jingxian/string/string.hpp"
 
 _jingxian_begin
 
@@ -26,9 +26,9 @@ public:
 
 	inet_address (const void*, int len);
 
-	inet_address (u_long ip, u_short port_number);
+	inet_address (u_long ip, u_int16_t port_number);
 
-	inet_address (const char* name, u_short number);
+	inet_address (const char* name, u_int16_t number);
 
 	inet_address (const char* name, const char* number);
 
@@ -48,9 +48,9 @@ public:
 	
 	void swap( inet_address& r);
 
-	void port(u_short number , bool encode = true );
+	void port(u_int16_t number , bool encode = true );
 	void port( const char* number);
-	u_short port() const;
+	u_int16_t port() const;
 
 	void ip( u_long addr, bool encode = false);
 	void ip( const char* addr);
@@ -83,9 +83,9 @@ inline tostream& operator<<( tostream& target, const inet_address& addr )
 	return target;
 }
 
-#if defined (JOMOO_HAS_INLINED)
-#include "inet_address.inl"
-#endif
+//#if defined (OS_HAS_INLINED)
+//#include "jingxian/networks/inet_address.inl"
+//#endif
 
 _jingxian_end
 

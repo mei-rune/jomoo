@@ -28,14 +28,14 @@ _jingxian_begin
 	this->addr(addr, len);
 }
 
- inet_address::inet_address ( u_long ip,u_short number )
+ inet_address::inet_address ( u_long ip,u_int16_t number )
 {
 	this->reset ();
 	this->ip( ip );
 	this->port( number );
 }
 
- inet_address::inet_address ( const char* ipstr,u_short number)
+ inet_address::inet_address ( const char* ipstr,u_int16_t number)
 {
 	this->reset ();
 	this->ip( ipstr );
@@ -108,7 +108,7 @@ void inet_address::reset (void)
   this->m_addr_.sa_family = AF_INET;
 }
 
-void inet_address::port(u_short number,
+void inet_address::port(u_int16_t number,
 							   bool encode )
 {
 	((sockaddr_in*) &m_addr_)->sin_port = encode?htons (number):number;
@@ -119,7 +119,7 @@ void inet_address::port( const char* number )
 	((sockaddr_in*) &m_addr_)->sin_port = htons( ::atoi( number ) );
 }
 
-u_short inet_address::port( void ) const 
+u_int16_t inet_address::port( void ) const 
 {
 	return htons( ((sockaddr_in*) &m_addr_)->sin_port );
 }

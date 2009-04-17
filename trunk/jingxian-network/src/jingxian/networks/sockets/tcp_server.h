@@ -2,18 +2,17 @@
 #ifndef tcp_server_h
 #define tcp_server_h
 
-#include "jomoo/config.h"
+#include "jingxian/config.h"
 
 #if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
-#include "../config_Networks.h"
-#include "tcp_client.h"
-#include "inet_address.h"
+# include "jingxian/networks/inet_address.h"
+# include "jingxian/networks/sockets/tcp_client.h"
 
-_networks_begin
+_jingxian_begin
 
 class tcp_server
 {
@@ -66,20 +65,20 @@ public:
 						, size_t data_len
 						, size_t local_addr_len
 						, size_t remote_addr_len
-						, JOMOO_OVERLAPPED& overlapped);
+						, OVERLAPPED& overlapped);
 
   void swap( tcp_server& r);
 
   /**
    * 返回一个人可读的字符串
    */
-  const string& toString() const;
+  const tstring& toString() const;
 
 private:
-	DECLARE_NO_COPY_CLASS( tcp_server );
+	NOCOPY( tcp_server );
 	inet_address bind_addr_;
 	base_socket socket_;
-	mutable string toString_;
+	mutable tstring toString_;
 };
 
 
@@ -100,10 +99,10 @@ inline tostream& operator<<( tostream& target, const tcp_server& server )
   return target;
 }
 
-#if defined (JOMOO_HAS_INLINED)
+#if defined (OS_HAS_INLINED)
 #include "tcp_server.inl"
 #endif
 
-_networks_end
+_jingxian_end
 
 #endif /* tcp_server_h */

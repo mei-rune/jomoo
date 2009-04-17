@@ -2,7 +2,7 @@
 #ifndef _IAcceptor_H_
 #define _IAcceptor_H_
 
-#include "config.h"
+#include "jingxian/config.h"
 
 #if !defined (JINGXIAN_LACKS_PRAGMA_ONCE)
 # pragma once
@@ -10,7 +10,7 @@
 
 // Include files
 # include "buffer.h"
-# include "IDictionary.h"
+# include "Dictionary.h"
 
 _jingxian_begin
 

@@ -2,7 +2,7 @@
 #ifndef _IOCPServer_H_
 #define _IOCPServer_H_
 
-#include "config.h"
+#include "jingxian/config.h"
 
 #if !defined (JINGXIAN_LACKS_PRAGMA_ONCE)
 # pragma once
@@ -10,9 +10,10 @@
 
 // Include files
 # include <map>
-# include "jingxian/string.hpp"
+# include "jingxian/string/string.hpp"
 # include "jingxian/IReactorCore.h"
 # include "jingxian/networks/proactor.h"
+
 
 _jingxian_begin
 
@@ -73,8 +74,6 @@ public:
 	virtual const tstring& toString() const;
 
 private:
-
-
 
 	proactor _proactor;
 
