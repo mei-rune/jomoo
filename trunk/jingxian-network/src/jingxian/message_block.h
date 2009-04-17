@@ -1,6 +1,6 @@
 
-#ifndef _mem_block_h_
-#define _mem_block_h_
+#ifndef _message_block_h_
+#define _message_block_h_
 
 #include "jingxian/config.h"
 
@@ -206,4 +206,4 @@ public:
 
 _jingxian_end
 
-#endif // _mem_block_h_
+#endif // _message_block_h_

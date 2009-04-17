@@ -14,7 +14,7 @@ static char THIS_FILE[] = __FILE__;
 _jingxian_begin
 
 #if !defined (OS_HAS_INLINED)
-#include "tcp_client.inl"
+#include "jingxian/networks/sockets/tcp_client.inl"
 #endif /* OS_HAS_INLINED */
 
 

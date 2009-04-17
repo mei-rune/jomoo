@@ -10,7 +10,7 @@
 #endif /* JINGXIAN_LACKS_PRAGMA_ONCE */
 
 // Include files
-#include "ICommand.h"
+#include "jingxian/networks/commands/ICommand.h"
 
 _jingxian_begin
 

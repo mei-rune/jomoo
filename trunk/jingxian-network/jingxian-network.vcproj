@@ -497,10 +497,6 @@
 			>
 		</File>
 		<File
-			RelativePath=".\src\jingxian\stdafx.h"
-			>
-		</File>
-		<File
 			RelativePath=".\src\jingxian\variant.hpp"
 			>
 		</File>

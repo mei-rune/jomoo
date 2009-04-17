@@ -10,8 +10,7 @@
 #endif /* JOMOO_LACKS_PRAGMA_ONCE */
 
 // Include files
-#include "config_Networks.h"
-#include "../io_request.h"
+#include "jingxian/networks/commands/io_request.h"
 
 _jingxian_begin
 

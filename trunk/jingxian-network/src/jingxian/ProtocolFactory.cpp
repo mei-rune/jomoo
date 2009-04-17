@@ -1,6 +1,6 @@
 
 # include "pro_config.h"
-#include "IProtocolFactory.h"
+#include "jingxian/IProtocolFactory.h"
 
 _jingxian_begin
 
