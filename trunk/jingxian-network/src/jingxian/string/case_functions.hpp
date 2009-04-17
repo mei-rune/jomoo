@@ -10,7 +10,7 @@
 
 // Include files
 # include <algorithm>
-# include "ctype_traits.hpp"
+# include "jingxian/string/ctype_traits.hpp"
 
 template<   typename S
         ,   typename F

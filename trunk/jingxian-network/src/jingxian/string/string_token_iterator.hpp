@@ -9,7 +9,7 @@
 #endif /* JINGXIAN_LACKS_PRAGMA_ONCE */
 
 // Include files
-# include "os_string.hpp"
+# include "jingxian/string/os_string.hpp"
 
 template< typename C >
 struct string_token_iterator ITERATOR_BASE( input_iterator, tstring , ptrdiff_t )

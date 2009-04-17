@@ -253,4 +253,4 @@ typedef  int errno_t;
 #define __MSVCRT_VERSION__ 0x0700
 #endif
 
-#endif // _config_H_
+#endif // _config_h_

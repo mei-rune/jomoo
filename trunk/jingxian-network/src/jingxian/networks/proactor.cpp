@@ -1,9 +1,9 @@
 
 # include "pro_config.h"
 # include "proactor.h"
-# include "exception.hpp"
-# include "logging.hpp"
-# include "command_queue.h"
+# include "Jexception.hpp"
+# include "jingxian/logging/logging.hpp"
+# include "jingxian/netowrks/commands/command_queue.h"
 
 #ifdef _MEMORY_DEBUG
 #undef THIS_FILE
@@ -79,7 +79,7 @@ void proactor::close (void)
 			&overlapped,
 			0);  // poll
 
-		if ( is_null(overlapped) || res == FALSE)
+		if ( is_null(overlapped) || FALSE == res )
 			break;
 
 		command *asynch_result =
@@ -140,7 +140,7 @@ int proactor::handle_events (unsigned long milli_seconds)
 		&completion_key,
 		&overlapped,
 		milli_seconds);
-	if (FALSE == result && is_null(overlapped) )
+	if ( FALSE == result && is_null(overlapped) )
 	{
 		switch ( GetLastError() )
 		{

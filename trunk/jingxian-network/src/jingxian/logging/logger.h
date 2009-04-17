@@ -8,9 +8,10 @@
 # pragma once
 #endif /* JINGXIAN_LACKS_PRAGMA_ONCE */
 
-#include "string.hpp"
-#include "jingxian_export.h"
-#include <assert.h>
+// Include files
+# include <assert.h>
+# include "jingxian/string/string.hpp"
+# include "jingxian/jingxian_export.h"
 
 _jingxian_begin
 

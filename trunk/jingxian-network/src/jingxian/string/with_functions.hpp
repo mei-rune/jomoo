@@ -10,7 +10,7 @@
 
 // Include files
 # include <functional>
-# include "string_traits.hpp"
+# include "jingxian/string/string_traits.hpp"
 
 
 _jingxian_begin

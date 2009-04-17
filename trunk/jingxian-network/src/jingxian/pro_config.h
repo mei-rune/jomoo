@@ -1,6 +1,6 @@
 
-#ifndef _config_h_
-#define _config_h_
+#ifndef _pro_config_h_
+#define _pro_config_h_
 
 #if !defined (JINGXIAN_LACKS_PRAGMA_ONCE)
 # pragma once
@@ -243,4 +243,4 @@ typedef  int errno_t;
 #define __MSVCRT_VERSION__ 0x0700
 #endif
 
-#endif // _config_H_
+#endif // _pro_config_h_
