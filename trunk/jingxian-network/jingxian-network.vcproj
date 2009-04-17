@@ -41,12 +41,12 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/DTEST"
 				Optimization="0"
-				AdditionalIncludeDirectories="."
+				AdditionalIncludeDirectories="&quot;D:\developing\JoMoo\trunk\jingxian-network\src&quot;;."
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
-				UsePrecompiledHeader="2"
+				UsePrecompiledHeader="1"
 				PrecompiledHeaderThrough="pro_config.h"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="true"
@@ -180,23 +180,11 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\src\LogUtils.cpp"
+				RelativePath=".\src\jingxian\main.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\main.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\message_block.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\ProtocolFactory.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\stdafx.cpp"
+				RelativePath=".\src\jingxian\stdafx.cpp"
 				>
 			</File>
 		</Filter>
@@ -206,19 +194,11 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\src\config.h"
+				RelativePath=".\src\jingxian\config.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\logging.hpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\pro_config.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\string.hpp"
+				RelativePath=".\src\jingxian\pro_config.h"
 				>
 			</File>
 		</Filter>
@@ -232,23 +212,27 @@
 			Name="logging"
 			>
 			<File
-				RelativePath=".\src\logging\logger.h"
+				RelativePath=".\src\jingxian\logging\logger.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\logging\LogUtils.cpp"
+				RelativePath=".\src\jingxian\logging\logging.hpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\logging\LogUtils.h"
+				RelativePath=".\src\jingxian\logging\LogUtils.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\logging\stdlogger.H"
+				RelativePath=".\src\jingxian\logging\LogUtils.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\logging\tracer.h"
+				RelativePath=".\src\jingxian\logging\stdlogger.H"
+				>
+			</File>
+			<File
+				RelativePath=".\src\jingxian\logging\tracer.h"
 				>
 			</File>
 		</Filter>
@@ -256,66 +240,66 @@
 			Name="networks"
 			>
 			<File
-				RelativePath=".\src\networks\command_queue.cpp"
+				RelativePath=".\src\jingxian\networks\connected_socket.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\networks\command_queue.h"
+				RelativePath=".\src\jingxian\networks\connected_socket.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\networks\connected_socket.cpp"
+				RelativePath=".\src\jingxian\networks\connection_status.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\networks\connected_socket.h"
+				RelativePath=".\src\jingxian\networks\inet_address.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\networks\connection_status.h"
+				RelativePath=".\src\jingxian\networks\inet_address.h"
 				>
 			</File>
 			<File
-				RelativePath=".\src\networks\ICommand.h"
+				RelativePath=".\src\jingxian\networks\proactor.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\networks\inet_address.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\networks\inet_address.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\networks\IOCPServer.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\src\networks\IOCPServer.h"
+				RelativePath=".\src\jingxian\networks\proactor.h"
 				>
 			</File>
 			<Filter
 				Name="commands"
 				>
 				<File
-					RelativePath=".\src\networks\commands\AcceptRequest.cs"
+					RelativePath=".\src\jingxian\networks\commands\AcceptRequest.cs"
 					>
 				</File>
 				<File
-					RelativePath=".\src\networks\commands\ConnectRequest.cs"
+					RelativePath=".\src\jingxian\networks\commands\command_queue.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\src\networks\commands\DisconnectRequest.cs"
+					RelativePath=".\src\jingxian\networks\commands\command_queue.h"
 					>
 				</File>
 				<File
-					RelativePath=".\src\networks\commands\ReadRequest.cs"
+					RelativePath=".\src\jingxian\networks\commands\ConnectRequest.cs"
 					>
 				</File>
 				<File
-					RelativePath=".\src\networks\commands\write_request.h"
+					RelativePath=".\src\jingxian\networks\commands\DisconnectRequest.cs"
+					>
+				</File>
+				<File
+					RelativePath=".\src\jingxian\networks\commands\ICommand.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\jingxian\networks\commands\ReadRequest.cs"
+					>
+				</File>
+				<File
+					RelativePath=".\src\jingxian\networks\commands\write_request.h"
 					>
 				</File>
 			</Filter>
@@ -323,39 +307,39 @@
 				Name="sockets"
 				>
 				<File
-					RelativePath=".\src\networks\sockets\base_socket.cpp"
+					RelativePath=".\src\jingxian\networks\sockets\base_socket.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\src\networks\sockets\base_socket.h"
+					RelativePath=".\src\jingxian\networks\sockets\base_socket.h"
 					>
 				</File>
 				<File
-					RelativePath=".\src\networks\sockets\base_socket.inl"
+					RelativePath=".\src\jingxian\networks\sockets\base_socket.inl"
 					>
 				</File>
 				<File
-					RelativePath=".\src\networks\sockets\tcp_client.cpp"
+					RelativePath=".\src\jingxian\networks\sockets\tcp_client.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\src\networks\sockets\tcp_client.h"
+					RelativePath=".\src\jingxian\networks\sockets\tcp_client.h"
 					>
 				</File>
 				<File
-					RelativePath=".\src\networks\sockets\tcp_client.inl"
+					RelativePath=".\src\jingxian\networks\sockets\tcp_client.inl"
 					>
 				</File>
 				<File
-					RelativePath=".\src\networks\sockets\tcp_server.cpp"
+					RelativePath=".\src\jingxian\networks\sockets\tcp_server.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\src\networks\sockets\tcp_server.h"
+					RelativePath=".\src\jingxian\networks\sockets\tcp_server.h"
 					>
 				</File>
 				<File
-					RelativePath=".\src\networks\sockets\tcp_server.inl"
+					RelativePath=".\src\jingxian\networks\sockets\tcp_server.inl"
 					>
 				</File>
 			</Filter>
@@ -372,120 +356,140 @@
 			Name="string"
 			>
 			<File
-				RelativePath=".\src\string\case_functions.hpp"
+				RelativePath=".\src\jingxian\string\case_functions.hpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\string\ctype_traits.hpp"
+				RelativePath=".\src\jingxian\string\ctype_traits.hpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\string\os_string.hpp"
+				RelativePath=".\src\jingxian\string\os_string.hpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\string\replace_functions.hpp"
+				RelativePath=".\src\jingxian\string\replace_functions.hpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\string\string_append_iterator.hpp"
+				RelativePath=".\src\jingxian\string\string.hpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\string\string_token_iterator.hpp"
+				RelativePath=".\src\jingxian\string\string_append_iterator.hpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\string\string_traits.hpp"
+				RelativePath=".\src\jingxian\string\string_token_iterator.hpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\string\StringOps.hpp"
+				RelativePath=".\src\jingxian\string\string_traits.hpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\string\stringPtr.hpp"
+				RelativePath=".\src\jingxian\string\StringOps.hpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\string\toString.hpp"
+				RelativePath=".\src\jingxian\string\stringPtr.hpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\string\trim_functions.hpp"
+				RelativePath=".\src\jingxian\string\toString.hpp"
 				>
 			</File>
 			<File
-				RelativePath=".\src\string\with_functions.hpp"
+				RelativePath=".\src\jingxian\string\trim_functions.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\jingxian\string\with_functions.hpp"
 				>
 			</File>
 		</Filter>
 		<File
-			RelativePath=".\src\Buffer.h"
+			RelativePath=".\src\jingxian\Buffer.h"
 			>
 		</File>
 		<File
-			RelativePath=".\src\communicator.h"
+			RelativePath=".\src\jingxian\communicator.h"
 			>
 		</File>
 		<File
-			RelativePath=".\src\dictionary.h"
+			RelativePath=".\src\jingxian\dictionary.h"
 			>
 		</File>
 		<File
-			RelativePath=".\src\exception.hpp"
+			RelativePath=".\src\jingxian\exception.hpp"
 			>
 		</File>
 		<File
-			RelativePath=".\src\IAcceptor.h"
+			RelativePath=".\src\jingxian\IAcceptor.h"
 			>
 		</File>
 		<File
-			RelativePath=".\src\IConcurrentPort.h"
+			RelativePath=".\src\jingxian\IConcurrentPort.h"
 			>
 		</File>
 		<File
-			RelativePath=".\src\IConnector.h"
+			RelativePath=".\src\jingxian\IConnector.h"
 			>
 		</File>
 		<File
-			RelativePath=".\src\IDNSResolver.h"
+			RelativePath=".\src\jingxian\IDNSResolver.h"
 			>
 		</File>
 		<File
-			RelativePath=".\src\IEndpoint.h"
+			RelativePath=".\src\jingxian\IEndpoint.h"
 			>
 		</File>
 		<File
-			RelativePath=".\src\IProtocol.h"
+			RelativePath=".\src\jingxian\IOCPServer.cpp"
 			>
 		</File>
 		<File
-			RelativePath=".\src\IProtocolFactory.h"
+			RelativePath=".\src\jingxian\IOCPServer.h"
 			>
 		</File>
 		<File
-			RelativePath=".\src\IReactorCore.h"
+			RelativePath=".\src\jingxian\IProtocol.h"
 			>
 		</File>
 		<File
-			RelativePath=".\src\ITransport.h"
+			RelativePath=".\src\jingxian\IProtocolFactory.h"
 			>
 		</File>
 		<File
-			RelativePath=".\src\jingxian_export.h"
+			RelativePath=".\src\jingxian\IReactorCore.h"
 			>
 		</File>
 		<File
-			RelativePath=".\src\lastError.h"
+			RelativePath=".\src\jingxian\ITransport.h"
 			>
 		</File>
 		<File
-			RelativePath=".\src\message_block.h"
+			RelativePath=".\src\jingxian\jingxian_export.h"
 			>
 		</File>
 		<File
-			RelativePath=".\src\ProtocolContext.h"
+			RelativePath=".\src\jingxian\lastError.h"
+			>
+		</File>
+		<File
+			RelativePath=".\src\jingxian\message_block.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\src\jingxian\message_block.h"
+			>
+		</File>
+		<File
+			RelativePath=".\src\jingxian\ProtocolContext.h"
+			>
+		</File>
+		<File
+			RelativePath=".\src\jingxian\ProtocolFactory.cpp"
 			>
 		</File>
 		<File
@@ -493,11 +497,11 @@
 			>
 		</File>
 		<File
-			RelativePath=".\src\stdafx.h"
+			RelativePath=".\src\jingxian\stdafx.h"
 			>
 		</File>
 		<File
-			RelativePath=".\src\variant.hpp"
+			RelativePath=".\src\jingxian\variant.hpp"
 			>
 		</File>
 	</Files>
