@@ -42,14 +42,37 @@ public:
     virtual const IEndpoint& connectTo() const = 0;
 
 	/**
-	* 取得地址的描述
-	*/
+	 * 取得地址的描述
+	 */
+	virtual const tstring& toString() const = 0;
+};
+
+class IConnectorFactory
+{
+public:
+
+	virtual ~IConnectorFactory(){}
+
+	/**
+	 * 创建 IConnector 对象
+	 */
+	virtual IConnector* createConnector() = 0;
+
+	/**
+	 * 取得地址的描述
+	 */
 	virtual const tstring& toString() const = 0;
 };
 
 inline tostream& operator<<( tostream& target, const IConnector& connector )
 {
 	target << connector.toString();
+	return target;
+}
+
+inline tostream& operator<<( tostream& target, const IConnectorFactory& connectorFactory )
+{
+	target << connectorFactory.toString();
 	return target;
 }
 

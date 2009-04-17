@@ -13,32 +13,32 @@
 
 _jingxian_begin
 
-	/**
-	 * symbol[var]
-	 */
-	inline bool square_pattern( const tstring& src , tstring& symbol , tstring& var )
-	{
-		if( src.size() < 2 )
-			return false;
-		
-		tstring::size_type square_start = src.find( '[' );
-		
-		if( tstring::npos == square_start )
-		{
-			symbol = src;
-			return true;
-		}
+/**
+* symbol[var]
+*/
+inline bool square_pattern( const tstring& src , tstring& symbol , tstring& var )
+{
+	if( src.size() < 2 )
+		return false;
 
-		tstring::size_type square_end = src.find( ']' , square_start );
-		if( tstring::npos == square_end )
-		{
-			symbol = src.substr( 0,square_start );
-			return true;
-		}
-		symbol = src.substr( 0,square_start );
-		var = src.substr( square_start + 1, square_end - square_start - 1 );
+	tstring::size_type square_start = src.find( '[' );
+
+	if( tstring::npos == square_start )
+	{
+		symbol = src;
 		return true;
 	}
+
+	tstring::size_type square_end = src.find( ']' , square_start );
+	if( tstring::npos == square_end )
+	{
+		symbol = src.substr( 0,square_start );
+		return true;
+	}
+	symbol = src.substr( 0,square_start );
+	var = src.substr( square_start + 1, square_end - square_start - 1 );
+	return true;
+}
 
 ///**
 // * 在指定字符串忽略大小查找字符

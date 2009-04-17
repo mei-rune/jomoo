@@ -138,4 +138,4 @@ public:
 
 _jingxian_end
 
-#endif // _JOMOO_Log_H_
+#endif // _JINGXIAN_Log_H_

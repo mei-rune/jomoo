@@ -5,9 +5,9 @@
 
 #include "jingxian/config.h"
 
-#if !defined (JOMOO_LACKS_PRAGMA_ONCE)
+#if !defined (JINGXIAN_LACKS_PRAGMA_ONCE)
 # pragma once
-#endif /* JOMOO_LACKS_PRAGMA_ONCE */
+#endif /* JINGXIAN_LACKS_PRAGMA_ONCE */
 
 // Include files
 #include "jingxian/networks/commands/io_request.h"

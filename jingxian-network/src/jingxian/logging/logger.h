@@ -36,7 +36,7 @@ public:
 	};
 
 	/**
-	 * virtual JOMOO_Log_Impl destructor
+	 * virtual JINGXIAN_Log_Impl destructor
 	 */
 	virtual ~logger(){};
 
@@ -715,4 +715,4 @@ _jingxian_end
 
 #endif // _NO_LOG_
 
-#endif // _JOMOO_Log_H_
+#endif // _JINGXIAN_Log_H_

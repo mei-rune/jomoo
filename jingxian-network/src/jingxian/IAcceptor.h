@@ -22,18 +22,39 @@ class IAcceptor
 public:
 	virtual ~IAcceptor(){}
 
+	/**
+	 * 取得超时时间
+	 */
     virtual  time_t timeout () const = 0;
 
+	/**
+	 * 监听的地址
+	 */
     virtual const IEndpoint& bindPoint() const = 0;
 
+	/**
+	 * 停止监听
+	 */
     virtual void stopListening() = 0;
 
+	/**
+	 * 启动监听
+	 */
     virtual void startListening() = 0;
 
+	/**
+	 * 取得协议工厂
+	 */
     virtual IProtocolFactory& protocolFactory() = 0;
 
+	/**
+	 * 取得配置字典
+	 */
     virtual IDictionary& misc() = 0;
-	
+
+	/**
+	 * 取得配置字典
+	 */
 	virtual const IDictionary& misc() const = 0;
 
 	/**
@@ -42,9 +63,33 @@ public:
 	virtual const tstring& toString() const = 0;
 };
 
+
+class IAcceptorFactory
+{
+public:
+
+	virtual ~IAcceptorFactory(){}
+
+	/**
+	 * 创建 IAcceptor 对象
+	 */
+	virtual IAcceptor* createAcceptor() = 0;
+
+	/**
+	 * 取得地址的描述
+	 */
+	virtual const tstring& toString() const = 0;
+};
+
 inline tostream& operator<<( tostream& target, const IAcceptor& acceptor )
 {
 	target << acceptor.toString();
+	return target;
+}
+
+inline tostream& operator<<( tostream& target, const IAcceptorFactory& acceptorFactory )
+{
+	target << acceptorFactory.toString();
 	return target;
 }
 

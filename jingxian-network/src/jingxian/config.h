@@ -17,6 +17,7 @@
 #endif /* JINGXIAN_LACKS_PRAGMA_ONCE */
 
 
+#define JINGXIAN_MT 1
 
 #include "pro_config.h"
 
