@@ -21,36 +21,44 @@ IOCPServer::~IOCPServer(void)
 
 IConnector* IOCPServer::connectWith(const tchar* endPoint)
 {
+	ThrowException( NotImplementedException );
 }
 
 IConnector* IOCPServer::connectWith(const tchar* endPoint
 			, IDictionary& kw)
 {
+	ThrowException( NotImplementedException );
 }
 
 IAcceptor* IOCPServer::listenWith(const tchar* endPoint
 			, IProtocolFactory* protocolFactory)
 {
+	ThrowException( NotImplementedException );
 }
 	
 void IOCPServer::send( IRunnable* runnable )
 {
+	ThrowException( NotImplementedException );
 }
 	
 void IOCPServer::runForever()
 {
+	ThrowException( NotImplementedException );
 }
 	
 void IOCPServer::interrupt()
 {
+	ThrowException( NotImplementedException );
 }
 	
 bool IOCPServer::bind(HANDLE systemHandler)
 {
+	ThrowException( NotImplementedException );
 }
 	
 const tstring& IOCPServer::toString() const
 {
+	ThrowException( NotImplementedException );
 }
 
 

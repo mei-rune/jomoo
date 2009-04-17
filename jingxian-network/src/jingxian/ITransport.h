@@ -2,7 +2,7 @@
 #ifndef _transport_h_
 #define _transport_h_
 
-#include "config.h"
+#include "jingxian/config.h"
 
 #if !defined (JINGXIAN_LACKS_PRAGMA_ONCE)
 # pragma once

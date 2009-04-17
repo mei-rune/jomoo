@@ -2,14 +2,14 @@
 #ifndef _IEndpoint_H
 #define _IEndpoint_H
 
-#include "config.h"
+#include "jingxian/config.h"
 
 #if !defined (JINGXIAN_LACKS_PRAGMA_ONCE)
 # pragma once
 #endif /* JINGXIAN_LACKS_PRAGMA_ONCE */
 
 // Include files
-# include "string.hpp"
+# include "jingxian/string/string.hpp"
 
 _jingxian_begin
 

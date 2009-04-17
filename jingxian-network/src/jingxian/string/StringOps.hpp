@@ -2,7 +2,7 @@
 #ifndef _STRINGOPS_H_
 #define _STRINGOPS_H_
 
-#include "config.h"
+#include "jingxian/config.h"
 
 #if !defined (JINGXIAN_LACKS_PRAGMA_ONCE)
 # pragma once

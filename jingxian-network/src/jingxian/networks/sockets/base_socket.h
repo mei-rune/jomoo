@@ -1,8 +1,8 @@
 
-#ifndef _protocol_h_
-#define _protocol_h_
+#ifndef _base_socket_h_
+#define _base_socket_h_
 
-#include "config.h"
+#include "jingxian/config.h"
 
 #if !defined (JINGXIAN_LACKS_PRAGMA_ONCE)
 # pragma once
@@ -11,7 +11,7 @@
 // Include files
 # include "Winsock2.h"
 # include "Mswsock.h"
-# include "inet_address.h"
+# include "jingxian/networks/inet_address.h"
 
 typedef WSABUF iovec;
 
@@ -26,7 +26,7 @@ typedef WSABUF iovec;
 # endif // ___iopack___
 
 
-_networks_begin
+_jingxian_begin
 
 enum select_mode
 {
@@ -92,7 +92,7 @@ public:
   /**
    * 返回一个人可读的字符串
    */
-  const string& toString() const;
+  const tstring& toString() const;
 
   /**
    * 初始化socket服务
@@ -114,8 +114,8 @@ public:
   base_socket ( int protocol_family,
 			int type,
             int protocol,
-            WSAPROTOCOL_INFO *protocolinfo,
-            JOMOO_SOCK_GROUP g,
+            LPWSAPROTOCOL_INFO protocolinfo,
+            GROUP g,
              u_long flags,
             int reuse_addr);
 
@@ -139,16 +139,16 @@ public:
   bool open (int protocol_family,
 			int type,
             int protocol,
-            WSAPROTOCOL_INFO *protocolinfo,
-            JOMOO_SOCK_GROUP g,
+            LPWSAPROTOCOL_INFO protocolinfo,
+            GROUP g,
             u_long flags,
             int reuse_addr);
 
 private:
-  DECLARE_NO_COPY_CLASS( base_socket );
+  NOCOPY( base_socket );
 
   SOCKET handle_;
-  mutable string toString_;
+  mutable tstring toString_;
 
 public:
 	static LPFN_TRANSMITFILE __transmitfile;
@@ -173,10 +173,10 @@ inline tostream& operator<<( tostream& target, const base_socket& s )
   return target;
 }
 
-#if defined (JOMOO_HAS_INLINED)
+#if defined (OS_HAS_INLINED)
 #include "base_socket.inl"
-#endif /* JOMOO_HAS_INLINED */
+#endif /* OS_HAS_INLINED */
 
-_networks_end
+_jingxian_end
 
-#endif /* JOMOO_sap_H */
+#endif /* _base_socket_h_ */

@@ -6,6 +6,7 @@
 # pragma once
 #endif /* JINGXIAN_LACKS_PRAGMA_ONCE */
 
+
 #ifndef _WINSOCKAPI_
 #define _WINSOCKAPI_   /* Prevent inclusion of winsock.h in windows.h */
 #endif // _WINSOCKAPI_
@@ -17,10 +18,10 @@
 typedef unsigned char u_char;
 #endif // _u_char_
 
-#ifndef _u_short_
-#define _u_short_
-typedef unsigned short u_short;
-#endif // _u_short_
+#ifndef _u_int16_t_
+#define _u_int16_t_
+typedef unsigned short u_int16_t;
+#endif // _u_int16_t_
 
 #ifndef _n_short_
 #define _n_short_
@@ -46,11 +47,6 @@ typedef unsigned int  u_int;
 #define _u_char_t_
 typedef unsigned char u_char_t;
 #endif //_u_char_t_
-
-#ifndef _u_short_t_
-#define _u_short_t_
-typedef unsigned short u_short_t;
-#endif // _u_short_t_
 
 #ifndef _n_short_t_
 #define _n_short_t_
@@ -209,7 +205,7 @@ inline T get_ptr( T t )
 #define MAKE_STRING( X ) #X
 #define ASSERT assert
 
-#define OS_HAS_INLINED 1
+
 
 #if defined (OS_HAS_INLINED)
 #define OS_INLINE inline
@@ -217,13 +213,6 @@ inline T get_ptr( T t )
 #define OS_INLINE
 #endif
 
-//#define JINGXIAN_HAS_INLINED 1
-
-#if defined (JINGXIAN_HAS_INLINED)
-#define JINGXIAN_INLINE inline
-#else
-#define JINGXIAN_INLINE
-#endif
 
 #define jingxian_assert assert
 

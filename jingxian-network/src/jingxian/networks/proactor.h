@@ -1,9 +1,9 @@
 
 
-#ifndef _IOCPServer_H_
-#define _IOCPServer_H_
+#ifndef _proactor_h_
+#define _proactor_h_
 
-#include "config.h"
+#include "jingxian/config.h"
 
 #if !defined (JINGXIAN_LACKS_PRAGMA_ONCE)
 # pragma once
@@ -74,4 +74,4 @@ private:
 
 _jingxian_end
 
-#endif // _IOCPServer_H_
+#endif // _proactor_h_

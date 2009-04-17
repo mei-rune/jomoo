@@ -3,7 +3,7 @@
 #ifndef _write_request_h_
 #define _write_request_h_
 
-#include "config.h"
+#include "jingxian/config.h"
 
 #if !defined (JOMOO_LACKS_PRAGMA_ONCE)
 # pragma once
@@ -13,7 +13,7 @@
 #include "config_Networks.h"
 #include "../io_request.h"
 
-_networks_begin
+_jingxian_begin
 
 class write_request : io_request
 {
@@ -81,6 +81,6 @@ private:
 	std::vector<iovec> _iovec;
 };
 
-_networks_end
+_jingxian_end
 
 #endif 

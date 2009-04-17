@@ -2,7 +2,7 @@
 #ifndef _string_append_iterator_
 #define _string_append_iterator_
 
-#include "config.h"
+#include "jingxian/config.h"
 
 #if !defined (JINGXIAN_LACKS_PRAGMA_ONCE)
 # pragma once

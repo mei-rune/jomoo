@@ -3,13 +3,13 @@
 #ifndef JOMOO_GET_LAST_ERROR_H
 #define JOMOO_GET_LAST_ERROR_H
 
-#include "config.h"
+#include "jingxian/config.h"
 
 #if !defined (JINGXIAN_LACKS_PRAGMA_ONCE)
 # pragma once
 #endif /* JINGXIAN_LACKS_PRAGMA_ONCE */
 
-# include "string.hpp"
+# include "jingxian/string/string.hpp"
 
 _jingxian_begin
 

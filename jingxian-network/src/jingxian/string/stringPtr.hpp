@@ -1,7 +1,7 @@
 #ifndef STRINGPTR_H
 # define STRINGPTR_H
 
-#include "config.h"
+#include "jingxian/config.h"
 
 #if !defined (JINGXIAN_LACKS_PRAGMA_ONCE)
 # pragma once

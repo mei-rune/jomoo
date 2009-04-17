@@ -1,36 +1,36 @@
 
 
-JOMOO_INLINE tcp_server::tcp_server (void)
+OS_INLINE tcp_server::tcp_server (void)
 : socket_(AF_INET , SOCK_STREAM, IPPROTO_TCP )
 {
 	toString_ = _T("tcp_server - ") + socket_.toString();
 }
 
-JOMOO_INLINE tcp_server::~tcp_server (void)
+OS_INLINE tcp_server::~tcp_server (void)
 {
 }
 
-JOMOO_INLINE base_socket& tcp_server::socket()
-{
-	return socket_;
-}
-
-JOMOO_INLINE  const base_socket& tcp_server::socket() const
+OS_INLINE base_socket& tcp_server::socket()
 {
 	return socket_;
 }
 
-JOMOO_INLINE  const inet_address& tcp_server::bind_addr() const
+OS_INLINE  const base_socket& tcp_server::socket() const
+{
+	return socket_;
+}
+
+OS_INLINE  const inet_address& tcp_server::bind_addr() const
 {
 	return bind_addr_;
 }
 
-JOMOO_INLINE bool tcp_server::is_good() const
+OS_INLINE bool tcp_server::is_good() const
 {
 	return socket_.is_good();
 }
 
-JOMOO_INLINE bool tcp_server::bind( const inet_address& addr)
+OS_INLINE bool tcp_server::bind( const inet_address& addr)
 {
 #pragma warning(disable: 4267)
 	if ( SOCKET_ERROR != ::bind( socket_.get_handle(), addr.addr(), addr.size() ) )
@@ -43,7 +43,7 @@ JOMOO_INLINE bool tcp_server::bind( const inet_address& addr)
 	return false;
 }
 
-JOMOO_INLINE bool tcp_server::listen( int backlog )
+OS_INLINE bool tcp_server::listen( int backlog )
 {
 	if( SOCKET_ERROR != ::listen( socket_.get_handle(), backlog ) )
 	{
@@ -53,7 +53,7 @@ JOMOO_INLINE bool tcp_server::listen( int backlog )
 	return false;
 }
 
-JOMOO_INLINE bool tcp_server::accept( tcp_client& accepted)
+OS_INLINE bool tcp_server::accept( tcp_client& accepted)
 {
 #pragma warning(disable: 4267)
 	int len = accepted.remote_addr().size();
@@ -62,12 +62,12 @@ JOMOO_INLINE bool tcp_server::accept( tcp_client& accepted)
 	return accepted.is_good();
 }
 
-JOMOO_INLINE bool tcp_server::accept(tcp_client& accepted
+OS_INLINE bool tcp_server::accept(tcp_client& accepted
 						, void* data_buffer
 						, size_t data_len
 						, size_t local_addr_len
 						, size_t remote_addr_len
-						, JOMOO_OVERLAPPED& overlapped )
+						, OVERLAPPED& overlapped )
 {
 	DWORD bytesReceived = 0;
 #pragma warning(disable: 4267)
@@ -75,14 +75,14 @@ JOMOO_INLINE bool tcp_server::accept(tcp_client& accepted
 #pragma warning(default: 4267)
 }
 
-JOMOO_INLINE void tcp_server::swap( tcp_server& r)
+OS_INLINE void tcp_server::swap( tcp_server& r)
 {
 	bind_addr_.swap( r.bind_addr_ );
 	socket_.swap( r.socket_ );
 	toString_.swap( r.toString_ );
 }
 
-JOMOO_INLINE const string& tcp_server::toString( ) const
+OS_INLINE const tstring& tcp_server::toString( ) const
 {
 	return toString_;
 }

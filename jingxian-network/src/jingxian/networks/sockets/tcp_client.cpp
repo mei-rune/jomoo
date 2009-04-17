@@ -1,20 +1,21 @@
 
+# include "pro_config.h"
+# include <vector>
+# include "jingxian/networks/sockets/tcp_client.h"
 
-#include "tcp_client.h"
-#include <vector>
 
-#ifdef _jomoo_memory_DEBUG
+#ifdef _MEMORY_DEBUG
 #undef THIS_FILE
 #define new	   DEBUG_NEW  
 #define malloc DEBUG_MALLOC  
 static char THIS_FILE[] = __FILE__;  
-#endif // _jomoo_memory_DEBUG
+#endif // _MEMORY_DEBUG
 
-_networks_begin
+_jingxian_begin
 
-#if !defined (JOMOO_HAS_INLINED)
+#if !defined (OS_HAS_INLINED)
 #include "tcp_client.inl"
-#endif /* JOMOO_HAS_INLINED */
+#endif /* OS_HAS_INLINED */
 
 
-_networks_end
+_jingxian_end

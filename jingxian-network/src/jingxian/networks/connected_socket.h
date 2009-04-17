@@ -3,19 +3,19 @@
 #ifndef _CONNECTED_SOCKET_H_
 #define _CONNECTED_SOCKET_H_
 
-#include "config.h"
+#include "jingxian/config.h"
 
 #if !defined (JINGXIAN_LACKS_PRAGMA_ONCE)
 # pragma once
 #endif /* JINGXIAN_LACKS_PRAGMA_ONCE */
 
 // Include files
-# include "os_networks.h"
-# include "proactor.h"
-# include "protocol.h"
-# include "ProtocolContext.h"
-# include "connection_status.h"
-# include "logging.hpp"
+# include <Winsock2.h>
+# include "jingxian/IProtocol.h"
+# include "jingxian/ProtocolContext.h"
+# include "jingxian/networks/connection_status.h"
+# include "jingxian/networks/proactor.h"
+# include "jingxian/logging/logging.hpp"
 
 _jingxian_begin
 
@@ -23,12 +23,12 @@ _jingxian_begin
  * On开头的函数在用户直接调用的方法中不可以使用。
  * 给用户调用的方法为ITransport接口中的方法
  */
-class connected_socket : transport
+class connected_socket : public ITransport
 {
-
 public:
 	
-	connected_socket(proactor& core , SOCKET socket);
+	connected_socket( proactor* core, SOCKET socket );
+
 	virtual ~connected_socket( );
 
 
@@ -587,7 +587,7 @@ private:
 	/// iocp对象的引用
     proactor* _core;
 	/// 协议处理器
-    protocol* _protocol;
+    IProtocol* _protocol;
 	/// socket 对象
 	SOCKET _socket;
 	/// 本对象当前所处的状态

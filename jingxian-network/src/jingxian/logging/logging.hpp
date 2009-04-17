@@ -2,7 +2,7 @@
 #ifndef _LOGGING_HPP_
 #define _LOGGING_HPP_
 
-#include "config.h"
+#include "jingxian/config.h"
 
 #if !defined (JINGXIAN_LACKS_PRAGMA_ONCE)
 # pragma once

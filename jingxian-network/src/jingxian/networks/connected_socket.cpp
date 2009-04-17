@@ -1,11 +1,11 @@
 
 # include "pro_config.h"
-# include "connected_socket.h"
+# include "jingxian/networks/connected_socket.h"
 
 _jingxian_begin
 
-connected_socket::connected_socket(proactor& core , SOCKET socket )
-: _core( &core )
+connected_socket::connected_socket(proactor* core , SOCKET socket )
+: _core( core )
 {
 }
 

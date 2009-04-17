@@ -2,7 +2,7 @@
 #ifndef os_string_h
 #define os_string_h
 
-#include "config.h"
+#include "jingxian/config.h"
 
 #if !defined (JINGXIAN_LACKS_PRAGMA_ONCE)
 # pragma once
