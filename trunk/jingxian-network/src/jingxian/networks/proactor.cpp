@@ -66,11 +66,11 @@ void proactor::close (void)
 	{
 		OVERLAPPED *overlapped = 0;
 		u_long bytes_transferred = 0;
-#if defined (JOMOO_WIN64)
+#if defined (JINGXIAN_WIN64)
 		ULONG_PTR completion_key = 0;
 #else
 		ULONG completion_key = 0;
-#endif /* JOMOO_WIN64 */
+#endif /* JINGXIAN_WIN64 */
 
 		BOOL res = ::GetQueuedCompletionStatus
 			(m_completion_port_,

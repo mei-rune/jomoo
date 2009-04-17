@@ -19,14 +19,17 @@ IOCPServer::~IOCPServer(void)
 {
 }
 
-IConnector* IOCPServer::connectWith(const tchar* endPoint)
+bool split( const tchar* endPoint, tstring& protocol )
 {
-	ThrowException( NotImplementedException );
+	if( is_null( endPoint ) )
+		return false;
+	tchar* p = string_traits<tchar>::strstr( endPoint , _T("://") );
+	tstring protocol( endPoint, p - endPoint );
 }
 
-IConnector* IOCPServer::connectWith(const tchar* endPoint
-			, IDictionary& kw)
+IConnector* IOCPServer::connectWith(const tchar* endPoint)
 {
+
 	ThrowException( NotImplementedException );
 }
 

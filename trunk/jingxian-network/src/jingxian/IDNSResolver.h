@@ -37,6 +37,8 @@ public:
 	virtual void ResolveHostByName(const tstring& name, void* context, IReactorCore* port, ResolveHost callback, ResolveError onError, int timeout);
 };
 
+
+
 _jingxian_end
 
 #endif // _IDNSResolver_H_

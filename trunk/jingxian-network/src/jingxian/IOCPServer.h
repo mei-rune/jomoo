@@ -9,7 +9,7 @@
 #endif /* JINGXIAN_LACKS_PRAGMA_ONCE */
 
 // Include files
-# include <map>
+# include <hash_map>
 # include "jingxian/string/string.hpp"
 # include "jingxian/IReactorCore.h"
 # include "jingxian/networks/proactor.h"
@@ -29,14 +29,6 @@ public:
 	 * 创建一个连接器
 	 */
     virtual IConnector* connectWith(const tchar* endPoint);
-
-	
-    /**
-	 * 创建一个连接器
-	 */
-    virtual IConnector* connectWith(const tchar* endPoint
-			, IDictionary& kw);
-
 	
     /**
 	 * 创建一个监听服务
@@ -67,7 +59,6 @@ public:
 	 */
 	virtual bool bind(HANDLE systemHandler);
 
-	
 	/**
 	* 取得地址的描述
 	*/
@@ -77,6 +68,9 @@ private:
 
 	proactor _proactor;
 
+	stdext::hash_map<tstring, IConnectorFactory > _connectorFactory;
+
+	stdext::hash_map<tstring, IAcceptorFactory > _acceptorFactory;
 };
 
 _jingxian_end

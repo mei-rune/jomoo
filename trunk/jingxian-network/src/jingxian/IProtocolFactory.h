@@ -21,8 +21,14 @@ public:
 
 	virtual ~IProtocolFactory(){}
 
+	/**
+	 * 创建 IProtocol 对象
+	 */
 	virtual IProtocol* createProtocol() = 0;
 
+	/**
+	 * 释放 IProtocol 对象
+	 */
 	virtual void release( IProtocol* pr ) = 0;
 
 	/**
