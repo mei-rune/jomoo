@@ -8,8 +8,9 @@
 # pragma once
 #endif /* JINGXIAN_LACKS_PRAGMA_ONCE */
 
-#include "Logger.h"
+// Include files
 #include <iostream>
+#include "jingxian/logging/Logger.h"
 
 _jingxian_begin
 

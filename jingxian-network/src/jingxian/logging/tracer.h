@@ -8,8 +8,9 @@
 # pragma once
 #endif /* JINGXIAN_LACKS_PRAGMA_ONCE */
 
-#include "string.hpp"
-#include "buffer.h"
+// Include files
+# include "jingxian/string/string.hpp"
+# include "jingxian/buffer.h"
 
 _jingxian_begin
 
