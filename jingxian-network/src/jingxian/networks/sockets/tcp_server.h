@@ -100,7 +100,7 @@ inline tostream& operator<<( tostream& target, const tcp_server& server )
 }
 
 #if defined (OS_HAS_INLINED)
-#include "tcp_server.inl"
+#include "jingxian/networks/sockets/tcp_server.inl"
 #endif
 
 _jingxian_end

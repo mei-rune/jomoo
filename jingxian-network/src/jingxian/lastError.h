@@ -1,7 +1,5 @@
-
-
-#ifndef JOMOO_GET_LAST_ERROR_H
-#define JOMOO_GET_LAST_ERROR_H
+#ifndef _lastError_H
+#define _lastError_H
 
 #include "jingxian/config.h"
 
@@ -91,4 +89,4 @@ inline tstring get_c_error()
 
 _jingxian_end
 
-#endif //JOMOO_GET_LAST_ERROR_H
+#endif //_lastError_H

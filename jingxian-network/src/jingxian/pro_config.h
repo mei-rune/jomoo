@@ -11,7 +11,7 @@
 #define _WINSOCKAPI_   /* Prevent inclusion of winsock.h in windows.h */
 #endif // _WINSOCKAPI_
 
-#include "windows.h"
+#include <windows.h>
 
 #ifndef _u_char_
 #define _u_char_

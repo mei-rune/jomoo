@@ -174,7 +174,7 @@ inline tostream& operator<<( tostream& target, const base_socket& s )
 }
 
 #if defined (OS_HAS_INLINED)
-#include "base_socket.inl"
+#include "jingxian/networks/sockets/base_socket.inl"
 #endif /* OS_HAS_INLINED */
 
 _jingxian_end
