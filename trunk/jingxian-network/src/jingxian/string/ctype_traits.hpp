@@ -12,6 +12,7 @@
 # include <ctype.h>
 # include "jingxian/string/os_string.hpp"
 
+_jingxian_begin
 
 template <typename C>
 struct ctype_traits;
@@ -81,5 +82,7 @@ struct ctype_traits<wchar_t>
 		return (char_type) towlower(ch);  
 	}
 };
+
+_jingxian_end
 
 #endif /* _ctype_traits_hpp_ */

@@ -11,6 +11,8 @@
 // Include files
 # include "jingxian/string/os_string.hpp"
 
+_jingxian_begin
+
 template< typename C >
 struct string_token_iterator ITERATOR_BASE( input_iterator, tstring , ptrdiff_t )
 {
@@ -86,5 +88,7 @@ private:
   size_type start;
   size_type end;
 };
+
+_jingxian_end
 
 #endif // _string_token_iterator_
