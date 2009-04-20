@@ -14,7 +14,7 @@ _jingxian_begin
 
 
 
-struct stringData;
+struct stringData
 {
 	size_t len;
 	char* ptr;

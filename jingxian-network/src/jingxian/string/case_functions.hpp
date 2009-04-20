@@ -12,6 +12,8 @@
 # include <algorithm>
 # include "jingxian/string/ctype_traits.hpp"
 
+_jingxian_begin
+
 template<   typename S
         ,   typename F
         >
@@ -55,5 +57,6 @@ inline S to_lower(S const &s)
     return r;
 }
 
+_jingxian_end
 
 #endif /* _CASE_FUNCTIONS_HPP_ */

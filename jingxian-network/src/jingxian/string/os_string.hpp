@@ -28,6 +28,8 @@ typedef std::stringstream StringStream;
 typedef char_t tchar;
 #endif
 
+_jingxian_begin
+
 inline const char* c_str_ptr( const char* t )
 {
 	return t;
@@ -179,6 +181,8 @@ inline const std::string& toNarrowString( const std::string& str )
         return toNarrowString(p,len) ;
     }
 #endif // _UNICODE
+    
+_jingxian_end
 
 #endif // LOG4CPLUS_TSTRING_HEADER_
 
