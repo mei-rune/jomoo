@@ -12,8 +12,6 @@
 
 _jingxian_begin
 
-
-
 struct stringData
 {
 	size_t len;
