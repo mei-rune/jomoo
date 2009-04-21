@@ -13,6 +13,29 @@
 
 _jingxian_begin
 
+namespace detail
+{
+	template< typename charT >
+	class StringOp
+	{
+	public:
+		static void* malloc( size_t size )
+		{
+			return ::malloc( size );
+		}
+
+		static charT* dup( const charT* p )
+		{
+			return string_traits< charT>::strdup( p );
+		}
+
+		static void free( void* p)
+		{
+			::free( p );
+		}
+	};
+};
+
 /**
 * symbol[var]
 */

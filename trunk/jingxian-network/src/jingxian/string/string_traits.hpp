@@ -241,9 +241,13 @@ struct string_traits<char_t>
 
 #pragma warning(disable: 4996)
 	inline static char_type *strtok( char_type *strToken
-		, const char_type *strDelimit )
+		, const char_type *strDelimit,char **context )
 	{
+#ifdef __GNUG__
 		return ::strtok( strToken, strDelimit );
+#else
+		return ::strtok_s( strToken, strDelimit,context );
+#endif
 	}
 #pragma warning(default: 4996)
 
@@ -527,9 +531,13 @@ struct string_traits<wchar_t>
 
 #pragma warning(disable: 4996)
 	inline static  char_type *strtok( char_type *strToken
-		, const char_type *strDelimit )
+		, const char_type *strDelimit, char_type** context )
 	{
+#ifdef __GNUG__
 		return ::wcstok( strToken, strDelimit );
+#else
+		return ::wcstok_s( strToken, strDelimit, context );
+#endif
 	}
 #pragma warning(default: 4996)
 

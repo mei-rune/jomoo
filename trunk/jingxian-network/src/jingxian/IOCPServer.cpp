@@ -19,14 +19,6 @@ IOCPServer::~IOCPServer(void)
 {
 }
 
-bool split( const tchar* endPoint, tstring& protocol )
-{
-	if( is_null( endPoint ) )
-		return false;
-	tchar* p = string_traits<tchar>::strstr( endPoint , _T("://") );
-	tstring protocol( endPoint, p - endPoint );
-}
-
 IConnector* IOCPServer::connectWith(const tchar* endPoint)
 {
 

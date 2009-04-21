@@ -9,26 +9,9 @@
 
 // Include files
 # include "jingxian/string/string_traits.hpp"
+# include "jingxian/string/stringOps.hpp"
 
 _jingxian_begin
-
-namespace detail
-{
-	template< typename charT >
-	class StringOp
-	{
-	public:
-		static charT* dup( const charT* p )
-		{
-			return string_traits< charT>::strdup( p );
-		}
-
-		static void free( charT* p)
-		{
-			string_traits< charT>::free( p );
-		}
-	};
-};
 
 template< typename charT , typename OP = detail::StringOp<charT> >
 class StringPtr

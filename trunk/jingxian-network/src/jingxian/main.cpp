@@ -1,13 +1,43 @@
 // Jingxian_Network.cpp : 定义控制台应用程序的入口点。
-//
 
 #include "pro_config.h"
 #include "jingxian/string/string.hpp"
 #include <iostream>
 
+
 int main(int argc, char* argv[])
 {
 #ifdef TEST
+
+	{
+	StringArray<char, detail::StringOp<char> > sa( split<char, detail::StringOp<char> >( "ad,adf,ff,d,,.d.f",",." ) );
+	StringArray<char, detail::StringOp<char> > sa1 = split<std::string, detail::StringOp<char> >( std::string("ad,adf,ff,d,,.d.f"),",." );
+
+	StringArray<char > sa2 = split( "ad,adf,ff,d,,.d.f",",." );
+	
+	StringArray<char> sa3 = split(std::string( "ad,adf,ff,d,,.d.f" ),",." );
+	if( sa.size() != 6)
+		std::cout << "ERROR split!" << std::endl;
+	if(    0 != strcmp( "ad", sa.ptr( 0 ) )
+		&& 0 != strcmp( "adf", sa.ptr( 1 ) )
+		&& 0 != strcmp( "ff", sa.ptr( 2 ) )
+		&& 0 != strcmp( "d", sa.ptr( 3 ) )
+		&& 0 != strcmp( "d", sa.ptr( 4 ) )
+		&& 0 != strcmp( "f", sa.ptr( 5 ) ) )
+		std::cout << "ERROR split!" << std::endl;
+
+	try
+	{
+		char* p = sa[ 8 ].ptr;
+		std::cout << "ERROR split!" << std::endl;
+	}
+	catch( OutOfRangeException& e)
+	{
+	}
+	}
+
+
+
 	std::string str1( "asdfasdfas" );
 	std::string str2( "as" );
 

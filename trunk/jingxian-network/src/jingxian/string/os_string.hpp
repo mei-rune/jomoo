@@ -30,6 +30,13 @@ typedef char_t tchar;
 
 _jingxian_begin
 
+template<typename charT>
+struct stringData
+{
+    size_t len;
+    charT* ptr;
+};
+
 inline const char* c_str_ptr( const char* t )
 {
 	return t;

@@ -183,6 +183,10 @@
 				RelativePath=".\src\jingxian\main.cpp"
 				>
 			</File>
+			<File
+				RelativePath=".\pro_config.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Í·ÎÄ¼þ"
@@ -194,7 +198,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\src\jingxian\pro_config.h"
+				RelativePath=".\pro_config.h"
 				>
 			</File>
 		</Filter>
@@ -368,6 +372,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\jingxian\string\split_functions.hpp"
+				>
+			</File>
+			<File
 				RelativePath=".\src\jingxian\string\string.hpp"
 				>
 			</File>
@@ -381,6 +389,10 @@
 			</File>
 			<File
 				RelativePath=".\src\jingxian\string\string_traits.hpp"
+				>
+			</File>
+			<File
+				RelativePath=".\src\jingxian\string\stringArray.hpp"
 				>
 			</File>
 			<File
@@ -514,6 +526,10 @@
 		</File>
 		<File
 			RelativePath=".\src\jingxian\message_block.h"
+			>
+		</File>
+		<File
+			RelativePath=".\src\jingxian\pro.h"
 			>
 		</File>
 		<File

@@ -1,6 +1,6 @@
 
-#ifndef _ctype_traits_hpp_
-#define _ctype_traits_hpp_
+#ifndef _string_array_hpp_
+#define _string_array_hpp_
 
 #include "jingxian/config.h"
 
@@ -10,28 +10,23 @@
 
 // Include files
 # include <ctype.h>
-# include "jingxian/string/os_string.hpp"
 # include "jingxian/exception.hpp"
+# include "jingxian/string/os_string.hpp"
+# include "jingxian/string/stringOps.hpp"
 
 _jingxian_begin
 
 
 
-template<typename charT>
+template<typename charT, typename OP = detail::StringOp<charT> >
 class StringArray
 {
 public:
 
-    struct stringData
-    {
-        size_t len;
-        charT* ptr;
-    };
-
     StringArray( size_t size )
     {
-        ptrArray_ = (stringData*)::malloc( sizeof( stringData ) * size );
-        memset( ptrArray_, 0, sizeof( stringData ) * size );
+        ptrArray_ = (stringData<charT>*)OP::malloc( sizeof( stringData<charT> ) * size );
+        memset( ptrArray_, 0, sizeof( stringData<charT> ) * size );
         size_ = size;
     }
 
@@ -63,23 +58,23 @@ public:
 
         for( size_t i = 0; i < size_ ; i ++ )
         {
-            ::free( ptrArray_[ i ].ptr );
+            OP::free( ptrArray_[ i ].ptr );
         }
 
-        ::free( ptrArray_ );
+        OP::free( ptrArray_ );
     }
 
-    stringData& operator[]( size_t p )
+    stringData<charT>& operator[]( size_t p )
     {
         if( p >= size_ )
-            ThrowException1( OutOfRangeException );
+            ThrowException( OutOfRangeException );
         return ptrArray_[ p ];
     }
 
-    const stringData& operator[]( size_t p ) const
+    const stringData<charT>& operator[]( size_t p ) const
     {
         if( p >= size_ )
-            ThrowException1( OutOfRangeException );
+            ThrowException( OutOfRangeException );
         return ptrArray_[ p ];
     }
 
@@ -116,10 +111,10 @@ public:
     }
     
 private:
-    stringData* ptrArray_;
+    stringData<charT>* ptrArray_;
     size_t size_;
-}
+};
 
 _jingxian_end
 
-#endif /* _CASE_FUNCTIONS_HPP_ */
+#endif /* _string_array_hpp_ */

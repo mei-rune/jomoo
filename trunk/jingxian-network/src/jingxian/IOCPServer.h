@@ -68,9 +68,9 @@ private:
 
 	proactor _proactor;
 
-	stdext::hash_map<tstring, IConnectorFactory > _connectorFactory;
+	stdext::hash_map<tstring, IConnectorFactory* > _connectorFactory;
 
-	stdext::hash_map<tstring, IAcceptorFactory > _acceptorFactory;
+	stdext::hash_map<tstring, IAcceptorFactory* > _acceptorFactory;
 };
 
 _jingxian_end
