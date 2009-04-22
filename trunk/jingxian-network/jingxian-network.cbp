@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="jingxian-network" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug Win32">
+				<Option output="jingxian-network" prefix_auto="1" extension_auto="1" />
+				<Option object_output="Debug Win32" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-DWIN32" />
+					<Add option="-D_DEBUG" />
+					<Add option="-D_CONSOLE" />
+					<Add option="-W" />
+					<Add option="-g" />
+					<Add option="-O0" />
+					<Add option="-DTEST" />
+					<Add directory="D:\developing\JoMoo\trunk\jingxian-network\src" />
+					<Add directory="." />
+				</Compiler>
+				<ResourceCompiler>
+					<Add directory="D:\developing\JoMoo\trunk\jingxian-network\src" />
+					<Add directory="." />
+				</ResourceCompiler>
+				<Linker>
+					<Add library="Ws2_32" />
+				</Linker>
+			</Target>
+			<Target title="Release Win32">
+				<Option output="jingxian-network" prefix_auto="1" extension_auto="1" />
+				<Option object_output="Release Win32" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-DWIN32" />
+					<Add option="-DNDEBUG" />
+					<Add option="-D_CONSOLE" />
+					<Add option="-W" />
+				</Compiler>
+				<Linker>
+					<Add library="Ws2_32" />
+				</Linker>
+			</Target>
+		</Build>
+		<Unit filename="src\jingxian\Buffer.h" />
+		<Unit filename="src\jingxian\communicator.h" />
+		<Unit filename="src\jingxian\dictionary.h" />
+		<Unit filename="src\jingxian\exception.hpp" />
+		<Unit filename="src\jingxian\IAcceptor.h" />
+		<Unit filename="src\jingxian\IConcurrentPort.h" />
+		<Unit filename="src\jingxian\IConnector.h" />
+		<Unit filename="src\jingxian\IDNSResolver.h" />
+		<Unit filename="src\jingxian\IEndpoint.h" />
+		<Unit filename="src\jingxian\IOCPServer.cpp" />
+		<Unit filename="src\jingxian\IOCPServer.h" />
+		<Unit filename="src\jingxian\IProtocol.h" />
+		<Unit filename="src\jingxian\IProtocolFactory.h" />
+		<Unit filename="src\jingxian\IReactorCore.h" />
+		<Unit filename="src\jingxian\ITransport.h" />
+		<Unit filename="src\jingxian\jingxian_export.h" />
+		<Unit filename="src\jingxian\lastError.h" />
+		<Unit filename="src\jingxian\message_block.cpp" />
+		<Unit filename="src\jingxian\message_block.h" />
+		<Unit filename="src\jingxian\ProtocolContext.h" />
+		<Unit filename="src\jingxian\ProtocolFactory.cpp" />
+		<Unit filename="ReadMe.txt" />
+		<Unit filename="src\jingxian\variant.hpp" />
+		<Unit filename="src\jingxian\main.cpp" />
+		<Unit filename="src\jingxian\config.h" />
+		<Unit filename="src\jingxian\pro_config.h" />
+		<Unit filename="src\jingxian\logging\logger.h" />
+		<Unit filename="src\jingxian\logging\logging.hpp" />
+		<Unit filename="src\jingxian\logging\LogUtils.cpp" />
+		<Unit filename="src\jingxian\logging\LogUtils.h" />
+		<Unit filename="src\jingxian\logging\stdlogger.H" />
+		<Unit filename="src\jingxian\logging\tracer.h" />
+		<Unit filename="src\jingxian\networks\connected_socket.cpp" />
+		<Unit filename="src\jingxian\networks\connected_socket.h" />
+		<Unit filename="src\jingxian\networks\connection_status.h" />
+		<Unit filename="src\jingxian\networks\inet_address.cpp" />
+		<Unit filename="src\jingxian\networks\inet_address.h" />
+		<Unit filename="src\jingxian\networks\proactor.cpp" />
+		<Unit filename="src\jingxian\networks\proactor.h" />
+		<Unit filename="src\jingxian\networks\commands\AcceptRequest.cs" />
+		<Unit filename="src\jingxian\networks\commands\command_queue.cpp" />
+		<Unit filename="src\jingxian\networks\commands\command_queue.h" />
+		<Unit filename="src\jingxian\networks\commands\ConnectRequest.cs" />
+		<Unit filename="src\jingxian\networks\commands\DisconnectRequest.cs" />
+		<Unit filename="src\jingxian\networks\commands\ICommand.h" />
+		<Unit filename="src\jingxian\networks\commands\ReadRequest.cs" />
+		<Unit filename="src\jingxian\networks\commands\write_request.h" />
+		<Unit filename="src\jingxian\networks\sockets\base_socket.cpp" />
+		<Unit filename="src\jingxian\networks\sockets\base_socket.h" />
+		<Unit filename="src\jingxian\networks\sockets\base_socket.inl" />
+		<Unit filename="src\jingxian\networks\sockets\tcp_client.cpp" />
+		<Unit filename="src\jingxian\networks\sockets\tcp_client.h" />
+		<Unit filename="src\jingxian\networks\sockets\tcp_client.inl" />
+		<Unit filename="src\jingxian\networks\sockets\tcp_server.cpp" />
+		<Unit filename="src\jingxian\networks\sockets\tcp_server.h" />
+		<Unit filename="src\jingxian\networks\sockets\tcp_server.inl" />
+		<Unit filename="src\jingxian\string\case_functions.hpp" />
+		<Unit filename="src\jingxian\string\ctype_traits.hpp" />
+		<Unit filename="src\jingxian\string\os_string.hpp" />
+		<Unit filename="src\jingxian\string\replace_functions.hpp" />
+		<Unit filename="src\jingxian\string\string.hpp" />
+		<Unit filename="src\jingxian\string\string_append_iterator.hpp" />
+		<Unit filename="src\jingxian\string\string_token_iterator.hpp" />
+		<Unit filename="src\jingxian\string\string_traits.hpp" />
+		<Unit filename="src\jingxian\string\StringOps.hpp" />
+		<Unit filename="src\jingxian\string\stringPtr.hpp" />
+		<Unit filename="src\jingxian\string\toString.hpp" />
+		<Unit filename="src\jingxian\string\trim_functions.hpp" />
+		<Unit filename="src\jingxian\string\with_functions.hpp" />
+		<Unit filename="src\jingxian\threading\event.h" />
+		<Unit filename="src\jingxian\threading\guard.h" />
+		<Unit filename="src\jingxian\threading\mutex.h" />
+		<Unit filename="src\jingxian\threading\null_mutex.H" />
+		<Unit filename="src\jingxian\threading\null_semaphore.H" />
+		<Unit filename="src\jingxian\threading\semaphore.h" />
+		<Unit filename="src\jingxian\threading\thread.h" />
+		<Unit filename="src\jingxian\threading\thread_closure.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
