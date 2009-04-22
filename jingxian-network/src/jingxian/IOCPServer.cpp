@@ -86,14 +86,13 @@ IAcceptor* IOCPServer::listenWith(const tchar* endPoint
 	     return NULL;
 	}
 	     
-    IAcceptor* acceptor = it->second->createAcceptor( endPoint );
+    auto_ptr< IAcceptor> acceptor = it->second->createAcceptor( endPoint );
     
-    if( acceptor.startListening() )
+    if( acceptor->startListening() )
 	{
 		TRACE( _logger, _T("尝试监听地址 '") << endPoint 
 			<< _T("' 时发生错误‘") << lastError()
 			<< _T("’") );
-		IAcceptor::release( acceptor );
 		return NULL;
     }
 	
@@ -101,9 +100,9 @@ IAcceptor* IOCPServer::listenWith(const tchar* endPoint
 		<< _T("' 成功‘") << sa.ptr(0) 
 		<< _T("’") );
 	
-    _acceptors[ add ] = acceptor;
+    _acceptors[ add ] = acceptor.get();
     
-    return acceptor;
+    return acceptor.release();
 }
 	
 bool IOCPServer::send( IRunnable* runnable )
