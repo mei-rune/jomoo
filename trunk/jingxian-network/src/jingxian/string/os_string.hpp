@@ -33,7 +33,11 @@ _jingxian_begin
 template<typename charT>
 struct stringData
 {
+	// 内存块大小（可选值，为0时为无效值）
+	size_t capacity;
+	// 字符串大小（可选值，为0或-1为无效值）
     size_t len;
+    // 字符串指针
     charT* ptr;
 };
 

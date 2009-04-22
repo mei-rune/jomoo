@@ -19,14 +19,15 @@ class IEndpoint;
 typedef IProtocol* (*BuildProtocol)( ITransport* transport, void* context);
 typedef void (*OnConnectError)( const Exception& exception, void* context);
 
-class IConnector
+class IConnectionBuilder
 {
 public:
 
-	virtual ~IConnector() {};
+	virtual ~IConnectionBuilder() {};
     /**
      * 建立一个连接
      * 
+     * @param[ in ] endPoint 连接目标地址
      * @param[ in ] buildProtocol 在连接成功时，调用本委托创建一个处理器
      * @param[ in ] throwError  在连接发生错误或初始化处理器发生错误时调
 	 * 用本委托，错误异常的类型有两种ConnectError和InitializeError
@@ -34,29 +35,10 @@ public:
      * @exception ConnectError 在连接发生错误时，调用错误处理委托时将传递</exception>
      * @exception InitializeError 初始化处理器发生错误时，调用错误处理委托时将传递</exception>
 	 */
-    virtual void connect(BuildProtocol buildProtocol, OnConnectError onConnectError, void* context ) = 0;
-
-	/**
-	 * 连接的目标地址
-	 */
-    virtual const IEndpoint& connectTo() const = 0;
-
-	/**
-	 * 取得地址的描述
-	 */
-	virtual const tstring& toString() const = 0;
-};
-
-class IConnectorFactory
-{
-public:
-
-	virtual ~IConnectorFactory(){}
-
-	/**
-	 * 创建 IConnector 对象
-	 */
-	virtual IConnector* createConnector() = 0;
+    virtual void connect(const tchar* endPoint
+                       , BuildProtocol buildProtocol
+                       , OnConnectError onConnectError
+                       , void* context ) = 0;
 
 	/**
 	 * 取得地址的描述
@@ -64,17 +46,12 @@ public:
 	virtual const tstring& toString() const = 0;
 };
 
-inline tostream& operator<<( tostream& target, const IConnector& connector )
+inline tostream& operator<<( tostream& target, const IConnectionBuilder& connectionBuilder )
 {
-	target << connector.toString();
+	target << connectionBuilder.toString();
 	return target;
 }
 
-inline tostream& operator<<( tostream& target, const IConnectorFactory& connectorFactory )
-{
-	target << connectorFactory.toString();
-	return target;
-}
 
 _jingxian_end
 

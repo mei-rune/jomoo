@@ -23,7 +23,7 @@ class StringArray
 {
 public:
 
-    StringArray( size_t size )
+    explicit StringArray( size_t size )
     {
         ptrArray_ = (stringData<charT>*)OP::malloc( sizeof( stringData<charT> ) * size );
         memset( ptrArray_, 0, sizeof( stringData<charT> ) * size );

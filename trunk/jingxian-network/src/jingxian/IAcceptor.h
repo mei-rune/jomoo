@@ -39,8 +39,10 @@ public:
 
 	/**
 	 * 启动监听
+	 * 
+	 * @return 启动监听成功返回true, 失败返回false
 	 */
-    virtual void startListening() = 0;
+    virtual bool startListening() = 0;
 
 	/**
 	 * 取得协议工厂
@@ -73,7 +75,7 @@ public:
 	/**
 	 * 创建 IAcceptor 对象
 	 */
-	virtual IAcceptor* createAcceptor() = 0;
+	virtual IAcceptor* createAcceptor(const tchar* endPoint) = 0;
 
 	/**
 	 * 取得地址的描述

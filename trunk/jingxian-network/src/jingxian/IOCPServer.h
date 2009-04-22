@@ -14,7 +14,6 @@
 # include "jingxian/IReactorCore.h"
 # include "jingxian/networks/proactor.h"
 
-
 _jingxian_begin
 
 class IOCPServer : public IReactorCore
@@ -28,7 +27,10 @@ public:
     /**
 	 * 创建一个连接器
 	 */
-    virtual IConnector* connectWith(const tchar* endPoint);
+    virtual void connectWith(const tchar* endPoint
+                            , BuildProtocol buildProtocol
+                            , OnConnectError onConnectError
+                            , void* context );
 	
     /**
 	 * 创建一个监听服务
@@ -42,7 +44,7 @@ public:
      *
      * @param[ in ] run 执行方法
 	 */
-    virtual void send( IRunnable* runnable );
+    virtual bool send( IRunnable* runnable );
 
 	/**
 	 * 开始运行直到调用Interrupt才返回
@@ -68,9 +70,11 @@ private:
 
 	proactor _proactor;
 
-	stdext::hash_map<tstring, IConnectorFactory* > _connectorFactory;
+	stdext::hash_map<tstring, IConnectionBuilder* > _connectionBuilders;
 
-	stdext::hash_map<tstring, IAcceptorFactory* > _acceptorFactory;
+	stdext::hash_map<tstring, IAcceptorFactory* > _acceptorFactorys;
+	
+	stdext::hash_map<tstring, IAcceptor* > _acceptors;
 };
 
 _jingxian_end
