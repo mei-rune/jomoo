@@ -334,46 +334,6 @@
 				RelativePath="..\..\src\jomoo\memory\config_Memory.H"
 				>
 			</File>
-			<File
-				RelativePath="..\..\src\jomoo\memory\FixedPool.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\memory\FixedPool.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\memory\Memory.H"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\memory\MemoryManager.CPP"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\memory\MemoryManager.H"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\memory\MemoryPool.H"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\memory\ObjectPool.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\memory\Pool.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\memory\SystemPool.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\memory\SystemPool.h"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="threading"
@@ -391,6 +351,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\jomoo\threading\mutex.h"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\jomoo\threading\null_mutex.H"
 				>
 			</File>
@@ -399,15 +363,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\jomoo\threading\os_threading.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\threading\os_threading.inl"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\threading\thread.cpp"
+				RelativePath="..\..\src\jomoo\threading\semaphore.h"
 				>
 			</File>
 			<File
@@ -415,39 +371,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\src\jomoo\threading\thread.inl"
-				>
-			</File>
-			<File
 				RelativePath="..\..\src\jomoo\threading\thread_closure.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\threading\thread_manager.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\threading\thread_manager.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\threading\thread_manager.inl"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\threading\thread_mutex.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\threading\thread_semaphore.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\threading\worker_queue..h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\threading\worker_queue.T"
 				>
 			</File>
 		</Filter>
@@ -846,114 +770,6 @@
 				RelativePath="..\..\src\jomoo\serialize\XML_serializer.h"
 				>
 			</File>
-		</Filter>
-		<Filter
-			Name="db"
-			>
-			<File
-				RelativePath="..\..\src\jomoo\db\config_db.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\db\dbcommand.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\db\dbcommand_sqlite.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\db\dbcommand_sqlite.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\db\dbconnection.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\db\dbconnection_impl.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\db\dbconnection_impl.inl"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\db\dbconnection_sqlite.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\db\dbconnection_sqlite.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\db\dbdriver.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\db\dbdriver.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\db\dbquery.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\db\dbquery_sqlite.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\db\dbquery_sqlite.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\db\dbtransaction_sqlite.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\db\dbtransaction_sqlite.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\db\sqlite_function.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\db\sqlite_function.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\db\sqlite_wrapper.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\db\sqlite_wrapper.h"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\db\transactionscope.h"
-				>
-			</File>
-			<Filter
-				Name="spi"
-				>
-				<File
-					RelativePath="..\..\src\jomoo\db\spi\command.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\jomoo\db\spi\connection.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\jomoo\db\spi\query.h"
-					>
-				</File>
-				<File
-					RelativePath="..\..\src\jomoo\db\spi\transaction.h"
-					>
-				</File>
-			</Filter>
 		</Filter>
 		<Filter
 			Name="exception"

@@ -106,7 +106,7 @@ IAcceptor* IOCPServer::listenWith(const tchar* endPoint
 	
 bool IOCPServer::send( IRunnable* runnable )
 {
-	return _proactor.send( _proactor.createCommand( runnable ) );
+	return _proactor.send( _proactor.createRunnableCommand( runnable ) );
 }
 	
 void IOCPServer::runForever()

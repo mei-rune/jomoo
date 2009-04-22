@@ -42,7 +42,7 @@ public:
 		Raise( *this );
 	}
 
-	virtual void print(std::ostream& Target ) const
+	virtual void print(tostream& Target ) const
 	{
 		Target << _T( "ConfigurationException" )
 			<< what()
