@@ -251,7 +251,7 @@ public:
 		return _span <= microseconds;
 	}
 
-	friend std::ostream& operator<<( std::ostream& target, const Timespan& );
+	friend tostream& operator<<( tostream& target, const Timespan& );
 
 private:
 	int64_t _span;
@@ -264,7 +264,7 @@ inline void swap(Timespan& s1, Timespan& s2)
 
 _jomoo_end
 
-inline std::ostream& operator<<( std::ostream& target, const Timespan& ts)
+inline tostream& operator<<( tostream& target, const Timespan& ts)
 {
 	target << ts._span;
 }

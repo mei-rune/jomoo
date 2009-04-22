@@ -305,14 +305,6 @@
 		<Filter
 			Name="db"
 			>
-			<File
-				RelativePath="..\..\src\jomoo\db\unittest\dbTest.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\..\src\jomoo\db\unittest\dbTest.h"
-				>
-			</File>
 		</Filter>
 		<File
 			RelativePath=".\ReadMe.txt"
