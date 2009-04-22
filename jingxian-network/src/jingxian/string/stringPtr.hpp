@@ -32,7 +32,7 @@ public:
 	}
 
 	template< typename STRING >
-	StringPtr(const STRING& right) _THROW0()
+	explicit StringPtr(const STRING& right) _THROW0()
 		: _ptr( 0 )
 		, _length( 0 )
 	{

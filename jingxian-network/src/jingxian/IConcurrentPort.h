@@ -36,9 +36,9 @@ public:
     /**
      * 将执行方法发送到线程等待队列,稍后执行
      *
-     * @param[ in ] run 执行方法
+     * @param[ in ] runnable 执行方法
 	 */
-    virtual void send( IRunnable* run ) = 0;
+    virtual bool send( IRunnable* runnable ) = 0;
 
 	/**
 	* 取得地址的描述

@@ -14,7 +14,7 @@
 # include "jingxian/ITransport.h"
 # include "jingxian/IProtocol.h"
 # include "jingxian/IProtocolFactory.h"
-# include "jingxian/IConnector.h"
+# include "jingxian/IConnectionBuilder.h"
 # include "jingxian/IAcceptor.h"
 
 _jingxian_begin
@@ -25,12 +25,25 @@ public:
 	virtual ~IReactorCore() {};
 
     /**
-	 * 创建一个连接器
+	 * 创建一个连接
+	 * @param[ in ] endPoint 连接的目标地址
+	 * @param[ in ] buildProtocol 成功连接时创建协议处理器的回调函数
+	 * @param[ in ] onConnectError 连接失败时错误处理的回调函数
+	 * @param[ in ] context 回调函数的上下文
+	 * @remarks 回调函数可能会在调用线程中直接被调用
 	 */
-    virtual IConnector* connectWith(const tchar* endPoint) = 0;
+    virtual void connectWith(const tchar* endPoint
+                            , BuildProtocol buildProtocol
+                            , OnConnectError onConnectError
+                            , void* context ) = 0;
 
     /**
 	 * 创建一个监听服务
+	 *
+	 * @param[ in ] endPoint 监听的地址
+	 * @param[ in ] protocolFactory 协议处理器工厂
+	 * @return 成功进返回创建的对象，失败时返回 NULL
+	 * @remarks 不要尝试删除返回的对象，该对象已被 IReactorCore 持有。
 	 */
     virtual IAcceptor* listenWith( const tchar* endPoint
 			, IProtocolFactory* protocolFactory) = 0;
