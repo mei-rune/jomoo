@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "make", "make.vcproj", "{E0D6401A-B7BD-4CED-8D1C-132349FFA745}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "python", "python.vcproj", "{E0D6401A-B7BD-4CED-8F1C-132349FFA745}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E0D6401A-B7BD-4CED-8D1C-132349FFA745}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E0D6401A-B7BD-4CED-8D1C-132349FFA745}.Debug|Win32.Build.0 = Debug|Win32
+		{E0D6401A-B7BD-4CED-8D1C-132349FFA745}.Release|Win32.ActiveCfg = Release|Win32
+		{E0D6401A-B7BD-4CED-8D1C-132349FFA745}.Release|Win32.Build.0 = Release|Win32
+		{E0D6401A-B7BD-4CED-8F1C-132349FFA745}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E0D6401A-B7BD-4CED-8F1C-132349FFA745}.Debug|Win32.Build.0 = Debug|Win32
+		{E0D6401A-B7BD-4CED-8F1C-132349FFA745}.Release|Win32.ActiveCfg = Release|Win32
+		{E0D6401A-B7BD-4CED-8F1C-132349FFA745}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
