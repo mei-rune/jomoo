@@ -25,12 +25,12 @@ std::string decodePath( const std::string& second  )
 	std::string value = second.substr( 0, index );
 	value += second[ index + driveLen ];
 	value += ":";
-	value += second.substr( index + driveLen );
+	value += second.substr( index + driveLen + 1 );
 	return value;
 }
 
 void readFile( std::map<std::string,std::string>& environMap
-					, const char* path )
+			  , const char* path )
 {
 	std::string filePath = path;
 	filePath += ".conf";
@@ -63,15 +63,15 @@ int _tmain(int argc, _TCHAR* argv[])
 		logPath += ".log";
 		std::ofstream logger( logPath.c_str() );
 
-		logger << "Arguments:" << std::endl;
+		logger << "Old_Arguments:" << std::endl;
 		for( int i = 0; i < argc; ++ i )
 		{
-			arguments[ i ] = argv[0];
+			arguments[ i ] = argv[ i ];
 			logger  << i << ":\t" << argv[ i ] << std::endl;
 		}
 
 
-		
+
 		logger << std::endl << "Old_Environments:" << std::endl;
 		std::map<std::string,std::string> environMap;
 		for( int i = 0; NULL != _environ[ i ]; ++ i )
@@ -104,7 +104,14 @@ int _tmain(int argc, _TCHAR* argv[])
 		arguments[0] = "e:\\tools\\MinGW\\bin\\mingw32-make.exe";
 		std::map<std::string,std::string>::iterator it = environMap.find( "Command" );
 		if( environMap.end() != it )
-			arguments[ 0 ] =::strdup( decodePath( it->second ).c_str() );
+			arguments[ 0 ] =( char*) it->second.c_str();
+
+		logger << std::endl << "Arguments:" << std::endl;
+		for( int i = 0; i < arguments.size(); ++ i )
+		{
+			arguments[ i ] =::strdup( decodePath( arguments[ i ] ).c_str() );
+			logger  << i << ":\t" << arguments[ i ] << std::endl;
+		}
 	}
 
 	arguments.push_back( 0 );
