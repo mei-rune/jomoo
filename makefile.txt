@@ -1,0 +1,10 @@
+. "$TM_SUPPORT_PATH/lib/webpreview.sh"
+html_header "Running make"
+
+echo "python /cygdrive/c/cygwin/bin/make.py \"--file=${TM_FILEPATH}\" all "
+
+python /cygdrive/c/cygwin/bin/make.py "--file=$TM_FILEPATH" all 2>&1|"${TM_RUBY:-ruby}" -rtm_parser -eTextMate.parse_errors
+
+echo "Done."
+
+html_footer
