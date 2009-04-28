@@ -6,7 +6,7 @@ else
 	BASE_PATH="."
 endif
 
-#include $(BASE_PATH)/include.mak
+include $(BASE_PATH)/include.mak
 
 .PHONY : clean
 clean :

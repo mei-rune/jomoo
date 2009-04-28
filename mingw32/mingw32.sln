@@ -5,6 +5,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "make", "make.vcproj", "{E0D
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "python", "python.vcproj", "{E0D6401A-B7BD-4CED-8F1C-132349FFA745}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hello", "hello.vcproj", "{F4C2EE4A-F16C-4245-85D3-A9439EE032E9}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ruby", "ruby.vcproj", "{B1E87978-DCE3-4B27-B34D-F4E77AF71FBB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -19,6 +23,14 @@ Global
 		{E0D6401A-B7BD-4CED-8F1C-132349FFA745}.Debug|Win32.Build.0 = Debug|Win32
 		{E0D6401A-B7BD-4CED-8F1C-132349FFA745}.Release|Win32.ActiveCfg = Release|Win32
 		{E0D6401A-B7BD-4CED-8F1C-132349FFA745}.Release|Win32.Build.0 = Release|Win32
+		{F4C2EE4A-F16C-4245-85D3-A9439EE032E9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F4C2EE4A-F16C-4245-85D3-A9439EE032E9}.Debug|Win32.Build.0 = Debug|Win32
+		{F4C2EE4A-F16C-4245-85D3-A9439EE032E9}.Release|Win32.ActiveCfg = Release|Win32
+		{F4C2EE4A-F16C-4245-85D3-A9439EE032E9}.Release|Win32.Build.0 = Release|Win32
+		{B1E87978-DCE3-4B27-B34D-F4E77AF71FBB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B1E87978-DCE3-4B27-B34D-F4E77AF71FBB}.Debug|Win32.Build.0 = Debug|Win32
+		{B1E87978-DCE3-4B27-B34D-F4E77AF71FBB}.Release|Win32.ActiveCfg = Release|Win32
+		{B1E87978-DCE3-4B27-B34D-F4E77AF71FBB}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
