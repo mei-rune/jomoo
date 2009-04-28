@@ -12,6 +12,7 @@
 
 const char* drive ="/cygdrive/";
 size_t driveLen = 0;
+std::ofstream *_logger = NULL;
 
 std::string decodePath( const std::string& second  )
 {
@@ -32,23 +33,51 @@ std::string decodePath( const std::string& second  )
 void readFile( std::map<std::string,std::string>& environMap
 			  , const char* path )
 {
+
+	if( NULL != _logger)
+		*_logger << std::endl << "File:"<< std::endl;
+
 	std::string filePath = path;
 	filePath += ".conf";
 
 	std::ifstream config( filePath.c_str() );
 
 	if( !config )
+	{
+		if( NULL != _logger)
+			*_logger << "读文件 '" <<  filePath << "' 失败!" << std::endl;
 		return;
+	}
+
+
+	if( NULL != _logger)
+		*_logger << "开始读文件 '" <<  filePath << "'" << std::endl;
 
 	std::string line;
 	while( std::getline( config,line ) )
 	{
 		std::string::size_type index = line.find( "=" );
 		if( std::string::npos != index )
-			environMap[ line.substr( 0, index ) ] = line.substr( index + 1 );
+		{
+			std::string key = line.substr( 0, index );
+			std::string value = line.substr( index + 1 );
+			environMap[ key ] = value;
+
+			if( NULL != _logger)
+				*_logger << "\t" << key << "='" << value << "'" << std::endl;
+		}
 		else
+		{
 			environMap.erase( line );
+
+			if( NULL != _logger)
+				*_logger << "\tdel " << line << std::endl;
+		}
 	}
+
+
+	if( NULL != _logger)
+		*_logger << "读文件 '" <<  filePath << "' 结束!" << std::endl;
 }
 
 int _tmain(int argc, _TCHAR* argv[])
@@ -62,6 +91,8 @@ int _tmain(int argc, _TCHAR* argv[])
 		std::string logPath = argv[ 0 ];
 		logPath += ".log";
 		std::ofstream logger( logPath.c_str() );
+		if( logger )
+			_logger = &logger;
 
 		logger << "Old_Arguments:" << std::endl;
 		for( int i = 0; i < argc; ++ i )
@@ -69,8 +100,6 @@ int _tmain(int argc, _TCHAR* argv[])
 			arguments[ i ] = argv[ i ];
 			logger  << i << ":\t" << argv[ i ] << std::endl;
 		}
-
-
 
 		logger << std::endl << "Old_Environments:" << std::endl;
 		std::map<std::string,std::string> environMap;
@@ -117,8 +146,8 @@ int _tmain(int argc, _TCHAR* argv[])
 	arguments.push_back( 0 );
 	environments.push_back( 0 );
 
-	::_spawnve( _P_WAIT, arguments[0], &(arguments[0]), &(environments[0]) );
-	std::cout << "执行结束!" << std::endl;
-	return 0;
+	return ::_spawnve( _P_WAIT, arguments[0], &(arguments[0]), &(environments[0]) );
+	//std::cout << "执行结束!" << std::endl;
+	//return 0;
 }
 
