@@ -215,6 +215,14 @@
 			>
 		</Filter>
 		<File
+			RelativePath=".\make.py"
+			>
+		</File>
+		<File
+			RelativePath=".\python.exe.conf"
+			>
+		</File>
+		<File
 			RelativePath=".\ReadMe.txt"
 			>
 		</File>
