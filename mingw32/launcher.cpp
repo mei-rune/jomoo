@@ -85,7 +85,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	driveLen = strlen( drive );
 
 	std::vector<char*> arguments( argc );
-	std::vector<char*> environments( argc, (char*)NULL );
+	std::vector<char*> environments;
 
 	{
 		std::string logPath = argv[ 0 ];
@@ -119,15 +119,11 @@ int _tmain(int argc, _TCHAR* argv[])
 		}
 
 		readFile( environMap, argv[0] );
-
-		logger << std::endl << "Environments:" << std::endl;
-
 		for( std::map<std::string, std::string>::iterator it = environMap.begin()
 			; it != environMap.end(); ++ it)
 		{
 			std::string line  = it->first + "="+ decodePath( it->second );
 			environments.push_back( ::strdup( line.c_str() ) );
-			logger << line << std::endl;
 		}
 
 		arguments[0] = "e:\\tools\\MinGW\\bin\\mingw32-make.exe";
@@ -135,16 +131,28 @@ int _tmain(int argc, _TCHAR* argv[])
 		if( environMap.end() != it )
 			arguments[ 0 ] =( char*) it->second.c_str();
 
-		logger << std::endl << "Arguments:" << std::endl;
 		for( int i = 0; i < arguments.size(); ++ i )
 		{
 			arguments[ i ] =::strdup( decodePath( arguments[ i ] ).c_str() );
-			logger  << i << ":\t" << arguments[ i ] << std::endl;
+		}
+
+
+		environments.push_back( 0 );
+		arguments.push_back( 0 );
+
+		logger << std::endl << "Environments:" << std::endl;
+		for( char** ptr = &(environments[0]) ; 0 != *ptr; ++ ptr )
+		{
+			logger << *ptr << std::endl;
+		}
+
+		logger << std::endl << "Arguments:" << std::endl;
+		for( char** ptr = &(arguments[0]) ; 0 != *ptr; ++ ptr )
+		{
+			logger << *ptr << std::endl;
 		}
 	}
 
-	arguments.push_back( 0 );
-	environments.push_back( 0 );
 
 	return ::_spawnve( _P_WAIT, arguments[0], &(arguments[0]), &(environments[0]) );
 	//std::cout << "Ö´ÐÐ½áÊø!" << std::endl;
