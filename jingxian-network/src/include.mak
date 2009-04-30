@@ -1,2 +1,3 @@
 
 
+TargetPath=../../bin
