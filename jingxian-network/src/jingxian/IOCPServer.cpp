@@ -12,8 +12,9 @@ static char THIS_FILE[] = __FILE__;
 _jingxian_begin
 
 IOCPServer::IOCPServer(void)
+	: _toString( _T("IOCPServer") )
+	, _isRunning( false )
 {
-	std::std::vector<char> v;
 }
 
 IOCPServer::~IOCPServer(void)
@@ -112,22 +113,32 @@ bool IOCPServer::send( IRunnable* runnable )
 	
 void IOCPServer::runForever()
 {
-	ThrowException( NotImplementedException );
+	_isRunning = true;
+	while( _isRunning )
+	{
+		if( 1 ==  _proactor.handle_events() )
+			onIdle();
+	}
 }
 	
 void IOCPServer::interrupt()
 {
-	ThrowException( NotImplementedException );
+	_isRunning = false;
 }
 	
 bool IOCPServer::bind(HANDLE systemHandler)
 {
-	ThrowException( NotImplementedException );
+	_paroactor.bind(systemHandler);
+}
+
+void IOCPServer::onIdle()
+{
+	
 }
 	
 const tstring& IOCPServer::toString() const
 {
-	ThrowException( NotImplementedException );
+	return _toString;
 }
 
 

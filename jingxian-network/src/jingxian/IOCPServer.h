@@ -37,7 +37,6 @@ public:
 	 */
     virtual IAcceptor* listenWith(const tchar* endPoint
 			, IProtocolFactory* protocolFactory);
-
 	
     /**
      * 将执行方法发送到线程等待队列,稍后执行
@@ -60,6 +59,11 @@ public:
 	 * 将句柄绑定到本端口
 	 */
 	virtual bool bind(HANDLE systemHandler);
+	
+	/**
+	 *  空闲时执行的回调函数，子类可以继承本函数 
+	 */
+	virtaul void onIdle()
 
 	/**
 	* 取得地址的描述
@@ -67,6 +71,10 @@ public:
 	virtual const tstring& toString() const;
 
 private:
+	
+	NO_COPY(IOCPServer);
+	
+	tstring _toString;
 
 	proactor _proactor;
 
@@ -75,6 +83,8 @@ private:
 	stdext::hash_map<tstring, IAcceptorFactory* > _acceptorFactorys;
 	
 	stdext::hash_map<tstring, IAcceptor* > _acceptors;
+	
+	bool _isRunning;
 };
 
 _jingxian_end

@@ -27,11 +27,6 @@ public:
 	virtual IProtocol* createProtocol() = 0;
 
 	/**
-	 * 释放 IProtocol 对象
-	 */
-	virtual void release( IProtocol* pr ) = 0;
-
-	/**
 	* 取得地址的描述
 	*/
 	virtual const tstring& toString() const = 0;
